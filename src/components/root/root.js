@@ -10,6 +10,7 @@ import Layout from '../layout/layout';
 import '../../styles/base.css';
 import Login from '../login/login';
 import AuthenticationProvider from '../authentication-provider/authentication-provider';
+import ApiDemo from '../api-demo/api-demo';
 
 const theme = createTheme();
 
@@ -25,9 +26,10 @@ export default function Root() {
                 path={ROUTES.SIGN_UP_SUCCESS}
                 element={<SignUpSuccess />}
               />
-              <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
+              <Route path={ROUTES.API_DEMO} element={<ApiDemo />} />
               <Route path={ROUTES.LAYOUT} element={<Layout />} />
               <Route path={ROUTES.LOGIN} element={<Login />} />
+              <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
             </Route>
           </Routes>
         </BrowserRouter>

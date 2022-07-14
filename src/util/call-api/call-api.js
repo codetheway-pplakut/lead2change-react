@@ -1,6 +1,12 @@
 import getToken from '../get-token/get-token';
 import handleFetchResponse from '../handle-fetch-response/handle-fetch-response';
 
+/**
+ * It takes an object with some optional parameters, and returns a promise that
+ * resolves to the response from the API
+ * @param [] - authenticated - whether or not the request is authenticated.
+ * @returns A function that takes an object as an argument.
+ */
 const callApi = async ({
   authenticated = true,
   body,
