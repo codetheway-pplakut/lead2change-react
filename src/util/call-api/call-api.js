@@ -1,3 +1,4 @@
+import getToken from '../get-token/get-token';
 import handleFetchResponse from '../handle-fetch-response/handle-fetch-response';
 
 const callApi = async ({
@@ -13,7 +14,7 @@ const callApi = async ({
 
   const headers = { 'Content-Type': 'application/json', ...config.headers };
   if (authenticated) {
-    const token = ''; // TODO, get token
+    const token = getToken();
     headers.Authorization = token;
   }
 
