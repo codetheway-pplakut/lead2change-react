@@ -1,0 +1,88 @@
+{
+  "name": "code-the-way-project-starter",
+  "version": "0.1.0",
+  "description": "A project to help jump-start Code The Way UI development.",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "eslint": "./node_modules/.bin/eslint src/ && echo \"\\x1b[102m\\x1b[1m ESLINT \\x1b[0m\" No JavaScript ESLint errors to fix",
+    "eslint:fix": "./node_modules/.bin/eslint --fix src/ && echo \"\\x1b[102m\\x1b[1m ESLINT \\x1b[0m\" ESLint JavaScript errors fixed"
+  },
+  "author": "Joey Schroeder <schrjos@gmail.com>",
+  "dependencies": {
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/material": "^5.8.7",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router": "^6.3.0",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "pre-commit": "^1.2.2",
+    "prettier": "^2.7.1"
+  },
+  "pre-commit": [
+    "eslint"
+  ],
+  "eslintConfig": {
+    "extends": [
+      "airbnb",
+      "eslint:recommended",
+      "plugin:prettier/recommended",
+      "react-app"
+    ],
+    "rules": {
+      "comma-dangle": 0,
+      "consistent-return": 0,
+      "prettier/prettier": 1,
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "react/forbid-prop-types": [
+        2,
+        {
+          "forbid": [
+            "any"
+          ]
+        }
+      ],
+      "react/jsx-filename-extension": [
+        0
+      ],
+      "react/jsx-indent": 0,
+      "react/jsx-indent-props": 0,
+      "react/jsx-one-expression-per-line": [
+        0
+      ],
+      "react/no-unused-prop-types": 1,
+      "react/react-in-jsx-scope": 0,
+      "semi": [
+        "error",
+        "always"
+      ]
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
