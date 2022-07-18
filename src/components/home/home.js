@@ -77,6 +77,9 @@ export default function Home() {
           >
             Interview
           </Button>
+          <Button variant="contained" onClick={() => navigate(ROUTES.COACHES)}>
+            Coaches
+          </Button>
         </Stack>
       </Box>
     </Container>

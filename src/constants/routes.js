@@ -6,6 +6,7 @@ const ROUTES = {
   SIGN_UP_SUCCESS: '/sign-up-success',
   TABS: '/interview/tabs',
   HeaderandFooter: '/interview/HeaderandFooter',
+  COACHES: '/coaches/Coaches',
 };
 
 export default ROUTES;
