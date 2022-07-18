@@ -11,6 +11,9 @@ import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import { TextField } from '@mui/material';
+import InputAdornment from '@mui/material/InputAdornment';
+import SearchIcon from '@mui/icons-material/Search';
 import StudentListModal from './StudentListModal';
 import InactivationModal from './Modals/InactivateCoachModal';
 import CoachDeletionModal from './Modals/DeleteCoachModal';
@@ -111,6 +114,7 @@ export default function CoachesList(props) {
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [searchTerm, setSearchTerm] = React.useState('');
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -151,6 +155,23 @@ export default function CoachesList(props) {
 
   return (
     <Box sx={{ width: '100%' }}>
+      <TextField
+        value={searchTerm}
+        placeholder="Search..."
+        variant="outlined"
+        size="small"
+        margin="normal"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+        }}
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+        }}
+      />
       <Paper sx={{ width: '100%', mb: 2 }}>
         <TableContainer>
           <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
@@ -163,6 +184,12 @@ export default function CoachesList(props) {
             <TableBody>
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .filter((coach) =>
+                  coach.coachFirstName
+                    .concat(coach.coachLastName)
+                    .toLowerCase()
+                    .includes(searchTerm.toLowerCase())
+                )
                 .map((coach, index) => {
                   return (
                     <TableRow
