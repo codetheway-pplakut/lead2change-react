@@ -12,13 +12,6 @@ import StudentTable from './studentTable';
 import StudentModal from './studentModal';
 
 export default function Student(props) {
-  const text = '< Back to Home';
-
-  const onBackClick = () => {
-    navigate(ROUTES.HOME);
-  };
-  const navigate = useNavigate();
-
   return (
     <div>
       <Grid container>
@@ -43,11 +36,6 @@ export default function Student(props) {
         sx={{ mx: '20vh' }}
       >
         <StudentTable />
-        <Grid item xs={1}>
-          <Button onClick={onBackClick} size="small" variant="outlined">
-            {text}
-          </Button>
-        </Grid>
       </Stack>
     </div>
   );

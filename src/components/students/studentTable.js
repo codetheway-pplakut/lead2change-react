@@ -4,13 +4,9 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Box from '@mui/material/Box';
-import FormControl from '@mui/material/FormControl';
+import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import InputLabel from '@mui/material/InputLabel';
 import Link from '@mui/material/Link';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import Stack from '@mui/material/Stack';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import Table from '@mui/material/Table';
@@ -73,10 +69,6 @@ const deactivateHandler = (studentId) => {
   console.log('this is when it should deactivate using', studentId);
 };
 
-const deleteHandler = (studentId) => {
-  console.log('this is when it should delete using', studentId);
-};
-
 const reactivateHandler = (studentId) => {
   console.log('this is when it should reactivate using', studentId);
 };
@@ -125,6 +117,15 @@ export default function StudentTable() {
             <Tab label="Inactive" {...a11yProps(1)} />
           </Tabs>
         </Grid>
+        <Button
+          fullWidth
+          sx={{ mt: 3, mb: 2 }}
+          type="submit"
+          onClick={onRequestStudentsPress}
+          variant="contained"
+        >
+          Request Students
+        </Button>
         <Grid item xs={4} />
         <Grid item xs={4}>
           <Box>
@@ -132,7 +133,7 @@ export default function StudentTable() {
           </Box>
         </Grid>
         <Grid item xs={2}>
-          <StudentRegistryModal confirmHandler={onRequestStudentsPress} />
+          <StudentRegistryModal />
         </Grid>
       </Grid>
       <TabPanel value={value} index={0}>
