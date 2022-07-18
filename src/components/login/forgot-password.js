@@ -7,20 +7,20 @@ import {
   FormControl,
   OutlinedInput,
   Modal,
-  Fade,
-  Backdrop,
   TextField,
+  IconButton,
 } from '@mui/material';
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  minWidth: '750px',
+  width: '50%',
   bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
+  boxShadow: 12,
   p: 4,
 };
 
@@ -41,7 +41,7 @@ function ForgotPassword() {
       console.log(enteredEmail);
       setIsError(true);
     } else {
-      setIsError(false);    
+      setIsError(false);
     }
   };
 
@@ -55,18 +55,47 @@ function ForgotPassword() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Grid container>
+            <Grid item sx={{ bgcolor: '#004cbb', color: 'white' }} xs={12}>
+              <Grid container>
+                <Grid item xs={2} />
+                <Grid item xs={8} sx={{ margin: 2 }}>
+                  <Typography variant="h5" component="h2" align="center">
+                    Reset Password
+                  </Typography>
+                </Grid>
+                {/* <Grid item sx={{ margin: 1.5 }}>
+                  <IconButton
+                    align="right"
+                    size="medium"
+                    onClick={handleClose}
+                    sx={{ color: 'white' }}
+                  >
+                    <CloseOutlinedIcon />
+                  </IconButton>
+                </Grid> */}
+              </Grid>
+            </Grid>
+          </Grid>
+          {/* <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+            color="#004cbb"
+          >
             Forgot Password?
-          </Typography>
+          </Typography> */}
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Please enter your email for password recovery:
           </Typography>
           <Grid item xs={6}>
             <FormControl
-              sx={{ boxShadow: 2, bgcolor: 'common.white', mt: 1, mb: 2 }}
+              sx={{  bgcolor: 'common.white', mt: 1, mb: 2 }}
             >
               {isError ? (
-                <OutlinedInput
+                <TextField
+                  label="Email Address"
+                  required
                   value={enteredEmail}
                   onChange={(event) => setEmail(event.target.value)}
                 />
@@ -85,7 +114,7 @@ function ForgotPassword() {
           </Grid>
           <Grid item xs={6}>
             <Button onClick={emailHandler}>Send email</Button>
-          </Grid>     
+          </Grid>
         </Box>
       </Modal>
     </>
