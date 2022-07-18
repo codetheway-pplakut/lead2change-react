@@ -31,8 +31,8 @@ export default function RegisterAdmin() {
   return (
     <Container maxWidth="sm">
       {/* <ThemeProvider theme={theme}> */}
-      <Button color="primary" variant="contained" onClick={handleOpen}>
-        + Register Admin
+      <Button color="primary" variant="contained" onClick={handleOpen} sx={{height: '44px'}}>
+        <Typography variant="h6">+ Register Admin</Typography>
       </Button>
         <Modal
             onClose={handleClose}

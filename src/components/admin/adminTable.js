@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
@@ -26,8 +27,6 @@ const rows = [
 
 export default function AdminTable() {
   return (
-    <>
-      <SearchBar sx={{}} />
       <TableContainer
         component={Paper}
         align="center"
@@ -137,6 +136,5 @@ export default function AdminTable() {
           </TableBody>
         </Table>
       </TableContainer>
-    </>
   );
 }

@@ -1,9 +1,8 @@
 /* eslint-disable prettier/prettier */
 import Navbar from './sampleNavbar';
 import Title from './title';
-import Admin from './registerAdmin';
-import Inactive from './inactivateAdmin';
 import AdminTable from './adminTable';
+import Search from './searchAndRegister';
 
 export default function header(){
 
@@ -12,9 +11,8 @@ export default function header(){
         <div>
             <Navbar />
             <Title />
+            <Search />
             <AdminTable />
-            <Inactive />
-            <Admin />
         </div>
     );
 }
