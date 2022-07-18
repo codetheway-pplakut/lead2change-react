@@ -13,7 +13,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 export default function StudentRegistryModal(props) {
   const {
-    // confirmHandler,
+    confirmHandler,
     firstName,
     lastName,
     email,
@@ -41,10 +41,10 @@ export default function StudentRegistryModal(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  /* const confirm = () => {
+  const confirm = () => {
     confirmHandler(firstName, lastName, email, phoneNumber, dateOfBirth);
     handleClose();
-  }; */
+  };
 
   return (
     <div>
@@ -131,7 +131,7 @@ export default function StudentRegistryModal(props) {
 }
 
 StudentRegistryModal.propTypes = {
-  // confirmHandler: PropTypes.func.isRequired,
+  confirmHandler: PropTypes.func.isRequired,
   firstName: PropTypes.string.isRequired,
   lastName: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,

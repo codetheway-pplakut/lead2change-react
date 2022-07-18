@@ -3,7 +3,6 @@ import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import TabsFunction from './detailsTab';
@@ -32,15 +31,18 @@ export default function ResponsiveGrid(props) {
   const buttonText = '< Back to table';
   return (
     <Grid container>
-      <Grid item xs={12}>
-        <Typography
-          style={{ color: '#2656A5' }}
-          variant="h4"
-          align="center"
-          sx={{ m: '2vh' }}
-        >
-          Students
-        </Typography>
+      <Grid
+        item
+        align="center"
+        style={{
+          backgroundColor: '#2656A5',
+          marginBottom: '3vh',
+          color: '#FFFFFF',
+          padding: '0vh',
+        }}
+        sx={{width: '100%'}}
+      >
+        <h1>AADI&rsquo;S DETAILS</h1>
       </Grid>
       <Grid item xs={4}>
         <Paper
@@ -88,27 +90,27 @@ export default function ResponsiveGrid(props) {
             </StudentInfo>
             <StudentInfo>
               <h3>
-                <b>Email Address: 1234@gmail.com </b>
+                <b>Email Address: tiwariA@gmail.com </b>
               </h3>
             </StudentInfo>
             <StudentInfo>
               <h3>
-                <b>Phone Number: 901-234-5678 </b>
+                <b>Phone Number: 231-381-4814 </b>
               </h3>
             </StudentInfo>
             <StudentInfo>
               <h3>
-                <b>Home Address: 123456 HelloStreet Blvd. </b>
+                <b>Home Address: 12345 Demo street </b>
               </h3>
             </StudentInfo>
             <StudentInfo>
               <h3>
-                <b>Apt. #: N/A </b>
+                <b>Apt. #: 42</b>
               </h3>
             </StudentInfo>
             <StudentInfo>
               <h3>
-                <b>Zip Code: 12345 </b>
+                <b>Zip Code: 50021 </b>
               </h3>
             </StudentInfo>
             <StudentInfo>
