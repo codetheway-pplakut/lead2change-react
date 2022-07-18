@@ -2,6 +2,7 @@ import React from 'react';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import BasicTabs from './tabs';
+import navbar from '../admin/sampleNavbar';
 
 function saveResponses() {
   return null;
@@ -14,6 +15,7 @@ function goBack() {
 export default function HeaderandFooter() {
   return (
     <div>
+        <navbar />
       <h1
         align="center"
         style={{ backgroundColor: '#004cbb', color: 'rgb(255,255,255)' }}
