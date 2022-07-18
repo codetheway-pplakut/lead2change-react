@@ -1,6 +1,5 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Grid from '@mui/material/Grid';
@@ -8,17 +7,6 @@ import IconButton from '@mui/material/IconButton';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import PropTypes from 'prop-types';
 import ColorButton from '../Shared/ColoredButton';
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  minWidth: '750px',
-  width: '50%',
-  bgcolor: 'background.paper',
-  boxShadow: 12,
-};
 
 export default function InactivationModal(props) {
   const { coach } = props;
@@ -39,17 +27,17 @@ export default function InactivationModal(props) {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
       >
-        <Box sx={style}>
+        <Grid container variant="small">
           <Grid container>
             <Grid item sx={{ bgcolor: '#004cbb', color: 'white' }} xs={12}>
-              <Grid container>
+              <Grid container alignItems="center">
                 <Grid item xs={2} />
-                <Grid item xs={8} sx={{ margin: 2 }}>
+                <Grid item xs={8}>
                   <Typography variant="h5" component="h2" align="center">
                     Inactivation
                   </Typography>
                 </Grid>
-                <Grid item sx={{ margin: 1.5 }}>
+                <Grid item>
                   <IconButton
                     align="right"
                     size="medium"
@@ -67,18 +55,18 @@ export default function InactivationModal(props) {
               Are you sure you want to inactivate {coach.coachFirstName}{' '}
               {coach.coachLastName}?
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={6}>
               <ColorButton variant="contained" fullWidth onClick={Inactivate}>
                 Inactivate
               </ColorButton>
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={6}>
               <ColorButton variant="contained" fullWidth onClick={handleClose}>
                 Cancel
               </ColorButton>
             </Grid>
           </Grid>
-        </Box>
+        </Grid>
       </Modal>
     </div>
   );
