@@ -1,28 +1,31 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
+
 import Box from '@mui/material/Box';
+import FormControl from '@mui/material/FormControl';
+import Grid from '@mui/material/Grid';
+import InputLabel from '@mui/material/InputLabel';
+import Link from '@mui/material/Link';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import Stack from '@mui/material/Stack';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
 import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
+import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import Grid from '@mui/material/Grid';
-import { useState } from 'react';
 import { styled } from '@mui/material/styles';
-import Link from '@mui/material/Link';
+
 import { useNavigate } from 'react-router-dom';
 import ROUTES from '../../constants/routes';
+
 import StudentModal from './studentModal';
 import StudentRegistryModal from './studentRegistryModal';
 import SearchBar from './searchBar';
@@ -64,16 +67,16 @@ function TabPanel(props) {
     </div>
   );
 }
-const deactivateHandler = () => {
-  // console.log('this is when it should deactivate');
+const deactivateHandler = (studentId) => {
+  console.log('this is when it should deactivate using', studentId);
 };
 
-const deleteHandler = () => {
-  // console.log('this is when it should delete');
+const deleteHandler = (studentId) => {
+  console.log('this is when it should delete using', studentId);
 };
 
-const reactivateHandler = () => {
-  // console.log('this is when it should reactivate');
+const reactivateHandler = (studentId) => {
+  console.log('this is when it should reactivate using', studentId);
 };
 
 TabPanel.propTypes = {
@@ -116,128 +119,128 @@ const rows = [
   createDataActive(
     'Kevin',
     'Niu',
-    'test@gmail.com',
-    '414 - 414 - 414',
+    'niuK@gmail.com',
+    '262 - 592 - 4149',
     24,
     <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
+      <StudentModal
+        modalType="deactivate"
+        confirmHandler={deactivateHandler}
+        studentId="student-id"
+      />
     </Stack>
   ),
   createDataActive(
     'Jason',
     'Dong',
-    'test@gmail.com',
-    '414 - 414 - 414',
+    'dongJ@gmail.com',
+    '283 - 139 - 2381',
     37,
     <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
+      <StudentModal
+        modalType="deactivate"
+        confirmHandler={deactivateHandler}
+        studentId="student-id"
+      />
     </Stack>
   ),
   createDataActive(
     'Sirat',
     'Mokha',
-    'test@gmail.com',
-    '414 - 414 - 414',
+    'mokhaS@gmail.com',
+    '342 - 582 - 6148',
     24,
     <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
+      <StudentModal
+        modalType="deactivate"
+        confirmHandler={deactivateHandler}
+        studentId="student-id"
+      />
     </Stack>
   ),
   createDataActive(
     'Noah',
     'Ren',
-    'test@gmail.com',
-    '414 - 414 - 414',
+    'renN@gmail.com',
+    '213 - 436 - 3412',
     67,
     <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
+      <StudentModal
+        modalType="deactivate"
+        confirmHandler={deactivateHandler}
+        studentId="student-id"
+      />
     </Stack>
   ),
   createDataActive(
     'Holly',
     'Raetz',
-    'test@gmail.com',
-    '414 - 414 - 414',
+    'raetzH@gmail.com',
+    '582 - 581 - 2499',
     67,
     <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
+      <StudentModal
+        modalType="deactivate"
+        confirmHandler={deactivateHandler}
+        studentId="student-id"
+      />
     </Stack>
   ),
   createDataActive(
     'Aadi',
     'Tiwari',
-    'test@gmail.com',
-    '414 - 414 - 414',
+    'tiwariA@gmail.com',
+    '231 - 381 - 4814',
     49,
     <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
-    </Stack>
-  ),
-  createDataActive(
-    'Aadi',
-    'Tiwari',
-    'test@gmail.com',
-    '414 - 414 - 414',
-    49,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
-    </Stack>
-  ),
-  createDataActive(
-    'Aadi',
-    'Tiwari',
-    'test@gmail.com',
-    '414 - 414 - 414',
-    49,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
-    </Stack>
-  ),
-  createDataActive(
-    'Aadi',
-    'Tiwari',
-    'test@gmail.com',
-    '414 - 414 - 414',
-    49,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
-    </Stack>
-  ),
-  createDataActive(
-    'Aadi',
-    'Tiwari',
-    'test@gmail.com',
-    '414 - 414 - 414',
-    49,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
+      <StudentModal
+        modalType="deactivate"
+        confirmHandler={deactivateHandler}
+        studentId="student-id"
+      />
     </Stack>
   ),
 ];
 
 const rowsInactive = [
   createDataInactive(
-    'Hello',
-    'Test',
-    'test@gmail.com',
-    '414 - 414 - 414',
+    'John',
+    'Doe',
+    'doeJ@gmail.com',
+    '592 - 124 - 4144',
     <Stack spacing={2} direction="row">
-      <StudentModal modalType="delete" confirmHandler={deleteHandler} />
+      <StudentModal
+        modalType="delete"
+        confirmHandler={deleteHandler}
+        studentId="student-id"
+      />
     </Stack>,
     <Stack spacing={2} direction="row">
-      <StudentModal modalType="reactivate" confirmHandler={reactivateHandler} />
+      <StudentModal
+        modalType="reactivate"
+        confirmHandler={reactivateHandler}
+        studentId="student-id"
+      />
     </Stack>
   ),
   createDataInactive(
     'Bob',
     'Jones',
-    'test@gmail.com',
-    '414 - 414 - 414',
+    'jonesB@gmail.com',
+    '693 - 491 - 5812',
     <Stack spacing={2} direction="row">
-      <StudentModal modalType="delete" confirmHandler={deleteHandler} />
+      <StudentModal
+        modalType="delete"
+        confirmHandler={deleteHandler}
+        studentId="student-id"
+      />
     </Stack>,
     <Stack spacing={2} direction="row">
-      <StudentModal modalType="reactivate" confirmHandler={reactivateHandler} />
+      <StudentModal
+        modalType="reactivate"
+        confirmHandler={reactivateHandler}
+        studentId="student-id"
+      />
     </Stack>
   ),
 ];
@@ -258,14 +261,18 @@ export default function StudentTable() {
 
   return (
     <Box sx={{ width: '100%', height: '60%' }}>
-      <Typography
-        style={{ color: '#2656A5' }}
-        variant="h4"
+      <Grid
+        item
         align="center"
-        sx={{ m: '2vh' }}
+        style={{
+          backgroundColor: '#2656A5',
+          marginBottom: '2vh',
+          color: '#FFFFFF',
+          padding: '0.1vh',
+        }}
       >
-        Students
-      </Typography>
+        <h1>STUDENTS</h1>
+      </Grid>
       <Grid container spacing={0}>
         <Grid item xs={2}>
           <Tabs value={value} onChange={handleChange}>
@@ -284,7 +291,7 @@ export default function StudentTable() {
         </Grid>
       </Grid>
       <TabPanel value={value} index={0}>
-        <TableContainer component={Paper} sx={{ height: '65vh' }}>
+        <TableContainer component={Paper} sx={{ height: '64vh' }}>
           <Table sx={{ minWidth: 10 }} stickyHeader>
             <TableHead>
               <StyledTableRow>
@@ -363,7 +370,7 @@ export default function StudentTable() {
       </TabPanel>
 
       <TabPanel value={value} index={1}>
-        <TableContainer component={Paper} sx={{ height: '65vh' }}>
+        <TableContainer component={Paper} sx={{ height: '55vh' }}>
           <Table sx={{ minWidth: 10 }}>
             <TableHead>
               <StyledTableRow>

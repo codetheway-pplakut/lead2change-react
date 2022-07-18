@@ -1,19 +1,22 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import Grid from '@mui/material/Grid';
 import PropTypes from 'prop-types';
 
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
+
 export default function StudentModal(props) {
-  const { modalType, confirmHandler } = props;
+  const { modalType, confirmHandler, studentId } = props;
 
   let deleteText = '';
   let useColor = 'warning';
+  let useButtonMargin = '1vh';
   if (modalType === 'delete') {
     deleteText = 'All data will be lost.';
     useColor = 'error';
+    useButtonMargin = null;
   }
   const style = {
     position: 'absolute',
@@ -31,13 +34,12 @@ export default function StudentModal(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const confirm = () => {
-    confirmHandler();
+    confirmHandler(studentId);
     handleClose();
   };
 
   return (
     <div>
-      <p />
       <Button onClick={handleOpen} variant="contained" color={useColor}>
         {modalType}
       </Button>
@@ -49,7 +51,7 @@ export default function StudentModal(props) {
           <Typography sx={{ mt: 2 }} align="center" color={useColor}>
             {deleteText}
           </Typography>
-          <Grid container spacing={4} sx={{ mt: '1vh' }}>
+          <Grid container spacing={4} sx={{ mt: useButtonMargin }}>
             <Grid item xs={6} align="center">
               <Button
                 variant="contained"
@@ -75,4 +77,5 @@ export default function StudentModal(props) {
 StudentModal.propTypes = {
   modalType: PropTypes.string.isRequired,
   confirmHandler: PropTypes.func.isRequired,
+  studentId: PropTypes.string.isRequired,
 };
