@@ -28,6 +28,8 @@ import StudentModal from './studentModal';
 import StudentRegistryModal from './studentRegistryModal';
 import SearchBar from './searchBar';
 
+import ProgressIndicatorOverlay from '../progress-indicator-overlay/progress-indicator-overlay';
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: '#2656A5',
@@ -89,9 +91,13 @@ function a11yProps(index) {
 
 export default function StudentTable() {
   const [students, setStudents] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onRequestStudentsPress = async () => {
+    setIsLoading(true);
     const response = await getStudents();
+
+    setIsLoading(false);
     setStudents(response);
   };
 
@@ -110,6 +116,7 @@ export default function StudentTable() {
 
   return (
     <Box sx={{ width: '100%', height: '60%' }}>
+      <ProgressIndicatorOverlay active={isLoading} />
       <Grid container spacing={0}>
         <Grid item xs={2}>
           <Tabs value={value} onChange={handleChange}>
@@ -151,7 +158,7 @@ export default function StudentTable() {
             <TableBody>
               {students
                 .filter((post) => {
-                  if (post.active) {
+                  // if (post.active) {
                     if (search === '') {
                       return post;
                     }
@@ -176,10 +183,10 @@ export default function StudentTable() {
                     ) {
                       return post;
                     }
-                    if (post.studentCellPhone.includes(search.toLowerCase())) {
+                    if (post.parentFirstName.includes(search.toLowerCase())) {
                       return post;
                     }
-                  }
+                  // }
                   return null;
                 })
                 .map((student) => (
@@ -193,14 +200,14 @@ export default function StudentTable() {
                         variant="body2"
                         onClick={toDetailDemo}
                       >
-                        {student.studentLastName}, {student.studentFirstName}
+                        {student.lastName}, {student.firstName}
                       </Link>
                     </StyledTableCell>
                     <StyledTableCell align="left">
                       {student.studentEmail || '--'}
                     </StyledTableCell>
                     <StyledTableCell align="left">
-                      {student.studentCellPhone || '--'}
+                      {student.parentFirstName || '--'}
                     </StyledTableCell>
                     <StyledTableCell align="left">--</StyledTableCell>
                     <StyledTableCell align="left">
@@ -232,35 +239,32 @@ export default function StudentTable() {
             <TableBody>
               {students
                 .filter((post) => {
-                  if (post.active === false) {
+                  // if (post.active === false) {
                     if (search === '') {
                       return post;
                     }
                     if (
-                      post.studentFirstName
+                      post.firstName
                         .toLowerCase()
                         .includes(search.toLowerCase())
                     ) {
                       return post;
                     }
                     if (
-                      post.studentLastName
+                      post.lastName
                         .toLowerCase()
                         .includes(search.toLowerCase())
                     ) {
                       return post;
                     }
                     if (
-                      post.studentEmail
+                      post.email
                         .toLowerCase()
                         .includes(search.toLowerCase())
                     ) {
                       return post;
                     }
-                    if (post.studentCellPhone.includes(search.toLowerCase())) {
-                      return post;
-                    }
-                  }
+                  // }
                   return null;
                 })
                 .map((student) => (
