@@ -1,4 +1,4 @@
-import React, { useState, useRef} from 'react';
+import React, { useState, useRef } from 'react';
 import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -25,25 +25,20 @@ const StudentInfo = styled(Box)(({ theme }) => ({
 }));
 
 export default function ResponsiveGrid(props) {
- 
   const onBackClick = () => {
     navigate(ROUTES.STUDENT_TEST);
   };
   const navigate = useNavigate();
   const buttonText = '< Back to table';
 
+  const [disabled, setDisabled] = useState(false);
 
-
+  function handleGameClick() {
+    setDisabled(!disabled);
+  }
 
   return (
-      
-    
     <Grid container>
-
-
-
-
-
       <Grid
         item
         align="center"
@@ -53,7 +48,7 @@ export default function ResponsiveGrid(props) {
           color: '#FFFFFF',
           padding: '0vh',
         }}
-        sx={{width: '100%'}}
+        sx={{ width: '100%' }}
       >
         <h1>AADI&rsquo;S DETAILS</h1>
       </Grid>
@@ -83,55 +78,127 @@ export default function ResponsiveGrid(props) {
           <Grid style={{ marginLeft: '2vh' }}>
             <StudentInfo>
               <h3>
-                <b>First Name: Aadi</b>
-      
-   
-              
+                <b>
+                  First Name:{' '}
+                  <input
+                    className="typing-container"
+                    placeholder=" I want to get job "
+                    disabled={!disabled}
+                  />
+                </b>
+                <button allign="right" type="submit" onClick={handleGameClick}>
+                  {' '}
+                  Edit{' '}
+                </button>
               </h3>
             </StudentInfo>
             <StudentInfo>
               <h3>
-                <b>Last Name: Tiwari </b>
+                <b>
+                  Last Name:{' '}
+                  <input
+                    className="typing-container"
+                    placeholder=" I want to get job "
+                    disabled={!disabled}
+                  />{' '}
+                </b>
               </h3>
             </StudentInfo>
             <StudentInfo>
               <h3>
-                <b>Date of Birth: 02/04/2006</b>
+                <b>
+                  Date of Birth:
+                  <input
+                    className="typing-container"
+                    placeholder=" I want to get job "
+                    disabled={!disabled}
+                    type="date"
+                  />
+                </b>
               </h3>
             </StudentInfo>
             <StudentInfo>
               <h3>
-                <b>Age: 16 </b>
+                <b>
+                  Age:{' '}
+                  <input
+                    className="typing-container"
+                    placeholder=" I want to get job "
+                    disabled={!disabled}
+                  />{' '}
+                </b>
               </h3>
             </StudentInfo>
             <StudentInfo>
               <h3>
-                <b>Email Address: tiwariA@gmail.com </b>
+                <b>
+                  Email Address:{' '}
+                  <input
+                    className="typing-container"
+                    placeholder=" I want to get job "
+                    disabled={!disabled}
+                  />
+                </b>
               </h3>
             </StudentInfo>
             <StudentInfo>
               <h3>
-                <b>Phone Number: 231-381-4814 </b>
+                <b>
+                  Phone Number:{' '}
+                  <input
+                    className="typing-container"
+                    placeholder=" I want to get job "
+                    disabled={!disabled}
+                  />{' '}
+                </b>
               </h3>
             </StudentInfo>
             <StudentInfo>
               <h3>
-                <b>Home Address: 12345 Demo street </b>
+                <b>
+                  Home Address:{' '}
+                  <input
+                    className="typing-container"
+                    placeholder=" I want to get job "
+                    disabled={!disabled}
+                  />{' '}
+                </b>
               </h3>
             </StudentInfo>
             <StudentInfo>
               <h3>
-                <b>Apt. #: 42</b>
+                <b>
+                  Apt. #:
+                  <input
+                    className="typing-container"
+                    placeholder=" I want to get job "
+                    disabled={!disabled}
+                  />
+                </b>
               </h3>
             </StudentInfo>
             <StudentInfo>
               <h3>
-                <b>Zip Code: 50021 </b>
+                <b>
+                  Zip Code:{' '}
+                  <input
+                    className="typing-container"
+                    placeholder=" I want to get job "
+                    disabled={!disabled}
+                  />
+                </b>
               </h3>
             </StudentInfo>
             <StudentInfo>
               <h3>
-                <b>State: Wisconsin </b>
+                <b>
+                  State:{' '}
+                  <input
+                    className="typing-container"
+                    placeholder=" I want to get job "
+                    disabled={!disabled}
+                  />{' '}
+                </b>
               </h3>
             </StudentInfo>
           </Grid>
@@ -151,5 +218,4 @@ export default function ResponsiveGrid(props) {
       </Grid>
     </Grid>
   );
-        };
-   
+}

@@ -1,6 +1,6 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -14,12 +14,7 @@ import Button from '@mui/material/Button';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
-
   return (
-
-
-
-    
     <div
       role="tabpanel"
       hidden={value !== index}
@@ -33,10 +28,6 @@ function TabPanel(props) {
           <Typography>{children}</Typography>
         </Box>
       )}
-
-
-
-
     </div>
   );
 }
@@ -100,99 +91,147 @@ export default function TabsFunction() {
                 <GridText>
                   <h3 style={{ color: '#2656A5' }}>
                     <b>Post Secondary Plan</b>
-                    <button  style={{float: 'right'}} type='submit' onClick={handleGameClick}> Edit </button>
+                    <button
+                      style={{ float: 'right' }}
+                      type="submit"
+                      onClick={handleGameClick}
+                    >
+                      {' '}
+                      Edit{' '}
+                    </button>
                   </h3>
                   <h5>
                     <b>
-                      Plans After College: <input
-        className='typing-container'
-        placeholder=' I want to get job '
-        disabled={!disabled}
-      />
+                      Plans After College:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />
                     </b>
                   </h5>
                   <h5>
                     <b>I have applied to a college: </b>
                     <input
-        className='typing-container'
-        placeholder=' Yes '
-        disabled={!disabled}
-      />
-
-     
-
+                      className="typing-container"
+                      placeholder=" Yes "
+                      disabled={!disabled}
+                    />
                   </h5>
                   <h5>
                     <b>
-                      Colleges I’ve applied to/plan to apply to: 1. UW-Madison
-                      2. Northwestern 3. Purdue
+                      Colleges I’ve applied to/plan to apply to:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />
                     </b>
                   </h5>
                   <h5>
                     <b>I have begun my work on my college essay: </b>
                     <input
-        className='typing-container'
-        placeholder=' Yes '
-        disabled={!disabled}
-      />
+                      className="typing-container"
+                      placeholder=" Yes "
+                      disabled={!disabled}
+                    />
                   </h5>
                   <h5>
                     <b>I need help writing my college essay: </b>
                     <input
-        className='typing-container'
-        placeholder=' No '
-        disabled={!disabled}
-      />
+                      className="typing-container"
+                      placeholder=" No "
+                      disabled={!disabled}
+                    />
                   </h5>
                   <h5>
                     <b>First choice of college: </b>
                     <input
-        className='typing-container'
-        placeholder=' Sus '
-        disabled={!disabled}
-      />
+                      className="typing-container"
+                      placeholder=" Sus "
+                      disabled={!disabled}
+                    />
                   </h5>
                   <h3 style={{ color: '#2656A5' }}>
                     <b>College Entrance Exam Information: </b>
                   </h3>
                   <h5>
                     <b>
-                      PACT Score: <input
-        className='typing-container'
-        placeholder=' 35 '
-        disabled={!disabled}
-      />
-                      <div>Date of PACT: 10/22/2021</div>
+                      PACT Score:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" 35 "
+                        disabled={!disabled}
+                      />
+                      <div>
+                        Date of PACT:{' '}
+                        <input
+                          className="typing-container"
+                          placeholder=" I want to get job "
+                          disabled={!disabled}
+                          type="date"
+                        />
+                      </div>
                     </b>
                   </h5>
                   <h5>
                     <b>
-                      PSAT Score: <input
-        className='typing-container'
-        placeholder=' 1600 '
-        disabled={!disabled}
-      />
-                      <div> Date of PSAT: 11/29/2021</div>
+                      PSAT Score:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" 1600 "
+                        disabled={!disabled}
+                      />
+                      <div>
+                        {' '}
+                        Date of PSAT:{' '}
+                        <input
+                          className="typing-container"
+                          placeholder=" I want to get job "
+                          disabled={!disabled}
+                          type="date"
+                        />
+                      </div>
                     </b>
                   </h5>
                   <h5>
                     <b>
-                      ACT Score: <input
-        className='typing-container'
-        placeholder=' 37 '
-        disabled={!disabled}
-      />
-                      <div> Date of ACT: 3/3/2022</div>
+                      ACT Score:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" 37 "
+                        disabled={!disabled}
+                      />
+                      <div>
+                        {' '}
+                        Date of ACT:{' '}
+                        <input
+                          className="typing-container"
+                          placeholder=" I want to get job "
+                          disabled={!disabled}
+                          type="date"
+                        />
+                      </div>
                     </b>
                   </h5>
                   <h5>
                     <b>
-                      SAT Score: 1<input
-        className='typing-container'
-        placeholder=' 1700 '
-        disabled={!disabled}
-      />
-                      <div> Date of SAT: 5/19/2022 </div>
+                      SAT Score: 1
+                      <input
+                        className="typing-container"
+                        placeholder=" 1700 "
+                        disabled={!disabled}
+                      />
+                      <div>
+                        {' '}
+                        Date of SAT:{' '}
+                        <input
+                          className="typing-container"
+                          placeholder=" I want to get job "
+                          disabled={!disabled}
+                          type="date"
+                        />
+                      </div>
                     </b>
                   </h5>
                   <h3 style={{ color: '#2656A5' }}>
@@ -200,29 +239,34 @@ export default function TabsFunction() {
                   </h3>
                   <h5>
                     <b>
-                      I have already completed the financial aid process: <input
-        className='typing-container'
-        placeholder=' Yes '
-        disabled={!disabled}
-      />
+                      I have already completed the financial aid process:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" Yes "
+                        disabled={!disabled}
+                      />
                     </b>
                   </h5>
                   <h5>
                     <b>
                       I need assistance filling out my FAFSA/Financial aid
-                      forms: <input
-        className='typing-container'
-        placeholder=' Yes '
-        disabled={!disabled}
-      />
+                      forms:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" Yes "
+                        disabled={!disabled}
+                      />
                     </b>
                   </h5>
                   <h5>
-                    <b>Support they need: <input
-        className='typing-container'
-        placeholder=' Yes '
-        disabled={!disabled}
-      /></b>
+                    <b>
+                      Support they need:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" Yes "
+                        disabled={!disabled}
+                      />
+                    </b>
                   </h5>
                 </GridText>
               </Grid>
@@ -236,73 +280,206 @@ export default function TabsFunction() {
                 <GridText>
                   <h3 style={{ color: '#2656A5' }}>
                     <b>Goal One</b>
+                    <button
+                      style={{ float: 'right' }}
+                      type="submit"
+                      onClick={handleGameClick}
+                    >
+                      {' '}
+                      Edit{' '}
+                    </button>
                   </h3>
                   <h5>
-                    <b>Goal: Be able to become a leader for a school club </b>
-                  </h5>
-                  <h5>
-                    <b>Goal Set Date: 3/20/22 </b>
-                  </h5>
-                  <h5>
-                    <b>SEL: Responsible-Decision Making </b>
-                  </h5>
-                  <h5>
-                    <b>Goal Review Date: 3/20/23 </b>
-                  </h5>
-                  <h5>
-                    <b>Accomplishment State: </b>
-                    <p>In progress</p>
+                    <b>
+                      Goal:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />{' '}
+                    </b>
                   </h5>
                   <h5>
                     <b>
-                      Explanation: Joined multiple clubs, trying to establish a
-                      role and get a leadership position
+                      Goal Set Date:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                        type="date"
+                      />{' '}
+                    </b>
+                  </h5>
+                  <h5>
+                    <b>
+                      SEL:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />{' '}
+                    </b>
+                  </h5>
+                  <h5>
+                    <b>
+                      Goal Review Date:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                        type="date"
+                      />{' '}
+                    </b>
+                  </h5>
+                  <h5>
+                    <b>Accomplishment State: </b>
+                    <p>
+                      {' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />
+                    </p>
+                  </h5>
+                  <h5>
+                    <b>
+                      Explanation:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />
                     </b>
                   </h5>
                   <h3 style={{ color: '#2656A5' }}>
                     <b>Goal Two</b>
                   </h3>
                   <h5>
-                    <b>Goal: Make it onto the Varsity Tennis Team </b>
-                  </h5>
-                  <h5>
-                    <b>Goal Set Date: 11/22/21</b>
-                  </h5>
-                  <h5>
-                    <b>SEL:Social Awareness </b>
-                  </h5>
-                  <h5>
-                    <b>Goal Review Date: 4/30/22 </b>
-                  </h5>
-                  <h5>
-                    <b>Accomplishment State: In Progress </b>
+                    <b>
+                      Goal:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />
+                    </b>
                   </h5>
                   <h5>
                     <b>
-                      Explanation: Tryouts will be in April, currently on JV
+                      Goal Set Date:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                        type="date"
+                      />
+                    </b>
+                  </h5>
+                  <h5>
+                    <b>
+                      SEL:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />{' '}
+                    </b>
+                  </h5>
+                  <h5>
+                    <b>
+                      Goal Review Date:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                        type="date"
+                      />{' '}
+                    </b>
+                  </h5>
+                  <h5>
+                    <b>
+                      Accomplishment State:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />{' '}
+                    </b>
+                  </h5>
+                  <h5>
+                    <b>
+                      Explanation:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />
                     </b>
                   </h5>
                   <h3 style={{ color: '#2656A5' }}>
                     <b>Goal Three</b>
                   </h3>
                   <h5>
-                    <b>Goal: 4.3 GPA </b>
-                  </h5>
-                  <h5>
-                    <b>Goal Set Date: 11/10/21 </b>
-                  </h5>
-                  <h5>
-                    <b>SEL: Social Awareness</b>
-                  </h5>
-                  <h5>
-                    <b>Goal Review Date: 6/10/22 </b>
-                  </h5>
-                  <h5>
-                    <b>Accomplishment State: In Progress </b>
+                    <b>
+                      Goal:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />{' '}
+                    </b>
                   </h5>
                   <h5>
                     <b>
-                      Explanation: Trying to get a 4.3 GPA in all of my classes{' '}
+                      Goal Set Date:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                        type="date"
+                      />{' '}
+                    </b>
+                  </h5>
+                  <h5>
+                    <b>
+                      SEL:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />
+                    </b>
+                  </h5>
+                  <h5>
+                    <b>
+                      Goal Review Date:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                        type="date"
+                      />{' '}
+                    </b>
+                  </h5>
+                  <h5>
+                    <b>
+                      Accomplishment State:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />{' '}
+                    </b>
+                  </h5>
+                  <h5>
+                    <b>
+                      Explanation:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />{' '}
                     </b>
                   </h5>
                 </GridText>
@@ -317,66 +494,195 @@ export default function TabsFunction() {
                 <GridText>
                   <h3>
                     <b style={{ color: '#2656A5' }}>Parent Information</b>
+                    <button
+                      style={{ float: 'right' }}
+                      type="submit"
+                      onClick={handleGameClick}
+                    >
+                      {' '}
+                      Edit{' '}
+                    </button>
                   </h3>
                   <h5>
-                    <b>First Name: Bob </b>
+                    <b>
+                      First Name:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />{' '}
+                    </b>
                   </h5>
                   <h5>
-                    <b>Last Name: Doe </b>
+                    <b>
+                      Last Name:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />{' '}
+                    </b>
                   </h5>
                   <h5>
-                    <b>Address: 12345 Demo Street </b>
+                    <b>
+                      Address:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />{' '}
+                    </b>
                   </h5>
                   <h5>
-                    <b>Parent Apartment Number: 42 </b>
+                    <b>
+                      Parent Apartment Number:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />{' '}
+                    </b>
                   </h5>
                   <h5>
-                    <b>City: Milwaukee </b>
+                    <b>
+                      City:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />{' '}
+                    </b>
                   </h5>
                   <h5>
-                    <b>State: Wisconsin </b>
+                    <b>
+                      State:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />{' '}
+                    </b>
                   </h5>
                   <h5>
-                    <b>Zip Code: 50021 </b>
+                    <b>
+                      Zip Code:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />{' '}
+                    </b>
                   </h5>
                   <h5>
-                    <b>Home Phone: 421-422-4123 </b>
+                    <b>
+                      Home Phone:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />
+                    </b>
                   </h5>
                   <h5>
-                    <b>Cell Phone: 234-567-8901 </b>
+                    <b>
+                      Cell Phone:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />{' '}
+                    </b>
                   </h5>
                   <h5>
-                    <b>Parent Email: doeB@gmail.com </b>
+                    <b>
+                      Parent Email:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />{' '}
+                    </b>
                   </h5>
                   <h3>
                     <b style={{ color: '#2656A5' }}>Guidance Couselor Info: </b>
                   </h3>
                   <h5>
-                    <b>I know my guidance counselor: Yes </b>
+                    <b>
+                      I know my guidance counselor:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />{' '}
+                    </b>
                   </h5>
                   <h3 style={{ color: '#2656A5' }}>
                     <b>Admin Details: </b>
                   </h3>
                   <h5>
-                    <b>Activity Status: Active </b>
+                    <b>
+                      Activity Status:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />{' '}
+                    </b>
                   </h5>
                   <h5>
-                    <b>Acceptance Status: Accepted </b>
+                    <b>
+                      Acceptance Status:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />{' '}
+                    </b>
                   </h5>
                   <h3 style={{ color: '#2656A5' }}>
                     <b>Signatures </b>
                   </h3>
                   <h5>
-                    <b>Student Signature: Aadi Tiwari</b>
+                    <b>
+                      Student Signature:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />
+                    </b>
                   </h5>
                   <h5>
-                    <b>Date Signed: 2/1/22 </b>
+                    <b>
+                      Date Signed:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                        type="date"
+                      />{' '}
+                    </b>
                   </h5>
                   <h5>
-                    <b>Parent Signature: Bob Doe </b>
+                    <b>
+                      Parent Signature:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                      />{' '}
+                    </b>
                   </h5>
                   <h5>
-                    <b>Date Signed: 2/1/22 </b>
+                    <b>
+                      Date Signed:{' '}
+                      <input
+                        className="typing-container"
+                        placeholder=" I want to get job "
+                        disabled={!disabled}
+                        type="date"
+                      />{' '}
+                    </b>
                   </h5>
                 </GridText>
               </Grid>
