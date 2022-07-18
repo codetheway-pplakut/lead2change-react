@@ -6,6 +6,7 @@ import ProgressIndicatorOverlay from '../progress-indicator-overlay/progress-ind
 import LoginForm from './login-form/login-form';
 import AuthenticationContext from '../../context/authentication/authentication';
 import ROUTES from '../../constants/routes';
+import ForgotPassword from './forgot-password';
 
 export default function Login() {
   const { login } = useContext(AuthenticationContext);
@@ -45,6 +46,7 @@ export default function Login() {
             password={password}
             username={username}
           />
+          <ForgotPassword />
         </Box>
       </Container>
     </>
