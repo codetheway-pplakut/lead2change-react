@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Box from '@mui/material/Box';
@@ -93,13 +93,17 @@ export default function StudentTable() {
   const [students, setStudents] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const onRequestStudentsPress = async () => {
+  const refreshStudents = async () => {
     setIsLoading(true);
     const response = await getStudents();
 
     setIsLoading(false);
     setStudents(response);
   };
+
+  useEffect(() => {
+    refreshStudents();
+  }, []);
 
   const navigate = useNavigate();
 
@@ -124,15 +128,6 @@ export default function StudentTable() {
             <Tab label="Inactive" {...a11yProps(1)} />
           </Tabs>
         </Grid>
-        <Button
-          fullWidth
-          sx={{ mt: 3, mb: 2 }}
-          type="submit"
-          onClick={onRequestStudentsPress}
-          variant="contained"
-        >
-          Request Students
-        </Button>
         <Grid item xs={4} />
         <Grid item xs={4}>
           <Box>
@@ -158,35 +153,30 @@ export default function StudentTable() {
             <TableBody>
               {students
                 .filter((post) => {
-                  // if (post.active) {
-                    if (search === '') {
-                      return post;
-                    }
-                    if (
-                      post.studentFirstName
-                        .toLowerCase()
-                        .includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                    if (
-                      post.studentLastName
-                        .toLowerCase()
-                        .includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                    if (
-                      post.studentEmail
-                        .toLowerCase()
-                        .includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                    if (post.parentFirstName.includes(search.toLowerCase())) {
-                      return post;
-                    }
-                  // }
+                  if (search === '') {
+                    return post;
+                  }
+                  if (
+                    post.studentFirstName
+                      .toLowerCase()
+                      .includes(search.toLowerCase())
+                  ) {
+                    return post;
+                  }
+                  if (
+                    post.studentLastName
+                      .toLowerCase()
+                      .includes(search.toLowerCase())
+                  ) {
+                    return post;
+                  }
+                  if (
+                    post.studentEmail
+                      .toLowerCase()
+                      .includes(search.toLowerCase())
+                  ) {
+                    return post;
+                  }
                   return null;
                 })
                 .map((student) => (
@@ -240,30 +230,22 @@ export default function StudentTable() {
               {students
                 .filter((post) => {
                   // if (post.active === false) {
-                    if (search === '') {
-                      return post;
-                    }
-                    if (
-                      post.firstName
-                        .toLowerCase()
-                        .includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                    if (
-                      post.lastName
-                        .toLowerCase()
-                        .includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                    if (
-                      post.email
-                        .toLowerCase()
-                        .includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
+                  if (search === '') {
+                    return post;
+                  }
+                  if (
+                    post.firstName.toLowerCase().includes(search.toLowerCase())
+                  ) {
+                    return post;
+                  }
+                  if (
+                    post.lastName.toLowerCase().includes(search.toLowerCase())
+                  ) {
+                    return post;
+                  }
+                  if (post.email.toLowerCase().includes(search.toLowerCase())) {
+                    return post;
+                  }
                   // }
                   return null;
                 })
