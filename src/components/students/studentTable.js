@@ -22,6 +22,7 @@ import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Link from '@mui/material/Link';
 import { useNavigate } from 'react-router-dom';
+import AppBar from '@mui/material/AppBar';
 import ROUTES from '../../constants/routes';
 import StudentModal from './studentModal';
 import StudentRegistryModal from './studentRegistryModal';
@@ -65,15 +66,15 @@ function TabPanel(props) {
   );
 }
 const deactivateHandler = () => {
-  // console.log('this is when it should deactivate');
+  console.log('this is when it should deactivate');
 };
 
 const deleteHandler = () => {
-  // console.log('this is when it should delete');
+  console.log('this is when it should delete');
 };
 
 const reactivateHandler = () => {
-  // console.log('this is when it should reactivate');
+  console.log('this is when it should reactivate');
 };
 
 TabPanel.propTypes = {
@@ -85,8 +86,8 @@ TabPanel.propTypes = {
 
 function a11yProps(index) {
   return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    id: `full-width-tab-${index}`,
+    'aria-controls': `full-width-tabpanel-${index}`,
   };
 }
 
@@ -116,8 +117,8 @@ const rows = [
   createDataActive(
     'Kevin',
     'Niu',
-    'test@gmail.com',
-    '414 - 414 - 414',
+    'niuK@gmail.com',
+    '262 - 592 - 4149',
     24,
     <Stack spacing={2} direction="row">
       <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
@@ -126,8 +127,8 @@ const rows = [
   createDataActive(
     'Jason',
     'Dong',
-    'test@gmail.com',
-    '414 - 414 - 414',
+    'dongJ@gmail.com',
+    '283 - 139 - 2381',
     37,
     <Stack spacing={2} direction="row">
       <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
@@ -136,8 +137,8 @@ const rows = [
   createDataActive(
     'Sirat',
     'Mokha',
-    'test@gmail.com',
-    '414 - 414 - 414',
+    'mokhaS@gmail.com',
+    '342 - 582 - 6148',
     24,
     <Stack spacing={2} direction="row">
       <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
@@ -146,8 +147,8 @@ const rows = [
   createDataActive(
     'Noah',
     'Ren',
-    'test@gmail.com',
-    '414 - 414 - 414',
+    'renN@gmail.com',
+    '213 - 436 - 3412',
     67,
     <Stack spacing={2} direction="row">
       <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
@@ -156,8 +157,8 @@ const rows = [
   createDataActive(
     'Holly',
     'Raetz',
-    'test@gmail.com',
-    '414 - 414 - 414',
+    'raetzH@gmail.com',
+    '582 - 581 - 2499',
     67,
     <Stack spacing={2} direction="row">
       <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
@@ -166,48 +167,8 @@ const rows = [
   createDataActive(
     'Aadi',
     'Tiwari',
-    'test@gmail.com',
-    '414 - 414 - 414',
-    49,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
-    </Stack>
-  ),
-  createDataActive(
-    'Aadi',
-    'Tiwari',
-    'test@gmail.com',
-    '414 - 414 - 414',
-    49,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
-    </Stack>
-  ),
-  createDataActive(
-    'Aadi',
-    'Tiwari',
-    'test@gmail.com',
-    '414 - 414 - 414',
-    49,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
-    </Stack>
-  ),
-  createDataActive(
-    'Aadi',
-    'Tiwari',
-    'test@gmail.com',
-    '414 - 414 - 414',
-    49,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
-    </Stack>
-  ),
-  createDataActive(
-    'Aadi',
-    'Tiwari',
-    'test@gmail.com',
-    '414 - 414 - 414',
+    'tiwariA@gmail.com',
+    '231 - 381 - 4814',
     49,
     <Stack spacing={2} direction="row">
       <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
@@ -217,10 +178,10 @@ const rows = [
 
 const rowsInactive = [
   createDataInactive(
-    'Hello',
-    'Test',
-    'test@gmail.com',
-    '414 - 414 - 414',
+    'John',
+    'Doe',
+    'doeJ@gmail.com',
+    '592 - 124 - 4144',
     <Stack spacing={2} direction="row">
       <StudentModal modalType="delete" confirmHandler={deleteHandler} />
     </Stack>,
@@ -231,8 +192,8 @@ const rowsInactive = [
   createDataInactive(
     'Bob',
     'Jones',
-    'test@gmail.com',
-    '414 - 414 - 414',
+    'jonesB@gmail.com',
+    '693 - 491 - 5812',
     <Stack spacing={2} direction="row">
       <StudentModal modalType="delete" confirmHandler={deleteHandler} />
     </Stack>,
@@ -258,21 +219,34 @@ export default function StudentTable() {
 
   return (
     <Box sx={{ width: '100%', height: '60%' }}>
-      <Typography
-        style={{ color: '#2656A5' }}
-        variant="h4"
+      <Grid
+        item
         align="center"
-        sx={{ m: '2vh' }}
+        style={{
+          backgroundColor: '#2656A5',
+          marginBottom: '4vh',
+          color: '#FFFFFF',
+          padding: '3vh',
+        }}
       >
-        Students
-      </Typography>
+        <h1>STUDENTS</h1>
+      </Grid>
       <Grid container spacing={0}>
-        <Grid item xs={2}>
-          <Tabs value={value} onChange={handleChange}>
-            <Tab label="Active" {...a11yProps(0)} />
-            <Tab label="Inactive" {...a11yProps(1)} />
-          </Tabs>
-        </Grid>
+        <Box sx={{ bgcolor: 'background.paper', width: '16%' }}>
+          <AppBar position="static">
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              indicatorColor="secondary"
+              textColor="inherit"
+              variant="fullWidth"
+              aria-label="full width tabs example"
+            >
+              <Tab label="Active" {...a11yProps(0)} />
+              <Tab label="Inactive" {...a11yProps(1)} />
+            </Tabs>
+          </AppBar>
+        </Box>
         <Grid item xs={4} />
         <Grid item xs={4}>
           <Box>
@@ -284,7 +258,7 @@ export default function StudentTable() {
         </Grid>
       </Grid>
       <TabPanel value={value} index={0}>
-        <TableContainer component={Paper} sx={{ height: '65vh' }}>
+        <TableContainer component={Paper} sx={{ height: '55vh' }}>
           <Table sx={{ minWidth: 10 }} stickyHeader>
             <TableHead>
               <StyledTableRow>
@@ -363,7 +337,7 @@ export default function StudentTable() {
       </TabPanel>
 
       <TabPanel value={value} index={1}>
-        <TableContainer component={Paper} sx={{ height: '65vh' }}>
+        <TableContainer component={Paper} sx={{ height: '55vh' }}>
           <Table sx={{ minWidth: 10 }}>
             <TableHead>
               <StyledTableRow>
