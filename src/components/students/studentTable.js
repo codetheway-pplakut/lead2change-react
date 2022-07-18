@@ -65,15 +65,15 @@ function TabPanel(props) {
   );
 }
 const deactivateHandler = () => {
-  console.log('this is when it should deactivate');
+  // console.log('this is when it should deactivate');
 };
 
 const deleteHandler = () => {
-  console.log('this is when it should delete');
+  // console.log('this is when it should delete');
 };
 
 const reactivateHandler = () => {
-  console.log('this is when it should reactivate');
+  // console.log('this is when it should reactivate');
 };
 
 TabPanel.propTypes = {
