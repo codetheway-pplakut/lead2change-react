@@ -28,7 +28,7 @@ const StudentInfo = styled(Box)(({ theme }) => ({
 
 export default function ResponsiveGrid(props) {
   const onBackClick = () => {
-    navigate(ROUTES.STUDENT_TEST);
+    navigate(ROUTES.STUDENTS);
   };
   const navigate = useNavigate();
   const buttonText = '< Back to table';
