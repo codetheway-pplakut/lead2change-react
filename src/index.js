@@ -1,7 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Root from './components/root/root';
+import APP_CONFIG from './constants/app-config';
 import reportWebVitals from './reportWebVitals';
+import isDomAccessible from './util/is-dom-accessible/is-dom-accessible';
+
+/* This code sets the API and the application base URL to the "window" object,
+ * depending on the environment.  Then those values can be used throughout the
+ * application.  For example, you might want to use a different API during
+ * development than production.
+ */
+if (isDomAccessible())
+  window.ENV_CONFIG = {
+    API: APP_CONFIG.DEVELOPMENT.API,
+  };
 
 /* This code initializes a React application.  The code searches the index.html
  * file (./public/index.html) for an element with the id attribute "root," then
