@@ -9,7 +9,7 @@ import Table from '@mui/material/Table';
 import TableCell from '@mui/material/TableCell';
 import TableBody from '@mui/material/TableBody';
 import SearchBar from './searchBar';
-import DeleteAdmin from './deleteAdmin';
+import DeactivateAdmin from './inactivateAdmin';
 import EditModal from './editAdmin';
 
 function createData(name, username, email) {
@@ -97,7 +97,7 @@ export default function AdminTable() {
                   fontSize: 'large',
                 }}
               >
-                Delete
+                Deactivate
               </TableCell>
             </TableRow>
           </TableHead>
@@ -130,7 +130,7 @@ export default function AdminTable() {
                 <TableCell align="left">{row.username}</TableCell>
                 <TableCell align="left">{row.email}</TableCell>
                 <TableCell align="left">
-                  <DeleteAdmin />
+                  <DeactivateAdmin />
                 </TableCell>
               </TableRow>
             ))}
