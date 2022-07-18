@@ -10,7 +10,7 @@ import TableCell from '@mui/material/TableCell';
 import TableBody from '@mui/material/TableBody';
 import SearchBar from './searchBar';
 import DeleteAdmin from './deleteAdmin';
-import EditModal from './editAdmin';
+import EditModal from './editAdmin/editAdmin';
 
 function createData(name, username, email) {
   return { name, username, email };
