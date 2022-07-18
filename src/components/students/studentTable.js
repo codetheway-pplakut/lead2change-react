@@ -261,18 +261,6 @@ export default function StudentTable() {
 
   return (
     <Box sx={{ width: '100%', height: '60%' }}>
-      <Grid
-        item
-        align="center"
-        style={{
-          backgroundColor: '#2656A5',
-          marginBottom: '2vh',
-          color: '#FFFFFF',
-          padding: '0.1vh',
-        }}
-      >
-        <h1>STUDENTS</h1>
-      </Grid>
       <Grid container spacing={0}>
         <Grid item xs={2}>
           <Tabs value={value} onChange={handleChange}>

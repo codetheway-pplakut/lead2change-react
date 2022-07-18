@@ -20,19 +20,36 @@ export default function Student(props) {
   const navigate = useNavigate();
 
   return (
-    <Stack
-      spacing={2}
-      justifyContent="center"
-      justify="center"
-      sx={{ mx: '20vh' }}
-    >
-      <StudentTable />
-      <Grid item xs={1}>
-        <Button onClick={onBackClick} size="small" variant="outlined">
-          {text}
-        </Button>
+    <div>
+      <Grid container>
+        <Grid
+          item
+          align="center"
+          style={{
+            backgroundColor: '#2656A5',
+            marginBottom: '2vh',
+            color: '#FFFFFF',
+            padding: '0.1vh',
+          }}
+          sx={{ width: '100%' }}
+        >
+          <h1>STUDENTS</h1>
+        </Grid>
       </Grid>
-    </Stack>
+      <Stack
+        spacing={2}
+        justifyContent="center"
+        justify="center"
+        sx={{ mx: '20vh' }}
+      >
+        <StudentTable />
+        <Grid item xs={1}>
+          <Button onClick={onBackClick} size="small" variant="outlined">
+            {text}
+          </Button>
+        </Grid>
+      </Stack>
+    </div>
   );
 }
 
