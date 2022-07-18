@@ -1,19 +1,25 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable react/jsx-props-no-spreading */
-import * as React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import Button from '@mui/material/Button';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
+
   return (
+
+
+
+    
     <div
       role="tabpanel"
       hidden={value !== index}
@@ -27,6 +33,10 @@ function TabPanel(props) {
           <Typography>{children}</Typography>
         </Box>
       )}
+
+
+
+
     </div>
   );
 }
@@ -52,30 +62,27 @@ const GridText = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const dataTheme = createTheme({
-  typography: {
-    heading6: {
-      fontSize: 12,
-      fontWeight: 400,
-    },
-    body1: {
-      fontSize: 12,
-    },
-  },
-});
-
 export default function TabsFunction() {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const [disabled, setDisabled] = useState(false);
+
+  function handleGameClick() {
+    setDisabled(!disabled);
+  }
 
   return (
-    <ThemeProvider theme={dataTheme}>
+    <div>
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs value={value} onChange={handleChange}>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="basic tabs example"
+          >
             <Tab label="Education" {...a11yProps(0)} />
             <Tab label="Goals" {...a11yProps(1)} />
             <Tab label="Other" {...a11yProps(2)} />
@@ -88,92 +95,135 @@ export default function TabsFunction() {
                 item
                 xs={12}
                 sx={{ minWidth: 10, height: 'max-content' }}
-                style={{ height: '65vh' }}
+                style={{ height: '70vh' }}
               >
                 <GridText>
-                  <Typography
-                    variant="h6"
-                    sx={{ mt: '2vh' }}
-                    style={{ color: '#2656A5' }}
-                  >
-                    Post Secondary Plan
-                  </Typography>
-                  <Typography variant="b" sx={{ mt: '2vh' }}>
-                    Plans After College: After college I plan to go and get a
-                    job as a software seveloper at a company such as Google, and
-                    do my best to rise through the ranks once there.
-                  </Typography>
-                  <div>
-                    <Typography variant="b" sx={{ mt: '2vh' }}>
-                      I have applied to a college: Yes
-                    </Typography>
-                  </div>
-                  <div>
-                    <Typography variant="b" sx={{ mt: '2vh' }}>
+                  <h3 style={{ color: '#2656A5' }}>
+                    <b>Post Secondary Plan</b>
+                    <button  style={{float: 'right'}} type='submit' onClick={handleGameClick}> Edit </button>
+                  </h3>
+                  <h5>
+                    <b>
+                      Plans After College: <input
+        className='typing-container'
+        placeholder=' I want to get job '
+        disabled={!disabled}
+      />
+                    </b>
+                  </h5>
+                  <h5>
+                    <b>I have applied to a college: </b>
+                    <input
+        className='typing-container'
+        placeholder=' Yes '
+        disabled={!disabled}
+      />
+
+     
+
+                  </h5>
+                  <h5>
+                    <b>
                       Colleges I’ve applied to/plan to apply to: 1. UW-Madison
                       2. Northwestern 3. Purdue
-                    </Typography>
-                  </div>
-                  <div>
-                    <Typography variant="b" sx={{ mt: '2vh' }}>
-                      I have begun my work on my college essay: Yes
-                    </Typography>
-                  </div>
-                  <div>
-                    <Typography variant="b" sx={{ mt: '2vh' }}>
-                      I need help writing my college essay: No
-                    </Typography>
-                  </div>
-                  <div>
-                    <Typography variant="b" sx={{ mt: '2vh' }}>
-                      First choice of college: Northwestern
-                    </Typography>
-                  </div>
-                  <Typography
-                    variant="h6"
-                    sx={{ mt: '2vh' }}
-                    style={{ color: '#2656A5' }}
-                  >
-                    College Entrance Exam Information:
-                  </Typography>
-                  <Typography variant="b" sx={{ mt: '2vh' }}>
-                    PACT Score: 4<div>Date of PACT: 10/22/2021</div>
-                  </Typography>
-                  <Typography variant="b" sx={{ mt: '2vh' }}>
-                    PSAT Score: 10
-                    <div> Date of PSAT: 11/29/2021</div>
-                  </Typography>
-                  <Typography variant="b" sx={{ mt: '2vh' }}>
-                    ACT Score: 3<div> Date of ACT: 3/3/2022</div>
-                  </Typography>
-                  <Typography variant="b" sx={{ mt: '2vh' }}>
-                    SAT Score: 9<div> Date of SAT: 5/19/2022 </div>
-                  </Typography>
-                  <div>
-                    <Typography
-                      variant="h6"
-                      sx={{ mt: '2vh' }}
-                      style={{ color: '#2656A5' }}
-                    >
-                      Financial Aid:
-                    </Typography>
-                  </div>
-                  <div>
-                    <Typography variant="b" sx={{ mt: '2vh' }}>
-                      I have already completed the financial aid process: No
-                    </Typography>
-                  </div>
-                  <div>
-                    <Typography variant="b" sx={{ mt: '2vh' }}>
+                    </b>
+                  </h5>
+                  <h5>
+                    <b>I have begun my work on my college essay: </b>
+                    <input
+        className='typing-container'
+        placeholder=' Yes '
+        disabled={!disabled}
+      />
+                  </h5>
+                  <h5>
+                    <b>I need help writing my college essay: </b>
+                    <input
+        className='typing-container'
+        placeholder=' No '
+        disabled={!disabled}
+      />
+                  </h5>
+                  <h5>
+                    <b>First choice of college: </b>
+                    <input
+        className='typing-container'
+        placeholder=' Sus '
+        disabled={!disabled}
+      />
+                  </h5>
+                  <h3 style={{ color: '#2656A5' }}>
+                    <b>College Entrance Exam Information: </b>
+                  </h3>
+                  <h5>
+                    <b>
+                      PACT Score: <input
+        className='typing-container'
+        placeholder=' 35 '
+        disabled={!disabled}
+      />
+                      <div>Date of PACT: 10/22/2021</div>
+                    </b>
+                  </h5>
+                  <h5>
+                    <b>
+                      PSAT Score: <input
+        className='typing-container'
+        placeholder=' 1600 '
+        disabled={!disabled}
+      />
+                      <div> Date of PSAT: 11/29/2021</div>
+                    </b>
+                  </h5>
+                  <h5>
+                    <b>
+                      ACT Score: <input
+        className='typing-container'
+        placeholder=' 37 '
+        disabled={!disabled}
+      />
+                      <div> Date of ACT: 3/3/2022</div>
+                    </b>
+                  </h5>
+                  <h5>
+                    <b>
+                      SAT Score: 1<input
+        className='typing-container'
+        placeholder=' 1700 '
+        disabled={!disabled}
+      />
+                      <div> Date of SAT: 5/19/2022 </div>
+                    </b>
+                  </h5>
+                  <h3 style={{ color: '#2656A5' }}>
+                    <b>Financial Aid:</b>
+                  </h3>
+                  <h5>
+                    <b>
+                      I have already completed the financial aid process: <input
+        className='typing-container'
+        placeholder=' Yes '
+        disabled={!disabled}
+      />
+                    </b>
+                  </h5>
+                  <h5>
+                    <b>
                       I need assistance filling out my FAFSA/Financial aid
-                      forms: No
-                    </Typography>
-                  </div>
-                  <div>
-                    <Typography variant="b" sx={{ mt: '2vh' }}>
-                      Support they need: None
-                    </Typography>
-                  </div>
+                      forms: <input
+        className='typing-container'
+        placeholder=' Yes '
+        disabled={!disabled}
+      />
+                    </b>
+                  </h5>
+                  <h5>
+                    <b>Support they need: <input
+        className='typing-container'
+        placeholder=' Yes '
+        disabled={!disabled}
+      /></b>
+                  </h5>
                 </GridText>
               </Grid>
             </Grid>
@@ -236,7 +286,7 @@ export default function TabsFunction() {
                     <b>Goal Three</b>
                   </h3>
                   <h5>
-                    <b>Goal: 4.0 GPA </b>
+                    <b>Goal: 4.3 GPA </b>
                   </h5>
                   <h5>
                     <b>Goal Set Date: 11/10/21 </b>
@@ -252,7 +302,7 @@ export default function TabsFunction() {
                   </h5>
                   <h5>
                     <b>
-                      Explanation: Trying to get a 4.0 GPA in all of my classes{' '}
+                      Explanation: Trying to get a 4.3 GPA in all of my classes{' '}
                     </b>
                   </h5>
                 </GridText>
@@ -269,16 +319,16 @@ export default function TabsFunction() {
                     <b style={{ color: '#2656A5' }}>Parent Information</b>
                   </h3>
                   <h5>
-                    <b>First Name: John </b>
+                    <b>First Name: Bob </b>
                   </h5>
                   <h5>
                     <b>Last Name: Doe </b>
                   </h5>
                   <h5>
-                    <b>Address: 123456 HelloStreet Blvd. </b>
+                    <b>Address: 12345 Demo Street </b>
                   </h5>
                   <h5>
-                    <b>Parent Apartment Number: N/A </b>
+                    <b>Parent Apartment Number: 42 </b>
                   </h5>
                   <h5>
                     <b>City: Milwaukee </b>
@@ -287,16 +337,16 @@ export default function TabsFunction() {
                     <b>State: Wisconsin </b>
                   </h5>
                   <h5>
-                    <b>Zip Code: 12345 </b>
+                    <b>Zip Code: 50021 </b>
                   </h5>
                   <h5>
-                    <b>Home Phone: 123-456-7890 </b>
+                    <b>Home Phone: 421-422-4123 </b>
                   </h5>
                   <h5>
                     <b>Cell Phone: 234-567-8901 </b>
                   </h5>
                   <h5>
-                    <b>Parent Email: hellome@gmail.com </b>
+                    <b>Parent Email: doeB@gmail.com </b>
                   </h5>
                   <h3>
                     <b style={{ color: '#2656A5' }}>Guidance Couselor Info: </b>
@@ -317,13 +367,13 @@ export default function TabsFunction() {
                     <b>Signatures </b>
                   </h3>
                   <h5>
-                    <b>Student Signature: Aaditya Tiwari</b>
+                    <b>Student Signature: Aadi Tiwari</b>
                   </h5>
                   <h5>
                     <b>Date Signed: 2/1/22 </b>
                   </h5>
                   <h5>
-                    <b>Parent Signature: Someone Tiwari </b>
+                    <b>Parent Signature: Bob Doe </b>
                   </h5>
                   <h5>
                     <b>Date Signed: 2/1/22 </b>
@@ -334,6 +384,6 @@ export default function TabsFunction() {
           </Box>
         </TabPanel>
       </Box>
-    </ThemeProvider>
+    </div>
   );
 }
