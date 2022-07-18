@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import PropTypes from 'prop-types';
 import Table from '@mui/material/Table';
@@ -16,6 +15,7 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import ColorButton from './Shared/ColoredButton';
 
 const style = {
   position: 'absolute',
@@ -163,9 +163,9 @@ function StudentListModal(props) {
 
   return (
     <div>
-      <Button onClick={handleOpen} variant="contained">
+      <ColorButton onClick={handleOpen} variant="contained">
         Student List
-      </Button>
+      </ColorButton>
       <Modal
         open={open}
         onClose={handleClose}

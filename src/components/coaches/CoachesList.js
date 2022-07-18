@@ -184,12 +184,6 @@ export default function CoachesList(props) {
                             <StudentListModal coach={coach} />
                           </Grid>
                           <Grid item>
-                            <CoachDeletionModal
-                              deleteFunction={deleteFunction}
-                              coach={coach}
-                            />
-                          </Grid>
-                          <Grid item>
                             <InactivationModal coach={coach} />
                           </Grid>
                           <Grid item>

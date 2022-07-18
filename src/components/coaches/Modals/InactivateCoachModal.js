@@ -1,7 +1,6 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
@@ -31,9 +30,9 @@ export default function InactivationModal(props) {
   };
   return (
     <div>
-      <Button variant="contained" onClick={handleOpen}>
-        Inactivate
-      </Button>
+      <ColorButton variant="contained" onClick={handleOpen}>
+        Deactivate
+      </ColorButton>
       <Modal
         open={open}
         onClose={handleClose}

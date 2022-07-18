@@ -1,13 +1,13 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import PropTypes from 'prop-types';
+import EditIcon from '@mui/icons-material/EditRounded';
 import ColorButton from '../Shared/ColoredButton';
 
 const style = {
@@ -43,9 +43,9 @@ export default function EditCoachModal(props) {
   };
   return (
     <div>
-      <Button variant="contained" onClick={handleOpen}>
-        Edit
-      </Button>
+      <IconButton sx={{ color: '#004cbb' }} size="small" onClick={handleOpen}>
+        <EditIcon />
+      </IconButton>
       <Modal
         open={open}
         onClose={handleClose}
