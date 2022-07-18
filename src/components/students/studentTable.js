@@ -26,6 +26,8 @@ import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import ROUTES from '../../constants/routes';
 
+import { getStudents } from '../../services/students/students';
+
 import StudentModal from './studentModal';
 import StudentRegistryModal from './studentRegistryModal';
 import SearchBar from './searchBar';
@@ -93,159 +95,14 @@ function a11yProps(index) {
   };
 }
 
-function createDataActive(
-  firstName,
-  lastName,
-  email,
-  number,
-  coaches,
-  deactivate
-) {
-  return { firstName, lastName, email, number, coaches, deactivate };
-}
-
-function createDataInactive(
-  firstName,
-  lastName,
-  email,
-  number,
-  deleteStudent,
-  reactivate
-) {
-  return { firstName, lastName, email, number, deleteStudent, reactivate };
-}
-
-const rows = [
-  createDataActive(
-    'Kevin',
-    'Niu',
-    'niuK@gmail.com',
-    '262 - 592 - 4149',
-    24,
-    <Stack spacing={2} direction="row">
-      <StudentModal
-        modalType="deactivate"
-        confirmHandler={deactivateHandler}
-        studentId="student-id"
-      />
-    </Stack>
-  ),
-  createDataActive(
-    'Jason',
-    'Dong',
-    'dongJ@gmail.com',
-    '283 - 139 - 2381',
-    37,
-    <Stack spacing={2} direction="row">
-      <StudentModal
-        modalType="deactivate"
-        confirmHandler={deactivateHandler}
-        studentId="student-id"
-      />
-    </Stack>
-  ),
-  createDataActive(
-    'Sirat',
-    'Mokha',
-    'mokhaS@gmail.com',
-    '342 - 582 - 6148',
-    24,
-    <Stack spacing={2} direction="row">
-      <StudentModal
-        modalType="deactivate"
-        confirmHandler={deactivateHandler}
-        studentId="student-id"
-      />
-    </Stack>
-  ),
-  createDataActive(
-    'Noah',
-    'Ren',
-    'renN@gmail.com',
-    '213 - 436 - 3412',
-    67,
-    <Stack spacing={2} direction="row">
-      <StudentModal
-        modalType="deactivate"
-        confirmHandler={deactivateHandler}
-        studentId="student-id"
-      />
-    </Stack>
-  ),
-  createDataActive(
-    'Holly',
-    'Raetz',
-    'raetzH@gmail.com',
-    '582 - 581 - 2499',
-    67,
-    <Stack spacing={2} direction="row">
-      <StudentModal
-        modalType="deactivate"
-        confirmHandler={deactivateHandler}
-        studentId="student-id"
-      />
-    </Stack>
-  ),
-  createDataActive(
-    'Aadi',
-    'Tiwari',
-    'tiwariA@gmail.com',
-    '231 - 381 - 4814',
-    49,
-    <Stack spacing={2} direction="row">
-      <StudentModal
-        modalType="deactivate"
-        confirmHandler={deactivateHandler}
-        studentId="student-id"
-      />
-    </Stack>
-  ),
-];
-
-const rowsInactive = [
-  createDataInactive(
-    'John',
-    'Doe',
-    'doeJ@gmail.com',
-    '592 - 124 - 4144',
-    <Stack spacing={2} direction="row">
-      <StudentModal
-        modalType="delete"
-        confirmHandler={deleteHandler}
-        studentId="student-id"
-      />
-    </Stack>,
-    <Stack spacing={2} direction="row">
-      <StudentModal
-        modalType="reactivate"
-        confirmHandler={reactivateHandler}
-        studentId="student-id"
-      />
-    </Stack>
-  ),
-  createDataInactive(
-    'Bob',
-    'Jones',
-    'jonesB@gmail.com',
-    '693 - 491 - 5812',
-    <Stack spacing={2} direction="row">
-      <StudentModal
-        modalType="delete"
-        confirmHandler={deleteHandler}
-        studentId="student-id"
-      />
-    </Stack>,
-    <Stack spacing={2} direction="row">
-      <StudentModal
-        modalType="reactivate"
-        confirmHandler={reactivateHandler}
-        studentId="student-id"
-      />
-    </Stack>
-  ),
-];
-
 export default function StudentTable() {
+  const [students, setStudents] = useState([]);
+
+  const onRequestStudentsPress = async () => {
+    const response = await getStudents();
+    setStudents(response);
+  };
+
   const navigate = useNavigate();
 
   const toDetailDemo = () => {
@@ -275,7 +132,7 @@ export default function StudentTable() {
           </Box>
         </Grid>
         <Grid item xs={2}>
-          <StudentRegistryModal />
+          <StudentRegistryModal confirmHandler={onRequestStudentsPress} />
         </Grid>
       </Grid>
       <TabPanel value={value} index={0}>
@@ -291,34 +148,42 @@ export default function StudentTable() {
               </StyledTableRow>
             </TableHead>
             <TableBody>
-              {rows
+              {students
                 .filter((post) => {
-                  if (search === '') {
-                    return post;
-                  }
-                  if (
-                    post.firstName.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (
-                    post.lastName.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (post.email.toLowerCase().includes(search.toLowerCase())) {
-                    return post;
-                  }
-                  if (
-                    post.number.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
+                  if (post.active) {
+                    if (search === '') {
+                      return post;
+                    }
+                    if (
+                      post.studentFirstName
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.studentLastName
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.studentEmail
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (post.studentCellPhone.includes(search.toLowerCase())) {
+                      return post;
+                    }
                   }
                   return null;
                 })
-                .map((row) => (
+                .map((student) => (
                   <StyledTableRow
-                    key={row.name}
+                    key={student.id}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
                     <StyledTableCell component="th" scope="row">
@@ -327,28 +192,22 @@ export default function StudentTable() {
                         variant="body2"
                         onClick={toDetailDemo}
                       >
-                        {row.lastName}, {row.firstName}
+                        {student.studentLastName}, {student.studentFirstName}
                       </Link>
                     </StyledTableCell>
-                    <StyledTableCell align="left">{row.email}</StyledTableCell>
-                    <StyledTableCell align="left">{row.number}</StyledTableCell>
                     <StyledTableCell align="left">
-                      {' '}
-                      <Box sx={{ minWidth: 120 }}>
-                        <FormControl fullWidth size="small">
-                          <InputLabel id="demo-simple-select-label">
-                            Coach
-                          </InputLabel>
-                          <Select label="Coach">
-                            <MenuItem value={10}>Coach 1</MenuItem>
-                            <MenuItem value={20}>Coach 2</MenuItem>
-                            <MenuItem value={30}>Coach 3</MenuItem>
-                          </Select>
-                        </FormControl>
-                      </Box>
+                      {student.studentEmail || '--'}
                     </StyledTableCell>
                     <StyledTableCell align="left">
-                      {row.deactivate}
+                      {student.studentCellPhone || '--'}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">--</StyledTableCell>
+                    <StyledTableCell align="left">
+                      <StudentModal
+                        modalType="deactivate"
+                        confirmHandler={deactivateHandler}
+                        studentId={student.id}
+                      />
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}
@@ -370,34 +229,42 @@ export default function StudentTable() {
               </StyledTableRow>
             </TableHead>
             <TableBody>
-              {rowsInactive
+              {students
                 .filter((post) => {
-                  if (search === '') {
-                    return post;
-                  }
-                  if (
-                    post.firstName.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (
-                    post.lastName.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (post.email.toLowerCase().includes(search.toLowerCase())) {
-                    return post;
-                  }
-                  if (
-                    post.number.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
+                  if (post.active === false) {
+                    if (search === '') {
+                      return post;
+                    }
+                    if (
+                      post.studentFirstName
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.studentLastName
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.studentEmail
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (post.studentCellPhone.includes(search.toLowerCase())) {
+                      return post;
+                    }
                   }
                   return null;
                 })
-                .map((row) => (
+                .map((student) => (
                   <StyledTableRow
-                    key={row.name}
+                    key={student.id}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
                     <StyledTableCell component="th" scope="row">
@@ -406,16 +273,22 @@ export default function StudentTable() {
                         variant="body2"
                         onClick={toDetailDemo}
                       >
-                        {row.lastName}, {row.firstName}
+                        {student.studentLastName}, {student.studentFirstName}
                       </Link>
                     </StyledTableCell>
-                    <StyledTableCell align="left">{row.email}</StyledTableCell>
-                    <StyledTableCell align="left">{row.number}</StyledTableCell>
                     <StyledTableCell align="left">
-                      {row.deleteStudent}
+                      {student.studentEmail || '--'}
                     </StyledTableCell>
                     <StyledTableCell align="left">
-                      {row.reactivate}
+                      {student.studentCellPhone || '--'}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">--</StyledTableCell>
+                    <StyledTableCell align="left">
+                      <StudentModal
+                        modalType="deactivate"
+                        confirmHandler={deactivateHandler}
+                        studentId={student.id}
+                      />
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}
