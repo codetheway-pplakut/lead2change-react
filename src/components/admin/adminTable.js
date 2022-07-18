@@ -9,8 +9,8 @@ import Table from '@mui/material/Table';
 import TableCell from '@mui/material/TableCell';
 import TableBody from '@mui/material/TableBody';
 import SearchBar from './searchBar';
-import DeactivateAdmin from './inactivateAdmin';
 import EditModal from './editAdmin';
+import IsActive from './isActive';
 
 function createData(name, username, email) {
   return { name, username, email };
@@ -97,7 +97,7 @@ export default function AdminTable() {
                   fontSize: 'large',
                 }}
               >
-                Deactivate
+                Inactivate
               </TableCell>
             </TableRow>
           </TableHead>
@@ -130,7 +130,7 @@ export default function AdminTable() {
                 <TableCell align="left">{row.username}</TableCell>
                 <TableCell align="left">{row.email}</TableCell>
                 <TableCell align="left">
-                  <DeactivateAdmin />
+                  <IsActive name={row.name} />
                 </TableCell>
               </TableRow>
             ))}
