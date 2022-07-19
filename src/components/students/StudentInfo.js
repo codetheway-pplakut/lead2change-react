@@ -5,6 +5,7 @@ import React, { useState, useRef } from 'react';
 import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
+import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
@@ -27,7 +28,50 @@ const StudentInfo = styled(Box)(({ theme }) => ({
   borderRadius: 1,
 }));
 
+function SignUpDisplay() {
+  return (
+    <div>
+      DISPLAY
+      <Button variant ="contained">Edit</Button>
+      <ul>
+        <li>Test</li>
+        <li>Test</li>
+      </ul>
+    </div>
+  );
+}
+
+function SignUpEdit() {
+  return (
+    <div>
+      DISPLAY
+      <h3>EDIT</h3>
+      <ul>
+        <li>Test</li>
+        <li>Test</li>
+      </ul>
+    </div>
+  );
+}
+
+SignUpEdit.propTypes = {
+  onSaveClick: PropTypes.func.isRequired,
+};
+
 export default function ResponsiveGrid(props) {
+  const [isEditing, setIsEditing] = useState(false);
+  const startEditing = () => setIsEditing(true);
+  const endEditing = () => setIsEditing(false);
+
+  const saveStudentInfo = (studentInfo) => {
+    console.log('save');
+  };
+
+  const onSaveClick = () => {
+    saveStudentInfo();
+    endEditing();
+  };
+
   const num = 0;
   const onBackClick = () => {
     navigate(ROUTES.STUDENT_TEST);
@@ -59,6 +103,20 @@ export default function ResponsiveGrid(props) {
 
   return (
     <Grid container>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        {isEditing ? (
+          <SignUpEdit onSaveClick={onSaveClick} />
+        ) : (
+          <SignUpDisplay onEditClick={startEditing} />
+        )}
+      </Box>
+
       <Grid
         item
         align="center"
@@ -70,7 +128,7 @@ export default function ResponsiveGrid(props) {
         }}
         sx={{ width: '100%' }}
       >
-        <h1>AADI&rsquo;S DETAILS</h1>
+        <h1>Aadi&rsquo;S DETAILS</h1>
       </Grid>
       <Grid item xs={4}>
         <Paper
@@ -99,13 +157,12 @@ export default function ResponsiveGrid(props) {
             <StudentInfo>
               <h3>
                 <b>
-                  First Name:{' '}
-                  <input
+                  <TextField
                     onChange={handleChange}
                     className="typing-container"
-                    placeholder=" I want to get job "
                     disabled={!disabled}
-                    type="text"
+                    defaultValue="Aadi"
+                    label="First Name"
                   />
                 </b>
                 <button allign="right" type="submit" onClick={handleGameClick}>
@@ -117,11 +174,11 @@ export default function ResponsiveGrid(props) {
             <StudentInfo>
               <h3>
                 <b>
-                  Last Name:{' '}
-                  <input
+                  <TextField
                     className="typing-container"
-                    placeholder=" I want to get job "
                     disabled={!disabled}
+                    label="Last Name"
+                    defaultValue="Tiwari"
                   />{' '}
                 </b>
               </h3>
@@ -129,12 +186,12 @@ export default function ResponsiveGrid(props) {
             <StudentInfo>
               <h3>
                 <b>
-                  Date of Birth:{' '}
-                  <input
+                  <TextField
                     className="typing-container"
-                    placeholder=" I want to get job "
                     disabled={!disabled}
                     type="date"
+                    label="Date of Birth"
+                    defaultValue="Aadi"
                   />
                 </b>
               </h3>
@@ -142,12 +199,12 @@ export default function ResponsiveGrid(props) {
             <StudentInfo>
               <h3>
                 <b>
-                  Age:{' '}
-                  <input
+                  <TextField
                     className="typing-container"
-                    placeholder=" I want to get job "
                     disabled={!disabled}
                     type="number"
+                    label="Age"
+                    defaultValue="16"
                   />{' '}
                 </b>
               </h3>
@@ -155,11 +212,11 @@ export default function ResponsiveGrid(props) {
             <StudentInfo>
               <h3>
                 <b>
-                  Email Address:{' '}
-                  <input
+                  <TextField
                     className="typing-container"
-                    placeholder=" I want to get job "
                     disabled={!disabled}
+                    label="Email Adress"
+                    defaultValue="Aadi"
                   />
                 </b>
               </h3>
@@ -167,11 +224,11 @@ export default function ResponsiveGrid(props) {
             <StudentInfo>
               <h3>
                 <b>
-                  Phone Number:{' '}
-                  <input
+                  <TextField
                     className="typing-container"
-                    placeholder=" I want to get job "
                     disabled={!disabled}
+                    label="Phone Number"
+                    defaultValue="Aadi"
                   />{' '}
                 </b>
               </h3>
@@ -179,11 +236,11 @@ export default function ResponsiveGrid(props) {
             <StudentInfo>
               <h3>
                 <b>
-                  Home Address:{' '}
-                  <input
+                  <TextField
                     className="typing-container"
-                    placeholder=" I want to get job "
                     disabled={!disabled}
+                    label="Home Adress"
+                    defaultValue="Aadi"
                   />{' '}
                 </b>
               </h3>
@@ -191,11 +248,11 @@ export default function ResponsiveGrid(props) {
             <StudentInfo>
               <h3>
                 <b>
-                  Apt. #:
-                  <input
+                  <TextField
                     className="typing-container"
-                    placeholder=" I want to get job "
                     disabled={!disabled}
+                    label="Apt. #"
+                    defaultValue="Aadi"
                   />
                 </b>
               </h3>
@@ -203,11 +260,11 @@ export default function ResponsiveGrid(props) {
             <StudentInfo>
               <h3>
                 <b>
-                  Zip Code:{' '}
-                  <input
+                  <TextField
                     className="typing-container"
-                    placeholder=" I want to get job "
                     disabled={!disabled}
+                    label="Zip Code"
+                    defaultValue="Aadi"
                   />
                 </b>
               </h3>
@@ -215,11 +272,11 @@ export default function ResponsiveGrid(props) {
             <StudentInfo>
               <h3>
                 <b>
-                  State:{' '}
-                  <input
+                  <TextField
                     className="typing-container"
-                    placeholder=" I want to get job "
                     disabled={!disabled}
+                    label="State"
+                    defaultValue="Aadi"
                   />{' '}
                 </b>
               </h3>

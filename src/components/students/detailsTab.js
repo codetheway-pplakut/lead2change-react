@@ -1,6 +1,7 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
+import { TextField } from '@mui/material';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -103,7 +104,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Plans After College:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -112,7 +113,7 @@ export default function TabsFunction() {
                   </h5>
                   <h5>
                     <b>I have applied to a college: </b>
-                    <input
+                    <TextField
                       className="typing-container"
                       placeholder=" Yes "
                       disabled={!disabled}
@@ -121,7 +122,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Colleges I’ve applied to/plan to apply to:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -130,7 +131,7 @@ export default function TabsFunction() {
                   </h5>
                   <h5>
                     <b>I have begun my work on my college essay: </b>
-                    <input
+                    <TextField
                       className="typing-container"
                       placeholder=" Yes "
                       disabled={!disabled}
@@ -138,7 +139,7 @@ export default function TabsFunction() {
                   </h5>
                   <h5>
                     <b>I need help writing my college essay: </b>
-                    <input
+                    <TextField
                       className="typing-container"
                       placeholder=" No "
                       disabled={!disabled}
@@ -146,7 +147,7 @@ export default function TabsFunction() {
                   </h5>
                   <h5>
                     <b>First choice of college: </b>
-                    <input
+                    <TextField
                       className="typing-container"
                       placeholder=" Sus "
                       disabled={!disabled}
@@ -158,14 +159,14 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       PACT Score:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" 35 "
                         disabled={!disabled}
                       />
                       <div>
                         Date of PACT:{' '}
-                        <input
+                        <TextField
                           className="typing-container"
                           placeholder=" I want to get job "
                           disabled={!disabled}
@@ -177,7 +178,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       PSAT Score:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" 1600 "
                         disabled={!disabled}
@@ -185,7 +186,7 @@ export default function TabsFunction() {
                       <div>
                         {' '}
                         Date of PSAT:{' '}
-                        <input
+                        <TextField
                           className="typing-container"
                           placeholder=" I want to get job "
                           disabled={!disabled}
@@ -197,7 +198,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       ACT Score:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" 37 "
                         disabled={!disabled}
@@ -205,7 +206,7 @@ export default function TabsFunction() {
                       <div>
                         {' '}
                         Date of ACT:{' '}
-                        <input
+                        <TextField
                           className="typing-container"
                           placeholder=" I want to get job "
                           disabled={!disabled}
@@ -217,7 +218,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       SAT Score: 1
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" 1700 "
                         disabled={!disabled}
@@ -225,7 +226,7 @@ export default function TabsFunction() {
                       <div>
                         {' '}
                         Date of SAT:{' '}
-                        <input
+                        <TextField
                           className="typing-container"
                           placeholder=" I want to get job "
                           disabled={!disabled}
@@ -240,7 +241,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       I have already completed the financial aid process:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" Yes "
                         disabled={!disabled}
@@ -251,7 +252,7 @@ export default function TabsFunction() {
                     <b>
                       I need assistance filling out my FAFSA/Financial aid
                       forms:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" Yes "
                         disabled={!disabled}
@@ -261,7 +262,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Support they need:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" Yes "
                         disabled={!disabled}
@@ -292,7 +293,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Goal:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -302,7 +303,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Goal Set Date:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -313,7 +314,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       SEL:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -323,7 +324,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Goal Review Date:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -335,7 +336,7 @@ export default function TabsFunction() {
                     <b>Accomplishment State: </b>
                     <p>
                       {' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -345,7 +346,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Explanation:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -358,7 +359,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Goal:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -368,7 +369,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Goal Set Date:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -379,7 +380,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       SEL:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -389,7 +390,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Goal Review Date:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -400,7 +401,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Accomplishment State:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -410,7 +411,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Explanation:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -423,7 +424,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Goal:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -433,7 +434,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Goal Set Date:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -444,7 +445,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       SEL:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -454,7 +455,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Goal Review Date:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -465,7 +466,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Accomplishment State:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -475,7 +476,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Explanation:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -506,7 +507,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       First Name:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -516,7 +517,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Last Name:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -526,7 +527,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Address:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -536,7 +537,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Parent Apartment Number:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -546,7 +547,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       City:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -556,7 +557,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       State:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -566,7 +567,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Zip Code:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -576,7 +577,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Home Phone:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -586,7 +587,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Cell Phone:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -596,7 +597,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Parent Email:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -609,7 +610,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       I know my guidance counselor:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -622,7 +623,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Activity Status:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -632,7 +633,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Acceptance Status:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -645,7 +646,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Student Signature:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -655,7 +656,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Date Signed:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -666,7 +667,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Parent Signature:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
@@ -676,7 +677,7 @@ export default function TabsFunction() {
                   <h5>
                     <b>
                       Date Signed:{' '}
-                      <input
+                      <TextField
                         className="typing-container"
                         placeholder=" I want to get job "
                         disabled={!disabled}
