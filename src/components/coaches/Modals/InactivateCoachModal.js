@@ -45,7 +45,7 @@ export default function InactivationModal(props) {
                 <Grid item xs={2} />
                 <Grid item xs={8} sx={{ margin: 2 }}>
                   <Typography variant="h5" component="h2" align="center">
-                    Inactivation
+                    Deactivation
                   </Typography>
                 </Grid>
                 <Grid item sx={{ margin: 1.5 }}>
@@ -63,12 +63,17 @@ export default function InactivationModal(props) {
           </Grid>
           <Grid container spacing={1} sx={{ p: 2 }} justifyContent="center">
             <Grid item xs={12} align="center">
-              Are you sure you want to inactivate {coach.coachFirstName}{' '}
+              Are you sure you want to deactivate {coach.coachFirstName}{' '}
               {coach.coachLastName}?
             </Grid>
             <Grid item xs={2}>
-              <ColorButton variant="contained" fullWidth onClick={Inactivate}>
-                Inactivate
+              <ColorButton
+                sx={{ bgcolor: '#F47D23' }}
+                variant="contained"
+                fullWidth
+                onClick={Inactivate}
+              >
+                Deactivate
               </ColorButton>
             </Grid>
             <Grid item xs={2}>

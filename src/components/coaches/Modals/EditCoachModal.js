@@ -142,9 +142,9 @@ export default function EditCoachModal(props) {
                     }}
                   />
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={2}>
                   <ColorButton variant="contained" fullWidth onClick={Edit}>
-                    Confirm Changes
+                    Confirm
                   </ColorButton>
                 </Grid>
                 <Grid item xs={2}>
