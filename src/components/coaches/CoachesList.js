@@ -11,6 +11,8 @@ import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
 import StudentListModal from './StudentListModal';
 import InactivationModal from './Modals/InactivateCoachModal';
 import CoachDeletionModal from './Modals/DeleteCoachModal';
@@ -138,6 +140,12 @@ export default function CoachesList(props) {
     setSelected(newSelected);
   };
 
+  const [value, setValue] = React.useState(2);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -152,6 +160,15 @@ export default function CoachesList(props) {
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="disabled tabs example"
+        >
+          <Tab label="Active" />
+          <Tab label="Disabled" />
+        </Tabs>
+
         <TableContainer>
           <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
             <EnhancedTableHead
