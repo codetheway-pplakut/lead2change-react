@@ -1,3 +1,6 @@
+/* eslint-disable no-useless-return */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable react/button-has-type */
 import React, { useState, useRef } from 'react';
 import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -5,7 +8,7 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
-
+import { TextField } from '@mui/material';
 import TabsFunction from './detailsTab';
 import ROUTES from '../../constants/routes';
 
@@ -25,6 +28,7 @@ const StudentInfo = styled(Box)(({ theme }) => ({
 }));
 
 export default function ResponsiveGrid(props) {
+  const num = 0;
   const onBackClick = () => {
     navigate(ROUTES.STUDENT_TEST);
   };
@@ -33,9 +37,25 @@ export default function ResponsiveGrid(props) {
 
   const [disabled, setDisabled] = useState(false);
 
+  const [textInputName, setTextInputName] = useState('');
+
   function handleGameClick() {
     setDisabled(!disabled);
+
+    event.preventDefault();
+
+    if (message.trim().length !== 0) {
+      console.log('input value is NOT empty');
+    } else {
+      console.log('input value is empty');
+    }
   }
+
+  const [message, setMessage] = useState('');
+
+  const handleChange = (event) => {
+    setMessage(event.target.value);
+  };
 
   return (
     <Grid container>
@@ -81,9 +101,11 @@ export default function ResponsiveGrid(props) {
                 <b>
                   First Name:{' '}
                   <input
+                    onChange={handleChange}
                     className="typing-container"
                     placeholder=" I want to get job "
                     disabled={!disabled}
+                    type="text"
                   />
                 </b>
                 <button allign="right" type="submit" onClick={handleGameClick}>
@@ -107,7 +129,7 @@ export default function ResponsiveGrid(props) {
             <StudentInfo>
               <h3>
                 <b>
-                  Date of Birth:
+                  Date of Birth:{' '}
                   <input
                     className="typing-container"
                     placeholder=" I want to get job "
@@ -125,6 +147,7 @@ export default function ResponsiveGrid(props) {
                     className="typing-container"
                     placeholder=" I want to get job "
                     disabled={!disabled}
+                    type="number"
                   />{' '}
                 </b>
               </h3>
