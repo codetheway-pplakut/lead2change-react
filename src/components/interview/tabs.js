@@ -4,8 +4,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import InterviewQuestions from './interviewQuestions';
-import GritSliderQuestions from './gritQuestions';
+import InterviewQuestions from './InterviewQuestions';
+import GritSliderQuestions from './GritQuestions';
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/require-default-props */
 function TabPanel(props) {

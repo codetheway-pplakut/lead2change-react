@@ -4,7 +4,7 @@ import Container from '@mui/material/Container';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { Divider } from '@mui/material';
-import GritItem from './gritItem';
+import GritItem from './GritItem';
 
 export default function GritSliderQuestions() {
   return (
