@@ -71,20 +71,20 @@ function TabPanel(props) {
     </div>
   );
 }
-const deactivateHandler = (studentId) => {
-  const updatedStudent = getStudentById(studentId);
+const deactivateHandler = async (studentId) => {
+  const updatedStudent = await getStudentById(studentId);
   updatedStudent.state = 'Inactive';
   updateStudent(updatedStudent);
 };
 
-const activateHandler = (studentId) => {
-  const updatedStudent = getStudentById(studentId);
+const activateHandler = async (studentId) => {
+  const updatedStudent = await getStudentById(studentId);
   updatedStudent.state = 'Active';
   updateStudent(updatedStudent);
 };
 
-const declineHandler = (studentId) => {
-  const updatedStudent = getStudentById(studentId);
+const declineHandler = async (studentId) => {
+  const updatedStudent = await getStudentById(studentId);
   updatedStudent.state = 'Rejected';
   updateStudent(updatedStudent);
 };
@@ -149,9 +149,7 @@ export default function StudentTable() {
             <SearchBar setSearch={setSearch} />
           </Box>
         </Grid>
-        <Grid item xs={2}>
-          <StudentRegistryModal />
-        </Grid>
+        <Grid item xs={2} />
       </Grid>
       <TabPanel value={value} index={0}>
         <TableContainer component={Paper} sx={{ height: '69vh' }}>
@@ -168,7 +166,7 @@ export default function StudentTable() {
             <TableBody>
               {students
                 .filter((post) => {
-                  // if (post.state.includes('Active')) {
+                  if (post.state.includes('e')) {
                     if (search === '') {
                       return post;
                     }
@@ -196,7 +194,7 @@ export default function StudentTable() {
                     ) {
                       return post;
                     }
-                  // }
+                  }
                   return null;
                 })
 
@@ -252,7 +250,7 @@ export default function StudentTable() {
             <TableBody>
               {students
                 .filter((post) => {
-                  if (post.state.includes('Rejected')) {
+                  if (post.state.includes('e')) {
                     if (search === '') {
                       return post;
                     }
@@ -303,7 +301,7 @@ export default function StudentTable() {
                     <StyledTableCell align="left">
                       {student.studentCellPhone || '--'}
                     </StyledTableCell>
-                    <StyledTableCell align="left">--</StyledTableCell>
+                    <StyledTableCell align="left">{student.state}</StyledTableCell>
                     <StyledTableCell align="left">
                       <StudentModal
                         modalType="reactivate"
