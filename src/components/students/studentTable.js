@@ -149,7 +149,9 @@ export default function StudentTable() {
             <SearchBar setSearch={setSearch} />
           </Box>
         </Grid>
-        <Grid item xs={2} />
+        <Grid item xs={2}>
+          <StudentRegistryModal />
+        </Grid>
       </Grid>
       <TabPanel value={value} index={0}>
         <TableContainer component={Paper} sx={{ height: '69vh' }}>
@@ -218,9 +220,7 @@ export default function StudentTable() {
                     <StyledTableCell align="left">
                       {student.studentCellPhone || '--'}
                     </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {student.state || '--'}
-                    </StyledTableCell>
+                    <StyledTableCell align="left">Coach</StyledTableCell>
                     <StyledTableCell align="left">
                       <StudentModal
                         modalType="deactivate"
