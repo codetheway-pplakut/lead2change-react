@@ -116,6 +116,13 @@ export default function CoachesList(props) {
   const [filteredCoaches, setFilteredCoaches] = React.useState(
     rows.filter((item) => item.active === true)
   );
+
+  React.useEffect(() => {
+    if (filteredCoaches.length === 0 && rows.length !== 0) {
+      setFilteredCoaches(rows.filter((item) => item.active === true));
+    }
+  }, [filteredCoaches.length, rows]);
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
