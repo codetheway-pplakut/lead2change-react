@@ -3,10 +3,10 @@ import { useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
-import { Dialog, DialogActions } from '@mui/material';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { createTheme } from '@mui/material/styles';
@@ -31,6 +31,17 @@ export default function Students() {
     setOpen(true);
   };
 
+  const modalPosition = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    width: 430,
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'background.paper',
+    borderRadius: '10px',
+    boxShadow: 24,
+  };
+
   const editIconStyling = {
     borderRadius: 2,
     backgroundColor: 'orange',
@@ -42,8 +53,8 @@ export default function Students() {
 
   const buttonTheme = createTheme({
     palette: {
-      delete: {
-        main: '#FF4D4D',
+      save: {
+        main: '#ffba06',
         contrastText: '#fff',
       },
       cancel: {
@@ -102,129 +113,137 @@ export default function Students() {
         <EditIcon />
       </IconButton>
       {/* <UpdateAdmin onSubmit={updateModalChange} handleClose={handleClose} /> */}
-      <Dialog open={open} onClose={handleClose}>
-        <Grid item xs={12}>
-          <Box bgcolor="#3764A8">
-            <Typography
-              textAlign="center"
-              color="white"
-              variant="h4"
-              fontWeight="bold"
-              padding="10px"
-            >
-              Edit Admin
-            </Typography>
-            <IconButton
-              onClick={handleClose}
-              sx={{ position: 'absolute', right: 8, top: 8 }}
-            >
-              <CloseIcon fontSize="large" sx={closeIconColor} />
-            </IconButton>
-          </Box>
-        </Grid>
-
-        <DialogActions>
-          <Box sx={{ mt: 1 }}>
-            <Grid container spacing={2} rowSpacing={2}>
-              <Grid item xs={6} sm={6}>
-                <TextField
-                  fullWidth
-                  label="Enter first name..."
-                  variant="filled"
-
-                  // onChange={firstNameChangeHandler}
-                  // value={firstName}
-                />
-              </Grid>
-              <Grid item xs={6} sm={6}>
-                <TextField
-                  fullWidth
-                  label="Enter last name..."
-                  variant="filled"
-                  // onChange={lastNameChangeHandler}
-                  // value={lastName}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="Enter email address..."
-                  variant="filled"
-                  // onChange={emailChangeHandler}
-                  // value={email}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="Enter username..."
-                  variant="filled"
-                  // onChange={usernameChangeHandler}
-                  // value={username}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="Enter password..."
-                  variant="filled"
-                  // onChange={passwordChangeHandler}
-                  // value={password}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="Enter same password..."
-                  variant="filled"
-                />
-              </Grid>
-
-              <Grid
-                container
-                spacing={2}
-                alignItems="center"
-                justifyContent="center"
-                paddingTop="10px"
-                paddingBottom="10px"
-                marginTop="0px"
-                marginLeft="0px"
-                align="center"
+      <Modal open={open} onClose={handleClose}>
+        <Box sx={modalPosition}>
+          <Grid spacing={2} alignItems="center" justifyContent="center">
+            <Grid item xs={12} sx={{ borderRadius: '10px' }}>
+              <Box
+                bgcolor="#3764A8"
+                sx={{
+                  borderTopLeftRadius: '10px',
+                  borderTopRightRadius: '10px',
+                }}
               >
-                <Grid item xs={4}>
-                  <Box>
-                    <Button
-                      theme={buttonTheme}
-                      color="delete"
-                      variant="contained"
-                      onClick={handleClose}
-                    >
-                      <Typography padding="5px">Save</Typography>
-                    </Button>
-                  </Box>
+                <Typography
+                  textAlign="center"
+                  color="white"
+                  variant="h4"
+                  fontWeight="bold"
+                  padding="10px"
+                >
+                  Edit Admin
+                </Typography>
+                <IconButton
+                  onClick={handleClose}
+                  sx={{ position: 'absolute', right: 8, top: 8 }}
+                >
+                  <CloseIcon fontSize="large" sx={closeIconColor} />
+                </IconButton>
+              </Box>
+            </Grid>
+          </Grid>
+          <Box sx={{ mt: 1 }}>
+            <Box container margin="20px">
+              <Grid container spacing={2} rowSpacing={2}>
+                <Grid item xs={6} sm={6}>
+                  <TextField
+                    fullWidth
+                    label="Enter first name..."
+                    variant="filled"
+
+                    // onChange={firstNameChangeHandler}
+                    // value={firstName}
+                  />
+                </Grid>
+                <Grid item xs={6} sm={6}>
+                  <TextField
+                    fullWidth
+                    label="Enter last name..."
+                    variant="filled"
+                    // onChange={lastNameChangeHandler}
+                    // value={lastName}
+                  />
                 </Grid>
 
-                <Grid item xs={4}>
-                  <Box>
-                    <Button
-                      theme={buttonTheme}
-                      color="cancel"
-                      variant="contained"
-                      onClick={handleClose}
-                    >
-                      <Typography padding="5px">Cancel</Typography>
-                    </Button>
-                  </Box>
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Enter email address..."
+                    variant="filled"
+                    // onChange={emailChangeHandler}
+                    // value={email}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Enter username..."
+                    variant="filled"
+                    // onChange={usernameChangeHandler}
+                    // value={username}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Enter password..."
+                    variant="filled"
+                    // onChange={passwordChangeHandler}
+                    // value={password}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Enter same password..."
+                    variant="filled"
+                  />
+                </Grid>
+
+                <Grid
+                  container
+                  spacing={2}
+                  alignItems="center"
+                  justifyContent="center"
+                  padding="20px"
+                  align="center"
+                >
+                  <Grid item xs={4}>
+                    <Box>
+                      <Button
+                        theme={buttonTheme}
+                        color="save"
+                        variant="contained"
+                        onClick={handleClose}
+                        style={{ minWidth: '100px' }}
+                      >
+                        <Typography padding="5px">Save</Typography>
+                      </Button>
+                    </Box>
+                  </Grid>
+
+                  <Grid item xs={4} sx={{ borderRadius: '10px' }}>
+                    <Box>
+                      <Button
+                        theme={buttonTheme}
+                        color="cancel"
+                        variant="contained"
+                        onClick={handleClose}
+                        style={{ minWidth: '100px' }}
+                      >
+                        <Typography padding="5px">Cancel</Typography>
+                      </Button>
+                    </Box>
+                  </Grid>
                 </Grid>
               </Grid>
-            </Grid>
+            </Box>
           </Box>
-        </DialogActions>
-      </Dialog>
+        </Box>
+      </Modal>
     </Container>
   );
 }
