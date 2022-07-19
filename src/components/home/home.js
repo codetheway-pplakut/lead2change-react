@@ -77,6 +77,12 @@ export default function Home() {
           >
             Interview
           </Button>
+          <Button
+            variant="contained"
+            onClick={() => navigate(ROUTES.RESET_PASS)}
+          >
+            Reset Password Form
+          </Button>
         </Stack>
       </Box>
     </Container>
