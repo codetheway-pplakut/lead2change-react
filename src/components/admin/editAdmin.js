@@ -178,16 +178,6 @@ export default function Students() {
                 <Grid item xs={12}>
                   <TextField
                     fullWidth
-                    label="Enter username..."
-                    variant="filled"
-                    // onChange={usernameChangeHandler}
-                    // value={username}
-                  />
-                </Grid>
-
-                <Grid item xs={12}>
-                  <TextField
-                    fullWidth
                     label="Enter password..."
                     variant="filled"
                     // onChange={passwordChangeHandler}
