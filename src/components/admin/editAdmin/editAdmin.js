@@ -11,15 +11,27 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { createTheme } from '@mui/material/styles';
 import { green, grey } from '@mui/material/colors';
-import Validation from './editAdminValidation';
+// import Validation from './editAdminValidation';
+// import UpdateAdmin from './update-admin';
 
-export default function EditAdmin() {
+export default function Students() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const [open, setOpen] = useState(false);
+  const [save, setSave] = useState(false);
+
+  const [firstNameError, setFirstNameError] = useState('');
+  const [lastNameError, setLastNameError] = useState('');
+  const [emailErrorOne, setEmailErrorOne] = useState('');
+  const [emailErrorTwo, setEmailErrorTwo] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [passwordErrorTwo, setPasswordErrorTwo] = useState('');
+  const [passwordErrorConfirmation, setPasswordErrorConfirmation] =
+    useState('');
 
   const handleClose = () => {
     setOpen(false);
@@ -27,6 +39,94 @@ export default function EditAdmin() {
 
   const handleOpen = () => {
     setOpen(true);
+  };
+
+  const handleSave = () => {
+    setFirstNameError(null);
+    setLastNameError(null);
+    setEmailErrorOne(null);
+    setEmailErrorTwo(null);
+    setPasswordError(null);
+    setPasswordErrorTwo(null);
+    setPasswordErrorConfirmation(null);
+
+    setSave(true);
+
+    if (firstName.length < 1) {
+      setFirstNameError(
+        <Typography variant="subtitle2" sx={{ color: 'red' }}>
+          First Name Error; First Name Required.
+        </Typography>
+      );
+      setSave(false);
+    }
+    if (lastName.length < 1) {
+      setLastNameError(
+        <Typography variant="subtitle2" sx={{ color: 'red' }}>
+          Last Name Error; Last Name Required.
+        </Typography>
+      );
+      setSave(false);
+    }
+    if (email.length < 1) {
+      setEmailErrorOne(
+        <Typography variant="subtitle2" sx={{ color: 'red' }}>
+          Email Error; Email Required.
+        </Typography>
+      );
+      setSave(false);
+    }
+    if (email.indexOf('@') < 0) {
+      setEmailErrorTwo(
+        <Typography variant="subtitle2" sx={{ color: 'red' }}>
+          Email Error; Please enter a valid email of the form ___@___.___
+        </Typography>
+      );
+      setSave(false);
+    }
+    if (password.length < 1) {
+      setPasswordError(
+        <Typography variant="subtitle2" sx={{ color: 'red' }}>
+          Password Error; Password Required.
+        </Typography>
+      );
+      setSave(false);
+    }
+    if (
+      password.indexOf('1') < 0 &&
+      password.indexOf('2') < 0 &&
+      password.indexOf('3') < 0 &&
+      password.indexOf('4') < 0 &&
+      password.indexOf('5') < 0 &&
+      password.indexOf('6') < 0 &&
+      password.indexOf('7') < 0 &&
+      password.indexOf('8') < 0 &&
+      password.indexOf('9') < 0 &&
+      password.indexOf('0') < 0
+    ) {
+      setPasswordErrorTwo(
+        <Typography variant="subtitle2" sx={{ color: 'red' }}>
+          Password Error; Password must contain a digit (0,1,2,3,4,5,6,7,8,9).
+        </Typography>
+      );
+      setSave(false);
+    }
+    if (password !== confirmPassword) {
+      setPasswordErrorConfirmation(
+        <Typography variant="subtitle2" sx={{ color: 'red' }}>
+          Password Error; Password and Confirm Password do not match.
+        </Typography>
+      );
+      setSave(false);
+    }
+
+    if (save) {
+      setPasswordErrorConfirmation(
+        <Typography variant="subtitle2" sx={{ color: 'red' }}>
+          Bruh
+        </Typography>
+      );
+    }
   };
 
   const buttonTheme = createTheme({
@@ -58,6 +158,9 @@ export default function EditAdmin() {
   const passwordChangeHandler = (event) => {
     setPassword(event.target.value);
   };
+  const confirmPasswordChangeHandler = (event) => {
+    setConfirmPassword(event.target.value);
+  };
 
   return (
     <Container maxWidth="sm">
@@ -68,12 +171,10 @@ export default function EditAdmin() {
           borderRadius: 2,
           backgroundColor: 'orange',
         }}
-        // value={admin.Id}
         onClick={handleOpen}
       >
         <EditIcon />
       </IconButton>
-      {/* <UpdateAdmin onSubmit={updateModalChange} handleClose={handleClose} /> */}
       <Dialog open={open} onClose={handleClose}>
         <Grid item xs={12} sx={{ borderRadius: '10px' }}>
           <Box
@@ -168,6 +269,8 @@ export default function EditAdmin() {
                     backgroundColor: grey[100],
                     boxShadow: 2,
                   }}
+                  onChange={confirmPasswordChangeHandler}
+                  value={confirmPassword}
                 />
               </Grid>
 
@@ -188,7 +291,7 @@ export default function EditAdmin() {
                       theme={buttonTheme}
                       color="delete"
                       variant="contained"
-                      onClick={handleClose}
+                      onClick={handleSave}
                     >
                       <Typography padding="5px">Save</Typography>
                     </Button>
@@ -210,7 +313,15 @@ export default function EditAdmin() {
               </Grid>
             </Grid>
 
-            <Validation firstName={firstName} />
+            <div>
+              {firstNameError}
+              {lastNameError}
+              {emailErrorOne}
+              {emailErrorTwo}
+              {passwordError}
+              {passwordErrorTwo}
+              {passwordErrorConfirmation}
+            </div>
           </Box>
         </DialogActions>
       </Dialog>
