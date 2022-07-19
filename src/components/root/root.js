@@ -12,7 +12,7 @@ import Login from '../login/login';
 import AuthenticationProvider from '../authentication-provider/authentication-provider';
 import ApiDemo from '../api-demo/api-demo';
 import BasicTabs from '../interview/tabs';
-import InterviewPage from '../interview/interviewPage';
+import InterviewPage from '../interview/interview-page';
 
 const theme = createTheme();
 

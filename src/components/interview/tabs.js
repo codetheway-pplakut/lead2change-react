@@ -4,7 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import InterviewQuestions from './interviewQuestions';
+import InterviewQuestions from './interview-questions';
 import GritSliderQuestions from './grit-questions';
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/require-default-props */
