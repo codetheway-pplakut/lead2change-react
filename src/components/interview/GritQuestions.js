@@ -4,8 +4,7 @@ import Container from '@mui/material/Container';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { Divider } from '@mui/material';
-import GritItem from './GritItem';
-
+import GritItem from './gritItem';
 
 export default function GritSliderQuestions() {
   return (
@@ -13,14 +12,13 @@ export default function GritSliderQuestions() {
       <Box
         components="span"
         display="flex"
-  justifyContent="center"
-  alignItems="center"
+        justifyContent="center"
+        alignItems="center"
         sx={{
           px: 10,
           py: 2,
           width: '100%',
           height: '5%',
-       
         }}
       >
         <FormControl>
@@ -32,13 +30,13 @@ export default function GritSliderQuestions() {
         </FormControl>
       </Box>
 
-      <Divider/>
+      <Divider />
 
       <Box
         components="span"
         display="flex"
-  justifyContent="center"
-  alignItems="center"
+        justifyContent="center"
+        alignItems="center"
         sx={{
           px: 10,
           py: 2,
@@ -53,12 +51,12 @@ export default function GritSliderQuestions() {
           <GritItem />
         </FormControl>
       </Box>
-      <Divider/>
+      <Divider />
       <Box
         components="span"
         display="flex"
-  justifyContent="center"
-  alignItems="center"
+        justifyContent="center"
+        alignItems="center"
         sx={{
           px: 10,
           py: 2,
@@ -68,18 +66,18 @@ export default function GritSliderQuestions() {
       >
         <FormControl>
           <FormLabel id="demo-controlled-radio-buttons-group">
-        3. I have been obsessed with a certain idea or project for a short time
-        but later lost interest.
+            3. I have been obsessed with a certain idea or project for a short
+            time but later lost interest.
           </FormLabel>
           <GritItem />
         </FormControl>
       </Box>
-      <Divider/>
+      <Divider />
       <Box
         components="span"
         display="flex"
-  justifyContent="center"
-  alignItems="center"
+        justifyContent="center"
+        alignItems="center"
         sx={{
           px: 10,
           py: 2,
@@ -94,12 +92,12 @@ export default function GritSliderQuestions() {
           <GritItem />
         </FormControl>
       </Box>
-      <Divider/>
+      <Divider />
       <Box
         components="span"
         display="flex"
-  justifyContent="center"
-  alignItems="center"
+        justifyContent="center"
+        alignItems="center"
         sx={{
           px: 10,
           py: 2,
@@ -114,12 +112,12 @@ export default function GritSliderQuestions() {
           <GritItem />
         </FormControl>
       </Box>
-      <Divider/>
+      <Divider />
       <Box
         components="span"
         display="flex"
-  justifyContent="center"
-  alignItems="center"
+        justifyContent="center"
+        alignItems="center"
         sx={{
           px: 10,
           py: 2,
@@ -135,9 +133,10 @@ export default function GritSliderQuestions() {
           <GritItem />
         </FormControl>
       </Box>
-      <Divider/>
+      <Divider />
       <Box
-        components="span"display="flex"
+        components="span"
+        display="flex"
         justifyContent="center"
         alignItems="center"
         sx={{
@@ -154,12 +153,12 @@ export default function GritSliderQuestions() {
           <GritItem />
         </FormControl>
       </Box>
-      <Divider/>
+      <Divider />
       <Box
         components="span"
         display="flex"
-  justifyContent="center"
-  alignItems="center"
+        justifyContent="center"
+        alignItems="center"
         sx={{
           px: 10,
           py: 2,
