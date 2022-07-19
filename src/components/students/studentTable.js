@@ -72,18 +72,21 @@ function TabPanel(props) {
   );
 }
 const deactivateHandler = (studentId) => {
-  getStudentById(studentId).state = 'Inactive';
-  updateStudent(getStudentById(studentId));
+  const updatedStudent = getStudentById(studentId);
+  updatedStudent.state = 'Inactive';
+  updateStudent(updatedStudent);
 };
 
 const activateHandler = (studentId) => {
-  getStudentById(studentId).state = 'Active';
-  updateStudent(getStudentById(studentId));
+  const updatedStudent = getStudentById(studentId);
+  updatedStudent.state = 'Active';
+  updateStudent(updatedStudent);
 };
 
 const declineHandler = (studentId) => {
-  getStudentById(studentId).state = 'Rejected';
-  updateStudent(getStudentById(studentId));
+  const updatedStudent = getStudentById(studentId);
+  updatedStudent.state = 'Rejected';
+  updateStudent(updatedStudent);
 };
 
 TabPanel.propTypes = {
