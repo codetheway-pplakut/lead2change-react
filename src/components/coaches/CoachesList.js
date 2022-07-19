@@ -17,6 +17,7 @@ import StudentListModal from './StudentListModal';
 import InactivationModal from './Modals/InactivateCoachModal';
 import CoachDeletionModal from './Modals/DeleteCoachModal';
 import EditCoachModal from './Modals/EditCoachModal';
+import ReactivationModal from './Modals/ActivateCoachModal';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -107,21 +108,13 @@ EnhancedTableHead.propTypes = {
 };
 
 export default function CoachesList(props) {
-  const { rows, deleteFunction } = props;
+  const { rows, deleteFunction, updateFunction } = props;
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('name');
   const [selected, setSelected] = React.useState(rows);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [filteredCoaches, setFilteredCoaches] = React.useState(
-    rows.filter((item) => item.active === true)
-  );
-
-  React.useEffect(() => {
-    if (filteredCoaches.length === 0 && rows.length !== 0) {
-      setFilteredCoaches(rows.filter((item) => item.active === true));
-    }
-  }, [filteredCoaches.length, rows]);
+  const [sortActive, setSortActive] = React.useState(true);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -153,10 +146,10 @@ export default function CoachesList(props) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
     if (newValue === 0) {
-      setFilteredCoaches(rows.filter((item) => item.active === true));
+      setSortActive(true);
     }
     if (newValue === 1) {
-      setFilteredCoaches(rows.filter((item) => item.active === false));
+      setSortActive(false);
     }
   };
 
@@ -170,7 +163,11 @@ export default function CoachesList(props) {
   };
   const emptyRows =
     page > 0
-      ? Math.max(0, (1 + page) * rowsPerPage - filteredCoaches.length)
+      ? Math.max(
+          0,
+          (1 + page) * rowsPerPage -
+            rows.filter((item) => item.active === sortActive).length
+        )
       : 0;
 
   return (
@@ -190,7 +187,10 @@ export default function CoachesList(props) {
               rowCount={rows.length}
             />
             <TableBody>
-              {stableSort(filteredCoaches, getComparator(order, orderBy))
+              {stableSort(
+                rows.filter((item) => item.active === sortActive),
+                getComparator(order, orderBy)
+              )
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((coach, index) => {
                   return (
@@ -209,20 +209,40 @@ export default function CoachesList(props) {
                       </TableCell>
                       <TableCell>
                         <Grid container spacing={2}>
+                          {sortActive === true && (
+                            <>
+                              <Grid item>
+                                <StudentListModal coach={coach} />
+                              </Grid>
+                              <Grid item>
+                                <InactivationModal
+                                  updateFunction={updateFunction}
+                                  coach={coach}
+                                />
+                              </Grid>
+                            </>
+                          )}
+                          {sortActive === false && (
+                            <>
+                              <Grid item>
+                                <CoachDeletionModal
+                                  deleteFunction={deleteFunction}
+                                  coach={coach}
+                                />
+                              </Grid>
+                              <Grid item>
+                                <ReactivationModal
+                                  updateFunction={updateFunction}
+                                  coach={coach}
+                                />
+                              </Grid>
+                            </>
+                          )}
                           <Grid item>
-                            <StudentListModal coach={coach} />
-                          </Grid>
-                          <Grid item>
-                            <CoachDeletionModal
-                              deleteFunction={deleteFunction}
+                            <EditCoachModal
+                              updateFunction={updateFunction}
                               coach={coach}
                             />
-                          </Grid>
-                          <Grid item>
-                            <InactivationModal coach={coach} />
-                          </Grid>
-                          <Grid item>
-                            <EditCoachModal coach={coach} />
                           </Grid>
                         </Grid>
                       </TableCell>
@@ -240,7 +260,7 @@ export default function CoachesList(props) {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={filteredCoaches.length}
+          count={rows.filter((item) => item.active === sortActive).length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
@@ -254,4 +274,5 @@ export default function CoachesList(props) {
 CoachesList.propTypes = {
   rows: PropTypes.array.isRequired,
   deleteFunction: PropTypes.func.isRequired,
+  updateFunction: PropTypes.func.isRequired,
 };

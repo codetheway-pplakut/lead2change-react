@@ -2,10 +2,15 @@ import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import Button from '@mui/material/Button';
+import uuid from 'react-uuid';
+
 import CoachesList from './CoachesList';
 import RegisterCoachModal from './Modals/RegisterCoachModal';
-import { getCoaches } from '../../services/coaches/coaches';
+import {
+  getCoaches,
+  addCoach,
+  updateCoach,
+} from '../../services/coaches/coaches';
 
 const theme = createTheme({
   components: {
@@ -57,27 +62,34 @@ const theme = createTheme({
 
 export default function Coaches() {
   const [coaches, setCoaches] = useState([]);
-  const refreshCoaches = async () => {
-    const coachAnswer = await getCoaches();
-    setCoaches(coachAnswer);
-    console.log(coachAnswer);
-  };
   const coachesExist = Boolean(coaches.length);
+
+  const refreshCoaches = async () => {
+    const result = await getCoaches();
+    setCoaches(result);
+  };
+
   useEffect(() => {
     refreshCoaches();
   }, []);
-  const newCoach = (first, last, email, phone) => {
+
+  const newCoach = async (first, last, email, phone) => {
     const coach = {
-      id: Date.now(), // TODO : Update to agreed ID creation method
+      id: uuid(), // TODO : Update to agreed ID creation method
       coachFirstName: first,
       coachLastName: last,
       coachEmail: email,
       coachPhoneNumber: phone,
       students: [],
+      active: true,
     };
-    setCoaches([...coaches, coach]);
+    await addCoach(coach);
+    await refreshCoaches();
   };
-
+  const updateCoachInfo = async (coach) => {
+    await updateCoach(coach);
+    await refreshCoaches();
+  };
   const deleteCoach = (id) => {
     setCoaches(coaches.filter((item) => item.id !== id));
   };
@@ -94,7 +106,11 @@ export default function Coaches() {
                     <RegisterCoachModal addFunction={newCoach} />
                   </Grid>
                   <Grid item xs={12}>
-                    <CoachesList rows={coaches} deleteFunction={deleteCoach} />
+                    <CoachesList
+                      rows={coaches}
+                      deleteFunction={deleteCoach}
+                      updateFunction={updateCoachInfo}
+                    />
                   </Grid>
                 </Grid>
               </Grid>
