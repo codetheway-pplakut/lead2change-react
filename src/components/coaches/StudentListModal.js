@@ -152,7 +152,9 @@ function StudentListModal(props) {
     page > 0
       ? Math.max(0, (1 + page) * rowsPerPage - coach.students.length)
       : 0;
-
+  if (coach.students === null) {
+    return;
+  }
   return (
     <div>
       <Button onClick={handleOpen} variant="contained">
