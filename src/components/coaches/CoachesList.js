@@ -13,7 +13,6 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import StudentListModal from './StudentListModal';
 import InactivationModal from './Modals/InactivateCoachModal';
-import CoachDeletionModal from './Modals/DeleteCoachModal';
 import EditCoachModal from './Modals/EditCoachModal';
 
 function descendingComparator(a, b, orderBy) {
@@ -105,6 +104,7 @@ EnhancedTableHead.propTypes = {
 };
 
 export default function CoachesList(props) {
+  // eslint-disable-next-line no-unused-vars
   const { rows, deleteFunction } = props;
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('name');
