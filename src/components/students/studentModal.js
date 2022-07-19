@@ -10,13 +10,9 @@ import Typography from '@mui/material/Typography';
 export default function StudentModal(props) {
   const { modalType, confirmHandler, studentId } = props;
 
-  let deleteText = '';
   let useColor = 'warning';
-  let useButtonMargin = '1vh';
-  if (modalType === 'delete') {
-    deleteText = 'All data will be lost.';
+  if (modalType === 'decline') {
     useColor = 'error';
-    useButtonMargin = null;
   }
   const style = {
     position: 'absolute',
@@ -48,10 +44,7 @@ export default function StudentModal(props) {
           <Typography variant="h6" component="h2" align="center">
             Are you sure you want to {modalType} this student?
           </Typography>
-          <Typography sx={{ mt: 2 }} align="center" color={useColor}>
-            {deleteText}
-          </Typography>
-          <Grid container spacing={4} sx={{ mt: useButtonMargin }}>
+          <Grid container spacing={4} sx={{ mt: '1vh' }}>
             <Grid item xs={6} align="center">
               <Button
                 variant="contained"

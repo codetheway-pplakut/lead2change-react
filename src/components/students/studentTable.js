@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Tab from '@mui/material/Tab';
@@ -22,7 +21,12 @@ import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import ROUTES from '../../constants/routes';
 
-import { getStudents } from '../../services/students/students';
+import {
+  getStudents,
+  getStudentById,
+  updateStudent,
+} from '../../services/students/students';
+// import { getCoachById } from '../../services/coaches/coaches';
 
 import StudentModal from './studentModal';
 import StudentRegistryModal from './studentRegistryModal';
@@ -68,11 +72,24 @@ function TabPanel(props) {
   );
 }
 const deactivateHandler = (studentId) => {
-  console.log('this is when it should deactivate using', studentId);
+  getStudentById(studentId).active = false;
+  updateStudent(getStudentById(studentId));
 };
 
 const reactivateHandler = (studentId) => {
-  console.log('this is when it should reactivate using', studentId);
+  getStudentById(studentId).active = true;
+  updateStudent(getStudentById(studentId));
+};
+
+const acceptHandler = (studentId) => {
+  getStudentById(studentId).accepted = true;
+  getStudentById(studentId).active = true;
+  updateStudent(getStudentById(studentId));
+};
+
+const declineHandler = (studentId) => {
+  getStudentById(studentId).declined = true;
+  updateStudent(getStudentById(studentId));
 };
 
 TabPanel.propTypes = {
@@ -122,13 +139,14 @@ export default function StudentTable() {
     <Box sx={{ width: '100%', height: '60%' }}>
       <ProgressIndicatorOverlay active={isLoading} />
       <Grid container spacing={0}>
-        <Grid item xs={2}>
+        <Grid item xs={3}>
           <Tabs value={value} onChange={handleChange}>
             <Tab label="Active" {...a11yProps(0)} />
             <Tab label="Inactive" {...a11yProps(1)} />
+            <Tab label="Applicants" {...a11yProps(1)} />
           </Tabs>
         </Grid>
-        <Grid item xs={4} />
+        <Grid item xs={3} />
         <Grid item xs={4}>
           <Box>
             <SearchBar setSearch={setSearch} />
@@ -139,8 +157,90 @@ export default function StudentTable() {
         </Grid>
       </Grid>
       <TabPanel value={value} index={0}>
-        <TableContainer component={Paper} sx={{ height: '64vh' }}>
+        <TableContainer component={Paper} sx={{ height: '69vh' }}>
           <Table sx={{ minWidth: 10 }} stickyHeader>
+            <TableHead>
+              <StyledTableRow>
+                <StyledTableCell>Name </StyledTableCell>
+                <StyledTableCell align="left">Email</StyledTableCell>
+                <StyledTableCell align="left">Phone Number</StyledTableCell>
+                <StyledTableCell align="left">Coach</StyledTableCell>
+                <StyledTableCell align="left"> </StyledTableCell>
+              </StyledTableRow>
+            </TableHead>
+            <TableBody>
+              {students
+                .filter((post) => {
+                  if (post.state.includes('active')) {
+                    if (search === '') {
+                      return post;
+                    }
+                    if (
+                      post.firstName
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.lastName.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.email.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.studentCellPhone
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                  }
+                  return null;
+                })
+
+                .map((student) => (
+                  <StyledTableRow
+                    key={student.id}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <StyledTableCell component="th" scope="row">
+                      <Link
+                        component="button"
+                        variant="body2"
+                        onClick={toDetailDemo}
+                      >
+                        {student.lastName}, {student.firstName}
+                      </Link>
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {student.email || '--'}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {student.studentCellPhone || '--'}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">--</StyledTableCell>
+                    <StyledTableCell align="left">
+                      <StudentModal
+                        modalType="deactivate"
+                        confirmHandler={deactivateHandler}
+                        studentId={student.id}
+                      />
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </TabPanel>
+
+      <TabPanel value={value} index={1}>
+        <TableContainer component={Paper} sx={{ height: '69vh' }}>
+          <Table sx={{ minWidth: 10 }}>
             <TableHead>
               <StyledTableRow>
                 <StyledTableCell>Name </StyledTableCell>
@@ -153,29 +253,34 @@ export default function StudentTable() {
             <TableBody>
               {students
                 .filter((post) => {
-                  if (search === '') {
-                    return post;
-                  }
-                  if (
-                    post.studentFirstName
-                      .toLowerCase()
-                      .includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (
-                    post.studentLastName
-                      .toLowerCase()
-                      .includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (
-                    post.studentEmail
-                      .toLowerCase()
-                      .includes(search.toLowerCase())
-                  ) {
-                    return post;
+                  if (post.state.includes('inactive')) {
+                    if (search === '') {
+                      return post;
+                    }
+                    if (
+                      post.firstName
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.lastName.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.email.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.studentCellPhone
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
                   }
                   return null;
                 })
@@ -194,16 +299,16 @@ export default function StudentTable() {
                       </Link>
                     </StyledTableCell>
                     <StyledTableCell align="left">
-                      {student.studentEmail || '--'}
+                      {student.email || '--'}
                     </StyledTableCell>
                     <StyledTableCell align="left">
-                      {student.parentFirstName || '--'}
+                      {student.studentCellPhone || '--'}
                     </StyledTableCell>
                     <StyledTableCell align="left">--</StyledTableCell>
                     <StyledTableCell align="left">
                       <StudentModal
-                        modalType="deactivate"
-                        confirmHandler={deactivateHandler}
+                        modalType="reactivate"
+                        confirmHandler={reactivateHandler}
                         studentId={student.id}
                       />
                     </StyledTableCell>
@@ -214,8 +319,8 @@ export default function StudentTable() {
         </TableContainer>
       </TabPanel>
 
-      <TabPanel value={value} index={1}>
-        <TableContainer component={Paper} sx={{ height: '55vh' }}>
+      <TabPanel value={value} index={2}>
+        <TableContainer component={Paper} sx={{ height: '69vh' }}>
           <Table sx={{ minWidth: 10 }}>
             <TableHead>
               <StyledTableRow>
@@ -229,24 +334,35 @@ export default function StudentTable() {
             <TableBody>
               {students
                 .filter((post) => {
-                  // if (post.active === false) {
-                  if (search === '') {
-                    return post;
+                  if (post.state.includes('applied')) {
+                    if (search === '') {
+                      return post;
+                    }
+                    if (
+                      post.firstName
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.lastName.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.email.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.studentCellPhone
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
                   }
-                  if (
-                    post.firstName.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (
-                    post.lastName.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (post.email.toLowerCase().includes(search.toLowerCase())) {
-                    return post;
-                  }
-                  // }
                   return null;
                 })
                 .map((student) => (
@@ -260,20 +376,26 @@ export default function StudentTable() {
                         variant="body2"
                         onClick={toDetailDemo}
                       >
-                        {student.studentLastName}, {student.studentFirstName}
+                        {student.lastName}, {student.firstName}
                       </Link>
                     </StyledTableCell>
                     <StyledTableCell align="left">
-                      {student.studentEmail || '--'}
+                      {student.email || '--'}
                     </StyledTableCell>
                     <StyledTableCell align="left">
                       {student.studentCellPhone || '--'}
                     </StyledTableCell>
-                    <StyledTableCell align="left">--</StyledTableCell>
                     <StyledTableCell align="left">
                       <StudentModal
-                        modalType="deactivate"
-                        confirmHandler={deactivateHandler}
+                        modalType="accept"
+                        confirmHandler={acceptHandler}
+                        studentId={student.id}
+                      />
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      <StudentModal
+                        modalType="decline"
+                        confirmHandler={declineHandler}
                         studentId={student.id}
                       />
                     </StyledTableCell>
