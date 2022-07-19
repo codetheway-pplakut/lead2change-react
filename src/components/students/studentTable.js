@@ -184,12 +184,12 @@ export default function StudentTable() {
                     ) {
                       return post;
                     }
-                    if (
+                    if ( post.email !== null &&
                       post.email.toLowerCase().includes(search.toLowerCase())
                     ) {
                       return post;
                     }
-                    if (
+                    if (  post.studentCellPhone !== null &&
                       post.studentCellPhone
                         .toLowerCase()
                         .includes(search.toLowerCase())
