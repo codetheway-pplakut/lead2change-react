@@ -1,7 +1,57 @@
 import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CoachesList from './CoachesList';
 import RegisterCoachModal from './Modals/RegisterCoachModal';
+
+const theme = createTheme({
+  components: {
+    MuiGrid: {
+      variants: [
+        {
+          props: { variant: 'large' },
+          style: {
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            minWidth: '750px',
+            width: '50%',
+            backgroundColor: 'white',
+            boxShadow: 12,
+          },
+        },
+        {
+          props: { variant: 'small' },
+          style: {
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            minWidth: '150px',
+            width: '25%',
+            backgroundColor: 'white',
+            boxShadow: 12,
+          },
+        },
+        {
+          props: { variant: 'ModalText' },
+          style: {
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            minWidth: '150px',
+            width: '25%',
+            backgroundColor: 'white',
+            boxShadow: 12,
+          },
+        },
+      ],
+    },
+  },
+});
 
 export default function Coaches() {
   const [coaches, setCoaches] = useState([]);
@@ -113,18 +163,22 @@ export default function Coaches() {
 
   return (
     <div>
-      <Grid container justifyContent="center" spacing={2}>
-        <Grid item xs={8}>
-          <Grid container justifyContent="right" spacing={1}>
-            <Grid item>
-              <RegisterCoachModal addFunction={newCoach} />
-            </Grid>
-            <Grid item xs={12}>
-              <CoachesList rows={coaches} deleteFunction={deleteCoach} />
+      <ThemeProvider theme={theme}>
+        <CssBaseline>
+          <Grid container justifyContent="center" spacing={2}>
+            <Grid item xs={8}>
+              <Grid container justifyContent="right" spacing={1}>
+                <Grid item>
+                  <RegisterCoachModal addFunction={newCoach} />
+                </Grid>
+                <Grid item xs={12}>
+                  <CoachesList rows={coaches} deleteFunction={deleteCoach} />
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      </Grid>
+        </CssBaseline>
+      </ThemeProvider>
     </div>
   );
 }
