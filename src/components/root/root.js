@@ -12,7 +12,7 @@ import Login from '../login/login';
 import AuthenticationProvider from '../authentication-provider/authentication-provider';
 import ApiDemo from '../api-demo/api-demo';
 import BasicTabs from '../interview/tabs';
-import HeaderandFooter from '../interview/HeaderandFooter';
+import InterviewPage from '../interview/interview-page';
 
 const theme = createTheme();
 
@@ -32,10 +32,7 @@ export default function Root() {
               <Route path={ROUTES.LAYOUT} element={<Layout />} />
               <Route path={ROUTES.LOGIN} element={<Login />} />
               <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
-              <Route
-                path={ROUTES.HeaderandFooter}
-                element={<HeaderandFooter />}
-              />
+              <Route path={ROUTES.INTERVIEW_PAGE} element={<InterviewPage />} />
               <Route path={ROUTES.TABS} element={<BasicTabs />} />
             </Route>
           </Routes>
