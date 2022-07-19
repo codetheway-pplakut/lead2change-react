@@ -166,7 +166,7 @@ export default function StudentTable() {
             <TableBody>
               {students
                 .filter((post) => {
-                  if (post.state.includes('e')) {
+                  if (post.state.includes('Active')) {
                     if (search === '') {
                       return post;
                     }
@@ -250,7 +250,7 @@ export default function StudentTable() {
             <TableBody>
               {students
                 .filter((post) => {
-                  if (post.state.includes('e')) {
+                  if (post.state.includes('Inactive')) {
                     if (search === '') {
                       return post;
                     }
@@ -301,7 +301,9 @@ export default function StudentTable() {
                     <StyledTableCell align="left">
                       {student.studentCellPhone || '--'}
                     </StyledTableCell>
-                    <StyledTableCell align="left">{student.state}</StyledTableCell>
+                    <StyledTableCell align="left">
+                      {student.state}
+                    </StyledTableCell>
                     <StyledTableCell align="left">
                       <StudentModal
                         modalType="reactivate"
