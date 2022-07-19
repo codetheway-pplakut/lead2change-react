@@ -11,6 +11,8 @@ import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
 import StudentListModal from './StudentListModal';
 import InactivationModal from './Modals/InactivateCoachModal';
 import CoachDeletionModal from './Modals/DeleteCoachModal';
@@ -108,9 +110,18 @@ export default function CoachesList(props) {
   const { rows, deleteFunction } = props;
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('name');
-  const [selected, setSelected] = React.useState([]);
+  const [selected, setSelected] = React.useState(rows);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [filteredCoaches, setFilteredCoaches] = React.useState(
+    rows.filter((item) => item.active === true)
+  );
+
+  React.useEffect(() => {
+    if (filteredCoaches.length === 0 && rows.length !== 0) {
+      setFilteredCoaches(rows.filter((item) => item.active === true));
+    }
+  }, [filteredCoaches.length, rows]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -138,6 +149,17 @@ export default function CoachesList(props) {
     setSelected(newSelected);
   };
 
+  const [value, setValue] = React.useState(0);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    if (newValue === 0) {
+      setFilteredCoaches(rows.filter((item) => item.active === true));
+    }
+    if (newValue === 1) {
+      setFilteredCoaches(rows.filter((item) => item.active === false));
+    }
+  };
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -147,11 +169,18 @@ export default function CoachesList(props) {
     setPage(0);
   };
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    page > 0
+      ? Math.max(0, (1 + page) * rowsPerPage - filteredCoaches.length)
+      : 0;
 
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
+        <Tabs value={value} onChange={handleChange}>
+          <Tab label="Active" />
+          <Tab label="Inactive" />
+        </Tabs>
+
         <TableContainer>
           <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
             <EnhancedTableHead
@@ -161,7 +190,7 @@ export default function CoachesList(props) {
               rowCount={rows.length}
             />
             <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
+              {stableSort(filteredCoaches, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((coach, index) => {
                   return (
@@ -211,7 +240,7 @@ export default function CoachesList(props) {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={rows.length}
+          count={filteredCoaches.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

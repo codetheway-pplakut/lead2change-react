@@ -60,6 +60,7 @@ export default function Coaches() {
     const listOfCoaches = [
       {
         id: 'c1',
+        active: true,
         coachFirstName: 'John',
         coachLastName: 'Zoe',
         coachPhoneNumber: '789-555-1234',
@@ -87,6 +88,7 @@ export default function Coaches() {
         coachLastName: 'Foe',
         coachPhoneNumber: '423-548-6135',
         coachEmail: 'mrsf@mail.org',
+        active: true,
         students: [
           {
             id: 'c2s1',
@@ -99,6 +101,7 @@ export default function Coaches() {
       },
       {
         id: 'c3',
+        active: true,
         coachFirstName: 'John',
         coachLastName: 'Johnson',
         coachPhoneNumber: '641-151-8626',
@@ -107,6 +110,7 @@ export default function Coaches() {
       },
       {
         id: 'c4',
+        active: false,
         coachFirstName: 'James',
         coachLastName: 'Jackson',
         coachPhoneNumber: '391-564-0197',
@@ -115,6 +119,7 @@ export default function Coaches() {
       },
       {
         id: 'c5',
+        active: false,
         coachFirstName: 'Zack',
         coachLastName: 'Jameson',
         coachPhoneNumber: '317-989-5736',
@@ -123,6 +128,7 @@ export default function Coaches() {
       },
       {
         id: 'c6',
+        active: false,
         coachFirstName: 'Jack',
         coachLastName: 'Smith',
         coachPhoneNumber: '596-620-4768',
