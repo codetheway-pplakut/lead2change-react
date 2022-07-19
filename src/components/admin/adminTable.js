@@ -1,16 +1,18 @@
+import * as React from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import TableContainer from '@mui/material/TableContainer';
-import Table from '@mui/material/Table';
-import TableCell from '@mui/material/TableCell';
-import TableBody from '@mui/material/TableBody';
 import SearchBar from './searchBar';
-import DeleteAdmin from './deleteAdmin';
 import EditModal from './editAdmin';
+import InactiveAdmin from './inactivateAdmin';
+import RegisterAdmin from './registerAdmin';
 
 function createData(name, username, email) {
   return { name, username, email };
@@ -24,44 +26,34 @@ const rows = [
   createData('Admin5', 'AdminUserName5', 'Admin1@gmail.com'),
 ];
 
+const tablePositioning = {
+  backgroundColor: '#3764A8',
+  color: 'white',
+  fontSize: 'large',
+  width: '50%',
+  marginLeft: '25%',
+  marginRight: '25%',
+};
+
+const tableHeadingText = {
+  color: 'white',
+  fontSize: 'large',
+};
+
 export default function AdminTable() {
   return (
     <>
-      <SearchBar sx={{}} />
-      <TableContainer
-        component={Paper}
-        align="center"
-        sx={{
-          backgroundColor: '#3764A8',
-          color: 'white',
-          fontSize: 'large',
-          width: '50%',
-          marginLeft: '25%',
-          marginRight: '25%',
-        }}
-      >
+      <Grid container>
+        <RegisterAdmin />
+        <Grid item xs="12">
+          <SearchBar />
+        </Grid>
+      </Grid>
+      <TableContainer component={Paper} align="center" sx={tablePositioning}>
         <Table aria-label="customized table">
-          <TableHead
-            sx={{
-              backgroundColor: '#3764A8',
-              color: 'white',
-              fontSize: 'large',
-            }}
-          >
-            <TableRow
-              sx={{
-                backgroundColor: '#3764A8',
-                color: 'white',
-                fontSize: 'large',
-              }}
-            >
-              <TableCell
-                align="left"
-                sx={{
-                  color: 'white',
-                  fontSize: 'large',
-                }}
-              >
+          <TableHead>
+            <TableRow>
+              <TableCell align="left" sx={tableHeadingText}>
                 <Grid container>
                   <Grid item xs={6} />
                   <Grid item xs={2}>
@@ -70,34 +62,16 @@ export default function AdminTable() {
                 </Grid>
               </TableCell>
 
-              <TableCell
-                align="left"
-                sx={{
-                  color: 'white',
-                  fontSize: 'large',
-                }}
-              >
+              <TableCell align="left" sx={tableHeadingText}>
                 Username
               </TableCell>
 
-              <TableCell
-                align="left"
-                sx={{
-                  color: 'white',
-                  fontSize: 'large',
-                }}
-              >
+              <TableCell align="left" sx={tableHeadingText}>
                 Email
               </TableCell>
 
-              <TableCell
-                align="left"
-                sx={{
-                  color: 'white',
-                  fontSize: 'large',
-                }}
-              >
-                Delete
+              <TableCell align="left" sx={tableHeadingText}>
+                Deactivate
               </TableCell>
             </TableRow>
           </TableHead>
@@ -130,7 +104,7 @@ export default function AdminTable() {
                 <TableCell align="left">{row.username}</TableCell>
                 <TableCell align="left">{row.email}</TableCell>
                 <TableCell align="left">
-                  <DeleteAdmin />
+                  <InactiveAdmin />
                 </TableCell>
               </TableRow>
             ))}
