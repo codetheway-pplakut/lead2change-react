@@ -72,23 +72,17 @@ function TabPanel(props) {
   );
 }
 const deactivateHandler = (studentId) => {
-  getStudentById(studentId).active = false;
+  getStudentById(studentId).state = 'Inactive';
   updateStudent(getStudentById(studentId));
 };
 
-const reactivateHandler = (studentId) => {
-  getStudentById(studentId).active = true;
-  updateStudent(getStudentById(studentId));
-};
-
-const acceptHandler = (studentId) => {
-  getStudentById(studentId).accepted = true;
-  getStudentById(studentId).active = true;
+const activateHandler = (studentId) => {
+  getStudentById(studentId).state = 'Active';
   updateStudent(getStudentById(studentId));
 };
 
 const declineHandler = (studentId) => {
-  getStudentById(studentId).declined = true;
+  getStudentById(studentId).state = 'Rejected';
   updateStudent(getStudentById(studentId));
 };
 
@@ -171,7 +165,7 @@ export default function StudentTable() {
             <TableBody>
               {students
                 .filter((post) => {
-                  if (post.state.includes('active')) {
+                  // if (post.state.includes('active')) {
                     if (search === '') {
                       return post;
                     }
@@ -199,7 +193,7 @@ export default function StudentTable() {
                     ) {
                       return post;
                     }
-                  }
+                  // }
                   return null;
                 })
 
@@ -223,7 +217,9 @@ export default function StudentTable() {
                     <StyledTableCell align="left">
                       {student.studentCellPhone || '--'}
                     </StyledTableCell>
-                    <StyledTableCell align="left">--</StyledTableCell>
+                    <StyledTableCell align="left">
+                      {student.state || '--'}
+                    </StyledTableCell>
                     <StyledTableCell align="left">
                       <StudentModal
                         modalType="deactivate"
@@ -246,14 +242,14 @@ export default function StudentTable() {
                 <StyledTableCell>Name </StyledTableCell>
                 <StyledTableCell align="left">Email</StyledTableCell>
                 <StyledTableCell align="left">Phone Number</StyledTableCell>
-                <StyledTableCell align="left"> </StyledTableCell>
+                <StyledTableCell align="left">Coach</StyledTableCell>
                 <StyledTableCell align="left"> </StyledTableCell>
               </StyledTableRow>
             </TableHead>
             <TableBody>
               {students
                 .filter((post) => {
-                  if (post.state.includes('inactive')) {
+                  if (post.state.includes('Rejected')) {
                     if (search === '') {
                       return post;
                     }
@@ -308,7 +304,7 @@ export default function StudentTable() {
                     <StyledTableCell align="left">
                       <StudentModal
                         modalType="reactivate"
-                        confirmHandler={reactivateHandler}
+                        confirmHandler={activateHandler}
                         studentId={student.id}
                       />
                     </StyledTableCell>
@@ -334,7 +330,7 @@ export default function StudentTable() {
             <TableBody>
               {students
                 .filter((post) => {
-                  if (post.state.includes('applied')) {
+                  if (post.state.includes('Applied')) {
                     if (search === '') {
                       return post;
                     }
@@ -388,7 +384,7 @@ export default function StudentTable() {
                     <StyledTableCell align="left">
                       <StudentModal
                         modalType="accept"
-                        confirmHandler={acceptHandler}
+                        confirmHandler={activateHandler}
                         studentId={student.id}
                       />
                     </StyledTableCell>
