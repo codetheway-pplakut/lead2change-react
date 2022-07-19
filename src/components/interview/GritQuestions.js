@@ -81,7 +81,7 @@ export default function GritSliderQuestions() {
         }}
       >
         {' '}
-        3. I have been obsessed with a certian idea or project for a short time
+        3. I have been obsessed with a certain idea or project for a short time
         but later lost interest.
         <Slider
           // aria-label="Restricted values"
