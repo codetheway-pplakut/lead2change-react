@@ -10,7 +10,6 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { createTheme } from '@mui/material/styles';
-import { grey } from '@mui/material/colors';
 // import UpdateAdmin from './update-admin';
 
 export default function Students() {
@@ -30,6 +29,15 @@ export default function Students() {
 
   const handleOpen = () => {
     setOpen(true);
+  };
+
+  const editIconStyling = {
+    borderRadius: 2,
+    backgroundColor: 'orange',
+  };
+
+  const closeIconColor = {
+    color: 'white',
   };
 
   const buttonTheme = createTheme({
@@ -87,10 +95,7 @@ export default function Students() {
       <IconButton
         variant="contained"
         aria-label="Edit"
-        sx={{
-          borderRadius: 2,
-          backgroundColor: 'orange',
-        }}
+        sx={editIconStyling}
         // value={admin.Id}
         onClick={handleOpen}
       >
@@ -98,14 +103,8 @@ export default function Students() {
       </IconButton>
       {/* <UpdateAdmin onSubmit={updateModalChange} handleClose={handleClose} /> */}
       <Dialog open={open} onClose={handleClose}>
-        <Grid item xs={12} sx={{ borderRadius: '10px' }}>
-          <Box
-            bgcolor="#3764A8"
-            sx={{
-              borderTopLeftRadius: '4px',
-              borderTopRightRadius: '4px',
-            }}
-          >
+        <Grid item xs={12}>
+          <Box bgcolor="#3764A8">
             <Typography
               textAlign="center"
               color="white"
@@ -119,7 +118,7 @@ export default function Students() {
               onClick={handleClose}
               sx={{ position: 'absolute', right: 8, top: 8 }}
             >
-              <CloseIcon fontSize="large" sx={{ color: 'white' }} />
+              <CloseIcon fontSize="large" sx={closeIconColor} />
             </IconButton>
           </Box>
         </Grid>
@@ -132,10 +131,7 @@ export default function Students() {
                   fullWidth
                   label="Enter first name..."
                   variant="filled"
-                  sx={{
-                    backgroundColor: grey[100],
-                    boxShadow: 2,
-                  }}
+
                   // onChange={firstNameChangeHandler}
                   // value={firstName}
                 />
@@ -145,10 +141,6 @@ export default function Students() {
                   fullWidth
                   label="Enter last name..."
                   variant="filled"
-                  sx={{
-                    backgroundColor: grey[100],
-                    boxShadow: 2,
-                  }}
                   // onChange={lastNameChangeHandler}
                   // value={lastName}
                 />
@@ -159,10 +151,6 @@ export default function Students() {
                   fullWidth
                   label="Enter email address..."
                   variant="filled"
-                  sx={{
-                    backgroundColor: grey[100],
-                    boxShadow: 2,
-                  }}
                   // onChange={emailChangeHandler}
                   // value={email}
                 />
@@ -173,10 +161,6 @@ export default function Students() {
                   fullWidth
                   label="Enter username..."
                   variant="filled"
-                  sx={{
-                    backgroundColor: grey[100],
-                    boxShadow: 2,
-                  }}
                   // onChange={usernameChangeHandler}
                   // value={username}
                 />
@@ -187,10 +171,6 @@ export default function Students() {
                   fullWidth
                   label="Enter password..."
                   variant="filled"
-                  sx={{
-                    backgroundColor: grey[100],
-                    boxShadow: 2,
-                  }}
                   // onChange={passwordChangeHandler}
                   // value={password}
                 />
@@ -201,10 +181,6 @@ export default function Students() {
                   fullWidth
                   label="Enter same password..."
                   variant="filled"
-                  sx={{
-                    backgroundColor: grey[100],
-                    boxShadow: 2,
-                  }}
                 />
               </Grid>
 
@@ -232,7 +208,7 @@ export default function Students() {
                   </Box>
                 </Grid>
 
-                <Grid item xs={4} sx={{ borderRadius: '10px' }}>
+                <Grid item xs={4}>
                   <Box>
                     <Button
                       theme={buttonTheme}
