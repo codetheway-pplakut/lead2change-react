@@ -7,25 +7,33 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import SignUpForm from './sign-up-form/sign-up-form';
 import signUp from '../../services/sign-up/sign-up';
+import { addStudent } from '../../services/students/students';
 import ROUTES from '../../constants/routes';
 import ProgressIndicatorOverlay from '../progress-indicator-overlay/progress-indicator-overlay';
 
 export default function SignUp() {
-  const [emailAddress, setEmailAddress] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [studentEmail, setEmail] = useState('');
+  const [studentFirstName, setFirstName] = useState('');
+  const [studentLastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
+  const [studentCellPhone, setStudentCellPhone] = useState('');
+  const [studentDateOfBirth, setStudentDateOfBirth] = useState(new Date());
 
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const onSignUpFormSubmit = async () => {
-    const user = { emailAddress, firstName, lastName, password };
-    setIsLoading(true);
+    const student = {
+      studentEmail,
+      studentFirstName,
+      studentLastName /* password */,
+    };
+    /* setIsLoading(true); */
 
-    await signUp(user);
-    setIsLoading(false);
-    navigate(ROUTES.SIGN_UP_SUCCESS);
+    await addStudent(student);
+    console.log('Success');
+    /* setIsLoading(false);
+    navigate(ROUTES.SIGN_UP_SUCCESS); */
   };
 
   return (
@@ -44,10 +52,14 @@ export default function SignUp() {
           </Avatar>
           <Typography variant="h5">Sign up</Typography>
           <SignUpForm
-            emailAddress={emailAddress}
-            firstName={firstName}
-            lastName={lastName}
-            onEmailAddressChange={setEmailAddress}
+            emailAddress={studentEmail}
+            firstName={studentFirstName}
+            lastName={studentLastName}
+            studentCellPhone={studentCellPhone}
+            studentDateOfBirth={studentDateOfBirth}
+            onEmailAddressChange={setEmail}
+            onStudentDateOfBirthChange={setStudentDateOfBirth}
+            onStudentCellPhoneChange={setStudentCellPhone}
             onFirstNameChange={setFirstName}
             onLastNameChange={setLastName}
             onPasswordChange={setPassword}

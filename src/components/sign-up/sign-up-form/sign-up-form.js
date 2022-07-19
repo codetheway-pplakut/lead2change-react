@@ -11,6 +11,10 @@ export default function SignUpForm(props) {
     emailAddress,
     firstName,
     lastName,
+    studentCellPhone,
+    studentDateOfBirth,
+    onStudentCellPhoneChange,
+    onStudentDateOfBirthChange,
     onEmailAddressChange,
     onFirstNameChange,
     onLastNameChange,
@@ -20,7 +24,11 @@ export default function SignUpForm(props) {
   } = props;
 
   const onSubmitDisabled =
-    !emailAddress || !firstName || !lastName || !password;
+    !emailAddress ||
+    !firstName ||
+    !lastName ||
+    !password ||
+    !studentDateOfBirth;
 
   return (
     <Box sx={{ mt: 3 }}>
@@ -53,16 +61,33 @@ export default function SignUpForm(props) {
             value={lastName}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} /* sm={6} */>
           <TextField
             fullWidth
             label="Password"
             onChange={(event) => onPasswordChange(event.target.value)}
-            required
+            /* required */
             type="password"
             value={password}
           />
         </Grid>
+        {/* <Grid item xs={12} sm={6}>
+          <TextField
+            fullWidth
+            label="Cell Phone Number"
+            onChange={(event) => onStudentCellPhoneChange(event.target.value)}
+            value={studentCellPhone}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            required
+            onChange={(event) => onStudentDateOfBirthChange(event.target.value)}
+            type="date"
+            value={studentDateOfBirth}
+          />
+        </Grid> */}
         <Grid item xs={12}>
           <FormControlLabel
             control={<Checkbox value="allowExtraEmails" color="primary" />}
@@ -88,6 +113,10 @@ SignUpForm.propTypes = {
   emailAddress: PropTypes.string.isRequired,
   firstName: PropTypes.string.isRequired,
   lastName: PropTypes.string.isRequired,
+  studentCellPhone: PropTypes.string.isRequired,
+  studentDateOfBirth: PropTypes.object.isRequired,
+  onStudentCellPhoneChange: PropTypes.func.isRequired,
+  onStudentDateOfBirthChange: PropTypes.func.isRequired,
   onEmailAddressChange: PropTypes.func.isRequired,
   onFirstNameChange: PropTypes.func.isRequired,
   onLastNameChange: PropTypes.func.isRequired,
