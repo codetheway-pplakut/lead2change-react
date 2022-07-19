@@ -1,17 +1,19 @@
 import React from 'react';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom';
 import BasicTabs from './tabs';
 import Navbar from '../admin/sampleNavbar';
-import ROUTES from '../../constants/routes';
+import ExitModal from './exit-modal';
 
 function saveResponses() {
   return null;
 }
 
+function goBack() {
+  <ExitModal />;
+}
+
 export default function InterviewPage() {
-  const navigate = useNavigate();
   return (
     <div>
       <Navbar />
@@ -30,7 +32,7 @@ export default function InterviewPage() {
           p: 2,
         }}
       >
-        <Button variant="outlined" onClick={() => navigate(ROUTES.HOME)}>
+        <Button variant="outlined" onClick={goBack}>
           Back To Home
         </Button>
         <Button variant="contained" onClick={saveResponses}>
