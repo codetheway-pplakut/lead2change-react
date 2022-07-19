@@ -165,7 +165,7 @@ export default function StudentTable() {
             <TableBody>
               {students
                 .filter((post) => {
-                  // if (post.state.includes('active')) {
+                  // if (post.state.includes('Active')) {
                     if (search === '') {
                       return post;
                     }

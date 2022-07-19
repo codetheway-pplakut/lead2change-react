@@ -14,6 +14,9 @@ export default function StudentModal(props) {
   if (modalType === 'decline') {
     useColor = 'error';
   }
+  if (modalType === 'accept') {
+    useColor = 'success';
+  }
   const style = {
     position: 'absolute',
     top: '50%',
