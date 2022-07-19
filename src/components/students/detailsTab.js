@@ -3,13 +3,14 @@
 import React, { useState } from 'react';
 import { TextField } from '@mui/material';
 import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
+
 import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
+import Typography from '@mui/material/Typography';
+import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 
 function TabPanel(props) {
@@ -87,7 +88,7 @@ export default function TabsFunction() {
                 item
                 xs={12}
                 sx={{ minWidth: 10, height: 'max-content' }}
-                style={{ height: '70vh' }}
+                style={{ height: '64vh' }}
               >
                 <GridText>
                   <h3 style={{ color: '#2656A5' }}>
@@ -291,25 +292,11 @@ export default function TabsFunction() {
                     </button>
                   </h3>
                   <h5>
-                    <b>
-                      Goal:{' '}
-                      <TextField
-                        className="typing-container"
-                        placeholder=" I want to get job "
-                        disabled={!disabled}
-                      />{' '}
-                    </b>
+                    <b>Goal: Be able to become a leader for a school club </b>
                   </h5>
+                  <h5>I have applied to a college: Yes</h5>
                   <h5>
-                    <b>
-                      Goal Set Date:{' '}
-                      <TextField
-                        className="typing-container"
-                        placeholder=" I want to get job "
-                        disabled={!disabled}
-                        type="date"
-                      />{' '}
-                    </b>
+                    <b>Goal Set Date: 3/20/22 </b>
                   </h5>
                   <h5>
                     <b>
@@ -354,7 +341,7 @@ export default function TabsFunction() {
                     </b>
                   </h5>
                   <h3 style={{ color: '#2656A5' }}>
-                    <b>Goal Two</b>
+                    College Entrance Exam Information:
                   </h3>
                   <h5>
                     <b>
@@ -398,6 +385,7 @@ export default function TabsFunction() {
                       />{' '}
                     </b>
                   </h5>
+                  <h3 style={{ color: '#2656A5' }}>Financial Aid:</h3>
                   <h5>
                     <b>
                       Accomplishment State:{' '}
@@ -418,9 +406,22 @@ export default function TabsFunction() {
                       />
                     </b>
                   </h5>
-                  <h3 style={{ color: '#2656A5' }}>
-                    <b>Goal Three</b>
-                  </h3>
+                  <h5>Support they need: None</h5>
+                </GridText>
+              </Grid>
+            </Grid>
+          </Box>
+        </TabPanel>
+        <TabPanel value={value} index={1} style={{ overflowY: 'auto' }}>
+          <Box sx={{ flexGrow: 1 }}>
+            <Grid container justifyContent="flex-end">
+              <Grid item xs={12} style={{ height: '64vh' }}>
+                <GridText>
+                  <h3 style={{ color: '#2656A5' }}>Goal One</h3>
+                  <h5>Goal: Be able to become a leader for a school club</h5>
+                  <h5>Goal Set Date: 3/20/22</h5>
+                  <h5>SEL: Responsible-Decision Making</h5>
+                  <h5>Goal Review Date: 3/20/23</h5>
                   <h5>
                     <b>
                       Goal:{' '}
@@ -442,6 +443,12 @@ export default function TabsFunction() {
                       />{' '}
                     </b>
                   </h5>
+                  <h3 style={{ color: '#2656A5' }}>Goal Two</h3>
+                  <h5>Goal: Make it onto the Varsity Tennis Team</h5>
+                  <h5>Goal Set Date: 11/22/21</h5>
+                  <h5>SEL:Social Awareness</h5>
+                  <h5>Goal Review Date: 4/30/22</h5>
+                  <h5>Accomplishment State: In Progress</h5>
                   <h5>
                     <b>
                       SEL:{' '}
@@ -452,6 +459,12 @@ export default function TabsFunction() {
                       />
                     </b>
                   </h5>
+                  <h3 style={{ color: '#2656A5' }}>Goal Three</h3>
+                  <h5>Goal: 4.3 GPA</h5>
+                  <h5>Goal Set Date: 11/10/21</h5>
+                  <h5>SEL: Social Awareness</h5>
+                  <h5>Goal Review Date: 6/10/22</h5>
+                  <h5>Accomplishment State: In Progress</h5>
                   <h5>
                     <b>
                       Goal Review Date:{' '}
@@ -491,7 +504,7 @@ export default function TabsFunction() {
         <TabPanel value={value} index={2} style={{ overflowY: 'auto' }}>
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">
-              <Grid item xs={12} style={{ height: '70vh' }}>
+              <Grid item xs={12} style={{ height: '64vh' }}>
                 <GridText>
                   <h3>
                     <b style={{ color: '#2656A5' }}>Parent Information</b>

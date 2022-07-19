@@ -4,14 +4,18 @@
 import React, { useState, useRef } from 'react';
 import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import PropTypes from 'prop-types';
-import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import { experimentalStyled as styled } from '@mui/material/styles';
+
 import { useNavigate } from 'react-router-dom';
 import { TextField } from '@mui/material';
 import TabsFunction from './detailsTab';
 import ROUTES from '../../constants/routes';
+
+import TabsFunction from './detailsTab';
 
 const StudentInfo = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -223,14 +227,7 @@ export default function ResponsiveGrid(props) {
             </StudentInfo>
             <StudentInfo>
               <h3>
-                <b>
-                  <TextField
-                    className="typing-container"
-                    disabled={!disabled}
-                    label="Phone Number"
-                    defaultValue="Aadi"
-                  />{' '}
-                </b>
+                <b>Phone Number: 901-234-5678 </b>
               </h3>
             </StudentInfo>
             <StudentInfo>
