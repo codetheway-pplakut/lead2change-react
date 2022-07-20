@@ -77,6 +77,12 @@ export default function Home() {
           >
             Interview
           </Button>
+          <Button
+            variant="contained"
+            onClick={() => navigate(ROUTES.ADMIN)}
+          >
+            Admin
+          </Button>
         </Stack>
       </Box>
     </Container>

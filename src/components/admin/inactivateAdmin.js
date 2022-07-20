@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button'; 
 import Typography from '@mui/material/Typography'; 
 import Modal from '@mui/material/Modal'; 
+import Paper from '@mui/material/Paper'; 
 import Grid from '@mui/material/Grid'; 
 import { createTheme } from '@mui/material/styles'; 
 import CloseIcon from '@mui/icons-material/Close';
@@ -16,7 +17,7 @@ export default function inactiveAdmin() {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
  
-  const style = { 
+  const modalPosition = { 
     position: 'absolute', 
     top: '50%', 
     left: '50%', 
@@ -26,6 +27,15 @@ export default function inactiveAdmin() {
     borderRadius: '10px', 
     boxShadow: 24, 
   }; 
+
+  const headingCurvedCorners = {
+    borderTopLeftRadius: '10px',
+    borderTopRightRadius: '10px',
+  };
+
+  const closeIconColor = {
+    color: 'white'
+  };
  
   const modalTextStyle = { 
     fontSize: 20, 
@@ -35,10 +45,14 @@ export default function inactiveAdmin() {
     textAlign: 'center', 
   }; 
  
+  const buttonHolder = {
+    marginLeft: '0px',
+    padding: '20px',
+  };
 
   const buttonTheme = createTheme({ 
     palette: { 
-      delete: { 
+      inactivate: { 
         main: 'orange', 
         contrastText: '#fff', 
       }, 
@@ -57,20 +71,20 @@ export default function inactiveAdmin() {
     <div> 
       <Button 
         theme={buttonTheme} 
-        color="delete" 
+        color="inactivate" 
         onClick={handleOpen} 
         variant="contained" 
       > 
         Inactivate 
       </Button> 
       <Modal open={open} onClose={handleClose}> 
-        <Box sx={style}> 
+        <Box sx={modalPosition}> 
             <Grid container spacing={0}  alignItems="center" justifyContent="center">
-                <Grid item xs={12} sx={{borderRadius: '10px'}}>
-                    <Box bgcolor='#3764A8'  sx={{borderTopLeftRadius: '10px', borderTopRightRadius: '10px'}} >
-                        <Typography textAlign= 'center' color='white' variant='h4' fontWeight='bold' padding='10px'>Inactivate Admin</Typography>
-                        <IconButton onClick={handleClose} sx={{ position: 'absolute', right: 3,top: 3,}}>
-                            <CloseIcon fontSize="large" sx={{color: 'white'}}/>
+                <Grid item xs={12}>
+                    <Box bgcolor='#3764A8'  sx={headingCurvedCorners} >
+                        <Typography textAlign= 'center' color='white' variant='h4' fontWeight='bold' padding='10px'>Deactivate Admin</Typography>
+                        <IconButton onClick={handleClose} sx={{ position: 'absolute', right: 3,top: 3,}} >
+                            <CloseIcon fontSize="large" sx={closeIconColor}/>
                         </IconButton>
                     </Box>
                 </Grid> 
@@ -79,14 +93,14 @@ export default function inactiveAdmin() {
                         Are you sure you want to turn this administrative account inactive? 
                     </Typography>
                 </Grid> 
-                <Grid container spacing={2}  alignItems="center" justifyContent="center" sx={{marginLeft: '0px', padding: '20px'}}>
+                <Grid container spacing={2}  alignItems="center" justifyContent="center" sx={buttonHolder}>
                     <Grid item xs={5}>
                         <Box display="flex"
                         justifyContent="center"
                         alignItems="center">
                             <Button 
                             theme={buttonTheme} 
-                            sx={{bgcolor: 'orange'}}
+                            color="inactivate"
                             variant="contained" 
                             onClick={handleClose} 
                             textAlign="center"
