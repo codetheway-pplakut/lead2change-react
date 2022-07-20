@@ -151,22 +151,27 @@ export default function StudentTable() {
     <Box sx={{ width: '100%', height: '60%' }}>
       <ProgressIndicatorOverlay active={isLoading} />
       <Grid container spacing={0}>
-        <Box sx={{ bgcolor: 'background.paper', width: '16%' }}>
+        <Box sx={{ bgcolor: 'background.paper', width: '25%' }}>
           <AppBar position="static">
             <Tabs
               value={tabValue}
               onChange={handleTabChange}
-              indicatorColor="secondary"
               textColor="inherit"
               variant="fullWidth"
-              aria-label="full width tabs example"
+              TabIndicatorProps={{
+                style: {
+                  backgroundColor: '#FFFFFF',
+                  height: '3px',
+                },
+              }}
             >
               <Tab label="Active" {...a11yProps(0)} />
               <Tab label="Inactive" {...a11yProps(1)} />
+              <Tab label="Applicants" {...a11yProps(2)} />
             </Tabs>
           </AppBar>
         </Box>
-        <Grid item xs={4} />
+        <Grid item xs={3} />
         <Grid item xs={4}>
           <Box>
             <SearchBar setSearch={setSearch} />
@@ -191,7 +196,7 @@ export default function StudentTable() {
             <TableBody>
               {students
                 .filter((post) => {
-                  // if (post.state.includes('Active')) {
+                  if (post.state.includes('Active')) {
                     if (search === '') {
                       return post;
                     }
@@ -221,7 +226,7 @@ export default function StudentTable() {
                     ) {
                       return post;
                     }
-                  // }
+                  }
                   return null;
                 })
 
