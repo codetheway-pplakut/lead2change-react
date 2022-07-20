@@ -17,7 +17,7 @@ export default function SignUp() {
   const [studentLastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [studentCellPhone, setStudentCellPhone] = useState('');
-  const [studentDateOfBirth, setStudentDateOfBirth] = useState(new Date());
+  const [studentDateOfBirth, setStudentDateOfBirth] = useState('');
 
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();

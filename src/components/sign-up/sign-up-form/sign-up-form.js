@@ -23,14 +23,15 @@ export default function SignUpForm(props) {
     password,
   } = props;
 
-  // const currentYear = new Date().getFullYear();
+  const currentYear = new Date().getFullYear();
 
   const onSubmitDisabled =
     !emailAddress ||
     !firstName ||
     !lastName ||
     !password ||
-    !studentDateOfBirth;
+    !studentDateOfBirth ||
+    (studentDateOfBirth !== null && studentDateOfBirth.includes(currentYear));
 
   return (
     <Box sx={{ mt: 3 }}>
@@ -116,7 +117,7 @@ SignUpForm.propTypes = {
   firstName: PropTypes.string.isRequired,
   lastName: PropTypes.string.isRequired,
   studentCellPhone: PropTypes.string.isRequired,
-  studentDateOfBirth: PropTypes.object.isRequired,
+  studentDateOfBirth: PropTypes.string.isRequired,
   onStudentCellPhoneChange: PropTypes.func.isRequired,
   onStudentDateOfBirthChange: PropTypes.func.isRequired,
   onEmailAddressChange: PropTypes.func.isRequired,
