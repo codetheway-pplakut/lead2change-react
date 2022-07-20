@@ -154,8 +154,8 @@ export default function StudentTable() {
         <Box sx={{ bgcolor: 'background.paper', width: '16%' }}>
           <AppBar position="static">
             <Tabs
-              value={value}
-              onChange={handleChange}
+              value={tabValue}
+              onChange={handleTabChange}
               indicatorColor="secondary"
               textColor="inherit"
               variant="fullWidth"
