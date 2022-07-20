@@ -338,7 +338,11 @@ export default function StudentTable() {
                       {student.studentCellPhone || '--'}
                     </StyledTableCell>
                     <StyledTableCell align="left">
-                      {handleGetCoach(student.coachId) || '--'}
+                      <CoachAssignModal
+                        confirmHandler={reassignCoachHandler}
+                        studentId={student.id}
+                        coachId={student.coachId}
+                      />
                     </StyledTableCell>
                     <StyledTableCell align="left">
                       <StudentModal

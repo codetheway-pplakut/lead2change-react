@@ -71,6 +71,12 @@ export default function TabsFunction() {
             textColor="inherit"
             variant="fullWidth"
             aria-label="full width tabs example"
+            TabIndicatorProps={{
+              style: {
+                backgroundColor: '#FFFFFF',
+                height: '3px',
+              },
+            }}
           >
             <Tab label="Education" {...a11yProps(0)} />
             <Tab label="Goals" {...a11yProps(1)} />
