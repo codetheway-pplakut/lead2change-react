@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Button from '@mui/material/Button';
 
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -120,6 +121,10 @@ function a11yProps(index) {
 }
 
 export default function StudentTable() {
+  const onBackClick = () => {
+    navigate(ROUTES.HOME);
+  };
+  const buttonText = '< Back to Home';
   const navigate = useNavigate();
   const toDetailDemo = () => {
     navigate(ROUTES.STUDENT_INFO);
@@ -442,6 +447,15 @@ export default function StudentTable() {
           </Table>
         </TableContainer>
       </TabPanel>
+      <Button
+        variant="outlined"
+        size="small"
+        justify="left"
+        onClick={onBackClick}
+        sx={{ mt: '1vh' }}
+      >
+        {buttonText}
+      </Button>
     </Box>
   );
 }

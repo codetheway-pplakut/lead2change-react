@@ -59,6 +59,7 @@ export default function ResponsiveGrid(props) {
             height: '70vh',
             overflowY: 'auto',
           }}
+          style={{ marginLeft: '3vh' }}
         >
           <Grid
             container
