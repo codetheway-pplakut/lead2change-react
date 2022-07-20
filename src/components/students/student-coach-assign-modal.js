@@ -68,10 +68,18 @@ export default function CoachAssignModal(props) {
     setNewCoachId(value.value);
   };
 
+  let denySubmit = true;
+  if (newCoachId !== '') {
+    denySubmit = false;
+  }
+
   return (
     <div>
-      {handleGetCoach(coachId)} <IconButton onClick={handleOpen}> <EditIcon /> </IconButton>
-
+      {handleGetCoach(coachId)}{' '}
+      <IconButton onClick={handleOpen}>
+        {' '}
+        <EditIcon />{' '}
+      </IconButton>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <FormControl>
@@ -98,6 +106,7 @@ export default function CoachAssignModal(props) {
                 color="warning"
                 onClick={confirm}
                 fullWidth
+                disabled={denySubmit}
               >
                 Assign
               </Button>

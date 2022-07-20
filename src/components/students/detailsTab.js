@@ -5,7 +5,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import Box from '@mui/material/Box';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import AppBar from '@mui/material/AppBar';
@@ -54,15 +54,10 @@ const GridText = styled(Paper)(({ theme }) => ({
 }));
 
 export default function TabsFunction() {
-  const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
-
-  const handleChangeIndex = (index) => {
-    setValue(index);
   };
 
   return (
@@ -76,6 +71,12 @@ export default function TabsFunction() {
             textColor="inherit"
             variant="fullWidth"
             aria-label="full width tabs example"
+            TabIndicatorProps={{
+              style: {
+                backgroundColor: '#FFFFFF',
+                height: '3px',
+              },
+            }}
           >
             <Tab label="Education" {...a11yProps(0)} />
             <Tab label="Goals" {...a11yProps(1)} />

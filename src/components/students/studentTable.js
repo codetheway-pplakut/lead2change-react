@@ -28,7 +28,6 @@ import {
   getStudentById,
   updateStudent,
 } from '../../services/students/students';
-import { getCoachById } from '../../services/coaches/coaches';
 
 import StudentModal from './studentModal';
 import StudentRegistryModal from './studentRegistryModal';
@@ -74,28 +73,37 @@ function TabPanel(props) {
     </div>
   );
 }
+
+const refreshPage = async () => {
+  window.location.reload(true);
+};
+
 const deactivateHandler = async (studentId) => {
   const updatedStudent = await getStudentById(studentId);
   updatedStudent.state = 'Inactive';
-  updateStudent(updatedStudent);
+  await updateStudent(updatedStudent);
+  refreshPage();
 };
 
 const activateHandler = async (studentId) => {
   const updatedStudent = await getStudentById(studentId);
   updatedStudent.state = 'Active';
-  updateStudent(updatedStudent);
+  await updateStudent(updatedStudent);
+  refreshPage();
 };
 
 const declineHandler = async (studentId) => {
   const updatedStudent = await getStudentById(studentId);
   updatedStudent.state = 'Rejected';
-  updateStudent(updatedStudent);
+  await updateStudent(updatedStudent);
+  refreshPage();
 };
 
 const reassignCoachHandler = async (studentId, coachId) => {
   const updatedStudent = await getStudentById(studentId);
   updatedStudent.coachId = coachId;
-  updateStudent(updatedStudent);
+  await updateStudent(updatedStudent);
+  refreshPage();
 };
 
 TabPanel.propTypes = {
@@ -142,36 +150,31 @@ export default function StudentTable() {
     setTabValue(newValue);
   };
 
-  const handleGetCoach = (coachId) => {
-    if (coachId !== null) {
-      const coachName = `${getCoachById(coachId).coachFirstName} ${
-        getCoachById(coachId).coachLastName
-      }`;
-      return coachName;
-    }
-    return null;
-  };
-
   return (
     <Box sx={{ width: '100%', height: '60%' }}>
       <ProgressIndicatorOverlay active={isLoading} />
       <Grid container spacing={0}>
-        <Box sx={{ bgcolor: 'background.paper', width: '16%' }}>
+        <Box sx={{ bgcolor: 'background.paper', width: '25%' }}>
           <AppBar position="static">
             <Tabs
               value={tabValue}
               onChange={handleTabChange}
-              indicatorColor="secondary"
               textColor="inherit"
               variant="fullWidth"
-              aria-label="full width tabs example"
+              TabIndicatorProps={{
+                style: {
+                  backgroundColor: '#FFFFFF',
+                  height: '3px',
+                },
+              }}
             >
               <Tab label="Active" {...a11yProps(0)} />
               <Tab label="Inactive" {...a11yProps(1)} />
+              <Tab label="Applicants" {...a11yProps(2)} />
             </Tabs>
           </AppBar>
         </Box>
-        <Grid item xs={4} />
+        <Grid item xs={3} />
         <Grid item xs={4}>
           <Box>
             <SearchBar setSearch={setSearch} />
@@ -196,35 +199,37 @@ export default function StudentTable() {
             <TableBody>
               {students
                 .filter((post) => {
-                  // if (post.state.includes('Active')) {
-                  if (search === '') {
-                    return post;
+                  if (post.state.includes('Active')) {
+                    if (search === '') {
+                      return post;
+                    }
+                    if (
+                      post.firstName
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.lastName.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.email !== null &&
+                      post.email.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.studentCellPhone !== null &&
+                      post.studentCellPhone
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
                   }
-                  if (
-                    post.firstName.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (
-                    post.lastName.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (
-                    post.email !== null &&
-                    post.email.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (
-                    post.studentCellPhone !== null &&
-                    post.studentCellPhone
-                      .toLowerCase()
-                      .includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  // }
                   return null;
                 })
 
@@ -258,8 +263,8 @@ export default function StudentTable() {
                     <StyledTableCell align="left">
                       <StudentModal
                         modalType="deactivate"
-                        confirmHandler={deactivateHandler}
                         studentId={student.id}
+                        confirmHandler={deactivateHandler}
                       />
                     </StyledTableCell>
                   </StyledTableRow>
@@ -336,13 +341,17 @@ export default function StudentTable() {
                       {student.studentCellPhone || '--'}
                     </StyledTableCell>
                     <StyledTableCell align="left">
-                      {handleGetCoach(student.coachId) || '--'}
+                      <CoachAssignModal
+                        confirmHandler={reassignCoachHandler}
+                        studentId={student.id}
+                        coachId={student.coachId}
+                      />
                     </StyledTableCell>
                     <StyledTableCell align="left">
                       <StudentModal
                         modalType="reactivate"
-                        confirmHandler={activateHandler}
                         studentId={student.id}
+                        confirmHandler={activateHandler}
                       />
                     </StyledTableCell>
                   </StyledTableRow>
