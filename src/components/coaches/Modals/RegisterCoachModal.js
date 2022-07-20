@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
@@ -25,9 +24,9 @@ export default function RegisterCoachModal(props) {
   };
   return (
     <div>
-      <Button variant="contained" onClick={handleOpen}>
+      <ColorButton variant="contained" onClick={handleOpen}>
         + Register
-      </Button>
+      </ColorButton>
       <Modal
         open={open}
         onClose={handleClose}

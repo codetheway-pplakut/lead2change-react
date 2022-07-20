@@ -1,6 +1,5 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
@@ -28,9 +27,9 @@ export default function InactivationModal(props) {
   };
   return (
     <div>
-      <Button variant="contained" onClick={handleOpen}>
-        Inactivate
-      </Button>
+      <ColorButton variant="contained" onClick={handleOpen}>
+        Deactivate
+      </ColorButton>
       <Modal
         open={open}
         onClose={handleClose}
@@ -43,7 +42,7 @@ export default function InactivationModal(props) {
                 <Grid item xs={2} />
                 <Grid item xs={8}>
                   <Typography variant="h5" component="h2" align="center">
-                    Inactivation
+                    Deactivation
                   </Typography>
                 </Grid>
                 <Grid item>
@@ -61,7 +60,7 @@ export default function InactivationModal(props) {
           </Grid>
           <Grid container spacing={1} sx={{ p: 2 }} justifyContent="center">
             <Grid item xs={12} align="center">
-              Are you sure you want to inactivate {coach.coachFirstName}{' '}
+              Are you sure you want to deactivate {coach.coachFirstName}{' '}
               {coach.coachLastName}?
             </Grid>
             <Grid item xs={6}>
