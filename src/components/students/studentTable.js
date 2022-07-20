@@ -27,7 +27,6 @@ import {
   getStudentById,
   updateStudent,
 } from '../../services/students/students';
-import { getCoachById } from '../../services/coaches/coaches';
 
 import StudentModal from './studentModal';
 import StudentRegistryModal from './studentRegistryModal';
@@ -135,16 +134,6 @@ export default function StudentTable() {
   const [tabValue, setTabValue] = useState(0);
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
-  };
-
-  const handleGetCoach = (coachId) => {
-    if (coachId !== null) {
-      const coachName = `${getCoachById(coachId).coachFirstName} ${
-        getCoachById(coachId).coachLastName
-      }`;
-      return coachName;
-    }
-    return null;
   };
 
   return (
