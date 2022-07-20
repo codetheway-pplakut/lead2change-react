@@ -41,11 +41,6 @@ const tableHeadingText = {
 export default function AdminTable() {
   return (
     <div>
-      <Grid container>
-        <Grid item xs="12">
-          <SearchBar />
-        </Grid>
-      </Grid>
       <TableContainer component={Paper} align="center" sx={tablePositioning}>
         <Table aria-label="customized table">
           <TableHead>

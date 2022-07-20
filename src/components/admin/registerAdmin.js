@@ -173,6 +173,7 @@ export default function Students() {
                     fullWidth
                     label="Enter password..."
                     variant="filled"
+                    type="password"
                     // onChange={passwordChangeHandler}
                     // value={password}
                   />
@@ -183,6 +184,7 @@ export default function Students() {
                     fullWidth
                     label="Enter same password..."
                     variant="filled"
+                    type="password"
                   />
                 </Grid>
 
