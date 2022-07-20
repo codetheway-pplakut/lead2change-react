@@ -1,14 +1,13 @@
-/* eslint-disable prettier/prettier */
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { Typography } from '@mui/material';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
 import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
 import TableCell from '@mui/material/TableCell';
 import TableBody from '@mui/material/TableBody';
+import Paper from '@mui/material/Paper';
+import { Typography } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 import SearchBar from './searchBar';
 import EditModal from './editAdmin';
 import IsActive from './isActive';
@@ -25,42 +24,33 @@ const rows = [
   createData('Admin5', 'AdminUserName5', 'Admin1@gmail.com'),
 ];
 
+const tablePositioning = {
+  backgroundColor: '#3764A8',
+  color: 'white',
+  fontSize: 'large',
+  width: '50%',
+  marginLeft: '25%',
+  marginRight: '25%',
+};
+
+const tableHeadingText = {
+  color: 'white',
+  fontSize: 'large',
+};
+
 export default function AdminTable() {
   return (
-      <TableContainer
-        component={Paper}
-        align="center"
-        sx={{
-          backgroundColor: '#3764A8',
-          color: 'white',
-          fontSize: 'large',
-          width: '50%',
-          marginLeft: '25%',
-          marginRight: '25%',
-        }}
-      >
+    <div>
+      <Grid container>
+        <Grid item xs="12">
+          <SearchBar />
+        </Grid>
+      </Grid>
+      <TableContainer component={Paper} align="center" sx={tablePositioning}>
         <Table aria-label="customized table">
-          <TableHead
-            sx={{
-              backgroundColor: '#3764A8',
-              color: 'white',
-              fontSize: 'large',
-            }}
-          >
-            <TableRow
-              sx={{
-                backgroundColor: '#3764A8',
-                color: 'white',
-                fontSize: 'large',
-              }}
-            >
-              <TableCell
-                align="left"
-                sx={{
-                  color: 'white',
-                  fontSize: 'large',
-                }}
-              >
+          <TableHead>
+            <TableRow>
+              <TableCell align="left" sx={tableHeadingText}>
                 <Grid container>
                   <Grid item xs={6} />
                   <Grid item xs={2}>
@@ -69,34 +59,16 @@ export default function AdminTable() {
                 </Grid>
               </TableCell>
 
-              <TableCell
-                align="left"
-                sx={{
-                  color: 'white',
-                  fontSize: 'large',
-                }}
-              >
+              <TableCell align="left" sx={tableHeadingText}>
                 Username
               </TableCell>
 
-              <TableCell
-                align="left"
-                sx={{
-                  color: 'white',
-                  fontSize: 'large',
-                }}
-              >
+              <TableCell align="left" sx={tableHeadingText}>
                 Email
               </TableCell>
 
-              <TableCell
-                align="left"
-                sx={{
-                  color: 'white',
-                  fontSize: 'large',
-                }}
-              >
-                Inactivate
+              <TableCell align="left" sx={tableHeadingText}>
+                Deactivate
               </TableCell>
             </TableRow>
           </TableHead>
@@ -136,5 +108,6 @@ export default function AdminTable() {
           </TableBody>
         </Table>
       </TableContainer>
+    </div>
   );
 }
