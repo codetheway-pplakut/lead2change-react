@@ -13,6 +13,7 @@ import AuthenticationProvider from '../authentication-provider/authentication-pr
 import ApiDemo from '../api-demo/api-demo';
 import BasicTabs from '../interview/tabs';
 import HeaderandFooter from '../interview/HeaderandFooter';
+import Admin from '../admin/header';
 
 const theme = createTheme();
 
@@ -22,7 +23,6 @@ export default function Root() {
       <AuthenticationProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<App />}>
               <Route path={ROUTES.HOME} element={<Home />} />
               <Route
                 path={ROUTES.SIGN_UP_SUCCESS}
@@ -30,6 +30,7 @@ export default function Root() {
               />
               <Route path={ROUTES.API_DEMO} element={<ApiDemo />} />
               <Route path={ROUTES.LAYOUT} element={<Layout />} />
+              <Route path={ROUTES.ADMIN} element={<Admin />} />
               <Route path={ROUTES.LOGIN} element={<Login />} />
               <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
               <Route
@@ -37,7 +38,6 @@ export default function Root() {
                 element={<HeaderandFooter />}
               />
               <Route path={ROUTES.TABS} element={<BasicTabs />} />
-            </Route>
           </Routes>
         </BrowserRouter>
       </AuthenticationProvider>

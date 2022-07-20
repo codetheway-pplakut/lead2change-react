@@ -1,5 +1,6 @@
 const ROUTES = {
   API_DEMO: '/api-demo',
+  ADMIN: '/admin',
   HOME: '/',
   LAYOUT: '/layout',
   SIGN_UP: '/sign-up',
