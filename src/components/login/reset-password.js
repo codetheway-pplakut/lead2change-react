@@ -32,11 +32,11 @@ function ResetPassword() {
     // if ((newPassword && confirmNewPassword) === validRegex) {
 
     if (newPassword === confirmNewPassword) {
-      console.log('Both match now the password will be changed.');
+      console.log('Both field match now the password will be changed.');
       setChangeButton(true);
     } else {
       console.log(
-        'Bruh, they do not match, so your password will not be changed'
+        'Both fields do not match, so your password will not be changed'
       );
     }
     // }
