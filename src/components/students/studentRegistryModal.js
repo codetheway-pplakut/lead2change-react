@@ -43,7 +43,7 @@ export default function StudentRegistryModal(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const confirm = () => {
-    // confirmHandler(firstName, lastName, email, phoneNumber, dateOfBirth);
+    confirmHandler(firstName, lastName, email, phoneNumber, dateOfBirth);
     handleClose();
   };
 

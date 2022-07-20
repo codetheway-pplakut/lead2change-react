@@ -19,6 +19,7 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 
 import { useNavigate } from 'react-router-dom';
+import AppBar from '@mui/material/AppBar';
 import ROUTES from '../../constants/routes';
 
 import {
@@ -105,8 +106,8 @@ TabPanel.propTypes = {
 
 function a11yProps(index) {
   return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    id: `full-width-tab-${index}`,
+    'aria-controls': `full-width-tabpanel-${index}`,
   };
 }
 
@@ -150,14 +151,22 @@ export default function StudentTable() {
     <Box sx={{ width: '100%', height: '60%' }}>
       <ProgressIndicatorOverlay active={isLoading} />
       <Grid container spacing={0}>
-        <Grid item xs={3}>
-          <Tabs value={tabValue} onChange={handleTabChange}>
-            <Tab label="Active" {...a11yProps(0)} />
-            <Tab label="Inactive" {...a11yProps(1)} />
-            <Tab label="Applicants" {...a11yProps(1)} />
-          </Tabs>
-        </Grid>
-        <Grid item xs={3} />
+        <Box sx={{ bgcolor: 'background.paper', width: '16%' }}>
+          <AppBar position="static">
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              indicatorColor="secondary"
+              textColor="inherit"
+              variant="fullWidth"
+              aria-label="full width tabs example"
+            >
+              <Tab label="Active" {...a11yProps(0)} />
+              <Tab label="Inactive" {...a11yProps(1)} />
+            </Tabs>
+          </AppBar>
+        </Box>
+        <Grid item xs={4} />
         <Grid item xs={4}>
           <Box>
             <SearchBar setSearch={setSearch} />
@@ -172,7 +181,7 @@ export default function StudentTable() {
           <Table sx={{ minWidth: 10 }} stickyHeader>
             <TableHead>
               <StyledTableRow>
-                <StyledTableCell>Name </StyledTableCell>
+                <StyledTableCell>Name</StyledTableCell>
                 <StyledTableCell align="left">Email</StyledTableCell>
                 <StyledTableCell align="left">Phone Number</StyledTableCell>
                 <StyledTableCell align="left">Coach</StyledTableCell>
