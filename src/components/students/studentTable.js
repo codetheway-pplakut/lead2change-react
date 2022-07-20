@@ -282,7 +282,6 @@ export default function StudentTable() {
                 <StyledTableCell>Name </StyledTableCell>
                 <StyledTableCell align="left">Email</StyledTableCell>
                 <StyledTableCell align="left">Phone Number</StyledTableCell>
-                <StyledTableCell align="left">Coach</StyledTableCell>
                 <StyledTableCell align="left"> </StyledTableCell>
               </StyledTableRow>
             </TableHead>
@@ -339,13 +338,6 @@ export default function StudentTable() {
                     </StyledTableCell>
                     <StyledTableCell align="left">
                       {student.studentCellPhone || '--'}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      <CoachAssignModal
-                        confirmHandler={reassignCoachHandler}
-                        studentId={student.id}
-                        coachId={student.coachId}
-                      />
                     </StyledTableCell>
                     <StyledTableCell align="left">
                       <StudentModal
