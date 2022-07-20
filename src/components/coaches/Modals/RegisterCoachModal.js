@@ -97,22 +97,6 @@ export default function RegisterCoachModal(props) {
                     }}
                   />
                 </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    fullWidth
-                    label="Password"
-                    variant="outlined"
-                    size="small"
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    fullWidth
-                    label="Confirm Password"
-                    variant="outlined"
-                    size="small"
-                  />
-                </Grid>
                 <Grid item xs={12}>
                   <TextField
                     value={phoneNumber}
