@@ -7,7 +7,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eslint": "eslint src/ && echo \"\\x1b[102m\\x1b[1m ESLINT \\x1b[0m\" No JavaScript ESLint errors to fix",
-      "eslint:fix": "eslint --fix src/ && echo \"\\x1b[102m\\x1b[1m ESLINT \\x1b[0m\" ESLint JavaScript errors fixed"
+    "eslint:fix": "eslint --fix src/ && echo \"\\x1b[102m\\x1b[1m ESLINT \\x1b[0m\" ESLint JavaScript errors fixed"
   },
   "author": "Joey Schroeder <schrjos@gmail.com>",
   "dependencies": {
@@ -23,6 +23,7 @@
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-uuid": "^1.0.2",
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {

@@ -1,6 +1,7 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
@@ -10,19 +11,8 @@ import PropTypes from 'prop-types';
 import EditIcon from '@mui/icons-material/EditRounded';
 import ColorButton from '../Shared/ColoredButton';
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  minWidth: '750px',
-  width: '50%',
-  bgcolor: 'background.paper',
-  boxShadow: 12,
-};
-
 export default function EditCoachModal(props) {
-  const { coach } = props;
+  const { coach, updateFunction } = props;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -39,7 +29,19 @@ export default function EditCoachModal(props) {
   const [enteredEmail, setEnteredEmail] = React.useState(coach.coachEmail);
   const Edit = () => {
     handleClose();
-    // TODO: API Integration
+    if (coach.students === null) {
+      coach.students = [];
+    }
+    const updatedCoach = {
+      id: coach.id, // TODO : Update to agreed ID creation method
+      coachFirstName: enteredFirstName,
+      coachLastName: enteredLastName,
+      coachEmail: enteredEmail,
+      coachPhoneNumber: enteredPhoneNumber,
+      students: coach.students,
+      active: coach.active,
+    };
+    updateFunction(updatedCoach);
   };
   return (
     <div>
@@ -51,17 +53,19 @@ export default function EditCoachModal(props) {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
       >
-        <Box sx={style}>
+        <Grid variant="large">
           <Grid container>
             <Grid item sx={{ bgcolor: '#004cbb', color: 'white' }} xs={12}>
-              <Grid container>
+              <Grid container alignItems="center" sx={{ margin: 1 }}>
                 <Grid item xs={2} />
-                <Grid item xs={8} sx={{ margin: 2 }}>
+                <Grid item xs={8}>
                   <Typography variant="h5" component="h2" align="center">
-                    Edit {coach.coachFirstName} {coach.coachLastName}
+                    Edit {coach.coachFirstName} {coach.coachLastName}&#39;s
+                    Information
                   </Typography>
                 </Grid>
-                <Grid item sx={{ margin: 1.5 }}>
+                <Grid item xs={1} />
+                <Grid item>
                   <IconButton
                     align="right"
                     size="medium"
@@ -114,22 +118,6 @@ export default function EditCoachModal(props) {
                     }}
                   />
                 </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    fullWidth
-                    label="Password"
-                    variant="outlined"
-                    size="small"
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    fullWidth
-                    label="Confirm Password"
-                    variant="outlined"
-                    size="small"
-                  />
-                </Grid>
                 <Grid item xs={12}>
                   <TextField
                     value={enteredPhoneNumber}
@@ -147,7 +135,7 @@ export default function EditCoachModal(props) {
                     Confirm
                   </ColorButton>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={3}>
                   <ColorButton
                     variant="contained"
                     fullWidth
@@ -159,7 +147,7 @@ export default function EditCoachModal(props) {
               </Grid>
             </Grid>
           </Grid>
-        </Box>
+        </Grid>
       </Modal>
     </div>
   );
@@ -167,4 +155,5 @@ export default function EditCoachModal(props) {
 
 EditCoachModal.propTypes = {
   coach: PropTypes.object.isRequired,
+  updateFunction: PropTypes.func.isRequired,
 };
