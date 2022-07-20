@@ -121,7 +121,7 @@ export default function StudentTable() {
 
   const navigate = useNavigate();
 
-  const toDetailDemo = () => {
+  const toDetailDemo = async (studentId) => {
     navigate(ROUTES.STUDENT_INFO);
   };
 
@@ -291,6 +291,8 @@ export default function StudentTable() {
                         component="button"
                         variant="body2"
                         onClick={toDetailDemo}
+                        studentId={student.id}
+                       
                       >
                         {student.lastName}, {student.firstName}
                       </Link>
