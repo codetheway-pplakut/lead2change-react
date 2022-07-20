@@ -70,7 +70,7 @@ export default function AdminTable() {
   };
 
   return (
-    <>
+    <div>
       <SearchBar
         value={searched}
         onChange={(searchVal) => requestSearch(searchVal)}
@@ -124,7 +124,7 @@ export default function AdminTable() {
                       <Grid container alignItems="center" justify="center">
                         <Grid item xs={6}>
                           <Box>
-                            <EditModal />
+                            <EditModal admin={rows}/>
                             <Typography />
                           </Box>
                         </Grid>
@@ -189,7 +189,7 @@ export default function AdminTable() {
                       <Grid container alignItems="center" justify="center">
                         <Grid item xs={6}>
                           <Box>
-                            <EditModal />
+                            {/* <EditModal /> */}
                             <Typography />
                           </Box>
                         </Grid>
@@ -204,7 +204,7 @@ export default function AdminTable() {
                     <TableCell align="left">{row.username}</TableCell>
                     <TableCell align="left">{row.email}</TableCell>
                     <TableCell align="left">
-                      vel<IsActive name={row.name} />
+                      <IsActive name={row.name} />
                     </TableCell>
                   </TableRow>
                 ))}
@@ -213,6 +213,6 @@ export default function AdminTable() {
           </TableContainer>
         </TabPanel>
       </TabContext>
-    </>
+    </div>
   );
 }
