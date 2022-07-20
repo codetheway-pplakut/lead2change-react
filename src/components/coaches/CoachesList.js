@@ -1,6 +1,5 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -11,13 +10,16 @@ import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import { TextField } from '@mui/material';
+import InputAdornment from '@mui/material/InputAdornment';
+import SearchIcon from '@mui/icons-material/Search';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import StudentListModal from './StudentListModal';
 import InactivationModal from './Modals/InactivateCoachModal';
-import CoachDeletionModal from './Modals/DeleteCoachModal';
 import EditCoachModal from './Modals/EditCoachModal';
 import ReactivationModal from './Modals/ActivateCoachModal';
+import RegisterCoachModal from './Modals/RegisterCoachModal';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -108,12 +110,13 @@ EnhancedTableHead.propTypes = {
 };
 
 export default function CoachesList(props) {
-  const { rows, deleteFunction, updateFunction } = props;
+  const { rows, addFunction, updateFunction } = props;
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('name');
   const [selected, setSelected] = React.useState(rows);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [searchTerm, setSearchTerm] = React.useState('');
   const [sortActive, setSortActive] = React.useState(true);
 
   const handleRequestSort = (event, property) => {
@@ -171,108 +174,139 @@ export default function CoachesList(props) {
       : 0;
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2 }}>
-        <Tabs value={value} onChange={handleChange}>
-          <Tab label="Active" />
-          <Tab label="Inactive" />
-        </Tabs>
-
-        <TableContainer>
-          <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
-            <EnhancedTableHead
-              order={order}
-              orderBy={orderBy}
-              onRequestSort={handleRequestSort}
-              rowCount={rows.length}
-            />
-            <TableBody>
-              {stableSort(
-                rows.filter((item) => item.active === sortActive),
-                getComparator(order, orderBy)
+    <Paper sx={{ width: '100%' }}>
+      <Grid container alignItems="center">
+        <Grid item xs={8}>
+          <Grid container spacing={1} alignItems="center">
+            <Grid item>
+              <Tabs value={value} onChange={handleChange}>
+                <Tab label="Active" />
+                <Tab label="Inactive" />
+              </Tabs>
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                value={searchTerm}
+                placeholder="Search..."
+                variant="outlined"
+                size="small"
+                margin="normal"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
+                }}
+                onChange={(e) => {
+                  setSearchTerm(e.target.value);
+                }}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs={4} align="right" padding={2}>
+          <RegisterCoachModal addFunction={addFunction} />
+        </Grid>
+      </Grid>
+      <TableContainer>
+        <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
+          <EnhancedTableHead
+            order={order}
+            orderBy={orderBy}
+            onRequestSort={handleRequestSort}
+            rowCount={rows.length}
+          />
+          <TableBody>
+            {stableSort(
+              rows.filter((item) => item.active === sortActive),
+              getComparator(order, orderBy)
+            )
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .filter((coach) =>
+                coach.coachFirstName
+                  .concat(coach.coachLastName)
+                  .toLowerCase()
+                  .includes(searchTerm.toLowerCase())
               )
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((coach, index) => {
-                  return (
-                    <TableRow
-                      hover
-                      onClick={(event) => handleClick(event, coach.id)}
-                      tabIndex={-1}
-                      key={coach.id}
-                    >
-                      <TableCell>
-                        {coach.coachLastName}, {coach.coachFirstName}
-                      </TableCell>
-                      <TableCell align="left">{coach.coachEmail}</TableCell>
-                      <TableCell align="left">
-                        {coach.coachPhoneNumber}
-                      </TableCell>
-                      <TableCell>
-                        <Grid container spacing={2}>
-                          {sortActive === true && (
-                            <>
-                              <Grid item>
-                                <StudentListModal coach={coach} />
-                              </Grid>
-                              <Grid item>
-                                <InactivationModal
-                                  updateFunction={updateFunction}
-                                  coach={coach}
-                                />
-                              </Grid>
-                              <Grid item>
-                                <EditCoachModal
-                                  updateFunction={updateFunction}
-                                  coach={coach}
-                                />
-                              </Grid>
-                            </>
-                          )}
-                          {sortActive === false && (
-                            <>
-                              {/* <Grid item>
+              .map((coach, index) => {
+                return (
+                  <TableRow
+                    hover
+                    onClick={(event) => handleClick(event, coach.id)}
+                    tabIndex={-1}
+                    key={coach.id}
+                  >
+                    <TableCell>
+                      {coach.coachLastName}, {coach.coachFirstName}
+                    </TableCell>
+                    <TableCell align="left">{coach.coachEmail}</TableCell>
+                    <TableCell align="left">{coach.coachPhoneNumber}</TableCell>
+                    <TableCell>
+                      <Grid container spacing={2}>
+                        {sortActive === true && (
+                          <>
+                            <Grid item>
+                              <StudentListModal coach={coach} />
+                            </Grid>
+                            <Grid item>
+                              <InactivationModal
+                                updateFunction={updateFunction}
+                                coach={coach}
+                              />
+                            </Grid>
+                            <Grid item>
+                              <EditCoachModal
+                                updateFunction={updateFunction}
+                                coach={coach}
+                              />
+                            </Grid>
+                          </>
+                        )}
+                        {sortActive === false && (
+                          <>
+                            {/* <Grid item>
                                 <CoachDeletionModal
                                   deleteFunction={deleteFunction}
                                   coach={coach}
                                 />
                               </Grid> */}
-                              <Grid item>
-                                <ReactivationModal
-                                  updateFunction={updateFunction}
-                                  coach={coach}
-                                />
-                              </Grid>
-                            </>
-                          )}
-                        </Grid>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-              {emptyRows > 0 && (
-                <TableRow>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.filter((item) => item.active === sortActive).length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
-    </Box>
+                            <Grid item>
+                              <ReactivationModal
+                                updateFunction={updateFunction}
+                                coach={coach}
+                              />
+                            </Grid>
+                          </>
+                        )}
+                      </Grid>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            {emptyRows > 0 && (
+              <TableRow>
+                <TableCell colSpan={6} />
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={rows.filter((item) => item.active === sortActive).length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Paper>
   );
 }
 
 CoachesList.propTypes = {
   rows: PropTypes.array.isRequired,
-  deleteFunction: PropTypes.func.isRequired,
+  addFunction: PropTypes.func.isRequired,
   updateFunction: PropTypes.func.isRequired,
 };
