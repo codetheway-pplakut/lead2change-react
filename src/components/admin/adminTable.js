@@ -1,3 +1,5 @@
+import * as React from 'react'; 
+import { useState, useEffect } from 'react'; 
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableContainer from '@mui/material/TableContainer';
@@ -8,9 +10,9 @@ import Paper from '@mui/material/Paper';
 import { Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import SearchBar from './searchBar';
-import EditModal from './editAdmin';
+import EditAdmin from './editAdmin';
 import IsActive from './isActive';
+import { getAdmin, updateAdmin } from '../../services/admin/admin'; 
 
 function createData(name, username, email) {
   return { name, username, email };
@@ -39,6 +41,54 @@ const tableHeadingText = {
 };
 
 export default function AdminTable() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [admins, setAdmins] = useState([]);
+  const [activeAdmin, setActiveAdmin] = useState([]);
+  const [updateAdminModal, setUpdateAdminModal] = useState(false);
+  const [adminToUpdate, setAdminToUpdate] = useState('');
+
+  useEffect(() => {
+    refreshAdmin();
+  }, []);
+
+  const refreshAdmin = async () => {
+    const response = await getAdmin();
+    setAdmins(response);
+    setActiveAdmin(response.filter((admin) => true));
+  };
+
+  const updateModalChange = (adminId) => {
+    if (updateAdminModal === true) {
+      setUpdateAdminModal(false);
+    } else {
+      const adminIndex = admins.findIndex((admin) => admin.id === adminId);
+      setAdminToUpdate(admins[adminIndex]);
+      setUpdateAdminModal(true);
+    }
+  };
+
+  const updateAdminHandler = async (
+    adminId,
+    newFirstName,
+    newLastName,
+    newEmail,
+    newPassword
+  ) => {
+    const updatedAdmin = {
+      id: adminId,
+      firstName: newFirstName,
+      lastName: newLastName,
+      email: newEmail,
+      password: newPassword,
+    };
+    await updateAdmin(updatedAdmin);
+    refreshAdmin();
+    updateModalChange();
+  };
+
   return (
     <div>
       <TableContainer component={Paper} align="center" sx={tablePositioning}>
@@ -81,7 +131,11 @@ export default function AdminTable() {
                   <Grid container alignItems="center" justify="center">
                     <Grid item xs={6}>
                       <Box>
-                        <EditModal />
+                        <EditAdmin
+                          admin={adminToUpdate}
+                          onSubmit={updateAdminHandler}
+                          handleClose={updateModalChange}
+                        />
                         <Typography />
                       </Box>
                     </Grid>
