@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import ColorButton from '../Shared/ColoredButton';
 
 export default function EditCoachModal(props) {
-  const { coach } = props;
+  const { coach, updateFunction } = props;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -27,7 +27,19 @@ export default function EditCoachModal(props) {
   const [enteredEmail, setEnteredEmail] = React.useState(coach.coachEmail);
   const Edit = () => {
     handleClose();
-    // TODO: API Integration
+    if (coach.students === null) {
+      coach.students = [];
+    }
+    const updatedCoach = {
+      id: coach.id, // TODO : Update to agreed ID creation method
+      coachFirstName: enteredFirstName,
+      coachLastName: enteredLastName,
+      coachEmail: enteredEmail,
+      coachPhoneNumber: enteredPhoneNumber,
+      students: coach.students,
+      active: coach.active,
+    };
+    updateFunction(updatedCoach);
   };
   return (
     <div>
@@ -141,4 +153,5 @@ export default function EditCoachModal(props) {
 
 EditCoachModal.propTypes = {
   coach: PropTypes.object.isRequired,
+  updateFunction: PropTypes.func.isRequired,
 };
