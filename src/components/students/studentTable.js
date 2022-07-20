@@ -72,28 +72,37 @@ function TabPanel(props) {
     </div>
   );
 }
+
+function refreshPage() {
+  window.location.reload(false);
+}
+
 const deactivateHandler = async (studentId) => {
   const updatedStudent = await getStudentById(studentId);
   updatedStudent.state = 'Inactive';
   updateStudent(updatedStudent);
+  refreshPage();
 };
 
 const activateHandler = async (studentId) => {
   const updatedStudent = await getStudentById(studentId);
   updatedStudent.state = 'Active';
   updateStudent(updatedStudent);
+  refreshPage();
 };
 
 const declineHandler = async (studentId) => {
   const updatedStudent = await getStudentById(studentId);
   updatedStudent.state = 'Rejected';
   updateStudent(updatedStudent);
+  refreshPage();
 };
 
 const reassignCoachHandler = async (studentId, coachId) => {
   const updatedStudent = await getStudentById(studentId);
   updatedStudent.coachId = coachId;
   updateStudent(updatedStudent);
+  refreshPage();
 };
 
 TabPanel.propTypes = {
