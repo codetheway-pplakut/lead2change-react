@@ -73,35 +73,35 @@ function TabPanel(props) {
   );
 }
 
-function refreshPage() {
-  window.location.reload(false);
-}
+const refreshPage = async () => {
+  window.location.reload(true);
+};
 
 const deactivateHandler = async (studentId) => {
   const updatedStudent = await getStudentById(studentId);
   updatedStudent.state = 'Inactive';
-  updateStudent(updatedStudent);
+  await updateStudent(updatedStudent);
   refreshPage();
 };
 
 const activateHandler = async (studentId) => {
   const updatedStudent = await getStudentById(studentId);
   updatedStudent.state = 'Active';
-  updateStudent(updatedStudent);
+  await updateStudent(updatedStudent);
   refreshPage();
 };
 
 const declineHandler = async (studentId) => {
   const updatedStudent = await getStudentById(studentId);
   updatedStudent.state = 'Rejected';
-  updateStudent(updatedStudent);
+  await updateStudent(updatedStudent);
   refreshPage();
 };
 
 const reassignCoachHandler = async (studentId, coachId) => {
   const updatedStudent = await getStudentById(studentId);
   updatedStudent.coachId = coachId;
-  updateStudent(updatedStudent);
+  await updateStudent(updatedStudent);
   refreshPage();
 };
 
@@ -258,8 +258,8 @@ export default function StudentTable() {
                     <StyledTableCell align="left">
                       <StudentModal
                         modalType="deactivate"
-                        confirmHandler={deactivateHandler}
                         studentId={student.id}
+                        confirmHandler={deactivateHandler}
                       />
                     </StyledTableCell>
                   </StyledTableRow>
@@ -345,8 +345,8 @@ export default function StudentTable() {
                     <StyledTableCell align="left">
                       <StudentModal
                         modalType="reactivate"
-                        confirmHandler={activateHandler}
                         studentId={student.id}
+                        confirmHandler={activateHandler}
                       />
                     </StyledTableCell>
                   </StyledTableRow>
