@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import PropTypes from 'prop-types';
@@ -16,13 +15,6 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-};
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -121,7 +113,9 @@ function StudentListModal(props) {
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
+  if (coach.students === null) {
+    coach.students = [];
+  }
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -160,7 +154,6 @@ function StudentListModal(props) {
     page > 0
       ? Math.max(0, (1 + page) * rowsPerPage - coach.students.length)
       : 0;
-
   return (
     <div>
       <Button onClick={handleOpen} variant="contained">
@@ -172,87 +165,81 @@ function StudentListModal(props) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          <div>
-            <Grid container>
-              <Grid item sx={{ bgcolor: '#004cbb', color: 'white' }} xs={12}>
-                <Grid container>
-                  <Grid item xs={2} />
-                  <Grid item xs={8} sx={{ margin: 2 }}>
-                    <Typography variant="h5" component="h2" align="center">
-                      {coach.coachFirstName} {coach.coachLastName}&#39;s
-                      Students
-                    </Typography>
-                  </Grid>
-                  <Grid item sx={{ margin: 1.5 }}>
-                    <IconButton
-                      align="right"
-                      size="medium"
-                      onClick={handleClose}
-                      sx={{ color: 'white' }}
-                    >
-                      <CloseOutlinedIcon />
-                    </IconButton>
-                  </Grid>
+        <Grid container variant="large">
+          <Grid container>
+            <Grid item sx={{ bgcolor: '#004cbb', color: 'white' }} xs={12}>
+              <Grid container>
+                <Grid item xs={2} />
+                <Grid item xs={8} sx={{ margin: 2 }}>
+                  <Typography variant="h5" component="h2" align="center">
+                    {coach.coachFirstName} {coach.coachLastName}&#39;s Students
+                  </Typography>
+                </Grid>
+                <Grid item sx={{ margin: 1.5 }}>
+                  <IconButton
+                    align="right"
+                    size="medium"
+                    onClick={handleClose}
+                    sx={{ color: 'white' }}
+                  >
+                    <CloseOutlinedIcon />
+                  </IconButton>
                 </Grid>
               </Grid>
             </Grid>
-            <Paper sx={{ width: '100%', mb: 2 }}>
-              <TableContainer>
-                <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
-                  <EnhancedTableHead
-                    order={order}
-                    orderBy={orderBy}
-                    onRequestSort={handleRequestSort}
-                    rowCount={coach.students.length}
-                  />
-                  <TableBody>
-                    {stableSort(coach.students, getComparator(order, orderBy))
-                      .slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
-                      .map((student, index) => {
-                        return (
-                          <TableRow
-                            hover
-                            onClick={(event) => handleClick(event, student.id)}
-                            tabIndex={-1}
-                            key={student.id}
-                          >
-                            <TableCell>
-                              {student.studentLastName},{' '}
-                              {student.studentFirstName}
-                            </TableCell>
-                            <TableCell align="left">
-                              {student.studentEmail}
-                            </TableCell>
-                            <TableCell align="left">
-                              {student.studentPhoneNumber}
-                            </TableCell>
-                          </TableRow>
-                        );
-                      })}
-                    {emptyRows > 0 && (
-                      <TableRow>
-                        <TableCell colSpan={6} />
-                      </TableRow>
-                    )}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-              <TablePagination
-                rowsPerPageOptions={[5, 10, 25]}
-                component="div"
-                count={coach.students.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-              />
-            </Paper>
-          </div>
-        </Box>
+          </Grid>
+          <Paper sx={{ width: '100%' }}>
+            <TableContainer>
+              <Table aria-labelledby="tableTitle">
+                <EnhancedTableHead
+                  order={order}
+                  orderBy={orderBy}
+                  onRequestSort={handleRequestSort}
+                  rowCount={coach.students.length}
+                />
+                <TableBody>
+                  {stableSort(coach.students, getComparator(order, orderBy))
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((student, index) => {
+                      return (
+                        <TableRow
+                          hover
+                          onClick={(event) => handleClick(event, student.id)}
+                          tabIndex={-1}
+                          key={student.id}
+                        >
+                          <TableCell>
+                            {student.studentLastName},{' '}
+                            {student.studentFirstName}
+                          </TableCell>
+                          <TableCell align="left">
+                            {student.studentEmail}
+                          </TableCell>
+                          <TableCell align="left">
+                            {student.studentPhoneNumber}
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
+                  {emptyRows > 0 && (
+                    <TableRow>
+                      <TableCell colSpan={6} />
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={coach.students.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </Paper>
+        </Grid>
       </Modal>
     </div>
   );
