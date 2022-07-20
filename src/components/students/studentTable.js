@@ -1,32 +1,40 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
+
 import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
 import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
+import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import Grid from '@mui/material/Grid';
-import { useState } from 'react';
 import { styled } from '@mui/material/styles';
-import Link from '@mui/material/Link';
+
 import { useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import ROUTES from '../../constants/routes';
+
+import {
+  getStudents,
+  getStudentById,
+  updateStudent,
+} from '../../services/students/students';
+import { getCoachById } from '../../services/coaches/coaches';
+
 import StudentModal from './studentModal';
 import StudentRegistryModal from './studentRegistryModal';
+import CoachAssignModal from './student-coach-assign-modal';
 import SearchBar from './searchBar';
+
+import ProgressIndicatorOverlay from '../progress-indicator-overlay/progress-indicator-overlay';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -65,16 +73,28 @@ function TabPanel(props) {
     </div>
   );
 }
-const deactivateHandler = () => {
-  console.log('this is when it should deactivate');
+const deactivateHandler = async (studentId) => {
+  const updatedStudent = await getStudentById(studentId);
+  updatedStudent.state = 'Inactive';
+  updateStudent(updatedStudent);
 };
 
-const deleteHandler = () => {
-  console.log('this is when it should delete');
+const activateHandler = async (studentId) => {
+  const updatedStudent = await getStudentById(studentId);
+  updatedStudent.state = 'Active';
+  updateStudent(updatedStudent);
 };
 
-const reactivateHandler = () => {
-  console.log('this is when it should reactivate');
+const declineHandler = async (studentId) => {
+  const updatedStudent = await getStudentById(studentId);
+  updatedStudent.state = 'Rejected';
+  updateStudent(updatedStudent);
+};
+
+const reassignCoachHandler = async (studentId, coachId) => {
+  const updatedStudent = await getStudentById(studentId);
+  updatedStudent.coachId = coachId;
+  updateStudent(updatedStudent);
 };
 
 TabPanel.propTypes = {
@@ -91,152 +111,51 @@ function a11yProps(index) {
   };
 }
 
-function createDataActive(
-  firstName,
-  lastName,
-  email,
-  number,
-  coaches,
-  deactivate
-) {
-  return { firstName, lastName, email, number, coaches, deactivate };
-}
-
-function createDataInactive(
-  firstName,
-  lastName,
-  email,
-  number,
-  deleteStudent,
-  reactivate
-) {
-  return { firstName, lastName, email, number, deleteStudent, reactivate };
-}
-
-const rows = [
-  createDataActive(
-    'Kevin',
-    'Niu',
-    'niuK@gmail.com',
-    '262 - 592 - 4149',
-    24,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
-    </Stack>
-  ),
-  createDataActive(
-    'Jason',
-    'Dong',
-    'dongJ@gmail.com',
-    '283 - 139 - 2381',
-    37,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
-    </Stack>
-  ),
-  createDataActive(
-    'Sirat',
-    'Mokha',
-    'mokhaS@gmail.com',
-    '342 - 582 - 6148',
-    24,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
-    </Stack>
-  ),
-  createDataActive(
-    'Noah',
-    'Ren',
-    'renN@gmail.com',
-    '213 - 436 - 3412',
-    67,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
-    </Stack>
-  ),
-  createDataActive(
-    'Holly',
-    'Raetz',
-    'raetzH@gmail.com',
-    '582 - 581 - 2499',
-    67,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
-    </Stack>
-  ),
-  createDataActive(
-    'Aadi',
-    'Tiwari',
-    'tiwariA@gmail.com',
-    '231 - 381 - 4814',
-    49,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
-    </Stack>
-  ),
-];
-
-const rowsInactive = [
-  createDataInactive(
-    'John',
-    'Doe',
-    'doeJ@gmail.com',
-    '592 - 124 - 4144',
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="delete" confirmHandler={deleteHandler} />
-    </Stack>,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="reactivate" confirmHandler={reactivateHandler} />
-    </Stack>
-  ),
-  createDataInactive(
-    'Bob',
-    'Jones',
-    'jonesB@gmail.com',
-    '693 - 491 - 5812',
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="delete" confirmHandler={deleteHandler} />
-    </Stack>,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="reactivate" confirmHandler={reactivateHandler} />
-    </Stack>
-  ),
-];
-
 export default function StudentTable() {
   const navigate = useNavigate();
-
   const toDetailDemo = () => {
     navigate(ROUTES.STUDENT_INFO);
   };
 
+  const [students, setStudents] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState('');
 
-  const [value, setValue] = React.useState(0);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const refreshStudents = async () => {
+    setIsLoading(true);
+    const response = await getStudents();
+
+    setIsLoading(false);
+    setStudents(response);
+  };
+  useEffect(() => {
+    refreshStudents();
+  }, []);
+
+  const [tabValue, setTabValue] = useState(0);
+  const handleTabChange = (event, newValue) => {
+    setTabValue(newValue);
+  };
+
+  const handleGetCoach = (coachId) => {
+    if (coachId !== null) {
+      const coachName = `${getCoachById(coachId).coachFirstName} ${
+        getCoachById(coachId).coachLastName
+      }`;
+      return coachName;
+    }
+    return null;
   };
 
   return (
     <Box sx={{ width: '100%', height: '60%' }}>
-      <Grid
-        item
-        align="center"
-        style={{
-          backgroundColor: '#2656A5',
-          marginBottom: '3vh',
-          color: '#FFFFFF',
-          padding: '0.1vh',
-        }}
-      >
-        <h1>STUDENTS</h1>
-      </Grid>
+      <ProgressIndicatorOverlay active={isLoading} />
       <Grid container spacing={0}>
         <Box sx={{ bgcolor: 'background.paper', width: '16%' }}>
           <AppBar position="static">
             <Tabs
-              value={value}
-              onChange={handleChange}
+              value={tabValue}
+              onChange={handleTabChange}
               indicatorColor="secondary"
               textColor="inherit"
               variant="fullWidth"
@@ -257,47 +176,58 @@ export default function StudentTable() {
           <StudentRegistryModal />
         </Grid>
       </Grid>
-      <TabPanel value={value} index={0}>
-        <TableContainer component={Paper} sx={{ height: '55vh' }}>
+      <TabPanel value={tabValue} index={0}>
+        <TableContainer component={Paper} sx={{ height: '69vh' }}>
           <Table sx={{ minWidth: 10 }} stickyHeader>
             <TableHead>
               <StyledTableRow>
                 <StyledTableCell>Name</StyledTableCell>
                 <StyledTableCell align="left">Email</StyledTableCell>
                 <StyledTableCell align="left">Phone Number</StyledTableCell>
-                <StyledTableCell align="left"> </StyledTableCell>
+                <StyledTableCell align="left">Coach</StyledTableCell>
                 <StyledTableCell align="left"> </StyledTableCell>
               </StyledTableRow>
             </TableHead>
             <TableBody>
-              {rows
+              {students
                 .filter((post) => {
-                  if (search === '') {
-                    return post;
-                  }
-                  if (
-                    post.firstName.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (
-                    post.lastName.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (post.email.toLowerCase().includes(search.toLowerCase())) {
-                    return post;
-                  }
-                  if (
-                    post.number.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
+                  // if (post.state.includes('Active')) {
+                    if (search === '') {
+                      return post;
+                    }
+                    if (
+                      post.firstName
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.lastName.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.email !== null &&
+                      post.email.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.studentCellPhone !== null &&
+                      post.studentCellPhone
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                  // }
                   return null;
                 })
-                .map((row) => (
+
+                .map((student) => (
                   <StyledTableRow
-                    key={row.name}
+                    key={student.id}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
                     <StyledTableCell component="th" scope="row">
@@ -306,28 +236,28 @@ export default function StudentTable() {
                         variant="body2"
                         onClick={toDetailDemo}
                       >
-                        {row.lastName}, {row.firstName}
+                        {student.lastName}, {student.firstName}
                       </Link>
                     </StyledTableCell>
-                    <StyledTableCell align="left">{row.email}</StyledTableCell>
-                    <StyledTableCell align="left">{row.number}</StyledTableCell>
                     <StyledTableCell align="left">
-                      {' '}
-                      <Box sx={{ minWidth: 120 }}>
-                        <FormControl fullWidth size="small">
-                          <InputLabel id="demo-simple-select-label">
-                            Coach
-                          </InputLabel>
-                          <Select label="Coach">
-                            <MenuItem value={10}>Coach 1</MenuItem>
-                            <MenuItem value={20}>Coach 2</MenuItem>
-                            <MenuItem value={30}>Coach 3</MenuItem>
-                          </Select>
-                        </FormControl>
-                      </Box>
+                      {student.email || '--'}
                     </StyledTableCell>
                     <StyledTableCell align="left">
-                      {row.deactivate}
+                      {student.studentCellPhone || '--'}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      <CoachAssignModal
+                        confirmHandler={reassignCoachHandler}
+                        studentId={student.id}
+                        coachId={student.coachId}
+                      />
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      <StudentModal
+                        modalType="deactivate"
+                        confirmHandler={deactivateHandler}
+                        studentId={student.id}
+                      />
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}
@@ -336,8 +266,91 @@ export default function StudentTable() {
         </TableContainer>
       </TabPanel>
 
-      <TabPanel value={value} index={1}>
-        <TableContainer component={Paper} sx={{ height: '55vh' }}>
+      <TabPanel value={tabValue} index={1}>
+        <TableContainer component={Paper} sx={{ height: '69vh' }}>
+          <Table sx={{ minWidth: 10 }}>
+            <TableHead>
+              <StyledTableRow>
+                <StyledTableCell>Name </StyledTableCell>
+                <StyledTableCell align="left">Email</StyledTableCell>
+                <StyledTableCell align="left">Phone Number</StyledTableCell>
+                <StyledTableCell align="left">Coach</StyledTableCell>
+                <StyledTableCell align="left"> </StyledTableCell>
+              </StyledTableRow>
+            </TableHead>
+            <TableBody>
+              {students
+                .filter((post) => {
+                  if (post.state.includes('Inactive')) {
+                    if (search === '') {
+                      return post;
+                    }
+                    if (
+                      post.firstName
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.lastName.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.email.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.studentCellPhone
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                  }
+                  return null;
+                })
+                .map((student) => (
+                  <StyledTableRow
+                    key={student.id}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <StyledTableCell component="th" scope="row">
+                      <Link
+                        component="button"
+                        variant="body2"
+                        onClick={toDetailDemo}
+                      >
+                        {student.lastName}, {student.firstName}
+                      </Link>
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {student.email || '--'}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {student.studentCellPhone || '--'}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {handleGetCoach(student.coachId) || '--'}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      <StudentModal
+                        modalType="reactivate"
+                        confirmHandler={activateHandler}
+                        studentId={student.id}
+                      />
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </TabPanel>
+
+      <TabPanel value={tabValue} index={2}>
+        <TableContainer component={Paper} sx={{ height: '69vh' }}>
           <Table sx={{ minWidth: 10 }}>
             <TableHead>
               <StyledTableRow>
@@ -349,34 +362,42 @@ export default function StudentTable() {
               </StyledTableRow>
             </TableHead>
             <TableBody>
-              {rowsInactive
+              {students
                 .filter((post) => {
-                  if (search === '') {
-                    return post;
-                  }
-                  if (
-                    post.firstName.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (
-                    post.lastName.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (post.email.toLowerCase().includes(search.toLowerCase())) {
-                    return post;
-                  }
-                  if (
-                    post.number.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
+                  if (post.state.includes('Applied')) {
+                    if (search === '') {
+                      return post;
+                    }
+                    if (
+                      post.firstName
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.lastName.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.email.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.studentCellPhone
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
                   }
                   return null;
                 })
-                .map((row) => (
+                .map((student) => (
                   <StyledTableRow
-                    key={row.name}
+                    key={student.id}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
                     <StyledTableCell component="th" scope="row">
@@ -385,16 +406,28 @@ export default function StudentTable() {
                         variant="body2"
                         onClick={toDetailDemo}
                       >
-                        {row.lastName}, {row.firstName}
+                        {student.lastName}, {student.firstName}
                       </Link>
                     </StyledTableCell>
-                    <StyledTableCell align="left">{row.email}</StyledTableCell>
-                    <StyledTableCell align="left">{row.number}</StyledTableCell>
                     <StyledTableCell align="left">
-                      {row.deleteStudent}
+                      {student.email || '--'}
                     </StyledTableCell>
                     <StyledTableCell align="left">
-                      {row.reactivate}
+                      {student.studentCellPhone || '--'}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      <StudentModal
+                        modalType="accept"
+                        confirmHandler={activateHandler}
+                        studentId={student.id}
+                      />
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      <StudentModal
+                        modalType="decline"
+                        confirmHandler={declineHandler}
+                        studentId={student.id}
+                      />
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}

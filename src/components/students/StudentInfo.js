@@ -1,12 +1,15 @@
 import React from 'react';
-import { experimentalStyled as styled } from '@mui/material/styles';
+
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import { experimentalStyled as styled } from '@mui/material/styles';
+
 import { useNavigate } from 'react-router-dom';
-import TabsFunction from './detailsTab';
 import ROUTES from '../../constants/routes';
+
+import TabsFunction from './detailsTab';
 
 const StudentInfo = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -38,9 +41,9 @@ export default function ResponsiveGrid(props) {
           backgroundColor: '#2656A5',
           marginBottom: '3vh',
           color: '#FFFFFF',
-          padding: '0vh',
+          padding: '0.1vh',
         }}
-        sx={{width: '100%'}}
+        sx={{ width: '100%' }}
       >
         <h1>AADI&rsquo;S DETAILS</h1>
       </Grid>
@@ -69,54 +72,28 @@ export default function ResponsiveGrid(props) {
           </Grid>
           <Grid style={{ marginLeft: '2vh' }}>
             <StudentInfo>
-              <h3>
-                <b>First Name: Aaditya </b>
-              </h3>
+              <h3>Name: Aaditya Tiwari</h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>
-                <b>Last Name: Tiwari </b>
-              </h3>
+              <h3>Date of Birth: 02/04/2006, Age 16</h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>
-                <b>Date of Birth: 02/04/2006</b>
-              </h3>
+              <h3>Email Address: tiwariA@gmail.com</h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>
-                <b>Age: 16 </b>
-              </h3>
+              <h3>Phone Number: 231-381-4814</h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>
-                <b>Email Address: tiwariA@gmail.com </b>
-              </h3>
+              <h3>Home Address: 12345 Demo street</h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>
-                <b>Phone Number: 231-381-4814 </b>
-              </h3>
+              <h3>Apt. #: 42</h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>
-                <b>Home Address: 12345 Demo street </b>
-              </h3>
+              <h3>State: WI</h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>
-                <b>Apt. #: 42</b>
-              </h3>
-            </StudentInfo>
-            <StudentInfo>
-              <h3>
-                <b>Zip Code: 50021 </b>
-              </h3>
-            </StudentInfo>
-            <StudentInfo>
-              <h3>
-                <b>State: Wisconsin </b>
-              </h3>
+              <h3>Zip Code: 50021</h3>
             </StudentInfo>
           </Grid>
         </Paper>
