@@ -155,23 +155,25 @@ export default function CoachesList(props) {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <TextField
-        value={searchTerm}
-        placeholder="Search..."
-        variant="outlined"
-        size="small"
-        margin="normal"
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon />
-            </InputAdornment>
-          ),
-        }}
-        onChange={(e) => {
-          setSearchTerm(e.target.value);
-        }}
-      />
+      <Box sx={{ bgcolor: 'white', width: '25%' }}>
+        <TextField
+          value={searchTerm}
+          placeholder="Search..."
+          variant="outlined"
+          size="small"
+          margin="normal"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+          }}
+        />
+      </Box>
       <Paper sx={{ width: '100%', mb: 2 }}>
         <TableContainer>
           <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
