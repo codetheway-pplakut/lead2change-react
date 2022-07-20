@@ -1,5 +1,5 @@
 import Container from '@mui/material/Container';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
@@ -10,21 +10,52 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { createTheme } from '@mui/material/styles';
+import PropTypes from 'prop-types';
 // import UpdateAdmin from './update-admin';
 
-export default function Students() {
-  // const [firstName, setFirstName] = useState('');
-  // const [lastName, setLastOwner] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [username, setUsername] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [updateAdminModal, setUpdateAdminModal] = useState(false);
-  // const [adminToUpdate, setAdminToUpdate] = useState('');
-
+export default function EditAdmin(props) {
+  const { admin, onSubmit, handleClose } = props;
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [open, setOpen] = useState(false);
 
-  const handleClose = () => {
-    setOpen(false);
+  useEffect(() => {
+    initializeForm();
+  }, []);
+
+  const initializeForm = () => {
+    if (admin.firstName != null) {
+      setFirstName(admin.firstName);
+    }
+    if (admin.lastName != null) {
+      setLastName(admin.lastName);
+    }
+    if (admin.email != null) {
+      setEmail(admin.email);
+    }
+    if (admin.password != null) {
+      setPassword(admin.password);
+    }
+  };
+
+  const updateAdminHandler = (event) => {
+    event.preventDefault();
+    onSubmit(admin.id, firstName, lastName, email, password);
+  };
+
+  const firstNameChangeHandler = (event) => {
+    setFirstName(event.target.value);
+  };
+  const lastNameChangeHandler = (event) => {
+    setLastName(event.target.value);
+  };
+  const emailChangeHandler = (event) => {
+    setEmail(event.target.value);
+  };
+  const passwordChangeHandler = (event) => {
+    setPassword(event.target.value);
   };
 
   const handleOpen = () => {
@@ -67,39 +98,6 @@ export default function Students() {
       fontSize: 20,
     },
   });
-
-  // const updateAdmin = (event) => {
-  //   updateAdminHandler(event.target.value);
-  // };
-
-  // const updateModalChange = (wasteId) => {
-  //   if (updateAdminModal === true) {
-  //     setUpdateAdminModal(false);
-  //   } else {
-  //     setAdminToUpdate(admin);
-  //     setUpdateAdminModal(true);
-  //   }
-  // };
-
-  // const updateAdminHandler = async (
-  //   adminId,
-  //   newFirstName,
-  //   newLastName,
-  //   newEmail,
-  //   newUsername,
-  //   newPassword
-  // ) => {
-  //   const updatedWaste = {
-  //     id: adminId,
-  //     name: newFirstName,
-  //     owner: newLastName,
-  //     price: newEmail,
-  //     city: newUsername,
-  //     state: newPassword,
-  //   };
-  //   await UpdateAdmin(updatedWaste);
-  //   updateModalChange();
-  // };
 
   return (
     <Container maxWidth="sm">
@@ -150,9 +148,8 @@ export default function Students() {
                     fullWidth
                     label="Enter first name..."
                     variant="filled"
-
-                    // onChange={firstNameChangeHandler}
-                    // value={firstName}
+                    onChange={firstNameChangeHandler}
+                    value={firstName}
                   />
                 </Grid>
                 <Grid item xs={6} sm={6}>
@@ -160,8 +157,8 @@ export default function Students() {
                     fullWidth
                     label="Enter last name..."
                     variant="filled"
-                    // onChange={lastNameChangeHandler}
-                    // value={lastName}
+                    onChange={lastNameChangeHandler}
+                    value={lastName}
                   />
                 </Grid>
 
@@ -170,8 +167,8 @@ export default function Students() {
                     fullWidth
                     label="Enter email address..."
                     variant="filled"
-                    // onChange={emailChangeHandler}
-                    // value={email}
+                    onChange={emailChangeHandler}
+                    value={email}
                   />
                 </Grid>
 
@@ -180,8 +177,8 @@ export default function Students() {
                     fullWidth
                     label="Enter password..."
                     variant="filled"
-                    // onChange={passwordChangeHandler}
-                    // value={password}
+                    onChange={passwordChangeHandler}
+                    value={password}
                   />
                 </Grid>
 
@@ -207,7 +204,7 @@ export default function Students() {
                         theme={buttonTheme}
                         color="save"
                         variant="contained"
-                        onClick={handleClose}
+                        onClick={updateAdminHandler}
                         style={{ minWidth: '100px' }}
                       >
                         <Typography padding="5px">Save</Typography>
@@ -237,3 +234,9 @@ export default function Students() {
     </Container>
   );
 }
+
+EditAdmin.propTypes = {
+  admin: PropTypes.object.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  handleClose: PropTypes.func.isRequired,
+};
