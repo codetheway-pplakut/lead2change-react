@@ -182,7 +182,7 @@ export default function StudentTable() {
             <TableBody>
               {students
                 .filter((post) => {
-                  if (post.state.includes('Active')) {
+                  // if (post.state.includes('Active')) {
                     if (search === '') {
                       return post;
                     }
@@ -212,7 +212,7 @@ export default function StudentTable() {
                     ) {
                       return post;
                     }
-                  }
+                  // }
                   return null;
                 })
 

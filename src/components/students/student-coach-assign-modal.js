@@ -7,7 +7,8 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Modal from '@mui/material/Modal';
-import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import EditIcon from '@mui/icons-material/Edit';
 
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -69,9 +70,8 @@ export default function CoachAssignModal(props) {
 
   return (
     <div>
-      <Button onClick={handleOpen} variant="contained" color="warning">
-        {handleGetCoach(coachId)}
-      </Button>
+      {handleGetCoach(coachId)} <IconButton onClick={handleOpen}> <EditIcon /> </IconButton>
+
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <FormControl>
