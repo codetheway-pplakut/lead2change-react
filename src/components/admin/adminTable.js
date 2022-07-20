@@ -1,30 +1,29 @@
-import * as React from 'react'; 
-import { useState, useEffect } from 'react'; 
+import React, { useState } from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import TableContainer from '@mui/material/TableContainer';
-import Table from '@mui/material/Table';
-import TableCell from '@mui/material/TableCell';
-import TableBody from '@mui/material/TableBody';
-import Paper from '@mui/material/Paper';
+// import Paper from '@mui/material/Paper';
 import { Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import EditAdmin from './editAdmin';
+// import { makeStyles } from '@mui/styles';
+import SearchBar from 'material-ui-search-bar';
+import Tab from '@mui/material/Tab';
+import TabContext from '@material-ui/lab/TabContext';
+import TabList from '@material-ui/lab/TabList';
+import TabPanel from '@material-ui/lab/TabPanel';
+import EditModal from './editAdmin';
 import IsActive from './isActive';
-import { getAdmin, updateAdmin } from '../../services/admin/admin'; 
+
+
+// import { getAdmin } from '../../services/admin/admin';
 
 function createData(name, username, email) {
   return { name, username, email };
 }
-
-const rows = [
-  createData('Admin1', 'AdminUserName1', 'Admin1@gmail.com'),
-  createData('Admin2', 'AdminUserName2', 'Admin1@gmail.com'),
-  createData('Admin3', 'AdminUserName3', 'Admin1@gmail.com'),
-  createData('Admin4', 'AdminUserName4', 'Admin1@gmail.com'),
-  createData('Admin5', 'AdminUserName5', 'Admin1@gmail.com'),
-];
 
 const tablePositioning = {
   backgroundColor: '#3764A8',
@@ -41,122 +40,179 @@ const tableHeadingText = {
 };
 
 export default function AdminTable() {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [admins, setAdmins] = useState([]);
-  const [activeAdmin, setActiveAdmin] = useState([]);
-  const [updateAdminModal, setUpdateAdminModal] = useState(false);
-  const [adminToUpdate, setAdminToUpdate] = useState('');
+  const data = [
+    { name: 'Admin1', username: 'AdminUserName1', email: 'Admin1@gmail.com' },
+    { name: 'Admin2', username: 'AdminUserName2', email: 'Admin1@gmail.com' },
+    { name: 'Admin3', username: 'AdminUserName3', email: 'Admin1@gmail.com' },
+    { name: 'Admin4', username: 'AdminUserName4', email: 'Admin1@gmail.com' },
+    { name: 'Admin5', username: 'AdminUserName5', email: 'Admin1@gmail.com' },
+  ];
 
-  useEffect(() => {
-    refreshAdmin();
-  }, []);
+  const [rows, setRows] = useState(data);
+  const [searched, setSearched] = useState('');
 
-  const refreshAdmin = async () => {
-    const response = await getAdmin();
-    setAdmins(response);
-    setActiveAdmin(response.filter((admin) => true));
+  const requestSearch = (searchedVal) => {
+    const filteredRows = data.filter((row) => {
+      return row.name.toLowerCase().includes(searchedVal.toLowerCase());
+    });
+    setRows(filteredRows);
   };
 
-  const updateModalChange = (adminId) => {
-    if (updateAdminModal === true) {
-      setUpdateAdminModal(false);
-    } else {
-      const adminIndex = admins.findIndex((admin) => admin.id === adminId);
-      setAdminToUpdate(admins[adminIndex]);
-      setUpdateAdminModal(true);
-    }
+  const cancelSearch = () => {
+    setSearched('');
+    requestSearch(searched);
   };
 
-  const updateAdminHandler = async (
-    adminId,
-    newFirstName,
-    newLastName,
-    newEmail,
-    newPassword
-  ) => {
-    const updatedAdmin = {
-      id: adminId,
-      firstName: newFirstName,
-      lastName: newLastName,
-      email: newEmail,
-      password: newPassword,
-    };
-    await updateAdmin(updatedAdmin);
-    refreshAdmin();
-    updateModalChange();
+  const [value, setValue] = React.useState('1');
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
 
   return (
-    <div>
-      <TableContainer component={Paper} align="center" sx={tablePositioning}>
-        <Table aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="left" sx={tableHeadingText}>
-                <Grid container>
-                  <Grid item xs={6} />
-                  <Grid item xs={2}>
-                    Name
-                  </Grid>
-                </Grid>
-              </TableCell>
-
-              <TableCell align="left" sx={tableHeadingText}>
-                Username
-              </TableCell>
-
-              <TableCell align="left" sx={tableHeadingText}>
-                Email
-              </TableCell>
-
-              <TableCell align="left" sx={tableHeadingText}>
-                Deactivate
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row, index) => (
-              <TableRow
-                key={row.name}
-                sx={
-                  index % 2
-                    ? { background: '#eeeeee' }
-                    : { background: 'white' }
-                }
-              >
-                <TableCell component="th" scope="row">
-                  <Grid container alignItems="center" justify="center">
-                    <Grid item xs={6}>
-                      <Box>
-                        <EditAdmin
-                          admin={adminToUpdate}
-                          onSubmit={updateAdminHandler}
-                          handleClose={updateModalChange}
-                        />
-                        <Typography />
-                      </Box>
+    <>
+      <SearchBar
+        value={searched}
+        onChange={(searchVal) => requestSearch(searchVal)}
+        onCancelSearch={() => cancelSearch()}
+      />
+      <TabContext value={value}>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <TabList onChange={handleChange} aria-label="lab API tabs example">
+            <Tab label="Item One" value="1" />
+            <Tab label="Item Two" value="2" />
+          </TabList>
+        </Box>
+        <TabPanel value="1">
+          <TableContainer sx={tablePositioning}>
+            <Table aria-label="customized table">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="left" sx={tableHeadingText}>
+                    <Grid container>
+                      <Grid item xs={6} />
+                      <Grid item xs={2}>
+                        Name
+                      </Grid>
                     </Grid>
-                    <Grid item xs={2}>
-                      <Box>
-                        {row.name}
-                        <Typography />
-                      </Box>
+                  </TableCell>
+
+                  <TableCell align="left" sx={tableHeadingText}>
+                    Username
+                  </TableCell>
+
+                  <TableCell align="left" sx={tableHeadingText}>
+                    Email
+                  </TableCell>
+
+                  <TableCell align="left" sx={tableHeadingText}>
+                    Delete
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row, index) => (
+                  <TableRow
+                    key={row.name}
+                    sx={
+                      index % 2
+                        ? { background: '#eeeeee' }
+                        : { background: 'white' }
+                    }
+                  >
+                    <TableCell component="th" scope="row">
+                      <Grid container alignItems="center" justify="center">
+                        <Grid item xs={6}>
+                          <Box>
+                            <EditModal />
+                            <Typography />
+                          </Box>
+                        </Grid>
+                        <Grid item xs={2}>
+                          <Box>
+                            {row.name}
+                            <Typography />
+                          </Box>
+                        </Grid>
+                      </Grid>
+                    </TableCell>
+                    <TableCell align="left">{row.username}</TableCell>
+                    <TableCell align="left">{row.email}</TableCell>
+                    <TableCell align="left">
+                      <IsActive name={row.name} />
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </TabPanel>
+
+        <TabPanel value="2">
+          <TableContainer sx={tablePositioning}>
+            <Table aria-label="customized table">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="left" sx={tableHeadingText}>
+                    <Grid container>
+                      <Grid item xs={6} />
+                      <Grid item xs={2}>
+                        Name
+                      </Grid>
                     </Grid>
-                  </Grid>
-                </TableCell>
-                <TableCell align="left">{row.username}</TableCell>
-                <TableCell align="left">{row.email}</TableCell>
-                <TableCell align="left">
-                  <IsActive name={row.name} />
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </div>
+                  </TableCell>
+
+                  <TableCell align="left" sx={tableHeadingText}>
+                    Username
+                  </TableCell>
+
+                  <TableCell align="left" sx={tableHeadingText}>
+                    Email
+                  </TableCell>
+
+                  <TableCell align="left" sx={tableHeadingText}>
+                    Delete
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row, index) => (
+                  <TableRow
+                    key={row.name}
+                    sx={
+                      index % 2
+                        ? { background: '#eeeeee' }
+                        : { background: 'white' }
+                    }
+                  >
+                    <TableCell component="th" scope="row">
+                      <Grid container alignItems="center" justify="center">
+                        <Grid item xs={6}>
+                          <Box>
+                            <EditModal />
+                            <Typography />
+                          </Box>
+                        </Grid>
+                        <Grid item xs={2}>
+                          <Box>
+                            {row.name}
+                            <Typography />
+                          </Box>
+                        </Grid>
+                      </Grid>
+                    </TableCell>
+                    <TableCell align="left">{row.username}</TableCell>
+                    <TableCell align="left">{row.email}</TableCell>
+                    <TableCell align="left">
+                      vel<IsActive name={row.name} />
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </TabPanel>
+      </TabContext>
+    </>
   );
 }
