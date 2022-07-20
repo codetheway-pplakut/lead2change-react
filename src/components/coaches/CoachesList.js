@@ -230,12 +230,12 @@ export default function CoachesList(props) {
                           )}
                           {sortActive === false && (
                             <>
-                              <Grid item>
+                              {/* <Grid item>
                                 <CoachDeletionModal
                                   deleteFunction={deleteFunction}
                                   coach={coach}
                                 />
-                              </Grid>
+                              </Grid> */}
                               <Grid item>
                                 <ReactivationModal
                                   updateFunction={updateFunction}
