@@ -224,9 +224,9 @@ export default function StudentTable() {
         align="center"
         style={{
           backgroundColor: '#2656A5',
-          marginBottom: '4vh',
+          marginBottom: '3vh',
           color: '#FFFFFF',
-          padding: '3vh',
+          padding: '0.1vh',
         }}
       >
         <h1>STUDENTS</h1>
@@ -262,7 +262,7 @@ export default function StudentTable() {
           <Table sx={{ minWidth: 10 }} stickyHeader>
             <TableHead>
               <StyledTableRow>
-                <StyledTableCell>Name </StyledTableCell>
+                <StyledTableCell>Name</StyledTableCell>
                 <StyledTableCell align="left">Email</StyledTableCell>
                 <StyledTableCell align="left">Phone Number</StyledTableCell>
                 <StyledTableCell align="left"> </StyledTableCell>
