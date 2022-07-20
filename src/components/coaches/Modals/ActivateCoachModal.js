@@ -1,6 +1,5 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
@@ -28,9 +27,9 @@ export default function ReactivationModal(props) {
   };
   return (
     <div>
-      <Button variant="contained" onClick={handleOpen}>
+      <ColorButton variant="contained" onClick={handleOpen}>
         Reactivate
-      </Button>
+      </ColorButton>
       <Modal
         open={open}
         onClose={handleClose}

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import uuid from 'react-uuid';
 import CoachesList from './CoachesList';
 import {
   getCoaches,
@@ -73,13 +72,10 @@ export default function Coaches() {
 
   const newCoach = async (first, last, email, phone) => {
     const coach = {
-      id: uuid(), // TODO : Update to agreed ID creation method
       coachFirstName: first,
       coachLastName: last,
       coachEmail: email,
       coachPhoneNumber: phone,
-      students: [],
-      active: true,
     };
     await addCoach(coach);
     await refreshCoaches();
