@@ -4,8 +4,11 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Box from '@mui/material/Box';
+import FormControl from '@mui/material/FormControl';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import Table from '@mui/material/Table';
@@ -26,7 +29,7 @@ import {
   getStudentById,
   updateStudent,
 } from '../../services/students/students';
-import { getCoachById } from '../../services/coaches/coaches';
+import { getCoaches, getCoachById } from '../../services/coaches/coaches';
 
 import StudentModal from './studentModal';
 import StudentRegistryModal from './studentRegistryModal';
@@ -110,8 +113,15 @@ function a11yProps(index) {
 }
 
 export default function StudentTable() {
+  const navigate = useNavigate();
+  const toDetailDemo = () => {
+    navigate(ROUTES.STUDENT_INFO);
+  };
+
   const [students, setStudents] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [coaches, setCoaches] = useState([]);
+  const [search, setSearch] = useState('');
 
   const refreshStudents = async () => {
     setIsLoading(true);
@@ -120,22 +130,33 @@ export default function StudentTable() {
     setIsLoading(false);
     setStudents(response);
   };
-
+  const refreshCoaches = async () => {
+    const response = await getCoaches();
+    setCoaches(response);
+  };
   useEffect(() => {
     refreshStudents();
+    refreshCoaches();
   }, []);
 
-  const navigate = useNavigate();
-
-  const toDetailDemo = () => {
-    navigate(ROUTES.STUDENT_INFO);
+  const [tabValue, setTabValue] = useState(0);
+  const handleTabChange = (event, newValue) => {
+    setTabValue(newValue);
   };
 
-  const [search, setSearch] = useState('');
+  const handleGetCoach = (coachId) => {
+    if (coachId !== null) {
+      const coachName = `${getCoachById(coachId).coachFirstName} ${
+        getCoachById(coachId).coachLastName
+      }`;
+      return coachName;
+    }
+    return null;
+  };
 
-  const [value, setValue] = React.useState(0);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const [coachId, setCoachId] = useState('');
+  const changeCoachId = (event) => {
+    setCoachId(event.target.value);
   };
 
   return (
@@ -143,7 +164,7 @@ export default function StudentTable() {
       <ProgressIndicatorOverlay active={isLoading} />
       <Grid container spacing={0}>
         <Grid item xs={3}>
-          <Tabs value={value} onChange={handleChange}>
+          <Tabs value={tabValue} onChange={handleTabChange}>
             <Tab label="Active" {...a11yProps(0)} />
             <Tab label="Inactive" {...a11yProps(1)} />
             <Tab label="Applicants" {...a11yProps(1)} />
@@ -159,7 +180,7 @@ export default function StudentTable() {
           <StudentRegistryModal />
         </Grid>
       </Grid>
-      <TabPanel value={value} index={0}>
+      <TabPanel value={tabValue} index={0}>
         <TableContainer component={Paper} sx={{ height: '69vh' }}>
           <Table sx={{ minWidth: 10 }} stickyHeader>
             <TableHead>
@@ -229,8 +250,21 @@ export default function StudentTable() {
                       {student.studentCellPhone || '--'}
                     </StyledTableCell>
                     <StyledTableCell align="left">
-                      {getCoachById(student.coachId).firstName || '--'}
-                      {getCoachById(student.coachId).lastName || '--'}
+                      <FormControl fullWidth>
+                        <Select
+                          label="Coach"
+                          value={coachId}
+                          onChange={changeCoachId}
+                        >
+                          {coaches.map((coach) => (
+                            <MenuItem value={coach.id}>
+                              {`${getCoachById(coach.id).coachFirstName} ${
+                                getCoachById(coach.id).coachLastName
+                              }`}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
                     </StyledTableCell>
                     <StyledTableCell align="left">
                       <StudentModal
@@ -246,7 +280,7 @@ export default function StudentTable() {
         </TableContainer>
       </TabPanel>
 
-      <TabPanel value={value} index={1}>
+      <TabPanel value={tabValue} index={1}>
         <TableContainer component={Paper} sx={{ height: '69vh' }}>
           <Table sx={{ minWidth: 10 }}>
             <TableHead>
@@ -313,8 +347,7 @@ export default function StudentTable() {
                       {student.studentCellPhone || '--'}
                     </StyledTableCell>
                     <StyledTableCell align="left">
-                      {getCoachById(student.coachId).firstName || '--'}
-                      {getCoachById(student.coachId).lastName || '--'}
+                      {handleGetCoach(student.coachId) || '--'}
                     </StyledTableCell>
                     <StyledTableCell align="left">
                       <StudentModal
@@ -330,7 +363,7 @@ export default function StudentTable() {
         </TableContainer>
       </TabPanel>
 
-      <TabPanel value={value} index={2}>
+      <TabPanel value={tabValue} index={2}>
         <TableContainer component={Paper} sx={{ height: '69vh' }}>
           <Table sx={{ minWidth: 10 }}>
             <TableHead>
