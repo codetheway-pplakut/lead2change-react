@@ -113,7 +113,9 @@ function StudentListModal(props) {
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
+  if (coach.students === null) {
+    coach.students = [];
+  }
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -152,9 +154,6 @@ function StudentListModal(props) {
     page > 0
       ? Math.max(0, (1 + page) * rowsPerPage - coach.students.length)
       : 0;
-  if (coach.students === null) {
-    return;
-  }
   return (
     <div>
       <Button onClick={handleOpen} variant="contained">

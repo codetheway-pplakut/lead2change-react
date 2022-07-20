@@ -3,13 +3,13 @@ import Grid from '@mui/material/Grid';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import uuid from 'react-uuid';
-
 import CoachesList from './CoachesList';
 import RegisterCoachModal from './Modals/RegisterCoachModal';
 import {
   getCoaches,
   addCoach,
   updateCoach,
+  deleteCoach,
 } from '../../services/coaches/coaches';
 
 const theme = createTheme({
@@ -90,8 +90,9 @@ export default function Coaches() {
     await updateCoach(coach);
     await refreshCoaches();
   };
-  const deleteCoach = (id) => {
-    setCoaches(coaches.filter((item) => item.id !== id));
+  const deleteCoachById = async (id) => {
+    // await deleteCoach(id);
+    // await refreshCoaches();
   };
 
   return (
@@ -108,7 +109,7 @@ export default function Coaches() {
                   <Grid item xs={12}>
                     <CoachesList
                       rows={coaches}
-                      deleteFunction={deleteCoach}
+                      deleteFunction={deleteCoachById}
                       updateFunction={updateCoachInfo}
                     />
                   </Grid>

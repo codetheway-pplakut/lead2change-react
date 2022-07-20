@@ -27,6 +27,9 @@ export default function EditCoachModal(props) {
   const [enteredEmail, setEnteredEmail] = React.useState(coach.coachEmail);
   const Edit = () => {
     handleClose();
+    if (coach.students === null) {
+      coach.students = [];
+    }
     const updatedCoach = {
       id: coach.id, // TODO : Update to agreed ID creation method
       coachFirstName: enteredFirstName,

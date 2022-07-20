@@ -10,7 +10,13 @@ export const getCoaches = async () => {
 export const getCoachById = async (id) => {
   return callApi({ endpoint: `${SERVICE_ROOT}/${id}` });
 };
-
+export const deleteCoach = async (coach) => {
+  return callApi({
+    body: coach,
+    endpoint: SERVICE_ROOT,
+    method: 'DELETE',
+  });
+};
 export const updateCoach = async (coach) => {
   return callApi({
     body: coach,

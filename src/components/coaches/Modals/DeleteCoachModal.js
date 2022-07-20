@@ -9,13 +9,13 @@ import PropTypes from 'prop-types';
 import ColorButton from '../Shared/ColoredButton';
 
 export default function DeleteCoachModal(props) {
-  const { coach } = props;
+  const { coach, deleteFunction } = props;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const Delete = () => {
     handleClose();
-    // TODO: API Integration
+    deleteFunction(coach.id);
   };
   return (
     <div>
@@ -74,4 +74,5 @@ export default function DeleteCoachModal(props) {
 
 DeleteCoachModal.propTypes = {
   coach: PropTypes.object.isRequired,
+  deleteFunction: PropTypes.func.isRequired,
 };

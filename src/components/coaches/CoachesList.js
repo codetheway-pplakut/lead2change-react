@@ -220,6 +220,12 @@ export default function CoachesList(props) {
                                   coach={coach}
                                 />
                               </Grid>
+                              <Grid item>
+                                <EditCoachModal
+                                  updateFunction={updateFunction}
+                                  coach={coach}
+                                />
+                              </Grid>
                             </>
                           )}
                           {sortActive === false && (
@@ -238,12 +244,6 @@ export default function CoachesList(props) {
                               </Grid>
                             </>
                           )}
-                          <Grid item>
-                            <EditCoachModal
-                              updateFunction={updateFunction}
-                              coach={coach}
-                            />
-                          </Grid>
                         </Grid>
                       </TableCell>
                     </TableRow>
