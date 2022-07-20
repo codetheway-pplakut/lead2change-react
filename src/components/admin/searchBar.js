@@ -10,13 +10,10 @@ export default function SearchBar() {
     <Paper
       component="form"
       sx={{
-        marginBottom: '1%',
         display: 'flex',
         alignItems: 'right',
-        width: '15%',
-        marginLeft: '60%',
+        width: '100%',
         bgcolor: '#F5F5F5',
-        marginTop: '1%',
       }}
     >
       <InputBase sx={{ ml: 1, flex: 1 }} placeholder="Filter..." />
