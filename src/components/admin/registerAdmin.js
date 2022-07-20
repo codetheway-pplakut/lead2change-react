@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import Button from '@mui/material/Button';
-import React from 'react';
+import React, { useState } from 'react';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -10,6 +10,7 @@ import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
+
 
 
 export default function RegisterAdmin() {
@@ -25,9 +26,132 @@ export default function RegisterAdmin() {
     mt: '3',
   };
 
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const [open, setOpen] = useState(false);
+  const [register, setRegister] = useState(false);
+
+  const [firstNameError, setFirstNameError] = useState('');
+  const [lastNameError, setLastNameError] = useState('');
+  const [emailErrorOne, setEmailErrorOne] = useState('');
+  const [emailErrorTwo, setEmailErrorTwo] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [passwordErrorTwo, setPasswordErrorTwo] = useState('');
+  const [passwordErrorConfirmation, setPasswordErrorConfirmation] =
+    useState('');
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleRegister = () => {
+    setFirstNameError(null);
+    setLastNameError(null);
+    setEmailErrorOne(null);
+    setEmailErrorTwo(null);
+    setPasswordError(null);
+    setPasswordErrorTwo(null);
+    setPasswordErrorConfirmation(null);
+
+    setRegister(true);
+
+    if (firstName.length < 1) {
+      setFirstNameError(
+        <Typography variant="subtitle2" sx={{ color: 'red' }}>
+          First Name Error; First Name Required.
+        </Typography>
+      );
+      setRegister(false);
+    }
+    if (lastName.length < 1) {
+      setLastNameError(
+        <Typography variant="subtitle2" sx={{ color: 'red' }}>
+          Last Name Error; Last Name Required.
+        </Typography>
+      );
+      setRegister(false);
+    }
+    if (email.length < 1) {
+      setEmailErrorOne(
+        <Typography variant="subtitle2" sx={{ color: 'red' }}>
+          Email Error; Email Required.
+        </Typography>
+      );
+      setRegister(false);
+    }
+    if (email.indexOf('@') < 0) {
+      setEmailErrorTwo(
+        <Typography variant="subtitle2" sx={{ color: 'red' }}>
+          Email Error; Please enter a valid email of the form ___@___.___
+        </Typography>
+      );
+      setRegister(false);
+    }
+    if (password.length < 1) {
+      setPasswordError(
+        <Typography variant="subtitle2" sx={{ color: 'red' }}>
+          Password Error; Password Required.
+        </Typography>
+      );
+      setRegister(false);
+    }
+    if (
+      password.indexOf('1') < 0 &&
+      password.indexOf('2') < 0 &&
+      password.indexOf('3') < 0 &&
+      password.indexOf('4') < 0 &&
+      password.indexOf('5') < 0 &&
+      password.indexOf('6') < 0 &&
+      password.indexOf('7') < 0 &&
+      password.indexOf('8') < 0 &&
+      password.indexOf('9') < 0 &&
+      password.indexOf('0') < 0
+    ) {
+      setPasswordErrorTwo(
+        <Typography variant="subtitle2" sx={{ color: 'red' }}>
+          Password Error; Password must contain a digit (0,1,2,3,4,5,6,7,8,9).
+        </Typography>
+      );
+      setRegister(false);
+    }
+    if (password !== confirmPassword) {
+      setPasswordErrorConfirmation(
+        <Typography variant="subtitle2" sx={{ color: 'red' }}>
+          Password Error; Password and Confirm Password do not match.
+        </Typography>
+      );
+      setRegister(false);
+    }
+
+    if (register) {
+      setOpen(false);
+    }
+  };
+
+  const firstNameChangeHandler = (event) => {
+    setFirstName(event.target.value);
+  };
+  const lastNameChangeHandler = (event) => {
+    setLastName(event.target.value);
+  };
+  const emailChangeHandler = (event) => {
+    setEmail(event.target.value);
+  };
+  const passwordChangeHandler = (event) => {
+    setPassword(event.target.value);
+  };
+  const confirmPasswordChangeHandler = (event) => {
+    setConfirmPassword(event.target.value);
+  };
+
   return (
     <Container maxWidth="sm">
       {/* <ThemeProvider theme={theme}> */}
@@ -56,6 +180,8 @@ export default function RegisterAdmin() {
                                 fullWidth
                                 sx={{bgcolor: '#F5F5F5'}}
                                 label="First Name"
+                                onChange={firstNameChangeHandler}
+                                value={firstName}
                             />
                         </Paper>
                     </Grid>
@@ -65,6 +191,8 @@ export default function RegisterAdmin() {
                                 fullWidth
                                 sx={{bgcolor: '#F5F5F5'}}
                                 label="Last Name"
+                                onChange={lastNameChangeHandler}
+                                value={lastName}
                             />
                         </Paper>
                     </Grid>
@@ -75,15 +203,8 @@ export default function RegisterAdmin() {
                                 sx={{bgcolor: '#F5F5F5'}}
                                 label="Email Address"
                                 type="email"
-                            />
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Paper>
-                            <TextField
-                                fullWidth
-                                sx={{bgcolor: '#F5F5F5'}}
-                                label="Username"
+                                onChange={emailChangeHandler}
+                                value={email}
                             />
                         </Paper>
                     </Grid>
@@ -94,6 +215,8 @@ export default function RegisterAdmin() {
                                 sx={{bgcolor: '#F5F5F5'}}
                                 label="Password"
                                 type="password"
+                                onChange={passwordChangeHandler}
+                                value={password}
                             />
                         </Paper>
                     </Grid>
@@ -104,6 +227,8 @@ export default function RegisterAdmin() {
                                 sx={{bgcolor: '#F5F5F5'}}
                                 label="Confirm Password"
                                 type="password"
+                                onChange={confirmPasswordChangeHandler}
+                                value={confirmPassword}
                             />
                         </Paper>
                     </Grid>
@@ -117,15 +242,24 @@ export default function RegisterAdmin() {
                         type="submit"
                         variant="contained"
                         size="large"
+                        onClick={handleRegister}
                     >
                         <Typography sx={{padding: '10px'}} variant='h4' fontWeight='bold'>Register</Typography>
                     </Button>
                 </Box>
             </Grid>
         </Grid>
+        <div>
+              {firstNameError}
+              {lastNameError}
+              {emailErrorOne}
+              {emailErrorTwo}
+              {passwordError}
+              {passwordErrorTwo}
+              {passwordErrorConfirmation}
+            </div>
         </Box>
         </Modal>
-      {/* </ThemeProvider> */}
     </Container>
   );
 }

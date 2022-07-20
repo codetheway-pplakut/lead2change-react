@@ -121,11 +121,7 @@ export default function Students() {
     }
 
     if (save) {
-      setPasswordErrorConfirmation(
-        <Typography variant="subtitle2" sx={{ color: 'red' }}>
-          Bruh
-        </Typography>
-      );
+      setOpen(false);
     }
   };
 
