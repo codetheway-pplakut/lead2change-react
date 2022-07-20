@@ -66,7 +66,7 @@ export default function TabsFunction() {
   };
 
   return (
-    <div>
+    <div style={{ marginRight: '8vh' }}>
       <Box sx={{ bgcolor: 'background.paper', width: '100%' }}>
         <AppBar position="static">
           <Tabs
