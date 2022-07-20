@@ -7,15 +7,17 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eslint": "eslint src/ && echo \"\\x1b[102m\\x1b[1m ESLINT \\x1b[0m\" No JavaScript ESLint errors to fix",
-      "eslint:fix": "eslint --fix src/ && echo \"\\x1b[102m\\x1b[1m ESLINT \\x1b[0m\" ESLint JavaScript errors fixed"
+    "eslint:fix": "eslint --fix src/ && echo \"\\x1b[102m\\x1b[1m ESLINT \\x1b[0m\" ESLint JavaScript errors fixed"
   },
   "author": "Joey Schroeder <schrjos@gmail.com>",
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
+    "@material-ui/lab": "^4.0.0-alpha.61",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.9.0",
     "jwt-decode": "^3.1.2",
+    "material-ui-search-bar": "^1.0.0",
     "moment": "^2.29.4",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
