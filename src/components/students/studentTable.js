@@ -22,6 +22,7 @@ import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Link from '@mui/material/Link';
 import { useNavigate } from 'react-router-dom';
+import AppBar from '@mui/material/AppBar';
 import ROUTES from '../../constants/routes';
 import StudentModal from './studentModal';
 import StudentRegistryModal from './studentRegistryModal';
@@ -85,8 +86,8 @@ TabPanel.propTypes = {
 
 function a11yProps(index) {
   return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    id: `full-width-tab-${index}`,
+    'aria-controls': `full-width-tabpanel-${index}`,
   };
 }
 
@@ -231,12 +232,21 @@ export default function StudentTable() {
         <h1>STUDENTS</h1>
       </Grid>
       <Grid container spacing={0}>
-        <Grid item xs={2}>
-          <Tabs value={value} onChange={handleChange}>
-            <Tab label="Active" {...a11yProps(0)} />
-            <Tab label="Inactive" {...a11yProps(1)} />
-          </Tabs>
-        </Grid>
+        <Box sx={{ bgcolor: 'background.paper', width: '16%' }}>
+          <AppBar position="static">
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              indicatorColor="secondary"
+              textColor="inherit"
+              variant="fullWidth"
+              aria-label="full width tabs example"
+            >
+              <Tab label="Active" {...a11yProps(0)} />
+              <Tab label="Inactive" {...a11yProps(1)} />
+            </Tabs>
+          </AppBar>
+        </Box>
         <Grid item xs={4} />
         <Grid item xs={4}>
           <Box>

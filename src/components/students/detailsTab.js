@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
@@ -6,9 +7,10 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import AppBar from '@mui/material/AppBar';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -17,9 +19,8 @@ function TabPanel(props) {
     <div
       role="tabpanel"
       hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      // eslint-disable-next-line react/jsx-props-no-spreading
+      id={`full-width-tabpanel-${index}`}
+      aria-labelledby={`full-width-tab-${index}`}
       {...other}
     >
       {value === index && (
@@ -32,7 +33,6 @@ function TabPanel(props) {
 }
 
 TabPanel.propTypes = {
-  // eslint-disable-next-line react/require-default-props
   children: PropTypes.node,
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
@@ -40,8 +40,8 @@ TabPanel.propTypes = {
 
 function a11yProps(index) {
   return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    id: `full-width-tab-${index}`,
+    'aria-controls': `full-width-tabpanel-${index}`,
   };
 }
 const GridText = styled(Paper)(({ theme }) => ({
@@ -53,26 +53,34 @@ const GridText = styled(Paper)(({ theme }) => ({
 }));
 
 export default function TabsFunction() {
+  const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  const handleChangeIndex = (index) => {
+    setValue(index);
+  };
+
   return (
     <div>
-      <Box sx={{ width: '100%' }}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      <Box sx={{ bgcolor: 'background.paper', width: '100%' }}>
+        <AppBar position="static">
           <Tabs
             value={value}
             onChange={handleChange}
-            aria-label="basic tabs example"
+            indicatorColor="secondary"
+            textColor="inherit"
+            variant="fullWidth"
+            aria-label="full width tabs example"
           >
             <Tab label="Education" {...a11yProps(0)} />
             <Tab label="Goals" {...a11yProps(1)} />
             <Tab label="Other" {...a11yProps(2)} />
           </Tabs>
-        </Box>
+        </AppBar>
         <TabPanel value={value} index={0} style={{ overflowY: 'auto' }}>
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">
