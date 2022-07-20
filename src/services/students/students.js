@@ -8,7 +8,7 @@ export const addStudent = async (student) => {
     body: JSON.stringify(student),
     endpoint: SERVICE_ROOT,
     method: 'POST',
-    // mode: 'no-cors',
+    // mode: 'cors',
     headers: {
       Accept: 'application/json, text/plain',
       'Content-Type': 'application/json',

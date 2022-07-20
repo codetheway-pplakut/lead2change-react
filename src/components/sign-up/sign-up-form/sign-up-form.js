@@ -23,6 +23,8 @@ export default function SignUpForm(props) {
     password,
   } = props;
 
+  // const currentYear = new Date().getFullYear();
+
   const onSubmitDisabled =
     !emailAddress ||
     !firstName ||
@@ -61,20 +63,20 @@ export default function SignUpForm(props) {
             value={lastName}
           />
         </Grid>
-        <Grid item xs={12} /* sm={6} */>
+        <Grid item xs={12} sm={6}>
           <TextField
             fullWidth
             label="Password"
             onChange={(event) => onPasswordChange(event.target.value)}
-            /* required */
+            required
             type="password"
             value={password}
           />
         </Grid>
-        {/* <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6}>
           <TextField
             fullWidth
-            label="Cell Phone Number"
+            label="Cell Phone Number (Optional)"
             onChange={(event) => onStudentCellPhoneChange(event.target.value)}
             value={studentCellPhone}
           />
@@ -87,7 +89,7 @@ export default function SignUpForm(props) {
             type="date"
             value={studentDateOfBirth}
           />
-        </Grid> */}
+        </Grid>
         <Grid item xs={12}>
           <FormControlLabel
             control={<Checkbox value="allowExtraEmails" color="primary" />}

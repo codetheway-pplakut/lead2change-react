@@ -27,11 +27,12 @@ export default function SignUp() {
       studentEmail,
       studentFirstName,
       studentLastName /* password */,
+      studentDateOfBirth,
+      studentCellPhone,
     };
     /* setIsLoading(true); */
 
     await addStudent(student);
-    console.log('Success');
     /* setIsLoading(false);
     navigate(ROUTES.SIGN_UP_SUCCESS); */
   };
