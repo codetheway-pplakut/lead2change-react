@@ -26,7 +26,7 @@ import {
   getStudentById,
   updateStudent,
 } from '../../services/students/students';
-// import { getCoachById } from '../../services/coaches/coaches';
+import { getCoachById } from '../../services/coaches/coaches';
 
 import StudentModal from './studentModal';
 import StudentRegistryModal from './studentRegistryModal';
@@ -86,6 +86,12 @@ const activateHandler = async (studentId) => {
 const declineHandler = async (studentId) => {
   const updatedStudent = await getStudentById(studentId);
   updatedStudent.state = 'Rejected';
+  updateStudent(updatedStudent);
+};
+
+const reassignCoachHandler = async (studentId, coachId) => {
+  const updatedStudent = await getStudentById(studentId);
+  updatedStudent.coachId = coachId;
   updateStudent(updatedStudent);
 };
 
@@ -184,12 +190,14 @@ export default function StudentTable() {
                     ) {
                       return post;
                     }
-                    if ( post.email !== null &&
+                    if (
+                      post.email !== null &&
                       post.email.toLowerCase().includes(search.toLowerCase())
                     ) {
                       return post;
                     }
-                    if (  post.studentCellPhone !== null &&
+                    if (
+                      post.studentCellPhone !== null &&
                       post.studentCellPhone
                         .toLowerCase()
                         .includes(search.toLowerCase())
@@ -220,7 +228,10 @@ export default function StudentTable() {
                     <StyledTableCell align="left">
                       {student.studentCellPhone || '--'}
                     </StyledTableCell>
-                    <StyledTableCell align="left">Coach</StyledTableCell>
+                    <StyledTableCell align="left">
+                      {getCoachById(student.coachId).firstName || '--'}
+                      {getCoachById(student.coachId).lastName || '--'}
+                    </StyledTableCell>
                     <StyledTableCell align="left">
                       <StudentModal
                         modalType="deactivate"
@@ -301,7 +312,10 @@ export default function StudentTable() {
                     <StyledTableCell align="left">
                       {student.studentCellPhone || '--'}
                     </StyledTableCell>
-                    <StyledTableCell align="left">Coach</StyledTableCell>
+                    <StyledTableCell align="left">
+                      {getCoachById(student.coachId).firstName || '--'}
+                      {getCoachById(student.coachId).lastName || '--'}
+                    </StyledTableCell>
                     <StyledTableCell align="left">
                       <StudentModal
                         modalType="reactivate"
