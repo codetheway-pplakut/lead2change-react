@@ -14,7 +14,7 @@ import PropTypes from 'prop-types';
 // import UpdateAdmin from './update-admin';
 
 export default function EditAdmin(props) {
-  const { admin, onSubmit, handleClose } = props;
+  const { admin, onSubmit} = props;
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -60,6 +60,9 @@ export default function EditAdmin(props) {
 
   const handleOpen = () => {
     setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
   };
 
   const modalPosition = {
