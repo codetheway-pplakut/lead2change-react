@@ -9,10 +9,6 @@ function saveResponses() {
   return null;
 }
 
-function goBack() {
-  <ExitModal />;
-}
-
 export default function InterviewPage() {
   return (
     <div>
@@ -32,9 +28,8 @@ export default function InterviewPage() {
           p: 2,
         }}
       >
-        <Button variant="outlined" onClick={goBack}>
-          Back To Home
-        </Button>
+        <ExitModal />
+
         <Button variant="contained" onClick={saveResponses}>
           Save
         </Button>

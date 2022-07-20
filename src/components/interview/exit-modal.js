@@ -1,26 +1,26 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import { Modal } from '@mui/material';
 
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: 600,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
+  align: 'center',
 };
 
 function returnInterview() {
   return null;
 }
-
 function BackHome() {
   return null;
 }
@@ -32,7 +32,9 @@ export default function ExitModal() {
 
   return (
     <div>
-      {handleOpen}
+      <Button variant="outlined" onClick={handleOpen}>
+        Go back home
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -40,15 +42,30 @@ export default function ExitModal() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+            align="center"
+          >
+            Remember to Save
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Are you sure you want to go back to home? If so, hit the BackHome or
-            Return to Interview
+          <Typography
+            id="modal-modal-description"
+            sx={{ mt: 2 }}
+            align="center"
+          >
+            Are you sure you want to go back to home?
+          </Typography>
+          <Typography
+            id="modal-modal-description"
+            sx={{ mt: 2 }}
+            align="center"
+          >
+            If so, hit the BackHome or Return to Interview
           </Typography>
           <Stack
-            spacing={15}
+            spacing={20}
             direction="row"
             sx={{
               p: 2,
