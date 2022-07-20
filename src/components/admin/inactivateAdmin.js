@@ -75,14 +75,14 @@ export default function inactiveAdmin() {
         onClick={handleOpen} 
         variant="contained" 
       > 
-        Inactivate 
+        Delete 
       </Button> 
       <Modal open={open} onClose={handleClose}> 
         <Box sx={modalPosition}> 
             <Grid container spacing={0}  alignItems="center" justifyContent="center">
                 <Grid item xs={12}>
                     <Box bgcolor='#3764A8'  sx={headingCurvedCorners} >
-                        <Typography textAlign= 'center' color='white' variant='h4' fontWeight='bold' padding='10px'>Deactivate Admin</Typography>
+                        <Typography textAlign= 'center' color='white' variant='h4' fontWeight='bold' padding='10px'>Delete Admin</Typography>
                         <IconButton onClick={handleClose} sx={{ position: 'absolute', right: 3,top: 3,}} >
                             <CloseIcon fontSize="large" sx={closeIconColor}/>
                         </IconButton>
@@ -90,7 +90,7 @@ export default function inactiveAdmin() {
                 </Grid> 
                 <Grid item xs={12}>
                     <Typography sx={modalTextStyle}> 
-                        Are you sure you want to turn this administrative account inactive? 
+                        Are you sure you want to delete this Administrative account? 
                     </Typography>
                 </Grid> 
                 <Grid container spacing={2}  alignItems="center" justifyContent="center" sx={buttonHolder}>

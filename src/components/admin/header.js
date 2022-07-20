@@ -11,7 +11,6 @@ export default function header(){
         <div>
             <Navbar />
             <Title />
-            <Search />
             <AdminTable />
         </div>
     );

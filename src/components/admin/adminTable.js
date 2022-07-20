@@ -17,7 +17,7 @@ import TabList from '@material-ui/lab/TabList';
 import TabPanel from '@material-ui/lab/TabPanel';
 import EditModal from './editAdmin';
 import IsActive from './isActive';
-
+import Admin from './registerAdmin';
 
 // import { getAdmin } from '../../services/admin/admin';
 
@@ -71,148 +71,86 @@ export default function AdminTable() {
 
   return (
     <div>
-      <SearchBar
-        value={searched}
-        onChange={(searchVal) => requestSearch(searchVal)}
-        onCancelSearch={() => cancelSearch()}
-      />
-      <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <TabList onChange={handleChange} aria-label="lab API tabs example">
-            <Tab label="Item One" value="1" />
-            <Tab label="Item Two" value="2" />
-          </TabList>
-        </Box>
-        <TabPanel value="1">
-          <TableContainer sx={tablePositioning}>
-            <Table aria-label="customized table">
-              <TableHead>
-                <TableRow>
-                  <TableCell align="left" sx={tableHeadingText}>
-                    <Grid container>
-                      <Grid item xs={6} />
-                      <Grid item xs={2}>
-                        Name
-                      </Grid>
+      <Box sx={{ mt: '10px', mb: '10px' }}>
+        <Grid container alignItems="center" justify="center">
+          <Grid item xs={3} />
+          <Grid item xs={4} align="right">
+            <Admin />
+          </Grid>
+          <Grid item xs={2} align="right">
+            <Box>
+              <SearchBar
+                value={searched}
+                onChange={(searchVal) => requestSearch(searchVal)}
+                onCancelSearch={() => cancelSearch()}
+              />
+            </Box>
+          </Grid>
+          <Grid item xs={3} />
+        </Grid>
+      </Box>
+      <TableContainer sx={tablePositioning}>
+        <Table aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="left" sx={tableHeadingText}>
+                <Grid container>
+                  <Grid item xs={6} />
+                  <Grid item xs={2}>
+                    Name
+                  </Grid>
+                </Grid>
+              </TableCell>
+
+              <TableCell align="left" sx={tableHeadingText}>
+                Username
+              </TableCell>
+
+              <TableCell align="left" sx={tableHeadingText}>
+                Email
+              </TableCell>
+
+              <TableCell align="left" sx={tableHeadingText}>
+                Delete
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row, index) => (
+              <TableRow
+                key={row.name}
+                sx={
+                  index % 2
+                    ? { background: '#eeeeee' }
+                    : { background: 'white' }
+                }
+              >
+                <TableCell component="th" scope="row">
+                  <Grid container alignItems="center" justify="center">
+                    <Grid item xs={6}>
+                      <Box>
+                        <EditModal admin={rows} />
+                        <Typography />
+                      </Box>
                     </Grid>
-                  </TableCell>
-
-                  <TableCell align="left" sx={tableHeadingText}>
-                    Username
-                  </TableCell>
-
-                  <TableCell align="left" sx={tableHeadingText}>
-                    Email
-                  </TableCell>
-
-                  <TableCell align="left" sx={tableHeadingText}>
-                    Delete
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows.map((row, index) => (
-                  <TableRow
-                    key={row.name}
-                    sx={
-                      index % 2
-                        ? { background: '#eeeeee' }
-                        : { background: 'white' }
-                    }
-                  >
-                    <TableCell component="th" scope="row">
-                      <Grid container alignItems="center" justify="center">
-                        <Grid item xs={6}>
-                          <Box>
-                            <EditModal admin={rows}/>
-                            <Typography />
-                          </Box>
-                        </Grid>
-                        <Grid item xs={2}>
-                          <Box>
-                            {row.name}
-                            <Typography />
-                          </Box>
-                        </Grid>
-                      </Grid>
-                    </TableCell>
-                    <TableCell align="left">{row.username}</TableCell>
-                    <TableCell align="left">{row.email}</TableCell>
-                    <TableCell align="left">
-                      <IsActive name={row.name} />
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </TabPanel>
-
-        <TabPanel value="2">
-          <TableContainer sx={tablePositioning}>
-            <Table aria-label="customized table">
-              <TableHead>
-                <TableRow>
-                  <TableCell align="left" sx={tableHeadingText}>
-                    <Grid container>
-                      <Grid item xs={6} />
-                      <Grid item xs={2}>
-                        Name
-                      </Grid>
+                    <Grid item xs={2}>
+                      <Box>
+                        {row.name}
+                        <Typography />
+                      </Box>
                     </Grid>
-                  </TableCell>
-
-                  <TableCell align="left" sx={tableHeadingText}>
-                    Username
-                  </TableCell>
-
-                  <TableCell align="left" sx={tableHeadingText}>
-                    Email
-                  </TableCell>
-
-                  <TableCell align="left" sx={tableHeadingText}>
-                    Delete
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows.map((row, index) => (
-                  <TableRow
-                    key={row.name}
-                    sx={
-                      index % 2
-                        ? { background: '#eeeeee' }
-                        : { background: 'white' }
-                    }
-                  >
-                    <TableCell component="th" scope="row">
-                      <Grid container alignItems="center" justify="center">
-                        <Grid item xs={6}>
-                          <Box>
-                            {/* <EditModal /> */}
-                            <Typography />
-                          </Box>
-                        </Grid>
-                        <Grid item xs={2}>
-                          <Box>
-                            {row.name}
-                            <Typography />
-                          </Box>
-                        </Grid>
-                      </Grid>
-                    </TableCell>
-                    <TableCell align="left">{row.username}</TableCell>
-                    <TableCell align="left">{row.email}</TableCell>
-                    <TableCell align="left">
-                      <IsActive name={row.name} />
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </TabPanel>
-      </TabContext>
+                  </Grid>
+                </TableCell>
+                <TableCell align="left">{row.username}</TableCell>
+                <TableCell align="left">{row.email}</TableCell>
+                <TableCell align="left">
+                  <IsActive name={row.name} />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 }

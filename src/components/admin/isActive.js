@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import InActive from './inactivateAdmin';
-import Disabled from './inactivateAdminDisabled';
+import Disabled from './deleteAdminDisabled';
 
 // const loginUser = "API CALL TO GET USER DATA"
 const loginUser = 'Admin2';

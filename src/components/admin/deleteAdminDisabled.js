@@ -30,7 +30,7 @@ export default function inactiveAdmin() {
         color="delete" 
         variant="disabled" 
       > 
-        <Typography textAlign= 'center' color='#56585c'>Inactivate </Typography>
+        <Typography textAlign= 'center' color='#56585c'>Delete </Typography>
       </Button> 
     </div> 
   ); 
