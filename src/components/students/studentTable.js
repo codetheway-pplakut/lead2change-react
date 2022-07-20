@@ -4,11 +4,8 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Box from '@mui/material/Box';
-import FormControl from '@mui/material/FormControl';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import Table from '@mui/material/Table';
@@ -29,10 +26,11 @@ import {
   getStudentById,
   updateStudent,
 } from '../../services/students/students';
-import { getCoaches, getCoachById } from '../../services/coaches/coaches';
+import { getCoachById } from '../../services/coaches/coaches';
 
 import StudentModal from './studentModal';
 import StudentRegistryModal from './studentRegistryModal';
+import CoachAssignModal from './student-coach-assign-modal';
 import SearchBar from './searchBar';
 
 import ProgressIndicatorOverlay from '../progress-indicator-overlay/progress-indicator-overlay';
@@ -120,7 +118,6 @@ export default function StudentTable() {
 
   const [students, setStudents] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [coaches, setCoaches] = useState([]);
   const [search, setSearch] = useState('');
 
   const refreshStudents = async () => {
@@ -130,13 +127,8 @@ export default function StudentTable() {
     setIsLoading(false);
     setStudents(response);
   };
-  const refreshCoaches = async () => {
-    const response = await getCoaches();
-    setCoaches(response);
-  };
   useEffect(() => {
     refreshStudents();
-    refreshCoaches();
   }, []);
 
   const [tabValue, setTabValue] = useState(0);
@@ -152,11 +144,6 @@ export default function StudentTable() {
       return coachName;
     }
     return null;
-  };
-
-  const [coachId, setCoachId] = useState('');
-  const changeCoachId = (event) => {
-    setCoachId(event.target.value);
   };
 
   return (
@@ -250,21 +237,11 @@ export default function StudentTable() {
                       {student.studentCellPhone || '--'}
                     </StyledTableCell>
                     <StyledTableCell align="left">
-                      <FormControl fullWidth>
-                        <Select
-                          label="Coach"
-                          value={coachId}
-                          onChange={changeCoachId}
-                        >
-                          {coaches.map((coach) => (
-                            <MenuItem value={coach.id}>
-                              {`${getCoachById(coach.id).coachFirstName} ${
-                                getCoachById(coach.id).coachLastName
-                              }`}
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
+                      <CoachAssignModal
+                        confirmHandler={reassignCoachHandler}
+                        studentId={student.id}
+                        coachId={student.coachId}
+                      />
                     </StyledTableCell>
                     <StyledTableCell align="left">
                       <StudentModal
