@@ -7,6 +7,8 @@ const ROUTES = {
   TABS: '/interview/tabs',
   HeaderandFooter: '/interview/HeaderandFooter',
   COACHES: '/coaches/Coaches',
+  STUDENTS: '/students/student-test',
+  STUDENT_INFO: '/students/StudentInfo',
 };
 
 export default ROUTES;

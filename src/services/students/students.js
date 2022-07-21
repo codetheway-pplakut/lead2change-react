@@ -15,6 +15,10 @@ export const updateStudent = (student) => {
   return callApi({
     body: student,
     endpoint: SERVICE_ROOT,
-    method: 'POST',
+    method: 'PUT',
+    headers: {
+      Accept: 'application/json, text/plain',
+      'Content-Type': 'application/json',
+    },
   });
 };
