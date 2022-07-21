@@ -13,6 +13,7 @@ import AuthenticationProvider from '../authentication-provider/authentication-pr
 import ApiDemo from '../api-demo/api-demo';
 import BasicTabs from '../interview/tabs';
 import HeaderandFooter from '../interview/HeaderandFooter';
+import Coaches from '../coaches/Coaches';
 import Student from '../students/student-test';
 import ResponsiveGrid from '../students/StudentInfo';
 
@@ -39,6 +40,7 @@ export default function Root() {
                 element={<HeaderandFooter />}
               />
               <Route path={ROUTES.TABS} element={<BasicTabs />} />
+              <Route path={ROUTES.COACHES} element={<Coaches />} />
               <Route path={ROUTES.STUDENTS} element={<Student />} />
               <Route path={ROUTES.STUDENT_INFO} element={<ResponsiveGrid />} />
             </Route>
