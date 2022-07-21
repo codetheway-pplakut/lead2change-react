@@ -77,7 +77,7 @@ export default function navbar() {
                 </Grid>
                 <Grid item xl={2}>
                   <Typography color="white">
-                    <p>Hello *insert name here*</p>
+                    <span>Hello *insert name here*</span>
                   </Typography>
                 </Grid>
               </Grid>
