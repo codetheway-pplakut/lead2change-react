@@ -12,29 +12,30 @@ import ROUTES from '../../constants/routes';
 import ProgressIndicatorOverlay from '../progress-indicator-overlay/progress-indicator-overlay';
 
 export default function SignUp() {
-  const [studentEmail, setEmail] = useState('');
-  const [studentFirstName, setFirstName] = useState('');
-  const [studentLastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
-  const [studentCellPhone, setStudentCellPhone] = useState('');
-  const [studentDateOfBirth, setStudentDateOfBirth] = useState('');
+  const [cellPhone, setCellPhone] = useState('');
+  const [dob, setDOB] = useState('');
 
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const onSignUpFormSubmit = async () => {
+    const dateOfBirth = new Date(dob);
     const student = {
-      studentEmail,
-      studentFirstName,
-      studentLastName /* password */,
-      studentDateOfBirth,
-      studentCellPhone,
+      email,
+      firstName,
+      lastName /* password */,
+      dateOfBirth,
+      cellPhone,
     };
     /* setIsLoading(true); */
 
     await addStudent(student);
-    /* setIsLoading(false);
-    navigate(ROUTES.SIGN_UP_SUCCESS); */
+    /* setIsLoading(false); */
+    navigate(ROUTES.SIGN_UP_SUCCESS);
   };
 
   return (
@@ -53,14 +54,14 @@ export default function SignUp() {
           </Avatar>
           <Typography variant="h5">Sign up</Typography>
           <SignUpForm
-            emailAddress={studentEmail}
-            firstName={studentFirstName}
-            lastName={studentLastName}
-            studentCellPhone={studentCellPhone}
-            studentDateOfBirth={studentDateOfBirth}
+            emailAddress={email}
+            firstName={firstName}
+            lastName={lastName}
+            studentCellPhone={cellPhone}
+            studentDateOfBirth={dob}
             onEmailAddressChange={setEmail}
-            onStudentDateOfBirthChange={setStudentDateOfBirth}
-            onStudentCellPhoneChange={setStudentCellPhone}
+            onStudentDateOfBirthChange={setDOB}
+            onStudentCellPhoneChange={setCellPhone}
             onFirstNameChange={setFirstName}
             onLastNameChange={setLastName}
             onPasswordChange={setPassword}

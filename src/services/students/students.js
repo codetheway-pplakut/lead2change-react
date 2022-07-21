@@ -5,7 +5,7 @@ const SERVICE_ROOT = 'Students';
 
 export const addStudent = async (student) => {
   return callApi({
-    body: JSON.stringify(student),
+    body: student,
     endpoint: SERVICE_ROOT,
     method: 'POST',
     headers: {
