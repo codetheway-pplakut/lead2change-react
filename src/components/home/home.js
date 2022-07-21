@@ -73,7 +73,7 @@ export default function Home() {
           </Button>
           <Button
             variant="contained"
-            onClick={() => navigate(ROUTES.HeaderandFooter)}
+            onClick={() => navigate(ROUTES.INTERVIEW_PAGE)}
           >
             Interview
           </Button>
