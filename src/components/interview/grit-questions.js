@@ -8,7 +8,7 @@ import GritItem from './grit-item';
 
 export default function GritSliderQuestions() {
   return (
-    <Container fixed="true">
+    <Container>
       <Box
         components="span"
         display="flex"

@@ -51,6 +51,7 @@ export default function ExitModal() {
             Remember to Save
           </Typography>
           <Typography
+            component="span"
             id="modal-modal-description"
             sx={{ mt: 2 }}
             align="center"
@@ -58,6 +59,7 @@ export default function ExitModal() {
             Are you sure you want to go back to home?
           </Typography>
           <Typography
+            component="span"
             id="modal-modal-description"
             sx={{ mt: 2 }}
             align="center"

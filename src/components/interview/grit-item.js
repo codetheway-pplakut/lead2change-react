@@ -18,12 +18,11 @@ export default function GritItem() {
         pt: 2,
       }}
     >
-      <p> Not Like Me At All </p>
+      <span> Not Like Me At All </span>
       <FormControlLabel
         value="1"
         control={
           <Radio
-            size="large"
             color="warning"
             sx={{
               px: 4,
@@ -111,7 +110,6 @@ export default function GritItem() {
         value="5"
         control={
           <Radio
-            size="large"
             color="success"
             sx={{
               px: 4,
@@ -129,7 +127,7 @@ export default function GritItem() {
         // labelPlacement="end"
         //  label="Very Much Like Me"
       />
-      <p> Very Much Like Me </p>
+      <span> Very Much Like Me </span>
     </RadioGroup>
   );
 }
