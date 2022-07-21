@@ -70,12 +70,12 @@ export default function Coaches() {
     refreshCoaches();
   }, []);
 
-  const newCoach = async (first, last, email, phone) => {
+  const newCoach = async (first, last, emailAddress, phoneNumber) => {
     const coach = {
-      coachFirstName: first,
-      coachLastName: last,
-      coachEmail: email,
-      coachPhoneNumber: phone,
+      firstName: first,
+      lastName: last,
+      email: emailAddress,
+      phone: phoneNumber,
     };
     await addCoach(coach);
     await refreshCoaches();
