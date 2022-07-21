@@ -80,14 +80,14 @@ const refreshPage = async () => {
 
 const deactivateHandler = async (studentId) => {
   const updatedStudent = await getStudentById(studentId);
-  updatedStudent.state = 'Inactive';
+  updatedStudent.state = 'inactive';
   await updateStudent(updatedStudent);
   refreshPage();
 };
 
 const activateHandler = async (studentId) => {
   const updatedStudent = await getStudentById(studentId);
-  updatedStudent.state = 'Active';
+  updatedStudent.state = 'active';
   await updateStudent(updatedStudent);
   refreshPage();
 };
@@ -199,7 +199,7 @@ export default function StudentTable() {
             <TableBody>
               {students
                 .filter((post) => {
-                  if (post.state.includes('Active')) {
+                  if (post.state === 'active') {
                     if (search === '') {
                       return post;
                     }
@@ -288,7 +288,7 @@ export default function StudentTable() {
             <TableBody>
               {students
                 .filter((post) => {
-                  if (post.state.includes('Inactive')) {
+                  if (post.state.includes('inactive')) {
                     if (search === '') {
                       return post;
                     }
@@ -368,7 +368,7 @@ export default function StudentTable() {
             <TableBody>
               {students
                 .filter((post) => {
-                  if (post.state.includes('Applied')) {
+                  if (post.state.includes('applied')) {
                     if (search === '') {
                       return post;
                     }
