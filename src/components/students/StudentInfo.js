@@ -33,85 +33,130 @@ const StudentInfo = styled(Box)(({ theme }) => ({
 function SignUpDisplay(props) {
   const { onEditClick } = props;
   return (
-    <div>
-      DISPLAY
-      <Button variant="contained" onClick={onEditClick}>
-        Edit
-      </Button>
-      <StudentInfo>
-        <h3>
-          <b>
-            <h3>First Name: Aadi</h3>
-          </b>
-        </h3>
-      </StudentInfo>
-      <StudentInfo>
-        <h3>
-          <b>
-            <h3>Last Name: Tiwari</h3>
-          </b>
-        </h3>
-      </StudentInfo>
-      <StudentInfo>
-        <h3>
-          <b>
-            <h3>Date: 10/13/2021</h3>
-          </b>
-        </h3>
-      </StudentInfo>
-      <StudentInfo>
-        <h3>
-          <b>
-            <h3>Age: 16</h3>
-          </b>
-        </h3>
-      </StudentInfo>
-      <StudentInfo>
-        <h3>
-          <b>
-            <h3>Email: aadi@gmail.com</h3>
-          </b>
-        </h3>
-      </StudentInfo>
-      <StudentInfo>
-        <h3>
-          <b>
-            <h3>Phone Number: 414-414-144</h3>
-          </b>
-        </h3>
-      </StudentInfo>
-      <StudentInfo>
-        <h3>
-          <b>
-            <h3>Home Adress: Aadi</h3>
-          </b>
-        </h3>
-      </StudentInfo>
-      <StudentInfo>
-        <h3>
-          <b>
-            <h3>Apt. #: Aadi</h3>
-          </b>
-        </h3>
-      </StudentInfo>
-      <StudentInfo>
-        <h3>
-          <b>
-            <h3>Zip Code: 50203</h3>
-          </b>
-        </h3>
-      </StudentInfo>
-      <StudentInfo>
-        <h3>
-          <b>
-            <h3>State: Wisconsin</h3>
-          </b>
-        </h3>
-      </StudentInfo>
+    <Grid container>
+      <Grid
+        item
+        align="center"
+        style={{
+          backgroundColor: '#2656A5',
+          marginBottom: '3vh',
+          color: '#FFFFFF',
+          padding: '0.1vh',
+        }}
+        sx={{ width: '100%' }}
+      >
+        <h1>Aadi&rsquo;s Details</h1>
+      </Grid>
+      <Grid item xs={4}>
+        <Paper
+          sx={{
+            backgroundColor: 'dark',
+            '#1A2027': '#fff',
+            textAlign: 'center',
+            color: 'secondary',
+            width: '50vh',
+            mr: '10vh',
+            height: '70vh',
+            overflowY: 'auto',
+          }}
+          style={{ marginLeft: '3vh' }}
+        >
+          <Grid
+            container
+            spacing={0}
+            align="center"
+            justify="center"
+            direction="column"
+            style={{ backgroundColor: '#2656A5', color: '#FFFFFF' }}
+          >
+            <h2>Student Info</h2>
+          </Grid>
+          <Button
+            style={{ float: 'right' }}
+            variant="contained"
+            onClick={onEditClick}
+          >
+            Edit
+          </Button>
+          <Grid style={{ margin: '2vh' }}>
+            <StudentInfo>
+              <h3>
+                <b>
+                  <h3>First Name: Aadi{'     '}</h3>
+                </b>
+              </h3>
+            </StudentInfo>
+
+            <StudentInfo>
+              <h3>
+                <b>
+                  <h3>Last Name: Tiwari</h3>
+                </b>
+              </h3>
+            </StudentInfo>
+            <StudentInfo>
+              <h3>
+                <b>
+                  <h3>Date: 10/13/2021</h3>
+                </b>
+              </h3>
+            </StudentInfo>
+            <StudentInfo>
+              <h3>
+                <b>
+                  <h3>Age: 16</h3>
+                </b>
+              </h3>
+            </StudentInfo>
+            <StudentInfo>
+              <h3>
+                <b>
+                  <h3>Email: aadi@gmail.com</h3>
+                </b>
+              </h3>
+            </StudentInfo>
+            <StudentInfo>
+              <h3>
+                <b>
+                  <h3>Phone Number: 414-414-144</h3>
+                </b>
+              </h3>
+            </StudentInfo>
+            <StudentInfo>
+              <h3>
+                <b>
+                  <h3>Home Adress: Aadi</h3>
+                </b>
+              </h3>
+            </StudentInfo>
+            <StudentInfo>
+              <h3>
+                <b>
+                  <h3>Apt. #: Aadi</h3>
+                </b>
+              </h3>
+            </StudentInfo>
+            <StudentInfo>
+              <h3>
+                <b>
+                  <h3>Zip Code: 50203</h3>
+                </b>
+              </h3>
+            </StudentInfo>
+            <StudentInfo>
+              <h3>
+                <b>
+                  <h3>State: Wisconsin</h3>
+                </b>
+              </h3>
+            </StudentInfo>
+          </Grid>
+        </Paper>
+      </Grid>
       <Grid item xs={8}>
         <TabsFunction />
       </Grid>
-    </div>
+    </Grid>
   );
 }
 
@@ -122,164 +167,163 @@ SignUpDisplay.propTypes = {
 function SignUpEdit(props) {
   const { onSaveClick } = props;
   return (
-    <div>
-      DISPLAY
-     
-      <Grid container>
-        <Grid
-          item
-          align="center"
-          style={{
-            backgroundColor: '#2656A5',
-            marginBottom: '3vh',
-            color: '#FFFFFF',
-            padding: '0vh',
-          }}
-          sx={{ width: '100%' }}
-        >
-          <h1>Aadi&rsquo;s Details</h1>
-        </Grid>
-        <Grid item xs={4}>
-          <Paper
-            sx={{
-              backgroundColor: 'dark',
-              '#1A2027': '#fff',
-              textAlign: 'center',
-              color: 'secondary',
-              width: '50vh',
-              mr: '10vh',
-              height: '70vh',
-              overflowY: 'auto',
-            }}
-          >
-            <Grid
-              container
-              spacing={0}
-              align="center"
-              justify="center"
-              direction="column"
-              style={{ backgroundColor: '#2656A5', color: '#FFFFFF' }}
-            >
-              <h2>Student Info</h2>
-            </Grid>
-            <Grid style={{ marginLeft: '2vh' }}>
-              <StudentInfo>
-                <h3>
-                  <b>
-                    <TextField
-                      className="typing-container"
-                      defaultValue="Aadi"
-                      label="First Name"
-                    />
-                  </b>
-                </h3>
-              </StudentInfo>
-              <StudentInfo>
-                <h3>
-                  <b>
-                    <TextField
-                      className="typing-container"
-                      label="Last Name"
-                      defaultValue="Tiwari"
-                    />{' '}
-                  </b>
-                </h3>
-              </StudentInfo>
-              <StudentInfo>
-                <h3>
-                  <b>
-                    <TextField
-                      className="typing-container"
-                      type="date"
-                      label="Date of Birth"
-                      defaultValue="Aadi"
-                    />
-                  </b>
-                </h3>
-              </StudentInfo>
-              <StudentInfo>
-                <h3>
-                  <b>
-                    <TextField
-                      className="typing-container"
-                      type="number"
-                      label="Age"
-                      defaultValue="16"
-                    />{' '}
-                  </b>
-                </h3>
-              </StudentInfo>
-              <StudentInfo>
-                <h3>
-                  <b>
-                    <TextField
-                      className="typing-container"
-                      label="Email Adress"
-                      defaultValue="Aadi"
-                    />
-                  </b>
-                </h3>
-              </StudentInfo>
-              <StudentInfo>
-                <h3>
-                  <b>Phone Number: 901-234-5678 </b>
-                </h3>
-              </StudentInfo>
-              <StudentInfo>
-                <h3>
-                  <b>
-                    <TextField
-                      className="typing-container"
-                      label="Home Adress"
-                      defaultValue="Aadi"
-                    />{' '}
-                  </b>
-                </h3>
-              </StudentInfo>
-              <StudentInfo>
-                <h3>
-                  <b>
-                    <TextField
-                      className="typing-container"
-                      label="Apt. #"
-                      defaultValue="Aadi"
-                    />
-                  </b>
-                </h3>
-              </StudentInfo>
-              <StudentInfo>
-                <h3>
-                  <b>
-                    <TextField
-                      className="typing-container"
-                      label="Zip Code"
-                      defaultValue="Aadi"
-                    />
-                  </b>
-                </h3>
-              </StudentInfo>
-              <StudentInfo>
-                <h3>
-                  <b>
-                    <TextField
-                      className="typing-container"
-                      label="State"
-                      defaultValue="Aadi"
-                    />{' '}
-                  </b>
-                </h3>
-              </StudentInfo>
-            </Grid>
-          </Paper>
-        </Grid>
+    <Grid container>
+      <Grid
+        item
+        align="center"
+        style={{
+          backgroundColor: '#2656A5',
+          marginBottom: '3vh',
+          color: '#FFFFFF',
+          padding: '0.1vh',
+        }}
+        sx={{ width: '100%' }}
+      >
+        <h1>Aadi&rsquo;s Details</h1>
       </Grid>
+      <Grid item xs={4}>
+        <Paper
+          sx={{
+            backgroundColor: 'dark',
+            '#1A2027': '#fff',
+            textAlign: 'center',
+            color: 'secondary',
+            width: '50vh',
+            mr: '10vh',
+            height: '70vh',
+            overflowY: 'auto',
+          }}
+          style={{ marginLeft: '3vh' }}
+        >
+          <Grid
+            container
+            spacing={0}
+            align="center"
+            justify="center"
+            direction="column"
+            style={{ backgroundColor: '#2656A5', color: '#FFFFFF' }}
+          >
+            <h2>Student Info</h2>
+          </Grid>
+          <Grid style={{ marginLeft: '2vh' }}>
+            <StudentInfo>
+              <h3>
+                <b>
+                  <TextField
+                    className="typing-container"
+                    defaultValue="Aadi"
+                    label="First Name"
+                  />
+                </b>
+              </h3>
+            </StudentInfo>
+            <StudentInfo>
+              <h3>
+                <b>
+                  <TextField
+                    className="typing-container"
+                    label="Last Name"
+                    defaultValue="Tiwari"
+                  />{' '}
+                </b>
+              </h3>
+            </StudentInfo>
+            <StudentInfo>
+              <h3>
+                <b>
+                  <TextField
+                    className="typing-container"
+                    type="date"
+                    label="Date of Birth"
+                    defaultValue="Aadi"
+                  />
+                </b>
+              </h3>
+            </StudentInfo>
+            <StudentInfo>
+              <h3>
+                <b>
+                  <TextField
+                    className="typing-container"
+                    type="number"
+                    label="Age"
+                    defaultValue="16"
+                  />{' '}
+                </b>
+              </h3>
+            </StudentInfo>
+            <StudentInfo>
+              <h3>
+                <b>
+                  <TextField
+                    className="typing-container"
+                    label="Email Adress"
+                    defaultValue="Aadi"
+                  />
+                </b>
+              </h3>
+            </StudentInfo>
+            <StudentInfo>
+              <h3>
+                <b>Phone Number: 901-234-5678 </b>
+              </h3>
+            </StudentInfo>
+            <StudentInfo>
+              <h3>
+                <b>
+                  <TextField
+                    className="typing-container"
+                    label="Home Adress"
+                    defaultValue="Aadi"
+                  />{' '}
+                </b>
+              </h3>
+            </StudentInfo>
+            <StudentInfo>
+              <h3>
+                <b>
+                  <TextField
+                    className="typing-container"
+                    label="Apt. #"
+                    defaultValue="Aadi"
+                  />
+                </b>
+              </h3>
+            </StudentInfo>
+            <StudentInfo>
+              <h3>
+                <b>
+                  <TextField
+                    className="typing-container"
+                    label="Zip Code"
+                    defaultValue="Aadi"
+                  />
+                </b>
+              </h3>
+            </StudentInfo>
+            <StudentInfo>
+              <h3>
+                <b>
+                  <TextField
+                    className="typing-container"
+                    label="State"
+                    defaultValue="Aadi"
+                  />{' '}
+                </b>
+              </h3>
+            </StudentInfo>
+          </Grid>
+        </Paper>
+
+        <Button variant="contained" onClick={onSaveClick}>
+          Save
+        </Button>
+      </Grid>
+
       <Grid item xs={8}>
         <TabsFunction />
       </Grid>
-      <Button variant="contained" onClick={onSaveClick}>
-        Save
-      </Button>
-    </div>
+    </Grid>
   );
 }
 
