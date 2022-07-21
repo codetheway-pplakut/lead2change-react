@@ -24,6 +24,9 @@ export default function SignUpForm(props) {
   } = props;
 
   const currentYear = new Date().getFullYear();
+  const studentYear = parseInt(studentDateOfBirth.substring(0, 4), 10);
+  const test = +studentDateOfBirth.substring(0, 4);
+  console.log(test);
 
   const onSubmitDisabled =
     !emailAddress ||
@@ -31,7 +34,7 @@ export default function SignUpForm(props) {
     !lastName ||
     !password ||
     !studentDateOfBirth ||
-    (studentDateOfBirth !== null && studentDateOfBirth.includes(currentYear));
+    (studentDateOfBirth !== null && studentYear >= currentYear);
 
   return (
     <Box sx={{ mt: 3 }}>
