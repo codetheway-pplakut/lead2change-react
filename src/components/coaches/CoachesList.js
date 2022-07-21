@@ -16,7 +16,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import StudentListModal from './StudentListModal';
-import InactivationModal from './Modals/InactivateCoachModal';
+import InactivationModal from './Modals/DeactivateCoachModal';
 import EditCoachModal from './Modals/EditCoachModal';
 import ReactivationModal from './Modals/ActivateCoachModal';
 import RegisterCoachModal from './Modals/RegisterCoachModal';

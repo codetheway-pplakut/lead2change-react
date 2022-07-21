@@ -65,7 +65,7 @@ export default function InactivationModal(props) {
             </Grid>
             <Grid item xs={6}>
               <ColorButton variant="contained" fullWidth onClick={Inactivate}>
-                Inactivate
+                Deactivate
               </ColorButton>
             </Grid>
             <Grid item xs={6}>
