@@ -1,31 +1,40 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+
 import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
 import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
+import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import Grid from '@mui/material/Grid';
-import { useState } from 'react';
 import { styled } from '@mui/material/styles';
-import Link from '@mui/material/Link';
+
 import { useNavigate } from 'react-router-dom';
+import AppBar from '@mui/material/AppBar';
 import ROUTES from '../../constants/routes';
+
+import {
+  getStudents,
+  getStudentById,
+  updateStudent,
+} from '../../services/students/students';
+
 import StudentModal from './studentModal';
 import StudentRegistryModal from './studentRegistryModal';
+import CoachAssignModal from './student-coach-assign-modal';
 import SearchBar from './searchBar';
+
+import ProgressIndicatorOverlay from '../progress-indicator-overlay/progress-indicator-overlay';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -64,16 +73,37 @@ function TabPanel(props) {
     </div>
   );
 }
-const deactivateHandler = () => {
-  // console.log('this is when it should deactivate');
+
+const refreshPage = async () => {
+  window.location.reload(true);
 };
 
-const deleteHandler = () => {
-  // console.log('this is when it should delete');
+const deactivateHandler = async (studentId) => {
+  const updatedStudent = await getStudentById(studentId);
+  updatedStudent.state = 'Inactive';
+  await updateStudent(updatedStudent);
+  refreshPage();
 };
 
-const reactivateHandler = () => {
-  // console.log('this is when it should reactivate');
+const activateHandler = async (studentId) => {
+  const updatedStudent = await getStudentById(studentId);
+  updatedStudent.state = 'Active';
+  await updateStudent(updatedStudent);
+  refreshPage();
+};
+
+const declineHandler = async (studentId) => {
+  const updatedStudent = await getStudentById(studentId);
+  updatedStudent.state = 'Rejected';
+  await updateStudent(updatedStudent);
+  refreshPage();
+};
+
+const reassignCoachHandler = async (studentId, coachId) => {
+  const updatedStudent = await getStudentById(studentId);
+  updatedStudent.coachId = coachId;
+  await updateStudent(updatedStudent);
+  refreshPage();
 };
 
 TabPanel.propTypes = {
@@ -85,195 +115,66 @@ TabPanel.propTypes = {
 
 function a11yProps(index) {
   return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    id: `full-width-tab-${index}`,
+    'aria-controls': `full-width-tabpanel-${index}`,
   };
 }
 
-function createDataActive(
-  firstName,
-  lastName,
-  email,
-  number,
-  coaches,
-  deactivate
-) {
-  return { firstName, lastName, email, number, coaches, deactivate };
-}
-
-function createDataInactive(
-  firstName,
-  lastName,
-  email,
-  number,
-  deleteStudent,
-  reactivate
-) {
-  return { firstName, lastName, email, number, deleteStudent, reactivate };
-}
-
-const rows = [
-  createDataActive(
-    'Kevin',
-    'Niu',
-    'test@gmail.com',
-    '414 - 414 - 414',
-    24,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
-    </Stack>
-  ),
-  createDataActive(
-    'Jason',
-    'Dong',
-    'test@gmail.com',
-    '414 - 414 - 414',
-    37,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
-    </Stack>
-  ),
-  createDataActive(
-    'Sirat',
-    'Mokha',
-    'test@gmail.com',
-    '414 - 414 - 414',
-    24,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
-    </Stack>
-  ),
-  createDataActive(
-    'Noah',
-    'Ren',
-    'test@gmail.com',
-    '414 - 414 - 414',
-    67,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
-    </Stack>
-  ),
-  createDataActive(
-    'Holly',
-    'Raetz',
-    'test@gmail.com',
-    '414 - 414 - 414',
-    67,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
-    </Stack>
-  ),
-  createDataActive(
-    'Aadi',
-    'Tiwari',
-    'test@gmail.com',
-    '414 - 414 - 414',
-    49,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
-    </Stack>
-  ),
-  createDataActive(
-    'Aadi',
-    'Tiwari',
-    'test@gmail.com',
-    '414 - 414 - 414',
-    49,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
-    </Stack>
-  ),
-  createDataActive(
-    'Aadi',
-    'Tiwari',
-    'test@gmail.com',
-    '414 - 414 - 414',
-    49,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
-    </Stack>
-  ),
-  createDataActive(
-    'Aadi',
-    'Tiwari',
-    'test@gmail.com',
-    '414 - 414 - 414',
-    49,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
-    </Stack>
-  ),
-  createDataActive(
-    'Aadi',
-    'Tiwari',
-    'test@gmail.com',
-    '414 - 414 - 414',
-    49,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="deactivate" confirmHandler={deactivateHandler} />
-    </Stack>
-  ),
-];
-
-const rowsInactive = [
-  createDataInactive(
-    'Hello',
-    'Test',
-    'test@gmail.com',
-    '414 - 414 - 414',
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="delete" confirmHandler={deleteHandler} />
-    </Stack>,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="reactivate" confirmHandler={reactivateHandler} />
-    </Stack>
-  ),
-  createDataInactive(
-    'Bob',
-    'Jones',
-    'test@gmail.com',
-    '414 - 414 - 414',
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="delete" confirmHandler={deleteHandler} />
-    </Stack>,
-    <Stack spacing={2} direction="row">
-      <StudentModal modalType="reactivate" confirmHandler={reactivateHandler} />
-    </Stack>
-  ),
-];
-
 export default function StudentTable() {
+  const onBackClick = () => {
+    navigate(ROUTES.HOME);
+  };
+  const buttonText = '< Back to Home';
   const navigate = useNavigate();
-
   const toDetailDemo = () => {
     navigate(ROUTES.STUDENT_INFO);
   };
 
+  const [students, setStudents] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState('');
 
-  const [value, setValue] = React.useState(0);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const refreshStudents = async () => {
+    setIsLoading(true);
+    const response = await getStudents();
+
+    setIsLoading(false);
+    setStudents(response);
+  };
+  useEffect(() => {
+    refreshStudents();
+  }, []);
+
+  const [tabValue, setTabValue] = useState(0);
+  const handleTabChange = (event, newValue) => {
+    setTabValue(newValue);
   };
 
   return (
     <Box sx={{ width: '100%', height: '60%' }}>
-      <Typography
-        style={{ color: '#2656A5' }}
-        variant="h4"
-        align="center"
-        sx={{ m: '2vh' }}
-      >
-        Students
-      </Typography>
+      <ProgressIndicatorOverlay active={isLoading} />
       <Grid container spacing={0}>
-        <Grid item xs={2}>
-          <Tabs value={value} onChange={handleChange}>
-            <Tab label="Active" {...a11yProps(0)} />
-            <Tab label="Inactive" {...a11yProps(1)} />
-          </Tabs>
-        </Grid>
-        <Grid item xs={4} />
+        <Box sx={{ bgcolor: 'background.paper', width: '25%' }}>
+          <AppBar position="static">
+            <Tabs
+              value={tabValue}
+              onChange={handleTabChange}
+              textColor="inherit"
+              variant="fullWidth"
+              TabIndicatorProps={{
+                style: {
+                  backgroundColor: '#FFFFFF',
+                  height: '3px',
+                },
+              }}
+            >
+              <Tab label="Active" {...a11yProps(0)} />
+              <Tab label="Inactive" {...a11yProps(1)} />
+              <Tab label="Applicants" {...a11yProps(2)} />
+            </Tabs>
+          </AppBar>
+        </Box>
+        <Grid item xs={3} />
         <Grid item xs={4}>
           <Box>
             <SearchBar setSearch={setSearch} />
@@ -283,47 +184,58 @@ export default function StudentTable() {
           <StudentRegistryModal />
         </Grid>
       </Grid>
-      <TabPanel value={value} index={0}>
-        <TableContainer component={Paper} sx={{ height: '65vh' }}>
+      <TabPanel value={tabValue} index={0}>
+        <TableContainer component={Paper} sx={{ height: '69vh' }}>
           <Table sx={{ minWidth: 10 }} stickyHeader>
             <TableHead>
               <StyledTableRow>
-                <StyledTableCell>Name </StyledTableCell>
+                <StyledTableCell>Name</StyledTableCell>
                 <StyledTableCell align="left">Email</StyledTableCell>
                 <StyledTableCell align="left">Phone Number</StyledTableCell>
-                <StyledTableCell align="left"> </StyledTableCell>
+                <StyledTableCell align="left">Coach</StyledTableCell>
                 <StyledTableCell align="left"> </StyledTableCell>
               </StyledTableRow>
             </TableHead>
             <TableBody>
-              {rows
+              {students
                 .filter((post) => {
-                  if (search === '') {
-                    return post;
-                  }
-                  if (
-                    post.firstName.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (
-                    post.lastName.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (post.email.toLowerCase().includes(search.toLowerCase())) {
-                    return post;
-                  }
-                  if (
-                    post.number.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
+                  if (post.state.includes('Active')) {
+                    if (search === '') {
+                      return post;
+                    }
+                    if (
+                      post.firstName
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.lastName.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.email !== null &&
+                      post.email.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.studentCellPhone !== null &&
+                      post.studentCellPhone
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
                   }
                   return null;
                 })
-                .map((row) => (
+
+                .map((student) => (
                   <StyledTableRow
-                    key={row.name}
+                    key={student.id}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
                     <StyledTableCell component="th" scope="row">
@@ -332,28 +244,28 @@ export default function StudentTable() {
                         variant="body2"
                         onClick={toDetailDemo}
                       >
-                        {row.lastName}, {row.firstName}
+                        {student.lastName}, {student.firstName}
                       </Link>
                     </StyledTableCell>
-                    <StyledTableCell align="left">{row.email}</StyledTableCell>
-                    <StyledTableCell align="left">{row.number}</StyledTableCell>
                     <StyledTableCell align="left">
-                      {' '}
-                      <Box sx={{ minWidth: 120 }}>
-                        <FormControl fullWidth size="small">
-                          <InputLabel id="demo-simple-select-label">
-                            Coach
-                          </InputLabel>
-                          <Select label="Coach">
-                            <MenuItem value={10}>Coach 1</MenuItem>
-                            <MenuItem value={20}>Coach 2</MenuItem>
-                            <MenuItem value={30}>Coach 3</MenuItem>
-                          </Select>
-                        </FormControl>
-                      </Box>
+                      {student.email || '--'}
                     </StyledTableCell>
                     <StyledTableCell align="left">
-                      {row.deactivate}
+                      {student.studentCellPhone || '--'}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      <CoachAssignModal
+                        confirmHandler={reassignCoachHandler}
+                        studentId={student.id}
+                        coachId={student.coachId}
+                      />
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      <StudentModal
+                        modalType="deactivate"
+                        studentId={student.id}
+                        confirmHandler={deactivateHandler}
+                      />
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}
@@ -362,8 +274,87 @@ export default function StudentTable() {
         </TableContainer>
       </TabPanel>
 
-      <TabPanel value={value} index={1}>
-        <TableContainer component={Paper} sx={{ height: '65vh' }}>
+      <TabPanel value={tabValue} index={1}>
+        <TableContainer component={Paper} sx={{ height: '69vh' }}>
+          <Table sx={{ minWidth: 10 }}>
+            <TableHead>
+              <StyledTableRow>
+                <StyledTableCell>Name </StyledTableCell>
+                <StyledTableCell align="left">Email</StyledTableCell>
+                <StyledTableCell align="left">Phone Number</StyledTableCell>
+                <StyledTableCell align="left"> </StyledTableCell>
+              </StyledTableRow>
+            </TableHead>
+            <TableBody>
+              {students
+                .filter((post) => {
+                  if (post.state.includes('Inactive')) {
+                    if (search === '') {
+                      return post;
+                    }
+                    if (
+                      post.firstName
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.lastName.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.email.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.studentCellPhone
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                  }
+                  return null;
+                })
+                .map((student) => (
+                  <StyledTableRow
+                    key={student.id}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <StyledTableCell component="th" scope="row">
+                      <Link
+                        component="button"
+                        variant="body2"
+                        onClick={toDetailDemo}
+                      >
+                        {student.lastName}, {student.firstName}
+                      </Link>
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {student.email || '--'}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {student.studentCellPhone || '--'}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      <StudentModal
+                        modalType="reactivate"
+                        studentId={student.id}
+                        confirmHandler={activateHandler}
+                      />
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </TabPanel>
+
+      <TabPanel value={tabValue} index={2}>
+        <TableContainer component={Paper} sx={{ height: '69vh' }}>
           <Table sx={{ minWidth: 10 }}>
             <TableHead>
               <StyledTableRow>
@@ -375,34 +366,42 @@ export default function StudentTable() {
               </StyledTableRow>
             </TableHead>
             <TableBody>
-              {rowsInactive
+              {students
                 .filter((post) => {
-                  if (search === '') {
-                    return post;
-                  }
-                  if (
-                    post.firstName.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (
-                    post.lastName.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (post.email.toLowerCase().includes(search.toLowerCase())) {
-                    return post;
-                  }
-                  if (
-                    post.number.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
+                  if (post.state.includes('Applied')) {
+                    if (search === '') {
+                      return post;
+                    }
+                    if (
+                      post.firstName
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.lastName.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.email.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.studentCellPhone
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
                   }
                   return null;
                 })
-                .map((row) => (
+                .map((student) => (
                   <StyledTableRow
-                    key={row.name}
+                    key={student.id}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
                     <StyledTableCell component="th" scope="row">
@@ -411,16 +410,28 @@ export default function StudentTable() {
                         variant="body2"
                         onClick={toDetailDemo}
                       >
-                        {row.lastName}, {row.firstName}
+                        {student.lastName}, {student.firstName}
                       </Link>
                     </StyledTableCell>
-                    <StyledTableCell align="left">{row.email}</StyledTableCell>
-                    <StyledTableCell align="left">{row.number}</StyledTableCell>
                     <StyledTableCell align="left">
-                      {row.deleteStudent}
+                      {student.email || '--'}
                     </StyledTableCell>
                     <StyledTableCell align="left">
-                      {row.reactivate}
+                      {student.studentCellPhone || '--'}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      <StudentModal
+                        modalType="accept"
+                        confirmHandler={activateHandler}
+                        studentId={student.id}
+                      />
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      <StudentModal
+                        modalType="decline"
+                        confirmHandler={declineHandler}
+                        studentId={student.id}
+                      />
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}
@@ -428,6 +439,15 @@ export default function StudentTable() {
           </Table>
         </TableContainer>
       </TabPanel>
+      <Button
+        variant="outlined"
+        size="small"
+        justify="left"
+        onClick={onBackClick}
+        sx={{ mt: '1vh' }}
+      >
+        {buttonText}
+      </Button>
     </Box>
   );
 }
