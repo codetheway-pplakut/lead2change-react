@@ -83,6 +83,12 @@ export default function Home() {
           <Button variant="contained" onClick={() => navigate(ROUTES.STUDENTS)}>
             Students
           </Button>
+          <Button
+            variant="contained"
+            onClick={() => navigate(ROUTES.RESET_PASS)}
+          >
+            Reset Password Form
+          </Button>
         </Stack>
       </Box>
     </Container>

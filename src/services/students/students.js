@@ -3,6 +3,18 @@ import callApi from '../../util/call-api/call-api';
 
 const SERVICE_ROOT = 'Students';
 
+export const addStudent = async (student) => {
+  return callApi({
+    body: student,
+    endpoint: SERVICE_ROOT,
+    method: 'POST',
+    headers: {
+      Accept: 'application/json, text/plain',
+      'Content-Type': 'application/json',
+    },
+  });
+};
+
 export const getStudents = () => {
   return callApi({ endpoint: SERVICE_ROOT });
 };
