@@ -3,15 +3,21 @@ import callApi from '../../util/call-api/call-api';
 
 const SERVICE_ROOT = 'Coaches';
 
-export const getCoaches = () => {
+export const getCoaches = async () => {
   return callApi({ endpoint: SERVICE_ROOT });
 };
 
-export const getCoachById = (id) => {
+export const getCoachById = async (id) => {
   return callApi({ endpoint: `${SERVICE_ROOT}/${id}` });
 };
-
-export const updateCoach = (coach) => {
+export const deleteCoach = async (coach) => {
+  return callApi({
+    body: coach,
+    endpoint: SERVICE_ROOT,
+    method: 'DELETE',
+  });
+};
+export const updateCoach = async (coach) => {
   return callApi({
     body: coach,
     endpoint: SERVICE_ROOT,
@@ -22,7 +28,7 @@ export const updateCoach = (coach) => {
     },
   });
 };
-export const addCoach = (coach) => {
+export const addCoach = async (coach) => {
   return callApi({
     body: coach,
     endpoint: SERVICE_ROOT,
