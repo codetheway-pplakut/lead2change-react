@@ -1,19 +1,20 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
+
+import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import TextField from '@mui/material/TextField';
-import Stack from '@mui/material/Stack';
-import PropTypes from 'prop-types';
 import CloseIcon from '@mui/icons-material/Close';
-import IconButton from '@mui/material/IconButton';
 import Grid from '@mui/material/Grid';
-import AddIcon from '@mui/icons-material/Add';
+import IconButton from '@mui/material/IconButton';
+import Modal from '@mui/material/Modal';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 
 export default function StudentRegistryModal(props) {
   const {
-    // confirmHandler,
+    confirmHandler,
     firstName,
     lastName,
     email,
@@ -41,10 +42,10 @@ export default function StudentRegistryModal(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  /* const confirm = () => {
+  const confirm = () => {
     confirmHandler(firstName, lastName, email, phoneNumber, dateOfBirth);
     handleClose();
-  }; */
+  };
 
   return (
     <div>
@@ -121,7 +122,7 @@ export default function StudentRegistryModal(props) {
             onChange={(event) => onDateOfBirthChange(event.target.value)}
             value={dateOfBirth}
           />
-          <Button variant="contained" onClick={handleClose} fullWidth>
+          <Button variant="contained" onClick={confirm} fullWidth>
             Register Student
           </Button>
         </Box>
@@ -131,7 +132,7 @@ export default function StudentRegistryModal(props) {
 }
 
 StudentRegistryModal.propTypes = {
-  // confirmHandler: PropTypes.func.isRequired,
+  confirmHandler: PropTypes.func.isRequired,
   firstName: PropTypes.string.isRequired,
   lastName: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
