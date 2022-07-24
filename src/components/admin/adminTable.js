@@ -61,20 +61,6 @@ const refreshPage = async () => {
   window.location.reload(true);
 };
 
-const deactivateHandler = async (studentId) => {
-  const updatedStudent = await getStudentById(studentId);
-  updatedStudent.state = 'Inactive';
-  await updateStudent(updatedStudent);
-  refreshPage();
-};
-
-const activateHandler = async (studentId) => {
-  const updatedStudent = await getStudentById(studentId);
-  updatedStudent.state = 'Active';
-  await updateStudent(updatedStudent);
-  refreshPage();
-};
-
 export default function AdminTable() {
   const [students, setStudents] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -93,22 +79,21 @@ export default function AdminTable() {
   return (
     <Box sx={{ width: '100%', height: '60%' }}>
       <ProgressIndicatorOverlay active={isLoading} />
-      <Grid>
-        <Box sx={{ bgcolor: 'background.paper', width: '25%' }}>
-          <AppBar position="static">
-            <Tabs />
-          </AppBar>
-        </Box>
-        <Grid item xs={3} />
-        <Grid item xs={4}>
-          <Box>
-            <SearchBar />
-          </Box>
+
+      <Box sx={{ mt: '10px', mb: '10px' }}>
+        <Grid container alignItems="center" justify="center">
+          <Grid item xs={3} />
+          <Grid item xs={4} align="right">
+            <RegisterAdminModal />
+          </Grid>
+          <Grid item xs={2} align="right">
+            <Box>
+              <SearchBar />
+            </Box>
+          </Grid>
+          <Grid item xs={3} />
         </Grid>
-        <Grid item xs={2}>
-          <RegisterAdminModal />
-        </Grid>
-      </Grid>
+      </Box>
 
       <TableContainer sx={tablePositioning}>
         <Table aria-label="customized table">
@@ -148,7 +133,7 @@ export default function AdminTable() {
                       </Box>
                     </Grid>
                     <Grid item xs={6}>
-                      {student.userName}
+                      {student.lastName}, {student.firstName}
                     </Grid>
                   </Grid>
                 </TableCell>
@@ -200,7 +185,7 @@ export default function AdminTable() {
                       </Box>
                     </Grid>
                     <Grid item xs={6}>
-                      {student.userName}
+                      {student.lastName}, {student.firstName}
                     </Grid>
                   </Grid>
                 </TableCell>
