@@ -7,7 +7,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Grid } from '@mui/material';
  
-export default function Navbar() {
+export default function SampleNavbar() {
  
     const onStudentClick = () => {
         // TODO document why this arrow function is empty

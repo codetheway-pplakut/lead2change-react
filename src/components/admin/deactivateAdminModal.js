@@ -9,7 +9,7 @@ import { createTheme } from '@mui/material/styles';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
  
-export default function InactivateAdminModal() {
+export default function DeactivateAdminModal() {
  
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [open, setOpen] = React.useState(false);

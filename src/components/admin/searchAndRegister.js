@@ -2,11 +2,11 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import Search from './FilterBar';
+import SearchBar from './SearchBar';
 import Admin from './registerAdminModal';
  
  
-export default function searchAndRegister(){
+export default function SearchAndRegister(){
     return(
         <Box sx={{ mt: '10px', mb: '10px' }}>
             <Grid container alignItems="center" justify="center">
@@ -16,7 +16,7 @@ export default function searchAndRegister(){
                 </Grid>
                 <Grid item xs={2} align="right">
                     <Box>
-                        <Search />
+                        <SearchBar />
                     </Box>
                 </Grid>
                 <Grid item xs={3} />

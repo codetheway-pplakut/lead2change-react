@@ -1,352 +1,218 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
+
 import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
 import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
+import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import Grid from '@mui/material/Grid';
-import { useState } from 'react';
 import { styled } from '@mui/material/styles';
+
+import AppBar from '@mui/material/AppBar';
+
 import DeleteAdminModal from './deleteAdminModal';
-import InactivateAdminModal from './inactivateAdminModal';
+import DeactivateAdminModal from './deactivateAdminModal';
 import EditAdminModal from './editAdminModal';
-import SearchBar from './FilterBar';
+import SearchBar from './SearchBar';
 import RegisterAdminModal from './registerAdminModal';
+import {
+  getAdmins,
+  // addAdmin,
+  // updateAdmin,
+  // getAdminById,
+} from '../../services/Admin/admin';
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: '#2656A5',
-    color: theme.palette.common.white,
-  },
-  // [`&.${tableCellClasses.body}`]: { },
-}));
+import {
+  getStudents,
+  getStudentById,
+  updateStudent,
+} from '../../services/students/students';
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(even)': {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-}));
+import ProgressIndicatorOverlay from '../progress-indicator-overlay/progress-indicator-overlay';
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-    >
-      {value === index && (
-        <Box sx={{ p: 0 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-const deactivateHandler = () => {
-  // console.log('this is when it should deactivate');
+const tablePositioning = {
+  backgroundColor: '#3764A8',
+  color: 'white',
+  fontSize: 'large',
+  width: '50%',
+  marginLeft: '25%',
+  marginRight: '25%',
 };
 
-const deleteHandler = () => {
-  // console.log('this is when it should delete');
+const tableHeadingText = {
+  color: 'white',
+  fontSize: 'large',
 };
 
-const reactivateHandler = () => {
-  // console.log('this is when it should reactivate');
+const tableDelete = {
+  color: 'white',
+  fontSize: 'large',
+  paddingLeft: '32px',
 };
 
-TabPanel.propTypes = {
-  // eslint-disable-next-line react/require-default-props
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
+const refreshPage = async () => {
+  window.location.reload(true);
 };
 
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+const deactivateHandler = async (studentId) => {
+  const updatedStudent = await getStudentById(studentId);
+  updatedStudent.state = 'Inactive';
+  await updateStudent(updatedStudent);
+  refreshPage();
+};
+
+const activateHandler = async (studentId) => {
+  const updatedStudent = await getStudentById(studentId);
+  updatedStudent.state = 'Active';
+  await updateStudent(updatedStudent);
+  refreshPage();
+};
+
+export default function AdminTable() {
+  const [students, setStudents] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const refreshStudents = async () => {
+    setIsLoading(true);
+    const response = await getStudents();
+
+    setIsLoading(false);
+    setStudents(response);
   };
-}
-
-function createDataActive(name, email, deactivate) {
-  return { name, email, deactivate };
-}
-
-function createDataInactive(
-  firstName,
-  lastName,
-  email,
-  number,
-  deleteStudent,
-  reactivate
-) {
-  return { firstName, lastName, email, number, deleteStudent, reactivate };
-}
-
-const rows = [
-  createDataActive(
-    'test1',
-    'test1@gmail.com',
-    <Stack spacing={2} direction="row">
-      <InactivateAdminModal
-        modalType="deactivate"
-        confirmHandler={deactivateHandler}
-      />
-    </Stack>
-  ),
-  createDataActive(
-    'test2',
-    'test2@gmail.com',
-    <Stack spacing={2} direction="row">
-      <InactivateAdminModal
-        modalType="deactivate"
-        confirmHandler={deactivateHandler}
-      />
-    </Stack>
-  ),
-  createDataActive(
-    'test3',
-    'test3@gmail.com',
-    <Stack spacing={2} direction="row">
-      <InactivateAdminModal
-        modalType="deactivate"
-        confirmHandler={deactivateHandler}
-      />
-    </Stack>
-  ),
-  createDataActive(
-    'test4',
-    'test4@gmail.com',
-    <Stack spacing={2} direction="row">
-      <InactivateAdminModal
-        modalType="deactivate"
-        confirmHandler={deactivateHandler}
-      />
-    </Stack>
-  ),
-  createDataActive(
-    'test5',
-    'test5@gmail.com',
-    <Stack spacing={2} direction="row">
-      <InactivateAdminModal
-        modalType="deactivate"
-        confirmHandler={deactivateHandler}
-      />
-    </Stack>
-  ),
-];
-
-const rowsInactive = [
-  createDataInactive(
-    'Test6',
-    'test6@gmail.com',
-    <Stack spacing={2} direction="row">
-      <DeleteAdminModal modalType="delete" confirmHandler={deleteHandler} />
-    </Stack>
-  ),
-  createDataInactive(
-    'Test7',
-    'test7@gmail.com',
-    <Stack spacing={2} direction="row">
-      <DeleteAdminModal modalType="delete" confirmHandler={deleteHandler} />
-    </Stack>
-  ),
-  createDataInactive(
-    'Test8',
-    'test8@gmail.com',
-    <Stack spacing={2} direction="row">
-      <DeleteAdminModal modalType="delete" confirmHandler={deleteHandler} />
-    </Stack>
-  ),
-];
-
-export default function StudentTable() {
-  const [search, setSearch] = useState('');
-
-  const [value, setValue] = React.useState(0);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  useEffect(() => {
+    refreshStudents();
+  }, []);
 
   return (
     <Box sx={{ width: '100%', height: '60%' }}>
-      <Typography
-        style={{ color: '#2656A5' }}
-        variant="h4"
-        align="center"
-        sx={{ m: '2vh' }}
-      >
-        Students
-      </Typography>
-      <Grid container spacing={0}>
-        <Grid item xs={2}>
-          <Tabs value={value} onChange={handleChange}>
-            <Tab label="Active" />
-            <Tab label="Inactive" />
-          </Tabs>
-        </Grid>
-        <Grid item xs={4} />
+      <ProgressIndicatorOverlay active={isLoading} />
+      <Grid>
+        <Box sx={{ bgcolor: 'background.paper', width: '25%' }}>
+          <AppBar position="static">
+            <Tabs />
+          </AppBar>
+        </Box>
+        <Grid item xs={3} />
         <Grid item xs={4}>
           <Box>
-            <SearchBar setSearch={setSearch} />
+            <SearchBar />
           </Box>
         </Grid>
         <Grid item xs={2}>
           <RegisterAdminModal />
         </Grid>
       </Grid>
-      <TabPanel value={value} index={0}>
-        <TableContainer component={Paper} sx={{ height: '65vh' }}>
-          <Table sx={{ minWidth: 10 }} stickyHeader>
-            <TableHead>
-              <StyledTableRow>
-                <StyledTableCell>Name </StyledTableCell>
-                <StyledTableCell align="left">Email</StyledTableCell>
-                <StyledTableCell align="left">Phone Number</StyledTableCell>
-                <StyledTableCell align="left"> </StyledTableCell>
-                <StyledTableCell align="left"> </StyledTableCell>
-              </StyledTableRow>
-            </TableHead>
-            <TableBody>
-              {rows
-                .filter((post) => {
-                  if (search === '') {
-                    return post;
-                  }
-                  if (
-                    post.firstName.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (
-                    post.lastName.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (post.email.toLowerCase().includes(search.toLowerCase())) {
-                    return post;
-                  }
-                  if (
-                    post.number.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  return null;
-                })
-                .map((row) => (
-                  <StyledTableRow
-                    key={row.name}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  >
-                    <StyledTableCell component="th" scope="row">
-                      {row.name}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">{row.email}</StyledTableCell>
-                    <StyledTableCell align="left">{row.number}</StyledTableCell>
-                    <StyledTableCell align="left">
-                      {' '}
-                      <Box sx={{ minWidth: 120 }}>
-                        <FormControl fullWidth size="small">
-                          <InputLabel id="demo-simple-select-label">
-                            Coach
-                          </InputLabel>
-                          <Select label="Coach">
-                            <MenuItem value={10}>Coach 1</MenuItem>
-                            <MenuItem value={20}>Coach 2</MenuItem>
-                            <MenuItem value={30}>Coach 3</MenuItem>
-                          </Select>
-                        </FormControl>
-                      </Box>
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {row.deactivate}
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </TabPanel>
 
-      <TabPanel value={value} index={1}>
-        <TableContainer component={Paper} sx={{ height: '65vh' }}>
-          <Table sx={{ minWidth: 10 }}>
-            <TableHead>
-              <StyledTableRow>
-                <StyledTableCell>Name </StyledTableCell>
-                <StyledTableCell align="left">Email</StyledTableCell>
-                <StyledTableCell align="left">Phone Number</StyledTableCell>
-                <StyledTableCell align="left"> </StyledTableCell>
-                <StyledTableCell align="left"> </StyledTableCell>
-              </StyledTableRow>
-            </TableHead>
-            <TableBody>
-              {rowsInactive
-                .filter((post) => {
-                  if (search === '') {
-                    return post;
-                  }
-                  if (
-                    post.firstName.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (
-                    post.lastName.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (post.email.toLowerCase().includes(search.toLowerCase())) {
-                    return post;
-                  }
-                  if (
-                    post.number.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  return null;
-                })
-                .map((row) => (
-                  <StyledTableRow
-                    key={row.name}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  >
-                    <StyledTableCell component="th" scope="row">
-                      {row.name}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">{row.email}</StyledTableCell>
-                    <StyledTableCell align="left">{row.number}</StyledTableCell>
-                    <StyledTableCell align="left">
-                      {row.deleteStudent}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {row.reactivate}
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </TabPanel>
+      <TableContainer sx={tablePositioning}>
+        <Table aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="left" sx={tableHeadingText}>
+                <Grid container>
+                  <Grid item xs={6} />
+                  <Grid item xs={2}>
+                    Name
+                  </Grid>
+                </Grid>
+              </TableCell>
+              <TableCell align="left" sx={tableHeadingText}>
+                Email
+              </TableCell>
+              <TableCell align="left" sx={tableDelete}>
+                Delete
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {students.map((student, index) => (
+              <TableRow
+                key={student.id}
+                sx={
+                  index % 2
+                    ? { background: '#eeeeee' }
+                    : { background: 'white' }
+                }
+              >
+                <TableCell component="th" scope="row">
+                  <Grid container alignItems="center" justify="center">
+                    <Grid item xs={6}>
+                      <Box>
+                        <EditAdminModal />
+                      </Box>
+                    </Grid>
+                    <Grid item xs={6}>
+                      {student.userName}
+                    </Grid>
+                  </Grid>
+                </TableCell>
+                <TableCell align="left">{student.email}</TableCell>
+                <TableCell align="left">
+                  <DeactivateAdminModal adminId={student.id} />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+
+      <TableContainer sx={tablePositioning}>
+        <Table aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="left" sx={tableHeadingText}>
+                <Grid container>
+                  <Grid item xs={6} />
+                  <Grid item xs={2}>
+                    Name
+                  </Grid>
+                </Grid>
+              </TableCell>
+              <TableCell align="left" sx={tableHeadingText}>
+                Email
+              </TableCell>
+              <TableCell align="left" sx={tableDelete}>
+                Delete
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {students.map((student, index) => (
+              <TableRow
+                key={student.id}
+                sx={
+                  index % 2
+                    ? { background: '#eeeeee' }
+                    : { background: 'white' }
+                }
+              >
+                <TableCell component="th" scope="row">
+                  <Grid container alignItems="center" justify="center">
+                    <Grid item xs={6}>
+                      <Box>
+                        <EditAdminModal />
+                      </Box>
+                    </Grid>
+                    <Grid item xs={6}>
+                      {student.userName}
+                    </Grid>
+                  </Grid>
+                </TableCell>
+                <TableCell align="left">{student.email}</TableCell>
+                <TableCell align="left">
+                  <DeleteAdminModal adminId={student.id} />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </Box>
   );
 }

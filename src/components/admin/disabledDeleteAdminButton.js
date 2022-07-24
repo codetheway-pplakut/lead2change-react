@@ -5,7 +5,7 @@ import { createTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
  
  
-export default function DeleteAdminButton() {
+export default function DisabledDeleteAdminButton() {
   const buttonTheme = createTheme({
     palette: {
       delete: {

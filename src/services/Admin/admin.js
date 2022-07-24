@@ -3,23 +3,15 @@ import callApi from '../../util/call-api/call-api';
 
 const SERVICE_ROOT = 'Admin';
 
-export const getAdmins = async () => {
+export const getAdmins = () => {
   return callApi({ endpoint: SERVICE_ROOT });
 };
 
-export const getAdminById = async (id) => {
+export const getAdminById = (id) => {
   return callApi({ endpoint: `${SERVICE_ROOT}/${id}` });
 };
 
-export const deleteAdmin = async (admin) => {
-  return callApi({
-    body: admin,
-    endpoint: SERVICE_ROOT,
-    method: 'DELETE',
-  });
-};
-
-export const updateAdmin = async (admin) => {
+export const updateAdmin = (admin) => {
   return callApi({
     body: admin,
     endpoint: SERVICE_ROOT,
@@ -33,7 +25,7 @@ export const updateAdmin = async (admin) => {
 
 export const addAdmin = async (admin) => {
   return callApi({
-    body: admin,
+    body: JSON.stringify(admin),
     endpoint: SERVICE_ROOT,
     method: 'POST',
     headers: {
