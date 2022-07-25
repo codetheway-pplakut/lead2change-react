@@ -43,7 +43,7 @@ export default function EditCoachModal(props) {
   };
   return (
     <div>
-      <IconButton sx={{ color: '#004cbb' }} size="small" onClick={handleOpen}>
+      <IconButton sx={{ color: '#2656A5' }} size="small" onClick={handleOpen}>
         <EditIcon />
       </IconButton>
       <Modal
@@ -53,7 +53,7 @@ export default function EditCoachModal(props) {
       >
         <Grid variant="large">
           <Grid container>
-            <Grid item sx={{ bgcolor: '#004cbb', color: 'white' }} xs={12}>
+            <Grid item sx={{ bgcolor: '#2656A5', color: 'white' }} xs={12}>
               <Grid container alignItems="center" sx={{ margin: 1 }}>
                 <Grid item xs={2} />
                 <Grid item xs={8}>

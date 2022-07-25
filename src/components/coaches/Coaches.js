@@ -100,7 +100,7 @@ export default function Coaches() {
                 align="center"
                 style={{
                   color: '#FFFFFF',
-                  backgroundColor: '#004cbb',
+                  backgroundColor: '#2656A5',
                   marginBottom: '3vh',
                   padding: '0.1vh',
                 }}

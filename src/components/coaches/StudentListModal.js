@@ -167,7 +167,7 @@ function StudentListModal(props) {
       >
         <Grid container variant="large">
           <Grid container>
-            <Grid item sx={{ bgcolor: '#004cbb', color: 'white' }} xs={12}>
+            <Grid item sx={{ bgcolor: '#2656A5', color: 'white' }} xs={12}>
               <Grid container>
                 <Grid item xs={2} />
                 <Grid item xs={8} sx={{ margin: 2 }}>
