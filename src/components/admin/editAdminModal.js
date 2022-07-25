@@ -173,11 +173,6 @@ export default function EditAdminModal(props) {
     boxShadow: 24,
   };
 
-  const editIconStyling = {
-    borderRadius: 2,
-    backgroundColor: 'orange',
-  };
-
   const closeIconColor = {
     color: 'white',
   };
@@ -185,7 +180,7 @@ export default function EditAdminModal(props) {
   const buttonTheme = createTheme({
     palette: {
       save: {
-        main: '#ffba06',
+        main: '#3764A8',
         contrastText: '#fff',
       },
       cancel: {
@@ -204,7 +199,8 @@ export default function EditAdminModal(props) {
       <IconButton
         variant="contained"
         aria-label="Edit"
-        sx={editIconStyling}
+        theme={buttonTheme}
+        color="save"
         // value={admin.Id}
         onClick={handleOpen}
       >
