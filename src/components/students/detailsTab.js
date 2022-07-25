@@ -19,6 +19,7 @@ import {
   getStudentById,
   updateStudent,
 } from '../../services/students/students';
+import { getGoals, getGoalById } from '../../services/goals/goals';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -63,6 +64,8 @@ const GridText = styled(Paper)(({ theme }) => ({
 export default function TabsFunction() {
   const [value, setValue] = React.useState(0);
   const { studentId } = useParams();
+  const { goalId } = useParams();
+  const [goals, setGoals] = useState({});
   const [students, setStudents] = useState({});
   useEffect(() => {
     const currentStudent = async () => {
@@ -71,9 +74,17 @@ export default function TabsFunction() {
     };
     currentStudent();
   }, [studentId]);
+  useEffect(() => {
+    const currentGoal = async () => {
+      const currGoal = await getGoalById(goalId);
+      setGoals(currGoal);
+    };
+    currentGoal();
+  }, [goalId]);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  console.log(goals);
 
   return (
     <div style={{ marginRight: '8vh' }}>
@@ -173,7 +184,7 @@ export default function TabsFunction() {
               <Grid item xs={12} style={{ height: '64vh' }}>
                 <GridText>
                   <h3 style={{ color: '#2656A5' }}>Goal One</h3>
-                  <h5>Goal: Be able to become a leader for a school club</h5>
+                  <h5>Goal: {goals.collegeBound}</h5>
                   <h5>Goal Set Date: 3/20/22</h5>
                   <h5>SEL: Responsible-Decision Making</h5>
                   <h5>Goal Review Date: 3/20/23</h5>
