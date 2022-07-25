@@ -42,7 +42,7 @@ export default function InactivationModal(props) {
                 <Grid item xs={2} />
                 <Grid item xs={8}>
                   <Typography variant="h5" component="h2" align="center">
-                    Deactivation
+                    Deactivate Coach
                   </Typography>
                 </Grid>
                 <Grid item>
