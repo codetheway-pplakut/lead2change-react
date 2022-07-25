@@ -6,6 +6,8 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Grid } from '@mui/material';
+import LoginUser from './loginUser';
+
  
 export default function SampleNavbar() {
  
@@ -58,7 +60,7 @@ export default function SampleNavbar() {
                 </Grid>
                 <Grid item xl={2}>
                     <Typography color="white">
-                        <p>Hello *insert name here*</p>
+                        <LoginUser/>
                     </Typography>
                 </Grid>
               </Grid>

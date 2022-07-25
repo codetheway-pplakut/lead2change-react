@@ -4,7 +4,9 @@ import AuthenticationContext from '../../context/authentication/authentication';
 import { authenticateUser } from '../../services/users/users';
 import getToken from '../../util/get-token/get-token';
 import setToken from '../../util/set-token/set-token';
+import setID from '../../util/id/set-id';
 import isTokenExpired from '../../util/is-token-expired/is-token-expired';
+
 
 function AuthenticationProvider(props) {
   const { children } = props;
@@ -30,6 +32,7 @@ function AuthenticationProvider(props) {
 
     setAuthenticated(true);
     setToken(response.token);
+    setID(response.id);
 
     return response;
   }
