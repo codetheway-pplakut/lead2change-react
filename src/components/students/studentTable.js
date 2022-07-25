@@ -99,6 +99,70 @@ function a11yProps(index) {
   };
 }
 
+const headCells = [
+  {
+    id: 'name',
+    numeric: false,
+    disablePadding: false,
+    label: 'Name',
+  },
+  {
+    id: 'email',
+    numeric: false,
+    disablePadding: false,
+    label: 'Email',
+  },
+  {
+    id: 'studentCellPhone',
+    numeric: false,
+    disablePadding: false,
+    label: 'Phone Number',
+  },
+  {
+    id: 'coach',
+    numeric: false,
+    disablePadding: false,
+    label: 'Coach',
+  },
+];
+
+function EnhancedTableHeadForTabOne(props) {
+  const { order, orderBy, onRequestSort } = props;
+  const createSortHandler = (property) => (event) => {
+    onRequestSort(event, property);
+  };
+
+  return (
+    <TableHead>
+      <TableRow>
+        {headCells.map((headCell) => (
+          <TableCell
+            key={headCell.id}
+            align={headCell.numeric ? 'right' : 'left'}
+            padding={headCell.disablePadding ? 'none' : 'normal'}
+            sortDirection={orderBy === headCell.id ? order : false}
+          >
+            <TableSortLabel
+              active={orderBy === headCell.id}
+              direction={orderBy === headCell.id ? order : 'asc'}
+              onClick={createSortHandler(headCell.id)}
+            >
+              {headCell.label}
+            </TableSortLabel>
+          </TableCell>
+        ))}
+        <TableCell padding="normal"> </TableCell>
+      </TableRow>
+    </TableHead>
+  );
+}
+
+EnhancedTableHeadForTabOne.propTypes = {
+  onRequestSort: PropTypes.func.isRequired,
+  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
+  orderBy: PropTypes.string.isRequired,
+};
+
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -190,60 +254,59 @@ export default function StudentTable() {
       <TabPanel value={tabValue} index={0}>
         <TableContainer component={Paper} sx={{ height: '69vh' }}>
           <Table sx={{ minWidth: 10 }} stickyHeader>
-            {/* <EnhancedTableHead
-            order={order}
-            orderBy={orderBy}
-            onRequestSort={handleRequestSort}
-          />
-          <TableBody>
-            {stableSort(
-              students.filter((item) => item.state === sortState),
-              getComparator(order, orderBy)
-            )
-              .filter((student) =>
-                student.firstName
-                  .concat(student.lastName)
-                  .concat(student.email)
-                  .concat(student.studentCellPhone)
-                  .concat(getCoachById(student.coachId).coachFirstName)
-                  .concat(getCoachById(student.coachId).coachLastName)
-                  .toLowerCase()
-                  .includes(search.toLowerCase())
+            <EnhancedTableHeadForTabOne
+              order={order}
+              orderBy={orderBy}
+              onRequestSort={handleRequestSort}
+            />
+            <TableBody> {/*
+              {stableSort(
+                students.filter((item) => item.state === sortState),
+                getComparator(order, orderBy)
               )
-              .map((student, index) => {
-                return (
-                  <TableRow tabIndex={0} key={student.id}>
-                    <TableCell>
-                      {student.lastName}, {student.firstName}
-                    </TableCell>
-                    <TableCell align="left">{student.email}</TableCell>
-                    <TableCell align="left">
-                      {student.studentCellPhone}
-                    </TableCell>
-                    <TableCell>
-                      <Grid container spacing={2}>
-                        {sortState === 'active' && (
-                          <Grid item>
-                            <StudentModal type="Deactivate" />
-                          </Grid>
-                        )}
-                        {sortState === 'inactive' && (
-                          <Grid item>
-                            <StudentModal type="reactivate" />
-                          </Grid>
-                        )}
-                        {sortState === 'applied' && (
-                          <Grid item>
-                            <StudentModal type="activate" />
-                          </Grid>
-                        )}
-                      </Grid>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-            */}
+                .filter((student) =>
+                  student.firstName
+                    .concat(student.lastName)
+                    .concat(student.email)
+                    .concat(student.studentCellPhone)
+                    .concat(getCoachById(student.coachId).coachFirstName)
+                    .concat(getCoachById(student.coachId).coachLastName)
+                    .toLowerCase()
+                    .includes(search.toLowerCase())
+                )
+                .map((student, index) => {
+                  return (
+                    <TableRow tabIndex={0} key={student.id}>
+                      <TableCell>
+                        {student.lastName}, {student.firstName}
+                      </TableCell>
+                      <TableCell align="left">{student.email}</TableCell>
+                      <TableCell align="left">
+                        {student.studentCellPhone}
+                      </TableCell>
+                      <TableCell>
+                        <Grid container spacing={2}>
+                          {sortState === 'active' && (
+                            <Grid item>
+                              <StudentModal type="Deactivate" />
+                            </Grid>
+                          )}
+                          {sortState === 'inactive' && (
+                            <Grid item>
+                              <StudentModal type="reactivate" />
+                            </Grid>
+                          )}
+                          {sortState === 'applied' && (
+                            <Grid item>
+                              <StudentModal type="activate" />
+                            </Grid>
+                          )}
+                        </Grid>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })} */}
+            </TableBody>
           </Table>
         </TableContainer>
       </TabPanel>
