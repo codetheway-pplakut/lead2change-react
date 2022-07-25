@@ -112,37 +112,15 @@ export default function CoachesList(props) {
   const { rows, addFunction, updateFunction } = props;
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('name');
-  const [selected, setSelected] = React.useState(rows);
   const [searchTerm, setSearchTerm] = React.useState('');
   const [sortActive, setSortActive] = React.useState(true);
+  const [value, setValue] = React.useState(0);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
-
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
-    }
-
-    setSelected(newSelected);
-  };
-
-  const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
     if (newValue === 0) {
@@ -209,12 +187,7 @@ export default function CoachesList(props) {
               )
               .map((coach, index) => {
                 return (
-                  <TableRow
-                    hover
-                    onClick={(event) => handleClick(event, coach.id)}
-                    tabIndex={-1}
-                    key={coach.id}
-                  >
+                  <TableRow hover tabIndex={-1} key={coach.id}>
                     <TableCell>
                       {coach.coachLastName}, {coach.coachFirstName}
                     </TableCell>
