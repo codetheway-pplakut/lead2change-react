@@ -22,6 +22,9 @@ import AddIcon from '@mui/icons-material/Add';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 
+import { useNavigate } from 'react-router';
+import ROUTES from '../../constants/routes';
+
 import ProgressIndicatorOverlay from '../progress-indicator-overlay/progress-indicator-overlay';
 
 import CoachAssignModal from './student-coach-assign-modal';
@@ -290,6 +293,12 @@ export default function StudentTable() {
     setOrderBy(property);
   };
 
+  const navigate = useNavigate();
+
+  const onRegisterClick = () => {
+    navigate(ROUTES.SIGN_UP);
+  };
+
   return (
     <Box sx={{ width: '100%', height: '60%' }}>
       <ProgressIndicatorOverlay active={isLoading} />
@@ -340,6 +349,7 @@ export default function StudentTable() {
             variant="contained"
             startIcon={<AddIcon />}
             sx={{ mt: '2vh' }}
+            onClick={onRegisterClick}
           >
             Student
           </Button>
