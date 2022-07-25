@@ -1,27 +1,21 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
 import Table from '@mui/material/Table';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import Paper from '@mui/material/Paper';
-import { styled } from '@mui/material/styles';
+import TableCell from '@mui/material/TableCell';
 
-import AppBar from '@mui/material/AppBar';
-
+import EditAdminModal from './editAdminModal';
 import DeleteAdminModal from './deleteAdminModal';
 import DeactivateAdminModal from './deactivateAdminModal';
-import EditAdminModal from './editAdminModal';
-import SearchBar from './SearchBar';
 import RegisterAdminModal from './registerAdminModal';
+import SearchBar from './SearchBar';
+
 import {
   getAdmins,
   // addAdmin,
@@ -31,8 +25,8 @@ import {
 
 import {
   getStudents,
-  getStudentById,
-  updateStudent,
+  // getStudentById,
+  // updateStudent,
 } from '../../services/students/students';
 
 import ProgressIndicatorOverlay from '../progress-indicator-overlay/progress-indicator-overlay';
@@ -55,10 +49,6 @@ const tableDelete = {
   color: 'white',
   fontSize: 'large',
   paddingLeft: '32px',
-};
-
-const refreshPage = async () => {
-  window.location.reload(true);
 };
 
 export default function AdminTable() {
