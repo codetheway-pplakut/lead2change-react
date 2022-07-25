@@ -99,7 +99,7 @@ function ResetPassword() {
               onClick={() => navigate(ROUTES.SIGN_UP)}
               variant="contained"
             >
-              Back to Login
+              Back to SignUp
             </Button>
           ) : (
             <Button

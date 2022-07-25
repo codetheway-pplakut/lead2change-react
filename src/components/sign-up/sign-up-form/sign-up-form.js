@@ -24,9 +24,11 @@ export default function SignUpForm(props) {
   } = props;
 
   const currentYear = new Date().getFullYear();
-  const studentYear = parseInt(studentDateOfBirth.substring(0, 4), 10);
-  const test = +studentDateOfBirth.substring(0, 4);
-  console.log(test);
+  const studentYear = +studentDateOfBirth.substring(0, 4);
+  const studentAge = currentYear - studentYear;
+
+  const re =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   const onSubmitDisabled =
     !emailAddress ||
@@ -47,6 +49,8 @@ export default function SignUpForm(props) {
             required
             type="email"
             value={emailAddress}
+            error={!re.test(emailAddress)}
+            helperText={re.test(emailAddress) ? '' : 'Invaild Email Address'}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -92,6 +96,8 @@ export default function SignUpForm(props) {
             onChange={(event) => onStudentDateOfBirthChange(event.target.value)}
             type="date"
             value={studentDateOfBirth}
+            error={studentAge < 9}
+            helperText={studentAge > 9 ? ' ' : 'Age Must Be Atleast 9'}
           />
         </Grid>
         <Grid item xs={12}>
