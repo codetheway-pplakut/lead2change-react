@@ -155,7 +155,7 @@ export default function RegisterAdminModal() {
   const buttonTheme = createTheme({
     palette: {
       save: {
-        main: '#ffba06',
+        main: '#3764A8',
         contrastText: '#fff',
       },
       cancel: {
@@ -177,7 +177,7 @@ export default function RegisterAdminModal() {
         variant="contained"
         onClick={handleOpen}
       >
-        + Register Admin
+        + Admin
       </Button>
       {/* <UpdateAdmin onSubmit={updateModalChange} handleClose={handleClose} /> */}
       <Modal open={open} onClose={handleClose}>

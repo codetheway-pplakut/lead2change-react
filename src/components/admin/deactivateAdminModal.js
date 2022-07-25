@@ -8,6 +8,7 @@ import Grid from '@mui/material/Grid';
 import { createTheme } from '@mui/material/styles';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
  
 export default function DeactivateAdminModal() {
  
@@ -52,7 +53,7 @@ export default function DeactivateAdminModal() {
   const buttonTheme = createTheme({
     palette: {
       inactivate: {
-        main: 'orange',
+        main: '#3764A8',
         contrastText: '#fff',
       },
       cancel: {
@@ -68,14 +69,9 @@ export default function DeactivateAdminModal() {
  
   return (
     <div>
-      <Button
-        theme={buttonTheme}
-        color="inactivate"
-        onClick={handleOpen}
-        variant="contained"
-      >
-        Delete
-      </Button>
+      <IconButton>
+        <DeleteOutlineIcon         color="inactivate" theme={buttonTheme} onClick={handleOpen}/>
+      </IconButton>
       <Modal open={open} onClose={handleClose}>
         <Box sx={modalPosition}>
             <Grid container spacing={0}  alignItems="center" justifyContent="center">
