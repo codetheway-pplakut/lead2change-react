@@ -5,7 +5,6 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Paper from '@mui/material/Paper';
@@ -113,11 +112,9 @@ export default function CoachesList(props) {
   const { rows, addFunction, updateFunction } = props;
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('name');
-  const [selected, setSelected] = React.useState(rows);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [searchTerm, setSearchTerm] = React.useState('');
   const [sortActive, setSortActive] = React.useState(true);
+  const [value, setValue] = React.useState(0);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -125,27 +122,7 @@ export default function CoachesList(props) {
     setOrderBy(property);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
-    }
-
-    setSelected(newSelected);
-  };
-
-  const [value, setValue] = React.useState(0);
+  // Changes from Active to Inactive and VV.
   const handleChange = (event, newValue) => {
     setValue(newValue);
     if (newValue === 0) {
@@ -155,36 +132,27 @@ export default function CoachesList(props) {
       setSortActive(false);
     }
   };
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-  const emptyRows =
-    page > 0
-      ? Math.max(
-          0,
-          (1 + page) * rowsPerPage -
-            rows.filter((item) => item.active === sortActive).length
-        )
-      : 0;
-
   return (
     <Paper sx={{ width: '100%' }}>
       <Grid container alignItems="center">
-        <Grid item xs={8}>
-          <Grid container spacing={1} alignItems="center">
+        <Grid item xs={4}>
+          <Grid container alignItems="center">
             <Grid item>
               <Tabs value={value} onChange={handleChange}>
                 <Tab label="Active" />
                 <Tab label="Inactive" />
               </Tabs>
             </Grid>
-            <Grid item xs={6}>
+          </Grid>
+        </Grid>
+        <Grid item xs={8} p={1}>
+          <Grid
+            container
+            spacing={1}
+            alignItems="center"
+            justifyContent="flex-end"
+          >
+            <Grid item xs={6} align="right">
               <TextField
                 value={searchTerm}
                 placeholder="Search..."
@@ -203,10 +171,10 @@ export default function CoachesList(props) {
                 }}
               />
             </Grid>
+            <Grid item>
+              <RegisterCoachModal addFunction={addFunction} />
+            </Grid>
           </Grid>
-        </Grid>
-        <Grid item xs={4} align="right" padding={2}>
-          <RegisterCoachModal addFunction={addFunction} />
         </Grid>
       </Grid>
       <TableContainer>
@@ -222,7 +190,6 @@ export default function CoachesList(props) {
               rows.filter((item) => item.active === sortActive),
               getComparator(order, orderBy)
             )
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .filter((coach) =>
                 coach.coachFirstName
                   .concat(coach.coachLastName)
@@ -231,12 +198,7 @@ export default function CoachesList(props) {
               )
               .map((coach, index) => {
                 return (
-                  <TableRow
-                    hover
-                    onClick={(event) => handleClick(event, coach.id)}
-                    tabIndex={-1}
-                    key={coach.id}
-                  >
+                  <TableRow hover tabIndex={-1} key={coach.id}>
                     <TableCell>
                       {coach.coachLastName}, {coach.coachFirstName}
                     </TableCell>
@@ -284,23 +246,9 @@ export default function CoachesList(props) {
                   </TableRow>
                 );
               })}
-            {emptyRows > 0 && (
-              <TableRow>
-                <TableCell colSpan={6} />
-              </TableRow>
-            )}
           </TableBody>
         </Table>
       </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
-        component="div"
-        count={rows.filter((item) => item.active === sortActive).length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
     </Paper>
   );
 }

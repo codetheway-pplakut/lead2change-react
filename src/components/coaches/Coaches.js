@@ -8,6 +8,7 @@ import {
   addCoach,
   updateCoach,
 } from '../../services/coaches/coaches';
+import { unassignStudent } from '../../services/students/students';
 
 const theme = createTheme({
   components: {
@@ -80,8 +81,11 @@ export default function Coaches() {
     await addCoach(coach);
     await refreshCoaches();
   };
-  const updateCoachInfo = async (coach) => {
+  const updateCoachInfo = async (coach, change) => {
     await updateCoach(coach);
+    if (change === false) {
+      // Remove Students
+    }
     await refreshCoaches();
   };
   const deleteCoachById = async (id) => {

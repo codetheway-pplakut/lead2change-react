@@ -34,3 +34,15 @@ export const updateStudent = (student) => {
     },
   });
 };
+
+export const unassignStudent = (Ids) => {
+  return callApi({
+    body: Ids,
+    endpoint: SERVICE_ROOT,
+    method: 'POST',
+    headers: {
+      Accept: 'application/json, text/plain',
+      'Content-Type': 'application/json',
+    },
+  });
+};
