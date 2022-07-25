@@ -121,6 +121,8 @@ export default function CoachesList(props) {
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
+
+  // Changes from Active to Inactive and VV.
   const handleChange = (event, newValue) => {
     setValue(newValue);
     if (newValue === 0) {
@@ -133,15 +135,24 @@ export default function CoachesList(props) {
   return (
     <Paper sx={{ width: '100%' }}>
       <Grid container alignItems="center">
-        <Grid item xs={8}>
-          <Grid container spacing={1} alignItems="center">
+        <Grid item xs={4}>
+          <Grid container alignItems="center">
             <Grid item>
               <Tabs value={value} onChange={handleChange}>
                 <Tab label="Active" />
                 <Tab label="Inactive" />
               </Tabs>
             </Grid>
-            <Grid item xs={6}>
+          </Grid>
+        </Grid>
+        <Grid item xs={8} p={1}>
+          <Grid
+            container
+            spacing={1}
+            alignItems="center"
+            justifyContent="flex-end"
+          >
+            <Grid item xs={6} align="right">
               <TextField
                 value={searchTerm}
                 placeholder="Search..."
@@ -160,10 +171,10 @@ export default function CoachesList(props) {
                 }}
               />
             </Grid>
+            <Grid item>
+              <RegisterCoachModal addFunction={addFunction} />
+            </Grid>
           </Grid>
-        </Grid>
-        <Grid item xs={4} align="right" padding={2}>
-          <RegisterCoachModal addFunction={addFunction} />
         </Grid>
       </Grid>
       <TableContainer>
