@@ -18,9 +18,9 @@ export default function SignUpForm(props) {
     onEmailAddressChange,
     onFirstNameChange,
     onLastNameChange,
-    onPasswordChange,
+    // onPasswordChange,
     onSubmit,
-    password,
+    // password,
   } = props;
 
   const currentYear = new Date().getFullYear();
@@ -29,7 +29,7 @@ export default function SignUpForm(props) {
     !emailAddress ||
     !firstName ||
     !lastName ||
-    !password ||
+    // !password ||
     !studentDateOfBirth ||
     (studentDateOfBirth !== null && studentDateOfBirth.includes(currentYear));
 
@@ -64,7 +64,7 @@ export default function SignUpForm(props) {
             value={lastName}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        {/* <Grid item xs={12} sm={6}>
           <TextField
             fullWidth
             label="Password"
@@ -73,7 +73,7 @@ export default function SignUpForm(props) {
             type="password"
             value={password}
           />
-        </Grid>
+        </Grid> */}
         <Grid item xs={12} sm={6}>
           <TextField
             fullWidth
@@ -91,12 +91,12 @@ export default function SignUpForm(props) {
             value={studentDateOfBirth}
           />
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <FormControlLabel
             control={<Checkbox value="allowExtraEmails" color="primary" />}
             label="I want to receive inspiration, marketing promotions and updates via email."
           />
-        </Grid>
+        </Grid> */}
       </Grid>
       <Button
         disabled={onSubmitDisabled}
@@ -123,7 +123,7 @@ SignUpForm.propTypes = {
   onEmailAddressChange: PropTypes.func.isRequired,
   onFirstNameChange: PropTypes.func.isRequired,
   onLastNameChange: PropTypes.func.isRequired,
-  onPasswordChange: PropTypes.func.isRequired,
+  // onPasswordChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  password: PropTypes.string.isRequired,
+  // password: PropTypes.string.isRequired,
 };
