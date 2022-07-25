@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
+// import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
@@ -22,13 +22,12 @@ import Tabs from '@mui/material/Tabs';
 
 import ProgressIndicatorOverlay from '../progress-indicator-overlay/progress-indicator-overlay';
 
-import CoachAssignModal from './student-coach-assign-modal';
-import StudentRegistryModal from './studentRegistryModal';
+// import CoachAssignModal from './student-coach-assign-modal';
 import StudentModal from './studentModal';
 import {
   getStudents,
   getStudentById,
-  addStudent,
+  // addStudent,
   updateStudent,
 } from '../../services/students/students';
 import { getCoachById } from '../../services/coaches/coaches';
@@ -46,7 +45,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 0 }}>
-          <Typography>{children}</Typography>
+          <Typography component="span">{children}</Typography>
         </Box>
       )}
     </div>
@@ -78,12 +77,12 @@ const declineHandler = async (studentId) => {
   refreshPage();
 };
 
-const reassignCoachHandler = async (studentId, coachId) => {
-  const updatedStudent = await getStudentById(studentId);
-  updatedStudent.coachId = coachId;
-  await updateStudent(updatedStudent);
-  refreshPage();
-};
+// const reassignCoachHandler = async (studentId, coachId) => {
+//   const updatedStudent = await getStudentById(studentId);
+//   updatedStudent.coachId = coachId;
+//   await updateStudent(updatedStudent);
+//   refreshPage();
+// };
 
 TabPanel.propTypes = {
   // eslint-disable-next-line react/require-default-props
@@ -197,16 +196,18 @@ function EnhancedTableHead(props) {
   };
 
   return (
-    <TableHead>
-      <TableRow>
+    <TableHead component="span">
+      <TableRow component="span">
         {headCells.map((headCell) => (
           <TableCell
+            component="span"
             key={headCell.id}
             align={headCell.numeric ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel
+              component="span"
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
@@ -215,7 +216,9 @@ function EnhancedTableHead(props) {
             </TableSortLabel>
           </TableCell>
         ))}
-        <TableCell padding="normal"> </TableCell>
+        <TableCell padding="normal" component="span">
+          {' '}
+        </TableCell>
       </TableRow>
     </TableHead>
   );
@@ -274,9 +277,9 @@ export default function StudentTable() {
   };
 
   return (
-    <Box sx={{ width: '100%', height: '60%' }}>
-      <ProgressIndicatorOverlay active={isLoading} />
-      <Box sx={{ bgcolor: 'background.paper', width: '25%' }}>
+    <Box sx={{ width: '100%', height: '60%' }} component="span">
+      <ProgressIndicatorOverlay active={isLoading} component="span" />
+      <Box sx={{ bgcolor: 'background.paper', width: '25%' }} component="span">
         <AppBar position="static">
           <Tabs
             value={tabValue}
@@ -297,6 +300,7 @@ export default function StudentTable() {
         </AppBar>
       </Box>
       <TextField
+        component="span"
         value={search}
         placeholder="Search..."
         variant="outlined"
@@ -314,196 +318,210 @@ export default function StudentTable() {
           setSearch(e.target.value);
         }}
       />
-      <StudentRegistryModal />
-      <TabPanel value={tabValue} index={0}>
-        <TableContainer component={Paper} sx={{ height: '69vh' }}>
-          <Table sx={{ minWidth: 10 }} stickyHeader>
-            <EnhancedTableHead
-              order={order}
-              orderBy={orderBy}
-              onRequestSort={handleRequestSort}
-              headCells={headCells1}
-            />
-            <TableBody>
-              {stableSort(students, getComparator(order, orderBy))
-                .filter((post) => {
-                  if (search === '') {
-                    return post;
-                  }
-                  if (
-                    post.firstName.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (
-                    post.lastName.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (
-                    post.email !== null &&
-                    post.email.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (
-                    post.studentCellPhone !== null &&
-                    post.studentCellPhone
-                      .toLowerCase()
-                      .includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (
-                    post.coachId !== null &&
-                    getCoachById(post.coachId)
-                      .coachName.toLowerCase()
-                      .includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  if (
-                    post.coachId === null &&
-                    'unassigned'.includes(search.toLowerCase())
-                  ) {
-                    return post;
-                  }
-                  return null;
-                })
-                .map((student) => {
-                  return (
-                    <TableRow tabIndex={0} key={student.id}>
-                      <TableCell>
-                        {student.lastName}, {student.firstName}
-                      </TableCell>
-                      <TableCell align="left">{student.email}</TableCell>
-                      <TableCell align="left">
-                        {student.studentCellPhone}
-                      </TableCell>
-                      <TableCell>
-                        <Grid container spacing={2}>
-                          <Grid item>
-                            <StudentModal
-                              type="Deactivate"
-                              studentId={student.id}
-                              confirmHandler={deactivateHandler}
-                            />
-                          </Grid>
+      <TabPanel value={tabValue} index={0} component="span">
+        <Table
+          component={(Paper, 'span')}
+          sx={{ minWidth: 10, height: '69vh' }}
+          stickyHeader
+        >
+          <EnhancedTableHead
+            component="span"
+            order={order}
+            orderBy={orderBy}
+            onRequestSort={handleRequestSort}
+            headCells={headCells1}
+          />
+          <TableBody component="span">
+            {stableSort(students, getComparator(order, orderBy))
+              .filter((post) => {
+                if (search === '') {
+                  return post;
+                }
+                if (
+                  post.firstName.toLowerCase().includes(search.toLowerCase())
+                ) {
+                  return post;
+                }
+                if (
+                  post.lastName.toLowerCase().includes(search.toLowerCase())
+                ) {
+                  return post;
+                }
+                if (
+                  post.email !== null &&
+                  post.email.toLowerCase().includes(search.toLowerCase())
+                ) {
+                  return post;
+                }
+                if (
+                  post.studentCellPhone !== null &&
+                  post.studentCellPhone
+                    .toLowerCase()
+                    .includes(search.toLowerCase())
+                ) {
+                  return post;
+                }
+                if (
+                  post.coachId !== null &&
+                  getCoachById(post.coachId)
+                    .coachName.toLowerCase()
+                    .includes(search.toLowerCase())
+                ) {
+                  return post;
+                }
+                if (
+                  post.coachId === null &&
+                  'unassigned'.includes(search.toLowerCase())
+                ) {
+                  return post;
+                }
+                return null;
+              })
+              .map((student) => {
+                return (
+                  <TableRow tabIndex={0} key={student.id} component="span">
+                    <TableCell component="span">
+                      {student.lastName}, {student.firstName}
+                    </TableCell>
+                    <TableCell align="left" component="span">
+                      {student.email}
+                    </TableCell>
+                    <TableCell align="left" component="span">
+                      {student.studentCellPhone}
+                    </TableCell>
+                    <TableCell component="span">
+                      <Grid container spacing={2} component="span">
+                        <Grid item component="span">
+                          <StudentModal
+                            modalType="accept"
+                            studentId={student.id}
+                            confirmHandler={deactivateHandler}
+                          />
                         </Grid>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
-          </Table>
-        </TableContainer>
+                      </Grid>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+          </TableBody>
+        </Table>
       </TabPanel>
 
       <TabPanel value={tabValue} index={1}>
-        <TableContainer component={Paper} sx={{ height: '69vh' }}>
-          <Table sx={{ minWidth: 10 }} stickyHeader>
-            <EnhancedTableHead
-              order={order}
-              orderBy={orderBy}
-              onRequestSort={handleRequestSort}
-              headCells={headCells2}
-            />
-            <TableBody>
-              {stableSort(students, getComparator(order, orderBy))
-                .filter((student) =>
-                  student.firstName
-                    .concat(student.studentLastName)
-                    .concat(student.email)
-                    .concat(student.studentCellPhone)
-                    .toLowerCase()
-                    .includes(search.toLowerCase())
-                )
-                .map((student) => {
-                  return (
-                    <TableRow tabIndex={0} key={student.id}>
-                      <TableCell>
-                        {student.lastName}, {student.firstName}
-                      </TableCell>
-                      <TableCell align="left">{student.email}</TableCell>
-                      <TableCell align="left">
-                        {student.studentCellPhone}
-                      </TableCell>
-                      <TableCell>
-                        <Grid container spacing={2}>
-                          <Grid item>
-                            <StudentModal
-                              modalType="Reactivate"
-                              studentId={student.id}
-                              confirmHandler={activateHandler}
-                            />
-                          </Grid>
+        <Table
+          component={Paper}
+          sx={{ minWidth: 10, height: '69vh' }}
+          stickyHeader
+        >
+          <EnhancedTableHead
+            component="span"
+            order={order}
+            orderBy={orderBy}
+            onRequestSort={handleRequestSort}
+            headCells={headCells2}
+          />
+          <TableBody component="span">
+            {stableSort(students, getComparator(order, orderBy))
+              .filter((student) =>
+                student.firstName
+                  .concat(student.studentLastName)
+                  .concat(student.email)
+                  .concat(student.studentCellPhone)
+                  .toLowerCase()
+                  .includes(search.toLowerCase())
+              )
+              .map((student) => {
+                return (
+                  <TableRow tabIndex={0} key={student.id} component="span">
+                    <TableCell component="span">
+                      {student.lastName}, {student.firstName}
+                    </TableCell>
+                    <TableCell align="left" component="span">
+                      {student.email}
+                    </TableCell>
+                    <TableCell align="left" component="span">
+                      {student.studentCellPhone}
+                    </TableCell>
+                    <TableCell component="span">
+                      <Grid container spacing={2} component="span">
+                        <Grid item component="span">
+                          <StudentModal
+                            modalType="accept"
+                            studentId={student.id}
+                            confirmHandler={activateHandler}
+                          />
                         </Grid>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
-          </Table>
-        </TableContainer>
+                      </Grid>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+          </TableBody>
+        </Table>
       </TabPanel>
 
       <TabPanel value={tabValue} index={2}>
-        <TableContainer component={Paper} sx={{ height: '69vh' }}>
-          <Table sx={{ minWidth: 10 }} stickyHeader>
-            <EnhancedTableHead
-              order={order}
-              orderBy={orderBy}
-              onRequestSort={handleRequestSort}
-              headCells={headCells3}
-            />
-            <TableBody>
-              {stableSort(students, getComparator(order, orderBy))
-                .filter((student) =>
-                  student.firstName
-                    .concat(student.lastName)
-                    .concat(student.email)
-                    .concat(student.studentCellPhone)
-                    .toLowerCase()
-                    .includes(search.toLowerCase())
-                )
-                .map((student) => {
-                  return (
-                    <TableRow tabIndex={0} key={student.id}>
-                      <TableCell>
-                        {student.lastName}, {student.firstName}
-                      </TableCell>
-                      <TableCell align="left">{student.email}</TableCell>
-                      <TableCell align="left">
-                        {student.studentCellPhone}
-                      </TableCell>
-                      <TableCell>
-                        <Grid container spacing={2}>
-                          <Grid item>
-                            <StudentModal
-                              modalType="Accept"
-                              studentId={student.id}
-                              confirmHandler={activateHandler}
-                            />
-                          </Grid>
+        <Table
+          component={(Paper, 'span')}
+          sx={{ minWidth: 10, height: '69vh' }}
+          stickyHeader
+        >
+          <EnhancedTableHead
+            component="span"
+            order={order}
+            orderBy={orderBy}
+            onRequestSort={handleRequestSort}
+            headCells={headCells3}
+          />
+          <TableBody component="span">
+            {stableSort(students, getComparator(order, orderBy))
+              .filter((student) =>
+                student.firstName
+                  .concat(student.lastName)
+                  .concat(student.email)
+                  .concat(student.studentCellPhone)
+                  .toLowerCase()
+                  .includes(search.toLowerCase())
+              )
+              .map((student) => {
+                return (
+                  <TableRow tabIndex={0} key={student.id} component="span">
+                    <TableCell component="span">
+                      {student.lastName}, {student.firstName}
+                    </TableCell>
+                    <TableCell align="left" component="span">
+                      {student.email}
+                    </TableCell>
+                    <TableCell align="left" component="span">
+                      {student.studentCellPhone}
+                    </TableCell>
+                    <TableCell component="span">
+                      <Grid container spacing={2} component="span">
+                        <Grid item component="span">
+                          <StudentModal
+                            modalType="accept"
+                            studentId={student.id}
+                            confirmHandler={activateHandler}
+                          />
                         </Grid>
-                      </TableCell>
-                      <TableCell>
-                        <Grid container spacing={2}>
-                          <Grid item>
-                            <StudentModal
-                              modalType="Decline"
-                              studentId={student.id}
-                              confirmHandler={declineHandler}
-                            />
-                          </Grid>
+                      </Grid>
+                    </TableCell>
+                    <TableCell component="span">
+                      <Grid container spacing={2} component="span">
+                        <Grid item component="span">
+                          <StudentModal
+                            modalType="decline"
+                            studentId={student.id}
+                            confirmHandler={declineHandler}
+                          />
                         </Grid>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
-          </Table>
-        </TableContainer>
+                      </Grid>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+          </TableBody>
+        </Table>
       </TabPanel>
     </Box>
   );

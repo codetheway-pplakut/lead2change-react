@@ -13,8 +13,7 @@ export default function StudentModal(props) {
   let useColor = 'warning';
   if (modalType === 'decline') {
     useColor = 'error';
-  }
-  if (modalType === 'accept') {
+  } else if (modalType === 'accept') {
     useColor = 'success';
   }
   const style = {
@@ -43,13 +42,14 @@ export default function StudentModal(props) {
         {modalType}
       </Button>
       <Modal open={open} onClose={handleClose}>
-        <Box sx={style}>
-          <Typography variant="h6" component="h2" align="center">
+        <Box sx={style} component="span">
+          <Typography variant="h6" align="center" component="span">
             Are you sure you want to {modalType} this student?
           </Typography>
-          <Grid container spacing={4} sx={{ mt: '1vh' }}>
-            <Grid item xs={6} align="center">
+          <Grid container spacing={4} sx={{ mt: '1vh' }} component="span">
+            <Grid item xs={6} align="center" component="span">
               <Button
+                component="span"
                 variant="contained"
                 color={useColor}
                 onClick={confirm}
@@ -58,8 +58,13 @@ export default function StudentModal(props) {
                 {modalType}
               </Button>
             </Grid>
-            <Grid item xs={6} align="center">
-              <Button variant="outlined" onClick={handleClose} fullWidth>
+            <Grid item xs={6} align="center" component="span">
+              <Button
+                variant="outlined"
+                onClick={handleClose}
+                component="span"
+                fullWidth
+              >
                 Cancel
               </Button>
             </Grid>
