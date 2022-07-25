@@ -42,8 +42,11 @@ function getComparator(order, orderBy) {
 }
 
 export default function StudentTable() {
-  const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('name');
+  const [order, setOrder] = useState('asc');
+  const [orderBy, setOrderBy] = useState('name');
+  const [search, setSearch] = useState('');
+  const [students, setStudents] = useState([]);
+  const [value, setValue] = useState(0);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -51,7 +54,102 @@ export default function StudentTable() {
     setOrderBy(property);
   };
 
-  return(
-    <Paper>e</Paper>
+  const handleTabChange = () => {
+
+  };
+
+  return (
+    <Paper sx={{ width: '100%' }}>
+      <Grid container spacing={1} alignItems="center">
+        <Grid item xs={8}>
+          <Tabs value={value} onChange={handleTabChange}>
+            <Tab label="Active" />
+            <Tab label="Inactive" />
+            <Tab label="Applied" />
+          </Tabs>
+        </Grid>
+        <Grid item xs={2}>
+          <TextField
+            value={search}
+            placeholder="Search..."
+            variant="outlined"
+            size="small"
+            margin="normal"
+            align="right"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+          />
+        </Grid>
+        <Grid item xs={2} align="right" padding={2}>
+          <StudentRegistryModal />
+        </Grid>
+      </Grid>
+      <TableContainer>
+        <Table sx={{ minWidth: 750 }}>
+          {/* <EnhancedTableHead
+            order={order}
+            orderBy={orderBy}
+            onRequestSort={handleRequestSort}
+          />
+          <TableBody>
+            {stableSort(
+              students.filter((item) => item.state === sortState),
+              getComparator(order, orderBy)
+            )
+              .filter((student) =>
+                student.firstName
+                  .concat(student.lastName)
+                  .concat(student.email)
+                  .concat(student.studentCellPhone)
+                  .concat(getCoachById(student.coachId).coachFirstName)
+                  .concat(getCoachById(student.coachId).coachLastName)
+                  .toLowerCase()
+                  .includes(search.toLowerCase())
+              )
+              .map((student, index) => {
+                return (
+                  <TableRow tabIndex={0} key={student.id}>
+                    <TableCell>
+                      {student.lastName}, {student.firstName}
+                    </TableCell>
+                    <TableCell align="left">{student.email}</TableCell>
+                    <TableCell align="left">
+                      {student.studentCellPhone}
+                    </TableCell>
+                    <TableCell>
+                      <Grid container spacing={2}>
+                        {sortState === 'active' && (
+                          <Grid item>
+                            <StudentModal type="Deactivate" />
+                          </Grid>
+                        )}
+                        {sortState === 'inactive' && (
+                          <Grid item>
+                            <StudentModal type="reactivate" />
+                          </Grid>
+                        )}
+                        {sortState === 'applied' && (
+                          <Grid item>
+                            <StudentModal type="activate" />
+                          </Grid>
+                        )}
+                      </Grid>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+          </TableBody>
+            */}
+        </Table>
+      </TableContainer>
+    </Paper>
   );
 }
