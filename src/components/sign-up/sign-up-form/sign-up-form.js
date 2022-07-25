@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
+// import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
-import FormControlLabel from '@mui/material/FormControlLabel';
+// import FormControlLabel from '@mui/material/FormControlLabel';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
@@ -34,8 +34,8 @@ export default function SignUpForm(props) {
     (studentDateOfBirth !== null && studentDateOfBirth.includes(currentYear));
 
   return (
-    <Box sx={{ mt: 3 }}>
-      <Grid container spacing={2}>
+    <Box sx={{ m: 20 }}>
+      <Grid container spacing={2} sx={{ alig: 'center' }}>
         <Grid item xs={12}>
           <TextField
             fullWidth
@@ -57,8 +57,8 @@ export default function SignUpForm(props) {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            fullWidth
             label="Last Name"
+            fullWidth
             onChange={(event) => onLastNameChange(event.target.value)}
             required
             value={lastName}
@@ -100,8 +100,7 @@ export default function SignUpForm(props) {
       </Grid>
       <Button
         disabled={onSubmitDisabled}
-        fullWidth
-        sx={{ mt: 3, mb: 2 }}
+        sx={{ mt: 3, mb: 2, ml: '46%' }}
         type="submit"
         onClick={onSubmit}
         variant="contained"
