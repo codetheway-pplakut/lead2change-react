@@ -3,7 +3,7 @@ import callApi from '../../util/call-api/call-api';
 
 const SERVICE_ROOT = 'Admin';
 
-export const getAdmins = () => {
+export const getAdmins = async () => {
   return callApi({ endpoint: SERVICE_ROOT });
 };
 
