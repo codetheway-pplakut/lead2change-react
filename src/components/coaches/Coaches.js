@@ -102,7 +102,7 @@ export default function Coaches() {
                   color: '#FFFFFF',
                   backgroundColor: '#2656A5',
                   marginBottom: '3vh',
-                  padding: '0.1vh',
+                  padding: '1.5vh',
                 }}
                 sx={{ width: '100%' }}
               >
