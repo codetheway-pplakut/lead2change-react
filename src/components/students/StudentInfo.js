@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -33,10 +33,19 @@ const StudentInfo = styled(Box)(({ theme }) => ({
 
 export default function ResponsiveGrid(props) {
   const { studentId } = useParams();
-  const currentStudent = getStudentById(studentId);
+  const [students, setStudents] = useState({});
+
   const onBackClick = () => {
     navigate(ROUTES.STUDENTS);
   };
+  useEffect(() => {
+    const currentStudent = async () => {
+      const currStudent = await getStudentById(studentId);
+      setStudents(currStudent);
+    };
+    currentStudent();
+  }, [studentId]);
+
   const navigate = useNavigate();
   const buttonText = '< Back to table';
   return (
@@ -52,7 +61,7 @@ export default function ResponsiveGrid(props) {
         }}
         sx={{ width: '100%' }}
       >
-        <h1>{currentStudent.studentFirstName}&rsquo;S DETAILS</h1>
+        <h1>{students.studentFirstName}&rsquo;s Details</h1>
       </Grid>
       <Grid item xs={4}>
         <Paper
