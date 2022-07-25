@@ -52,7 +52,7 @@ const tableDelete = {
 };
 
 export default function AdminTable() {
-  const [students, setStudents] = useState([]);
+  const [admins, setAdmins] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const refreshStudents = async () => {
@@ -60,7 +60,7 @@ export default function AdminTable() {
     const response = await getAdmins();
 
     setIsLoading(false);
-    setStudents(response);
+    setAdmins(response);
   };
   useEffect(() => {
     refreshStudents();
@@ -106,9 +106,9 @@ export default function AdminTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {students.map((student, index) => (
+            {admins.map((admin, index) => (
               <TableRow
-                key={student.id}
+                key={admin.id}
                 sx={
                   index % 2
                     ? { background: '#eeeeee' }
@@ -123,13 +123,13 @@ export default function AdminTable() {
                       </Box>
                     </Grid>
                     <Grid item xs={6}>
-                      {student.lastName}, {student.firstName}
+                      {admin.userName}
                     </Grid>
                   </Grid>
                 </TableCell>
-                <TableCell align="left">{student.email}</TableCell>
+                <TableCell align="left">{admin.email}</TableCell>
                 <TableCell align="left">
-                  <DeactivateAdminModal adminId={student.id} />
+                  <DeactivateAdminModal adminId={admin.id} />
                 </TableCell>
               </TableRow>
             ))}
@@ -158,9 +158,9 @@ export default function AdminTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {students.map((student, index) => (
+            {admins.map((admin, index) => (
               <TableRow
-                key={student.id}
+                key={admin.id}
                 sx={
                   index % 2
                     ? { background: '#eeeeee' }
@@ -175,13 +175,13 @@ export default function AdminTable() {
                       </Box>
                     </Grid>
                     <Grid item xs={6}>
-                      {student.lastName}, {student.firstName}
+                      {admin.userName}
                     </Grid>
                   </Grid>
                 </TableCell>
-                <TableCell align="left">{student.email}</TableCell>
+                <TableCell align="left">{admin.email}</TableCell>
                 <TableCell align="left">
-                  <DeleteAdminModal adminId={student.id} />
+                  <DeleteAdminModal adminId={admin.id} />
                 </TableCell>
               </TableRow>
             ))}
