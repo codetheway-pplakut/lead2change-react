@@ -339,7 +339,7 @@ export default function StudentTable() {
                     .toLowerCase()
                     .includes(search.toLowerCase())
                 )
-                .map((student, index) => {
+                .map((student) => {
                   return (
                     <TableRow tabIndex={0} key={student.id}>
                       <TableCell>
@@ -405,7 +405,7 @@ export default function StudentTable() {
                         <Grid container spacing={2}>
                           <Grid item>
                             <StudentModal
-                              type="Deactivate"
+                              modalType="Deactivate"
                               studentId={student.id}
                             />
                           </Grid>
@@ -457,7 +457,17 @@ export default function StudentTable() {
                         <Grid container spacing={2}>
                           <Grid item>
                             <StudentModal
-                              type="Deactivate"
+                              modalType="Accept"
+                              studentId={student.id}
+                            />
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+                      <TableCell>
+                        <Grid container spacing={2}>
+                          <Grid item>
+                            <StudentModal
+                              modalType="Decline"
                               studentId={student.id}
                             />
                           </Grid>
