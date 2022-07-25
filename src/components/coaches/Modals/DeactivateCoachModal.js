@@ -23,7 +23,7 @@ export default function InactivationModal(props) {
       students: coach.students,
       active: false,
     };
-    updateFunction(updatedCoach);
+    updateFunction(updatedCoach, false);
   };
   return (
     <div>
