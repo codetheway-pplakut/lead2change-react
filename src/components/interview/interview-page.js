@@ -1,6 +1,7 @@
 import React from 'react';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import { Grid } from '@mui/material';
 import BasicTabs from './tabs';
 import Navbar from '../admin/sampleNavbar';
 import ExitModal from './exit-modal';
@@ -13,13 +14,21 @@ export default function InterviewPage() {
   return (
     <div>
       <Navbar />
-      <h1
-        align="center"
-        style={{ backgroundColor: '#004cbb', color: 'rgb(255,255,255)' }}
-      >
-        Student Names Interview
-      </h1>
-
+      <Grid container>
+        <Grid
+          item
+          align="center"
+          style={{
+            backgroundColor: '#2656A5',
+            marginBottom: '2vh',
+            color: '#FFFFFF',
+            padding: '0.1vh',
+          }}
+          sx={{ width: '100%' }}
+        >
+          <h1>STUDENT NAME INTERVIEW</h1>
+        </Grid>
+      </Grid>
       <BasicTabs />
       <Stack
         spacing={75}
