@@ -1,468 +1,292 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import * as React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import Button from '@mui/material/Button';
-
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
 import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import Typography from '@mui/material/Typography';
+import TableSortLabel from '@mui/material/TableSortLabel';
 import Paper from '@mui/material/Paper';
-import { styled } from '@mui/material/styles';
+import Grid from '@mui/material/Grid';
+import { TextField } from '@mui/material';
+import InputAdornment from '@mui/material/InputAdornment';
+import SearchIcon from '@mui/icons-material/Search';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
 
-import { useNavigate } from 'react-router-dom';
-import AppBar from '@mui/material/AppBar';
-import ROUTES from '../../constants/routes';
-
+import StudentRegistryModal from './studentRegistryModal';
+import StudentModal from './studentModal';
 import {
   getStudents,
   getStudentById,
+  addStudent,
   updateStudent,
 } from '../../services/students/students';
-import { getCoachById } from '../../services/coaches/coaches';
+import getCoachById from '../../services/coaches/coaches';
 
-import StudentModal from './studentModal';
-import StudentRegistryModal from './studentRegistryModal';
-import CoachAssignModal from './student-coach-assign-modal';
-import SearchBar from './searchBar';
+function descendingComparator(a, b, orderBy) {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+  return 0;
+}
 
-import ProgressIndicatorOverlay from '../progress-indicator-overlay/progress-indicator-overlay';
+function getComparator(order, orderBy) {
+  return order === 'desc'
+    ? (a, b) => descendingComparator(a, b, orderBy)
+    : (a, b) => -descendingComparator(a, b, orderBy);
+}
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: '#2656A5',
-    color: theme.palette.common.white,
+// This method is created for cross-browser compatibility, if you don't
+// need to support IE11, you can use Array.prototype.sort() directly
+function stableSort(array, comparator) {
+  const stabilizedThis = array.map((el, index) => [el, index]);
+  stabilizedThis.sort((a, b) => {
+    const order = comparator(a[0], b[0]);
+    if (order !== 0) {
+      return order;
+    }
+    return a[1] - b[1];
+  });
+  return stabilizedThis.map((el) => el[0]);
+}
+
+const headCells = [
+  {
+    id: 'name',
+    numeric: false,
+    disablePadding: false,
+    label: 'Name',
   },
-  // [`&.${tableCellClasses.body}`]: { },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(even)': {
-    backgroundColor: theme.palette.action.hover,
+  {
+    id: 'email',
+    numeric: false,
+    disablePadding: false,
+    label: 'Email',
   },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
+  {
+    id: 'studentCellPhone',
+    numeric: false,
+    disablePadding: false,
+    label: 'Phone Number',
   },
-}));
+  {
+    id: 'coach',
+    numeric: false,
+    disablePadding: false,
+    label: 'Coach',
+  },
+];
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+function EnhancedTableHead(props) {
+  const { order, orderBy, onRequestSort } = props;
+  const createSortHandler = (property) => (event) => {
+    onRequestSort(event, property);
+  };
 
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 0 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
+    <TableHead>
+      <TableRow>
+        {headCells.map((headCell) => (
+          <TableCell
+            key={headCell.id}
+            align={headCell.numeric ? 'right' : 'left'}
+            padding={headCell.disablePadding ? 'none' : 'normal'}
+            sortDirection={orderBy === headCell.id ? order : false}
+          >
+            <TableSortLabel
+              active={orderBy === headCell.id}
+              direction={orderBy === headCell.id ? order : 'asc'}
+              onClick={createSortHandler(headCell.id)}
+            >
+              {headCell.label}
+            </TableSortLabel>
+          </TableCell>
+        ))}
+        <TableCell padding="normal"> </TableCell>
+      </TableRow>
+    </TableHead>
   );
 }
 
-const refreshPage = async () => {
-  window.location.reload(true);
+EnhancedTableHead.propTypes = {
+  onRequestSort: PropTypes.func.isRequired,
+  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
+  orderBy: PropTypes.string.isRequired,
 };
-
-const deactivateHandler = async (studentId) => {
-  const updatedStudent = await getStudentById(studentId);
-  updatedStudent.state = 'inactive';
-  await updateStudent(updatedStudent);
-  refreshPage();
-};
-
-const activateHandler = async (studentId) => {
-  const updatedStudent = await getStudentById(studentId);
-  updatedStudent.state = 'active';
-  await updateStudent(updatedStudent);
-  refreshPage();
-};
-
-const declineHandler = async (studentId) => {
-  const updatedStudent = await getStudentById(studentId);
-  updatedStudent.state = 'rejected';
-  await updateStudent(updatedStudent);
-  refreshPage();
-};
-
-const reassignCoachHandler = async (studentId, coachId) => {
-  const updatedStudent = await getStudentById(studentId);
-  updatedStudent.coachId = coachId;
-  await updateStudent(updatedStudent);
-  refreshPage();
-};
-
-TabPanel.propTypes = {
-  // eslint-disable-next-line react/require-default-props
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `full-width-tab-${index}`,
-    'aria-controls': `full-width-tabpanel-${index}`,
-  };
-}
 
 export default function StudentTable() {
-  const onBackClick = () => {
-    navigate(ROUTES.HOME);
-  };
-  const buttonText = '< Back to Home';
-  const navigate = useNavigate();
-  const toDetailDemo = () => {
-    navigate(ROUTES.STUDENT_INFO);
-  };
-
   const [students, setStudents] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [search, setSearch] = useState('');
 
   const refreshStudents = async () => {
-    setIsLoading(true);
-    const response = await getStudents();
-
-    setIsLoading(false);
-    setStudents(response);
+    const result = await getStudents();
+    setStudents(result);
   };
+
   useEffect(() => {
     refreshStudents();
   }, []);
 
-  const [tabValue, setTabValue] = useState(0);
-  const handleTabChange = (event, newValue) => {
-    setTabValue(newValue);
+  const newStudent = async (first, last, emailAddress, phoneNumber) => {
+    const student = {
+      firstName: first,
+      lastName: last,
+      email: emailAddress,
+      phone: phoneNumber,
+    };
+    await addStudent(student);
+    await refreshStudents();
+  };
+  const [order, setOrder] = React.useState('asc');
+  const [orderBy, setOrderBy] = React.useState('name');
+  const [selected, setSelected] = React.useState(students);
+  const [searchTerm, setSearchTerm] = React.useState('');
+  const [sortState, setSortState] = React.useState('');
+
+  const handleRequestSort = (event, property) => {
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(property);
+  };
+
+  const handleClick = (event, name) => {
+    const selectedIndex = selected.indexOf(name);
+    let newSelected = [];
+
+    if (selectedIndex === -1) {
+      newSelected = newSelected.concat(selected, name);
+    } else if (selectedIndex === 0) {
+      newSelected = newSelected.concat(selected.slice(1));
+    } else if (selectedIndex === selected.length - 1) {
+      newSelected = newSelected.concat(selected.slice(0, -1));
+    } else if (selectedIndex > 0) {
+      newSelected = newSelected.concat(
+        selected.slice(0, selectedIndex),
+        selected.slice(selectedIndex + 1)
+      );
+    }
+
+    setSelected(newSelected);
+  };
+
+  const [value, setValue] = React.useState(0);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    if (newValue === 0) {
+      setSortState('active');
+    }
+    if (newValue === 1) {
+      setSortState('inactive');
+    }
+    if (newValue === 2) {
+      setSortState('applied');
+    }
   };
 
   return (
-    <Box sx={{ width: '100%', height: '60%' }}>
-      <ProgressIndicatorOverlay active={isLoading} />
-      <Grid container spacing={0}>
-        <Box sx={{ bgcolor: 'background.paper', width: '25%' }}>
-          <AppBar position="static">
-            <Tabs
-              value={tabValue}
-              onChange={handleTabChange}
-              textColor="inherit"
-              variant="fullWidth"
-              TabIndicatorProps={{
-                style: {
-                  backgroundColor: '#FFFFFF',
-                  height: '3px',
-                },
-              }}
-            >
-              <Tab label="Active" {...a11yProps(0)} />
-              <Tab label="Inactive" {...a11yProps(1)} />
-              <Tab label="Applicants" {...a11yProps(2)} />
-            </Tabs>
-          </AppBar>
-        </Box>
-        <Grid item xs={3} />
-        <Grid item xs={4}>
-          <Box>
-            <SearchBar setSearch={setSearch} />
-          </Box>
+    <Paper sx={{ width: '100%' }}>
+      <Grid container spacing={1} alignItems="center">
+        <Grid item xs={8}>
+          <Tabs value={value} onChange={handleChange}>
+            <Tab label="Active" />
+            <Tab label="Inactive" />
+            <Tab label="Applied" />
+          </Tabs>
         </Grid>
         <Grid item xs={2}>
+          <TextField
+            value={searchTerm}
+            placeholder="Search..."
+            variant="outlined"
+            size="small"
+            margin="normal"
+            align="right"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+            }}
+          />
+        </Grid>
+        <Grid item xs={2} align="right" padding={2}>
           <StudentRegistryModal />
         </Grid>
       </Grid>
-      <TabPanel value={tabValue} index={0}>
-        <TableContainer component={Paper} sx={{ height: '69vh' }}>
-          <Table sx={{ minWidth: 10 }} stickyHeader>
-            <TableHead>
-              <StyledTableRow>
-                <StyledTableCell>Name</StyledTableCell>
-                <StyledTableCell align="left">Email</StyledTableCell>
-                <StyledTableCell align="left">Phone Number</StyledTableCell>
-                <StyledTableCell align="left">Coach</StyledTableCell>
-                <StyledTableCell align="left"> </StyledTableCell>
-              </StyledTableRow>
-            </TableHead>
-            <TableBody>
-              {students
-                .filter((post) => {
-                  if (post.state === 'active') {
-                    if (search === '') {
-                      return post;
-                    }
-                    if (
-                      post.firstName
-                        .toLowerCase()
-                        .includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                    if (
-                      post.lastName.toLowerCase().includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                    if (
-                      post.email !== null &&
-                      post.email.toLowerCase().includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                    if (
-                      post.studentCellPhone !== null &&
-                      post.studentCellPhone
-                        .toLowerCase()
-                        .includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                    if (
-                      post.coachId !== null &&
-                      getCoachById(post.coachId)
-                        .coachName.toLowerCase()
-                        .includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                    if (
-                      post.coachId === null &&
-                      'unassigned'.includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                  }
-                  return null;
-                })
-
-                .map((student) => (
-                  <StyledTableRow
+      <TableContainer>
+        <Table sx={{ minWidth: 750 }}>
+          <EnhancedTableHead
+            order={order}
+            orderBy={orderBy}
+            onRequestSort={handleRequestSort}
+          />
+          <TableBody>
+            {stableSort(
+              students.filter((item) => item.state === sortState),
+              getComparator(order, orderBy)
+            )
+              .filter((student) =>
+                student.firstName
+                  .concat(student.lastName)
+                  .concat(student.email)
+                  .concat(student.studentCellPhone)
+                  .concat(getCoachById(student.coachId).coachFirstName)
+                  .concat(getCoachById(student.coachId).coachLastName)
+                  .toLowerCase()
+                  .includes(searchTerm.toLowerCase())
+              )
+              .map((student, index) => {
+                return (
+                  <TableRow
+                    hover
+                    onClick={(event) => handleClick(event, student.id)}
+                    tabIndex={-1}
                     key={student.id}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
-                    <StyledTableCell component="th" scope="row">
-                      <Link
-                        component="button"
-                        variant="body2"
-                        onClick={toDetailDemo}
-                      >
-                        {student.lastName}, {student.firstName}
-                      </Link>
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {student.email || '--'}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {student.studentCellPhone || '--'}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      <CoachAssignModal
-                        confirmHandler={reassignCoachHandler}
-                        studentId={student.id}
-                        coachId={student.coachId}
-                      />
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      <StudentModal
-                        modalType="deactivate"
-                        studentId={student.id}
-                        confirmHandler={deactivateHandler}
-                      />
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </TabPanel>
-
-      <TabPanel value={tabValue} index={1}>
-        <TableContainer component={Paper} sx={{ height: '69vh' }}>
-          <Table sx={{ minWidth: 10 }}>
-            <TableHead>
-              <StyledTableRow>
-                <StyledTableCell>Name </StyledTableCell>
-                <StyledTableCell align="left">Email</StyledTableCell>
-                <StyledTableCell align="left">Phone Number</StyledTableCell>
-                <StyledTableCell align="left"> </StyledTableCell>
-              </StyledTableRow>
-            </TableHead>
-            <TableBody>
-              {students
-                .filter((post) => {
-                  if (post.state.includes('inactive')) {
-                    if (search === '') {
-                      return post;
-                    }
-                    if (
-                      post.firstName
-                        .toLowerCase()
-                        .includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                    if (
-                      post.lastName.toLowerCase().includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                    if (
-                      post.email.toLowerCase().includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                    if (
-                      post.studentCellPhone
-                        .toLowerCase()
-                        .includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                  }
-                  return null;
-                })
-                .map((student) => (
-                  <StyledTableRow
-                    key={student.id}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  >
-                    <StyledTableCell component="th" scope="row">
-                      <Link
-                        component="button"
-                        variant="body2"
-                        onClick={toDetailDemo}
-                      >
-                        {student.lastName}, {student.firstName}
-                      </Link>
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {student.email || '--'}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {student.studentCellPhone || '--'}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      <StudentModal
-                        modalType="reactivate"
-                        studentId={student.id}
-                        confirmHandler={activateHandler}
-                      />
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </TabPanel>
-
-      <TabPanel value={tabValue} index={2}>
-        <TableContainer component={Paper} sx={{ height: '69vh' }}>
-          <Table sx={{ minWidth: 10 }}>
-            <TableHead>
-              <StyledTableRow>
-                <StyledTableCell>Name </StyledTableCell>
-                <StyledTableCell align="left">Email</StyledTableCell>
-                <StyledTableCell align="left">Phone Number</StyledTableCell>
-                <StyledTableCell align="left"> </StyledTableCell>
-                <StyledTableCell align="left"> </StyledTableCell>
-              </StyledTableRow>
-            </TableHead>
-            <TableBody>
-              {students
-                .filter((post) => {
-                  if (post.state.includes('applied')) {
-                    if (search === '') {
-                      return post;
-                    }
-                    if (
-                      post.firstName
-                        .toLowerCase()
-                        .includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                    if (
-                      post.lastName.toLowerCase().includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                    if (
-                      post.email.toLowerCase().includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                    if (
-                      post.studentCellPhone
-                        .toLowerCase()
-                        .includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                  }
-                  return null;
-                })
-                .map((student) => (
-                  <StyledTableRow
-                    key={student.id}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  >
-                    <StyledTableCell component="th" scope="row">
-                      <Link
-                        component="button"
-                        variant="body2"
-                        onClick={toDetailDemo}
-                      >
-                        {student.lastName}, {student.firstName}
-                      </Link>
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {student.email || '--'}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {student.studentCellPhone || '--'}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      <StudentModal
-                        modalType="accept"
-                        confirmHandler={activateHandler}
-                        studentId={student.id}
-                      />
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      <StudentModal
-                        modalType="decline"
-                        confirmHandler={declineHandler}
-                        studentId={student.id}
-                      />
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </TabPanel>
-      <Button
-        variant="outlined"
-        size="small"
-        justify="left"
-        onClick={onBackClick}
-        sx={{ mt: '1vh' }}
-      >
-        {buttonText}
-      </Button>
-    </Box>
+                    <TableCell>
+                      {student.lastName}, {student.firstName}
+                    </TableCell>
+                    <TableCell align="left">{student.email}</TableCell>
+                    <TableCell align="left">
+                      {student.studentCellPhone}
+                    </TableCell>
+                    <TableCell>
+                      <Grid container spacing={2}>
+                        {sortState === 'active' && (
+                          <>
+                            <Grid item>wip</Grid>
+                            <Grid item>
+                              <StudentModal type="Deactivate" />
+                            </Grid>
+                            <Grid item>wip</Grid>
+                          </>
+                        )}
+                        {sortState === 'inactive' && (
+                          <Grid item>
+                            <StudentModal type="reactivate" />
+                          </Grid>
+                        )}
+                        {sortState === 'applied' && (
+                          <Grid item>
+                            <StudentModal type="activate" />
+                          </Grid>
+                        )}
+                      </Grid>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Paper>
   );
 }
