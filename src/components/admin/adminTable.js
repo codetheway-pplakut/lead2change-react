@@ -57,7 +57,7 @@ export default function AdminTable() {
 
   const refreshStudents = async () => {
     setIsLoading(true);
-    const response = await getStudents();
+    const response = await getAdmins();
 
     setIsLoading(false);
     setStudents(response);
