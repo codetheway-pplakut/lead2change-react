@@ -58,7 +58,7 @@ export default function StudentRegistryModal(props) {
         variant="contained"
         startIcon={<AddIcon />}
       >
-        Register Student
+        Student
       </Button>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>

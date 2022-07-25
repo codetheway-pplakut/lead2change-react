@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 export default function StudentModal(props) {
   const { modalType, confirmHandler, studentId } = props;
 
-  let useColor = 'warning';
+  let useColor = 'default';
   if (modalType === 'decline') {
     useColor = 'error';
   }
@@ -59,7 +59,7 @@ export default function StudentModal(props) {
               </Button>
             </Grid>
             <Grid item xs={6} align="center">
-              <Button variant="contained" onClick={handleClose} fullWidth>
+              <Button variant="outlined" onClick={handleClose} fullWidth>
                 Cancel
               </Button>
             </Grid>
