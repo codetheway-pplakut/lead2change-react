@@ -5,7 +5,6 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Paper from '@mui/material/Paper';
@@ -114,8 +113,6 @@ export default function CoachesList(props) {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('name');
   const [selected, setSelected] = React.useState(rows);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [searchTerm, setSearchTerm] = React.useState('');
   const [sortActive, setSortActive] = React.useState(true);
 
@@ -155,24 +152,6 @@ export default function CoachesList(props) {
       setSortActive(false);
     }
   };
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-  const emptyRows =
-    page > 0
-      ? Math.max(
-          0,
-          (1 + page) * rowsPerPage -
-            rows.filter((item) => item.active === sortActive).length
-        )
-      : 0;
-
   return (
     <Paper sx={{ width: '100%' }}>
       <Grid container alignItems="center">
@@ -222,7 +201,6 @@ export default function CoachesList(props) {
               rows.filter((item) => item.active === sortActive),
               getComparator(order, orderBy)
             )
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .filter((coach) =>
                 coach.coachFirstName
                   .concat(coach.coachLastName)
@@ -284,23 +262,9 @@ export default function CoachesList(props) {
                   </TableRow>
                 );
               })}
-            {emptyRows > 0 && (
-              <TableRow>
-                <TableCell colSpan={6} />
-              </TableRow>
-            )}
           </TableBody>
         </Table>
       </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
-        component="div"
-        count={rows.filter((item) => item.active === sortActive).length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
     </Paper>
   );
 }
