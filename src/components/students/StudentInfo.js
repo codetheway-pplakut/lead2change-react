@@ -61,7 +61,9 @@ export default function ResponsiveGrid(props) {
         }}
         sx={{ width: '100%' }}
       >
-        <h1>{students.studentFirstName}&rsquo;s Details</h1>
+        <h1>
+          {students.studentFirstName} {students.studentLastName}&rsquo;s Details
+        </h1>
       </Grid>
       <Grid item xs={4}>
         <Paper
@@ -89,28 +91,25 @@ export default function ResponsiveGrid(props) {
           </Grid>
           <Grid style={{ marginLeft: '2vh' }}>
             <StudentInfo>
-              <h3>Name: Aaditya Tiwari</h3>
+              <h3>Date of Birth: {students.studentDateOfBirth} </h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>Date of Birth: 02/04/2006, Age 16</h3>
+              <h3>Email Address: {students.studentEmail}</h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>Email Address: tiwariA@gmail.com</h3>
+              <h3>Phone Number: {students.studentCellPhone}</h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>Phone Number: 231-381-4814</h3>
+              <h3>Home Address: {students.studentAddress}</h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>Home Address: 12345 Demo street</h3>
+              <h3>Apt. #: {students.studentApartmentNumber}</h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>Apt. #: 42</h3>
+              <h3>State: {students.studentState}</h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>State: WI</h3>
-            </StudentInfo>
-            <StudentInfo>
-              <h3>Zip Code: 50021</h3>
+              <h3>Zip Code: {students.studentZipCode}</h3>
             </StudentInfo>
           </Grid>
         </Paper>

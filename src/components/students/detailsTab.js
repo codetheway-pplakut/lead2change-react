@@ -3,7 +3,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
 import PropTypes from 'prop-types';
-
+import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
@@ -12,6 +12,13 @@ import AppBar from '@mui/material/AppBar';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
+import { useParams } from 'react-router-dom';
+import StudentListModal from '../coaches/StudentListModal';
+import {
+  getStudents,
+  getStudentById,
+  updateStudent,
+} from '../../services/students/students';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -55,7 +62,15 @@ const GridText = styled(Paper)(({ theme }) => ({
 
 export default function TabsFunction() {
   const [value, setValue] = React.useState(0);
-
+  const { studentId } = useParams();
+  const [students, setStudents] = useState({});
+  useEffect(() => {
+    const currentStudent = async () => {
+      const currStudent = await getStudentById(studentId);
+      setStudents(currStudent);
+    };
+    currentStudent();
+  }, [studentId]);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -95,43 +110,56 @@ export default function TabsFunction() {
                 <GridText>
                   <h3 style={{ color: '#2656A5' }}>Post Secondary Plan</h3>
                   <h5>
-                    Plans After College: After College I plan to go and get a
-                    job as a Software Developer at a company such as google.
+                    Plans After High school: {students.planAfterHighSchool}
                   </h5>
-                  <h5>I have applied to a college: Yes</h5>
                   <h5>
-                    Colleges I’ve applied to/plan to apply to: 1. UW-Madison 2.
-                    Northwestern 3. Purdue
+                    I have applied to a college:{' '}
+                    {students.collegeApplicationStatus}
                   </h5>
-                  <h5>I have begun my work on my college essay: Yes</h5>
-                  <h5>I need help writing my college essay: No</h5>
-                  <h5>First choice of college: Northwestern</h5>
+                  <h5>
+                    Colleges I’ve applied to/plan to apply to: 1.{' '}
+                    {students.firstChoiceCollege} 2.{' '}
+                    {students.secondChoiceCollege}
+                    3. {students.thirdChoiceCollege}
+                  </h5>
+                  <h5>
+                    I have begun my work on my college essay:{' '}
+                    {students.collegeEssayStatus}
+                  </h5>
+                  <h5>
+                    I need help writing my college essay:{' '}
+                    {students.collegeEssayHelp}
+                  </h5>
+                  <h5>
+                    First choice of college: {students.firstChoiceCollege}
+                  </h5>
                   <h3 style={{ color: '#2656A5' }}>
                     College Entrance Exam Information:
                   </h3>
                   <h5>
-                    PACT Score: 35
-                    <div>Date of PACT: 10/22/2021</div>
+                    PACT Score: {students.pactTestScore}
+                    <div>Date of PACT: {students.pactTestDate}</div>
                   </h5>
                   <h5>
-                    PSAT Score: 1500
-                    <div> Date of PSAT: 11/29/2021</div>
+                    PSAT Score: {students.psatTestScore}
+                    <div> Date of PSAT: {students.psatTestDate}</div>
                   </h5>
                   <h5>
-                    ACT Score: 34
-                    <div> Date of ACT: 3/3/2022</div>
+                    ACT Score: {students.actTestDate}
+                    <div> Date of ACT: {students.actTestScore}</div>
                   </h5>
                   <h5>
-                    SAT Score: 1580
-                    <div> Date of SAT: 5/19/2022 </div>
+                    SAT Score: {students.satTestDate}
+                    <div> Date of SAT: {students.satTestScore} </div>
                   </h5>
                   <h3 style={{ color: '#2656A5' }}>Financial Aid:</h3>
                   <h5>
-                    I have already completed the financial aid process: No
+                    I have already completed the financial aid process:{' '}
+                    {students.financialAidProcessComplete}
                   </h5>
                   <h5>
                     I need assistance filling out my FAFSA/Financial aid forms:
-                    No
+                    {students.supportNeeded}
                   </h5>
                   <h5>Support they need: None</h5>
                 </GridText>
@@ -186,26 +214,30 @@ export default function TabsFunction() {
               <Grid item xs={12} style={{ height: '64vh' }}>
                 <GridText>
                   <h3 style={{ color: '#2656A5' }}>Parent Information</h3>
-                  <h5>First Name: Bob</h5>
-                  <h5>Last Name: Doe</h5>
-                  <h5>Address: 12345 Demo Street</h5>
-                  <h5>Parent Apartment Number: 42</h5>
-                  <h5>City: Milwaukee</h5>
-                  <h5>State: Wisconsin</h5>
-                  <h5>Zip Code: 50021</h5>
-                  <h5>Home Phone: 421-422-4123</h5>
-                  <h5>Cell Phone: 234-567-8901</h5>
-                  <h5>Parent Email: doeB@gmail.com</h5>
+                  <h5>First Name: {students.parentFirstName}</h5>
+                  <h5>Last Name: {students.parentLastName}</h5>
+                  <h5>Address: {students.address}</h5>
+                  <h5>
+                    Parent Apartment Number: {students.parentApartmentNumber}
+                  </h5>
+                  <h5>City: {students.parentCity}</h5>
+                  <h5>State: {students.parentState}</h5>
+                  <h5>Zip Code: {students.parentZipCode}</h5>
+                  <h5>Home Phone: {students.parentHomePhone}</h5>
+                  <h5>Cell Phone: {students.parentCellPhone}</h5>
+                  <h5>Parent Email: {students.parentEmail}</h5>
                   <h3 style={{ color: '#2656A5' }}>Guidance Couselor Info:</h3>
-                  <h5>I know my guidance counselor: Yes</h5>
+                  <h5>
+                    I know my guidance counselor:{' '}
+                    {students.knowGuidanceCounselor}
+                  </h5>
                   <h3 style={{ color: '#2656A5' }}>Admin Details:</h3>
-                  <h5>Activity Status: Active</h5>
-                  <h5>Acceptance Status: Accepted</h5>
+                  <h5>Activity Status: {students.state}</h5>
                   <h3 style={{ color: '#2656A5' }}>Signatures</h3>
-                  <h5>Student Signature: Aadi Tiwari</h5>
-                  <h5>Date Signed: 2/1/22</h5>
-                  <h5>Parent Signature: Bob Doe</h5>
-                  <h5>Date Signed: 2/1/22</h5>
+                  <h5>Student Signature: {students.studentSignature}</h5>
+                  <h5>Date Signed: {students.studentSignatureDate}</h5>
+                  <h5>Parent Signature: {students.parentSignature}</h5>
+                  <h5>Date Signed: {students.parentSignatureDate}</h5>
                 </GridText>
               </Grid>
             </Grid>
