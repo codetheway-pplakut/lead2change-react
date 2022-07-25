@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
 
 import StudentTable from './studentTable';
 import StudentModal from './studentModal';
 
 export default function Student(props) {
   return (
-    <div>
+    <Box>
       <Grid container>
         <Grid
           item
@@ -33,7 +34,7 @@ export default function Student(props) {
       >
         <StudentTable />
       </Stack>
-    </div>
+    </Box>
   );
 }
 

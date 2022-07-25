@@ -97,6 +97,7 @@ export default function CoachAssignModal(props) {
                   value={coach.id}
                   control={<Radio />}
                   label={handleGetCoach(coach.id)}
+                  key={coach.id}
                 />
               ))}
             </RadioGroup>

@@ -40,7 +40,7 @@ export default function StudentModal(props) {
   };
 
   return (
-    <div>
+    <Box>
       {modalType !== 'accept' && modalType !== 'decline' && (
         <Button onClick={handleOpen} variant="contained" color={useColor}>
           {modalType}
@@ -86,7 +86,7 @@ export default function StudentModal(props) {
           </Grid>
         </Box>
       </Modal>
-    </div>
+    </Box>
   );
 }
 
