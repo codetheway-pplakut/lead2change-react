@@ -96,8 +96,8 @@ export default function SignUpForm(props) {
             onChange={(event) => onStudentDateOfBirthChange(event.target.value)}
             type="date"
             value={studentDateOfBirth}
-            error={studentAge < 9}
-            helperText={studentAge > 9 ? ' ' : 'Age Must Be Atleast 9'}
+            error={studentAge < 13}
+            helperText={studentAge > 13 ? ' ' : 'Age Must Be Atleast 13'}
           />
         </Grid>
         <Grid item xs={12}>
