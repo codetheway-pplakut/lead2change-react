@@ -6,10 +6,15 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { experimentalStyled as styled } from '@mui/material/styles';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ROUTES from '../../constants/routes';
 
 import TabsFunction from './detailsTab';
+import {
+  getStudents,
+  getStudentById,
+  updateStudent,
+} from '../../services/students/students';
 
 const StudentInfo = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -27,6 +32,8 @@ const StudentInfo = styled(Box)(({ theme }) => ({
 }));
 
 export default function ResponsiveGrid(props) {
+  const { studentId } = useParams();
+  const currentStudent = getStudentById(studentId);
   const onBackClick = () => {
     navigate(ROUTES.STUDENTS);
   };
@@ -45,7 +52,7 @@ export default function ResponsiveGrid(props) {
         }}
         sx={{ width: '100%' }}
       >
-        <h1>AADI&rsquo;S DETAILS</h1>
+        <h1>{currentStudent.studentFirstName}&rsquo;S DETAILS</h1>
       </Grid>
       <Grid item xs={4}>
         <Paper

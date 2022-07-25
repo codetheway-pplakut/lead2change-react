@@ -38,6 +38,10 @@ export default function Root() {
               <Route path={ROUTES.RESET_PASS} element={<Reset />} />
               <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
               <Route path={ROUTES.INTERVIEW_PAGE} element={<InterviewPage />} />
+              <Route
+                path="/StudentInfo/:studentId"
+                element={<ResponsiveGrid />}
+              />
               <Route path={ROUTES.TABS} element={<BasicTabs />} />
               <Route path={ROUTES.COACHES} element={<Coaches />} />
               <Route path={ROUTES.STUDENTS} element={<Student />} />
