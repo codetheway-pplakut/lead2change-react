@@ -9,12 +9,12 @@ import Grid from '@mui/material/Grid';
 import Modal from '@mui/material/Modal';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
+import Typography from '@mui/material/Typography';
 
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 
 import { getCoachById, getCoaches } from '../../services/coaches/coaches';
 
@@ -82,8 +82,10 @@ export default function CoachAssignModal(props) {
       </IconButton>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
+          <Typography variant="h6" align="center" component="span">
+            Assign A Coach
+          </Typography>
           <FormControl>
-            <FormLabel>Coaches</FormLabel>
             <RadioGroup value={value} onChange={handleCoachChange}>
               <FormControlLabel
                 value="Unassigned"

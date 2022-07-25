@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
-// import TableContainer from '@mui/material/TableContainer';
+import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
@@ -17,17 +18,17 @@ import Grid from '@mui/material/Grid';
 import { TextField } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
+import AddIcon from '@mui/icons-material/Add';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 
 import ProgressIndicatorOverlay from '../progress-indicator-overlay/progress-indicator-overlay';
 
-// import CoachAssignModal from './student-coach-assign-modal';
+import CoachAssignModal from './student-coach-assign-modal';
 import StudentModal from './studentModal';
 import {
   getStudents,
   getStudentById,
-  // addStudent,
   updateStudent,
 } from '../../services/students/students';
 import { getCoachById } from '../../services/coaches/coaches';
@@ -45,7 +46,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 0 }}>
-          <Typography component="span">{children}</Typography>
+          <Typography>{children}</Typography>
         </Box>
       )}
     </div>
@@ -77,12 +78,12 @@ const declineHandler = async (studentId) => {
   refreshPage();
 };
 
-// const reassignCoachHandler = async (studentId, coachId) => {
-//   const updatedStudent = await getStudentById(studentId);
-//   updatedStudent.coachId = coachId;
-//   await updateStudent(updatedStudent);
-//   refreshPage();
-// };
+const reassignCoachHandler = async (studentId, coachId) => {
+  const updatedStudent = await getStudentById(studentId);
+  updatedStudent.coachId = coachId;
+  await updateStudent(updatedStudent);
+  refreshPage();
+};
 
 TabPanel.propTypes = {
   // eslint-disable-next-line react/require-default-props
@@ -196,18 +197,16 @@ function EnhancedTableHead(props) {
   };
 
   return (
-    <TableHead component="span">
-      <TableRow component="span">
+    <TableHead>
+      <TableRow>
         {headCells.map((headCell) => (
           <TableCell
-            component="span"
             key={headCell.id}
             align={headCell.numeric ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel
-              component="span"
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
@@ -216,9 +215,7 @@ function EnhancedTableHead(props) {
             </TableSortLabel>
           </TableCell>
         ))}
-        <TableCell padding="normal" component="span">
-          {' '}
-        </TableCell>
+        <TableCell padding="normal"> </TableCell>
       </TableRow>
     </TableHead>
   );
@@ -277,251 +274,340 @@ export default function StudentTable() {
   };
 
   return (
-    <Box sx={{ width: '100%', height: '60%' }} component="span">
-      <ProgressIndicatorOverlay active={isLoading} component="span" />
-      <Box sx={{ bgcolor: 'background.paper', width: '25%' }} component="span">
-        <AppBar position="static">
-          <Tabs
-            value={tabValue}
-            onChange={handleTabChange}
-            textColor="inherit"
-            variant="fullWidth"
-            TabIndicatorProps={{
-              style: {
-                backgroundColor: '#FFFFFF',
-                height: '3px',
-              },
+    <Box sx={{ width: '100%', height: '60%' }}>
+      <ProgressIndicatorOverlay active={isLoading} />
+      <Grid container spacing={2} sx={{ pr: '2vh' }}>
+        <Grid item xs={6}>
+          <Box width="33vh">
+            <AppBar position="static">
+              <Tabs
+                value={tabValue}
+                onChange={handleTabChange}
+                textColor="inherit"
+                TabIndicatorProps={{
+                  style: {
+                    backgroundColor: '#FFFFFF',
+                    height: '3px',
+                  },
+                }}
+              >
+                <Tab label="Active" {...a11yProps(0)} />
+                <Tab label="Inactive" {...a11yProps(1)} />
+                <Tab label="Applicants" {...a11yProps(2)} />
+              </Tabs>
+            </AppBar>
+          </Box>
+        </Grid>
+        <Grid item xs={5} align="right">
+          <TextField
+            value={search}
+            placeholder="Search..."
+            variant="outlined"
+            size="small"
+            margin="normal"
+            align="right"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
             }}
-          >
-            <Tab label="Active" {...a11yProps(0)} />
-            <Tab label="Inactive" {...a11yProps(1)} />
-            <Tab label="Applicants" {...a11yProps(2)} />
-          </Tabs>
-        </AppBar>
-      </Box>
-      <TextField
-        component="span"
-        value={search}
-        placeholder="Search..."
-        variant="outlined"
-        size="small"
-        margin="normal"
-        align="right"
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon />
-            </InputAdornment>
-          ),
-        }}
-        onChange={(e) => {
-          setSearch(e.target.value);
-        }}
-      />
-      <TabPanel value={tabValue} index={0} component="span">
-        <Table
-          component={(Paper, 'span')}
-          sx={{ minWidth: 10, height: '69vh' }}
-          stickyHeader
-        >
-          <EnhancedTableHead
-            component="span"
-            order={order}
-            orderBy={orderBy}
-            onRequestSort={handleRequestSort}
-            headCells={headCells1}
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
           />
-          <TableBody component="span">
-            {stableSort(students, getComparator(order, orderBy))
-              .filter((post) => {
-                if (search === '') {
-                  return post;
-                }
-                if (
-                  post.firstName.toLowerCase().includes(search.toLowerCase())
-                ) {
-                  return post;
-                }
-                if (
-                  post.lastName.toLowerCase().includes(search.toLowerCase())
-                ) {
-                  return post;
-                }
-                if (
-                  post.email !== null &&
-                  post.email.toLowerCase().includes(search.toLowerCase())
-                ) {
-                  return post;
-                }
-                if (
-                  post.studentCellPhone !== null &&
-                  post.studentCellPhone
-                    .toLowerCase()
-                    .includes(search.toLowerCase())
-                ) {
-                  return post;
-                }
-                if (
-                  post.coachId !== null &&
-                  getCoachById(post.coachId)
-                    .coachName.toLowerCase()
-                    .includes(search.toLowerCase())
-                ) {
-                  return post;
-                }
-                if (
-                  post.coachId === null &&
-                  'unassigned'.includes(search.toLowerCase())
-                ) {
-                  return post;
-                }
-                return null;
-              })
-              .map((student) => {
-                return (
-                  <TableRow tabIndex={0} key={student.id} component="span">
-                    <TableCell component="span">
-                      {student.lastName}, {student.firstName}
-                    </TableCell>
-                    <TableCell align="left" component="span">
-                      {student.email}
-                    </TableCell>
-                    <TableCell align="left" component="span">
-                      {student.studentCellPhone}
-                    </TableCell>
-                    <TableCell component="span">
-                      <Grid container spacing={2} component="span">
-                        <Grid item component="span">
-                          <StudentModal
-                            modalType="accept"
-                            studentId={student.id}
-                            confirmHandler={deactivateHandler}
-                          />
+        </Grid>
+        <Grid item xs={1} align="left">
+          <Button
+            variant="contained"
+            startIcon={<AddIcon />}
+            sx={{ mt: '2vh' }}
+          >
+            Student
+          </Button>
+        </Grid>
+      </Grid>
+      <TabPanel value={tabValue} index={0}>
+        <TableContainer component={Paper} sx={{ height: '69vh' }}>
+          <Table sx={{ minWidth: 10 }} stickyHeader>
+            <EnhancedTableHead
+              order={order}
+              orderBy={orderBy}
+              onRequestSort={handleRequestSort}
+              headCells={headCells1}
+            />
+            <TableBody>
+              {stableSort(students, getComparator(order, orderBy))
+                .filter((post) => {
+                  if (post.state === 'active') {
+                    if (search === '') {
+                      return post;
+                    }
+                    if (
+                      post.firstName
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.lastName.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.email !== null &&
+                      post.email.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.studentCellPhone !== null &&
+                      post.studentCellPhone
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.coachId !== null &&
+                      getCoachById(post.coachId)
+                        .coachName.toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.coachId === null &&
+                      'unassigned'.includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                  }
+                  return null;
+                })
+                .map((student) => {
+                  return (
+                    <TableRow tabIndex={0} key={student.id}>
+                      <TableCell>
+                        {student.lastName}, {student.firstName}
+                      </TableCell>
+                      <TableCell align="left">{student.email}</TableCell>
+                      <TableCell align="left">
+                        {student.studentCellPhone}
+                      </TableCell>
+                      <TableCell>
+                        <CoachAssignModal
+                          confirmHandler={reassignCoachHandler}
+                          studentId={student.id}
+                          coachId={student.coachId}
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <Grid container spacing={2}>
+                          <Grid item>
+                            <StudentModal
+                              modalType="deactivate"
+                              studentId={student.id}
+                              confirmHandler={deactivateHandler}
+                            />
+                          </Grid>
                         </Grid>
-                      </Grid>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </TabPanel>
 
       <TabPanel value={tabValue} index={1}>
-        <Table
-          component={Paper}
-          sx={{ minWidth: 10, height: '69vh' }}
-          stickyHeader
-        >
-          <EnhancedTableHead
-            component="span"
-            order={order}
-            orderBy={orderBy}
-            onRequestSort={handleRequestSort}
-            headCells={headCells2}
-          />
-          <TableBody component="span">
-            {stableSort(students, getComparator(order, orderBy))
-              .filter((student) =>
-                student.firstName
-                  .concat(student.studentLastName)
-                  .concat(student.email)
-                  .concat(student.studentCellPhone)
-                  .toLowerCase()
-                  .includes(search.toLowerCase())
-              )
-              .map((student) => {
-                return (
-                  <TableRow tabIndex={0} key={student.id} component="span">
-                    <TableCell component="span">
-                      {student.lastName}, {student.firstName}
-                    </TableCell>
-                    <TableCell align="left" component="span">
-                      {student.email}
-                    </TableCell>
-                    <TableCell align="left" component="span">
-                      {student.studentCellPhone}
-                    </TableCell>
-                    <TableCell component="span">
-                      <Grid container spacing={2} component="span">
-                        <Grid item component="span">
-                          <StudentModal
-                            modalType="accept"
-                            studentId={student.id}
-                            confirmHandler={activateHandler}
-                          />
+        <TableContainer component={Paper} sx={{ height: '69vh' }}>
+          <Table sx={{ minWidth: 10 }} stickyHeader>
+            <EnhancedTableHead
+              order={order}
+              orderBy={orderBy}
+              onRequestSort={handleRequestSort}
+              headCells={headCells2}
+            />
+            <TableBody>
+              {stableSort(students, getComparator(order, orderBy))
+                .filter((post) => {
+                  if (post.state === 'inactive') {
+                    if (search === '') {
+                      return post;
+                    }
+                    if (
+                      post.firstName
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.lastName.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.email !== null &&
+                      post.email.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.studentCellPhone !== null &&
+                      post.studentCellPhone
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.coachId !== null &&
+                      getCoachById(post.coachId)
+                        .coachName.toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.coachId === null &&
+                      'unassigned'.includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                  }
+                  return null;
+                })
+                .map((student) => {
+                  return (
+                    <TableRow tabIndex={0} key={student.id}>
+                      <TableCell>
+                        {student.lastName}, {student.firstName}
+                      </TableCell>
+                      <TableCell align="left">{student.email}</TableCell>
+                      <TableCell align="left">
+                        {student.studentCellPhone}
+                      </TableCell>
+                      <TableCell>
+                        <Grid container spacing={2}>
+                          <Grid item>
+                            <StudentModal
+                              modalType="reactivate"
+                              studentId={student.id}
+                              confirmHandler={activateHandler}
+                            />
+                          </Grid>
                         </Grid>
-                      </Grid>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </TabPanel>
 
       <TabPanel value={tabValue} index={2}>
-        <Table
-          component={(Paper, 'span')}
-          sx={{ minWidth: 10, height: '69vh' }}
-          stickyHeader
-        >
-          <EnhancedTableHead
-            component="span"
-            order={order}
-            orderBy={orderBy}
-            onRequestSort={handleRequestSort}
-            headCells={headCells3}
-          />
-          <TableBody component="span">
-            {stableSort(students, getComparator(order, orderBy))
-              .filter((student) =>
-                student.firstName
-                  .concat(student.lastName)
-                  .concat(student.email)
-                  .concat(student.studentCellPhone)
-                  .toLowerCase()
-                  .includes(search.toLowerCase())
-              )
-              .map((student) => {
-                return (
-                  <TableRow tabIndex={0} key={student.id} component="span">
-                    <TableCell component="span">
-                      {student.lastName}, {student.firstName}
-                    </TableCell>
-                    <TableCell align="left" component="span">
-                      {student.email}
-                    </TableCell>
-                    <TableCell align="left" component="span">
-                      {student.studentCellPhone}
-                    </TableCell>
-                    <TableCell component="span">
-                      <Grid container spacing={2} component="span">
-                        <Grid item component="span">
-                          <StudentModal
-                            modalType="accept"
-                            studentId={student.id}
-                            confirmHandler={activateHandler}
-                          />
+        <TableContainer component={Paper} sx={{ height: '69vh' }}>
+          <Table sx={{ minWidth: 10 }} stickyHeader>
+            <EnhancedTableHead
+              order={order}
+              orderBy={orderBy}
+              onRequestSort={handleRequestSort}
+              headCells={headCells3}
+            />
+            <TableBody>
+              {stableSort(students, getComparator(order, orderBy))
+                .filter((post) => {
+                  if (post.state === 'applied') {
+                    if (search === '') {
+                      return post;
+                    }
+                    if (
+                      post.firstName
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.lastName.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.email !== null &&
+                      post.email.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.studentCellPhone !== null &&
+                      post.studentCellPhone
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.coachId !== null &&
+                      getCoachById(post.coachId)
+                        .coachName.toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.coachId === null &&
+                      'unassigned'.includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                  }
+                  return null;
+                })
+                .map((student) => {
+                  return (
+                    <TableRow tabIndex={0} key={student.id}>
+                      <TableCell>
+                        {student.lastName}, {student.firstName}
+                      </TableCell>
+                      <TableCell align="left">{student.email}</TableCell>
+                      <TableCell align="left">
+                        {student.studentCellPhone}
+                      </TableCell>
+                      <TableCell>
+                        <Grid container spacing={2}>
+                          <Grid item>
+                            <StudentModal
+                              modalType="accept"
+                              studentId={student.id}
+                              confirmHandler={activateHandler}
+                            />
+                          </Grid>
                         </Grid>
-                      </Grid>
-                    </TableCell>
-                    <TableCell component="span">
-                      <Grid container spacing={2} component="span">
-                        <Grid item component="span">
-                          <StudentModal
-                            modalType="decline"
-                            studentId={student.id}
-                            confirmHandler={declineHandler}
-                          />
+                      </TableCell>
+                      <TableCell>
+                        <Grid container spacing={2}>
+                          <Grid item>
+                            <StudentModal
+                              modalType="decline"
+                              studentId={student.id}
+                              confirmHandler={declineHandler}
+                            />
+                          </Grid>
                         </Grid>
-                      </Grid>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </TabPanel>
     </Box>
   );

@@ -6,11 +6,14 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import CheckIcon from '@mui/icons-material/Check';
 
 export default function StudentModal(props) {
   const { modalType, confirmHandler, studentId } = props;
 
-  let useColor = 'warning';
+  let useColor = 'primary';
   if (modalType === 'decline') {
     useColor = 'error';
   } else if (modalType === 'accept') {
@@ -38,9 +41,21 @@ export default function StudentModal(props) {
 
   return (
     <div>
-      <Button onClick={handleOpen} variant="contained" color={useColor}>
-        {modalType}
-      </Button>
+      {modalType !== 'accept' && modalType !== 'decline' && (
+        <Button onClick={handleOpen} variant="contained" color={useColor}>
+          {modalType}
+        </Button>
+      )}
+      {modalType === 'accept' && (
+        <IconButton color={useColor} onClick={handleOpen}>
+          <CheckIcon />
+        </IconButton>
+      )}
+      {modalType === 'decline' && (
+        <IconButton color={useColor} onClick={handleOpen}>
+          <CloseIcon />
+        </IconButton>
+      )}
       <Modal open={open} onClose={handleClose}>
         <Box sx={style} component="span">
           <Typography variant="h6" align="center" component="span">
