@@ -94,6 +94,21 @@ export default function Coaches() {
       {coachesExist && (
         <ThemeProvider theme={theme}>
           <CssBaseline>
+            <Grid container>
+              <Grid
+                item
+                align="center"
+                style={{
+                  color: '#FFFFFF',
+                  backgroundColor: '#004cbb',
+                  marginBottom: '3vh',
+                  padding: '0.1vh',
+                }}
+                sx={{ width: '100%' }}
+              >
+                <h1>COACHES</h1>
+              </Grid>
+            </Grid>
             <Grid container justifyContent="center" spacing={2}>
               <Grid item xs={10}>
                 <Grid container justifyContent="right" spacing={1}>
