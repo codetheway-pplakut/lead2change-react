@@ -113,13 +113,13 @@ function stableSort(array, comparator) {
 
 const headCells1 = [
   {
-    id: 'name',
+    id: 'studentLastName',
     numeric: false,
     disablePadding: false,
     label: 'Name',
   },
   {
-    id: 'email',
+    id: 'studentEmail',
     numeric: false,
     disablePadding: false,
     label: 'Email',
@@ -139,13 +139,13 @@ const headCells1 = [
 ];
 const headCells2 = [
   {
-    id: 'name',
+    id: 'studentFirstName',
     numeric: false,
     disablePadding: false,
     label: 'Name',
   },
   {
-    id: 'email',
+    id: 'studentEmail',
     numeric: false,
     disablePadding: false,
     label: 'Email',
@@ -165,13 +165,13 @@ const headCells2 = [
 ];
 const headCells3 = [
   {
-    id: 'name',
+    id: 'studentFirstName',
     numeric: false,
     disablePadding: false,
     label: 'Name',
   },
   {
-    id: 'email',
+    id: 'studentEmail',
     numeric: false,
     disablePadding: false,
     label: 'Email',
@@ -334,8 +334,6 @@ export default function StudentTable() {
                     .concat(student.lastName)
                     .concat(student.email)
                     .concat(student.studentCellPhone)
-                    .concat(getCoachById(student.coachId).coachFirstName)
-                    .concat(getCoachById(student.coachId).coachLastName)
                     .toLowerCase()
                     .includes(search.toLowerCase())
                 )
@@ -383,11 +381,9 @@ export default function StudentTable() {
               )
                 .filter((student) =>
                   student.firstName
-                    .concat(student.lastName)
+                    .concat(student.studentLastName)
                     .concat(student.email)
                     .concat(student.studentCellPhone)
-                    .concat(getCoachById(student.coachId).coachFirstName)
-                    .concat(getCoachById(student.coachId).coachLastName)
                     .toLowerCase()
                     .includes(search.toLowerCase())
                 )
@@ -438,8 +434,6 @@ export default function StudentTable() {
                     .concat(student.lastName)
                     .concat(student.email)
                     .concat(student.studentCellPhone)
-                    .concat(getCoachById(student.coachId).coachFirstName)
-                    .concat(getCoachById(student.coachId).coachLastName)
                     .toLowerCase()
                     .includes(search.toLowerCase())
                 )
