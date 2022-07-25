@@ -7,6 +7,9 @@ import Stack from '@mui/material/Stack';
 import StudentTable from './studentTable';
 import StudentModal from './studentModal';
 
+import CreateGoalModal from './create-goal-modal';
+// TODO remove this once testing is done
+
 export default function Student(props) {
   return (
     <div>
@@ -33,6 +36,7 @@ export default function Student(props) {
       >
         <StudentTable />
       </Stack>
+      <CreateGoalModal />
     </div>
   );
 }
