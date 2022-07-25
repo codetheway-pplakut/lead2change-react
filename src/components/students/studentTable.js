@@ -325,18 +325,51 @@ export default function StudentTable() {
               headCells={headCells1}
             />
             <TableBody>
-              {stableSort(
-                students.filter((item) => item.state === 'active'),
-                getComparator(order, orderBy)
-              )
-                .filter((student) =>
-                  student.firstName
-                    .concat(student.lastName)
-                    .concat(student.email)
-                    .concat(student.studentCellPhone)
-                    .toLowerCase()
-                    .includes(search.toLowerCase())
-                )
+              {stableSort(students, getComparator(order, orderBy))
+                .filter((post) => {
+                  if (search === '') {
+                    return post;
+                  }
+                  if (
+                    post.firstName.toLowerCase().includes(search.toLowerCase())
+                  ) {
+                    return post;
+                  }
+                  if (
+                    post.lastName.toLowerCase().includes(search.toLowerCase())
+                  ) {
+                    return post;
+                  }
+                  if (
+                    post.email !== null &&
+                    post.email.toLowerCase().includes(search.toLowerCase())
+                  ) {
+                    return post;
+                  }
+                  if (
+                    post.studentCellPhone !== null &&
+                    post.studentCellPhone
+                      .toLowerCase()
+                      .includes(search.toLowerCase())
+                  ) {
+                    return post;
+                  }
+                  if (
+                    post.coachId !== null &&
+                    getCoachById(post.coachId)
+                      .coachName.toLowerCase()
+                      .includes(search.toLowerCase())
+                  ) {
+                    return post;
+                  }
+                  if (
+                    post.coachId === null &&
+                    'unassigned'.includes(search.toLowerCase())
+                  ) {
+                    return post;
+                  }
+                  return null;
+                })
                 .map((student) => {
                   return (
                     <TableRow tabIndex={0} key={student.id}>
@@ -353,6 +386,7 @@ export default function StudentTable() {
                             <StudentModal
                               type="Deactivate"
                               studentId={student.id}
+                              confirmHandler={deactivateHandler}
                             />
                           </Grid>
                         </Grid>
@@ -401,8 +435,9 @@ export default function StudentTable() {
                         <Grid container spacing={2}>
                           <Grid item>
                             <StudentModal
-                              modalType="Deactivate"
+                              modalType="Reactivate"
                               studentId={student.id}
+                              confirmHandler={activateHandler}
                             />
                           </Grid>
                         </Grid>
@@ -453,6 +488,7 @@ export default function StudentTable() {
                             <StudentModal
                               modalType="Accept"
                               studentId={student.id}
+                              confirmHandler={activateHandler}
                             />
                           </Grid>
                         </Grid>
@@ -463,6 +499,7 @@ export default function StudentTable() {
                             <StudentModal
                               modalType="Decline"
                               studentId={student.id}
+                              confirmHandler={declineHandler}
                             />
                           </Grid>
                         </Grid>
