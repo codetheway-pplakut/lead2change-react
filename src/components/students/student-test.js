@@ -1,9 +1,9 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 import StudentTable from './studentTable';
 import StudentModal from './studentModal';
@@ -11,21 +11,9 @@ import StudentModal from './studentModal';
 export default function Student(props) {
   return (
     <Box>
-      <Grid container>
-        <Grid
-          item
-          align="center"
-          style={{
-            backgroundColor: '#2656A5',
-            marginBottom: '2vh',
-            color: '#FFFFFF',
-            padding: '0.1vh',
-          }}
-          sx={{ width: '100%' }}
-        >
-          <h1>STUDENTS</h1>
-        </Grid>
-      </Grid>
+      <Typography align="center" variant="h3" component="h4">
+        STUDENTS
+      </Typography>
       <Stack
         spacing={2}
         justifyContent="center"
