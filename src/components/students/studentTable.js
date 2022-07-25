@@ -136,6 +136,12 @@ const headCells1 = [
     disablePadding: false,
     label: 'Coach',
   },
+  {
+    id: 'empty',
+    numeric: false,
+    disablePadding: false,
+    label: '',
+  },
 ];
 const headCells2 = [
   {
@@ -155,6 +161,12 @@ const headCells2 = [
     numeric: false,
     disablePadding: false,
     label: 'Phone Number',
+  },
+  {
+    id: 'empty',
+    numeric: false,
+    disablePadding: false,
+    label: '',
   },
   {
     id: 'empty',
@@ -183,10 +195,16 @@ const headCells3 = [
     label: 'Phone Number',
   },
   {
-    id: 'empty',
+    id: 'accept',
     numeric: false,
     disablePadding: false,
-    label: '',
+    label: 'Accept',
+  },
+  {
+    id: 'reject',
+    numeric: false,
+    disablePadding: false,
+    label: 'Reject',
   },
 ];
 
@@ -215,7 +233,6 @@ function EnhancedTableHead(props) {
             </TableSortLabel>
           </TableCell>
         ))}
-        <TableCell padding="normal"> </TableCell>
       </TableRow>
     </TableHead>
   );
@@ -329,7 +346,7 @@ export default function StudentTable() {
         </Grid>
       </Grid>
       <TabPanel value={tabValue} index={0}>
-        <TableContainer component={Paper} sx={{ height: '69vh' }}>
+        <TableContainer component={Paper} sx={{ height: '68vh' }}>
           <Table sx={{ minWidth: 10 }} stickyHeader>
             <EnhancedTableHead
               order={order}
@@ -424,7 +441,7 @@ export default function StudentTable() {
       </TabPanel>
 
       <TabPanel value={tabValue} index={1}>
-        <TableContainer component={Paper} sx={{ height: '69vh' }}>
+        <TableContainer component={Paper} sx={{ height: '68vh' }}>
           <Table sx={{ minWidth: 10 }} stickyHeader>
             <EnhancedTableHead
               order={order}
@@ -512,7 +529,7 @@ export default function StudentTable() {
       </TabPanel>
 
       <TabPanel value={tabValue} index={2}>
-        <TableContainer component={Paper} sx={{ height: '69vh' }}>
+        <TableContainer component={Paper} sx={{ height: '68vh' }}>
           <Table sx={{ minWidth: 10 }} stickyHeader>
             <EnhancedTableHead
               order={order}
