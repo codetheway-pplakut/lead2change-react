@@ -14,7 +14,7 @@ export default function loginUser(props){
 
     return (
         <div>
-            <p>{GetID()}</p>
+            <p>Hello {GetID()}</p>
         </div>
     );
 }

@@ -60,7 +60,7 @@ export default function SampleNavbar() {
                 </Grid>
                 <Grid item xl={2}>
                     <Typography color="white">
-                        <LoginUser/>
+                        <LoginUser />
                     </Typography>
                 </Grid>
               </Grid>

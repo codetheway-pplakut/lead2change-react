@@ -32,7 +32,7 @@ function AuthenticationProvider(props) {
 
     setAuthenticated(true);
     setToken(response.token);
-    setID(response.id);
+    setID(response.username);
 
     return response;
   }
