@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 export default function StudentModal(props) {
   const { modalType, confirmHandler, studentId } = props;
 
-  let useColor = 'default';
+  let useColor = 'warning';
   if (modalType === 'decline') {
     useColor = 'error';
   }

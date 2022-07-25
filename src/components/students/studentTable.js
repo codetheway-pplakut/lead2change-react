@@ -409,10 +409,7 @@ export default function StudentTable() {
               headCells={headCells2}
             />
             <TableBody>
-              {stableSort(
-                students.filter((item) => item.state === 'active'),
-                getComparator(order, orderBy)
-              )
+              {stableSort(students, getComparator(order, orderBy))
                 .filter((student) =>
                   student.firstName
                     .concat(student.studentLastName)
@@ -421,7 +418,7 @@ export default function StudentTable() {
                     .toLowerCase()
                     .includes(search.toLowerCase())
                 )
-                .map((student, index) => {
+                .map((student) => {
                   return (
                     <TableRow tabIndex={0} key={student.id}>
                       <TableCell>
@@ -460,10 +457,7 @@ export default function StudentTable() {
               headCells={headCells3}
             />
             <TableBody>
-              {stableSort(
-                students.filter((item) => item.state === 'active'),
-                getComparator(order, orderBy)
-              )
+              {stableSort(students, getComparator(order, orderBy))
                 .filter((student) =>
                   student.firstName
                     .concat(student.lastName)
@@ -472,7 +466,7 @@ export default function StudentTable() {
                     .toLowerCase()
                     .includes(search.toLowerCase())
                 )
-                .map((student, index) => {
+                .map((student) => {
                   return (
                     <TableRow tabIndex={0} key={student.id}>
                       <TableCell>
