@@ -80,75 +80,28 @@ function SignUpDisplay(props) {
           </Button>
           <Grid style={{ margin: '2vh' }}>
             <StudentInfo>
-              <h3>
-                <b>
-                  <h3>First Name: Aadi{'     '}</h3>
-                </b>
-              </h3>
-            </StudentInfo>
-
-            <StudentInfo>
-              <h3>
-                <b>
-                  <h3>Last Name: Tiwari</h3>
-                </b>
-              </h3>
+              <h3>Name: Aaditya Tiwari</h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>
-                <b>
-                  <h3>Date: 10/13/2021</h3>
-                </b>
-              </h3>
+              <h3>Date of Birth: 02/04/2006, Age 16</h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>
-                <b>
-                  <h3>Age: 16</h3>
-                </b>
-              </h3>
+              <h3>Email Address: tiwariA@gmail.com</h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>
-                <b>
-                  <h3>Email: aadi@gmail.com</h3>
-                </b>
-              </h3>
+              <h3>Phone Number: 231-381-4814</h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>
-                <b>
-                  <h3>Phone Number: 414-414-144</h3>
-                </b>
-              </h3>
+              <h3>Home Address: 12345 Demo street</h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>
-                <b>
-                  <h3>Home Adress: Aadi</h3>
-                </b>
-              </h3>
+              <h3>Apt. #: 42</h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>
-                <b>
-                  <h3>Apt. #: Aadi</h3>
-                </b>
-              </h3>
+              <h3>State: WI</h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>
-                <b>
-                  <h3>Zip Code: 50203</h3>
-                </b>
-              </h3>
-            </StudentInfo>
-            <StudentInfo>
-              <h3>
-                <b>
-                  <h3>State: Wisconsin</h3>
-                </b>
-              </h3>
+              <h3>Zip Code: 50021</h3>
             </StudentInfo>
           </Grid>
         </Paper>
@@ -181,7 +134,7 @@ function SignUpEdit(props) {
       >
         <h1>Aadi&rsquo;s Details</h1>
       </Grid>
-      <Grid item xs={4}>
+      <Grid container item xs={4}>
         <Paper
           sx={{
             backgroundColor: 'dark',
@@ -205,112 +158,94 @@ function SignUpEdit(props) {
           >
             <h2>Student Info</h2>
           </Grid>
-          <Grid style={{ marginLeft: '2vh' }}>
+          <Grid container style={{ marginLeft: '2vh' }}>
             <StudentInfo>
-              <h3>
-                <b>
-                  <TextField
-                    className="typing-container"
-                    defaultValue="Aadi"
-                    label="First Name"
-                  />
-                </b>
-              </h3>
+              <Grid item marginBottom={2} marginTop={2}>
+                <TextField
+                size="small"
+                  className="typing-container"
+                  defaultValue="Aaditya Tiwari"
+                  label="Name"
+                />
+              </Grid>
             </StudentInfo>
             <StudentInfo>
-              <h3>
-                <b>
-                  <TextField
-                    className="typing-container"
-                    label="Last Name"
-                    defaultValue="Tiwari"
-                  />{' '}
-                </b>
-              </h3>
+              <Grid item marginBottom={2}>
+                <TextField
+                size="small"
+                  className="typing-container"
+                  label="Date of Birth"
+                  type="date"
+                />
+                <TextField
+                size="small"
+                  className="typing-container"
+                  defaultValue="16"
+                  label="Age"
+                  type="number"
+                  style={{width:100}}
+                />
+              </Grid>
             </StudentInfo>
             <StudentInfo>
-              <h3>
-                <b>
-                  <TextField
-                    className="typing-container"
-                    type="date"
-                    label="Date of Birth"
-                    defaultValue="Aadi"
-                  />
-                </b>
-              </h3>
+              <Grid item marginBottom={2}>
+                <TextField
+                size="small"
+                  className="typing-container"
+                  defaultValue="tiwari.aadi@gmail.com"
+                  label="Email Adress"
+                />
+              </Grid>
             </StudentInfo>
             <StudentInfo>
-              <h3>
-                <b>
-                  <TextField
-                    className="typing-container"
-                    type="number"
-                    label="Age"
-                    defaultValue="16"
-                  />{' '}
-                </b>
-              </h3>
+              <Grid item marginBottom={2}>
+                <TextField
+                size="small"
+                  className="typing-container"
+                  defaultValue="414-244-9848"
+                  label="Phone Number"
+                />
+              </Grid>
             </StudentInfo>
             <StudentInfo>
-              <h3>
-                <b>
-                  <TextField
-                    className="typing-container"
-                    label="Email Adress"
-                    defaultValue="Aadi"
-                  />
-                </b>
-              </h3>
+              <Grid item marginBottom={2}>
+                <TextField
+                size="small"
+                  className="typing-container"
+                  defaultValue="12345 demo street"
+                  label="Home Adress"
+                />
+              </Grid>
             </StudentInfo>
             <StudentInfo>
-              <h3>
-                <b>Phone Number: 901-234-5678 </b>
-              </h3>
+              <Grid item marginBottom={2}>
+                <TextField
+                size="small"
+                  className="typing-container"
+                  defaultValue="42"
+                  label="Apt. #"
+                />
+              </Grid>
             </StudentInfo>
             <StudentInfo>
-              <h3>
-                <b>
-                  <TextField
-                    className="typing-container"
-                    label="Home Adress"
-                    defaultValue="Aadi"
-                  />{' '}
-                </b>
-              </h3>
+            <Grid item marginBottom={2}>
+              <TextField
+              size="small"
+                className="typing-container"
+                defaultValue="WI"
+                label="State"
+              />
+              </Grid>
             </StudentInfo>
             <StudentInfo>
-              <h3>
-                <b>
-                  <TextField
-                    className="typing-container"
-                    label="Apt. #"
-                    defaultValue="Aadi"
-                  />
-                </b>
-              </h3>
-            </StudentInfo>
-            <StudentInfo>
-              <h3>
-                <b>
-                  <TextField
-                    className="typing-container"
-                    label="Zip Code"
-                    defaultValue="Aadi"
-                  />
-                </b>
-              </h3>
-            </StudentInfo>
-            <StudentInfo>
-              <h3>
-                <b>
-                  <TextField
-                    className="typing-container"
-                    label="State"
-                    defaultValue="Aadi"
-                  />{' '}
-                </b>
-              </h3>
+            <Grid item marginBottom={2}>
+              <TextField
+              size="small"
+                className="typing-container"
+                defaultValue="50021"
+                label="Zip Code"
+              />
+              </Grid>
             </StudentInfo>
           </Grid>
         </Paper>
