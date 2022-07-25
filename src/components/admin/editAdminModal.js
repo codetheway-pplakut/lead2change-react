@@ -174,7 +174,7 @@ export default function EditAdminModal(props) {
   };
 
   const closeIconColor = {
-    color: 'transparent',
+    color: 'white',
   };
 
   const buttonTheme = createTheme({
