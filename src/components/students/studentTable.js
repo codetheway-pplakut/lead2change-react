@@ -28,6 +28,7 @@ import {
   getStudentById,
   updateStudent,
 } from '../../services/students/students';
+import { getCoachById } from '../../services/coaches/coaches';
 
 import StudentModal from './studentModal';
 import StudentRegistryModal from './studentRegistryModal';
@@ -94,7 +95,7 @@ const activateHandler = async (studentId) => {
 
 const declineHandler = async (studentId) => {
   const updatedStudent = await getStudentById(studentId);
-  updatedStudent.state = 'Rejected';
+  updatedStudent.state = 'rejected';
   await updateStudent(updatedStudent);
   refreshPage();
 };
@@ -226,6 +227,20 @@ export default function StudentTable() {
                       post.studentCellPhone
                         .toLowerCase()
                         .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.coachId !== null &&
+                      getCoachById(post.coachId)
+                        .coachName.toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.coachId === null &&
+                      'unassigned'.includes(search.toLowerCase())
                     ) {
                       return post;
                     }
