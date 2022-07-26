@@ -74,7 +74,7 @@ function SignUpDisplay(props) {
 
   return (
     <div style={{ marginRight: '8vh' }}>
-      <Box sx={{ bgcolor: 'background.paper', width: '100vh'}}> 
+      <Box sx={{ bgcolor: 'background.paper', width: '100vh' }}>
         <AppBar position="static">
           <Tabs
             value={value}
@@ -96,13 +96,14 @@ function SignUpDisplay(props) {
           </Tabs>
         </AppBar>
 
-        <TabPanel value={value} index={0} style={{ overflowY: 'auto' }}><Button
-        style={{ float: 'right' }}
-        variant="contained"
-        onClick={onEditClick}
-      >
-        Edit
-      </Button>
+        <TabPanel value={value} index={0} style={{ overflowY: 'auto' }}>
+          <Button
+            style={{ float: 'right' }}
+            variant="contained"
+            onClick={onEditClick}
+          >
+            Edit
+          </Button>
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">
               <Grid
@@ -232,7 +233,6 @@ function SignUpDisplay(props) {
           </Box>
         </TabPanel>
       </Box>
-     
     </div>
   );
 }
@@ -288,6 +288,7 @@ function SignUpEdit(props) {
                     className="typing-container"
                     defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
                     label="Plans after college"
+                    fullWidth
                   />
                 </Grid>
                 <h5>
@@ -486,6 +487,7 @@ function SignUpEdit(props) {
                       className="typing-container"
                       defaultValue="Be able to become a leader for a school club"
                       label="Goal"
+                      fullWidth
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -539,6 +541,7 @@ function SignUpEdit(props) {
                       className="typing-container"
                       defaultValue="Joined multiple clubs, trying to establish a role and get a leadership position"
                       label="Explanation"
+                      fullWidth
                     />
                   </Grid>
 
@@ -549,6 +552,7 @@ function SignUpEdit(props) {
                       className="typing-container"
                       defaultValue="Be able to become a leader for a school club"
                       label="Goal"
+                      fullWidth
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -602,6 +606,7 @@ function SignUpEdit(props) {
                       className="typing-container"
                       defaultValue="Joined multiple clubs, trying to establish a role and get a leadership position"
                       label="Explanation"
+                      fullWidth
                     />
                   </Grid>
                   <h3 style={{ color: '#2656A5' }}>Goal Three</h3>
@@ -611,6 +616,7 @@ function SignUpEdit(props) {
                       className="typing-container"
                       defaultValue="Be able to become a leader for a school club"
                       label="Goal"
+                      fullWidth
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -663,6 +669,7 @@ function SignUpEdit(props) {
                       className="typing-container"
                       defaultValue="Joined multiple clubs, trying to establish a role and get a leadership position"
                       label="Explanation"
+                      fullWidth
                     />
                   </Grid>
                 </GridText>
@@ -840,18 +847,15 @@ function SignUpEdit(props) {
             </Grid>
           </Box>
         </TabPanel>
-        <Grid align='right'> 
-        <Button variant="contained" onClick={onSaveClick}>
-        Save
-      </Button> 
-        <Button variant="contained" onClick={onCancelClick}>
-          Cancel
-        </Button>
-       
-      </Grid>
+        <Grid align="right">
+          <Button variant="contained" onClick={onSaveClick}>
+            Save
+          </Button>
+          <Button variant="contained" onClick={onCancelClick}>
+            Cancel
+          </Button>
+        </Grid>
       </Box>
-     
-      
     </div>
   );
 }

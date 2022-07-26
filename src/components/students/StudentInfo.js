@@ -30,6 +30,14 @@ const StudentInfo = styled(Box)(({ theme }) => ({
   borderRadius: 1,
 }));
 
+const GridText = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'left',
+  color: theme.palette.text.secondary,
+}));
+
 function SignUpDisplay(props) {
   const { onEditClick } = props;
   return (
@@ -157,108 +165,100 @@ function SignUpEdit(props) {
             justify="center"
             direction="column"
             style={{ backgroundColor: '#2656A5', color: '#FFFFFF' }}
+            marginBottom={2}
           >
             <h2>Student Info</h2>
           </Grid>
           <Grid container style={{ marginLeft: '2vh' }}>
             <StudentInfo>
-              <Grid item marginBottom={2} marginTop={2}>
+              <GridText item marginBottom={2} marginTop={5}>
                 <TextField
                   size="small"
                   className="typing-container"
                   defaultValue="Aaditya Tiwari"
                   label="Name"
                 />
-              </Grid>
+              </GridText>
             </StudentInfo>
             <StudentInfo>
-              <Grid item marginBottom={2}>
+              <GridText item marginBottom={2}>
                 <TextField
                   size="small"
                   className="typing-container"
                   label="Date of Birth"
                   type="date"
                 />
-                <TextField
-                  size="small"
-                  className="typing-container"
-                  defaultValue="16"
-                  label="Age"
-                  type="number"
-                  style={{ width: 100 }}
-                />
-              </Grid>
+              </GridText>
             </StudentInfo>
             <StudentInfo>
-              <Grid item marginBottom={2}>
+              <GridText item marginBottom={2}>
                 <TextField
                   size="small"
                   className="typing-container"
                   defaultValue="tiwari.aadi@gmail.com"
                   label="Email Adress"
                 />
-              </Grid>
+              </GridText>
             </StudentInfo>
             <StudentInfo>
-              <Grid item marginBottom={2}>
+              <GridText item marginBottom={2}>
                 <TextField
                   size="small"
                   className="typing-container"
                   defaultValue="414-244-9848"
                   label="Phone Number"
                 />
-              </Grid>
+              </GridText>
             </StudentInfo>
             <StudentInfo>
-              <Grid item marginBottom={2}>
+              <GridText item marginBottom={2}>
                 <TextField
                   size="small"
                   className="typing-container"
                   defaultValue="12345 demo street"
                   label="Home Adress"
                 />
-              </Grid>
+              </GridText>
             </StudentInfo>
             <StudentInfo>
-              <Grid item marginBottom={2}>
+              <GridText item marginBottom={2}>
                 <TextField
                   size="small"
                   className="typing-container"
                   defaultValue="42"
                   label="Apt. #"
                 />
-              </Grid>
+              </GridText>
             </StudentInfo>
             <StudentInfo>
-              <Grid item marginBottom={2}>
+              <GridText item marginBottom={2}>
                 <TextField
                   size="small"
                   className="typing-container"
                   defaultValue="WI"
                   label="State"
                 />
-              </Grid>
+              </GridText>
             </StudentInfo>
             <StudentInfo>
-              <Grid item marginBottom={2}>
+              <GridText item marginBottom={2}>
                 <TextField
                   size="small"
                   className="typing-container"
                   defaultValue="50021"
                   label="Zip Code"
                 />
-              </Grid>
+              </GridText>
             </StudentInfo>
-          
           </Grid>
 
           <Grid align="right">
             <Button variant="contained" onClick={onSaveClick}>
               Save
             </Button>
-             <Button variant="contained" onClick={onCancelClick}>
-                Cancel
-              </Button>
+            <Button variant="contained" onClick={onCancelClick}>
+              Cancel
+            </Button>
           </Grid>
         </Paper>
       </Grid>
