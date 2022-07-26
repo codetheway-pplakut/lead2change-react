@@ -75,17 +75,15 @@ export default function CoachAssignModal(props) {
 
   const handleGetCoach = (id) => {
     if (id !== null) {
-      const coachName = `${getCoachById(id).coachFirstName} ${
-        getCoachById(id).coachLastName
-      }`;
-      return coachName;
+      const coach = getCoachById(id).coachFirstName;
+      return coach;
     }
     return 'Unassigned';
   };
 
-  const handleCoachChange = (event) => {
+  const handleCoachChange = (event, coachChangeValue) => {
     setValue(event.target.value);
-    setNewCoachId(value.value);
+    setNewCoachId(coachChangeValue);
   };
 
   let denySubmit = true;
