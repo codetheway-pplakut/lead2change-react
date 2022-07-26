@@ -81,6 +81,12 @@ export default function Coaches() {
     await addCoach(coach);
     await refreshCoaches();
   };
+  const unassignStudents = async (coach) => {
+    coach.students.forEach((element) => {
+      unassignStudent({ coachId: coach.id, studentId: element.id });
+    });
+    await refreshCoaches();
+  };
   const updateCoachInfo = async (coach, change) => {
     await updateCoach(coach);
     if (change === false) {
@@ -122,6 +128,7 @@ export default function Coaches() {
                       addFunction={newCoach}
                       deleteFunction={deleteCoachById}
                       updateFunction={updateCoachInfo}
+                      unassignFunction={unassignStudents}
                     />
                   </Grid>
                 </Grid>

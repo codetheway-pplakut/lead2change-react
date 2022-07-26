@@ -109,7 +109,7 @@ EnhancedTableHead.propTypes = {
 };
 
 export default function CoachesList(props) {
-  const { rows, addFunction, updateFunction } = props;
+  const { rows, addFunction, updateFunction, unassignFunction } = props;
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('name');
   const [searchTerm, setSearchTerm] = React.useState('');
@@ -214,6 +214,7 @@ export default function CoachesList(props) {
                             <Grid item>
                               <InactivationModal
                                 updateFunction={updateFunction}
+                                unassignFunction={unassignFunction}
                                 coach={coach}
                               />
                             </Grid>
@@ -257,4 +258,5 @@ CoachesList.propTypes = {
   rows: PropTypes.array.isRequired,
   addFunction: PropTypes.func.isRequired,
   updateFunction: PropTypes.func.isRequired,
+  unassignFunction: PropTypes.func.isRequired,
 };
