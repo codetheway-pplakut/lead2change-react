@@ -67,6 +67,9 @@ export default function BasicTabs() {
             onChange={handleChange}
             textColor="inherit"
             variant="fullWidth"
+            style={{
+              backgroundColor: '#004cbb',
+            }}
             TabIndicatorProps={{
               style: {
                 backgroundColor: '#FFFFFF',

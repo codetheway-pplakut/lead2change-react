@@ -8,6 +8,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import { Button } from '@mui/material';
 
 export default function InterviewQuestions() {
   return (
@@ -334,6 +335,22 @@ export default function InterviewQuestions() {
             />
           </RadioGroup>
         </FormControl>
+      </Box>
+      <Box
+        components="span"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Button
+          variant="contained"
+          onClick={null}
+          style={{
+            backgroundColor: '#004cbb',
+          }}
+        >
+          Save
+        </Button>
       </Box>
     </Container>
   );
