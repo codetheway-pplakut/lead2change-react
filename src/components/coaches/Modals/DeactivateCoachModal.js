@@ -37,7 +37,7 @@ export default function InactivationModal(props) {
       >
         <Grid container variant="small">
           <Grid container>
-            <Grid item sx={{ bgcolor: '#004cbb', color: 'white' }} xs={12}>
+            <Grid item sx={{ bgcolor: '#2656A5', color: 'white' }} xs={12}>
               <Grid container alignItems="center" sx={{ margin: 1 }}>
                 <Grid item xs={2} />
                 <Grid item xs={8}>
