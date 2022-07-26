@@ -2,26 +2,30 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import AddIcon from '@mui/icons-material/Add';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import InputAdornment from '@mui/material/InputAdornment';
-import Paper from '@mui/material/Paper';
-import SearchIcon from '@mui/icons-material/Search';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
-import { TextField } from '@mui/material';
-import Typography from '@mui/material/Typography';
+import {
+  AppBar,
+  Box,
+  Button,
+  Grid,
+  InputAdornment,
+  Paper,
+  styled,
+  Tab,
+  Tabs,
+  TextField,
+  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  tableCellClasses,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TableSortLabel,
+} from '@mui/material';
 
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import TableSortLabel from '@mui/material/TableSortLabel';
+import AddIcon from '@mui/icons-material/Add';
+import SearchIcon from '@mui/icons-material/Search';
 
 import { useNavigate } from 'react-router';
 import ROUTES from '../../constants/routes';
@@ -36,6 +40,24 @@ import {
   updateStudent,
 } from '../../services/students/students';
 import { getCoachById } from '../../services/coaches/coaches';
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: '#2656A5',
+    color: theme.palette.common.white,
+  },
+  // [`&.${tableCellClasses.body}`]: { },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(even)': {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+}));
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -141,7 +163,7 @@ const headCellsActive = [
     label: 'Coach',
   },
   {
-    id: 'empty',
+    id: 'deactivate',
     numeric: false,
     disablePadding: false,
     label: '',
@@ -167,7 +189,7 @@ const headCellsInactive = [
     label: 'Phone Number',
   },
   {
-    id: 'empty',
+    id: 'reactivate',
     numeric: false,
     disablePadding: false,
     label: '',

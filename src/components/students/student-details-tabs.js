@@ -4,14 +4,16 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import { styled } from '@mui/material/styles';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
-import Typography from '@mui/material/Typography';
+import {
+  AppBar,
+  Box,
+  Grid,
+  Paper,
+  styled,
+  Tab,
+  Tabs,
+  Typography,
+} from '@mui/material';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

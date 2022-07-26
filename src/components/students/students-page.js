@@ -1,9 +1,5 @@
 import * as React from 'react';
-
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-
+import { Box, Stack, Typography } from '@mui/material';
 import StudentTable from './student-table';
 
 export default function Student(props) {

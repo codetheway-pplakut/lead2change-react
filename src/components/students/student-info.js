@@ -1,9 +1,6 @@
 import React from 'react';
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
+import { Box, Button, Grid, Paper } from '@mui/material';
 import { experimentalStyled as styled } from '@mui/material/styles';
 
 import { useNavigate } from 'react-router-dom';

@@ -3,18 +3,19 @@ import * as React from 'react';
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import {
+  Box,
+  Button,
+  Grid,
+  IconButton,
+  Modal,
+  Typography,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
+} from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
-import Grid from '@mui/material/Grid';
-import IconButton from '@mui/material/IconButton';
-import Modal from '@mui/material/Modal';
-import Typography from '@mui/material/Typography';
-
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
 
 import { getCoachById, getCoaches } from '../../services/coaches/coaches';
 
