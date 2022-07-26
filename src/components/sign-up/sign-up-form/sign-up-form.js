@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
+// import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
-import FormControlLabel from '@mui/material/FormControlLabel';
+// import FormControlLabel from '@mui/material/FormControlLabel';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
@@ -18,9 +18,9 @@ export default function SignUpForm(props) {
     onEmailAddressChange,
     onFirstNameChange,
     onLastNameChange,
-    onPasswordChange,
+    // onPasswordChange,
     onSubmit,
-    password,
+    // password,
   } = props;
 
   const currentYear = new Date().getFullYear();
@@ -29,13 +29,13 @@ export default function SignUpForm(props) {
     !emailAddress ||
     !firstName ||
     !lastName ||
-    !password ||
+    // !password ||
     !studentDateOfBirth ||
     (studentDateOfBirth !== null && studentDateOfBirth.includes(currentYear));
 
   return (
-    <Box sx={{ mt: 3 }}>
-      <Grid container spacing={2}>
+    <Box sx={{ m: 20 }}>
+      <Grid container spacing={2} sx={{ alig: 'center' }}>
         <Grid item xs={12}>
           <TextField
             fullWidth
@@ -57,14 +57,14 @@ export default function SignUpForm(props) {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            fullWidth
             label="Last Name"
+            fullWidth
             onChange={(event) => onLastNameChange(event.target.value)}
             required
             value={lastName}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        {/* <Grid item xs={12} sm={6}>
           <TextField
             fullWidth
             label="Password"
@@ -73,7 +73,7 @@ export default function SignUpForm(props) {
             type="password"
             value={password}
           />
-        </Grid>
+        </Grid> */}
         <Grid item xs={12} sm={6}>
           <TextField
             fullWidth
@@ -91,17 +91,16 @@ export default function SignUpForm(props) {
             value={studentDateOfBirth}
           />
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <FormControlLabel
             control={<Checkbox value="allowExtraEmails" color="primary" />}
             label="I want to receive inspiration, marketing promotions and updates via email."
           />
-        </Grid>
+        </Grid> */}
       </Grid>
       <Button
         disabled={onSubmitDisabled}
-        fullWidth
-        sx={{ mt: 3, mb: 2 }}
+        sx={{ mt: 3, mb: 2, ml: '46%' }}
         type="submit"
         onClick={onSubmit}
         variant="contained"
@@ -123,7 +122,7 @@ SignUpForm.propTypes = {
   onEmailAddressChange: PropTypes.func.isRequired,
   onFirstNameChange: PropTypes.func.isRequired,
   onLastNameChange: PropTypes.func.isRequired,
-  onPasswordChange: PropTypes.func.isRequired,
+  // onPasswordChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  password: PropTypes.string.isRequired,
+  // password: PropTypes.string.isRequired,
 };
