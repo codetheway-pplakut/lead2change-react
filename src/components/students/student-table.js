@@ -359,9 +359,31 @@ export default function StudentTable() {
                   },
                 }}
               >
-                <Tab label="Active" {...controlTabs(0)} />
-                <Tab label="Inactive" {...controlTabs(1)} />
-                <Tab label="Applicants" {...controlTabs(2)} />
+                <Tab
+                  label="Active"
+                  {...controlTabs(0)}
+                  sx={{
+                    borderRight: 1,
+                    borderBottom: 2,
+                  }}
+                />
+                <Tab
+                  label="Inactive"
+                  {...controlTabs(1)}
+                  sx={{
+                    borderRight: 1,
+                    borderLeft: 1,
+                    borderBottom: 2,
+                  }}
+                />
+                <Tab
+                  label="Applicants"
+                  {...controlTabs(2)}
+                  sx={{
+                    borderLeft: 1,
+                    borderBottom: 2,
+                  }}
+                />
               </Tabs>
             </AppBar>
           </Box>
