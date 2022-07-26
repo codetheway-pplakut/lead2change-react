@@ -19,15 +19,38 @@ export default function CreateGoalModal(props) {
 
   const [goalSet, setGoalSet] = useState('');
   const [dateGoalSet, setDateGoalSet] = useState('');
-  const [SEL, setSEL] = useState('');
+  const [sel1, setsel1] = useState('');
+  const [sel2, setsel2] = useState('');
+  const [sel3, setsel3] = useState('');
+  const [sel4, setsel4] = useState('');
+  const [sel5, setsel5] = useState('');
+  const [sel, setsel] = useState('');
   const [dateGoalReview, setDateGoalReview] = useState('');
   const [wasItAccomplished, setWasItAccomplished] = useState('');
   const [explanation, setExplanation] = useState('');
-  const Complete = () => {
+  const Create = () => {
     handleClose();
+    let temp = '';
+    if (sel1) {
+      temp += 'Self-Awareness/';
+    }
+    if (sel2) {
+      temp += 'Self-Management/';
+    }
+    if (sel3) {
+      temp += 'Social Awareness/';
+    }
+    if (sel4) {
+      temp += 'Relationship Skills/';
+    }
+    if (sel5) {
+      temp += 'Responsible Decision-making/';
+    }
+    /* setsel(temp); */
+    console.log(temp);
     addFunction(
       goalSet,
-      SEL,
+      sel,
       dateGoalSet,
       dateGoalReview,
       wasItAccomplished,
@@ -84,7 +107,94 @@ export default function CreateGoalModal(props) {
                     }}
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={2}>
+                  <Box
+                    value={sel1}
+                    label="Self-Awareness"
+                    onChange={(e) => {
+                      console.log(e.target.checked);
+                      setsel1(e.target.checked);
+                    }}
+                  >
+                    <FormControlLabel
+                      control={
+                        <Checkbox name="checkedA" value="Self-Awareness/" />
+                      }
+                      label="Self-Awareness"
+                    />
+                  </Box>
+                </Grid>
+                <Grid item xs={2}>
+                  <Box
+                    value={sel2}
+                    label="Self-Management"
+                    onChange={(e) => {
+                      setsel2(e.target.checked);
+                    }}
+                  >
+                    <FormControlLabel
+                      control={
+                        <Checkbox name="checkedB" value="Self-Management/" />
+                      }
+                      label="Self-Management"
+                    />
+                  </Box>
+                </Grid>
+                <Grid item xs={2}>
+                  <Box
+                    value={sel3}
+                    label="Social Awareness"
+                    onChange={(e) => {
+                      setsel3(e.target.checked);
+                    }}
+                  >
+                    <FormControlLabel
+                      control={
+                        <Checkbox name="checkedC" value="Social Awareness/" />
+                      }
+                      label="Social Awareness"
+                    />
+                  </Box>
+                </Grid>
+                <Grid item xs={2}>
+                  <Box
+                    value={sel4}
+                    label="Relationship Skills"
+                    onChange={(e) => {
+                      setsel4(e.target.checked);
+                    }}
+                  >
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          name="checkedD"
+                          value="Relationship Skills/"
+                        />
+                      }
+                      label="Relationship Skills"
+                    />
+                  </Box>
+                  <Grid item xs={2}>
+                    <Box
+                      value={sel5}
+                      label="Responsible Decision-making"
+                      onChange={(e) => {
+                        setsel5(e.target.checked);
+                      }}
+                    >
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            name="checkedE"
+                            value="Responsible Decision-making/"
+                          />
+                        }
+                        label="Responsible Decision-making"
+                      />
+                    </Box>
+                  </Grid>
+                </Grid>
+                {/* <Grid item xs={12}>
                   <Box
                     value={SEL}
                     fullWidth
@@ -99,25 +209,28 @@ export default function CreateGoalModal(props) {
                   >
                     <FormControlLabel
                       control={
-                        <Checkbox name="checkedA" value="Self-Awareness" />
+                        <Checkbox name="checkedA" value="Self-Awareness/" />
                       }
                       label="Self-Awareness"
                     />
                     <FormControlLabel
                       control={
-                        <Checkbox name="checkedB" value="Self-Management" />
+                        <Checkbox name="checkedB" value="Self-Management/" />
                       }
                       label="Self-management"
                     />
                     <FormControlLabel
                       control={
-                        <Checkbox name="checkedC" value="Social Awareness" />
+                        <Checkbox name="checkedC" value="Social Awareness/" />
                       }
                       label="Social Awareness"
                     />
                     <FormControlLabel
                       control={
-                        <Checkbox name="checkedD" value="Relationship Skills" />
+                        <Checkbox
+                          name="checkedD"
+                          value="Relationship Skills/"
+                        />
                       }
                       label="Relationship Skills"
                     />
@@ -131,14 +244,10 @@ export default function CreateGoalModal(props) {
                       label="Responsible Decision-making"
                     />
 
-                    {/* <Checkbox control={<Checkbox />} label="Self-Awareness" />
-                    <Checkbox label="Self-Management" />
-                    <Checkbox label="Social Awareness" />
-                    <Checkbox label="Relationship Skills" />
-                  <Checkbox label="Responsible Decision-making" /> */}
+                   
                   </Box>
                 </Grid>
-
+                    */}
                 <Grid item xs={6}>
                   <TextField
                     value={dateGoalSet}
@@ -193,17 +302,17 @@ export default function CreateGoalModal(props) {
                   <ColorButton
                     variant="contained"
                     fullWidth
-                    onClick={Complete}
+                    onClick={Create}
                     value={
                       (goalSet,
-                      SEL,
+                      sel,
                       dateGoalSet,
                       dateGoalReview,
                       wasItAccomplished,
                       explanation)
                     }
                   >
-                    Complete
+                    Create
                   </ColorButton>
                 </Grid>
                 <Grid item xs={2}>
