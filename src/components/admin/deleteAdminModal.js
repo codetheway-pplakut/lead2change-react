@@ -16,9 +16,12 @@ export default function DeleteAdminModal(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const { id } = props;
+  const userId = {
+    id,
+  };
   const deleteAdministrator = () => {
     handleClose();
-    console.log(getAdminById(id));
+    deleteAdmin(id);
   };
 
   const style = {
