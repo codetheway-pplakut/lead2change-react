@@ -7,6 +7,7 @@ import {
   Grid,
   IconButton,
   Modal,
+  styled,
   Typography,
 } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
@@ -15,7 +16,20 @@ import CloseIcon from '@mui/icons-material/Close';
 export default function StudentModal(props) {
   const { modalType, confirmHandler, studentId } = props;
 
-  let useColor = 'primary';
+  const StyledButton = styled(Button)({
+    backgroundColor: '#004cbb',
+    '&hover': {
+      backgroundColor: '#005ade',
+    },
+  });
+  const CancelButton = styled(Button)({
+    backgroundColor: '#7e8794',
+    '&:hover': {
+      backgroundColor: '#8698b3',
+    },
+  });
+
+  let useColor = '';
   if (modalType === 'decline') {
     useColor = 'error';
   } else if (modalType === 'accept') {
@@ -44,9 +58,9 @@ export default function StudentModal(props) {
   return (
     <Box>
       {modalType !== 'accept' && modalType !== 'decline' && (
-        <Button onClick={handleOpen} variant="contained" color={useColor}>
+        <StyledButton onClick={handleOpen} variant="contained">
           {modalType}
-        </Button>
+        </StyledButton>
       )}
       {modalType === 'accept' && (
         <IconButton color={useColor} onClick={handleOpen}>
@@ -65,25 +79,24 @@ export default function StudentModal(props) {
           </Typography>
           <Grid container spacing={4} sx={{ mt: '1vh' }} component="span">
             <Grid item xs={6} align="center" component="span">
-              <Button
+              <StyledButton
                 component="span"
                 variant="contained"
-                color={useColor}
                 onClick={confirm}
                 fullWidth
               >
                 {modalType}
-              </Button>
+              </StyledButton>
             </Grid>
             <Grid item xs={6} align="center" component="span">
-              <Button
-                variant="outlined"
+              <CancelButton
+                variant="contained"
                 onClick={handleClose}
                 component="span"
                 fullWidth
               >
                 Cancel
-              </Button>
+              </CancelButton>
             </Grid>
           </Grid>
         </Box>

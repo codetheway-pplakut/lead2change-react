@@ -43,7 +43,7 @@ import { getCoachById } from '../../services/coaches/coaches';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: '#2656A5',
+    backgroundColor: '#004cbb',
     color: theme.palette.common.white,
   },
   // [`&.${tableCellClasses.body}`]: { },
@@ -58,6 +58,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
+
+const StyledButton = styled(Button)({
+  backgroundColor: '#004cbb',
+  '&hover': {
+    backgroundColor: '#005ade',
+  },
+});
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -242,9 +249,9 @@ function EnhancedTableHead(props) {
 
   return (
     <TableHead>
-      <TableRow>
+      <StyledTableRow>
         {headCells.map((headCell) => (
-          <TableCell
+          <StyledTableCell
             key={headCell.id}
             align={headCell.numeric ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
@@ -257,9 +264,9 @@ function EnhancedTableHead(props) {
             >
               {headCell.label}
             </TableSortLabel>
-          </TableCell>
+          </StyledTableCell>
         ))}
-      </TableRow>
+      </StyledTableRow>
     </TableHead>
   );
 }
@@ -372,14 +379,14 @@ export default function StudentTable() {
           />
         </Grid>
         <Grid item xs={1} align="left">
-          <Button
+          <StyledButton
             variant="contained"
             startIcon={<AddIcon />}
             sx={{ mt: '2vh' }}
             onClick={onRegisterClick}
           >
             Student
-          </Button>
+          </StyledButton>
         </Grid>
       </Grid>
       <TabPanel value={tabValue} index={0}>
@@ -451,22 +458,24 @@ export default function StudentTable() {
                 })
                 .map((student) => {
                   return (
-                    <TableRow tabIndex={0} key={student.id}>
-                      <TableCell>
+                    <StyledTableRow tabIndex={0} key={student.id}>
+                      <StyledTableCell>
                         {student.lastName}, {student.firstName}
-                      </TableCell>
-                      <TableCell align="left">{student.email}</TableCell>
-                      <TableCell align="left">
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {student.email}
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
                         {student.studentCellPhone}
-                      </TableCell>
-                      <TableCell>
+                      </StyledTableCell>
+                      <StyledTableCell>
                         <CoachAssignModal
                           confirmHandler={reassignCoachHandler}
                           studentId={student.id}
                           coachId={student.coachId}
                         />
-                      </TableCell>
-                      <TableCell>
+                      </StyledTableCell>
+                      <StyledTableCell>
                         <Grid container spacing={2}>
                           <Grid item>
                             <StudentModal
@@ -476,8 +485,8 @@ export default function StudentTable() {
                             />
                           </Grid>
                         </Grid>
-                      </TableCell>
-                    </TableRow>
+                      </StyledTableCell>
+                    </StyledTableRow>
                   );
                 })}
             </TableBody>
@@ -532,15 +541,19 @@ export default function StudentTable() {
                 })
                 .map((student) => {
                   return (
-                    <TableRow tabIndex={0} key={student.id}>
-                      <TableCell>
+                    <StyledTableRow tabIndex={0} key={student.id}>
+                      <StyledTableCell>
                         {student.lastName}, {student.firstName}
-                      </TableCell>
-                      <TableCell align="left">{student.email}</TableCell>
-                      <TableCell align="left">
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {student.email}
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
                         {student.studentCellPhone}
-                      </TableCell>
-                      <TableCell>
+                      </StyledTableCell>
+
+                      <StyledTableCell />
+                      <StyledTableCell>
                         <Grid container spacing={2}>
                           <Grid item>
                             <StudentModal
@@ -550,8 +563,8 @@ export default function StudentTable() {
                             />
                           </Grid>
                         </Grid>
-                      </TableCell>
-                    </TableRow>
+                      </StyledTableCell>
+                    </StyledTableRow>
                   );
                 })}
             </TableBody>
@@ -606,15 +619,17 @@ export default function StudentTable() {
                 })
                 .map((student) => {
                   return (
-                    <TableRow tabIndex={0} key={student.id}>
-                      <TableCell>
+                    <StyledTableRow tabIndex={0} key={student.id}>
+                      <StyledTableCell>
                         {student.lastName}, {student.firstName}
-                      </TableCell>
-                      <TableCell align="left">{student.email}</TableCell>
-                      <TableCell align="left">
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {student.email}
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
                         {student.studentCellPhone}
-                      </TableCell>
-                      <TableCell>
+                      </StyledTableCell>
+                      <StyledTableCell>
                         <Grid container spacing={2}>
                           <Grid item>
                             <StudentModal
@@ -624,8 +639,8 @@ export default function StudentTable() {
                             />
                           </Grid>
                         </Grid>
-                      </TableCell>
-                      <TableCell>
+                      </StyledTableCell>
+                      <StyledTableCell>
                         <Grid container spacing={2}>
                           <Grid item>
                             <StudentModal
@@ -635,8 +650,8 @@ export default function StudentTable() {
                             />
                           </Grid>
                         </Grid>
-                      </TableCell>
-                    </TableRow>
+                      </StyledTableCell>
+                    </StyledTableRow>
                   );
                 })}
             </TableBody>
