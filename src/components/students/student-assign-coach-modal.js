@@ -9,6 +9,7 @@ import {
   Grid,
   IconButton,
   Modal,
+  styled,
   Typography,
   Radio,
   RadioGroup,
@@ -18,6 +19,24 @@ import {
 import EditIcon from '@mui/icons-material/Edit';
 
 import { getCoachById, getCoaches } from '../../services/coaches/coaches';
+
+const StyledButton = styled(Button)({
+  backgroundColor: '#004cbb',
+  '&:hover': {
+    backgroundColor: '#005ade',
+  },
+});
+const CancelButton = styled(Button)({
+  backgroundColor: '#7e8794',
+  '&:hover': {
+    backgroundColor: '#8698b3',
+  },
+});
+const StyledRadio = styled(Radio)({
+  '&.Mui-checked': {
+    color: '#005ade',
+  },
+});
 
 export default function CoachAssignModal(props) {
   const { confirmHandler, studentId, coachId } = props;
@@ -90,13 +109,13 @@ export default function CoachAssignModal(props) {
             <RadioGroup value={value} onChange={handleCoachChange}>
               <FormControlLabel
                 value="Unassigned"
-                control={<Radio />}
+                control={<StyledRadio />}
                 label="Unassigned"
               />
               {coaches.map((coach) => (
                 <FormControlLabel
                   value={coach.id}
-                  control={<Radio />}
+                  control={<StyledRadio />}
                   label={handleGetCoach(coach.id)}
                   key={coach.id}
                 />
@@ -105,20 +124,19 @@ export default function CoachAssignModal(props) {
           </FormControl>
           <Grid container spacing={4} sx={{ mt: '1vh' }}>
             <Grid item xs={6} align="center">
-              <Button
+              <StyledButton
                 variant="contained"
-                color="warning"
                 onClick={confirm}
                 fullWidth
                 disabled={denySubmit}
               >
                 Assign
-              </Button>
+              </StyledButton>
             </Grid>
             <Grid item xs={6} align="center">
-              <Button variant="contained" onClick={handleClose} fullWidth>
+              <CancelButton variant="contained" onClick={handleClose} fullWidth>
                 Cancel
-              </Button>
+              </CancelButton>
             </Grid>
           </Grid>
         </Box>

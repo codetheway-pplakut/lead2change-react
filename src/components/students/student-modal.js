@@ -18,7 +18,7 @@ export default function StudentModal(props) {
 
   const StyledButton = styled(Button)({
     backgroundColor: '#004cbb',
-    '&hover': {
+    '&:hover': {
       backgroundColor: '#005ade',
     },
   });
