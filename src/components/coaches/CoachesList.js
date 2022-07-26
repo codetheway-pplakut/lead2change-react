@@ -177,7 +177,7 @@ export default function CoachesList(props) {
           </Grid>
         </Grid>
       </Grid>
-      <TableContainer>
+      <TableContainer sx={{ height: '68vh' }}>
         <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
           <EnhancedTableHead
             order={order}

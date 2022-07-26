@@ -111,8 +111,6 @@ function StudentListModal(props) {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('name');
   const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
   if (coach.students === null) {
     coach.students = [];
   }
@@ -141,19 +139,6 @@ function StudentListModal(props) {
 
     setSelected(newSelected);
   };
-
-  const handleChangePage = (newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-  const emptyRows =
-    page > 0
-      ? Math.max(0, (1 + page) * rowsPerPage - coach.students.length)
-      : 0;
   return (
     <div>
       <ColorButton onClick={handleOpen} variant="contained">
@@ -189,7 +174,7 @@ function StudentListModal(props) {
             </Grid>
           </Grid>
           <Paper sx={{ width: '100%' }}>
-            <TableContainer>
+            <TableContainer sx={{ height: '14vh' }}>
               <Table aria-labelledby="tableTitle">
                 <EnhancedTableHead
                   order={order}
@@ -198,46 +183,32 @@ function StudentListModal(props) {
                   rowCount={coach.students.length}
                 />
                 <TableBody>
-                  {stableSort(coach.students, getComparator(order, orderBy))
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((student, index) => {
-                      return (
-                        <TableRow
-                          hover
-                          onClick={(event) => handleClick(event, student.id)}
-                          tabIndex={-1}
-                          key={student.id}
-                        >
-                          <TableCell>
-                            {student.studentLastName},{' '}
-                            {student.studentFirstName}
-                          </TableCell>
-                          <TableCell align="left">
-                            {student.studentEmail}
-                          </TableCell>
-                          <TableCell align="left">
-                            {student.studentPhoneNumber}
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
-                  {emptyRows > 0 && (
-                    <TableRow>
-                      <TableCell colSpan={6} />
-                    </TableRow>
-                  )}
+                  {stableSort(
+                    coach.students,
+                    getComparator(order, orderBy)
+                  ).map((student, index) => {
+                    return (
+                      <TableRow
+                        hover
+                        onClick={(event) => handleClick(event, student.id)}
+                        tabIndex={-1}
+                        key={student.id}
+                      >
+                        <TableCell>
+                          {student.studentLastName}, {student.studentFirstName}
+                        </TableCell>
+                        <TableCell align="left">
+                          {student.studentEmail}
+                        </TableCell>
+                        <TableCell align="left">
+                          {student.studentPhoneNumber}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
                 </TableBody>
               </Table>
             </TableContainer>
-            <TablePagination
-              rowsPerPageOptions={[5, 10, 25]}
-              component="div"
-              count={coach.students.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
           </Paper>
         </Grid>
       </Modal>
