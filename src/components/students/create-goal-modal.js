@@ -98,23 +98,36 @@ export default function CreateGoalModal(props) {
                     }}
                   >
                     <FormControlLabel
-                      control={<Checkbox name="checkedA" />}
+                      control={
+                        <Checkbox name="checkedA" value="Self-Awareness" />
+                      }
                       label="Self-Awareness"
                     />
                     <FormControlLabel
-                      control={<Checkbox name="checkedB" />}
+                      control={
+                        <Checkbox name="checkedB" value="Self-Management" />
+                      }
                       label="Self-management"
                     />
                     <FormControlLabel
-                      control={<Checkbox name="checkedC" />}
+                      control={
+                        <Checkbox name="checkedC" value="Social Awareness" />
+                      }
                       label="Social Awareness"
                     />
                     <FormControlLabel
-                      control={<Checkbox name="checkedD" />}
+                      control={
+                        <Checkbox name="checkedD" value="Relationship Skills" />
+                      }
                       label="Relationship Skills"
                     />
                     <FormControlLabel
-                      control={<Checkbox name="checkedE" />}
+                      control={
+                        <Checkbox
+                          name="checkedE"
+                          value="Responsible Decision-Making"
+                        />
+                      }
                       label="Responsible Decision-making"
                     />
 
