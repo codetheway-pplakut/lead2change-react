@@ -118,7 +118,7 @@ SignUpDisplay.propTypes = {
 };
 
 function SignUpEdit(props) {
-  const { onSaveClick } = props;
+  const { onSaveClick, onCancelClick } = props;
   return (
     <Grid container>
       <Grid
@@ -162,7 +162,7 @@ function SignUpEdit(props) {
             <StudentInfo>
               <Grid item marginBottom={2} marginTop={2}>
                 <TextField
-                size="small"
+                  size="small"
                   className="typing-container"
                   defaultValue="Aaditya Tiwari"
                   label="Name"
@@ -172,25 +172,25 @@ function SignUpEdit(props) {
             <StudentInfo>
               <Grid item marginBottom={2}>
                 <TextField
-                size="small"
+                  size="small"
                   className="typing-container"
                   label="Date of Birth"
                   type="date"
                 />
                 <TextField
-                size="small"
+                  size="small"
                   className="typing-container"
                   defaultValue="16"
                   label="Age"
                   type="number"
-                  style={{width:100}}
+                  style={{ width: 100 }}
                 />
               </Grid>
             </StudentInfo>
             <StudentInfo>
               <Grid item marginBottom={2}>
                 <TextField
-                size="small"
+                  size="small"
                   className="typing-container"
                   defaultValue="tiwari.aadi@gmail.com"
                   label="Email Adress"
@@ -200,7 +200,7 @@ function SignUpEdit(props) {
             <StudentInfo>
               <Grid item marginBottom={2}>
                 <TextField
-                size="small"
+                  size="small"
                   className="typing-container"
                   defaultValue="414-244-9848"
                   label="Phone Number"
@@ -210,7 +210,7 @@ function SignUpEdit(props) {
             <StudentInfo>
               <Grid item marginBottom={2}>
                 <TextField
-                size="small"
+                  size="small"
                   className="typing-container"
                   defaultValue="12345 demo street"
                   label="Home Adress"
@@ -220,7 +220,7 @@ function SignUpEdit(props) {
             <StudentInfo>
               <Grid item marginBottom={2}>
                 <TextField
-                size="small"
+                  size="small"
                   className="typing-container"
                   defaultValue="42"
                   label="Apt. #"
@@ -228,23 +228,26 @@ function SignUpEdit(props) {
               </Grid>
             </StudentInfo>
             <StudentInfo>
-            <Grid item marginBottom={2}>
-              <TextField
-              size="small"
-                className="typing-container"
-                defaultValue="WI"
-                label="State"
-              />
+              <Grid item marginBottom={2}>
+                <TextField
+                  size="small"
+                  className="typing-container"
+                  defaultValue="WI"
+                  label="State"
+                />
               </Grid>
             </StudentInfo>
             <StudentInfo>
-            <Grid item marginBottom={2}>
-              <TextField
-              size="small"
-                className="typing-container"
-                defaultValue="50021"
-                label="Zip Code"
-              />
+              <Grid item marginBottom={2}>
+                <TextField
+                  size="small"
+                  className="typing-container"
+                  defaultValue="50021"
+                  label="Zip Code"
+                />
+                <Button variant="contained" onClick={onCancelClick}>
+                  Cancel
+                </Button>
               </Grid>
             </StudentInfo>
           </Grid>
@@ -264,20 +267,31 @@ function SignUpEdit(props) {
 
 SignUpEdit.propTypes = {
   onSaveClick: PropTypes.func.isRequired,
+  onCancelClick: PropTypes.func.isRequired,
 };
 
 export default function ResponsiveGrid(props) {
   const [isEditing, setIsEditing] = useState(false);
   const startEditing = () => setIsEditing(true);
   const endEditing = () => setIsEditing(false);
+  const cancelEditing = () => setIsEditing(false);
 
   const saveStudentInfo = (studentInfo) => {
     console.log(studentInfo);
   };
 
+  const cancelStudentInfo = (studentInfo) => {
+    console.log('cancel');
+  };
+
   const onSaveClick = () => {
     saveStudentInfo();
     endEditing();
+  };
+
+  const onCancelClick = () => {
+    cancelStudentInfo();
+    cancelEditing();
   };
 
   const num = 0;
@@ -292,8 +306,6 @@ export default function ResponsiveGrid(props) {
   const [textInputName, setTextInputName] = useState('');
 
   function handleGameClick() {
-    setDisabled(!disabled);
-
     event.preventDefault();
 
     if (message.trim().length !== 0) {
@@ -312,7 +324,7 @@ export default function ResponsiveGrid(props) {
   return (
     <Grid container>
       {isEditing ? (
-        <SignUpEdit onSaveClick={onSaveClick} />
+        <SignUpEdit onSaveClick={onSaveClick} onCancelClick={onCancelClick} />
       ) : (
         <SignUpDisplay onEditClick={startEditing} />
       )}

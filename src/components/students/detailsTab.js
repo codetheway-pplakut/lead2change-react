@@ -242,7 +242,7 @@ SignUpDisplay.propTypes = {
 };
 
 function SignUpEdit(props) {
-  const { onSaveClick } = props;
+  const { onSaveClick, onCancelClick } = props;
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -480,36 +480,191 @@ function SignUpEdit(props) {
               <Grid item xs={12} style={{ height: '64vh' }}>
                 <GridText>
                   <h3 style={{ color: '#2656A5' }}>Goal One</h3>
-                  <h5>Goal: Be able to become a leader for a school club</h5>
-                  <h5>Goal Set Date: 3/20/22</h5>
-                  <h5>SEL: Responsible-Decision Making</h5>
-                  <h5>Goal Review Date: 3/20/23</h5>
-                  <h5>
-                    Accomplishment State:
-                    <p>In progress</p>
-                  </h5>
-                  <h5>
-                    Explanation: Joined multiple clubs, trying to establish a
-                    role and get a leadership position
-                  </h5>
+                  <Grid marginBottom={2}>
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      defaultValue="Be able to become a leader for a school club"
+                      label="Goal"
+                    />
+                  </Grid>
+                  <Grid marginBottom={2}>
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      label="Set Date"
+                      type="date"
+                    />
+                  </Grid>
+                  <Grid marginBottom={2}>
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      defaultValue="Responsible-Decision Making"
+                      label="SEL"
+                    />
+                  </Grid>
+                  <Grid marginBottom={2}>
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      type="date"
+                      label="Review Date"
+                    />
+                  </Grid>
+                  <Grid marginBottom={2}>
+                    <FormControl
+                      variant="standard"
+                      sx={{ m: 1, minWidth: 200 }}
+                    >
+                      <InputLabel id="demo-simple-select-standard-label">
+                        Accomplishment State{' '}
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-standard-label"
+                        id="demo-simple-select-standard"
+                        label="Age"
+                        defaultValue={10}
+                      >
+                        <MenuItem value=""></MenuItem>
+                        <MenuItem value={10}>In Progress</MenuItem>
+                        <MenuItem value={20}>Completed</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+
+                  <Grid marginBottom={2}>
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      defaultValue="Joined multiple clubs, trying to establish a role and get a leadership position"
+                      label="Explanation"
+                    />
+                  </Grid>
+
                   <h3 style={{ color: '#2656A5' }}>Goal Two</h3>
-                  <h5>Goal: Make it onto the Varsity Tennis Team</h5>
-                  <h5>Goal Set Date: 11/22/21</h5>
-                  <h5>SEL:Social Awareness</h5>
-                  <h5>Goal Review Date: 4/30/22</h5>
-                  <h5>Accomplishment State: In Progress</h5>
-                  <h5>
-                    Explanation: Tryouts will be in April, currently on JV
-                  </h5>
+                  <Grid marginBottom={2}>
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      defaultValue="Be able to become a leader for a school club"
+                      label="Goal"
+                    />
+                  </Grid>
+                  <Grid marginBottom={2}>
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      label="Set Date"
+                      type="date"
+                    />
+                  </Grid>
+                  <Grid marginBottom={2}>
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      defaultValue="Responsible-Decision Making"
+                      label="SEL"
+                    />
+                  </Grid>
+                  <Grid marginBottom={2}>
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      type="date"
+                      label="Review Date"
+                    />
+                  </Grid>
+                  <Grid marginBottom={2}>
+                    <FormControl
+                      variant="standard"
+                      sx={{ m: 1, minWidth: 200 }}
+                    >
+                      <InputLabel id="demo-simple-select-standard-label">
+                        Accomplishment State{' '}
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-standard-label"
+                        id="demo-simple-select-standard"
+                        label="Age"
+                        defaultValue={10}
+                      >
+                        <MenuItem value=""></MenuItem>
+                        <MenuItem value={10}>In Progress</MenuItem>
+                        <MenuItem value={20}>Completed</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+
+                  <Grid marginBottom={2}>
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      defaultValue="Joined multiple clubs, trying to establish a role and get a leadership position"
+                      label="Explanation"
+                    />
+                  </Grid>
                   <h3 style={{ color: '#2656A5' }}>Goal Three</h3>
-                  <h5>Goal: 4.3 GPA</h5>
-                  <h5>Goal Set Date: 11/10/21</h5>
-                  <h5>SEL: Social Awareness</h5>
-                  <h5>Goal Review Date: 6/10/22</h5>
-                  <h5>Accomplishment State: In Progress</h5>
-                  <h5>
-                    Explanation: Trying to get a 4.3 GPA in all of my classes{' '}
-                  </h5>
+                  <Grid marginBottom={2}>
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      defaultValue="Be able to become a leader for a school club"
+                      label="Goal"
+                    />
+                  </Grid>
+                  <Grid marginBottom={2}>
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      label="Set Date"
+                      type="date"
+                    />
+                  </Grid>
+                  <Grid marginBottom={2}>
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      defaultValue="Responsible-Decision Making"
+                      label="SEL"
+                    />
+                  </Grid>
+                  <Grid marginBottom={2}>
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      type="date"
+                      label="Review Date"
+                    />
+                  </Grid>
+                  <Grid marginBottom={2}>
+                    <FormControl
+                      variant="standard"
+                      sx={{ m: 1, minWidth: 200 }}
+                    >
+                      <InputLabel id="demo-simple-select-standard-label">
+                        Accomplishment State{' '}
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-standard-label"
+                        id="demo-simple-select-standard"
+                        label="Age"
+                        defaultValue={10}
+                      >
+                        <MenuItem value=""></MenuItem>
+                        <MenuItem value={10}>In Progress</MenuItem>
+                        <MenuItem value={20}>Completed</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid marginBottom={2}>
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      defaultValue="Joined multiple clubs, trying to establish a role and get a leadership position"
+                      label="Explanation"
+                    />
+                  </Grid>
                 </GridText>
               </Grid>
             </Grid>
@@ -685,6 +840,9 @@ function SignUpEdit(props) {
             </Grid>
           </Box>
         </TabPanel>
+        <Button variant="contained" onClick={onCancelClick}>
+          Cancel
+        </Button>
       </Box>
       <Button variant="contained" onClick={onSaveClick}>
         Save
@@ -695,22 +853,31 @@ function SignUpEdit(props) {
 
 SignUpEdit.propTypes = {
   onSaveClick: PropTypes.func.isRequired,
+  onCancelClick: PropTypes.func.isRequired,
 };
 
 export default function TabsFunction() {
   const [isEditing, setIsEditing] = useState(false);
   const startEditing = () => setIsEditing(true);
   const endEditing = () => setIsEditing(false);
-
-  
+  const cancelEditing = () => setIsEditing(false);
 
   const saveStudentInfo = (studentInfo) => {
     console.log(studentInfo);
   };
 
+  const cancelStudentInfo = (studentInfo) => {
+    console.log('cancel');
+  };
+
   const onSaveClick = () => {
     saveStudentInfo();
     endEditing();
+  };
+
+  const onCancelClick = () => {
+    cancelStudentInfo();
+    cancelEditing();
   };
 
   const num = 0;
@@ -745,7 +912,7 @@ export default function TabsFunction() {
   return (
     <Grid container>
       {isEditing ? (
-        <SignUpEdit onSaveClick={onSaveClick} />
+        <SignUpEdit onSaveClick={onSaveClick} onCancelClick={onCancelClick} />
       ) : (
         <SignUpDisplay onEditClick={startEditing} />
       )}
