@@ -612,21 +612,24 @@ function SignUpEdit(props) {
                   </FormControl>
                   <h3 style={{ color: '#2656A5' }}>Admin Details:</h3>
                   <Grid>
-                  <FormControl variant="standard" sx={{ m: 1, minWidth: 200 }}>
-                    <InputLabel id="demo-simple-select-standard-label">
-                      Activity Status{' '}
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-standard-label"
-                      id="demo-simple-select-standard"
-                      label="Age"
-                      defaultValue={10}
+                    <FormControl
+                      variant="standard"
+                      sx={{ m: 1, minWidth: 200 }}
                     >
-                      <MenuItem value=""></MenuItem>
-                      <MenuItem value={10}>Active</MenuItem>
-                      <MenuItem value={20}>Inactive</MenuItem>
-                    </Select>
-                  </FormControl>
+                      <InputLabel id="demo-simple-select-standard-label">
+                        Activity Status{' '}
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-standard-label"
+                        id="demo-simple-select-standard"
+                        label="Age"
+                        defaultValue={10}
+                      >
+                        <MenuItem value=""></MenuItem>
+                        <MenuItem value={10}>Active</MenuItem>
+                        <MenuItem value={20}>Inactive</MenuItem>
+                      </Select>
+                    </FormControl>
                   </Grid>
                   <FormControl variant="standard" sx={{ m: 1, minWidth: 200 }}>
                     <InputLabel id="demo-simple-select-standard-label">
@@ -656,12 +659,11 @@ function SignUpEdit(props) {
                     <TextField
                       size="small"
                       className="typing-container"
-                     
                       label="Date Signed"
-                      type='date'
+                      type="date"
                     />
                   </Grid>
-                 
+
                   <Grid marginBottom={2}>
                     <TextField
                       size="small"
@@ -674,9 +676,8 @@ function SignUpEdit(props) {
                     <TextField
                       size="small"
                       className="typing-container"
-                     
                       label="Date Signed"
-                      type='date'
+                      type="date"
                     />
                   </Grid>
                 </GridText>
@@ -700,6 +701,8 @@ export default function TabsFunction() {
   const [isEditing, setIsEditing] = useState(false);
   const startEditing = () => setIsEditing(true);
   const endEditing = () => setIsEditing(false);
+
+  
 
   const saveStudentInfo = (studentInfo) => {
     console.log(studentInfo);
