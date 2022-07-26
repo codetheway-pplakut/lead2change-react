@@ -7,12 +7,19 @@ import Grid from '@mui/material/Grid';
 import { createTheme } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import PropTypes from 'prop-types';
+import { deleteAdmin, getAdminById } from '../../services/Admin/admin';
 
-export default function DeleteAdminModal() {
+export default function DeleteAdminModal(props) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const { id } = props;
+  const deleteAdministrator = () => {
+    handleClose();
+    console.log(getAdminById(id));
+  };
 
   const style = {
     position: 'absolute',
@@ -122,7 +129,7 @@ export default function DeleteAdminModal() {
                   theme={buttonTheme}
                   color="delete"
                   variant="contained"
-                  onClick={handleClose}
+                  onClick={deleteAdministrator}
                 >
                   <Typography padding="5px">Delete</Typography>
                 </Button>
@@ -147,3 +154,6 @@ export default function DeleteAdminModal() {
     </div>
   );
 }
+DeleteAdminModal.propTypes = {
+  id: PropTypes.string.isRequired,
+};

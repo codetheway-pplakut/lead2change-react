@@ -12,7 +12,6 @@ import TableCell from '@mui/material/TableCell';
 
 import EditAdminModal from './editAdminModal';
 import DeleteAdminModal from './deleteAdminModal';
-import DeactivateAdminModal from './deactivateAdminModal';
 import RegisterAdminModal from './registerAdminModal';
 import SearchBar from './SearchBar';
 
@@ -129,12 +128,13 @@ export default function AdminTable() {
                 </TableCell>
                 <TableCell align="left">{admin.email}</TableCell>
                 <TableCell align="left">
-                  <DeactivateAdminModal adminId={admin.id} />
+                  <DeleteAdminModal id={admin.id} />
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
+
       </TableContainer>
     </Box>
   );
