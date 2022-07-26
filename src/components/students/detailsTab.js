@@ -19,7 +19,7 @@ import {
   getStudentById,
   updateStudent,
 } from '../../services/students/students';
-import { getGoals, getGoalById } from '../../services/goals/goals';
+import { getGoals, addGoal, getGoalById } from '../../services/goals/goals';
 import GoalRegistryModal from './goalModal';
 
 function TabPanel(props) {
@@ -63,6 +63,29 @@ const GridText = styled(Paper)(({ theme }) => ({
 }));
 
 export default function TabsFunction() {
+  const refreshGoals = async () => {
+    const result = await getGoals();
+    setGoals(result);
+  };
+  const newGoal = async (
+    goalss,
+    date,
+    social,
+    review,
+    accomplished,
+    explain
+  ) => {
+    const goal = {
+      goalSet: goalss,
+      dateGoalSet: date,
+      sel: social,
+      goalReviewDate: review,
+      wasItAccomplished: accomplished,
+      explanation: explain,
+    };
+    await addGoal(goal);
+    await refreshGoals();
+  };
   const [value, setValue] = React.useState(0);
   const { studentId } = useParams();
   const { goalId } = useParams();
@@ -184,7 +207,7 @@ export default function TabsFunction() {
             <Grid container justifyContent="flex-end">
               <Grid item xs={12} style={{ height: '64vh' }}>
                 <GridText>
-                  <GoalRegistryModal />
+                  <GoalRegistryModal addFunction={newGoal} />
                   <h3 style={{ color: '#2656A5' }}>Goal One</h3>
                   <h5>Goal: {goals.collegeBound}</h5>
                   <h5>Goal Set Date: 3/20/22</h5>
