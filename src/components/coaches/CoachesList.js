@@ -7,9 +7,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
+import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { TextField } from '@mui/material';
+import AppBar from '@mui/material/AppBar';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import Tab from '@mui/material/Tab';
@@ -133,26 +135,55 @@ export default function CoachesList(props) {
     }
   };
   return (
-    <Paper sx={{ width: '100%' }}>
-      <Grid container alignItems="center">
-        <Grid item xs={4}>
-          <Grid container alignItems="center">
+    <Box sx={{ width: '100%', height: '60%' }}>
+      <Grid container spacing={2} sx={{ pr: '2vh' }}>
+        <Grid item xs={12}>
+          <Grid container>
             <Grid item>
-              <Tabs value={value} onChange={handleChange}>
-                <Tab label="Active" />
-                <Tab label="Inactive" />
-              </Tabs>
+              <AppBar
+                position="static"
+                sx={{
+                  bgcolor: '#004cbb',
+                  mt: '2vh',
+                  ml: '0.5vh',
+                  borderTopLeftRadius: 5,
+                  borderTopRightRadius: 5,
+                }}
+                width="3vh"
+              >
+                <Tabs
+                  value={value}
+                  onChange={handleChange}
+                  textColor="inherit"
+                  TabIndicatorProps={{
+                    style: { transition: 'none', background: '#004cbb' },
+                  }}
+                  variant="fullWidth"
+                >
+                  <Tab
+                    label="Active"
+                    sx={{
+                      borderRight: 1,
+                      borderBottom: 2,
+                      borderColor: '#6f8abd',
+                    }}
+                    disableRipple
+                  />
+                  <Tab
+                    label="Inactive"
+                    sx={{
+                      borderRight: 1,
+                      borderLeft: 1,
+                      borderBottom: 2,
+                      borderColor: '#6f8abd',
+                    }}
+                    disableRipple
+                  />
+                </Tabs>
+              </AppBar>
             </Grid>
-          </Grid>
-        </Grid>
-        <Grid item xs={8} p={1}>
-          <Grid
-            container
-            spacing={1}
-            alignItems="center"
-            justifyContent="flex-end"
-          >
-            <Grid item xs={6} align="right">
+
+            <Grid item xs={9} align="right">
               <TextField
                 value={searchTerm}
                 placeholder="Search..."
@@ -171,13 +202,13 @@ export default function CoachesList(props) {
                 }}
               />
             </Grid>
-            <Grid item>
+            <Grid item xs={1} align="left">
               <RegisterCoachModal addFunction={addFunction} />
             </Grid>
           </Grid>
         </Grid>
       </Grid>
-      <TableContainer sx={{ height: '68vh' }}>
+      <TableContainer component={Paper} sx={{ height: '68vh' }}>
         <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
           <EnhancedTableHead
             order={order}
@@ -250,7 +281,7 @@ export default function CoachesList(props) {
           </TableBody>
         </Table>
       </TableContainer>
-    </Paper>
+    </Box>
   );
 }
 
