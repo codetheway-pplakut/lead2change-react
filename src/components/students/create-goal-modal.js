@@ -5,6 +5,8 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import PropTypes from 'prop-types';
 import ColorButton from '../coaches/Shared/ColoredButton';
 
@@ -16,7 +18,7 @@ export default function CreateGoalModal(props) {
 
   const [goalSet, setGoalSet] = useState('');
   const [dateGoalSet, setDateGoalSet] = useState('');
-  /* TODO add sel */
+  const [SEL, setSEL] = useState('');
   const [dateGoalReview, setDateGoalReview] = useState('');
   const [wasItAccomplished, setWasItAccomplished] = useState('');
   const [explanation, setExplanation] = useState('');
@@ -24,6 +26,7 @@ export default function CreateGoalModal(props) {
     handleClose();
     addFunction(
       goalSet,
+      SEL,
       dateGoalSet,
       dateGoalReview,
       wasItAccomplished,
@@ -68,7 +71,7 @@ export default function CreateGoalModal(props) {
           <Grid container>
             <Grid item xs={12}>
               <Grid container spacing={1} sx={{ p: 2 }} justifyContent="center">
-                <Grid item xs={6}>
+                <Grid item xs={12}>
                   <TextField
                     value={goalSet}
                     fullWidth
@@ -80,10 +83,26 @@ export default function CreateGoalModal(props) {
                     }}
                   />
                 </Grid>
+                <Grid item xs={12}>
+                  <FormGroup
+                    value={SEL}
+                    fullWidth
+                    label="Social Emotional Learning"
+                    onChange={(e) => {
+                      setSEL(e.target.value);
+                    }}
+                  >
+                    <FormControlLabel label="Self-Awareness" />
+                    <FormControlLabel label="Self-Management" />
+                    <FormControlLabel label="Social Awareness" />
+                    <FormControlLabel label="Relationship Skills" />
+                    <FormControlLabel label="Responsible Decision-making" />
+                  </FormGroup>
+                </Grid>
 
                 <Grid item xs={6}>
                   <TextField
-                    value={Date.now()}
+                    value={dateGoalSet}
                     fullWidth
                     label="Date Goal Set:"
                     type="date"
@@ -94,10 +113,9 @@ export default function CreateGoalModal(props) {
                     }}
                   />
                 </Grid>
-                {/* TODO add SEL */}
-                <Grid item xs={14}>
+                <Grid item xs={6}>
                   <TextField
-                    value={new Date(Date.now() + 14 * 24 * 60 * 60 * 1000)}
+                    value={dateGoalReview}
                     fullWidth
                     label="Goal Review Date:"
                     type="date"
@@ -139,12 +157,12 @@ export default function CreateGoalModal(props) {
                     onClick={Complete}
                     value={
                       (goalSet,
+                      SEL,
                       dateGoalSet,
                       dateGoalReview,
                       wasItAccomplished,
                       explanation)
                     }
-                    /* TODO add scl */
                   >
                     Complete
                   </ColorButton>
