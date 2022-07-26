@@ -34,8 +34,8 @@ export default function SignUpForm(props) {
     (studentDateOfBirth !== null && studentDateOfBirth.includes(currentYear));
 
   return (
-    <Box sx={{ m: 20 }}>
-      <Grid container spacing={2} sx={{ alig: 'center' }}>
+    <Box sx={{ mt: 3 }}>
+      <Grid container spacing={2}>
         <Grid item xs={12}>
           <TextField
             fullWidth
@@ -74,7 +74,7 @@ export default function SignUpForm(props) {
             value={password}
           />
         </Grid> */}
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={12}>
           <TextField
             fullWidth
             label="Cell Phone Number (Optional)"
@@ -91,22 +91,19 @@ export default function SignUpForm(props) {
             value={studentDateOfBirth}
           />
         </Grid>
-        {/* <Grid item xs={12}>
-          <FormControlLabel
-            control={<Checkbox value="allowExtraEmails" color="primary" />}
-            label="I want to receive inspiration, marketing promotions and updates via email."
-          />
-        </Grid> */}
+        <Grid item xs={12}>
+          <Button
+            fullWidth
+            disabled={onSubmitDisabled}
+            sx={{ mt: 3, mb: 2 }}
+            type="submit"
+            onClick={onSubmit}
+            variant="contained"
+          >
+            Sign Up
+          </Button>
+        </Grid>
       </Grid>
-      <Button
-        disabled={onSubmitDisabled}
-        sx={{ mt: 3, mb: 2, ml: '46%' }}
-        type="submit"
-        onClick={onSubmit}
-        variant="contained"
-      >
-        Sign Up
-      </Button>
     </Box>
   );
 }
