@@ -343,50 +343,48 @@ export default function StudentTable() {
       <ProgressIndicatorOverlay active={isLoading} />
       <Grid container spacing={2} sx={{ pr: '2vh' }}>
         <Grid item xs={6}>
-          <Box width="33vh">
-            <AppBar
-              position="static"
-              sx={{ bgcolor: '#004cbb', mt: '2vh', ml: '0.5vh' }}
+          <AppBar
+            position="static"
+            sx={{ bgcolor: '#004cbb', mt: '2vh', ml: '0.5vh' }}
+            width="40vh"
+          >
+            <Tabs
+              value={tabValue}
+              onChange={handleTabChange}
+              textColor="inherit"
+              TabIndicatorProps={{
+                style: { transition: 'none' },
+              }}
+              fullWidth
+              width="40vh"
             >
-              <Tabs
-                value={tabValue}
-                onChange={handleTabChange}
-                textColor="inherit"
-                TabIndicatorProps={{
-                  style: {
-                    backgroundColor: '#FFFFFF',
-                    height: '3px',
-                  },
+              <Tab
+                label="Active"
+                {...controlTabs(0)}
+                sx={{
+                  borderRight: 1,
+                  borderBottom: 2,
                 }}
-              >
-                <Tab
-                  label="Active"
-                  {...controlTabs(0)}
-                  sx={{
-                    borderRight: 1,
-                    borderBottom: 2,
-                  }}
-                />
-                <Tab
-                  label="Inactive"
-                  {...controlTabs(1)}
-                  sx={{
-                    borderRight: 1,
-                    borderLeft: 1,
-                    borderBottom: 2,
-                  }}
-                />
-                <Tab
-                  label="Applicants"
-                  {...controlTabs(2)}
-                  sx={{
-                    borderLeft: 1,
-                    borderBottom: 2,
-                  }}
-                />
-              </Tabs>
-            </AppBar>
-          </Box>
+              />
+              <Tab
+                label="Inactive"
+                {...controlTabs(1)}
+                sx={{
+                  borderRight: 1,
+                  borderLeft: 1,
+                  borderBottom: 2,
+                }}
+              />
+              <Tab
+                label="Applicants"
+                {...controlTabs(2)}
+                sx={{
+                  borderLeft: 1,
+                  borderBottom: 2,
+                }}
+              />
+            </Tabs>
+          </AppBar>
         </Grid>
         <Grid item xs={5} align="right">
           <TextField
