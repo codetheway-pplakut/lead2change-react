@@ -5,7 +5,6 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import PropTypes from 'prop-types';
 import { Box, Checkbox } from '@mui/material';
@@ -46,8 +45,7 @@ export default function CreateGoalModal(props) {
     if (sel5) {
       temp += 'Responsible Decision-making/';
     }
-    /* setsel(temp); */
-    console.log(temp);
+    setsel(temp);
     addFunction(
       goalSet,
       sel,
@@ -112,7 +110,6 @@ export default function CreateGoalModal(props) {
                     value={sel1}
                     label="Self-Awareness"
                     onChange={(e) => {
-                      console.log(e.target.checked);
                       setsel1(e.target.checked);
                     }}
                   >
