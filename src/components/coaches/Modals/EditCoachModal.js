@@ -41,6 +41,9 @@ export default function EditCoachModal(props) {
     };
     updateFunction(updatedCoach);
   };
+  function containsNumber(str) {
+    return /\d/.test(str);
+  }
   return (
     <div>
       <IconButton sx={{ color: '#2656A5' }} size="small" onClick={handleOpen}>
@@ -81,6 +84,10 @@ export default function EditCoachModal(props) {
               <Grid container spacing={1} sx={{ p: 2 }} justifyContent="center">
                 <Grid item xs={6}>
                   <TextField
+                    error={
+                      enteredFirstName.length < 1 ||
+                      containsNumber(enteredFirstName)
+                    }
                     value={enteredFirstName}
                     fullWidth
                     label="First Name"
@@ -94,6 +101,10 @@ export default function EditCoachModal(props) {
 
                 <Grid item xs={6}>
                   <TextField
+                    error={
+                      enteredLastName.length < 1 ||
+                      containsNumber(enteredLastName)
+                    }
                     value={enteredLastName}
                     fullWidth
                     label="Last Name"
@@ -106,6 +117,7 @@ export default function EditCoachModal(props) {
                 </Grid>
                 <Grid item xs={14}>
                   <TextField
+                    error={!enteredEmail.contains('@')}
                     value={enteredEmail}
                     fullWidth
                     label="Email"
@@ -118,6 +130,7 @@ export default function EditCoachModal(props) {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
+                    error={!enteredPhoneNumber.replace('-', '').isNaN()}
                     value={enteredPhoneNumber}
                     fullWidth
                     label="Phone Number"
