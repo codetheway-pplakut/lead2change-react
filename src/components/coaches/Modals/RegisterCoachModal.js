@@ -39,7 +39,7 @@ export default function RegisterCoachModal(props) {
                 <Grid item xs={2} />
                 <Grid item xs={8}>
                   <Typography variant="h5" component="h2" align="center">
-                    Register
+                    Register Coach
                   </Typography>
                 </Grid>
                 <Grid item xs={1} />
