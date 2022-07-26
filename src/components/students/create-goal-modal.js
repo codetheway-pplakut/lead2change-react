@@ -30,6 +30,7 @@ export default function CreateGoalModal(props) {
       explanation
     );
   };
+
   return (
     <div>
       <ColorButton variant="contained" onClick={handleOpen}>
@@ -82,7 +83,7 @@ export default function CreateGoalModal(props) {
 
                 <Grid item xs={6}>
                   <TextField
-                    value={dateGoalSet}
+                    value={Date.now()}
                     fullWidth
                     label="Date Goal Set:"
                     type="date"
@@ -96,7 +97,7 @@ export default function CreateGoalModal(props) {
                 {/* TODO add SEL */}
                 <Grid item xs={14}>
                   <TextField
-                    value={dateGoalReview}
+                    value={new Date(Date.now() + 14 * 24 * 60 * 60 * 1000)}
                     fullWidth
                     label="Goal Review Date:"
                     type="date"
