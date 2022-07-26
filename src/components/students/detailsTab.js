@@ -97,13 +97,6 @@ function SignUpDisplay(props) {
         </AppBar>
 
         <TabPanel value={value} index={0} style={{ overflowY: 'auto' }}>
-          <Button
-            style={{ float: 'right' }}
-            variant="contained"
-            onClick={onEditClick}
-          >
-            Edit
-          </Button>
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">
               <Grid
@@ -113,8 +106,15 @@ function SignUpDisplay(props) {
                 style={{ height: '64vh' }}
               >
                 <GridText>
+                  {' '}
+                  <Button
+                    style={{ float: 'right' }}
+                    variant="contained"
+                    onClick={onEditClick}
+                  >
+                    Edit
+                  </Button>
                   <h3 style={{ color: '#2656A5' }}>Post Secondary Plan</h3>
-
                   <h5>
                     Plans After College: After College I plan to go and get a
                     job as a Software Developer at a company such as google.
@@ -165,6 +165,13 @@ function SignUpDisplay(props) {
             <Grid container justifyContent="flex-end">
               <Grid item xs={12} style={{ height: '64vh' }}>
                 <GridText>
+                  <Button
+                    style={{ float: 'right' }}
+                    variant="contained"
+                    onClick={onEditClick}
+                  >
+                    Edit
+                  </Button>
                   <h3 style={{ color: '#2656A5' }}>Goal One</h3>
                   <h5>Goal: Be able to become a leader for a school club</h5>
                   <h5>Goal Set Date: 3/20/22</h5>
@@ -206,6 +213,13 @@ function SignUpDisplay(props) {
             <Grid container justifyContent="flex-end">
               <Grid item xs={12} style={{ height: '64vh' }}>
                 <GridText>
+                  <Button
+                    style={{ float: 'right' }}
+                    variant="contained"
+                    onClick={onEditClick}
+                  >
+                    Edit
+                  </Button>
                   <h3 style={{ color: '#2656A5' }}>Parent Information</h3>
                   <h5>First Name: Bob</h5>
                   <h5>Last Name: Doe</h5>

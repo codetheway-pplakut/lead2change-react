@@ -169,7 +169,7 @@ function SignUpEdit(props) {
           >
             <h2>Student Info</h2>
           </Grid>
-          <Grid container style={{ marginLeft: '2vh' }}>
+          <Grid container style={{ marginLeft: '2vh' }} direction="column">
             <StudentInfo>
               <GridText item marginBottom={2} marginTop={5}>
                 <TextField
