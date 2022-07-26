@@ -7,6 +7,7 @@ import {
   Box,
   TextField,
   Avatar,
+  Container,
 } from '@mui/material';
 
 import AutorenewTwoToneIcon from '@mui/icons-material/AutorenewTwoTone';
@@ -29,8 +30,8 @@ function ResetPassword() {
     // const validRegex =
     //   '^(?=.*[A-Za-z])(?=.*d)(?=.*[@$!%*#?&])[A-Za-zd@$!%*#?&]{8,}$';
 
-    // if ((newPassword && confirmNewPassword) === validRegex) {
-
+    // if ((newPassword && confirmNewPassword) !== validRegex) {
+    // console.log('must match vaildRergex: 8 characters, 1 number, 1 special character)
     if (newPassword === confirmNewPassword) {
       console.log('Both field match now the password will be changed.');
       setChangeButton(true);
@@ -43,57 +44,53 @@ function ResetPassword() {
   };
 
   return (
-    <Box sx={{ mt: 3 }}>
-      <Grid
-        container
-        spacing={2}
-        direction="column"
-        alignItems="center"
-        justifyContent="center" //  what is this doing
+    <Container maxWidth="sm">
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
       >
-        <Grid item xs={12}>
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <AutorenewTwoToneIcon />
-          </Avatar>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h5">Set New Password</Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h7">
-            Please set a new password for the following account.
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            sx={{ mt: 3 }}
-            fullWidth
-            label="New Password"
-            onChange={(e) => setNewPassword(e.target.value)}
-            required
-            type="email"
-            value={newPassword}
-            // error
-            // helperText
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            label="Confirm New Password"
-            onChange={(e) => setConfirmNewPassword(e.target.value)}
-            required
-            type="password"
-            value={confirmNewPassword}
-            error={newPassword !== confirmNewPassword}
-            helperText={
-              newPassword !== confirmNewPassword
-                ? 'Both field must match!'
-                : ' '
-            }
-          />
-        </Grid>
-        <Grid item xs={12}>
+        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <AutorenewTwoToneIcon />
+        </Avatar>
+        <Typography variant="h5">Set New Password</Typography>
+        <Typography variant="h7">
+          Please set a new password for the following account.
+        </Typography>
+        <Box sx={{ mt: 3 }}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                sx={{ mt: 3 }}
+                fullWidth
+                label="New Password"
+                onChange={(e) => setNewPassword(e.target.value)}
+                required
+                type="email"
+                value={newPassword}
+                // error
+                // helperText
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                label="Confirm New Password"
+                onChange={(e) => setConfirmNewPassword(e.target.value)}
+                required
+                type="password"
+                value={confirmNewPassword}
+                error={newPassword !== confirmNewPassword}
+                helperText={
+                  newPassword !== confirmNewPassword
+                    ? 'Both field must match!'
+                    : ' '
+                }
+              />
+            </Grid>
+          </Grid>
           {changeButton ? (
             <Button
               fullWidth
@@ -102,7 +99,7 @@ function ResetPassword() {
               onClick={() => navigate(ROUTES.SIGN_UP)}
               variant="contained"
             >
-              Back to Login
+              Back to SignUp
             </Button>
           ) : (
             <Button
@@ -116,9 +113,9 @@ function ResetPassword() {
               Confirm
             </Button>
           )}
-        </Grid>
-      </Grid>
-    </Box>
+        </Box>
+      </Box>
+    </Container>
   );
 }
 
