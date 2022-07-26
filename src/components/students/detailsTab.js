@@ -179,12 +179,12 @@ export default function TabsFunction() {
             </Grid>
           </Box>
         </TabPanel>
-        <GoalRegistryModal />
         <TabPanel value={value} index={1} style={{ overflowY: 'auto' }}>
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">
               <Grid item xs={12} style={{ height: '64vh' }}>
                 <GridText>
+                  <GoalRegistryModal />
                   <h3 style={{ color: '#2656A5' }}>Goal One</h3>
                   <h5>Goal: {goals.collegeBound}</h5>
                   <h5>Goal Set Date: 3/20/22</h5>
