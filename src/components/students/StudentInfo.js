@@ -252,7 +252,7 @@ function SignUpEdit(props) {
           
           </Grid>
 
-          <Grid align="right" marginRight={1}>
+          <Grid align="right">
             <Button variant="contained" onClick={onSaveClick}>
               Save
             </Button>
