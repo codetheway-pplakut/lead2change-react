@@ -71,13 +71,15 @@ function SignUpDisplay(props) {
           >
             <h2>Student Info</h2>
           </Grid>
-          <Button
-            style={{ float: 'right' }}
-            variant="contained"
-            onClick={onEditClick}
-          >
-            Edit
-          </Button>
+          <Grid marginRight={1} marginTop={1}>
+            <Button
+              style={{ float: 'right' }}
+              variant="contained"
+              onClick={onEditClick}
+            >
+              Edit
+            </Button>
+          </Grid>
           <Grid style={{ margin: '2vh' }}>
             <StudentInfo>
               <h3>Name: Aaditya Tiwari</h3>
@@ -245,17 +247,20 @@ function SignUpEdit(props) {
                   defaultValue="50021"
                   label="Zip Code"
                 />
-                <Button variant="contained" onClick={onCancelClick}>
-                  Cancel
-                </Button>
               </Grid>
             </StudentInfo>
+          
+          </Grid>
+
+          <Grid align="right" marginRight={1}>
+            <Button variant="contained" onClick={onSaveClick}>
+              Save
+            </Button>
+             <Button variant="contained" onClick={onCancelClick}>
+                Cancel
+              </Button>
           </Grid>
         </Paper>
-
-        <Button variant="contained" onClick={onSaveClick}>
-          Save
-        </Button>
       </Grid>
 
       <Grid item xs={8}>

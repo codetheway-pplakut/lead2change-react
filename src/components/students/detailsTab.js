@@ -74,7 +74,7 @@ function SignUpDisplay(props) {
 
   return (
     <div style={{ marginRight: '8vh' }}>
-      <Box sx={{ bgcolor: 'background.paper', width: 800 }}>
+      <Box sx={{ bgcolor: 'background.paper', width: '100vh'}}> 
         <AppBar position="static">
           <Tabs
             value={value}
@@ -96,7 +96,13 @@ function SignUpDisplay(props) {
           </Tabs>
         </AppBar>
 
-        <TabPanel value={value} index={0} style={{ overflowY: 'auto' }}>
+        <TabPanel value={value} index={0} style={{ overflowY: 'auto' }}><Button
+        style={{ float: 'right' }}
+        variant="contained"
+        onClick={onEditClick}
+      >
+        Edit
+      </Button>
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">
               <Grid
@@ -226,13 +232,7 @@ function SignUpDisplay(props) {
           </Box>
         </TabPanel>
       </Box>
-      <Button
-        style={{ float: 'right' }}
-        variant="contained"
-        onClick={onEditClick}
-      >
-        Edit
-      </Button>
+     
     </div>
   );
 }
@@ -251,7 +251,7 @@ function SignUpEdit(props) {
 
   return (
     <div style={{ marginRight: '8vh' }}>
-      <Box sx={{ bgcolor: 'background.paper', width: 800 }}>
+      <Box sx={{ bgcolor: 'background.paper', width: '100vh' }}>
         <AppBar position="static">
           <Tabs
             value={value}
@@ -840,13 +840,18 @@ function SignUpEdit(props) {
             </Grid>
           </Box>
         </TabPanel>
+        <Grid align='right'> 
+        <Button variant="contained" onClick={onSaveClick}>
+        Save
+      </Button> 
         <Button variant="contained" onClick={onCancelClick}>
           Cancel
         </Button>
+       
+      </Grid>
       </Box>
-      <Button variant="contained" onClick={onSaveClick}>
-        Save
-      </Button>
+     
+      
     </div>
   );
 }
