@@ -11,6 +11,14 @@ export const getAdminById = (id) => {
   return callApi({ endpoint: `${SERVICE_ROOT}/${id}` });
 };
 
+export const deleteAdmin = async (admin) => {
+  return callApi({
+    body: admin,
+    endpoint: SERVICE_ROOT,
+    method: 'DELETE',
+  });
+};
+
 export const updateAdmin = (admin) => {
   return callApi({
     body: admin,

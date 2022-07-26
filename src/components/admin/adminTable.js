@@ -136,58 +136,6 @@ export default function AdminTable() {
           </TableBody>
         </Table>
       </TableContainer>
-
-      <TableContainer sx={tablePositioning}>
-        <Table aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="left" sx={tableHeadingText}>
-                <Grid container>
-                  <Grid item xs={6} />
-                  <Grid item xs={2}>
-                    Name
-                  </Grid>
-                </Grid>
-              </TableCell>
-              <TableCell align="left" sx={tableHeadingText}>
-                Email
-              </TableCell>
-              <TableCell align="left" sx={tableDelete}>
-                Delete
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {admins.map((admin, index) => (
-              <TableRow
-                key={admin.id}
-                sx={
-                  index % 2
-                    ? { background: '#eeeeee' }
-                    : { background: 'white' }
-                }
-              >
-                <TableCell component="th" scope="row">
-                  <Grid container alignItems="center" justify="center">
-                    <Grid item xs={6}>
-                      <Box>
-                        <EditAdminModal />
-                      </Box>
-                    </Grid>
-                    <Grid item xs={6}>
-                      {admin.userName}
-                    </Grid>
-                  </Grid>
-                </TableCell>
-                <TableCell align="left">{admin.email}</TableCell>
-                <TableCell align="left">
-                  <DeleteAdminModal adminId={admin.id} />
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
     </Box>
   );
 }
