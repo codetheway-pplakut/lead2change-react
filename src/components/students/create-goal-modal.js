@@ -8,6 +8,7 @@ import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import PropTypes from 'prop-types';
+import { Box, Checkbox } from '@mui/material';
 import ColorButton from '../coaches/Shared/ColoredButton';
 
 export default function CreateGoalModal(props) {
@@ -84,20 +85,45 @@ export default function CreateGoalModal(props) {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <FormGroup
+                  <Box
                     value={SEL}
                     fullWidth
                     label="Social Emotional Learning"
+                    justifyContent="center"
                     onChange={(e) => {
-                      setSEL(e.target.value);
+                      {
+                        console.log(SEL + e.target.value);
+                      }
+                      setSEL(SEL + e.target.value);
                     }}
                   >
-                    <FormControlLabel label="Self-Awareness" />
-                    <FormControlLabel label="Self-Management" />
-                    <FormControlLabel label="Social Awareness" />
-                    <FormControlLabel label="Relationship Skills" />
-                    <FormControlLabel label="Responsible Decision-making" />
-                  </FormGroup>
+                    <FormControlLabel
+                      control={<Checkbox name="checkedA" />}
+                      label="Self-Awareness"
+                    />
+                    <FormControlLabel
+                      control={<Checkbox name="checkedB" />}
+                      label="Self-management"
+                    />
+                    <FormControlLabel
+                      control={<Checkbox name="checkedC" />}
+                      label="Social Awareness"
+                    />
+                    <FormControlLabel
+                      control={<Checkbox name="checkedD" />}
+                      label="Relationship Skills"
+                    />
+                    <FormControlLabel
+                      control={<Checkbox name="checkedE" />}
+                      label="Responsible Decision-making"
+                    />
+
+                    {/* <Checkbox control={<Checkbox />} label="Self-Awareness" />
+                    <Checkbox label="Self-Management" />
+                    <Checkbox label="Social Awareness" />
+                    <Checkbox label="Relationship Skills" />
+                  <Checkbox label="Responsible Decision-making" /> */}
+                  </Box>
                 </Grid>
 
                 <Grid item xs={6}>
