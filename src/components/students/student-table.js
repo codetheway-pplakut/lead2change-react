@@ -46,6 +46,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: '#004cbb',
     color: theme.palette.common.white,
+    textColor: theme.palette.common.white,
   },
   // [`&.${tableCellClasses.body}`]: { },
 }));

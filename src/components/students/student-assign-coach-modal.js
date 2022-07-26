@@ -73,12 +73,9 @@ export default function CoachAssignModal(props) {
     handleClose();
   };
 
-  const handleGetCoach = (id) => {
-    if (id !== null) {
-      const coach = getCoachById(id).coachFirstName;
-      return coach;
-    }
-    return 'Unassigned';
+  const getCoachName = (coach) => {
+    const coachName = `${coach.coachFirstName} ${coach.coachLastName}`;
+    return coachName;
   };
 
   const handleCoachChange = (event, coachChangeValue) => {
@@ -93,10 +90,9 @@ export default function CoachAssignModal(props) {
 
   return (
     <div>
-      {handleGetCoach(coachId)}{' '}
+      {getCoachName(getCoachById(coachId))}
       <IconButton onClick={handleOpen}>
-        {' '}
-        <EditIcon />{' '}
+        <EditIcon />
       </IconButton>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
@@ -114,7 +110,7 @@ export default function CoachAssignModal(props) {
                 <FormControlLabel
                   value={coach.id}
                   control={<StyledRadio />}
-                  label={handleGetCoach(coach.id)}
+                  label={getCoachName(coach)}
                   key={coach.id}
                 />
               ))}
