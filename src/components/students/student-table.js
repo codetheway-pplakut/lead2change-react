@@ -8,6 +8,7 @@ import {
   Button,
   Grid,
   InputAdornment,
+  Link,
   Paper,
   styled,
   Tab,
@@ -333,6 +334,10 @@ export default function StudentTable() {
     navigate(ROUTES.SIGN_UP);
   };
 
+  const toDetails = (studentId) => {
+    navigate(ROUTES.STUDENT_INFO);
+  };
+
   return (
     <Box sx={{ width: '100%', height: '60%' }}>
       <ProgressIndicatorOverlay active={isLoading} />
@@ -463,7 +468,9 @@ export default function StudentTable() {
                   return (
                     <StyledTableRow tabIndex={0} key={student.id}>
                       <StyledTableCell>
-                        {student.lastName}, {student.firstName}
+                        <Link onClick={toDetails}>
+                          {student.lastName}, {student.firstName}
+                        </Link>
                       </StyledTableCell>
                       <StyledTableCell align="left">
                         {student.email}
