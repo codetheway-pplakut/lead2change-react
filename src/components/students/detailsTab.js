@@ -142,7 +142,7 @@ export default function TabsFunction() {
                 sx={{ minWidth: 10, height: 'max-content' }}
                 style={{ height: '64vh' }}
               >
-                <GridText>
+                <Grid>
                   <h3 style={{ color: '#2656A5' }}>Post Secondary Plan</h3>
                   <h5>
                     Plans After High school: {students.planAfterHighSchool}
@@ -172,20 +172,53 @@ export default function TabsFunction() {
                     College Entrance Exam Information:
                   </h3>
                   <h5>
-                    PACT Score: {students.pactTestScore}
-                    <div>Date of PACT: {students.pactTestDate}</div>
+                    PSAT Score:{' '}
+                    <Box component="span" style={{ fontWeight: 'normal' }}>
+                      {students.psatTestScore}
+                    </Box>{' '}
+                    <Box component="span" style={{ marginLeft: '28.35vh' }}>
+                      SAT Score:{' '}
+                      <Box component="span" style={{ fontWeight: 'normal' }}>
+                        {students.satTestDate}
+                      </Box>
+                    </Box>{' '}
+                    <div>
+                      Date of PSAT:{' '}
+                      <Box component="span" style={{ fontWeight: 'normal' }}>
+                        {students.psatTestDate}
+                      </Box>
+                      <Box component="span" style={{ marginLeft: '23.29vh' }}>
+                        Date of SAT:{' '}
+                        <Box component="span" style={{ fontWeight: 'normal' }}>
+                          {students.satTestDate}
+                        </Box>{' '}
+                      </Box>
+                    </div>
                   </h5>
                   <h5>
-                    PSAT Score: {students.psatTestScore}
-                    <div> Date of PSAT: {students.psatTestDate}</div>
-                  </h5>
-                  <h5>
-                    ACT Score: {students.actTestDate}
-                    <div> Date of ACT: {students.actTestScore}</div>
-                  </h5>
-                  <h5>
-                    SAT Score: {students.satTestDate}
-                    <div> Date of SAT: {students.satTestScore} </div>
+                    PACT Score:{' '}
+                    <Box component="span" style={{ fontWeight: 'normal' }}>
+                      {students.pactTestScore}
+                    </Box>{' '}
+                    <Box component="span" style={{ marginLeft: '28.35vh' }}>
+                      ACT Score:{' '}
+                      <Box component="span" style={{ fontWeight: 'normal' }}>
+                        {students.actTestScore}
+                      </Box>
+                    </Box>
+                    <div>
+                      {' '}
+                      Date of PACT: {students.pactTestDate}
+                      <Box component="span" style={{ fontWeight: 'normal' }}>
+                        {students.pactTestDate}
+                      </Box>
+                      <Box component="span" style={{ marginLeft: '23.29vh' }}>
+                        Date of PSAT:{' '}
+                        <Box component="span" style={{ fontWeight: 'normal' }}>
+                          {students.psatTestDate}
+                        </Box>{' '}
+                      </Box>
+                    </div>
                   </h5>
                   <h3 style={{ color: '#2656A5' }}>Financial Aid:</h3>
                   <h5>
@@ -197,7 +230,7 @@ export default function TabsFunction() {
                     {students.supportNeeded}
                   </h5>
                   <h5>Support they need: None</h5>
-                </GridText>
+                </Grid>
               </Grid>
             </Grid>
           </Box>
@@ -206,7 +239,7 @@ export default function TabsFunction() {
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">
               <Grid item xs={12} style={{ height: '64vh' }}>
-                <GridText>
+                <Grid>
                   <GoalRegistryModal addFunction={newGoal} />
                   <h3 style={{ color: '#2656A5' }}>Goal One</h3>
                   <h5>Goal: {goals.collegeBound}</h5>
@@ -239,7 +272,7 @@ export default function TabsFunction() {
                   <h5>
                     Explanation: Trying to get a 4.3 GPA in all of my classes{' '}
                   </h5>
-                </GridText>
+                </Grid>
               </Grid>
             </Grid>
           </Box>
@@ -248,7 +281,7 @@ export default function TabsFunction() {
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">
               <Grid item xs={12} style={{ height: '64vh' }}>
-                <GridText>
+                <Grid>
                   <h3 style={{ color: '#2656A5' }}>Parent Information</h3>
                   <h5>First Name: {students.parentFirstName}</h5>
                   <h5>Last Name: {students.parentLastName}</h5>
@@ -274,7 +307,7 @@ export default function TabsFunction() {
                   <h5>Date Signed: {students.studentSignatureDate}</h5>
                   <h5>Parent Signature: {students.parentSignature}</h5>
                   <h5>Date Signed: {students.parentSignatureDate}</h5>
-                </GridText>
+                </Grid>
               </Grid>
             </Grid>
           </Box>
