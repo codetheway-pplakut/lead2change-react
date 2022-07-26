@@ -342,21 +342,26 @@ export default function StudentTable() {
     <Box sx={{ width: '100%', height: '60%' }}>
       <ProgressIndicatorOverlay active={isLoading} />
       <Grid container spacing={2} sx={{ pr: '2vh' }}>
-        <Grid item xs={6}>
+        <Grid item xs={3}>
           <AppBar
             position="static"
-            sx={{ bgcolor: '#004cbb', mt: '2vh', ml: '0.5vh' }}
-            width="40vh"
+            sx={{
+              bgcolor: '#004cbb',
+              mt: '2vh',
+              ml: '0.5vh',
+              borderTopLeftRadius: 5,
+              borderTopRightRadius: 5,
+            }}
+            width="3vh"
           >
             <Tabs
               value={tabValue}
               onChange={handleTabChange}
               textColor="inherit"
               TabIndicatorProps={{
-                style: { transition: 'none' },
+                style: { transition: 'none', background: '#004cbb' },
               }}
-              fullWidth
-              width="40vh"
+              variant="fullWidth"
             >
               <Tab
                 label="Active"
@@ -364,7 +369,9 @@ export default function StudentTable() {
                 sx={{
                   borderRight: 1,
                   borderBottom: 2,
+                  borderColor: '#6f8abd',
                 }}
+                disableRipple
               />
               <Tab
                 label="Inactive"
@@ -373,7 +380,9 @@ export default function StudentTable() {
                   borderRight: 1,
                   borderLeft: 1,
                   borderBottom: 2,
+                  borderColor: '#6f8abd',
                 }}
+                disableRipple
               />
               <Tab
                 label="Applicants"
@@ -381,12 +390,14 @@ export default function StudentTable() {
                 sx={{
                   borderLeft: 1,
                   borderBottom: 2,
+                  borderColor: '#6f8abd',
                 }}
+                disableRipple
               />
             </Tabs>
           </AppBar>
         </Grid>
-        <Grid item xs={5} align="right">
+        <Grid item xs={8} align="right">
           <TextField
             value={search}
             placeholder="Search..."
