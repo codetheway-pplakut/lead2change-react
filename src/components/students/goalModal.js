@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import AddIcon from '@mui/icons-material/Add';
@@ -11,26 +11,11 @@ import Modal from '@mui/material/Modal';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import { useNavigate } from 'react-router';
 import ROUTES from '../../constants/routes';
 
 export default function GoalRegistryModal(props) {
-  const {
-    confirmHandler,
-    goalSet,
-    dateGoalSet,
-    sel,
-    goalReviewDate,
-    wasItAccomplished,
-    explanation,
-    onGoalSetChange,
-    onDateGoalSetChange,
-    onSelChange,
-    onGoalReviewDateChange,
-    onWasItAccomplishedChange,
-    onExplanationChange,
-  } = props;
-
   const style = {
     position: 'absolute',
     top: '50%',
@@ -43,11 +28,20 @@ export default function GoalRegistryModal(props) {
     p: 4,
   };
 
+  const { addFunction } = props;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const confirm = () => {
-    confirmHandler(
+
+  const [goalSet, setGoalSet] = useState('');
+  const [dateGoalSet, setDateGoalSet] = useState('');
+  const [sel, setSel] = useState('');
+  const [goalReviewDate, setGoalReviewDate] = useState('');
+  const [wasItAccomplished, setWasItAccomplished] = useState('');
+  const [explanation, setExplanation] = useState('');
+  const Register = () => {
+    handleClose();
+    addFunction(
       goalSet,
       dateGoalSet,
       sel,
@@ -55,7 +49,6 @@ export default function GoalRegistryModal(props) {
       wasItAccomplished,
       explanation
     );
-    handleClose();
   };
 
   return (
@@ -65,8 +58,7 @@ export default function GoalRegistryModal(props) {
       <Modal
         open={open}
         onClose={handleClose}
-        variant="contained"
-        startIcon={<AddIcon />}
+        aria-labelledby="modal-modal-title"
       >
         <Modal open={open} onClose={handleClose}>
           <Box sx={style}>
@@ -93,7 +85,7 @@ export default function GoalRegistryModal(props) {
                   required
                   sx={{ mb: 2 }}
                   InputLabelProps={{ shrink: true }}
-                  onChange={(event) => onGoalSetChange(event.target.value)}
+                  onChange={(event) => setGoalSet(event.target.value)}
                   value={goalSet}
                 />
                 <TextField
@@ -103,7 +95,8 @@ export default function GoalRegistryModal(props) {
                   required
                   sx={{ mb: 2 }}
                   InputLabelProps={{ shrink: true }}
-                  onChange={(event) => onDateGoalSetChange(event.target.value)}
+                  type="date"
+                  onChange={(event) => setDateGoalSet(event.target.value)}
                   value={dateGoalSet}
                 />
               </Stack>
@@ -116,7 +109,7 @@ export default function GoalRegistryModal(props) {
                 required
                 sx={{ mb: 2 }}
                 InputLabelProps={{ shrink: true }}
-                onChange={(event) => onSelChange(event.target.value)}
+                onChange={(event) => setSel(event.target.value)}
                 value={sel}
               />
             </Box>
@@ -128,7 +121,7 @@ export default function GoalRegistryModal(props) {
                 required
                 sx={{ mb: 2 }}
                 InputLabelProps={{ shrink: true }}
-                onChange={(event) => onGoalReviewDateChange(event.target.value)}
+                onChange={(event) => setGoalReviewDate(event.target.value)}
                 type="date"
                 value={goalReviewDate}
               />
@@ -141,9 +134,7 @@ export default function GoalRegistryModal(props) {
                 required
                 sx={{ mb: 2 }}
                 InputLabelProps={{ shrink: true }}
-                onChange={(event) =>
-                  onWasItAccomplishedChange(event.target.value)
-                }
+                onChange={(event) => setWasItAccomplished(event.target.value)}
                 value={wasItAccomplished}
               />
             </Box>
@@ -154,11 +145,17 @@ export default function GoalRegistryModal(props) {
               required
               InputLabelProps={{ shrink: true }}
               sx={{ mb: 2 }}
-              onChange={(event) => onExplanationChange(event.target.value)}
+              onChange={(event) => setExplanation(event.target.value)}
               value={explanation}
             />
-            <Button variant="contained" onClick={confirm} fullWidth>
-              Create Goal
+            <Button
+              fullWidth
+              type="submit"
+              onClick={Register}
+              variant="contained"
+            >
+              {console.log('test')}
+              Sign Up
             </Button>
           </Box>
         </Modal>
@@ -168,17 +165,5 @@ export default function GoalRegistryModal(props) {
 }
 
 GoalRegistryModal.propTypes = {
-  confirmHandler: PropTypes.func.isRequired,
-  goalSet: PropTypes.string.isRequired,
-  dateGoalSet: PropTypes.string.isRequired,
-  sel: PropTypes.string.isRequired,
-  goalReviewDate: PropTypes.string.isRequired,
-  wasItAccomplished: PropTypes.string.isRequired,
-  explanation: PropTypes.string.isRequired,
-  onGoalSetChange: PropTypes.func.isRequired,
-  onDateGoalSetChange: PropTypes.func.isRequired,
-  onSelChange: PropTypes.func.isRequired,
-  onGoalReviewDateChange: PropTypes.func.isRequired,
-  onWasItAccomplishedChange: PropTypes.func.isRequired,
-  onExplanationChange: PropTypes.func.isRequired,
+  addFunction: PropTypes.func.isRequired,
 };
