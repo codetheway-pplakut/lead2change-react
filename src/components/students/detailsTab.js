@@ -297,18 +297,28 @@ function SignUpEdit(props) {
               >
                 <Grid>
                   <h3 style={{ color: '#2656A5' }}>Post Secondary Plan</h3>
+
                   <TextField
-                    size="small"
-                    className="typing-container"
+                    id="text-area-q1"
+                    multiline
+                    fullWidth
+                    maxRows={4}
+                    variant="filled"
                     defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
                     label="Plans after college"
-                    fullWidth
                   />
                 </Grid>
-                <h5>
-                  Colleges I’ve applied to/plan to apply to: 1. UW-Madison 2.
-                  Northwestern 3. Purdue
-                </h5>
+                <Grid marginTop={2} marginBottom={3}>
+                  <TextField
+                    id="text-area-q1"
+                    multiline
+                    fullWidth
+                    maxRows={4}
+                    variant="filled"
+                    defaultValue="1. Purde, 2. Madison, 3. MIT"
+                    label="Colleges Plan/Applied To"
+                  />
+                </Grid>
                 <Grid>
                   <TextField
                     size="small"
@@ -497,11 +507,13 @@ function SignUpEdit(props) {
                   <h3 style={{ color: '#2656A5' }}>Goal One</h3>
                   <Grid marginBottom={2}>
                     <TextField
-                      size="small"
-                      className="typing-container"
-                      defaultValue="Be able to become a leader for a school club"
-                      label="Goal"
+                      id="text-area-q1"
+                      multiline
                       fullWidth
+                      maxRows={4}
+                      variant="filled"
+                      defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
+                      label="Plans after college"
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -551,22 +563,26 @@ function SignUpEdit(props) {
 
                   <Grid marginBottom={2}>
                     <TextField
-                      size="small"
-                      className="typing-container"
-                      defaultValue="Joined multiple clubs, trying to establish a role and get a leadership position"
-                      label="Explanation"
+                      id="text-area-q1"
+                      multiline
                       fullWidth
+                      maxRows={4}
+                      variant="filled"
+                      defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
+                      label="Plans after college"
                     />
                   </Grid>
 
                   <h3 style={{ color: '#2656A5' }}>Goal Two</h3>
                   <Grid marginBottom={2}>
                     <TextField
-                      size="small"
-                      className="typing-container"
-                      defaultValue="Be able to become a leader for a school club"
-                      label="Goal"
+                      id="text-area-q1"
+                      multiline
                       fullWidth
+                      maxRows={4}
+                      variant="filled"
+                      defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
+                      label="Plans after college"
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -616,21 +632,25 @@ function SignUpEdit(props) {
 
                   <Grid marginBottom={2}>
                     <TextField
-                      size="small"
-                      className="typing-container"
-                      defaultValue="Joined multiple clubs, trying to establish a role and get a leadership position"
-                      label="Explanation"
+                      id="text-area-q1"
+                      multiline
                       fullWidth
+                      maxRows={4}
+                      variant="filled"
+                      defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
+                      label="Plans after college"
                     />
                   </Grid>
                   <h3 style={{ color: '#2656A5' }}>Goal Three</h3>
                   <Grid marginBottom={2}>
                     <TextField
-                      size="small"
-                      className="typing-container"
-                      defaultValue="Be able to become a leader for a school club"
-                      label="Goal"
+                      id="text-area-q1"
+                      multiline
                       fullWidth
+                      maxRows={4}
+                      variant="filled"
+                      defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
+                      label="Plans after college"
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -679,11 +699,13 @@ function SignUpEdit(props) {
                   </Grid>
                   <Grid marginBottom={2}>
                     <TextField
-                      size="small"
-                      className="typing-container"
-                      defaultValue="Joined multiple clubs, trying to establish a role and get a leadership position"
-                      label="Explanation"
+                      id="text-area-q1"
+                      multiline
                       fullWidth
+                      maxRows={4}
+                      variant="filled"
+                      defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
+                      label="Plans after college"
                     />
                   </Grid>
                 </GridText>
