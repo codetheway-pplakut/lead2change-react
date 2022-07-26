@@ -53,17 +53,16 @@ const tableDelete = {
 export default function AdminTable() {
   const [admins, setAdmins] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
-  const refreshStudents = async () => {
-    setIsLoading(true);
-    const response = await getAdmins();
-
-    setIsLoading(false);
-    setAdmins(response);
+  
+  const refreshAdmins = async () => {
+    const result = await getAdmins();
+    setAdmins(result);
   };
+
   useEffect(() => {
-    refreshStudents();
+    refreshAdmins();
   }, []);
+
 
   return (
     <Box sx={{ width: '100%', height: '60%' }}>

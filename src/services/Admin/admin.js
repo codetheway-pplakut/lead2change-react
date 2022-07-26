@@ -33,7 +33,7 @@ export const updateAdmin = (admin) => {
 
 export const addAdmin = async (admin) => {
   return callApi({
-    body: JSON.stringify(admin),
+    body: admin,
     endpoint: SERVICE_ROOT,
     method: 'POST',
     headers: {
