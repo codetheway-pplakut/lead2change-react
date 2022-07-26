@@ -104,7 +104,7 @@ export default function SignUpForm(props) {
           <Button
             fullWidth
             disabled={onSubmitDisabled}
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mb: 2 }}
             type="submit"
             onClick={onSubmit}
             variant="contained"
