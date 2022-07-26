@@ -31,7 +31,7 @@ export default function AppBar(props) {
   };
   const onLogoutClick = () => {
     navigate(ROUTES.LOGIN);
-    localStorage.removeItem('token-info'); // I don't know backend
+    localStorage.removeItem('token'); // I don't know backend
   };
 
   return (
@@ -91,7 +91,7 @@ export default function AppBar(props) {
             <Grid item xl={2} sx={{ ml: 52 }}>
               <Button variant="text" onClick={onLogoutClick} justify="center">
                 <Typography color="white" variant="body2">
-                  <span>LOG OUT: Jihong123</span>
+                  <span>LOG OUT: ***</span>
                 </Typography>
               </Button>
             </Grid>
