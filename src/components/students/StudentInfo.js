@@ -171,84 +171,84 @@ function SignUpEdit(props) {
           </Grid>
           <Grid container style={{ marginLeft: '2vh' }} direction="column">
             <StudentInfo>
-              <GridText item marginBottom={2} marginTop={5}>
+              <Grid item marginBottom={2} marginTop={5}>
                 <TextField
                   size="small"
                   className="typing-container"
                   defaultValue="Aaditya Tiwari"
                   label="Name"
                 />
-              </GridText>
+              </Grid>
             </StudentInfo>
             <StudentInfo>
-              <GridText item marginBottom={2}>
+              <Grid item marginBottom={2}>
                 <TextField
                   size="small"
                   className="typing-container"
                   label="Date of Birth"
                   type="date"
                 />
-              </GridText>
+              </Grid>
             </StudentInfo>
             <StudentInfo>
-              <GridText item marginBottom={2}>
+              <Grid item marginBottom={2}>
                 <TextField
                   size="small"
                   className="typing-container"
                   defaultValue="tiwari.aadi@gmail.com"
                   label="Email Adress"
                 />
-              </GridText>
+              </Grid>
             </StudentInfo>
             <StudentInfo>
-              <GridText item marginBottom={2}>
+              <Grid item marginBottom={2}>
                 <TextField
                   size="small"
                   className="typing-container"
                   defaultValue="414-244-9848"
                   label="Phone Number"
                 />
-              </GridText>
+              </Grid>
             </StudentInfo>
             <StudentInfo>
-              <GridText item marginBottom={2}>
+              <Grid item marginBottom={2}>
                 <TextField
                   size="small"
                   className="typing-container"
                   defaultValue="12345 demo street"
                   label="Home Adress"
                 />
-              </GridText>
+              </Grid>
             </StudentInfo>
             <StudentInfo>
-              <GridText item marginBottom={2}>
+              <Grid item marginBottom={2}>
                 <TextField
                   size="small"
                   className="typing-container"
                   defaultValue="42"
                   label="Apt. #"
                 />
-              </GridText>
+              </Grid>
             </StudentInfo>
             <StudentInfo>
-              <GridText item marginBottom={2}>
+              <Grid item marginBottom={2}>
                 <TextField
                   size="small"
                   className="typing-container"
                   defaultValue="WI"
                   label="State"
                 />
-              </GridText>
+              </Grid>
             </StudentInfo>
             <StudentInfo>
-              <GridText item marginBottom={2}>
+              <Grid item marginBottom={2}>
                 <TextField
                   size="small"
                   className="typing-container"
                   defaultValue="50021"
                   label="Zip Code"
                 />
-              </GridText>
+              </Grid>
             </StudentInfo>
           </Grid>
 
