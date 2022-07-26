@@ -74,7 +74,7 @@ function SignUpDisplay(props) {
 
   return (
     <div style={{ marginRight: '8vh' }}>
-      <Box sx={{ bgcolor: 'background.paper', width: '100%' }}>
+      <Box sx={{ bgcolor: 'background.paper', width: 800 }}>
         <AppBar position="static">
           <Tabs
             value={value}
@@ -251,7 +251,7 @@ function SignUpEdit(props) {
 
   return (
     <div style={{ marginRight: '8vh' }}>
-      <Box sx={{ bgcolor: 'background.paper', width: '100%' }}>
+      <Box sx={{ bgcolor: 'background.paper', width: 800 }}>
         <AppBar position="static">
           <Tabs
             value={value}
