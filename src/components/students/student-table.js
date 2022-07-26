@@ -339,7 +339,10 @@ export default function StudentTable() {
       <Grid container spacing={2} sx={{ pr: '2vh' }}>
         <Grid item xs={6}>
           <Box width="33vh">
-            <AppBar position="static" sx={{ bgcolor: '#004cbb' }}>
+            <AppBar
+              position="static"
+              sx={{ bgcolor: '#004cbb', mt: '2vh', ml: '0.5vh' }}
+            >
               <Tabs
                 value={tabValue}
                 onChange={handleTabChange}
