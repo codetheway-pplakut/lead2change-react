@@ -1,12 +1,10 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-import StudentTable from './studentTable';
-import StudentModal from './studentModal';
+import StudentTable from './student-table';
 
 export default function Student(props) {
   return (
@@ -25,8 +23,3 @@ export default function Student(props) {
     </Box>
   );
 }
-
-StudentModal.propTypes = {
-  modalType: PropTypes.string.isRequired,
-  confirmHandler: PropTypes.func.isRequired,
-};

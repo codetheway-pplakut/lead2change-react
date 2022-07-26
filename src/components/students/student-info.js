@@ -9,7 +9,7 @@ import { experimentalStyled as styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import ROUTES from '../../constants/routes';
 
-import TabsFunction from './detailsTab';
+import TabsFunction from './student-details-tabs';
 
 const StudentInfo = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -26,7 +26,7 @@ const StudentInfo = styled(Box)(({ theme }) => ({
   borderRadius: 1,
 }));
 
-export default function ResponsiveGrid(props) {
+export default function MainInfoSidebar(props) {
   const onBackClick = () => {
     navigate(ROUTES.STUDENTS);
   };

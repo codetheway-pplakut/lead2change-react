@@ -1,10 +1,20 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
+import AddIcon from '@mui/icons-material/Add';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import InputAdornment from '@mui/material/InputAdornment';
+import Paper from '@mui/material/Paper';
+import SearchIcon from '@mui/icons-material/Search';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
+import { TextField } from '@mui/material';
+import Typography from '@mui/material/Typography';
+
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -12,23 +22,14 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import { TextField } from '@mui/material';
-import InputAdornment from '@mui/material/InputAdornment';
-import SearchIcon from '@mui/icons-material/Search';
-import AddIcon from '@mui/icons-material/Add';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
 
 import { useNavigate } from 'react-router';
 import ROUTES from '../../constants/routes';
 
 import ProgressIndicatorOverlay from '../progress-indicator-overlay/progress-indicator-overlay';
 
-import CoachAssignModal from './student-coach-assign-modal';
-import StudentModal from './studentModal';
+import CoachAssignModal from './student-assign-coach-modal';
+import StudentModal from './student-modal';
 import {
   getStudents,
   getStudentById,
@@ -95,7 +96,7 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-function a11yProps(index) {
+function controlTabs(index) {
   return {
     id: `full-width-tab-${index}`,
     'aria-controls': `full-width-tabpanel-${index}`,
@@ -114,15 +115,15 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-const headCells1 = [
+const headCellsActive = [
   {
-    id: 'studentLastName',
+    id: 'lastName',
     numeric: false,
     disablePadding: false,
     label: 'Name',
   },
   {
-    id: 'studentEmail',
+    id: 'email',
     numeric: false,
     disablePadding: false,
     label: 'Email',
@@ -146,15 +147,15 @@ const headCells1 = [
     label: '',
   },
 ];
-const headCells2 = [
+const headCellsInactive = [
   {
-    id: 'studentFirstName',
+    id: 'lastName',
     numeric: false,
     disablePadding: false,
     label: 'Name',
   },
   {
-    id: 'studentEmail',
+    id: 'email',
     numeric: false,
     disablePadding: false,
     label: 'Email',
@@ -178,15 +179,15 @@ const headCells2 = [
     label: '',
   },
 ];
-const headCells3 = [
+const headCellsApplied = [
   {
-    id: 'studentFirstName',
+    id: 'lastName',
     numeric: false,
     disablePadding: false,
     label: 'Name',
   },
   {
-    id: 'studentEmail',
+    id: 'email',
     numeric: false,
     disablePadding: false,
     label: 'Email',
@@ -265,9 +266,13 @@ function getComparator(order, orderBy) {
 }
 
 export default function StudentTable() {
-  const [students, setStudents] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [search, setSearch] = useState('');
+  const [students, setStudents] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [search, setSearch] = React.useState('');
+
+  const onSearchChange = (value) => {
+    setSearch(value);
+  };
 
   const refreshStudents = async () => {
     setIsLoading(true);
@@ -280,12 +285,12 @@ export default function StudentTable() {
     refreshStudents();
   }, []);
 
-  const [tabValue, setTabValue] = useState(0);
+  const [tabValue, setTabValue] = React.useState(0);
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
   };
-  const [order, setOrder] = useState('asc');
-  const [orderBy, setOrderBy] = useState('name');
+  const [order, setOrder] = React.useState('asc');
+  const [orderBy, setOrderBy] = React.useState('name');
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -317,9 +322,9 @@ export default function StudentTable() {
                   },
                 }}
               >
-                <Tab label="Active" {...a11yProps(0)} />
-                <Tab label="Inactive" {...a11yProps(1)} />
-                <Tab label="Applicants" {...a11yProps(2)} />
+                <Tab label="Active" {...controlTabs(0)} />
+                <Tab label="Inactive" {...controlTabs(1)} />
+                <Tab label="Applicants" {...controlTabs(2)} />
               </Tabs>
             </AppBar>
           </Box>
@@ -340,7 +345,7 @@ export default function StudentTable() {
               ),
             }}
             onChange={(e) => {
-              setSearch(e.target.value);
+              onSearchChange(e.target.value);
             }}
           />
         </Grid>
@@ -362,7 +367,7 @@ export default function StudentTable() {
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
-              headCells={headCells1}
+              headCells={headCellsActive}
             />
             <TableBody>
               {stableSort(students, getComparator(order, orderBy))
@@ -400,7 +405,15 @@ export default function StudentTable() {
                     if (
                       post.coachId !== null &&
                       getCoachById(post.coachId)
-                        .coachName.toLowerCase()
+                        .coachFirstName.toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.coachId !== null &&
+                      getCoachById(post.coachId)
+                        .coachLastName.toLowerCase()
                         .includes(search.toLowerCase())
                     ) {
                       return post;
@@ -457,7 +470,7 @@ export default function StudentTable() {
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
-              headCells={headCells2}
+              headCells={headCellsInactive}
             />
             <TableBody>
               {stableSort(students, getComparator(order, orderBy))
@@ -489,20 +502,6 @@ export default function StudentTable() {
                       post.studentCellPhone
                         .toLowerCase()
                         .includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                    if (
-                      post.coachId !== null &&
-                      getCoachById(post.coachId)
-                        .coachName.toLowerCase()
-                        .includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                    if (
-                      post.coachId === null &&
-                      'unassigned'.includes(search.toLowerCase())
                     ) {
                       return post;
                     }
@@ -545,7 +544,7 @@ export default function StudentTable() {
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
-              headCells={headCells3}
+              headCells={headCellsApplied}
             />
             <TableBody>
               {stableSort(students, getComparator(order, orderBy))
@@ -577,20 +576,6 @@ export default function StudentTable() {
                       post.studentCellPhone
                         .toLowerCase()
                         .includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                    if (
-                      post.coachId !== null &&
-                      getCoachById(post.coachId)
-                        .coachName.toLowerCase()
-                        .includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                    if (
-                      post.coachId === null &&
-                      'unassigned'.includes(search.toLowerCase())
                     ) {
                       return post;
                     }

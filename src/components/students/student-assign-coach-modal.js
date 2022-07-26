@@ -1,14 +1,14 @@
 /* eslint-disable react/require-default-props */
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import Modal from '@mui/material/Modal';
-import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
+import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 
 import Radio from '@mui/material/Radio';
@@ -20,9 +20,9 @@ import { getCoachById, getCoaches } from '../../services/coaches/coaches';
 
 export default function CoachAssignModal(props) {
   const { confirmHandler, studentId, coachId } = props;
-  const [coaches, setCoaches] = useState([]);
-  const [value, setValue] = useState('Unassigned');
-  const [newCoachId, setNewCoachId] = useState('');
+  const [coaches, setCoaches] = React.useState([]);
+  const [value, setValue] = React.useState('Unassigned');
+  const [newCoachId, setNewCoachId] = React.useState('');
   const refreshCoaches = async () => {
     const response = await getCoaches();
     setCoaches(response);
@@ -43,7 +43,7 @@ export default function CoachAssignModal(props) {
     p: 4,
   };
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const confirm = () => {

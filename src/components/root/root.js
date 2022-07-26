@@ -15,8 +15,8 @@ import ApiDemo from '../api-demo/api-demo';
 import BasicTabs from '../interview/tabs';
 import Coaches from '../coaches/Coaches';
 import InterviewPage from '../interview/interview-page';
-import Student from '../students/student-test';
-import ResponsiveGrid from '../students/StudentInfo';
+import Student from '../students/students-page';
+import ResponsiveGrid from '../students/student-info';
 
 const theme = createTheme();
 
