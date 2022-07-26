@@ -171,7 +171,7 @@ function SignUpEdit(props) {
           </Grid>
           <Grid container style={{ marginLeft: '2vh' }} direction="column">
             <StudentInfo>
-              <Grid item marginBottom={2} marginTop={5}>
+              <Grid item marginBottom={2} marginTop={1}>
                 <TextField
                   size="small"
                   className="typing-container"
