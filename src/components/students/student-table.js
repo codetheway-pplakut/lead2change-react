@@ -319,7 +319,7 @@ export default function StudentTable() {
     setTabValue(newValue);
   };
   const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('name');
+  const [orderBy, setOrderBy] = React.useState('lastName');
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
