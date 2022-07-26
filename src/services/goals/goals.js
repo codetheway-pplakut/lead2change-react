@@ -3,7 +3,7 @@ import callApi from '../../util/call-api/call-api';
 
 const SERVICE_ROOT = 'Goals';
 
-export const addStudent = async (goal) => {
+export const addGoal = async (goal) => {
   return callApi({
     body: goal,
     endpoint: SERVICE_ROOT,

@@ -20,6 +20,7 @@ import {
   updateStudent,
 } from '../../services/students/students';
 import { getGoals, getGoalById } from '../../services/goals/goals';
+import GoalRegistryModal from './goalModal';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -178,6 +179,7 @@ export default function TabsFunction() {
             </Grid>
           </Box>
         </TabPanel>
+        <GoalRegistryModal />
         <TabPanel value={value} index={1} style={{ overflowY: 'auto' }}>
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">
