@@ -1,4 +1,5 @@
 /* eslint-disable no-restricted-globals */
+/* eslint-disable react/require-default-props */
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
@@ -6,15 +7,15 @@ import { TextField } from '@mui/material';
 import PropTypes from 'prop-types';
 
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
+import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import AppBar from '@mui/material/AppBar';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
-import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
-import AppBar from '@mui/material/AppBar';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect';
@@ -44,7 +45,6 @@ function TabPanel(props) {
 }
 
 TabPanel.propTypes = {
-  // eslint-disable-next-line react/require-default-props
   children: PropTypes.node,
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
@@ -95,7 +95,6 @@ function SignUpDisplay(props) {
             <Tab label="Other" {...a11yProps(2)} />
           </Tabs>
         </AppBar>
-
         <TabPanel value={value} index={0} style={{ overflowY: 'auto' }}>
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">

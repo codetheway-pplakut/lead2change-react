@@ -11,6 +11,8 @@ import Modal from '@mui/material/Modal';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { useNavigate } from 'react-router';
+import ROUTES from '../../constants/routes';
 
 export default function StudentRegistryModal(props) {
   const {
@@ -46,11 +48,16 @@ export default function StudentRegistryModal(props) {
     confirmHandler(firstName, lastName, email, phoneNumber, dateOfBirth);
     handleClose();
   };
+  const navigate = useNavigate();
 
   return (
     <div>
       <p />
-      <Button onClick={handleOpen} variant="contained" startIcon={<AddIcon />}>
+      <Button
+        onClick={() => navigate(ROUTES.SIGN_UP)}
+        variant="contained"
+        startIcon={<AddIcon />}
+      >
         Register Student
       </Button>
       <Modal open={open} onClose={handleClose}>
@@ -122,7 +129,7 @@ export default function StudentRegistryModal(props) {
             onChange={(event) => onDateOfBirthChange(event.target.value)}
             value={dateOfBirth}
           />
-          <Button variant="contained" onClick={handleClose} fullWidth>
+          <Button variant="contained" onClick={confirm} fullWidth>
             Register Student
           </Button>
         </Box>

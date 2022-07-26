@@ -73,12 +73,21 @@ export default function Home() {
           </Button>
           <Button
             variant="contained"
-            onClick={() => navigate(ROUTES.HeaderandFooter)}
+            onClick={() => navigate(ROUTES.INTERVIEW_PAGE)}
           >
             Interview
           </Button>
+          <Button variant="contained" onClick={() => navigate(ROUTES.COACHES)}>
+            Coaches
+          </Button>
           <Button variant="contained" onClick={() => navigate(ROUTES.STUDENTS)}>
             Students
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => navigate(ROUTES.RESET_PASS)}
+          >
+            Reset Password Form
           </Button>
         </Stack>
       </Box>

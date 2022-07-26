@@ -9,10 +9,12 @@ import SignUpSuccess from '../sign-up-success/sign-up-success';
 import Layout from '../layout/layout';
 import '../../styles/base.css';
 import Login from '../login/login';
+import Reset from '../login/reset-password';
 import AuthenticationProvider from '../authentication-provider/authentication-provider';
 import ApiDemo from '../api-demo/api-demo';
 import BasicTabs from '../interview/tabs';
-import HeaderandFooter from '../interview/HeaderandFooter';
+import Coaches from '../coaches/Coaches';
+import InterviewPage from '../interview/interview-page';
 import Student from '../students/student-test';
 import ResponsiveGrid from '../students/StudentInfo';
 
@@ -33,12 +35,11 @@ export default function Root() {
               <Route path={ROUTES.API_DEMO} element={<ApiDemo />} />
               <Route path={ROUTES.LAYOUT} element={<Layout />} />
               <Route path={ROUTES.LOGIN} element={<Login />} />
+              <Route path={ROUTES.RESET_PASS} element={<Reset />} />
               <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
-              <Route
-                path={ROUTES.HeaderandFooter}
-                element={<HeaderandFooter />}
-              />
+              <Route path={ROUTES.INTERVIEW_PAGE} element={<InterviewPage />} />
               <Route path={ROUTES.TABS} element={<BasicTabs />} />
+              <Route path={ROUTES.COACHES} element={<Coaches />} />
               <Route path={ROUTES.STUDENTS} element={<Student />} />
               <Route path={ROUTES.STUDENT_INFO} element={<ResponsiveGrid />} />
             </Route>

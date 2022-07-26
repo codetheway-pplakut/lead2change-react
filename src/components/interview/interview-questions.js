@@ -88,6 +88,7 @@ export default function InterviewQuestions() {
           variant="filled"
         />{' '}
       </Box>
+
       <Box
         components="span"
         sx={{
@@ -106,9 +107,9 @@ export default function InterviewQuestions() {
           fullWidth
           maxRows={4}
           variant="filled"
-        />{' '}
+        />
       </Box>
-      <Divider>In the remaining questions, check only one answer</Divider>
+      <Divider>For the following questions, choose only one option.</Divider>
       <Box
         components="span"
         sx={{
@@ -117,7 +118,6 @@ export default function InterviewQuestions() {
           height: '100%',
         }}
       >
-        {' '}
         <FormControl>
           <FormLabel id="radio-button-q6">
             {' '}
@@ -307,8 +307,8 @@ export default function InterviewQuestions() {
         <FormControl>
           <FormLabel id="demo-radio-buttons-group-label">
             {' '}
-            It’s important that you understand what you are committing to. We
-            are looking for you to participate in weekly class sessions,
+            It&rsquo;s important that you understand what you are committing to.
+            We are looking for you to participate in weekly class sessions,
             bi-monthly Etiquette Boot Camps on a Saturday and a summer
             internship experience. How confident are you that you can completely
             commit to the activities of this program?
