@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
 import ROUTES from '../../../constants/routes';
@@ -42,59 +43,60 @@ export default function AppBar(props) {
           edge="start"
           onClick={onMenuClick}
           size="large"
-          sx={{ mr: 1 }}
         >
           <Menu />
         </IconButton>
-        <Button variant="text" onClick={onHomeClick} justify="center">
-          {title && (
-            <Typography variant="h6" color="white">
-              {title}
-            </Typography>
-          )}
-        </Button>
-        {/* {title && <Typography variant="h6">{title}</Typography>} */}
-        <Grid item xl={8} lg={8} md={8} sm={8} xs={8}>
-          <Grid container spacing={2} alignItems="center" justify="center">
-            <Grid item xl={2} sx={{ ml: 2 }}>
-              <Button variant="text" onClick={onStudentClick} justify="center">
-                <Typography color="white" variant="body2">
-                  Students
+        <Grid
+          container
+          spacing={2}
+          alignItems="center"
+          justifyContent="flex-start"
+        >
+          <Grid item xs="auto">
+            <Button variant="text" onClick={onHomeClick}>
+              {title && (
+                <Typography variant="h6" color="white">
+                  {title}
                 </Typography>
-              </Button>
-            </Grid>
-            <Grid item xl={2}>
-              <Button variant="text" onClick={onCoachesClick} justify="center">
-                <Typography color="white" variant="body2">
-                  Coaches
-                </Typography>
-              </Button>
-            </Grid>
-            <Grid item xl={2}>
-              <Button
-                variant="text"
-                onClick={onInterviewsClick}
-                justify="center"
-              >
-                <Typography color="white" variant="body2">
-                  Interviews
-                </Typography>
-              </Button>
-            </Grid>
-            <Grid item xl={2}>
-              <Button variant="text" onClick={onSignUpClick} justify="center">
-                <Typography color="white" variant="body2">
-                  Sign Up
-                </Typography>
-              </Button>
-            </Grid>
-            <Grid item xl={2} sx={{ ml: 52 }}>
-              <Button variant="text" onClick={onLogoutClick} justify="center">
-                <Typography color="white" variant="body2">
-                  <span>LOG OUT: ***</span>
-                </Typography>
-              </Button>
-            </Grid>
+              )}
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button variant="text" onClick={onStudentClick}>
+              <Typography color="white" variant="body2">
+                Students
+              </Typography>
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button variant="text" onClick={onCoachesClick}>
+              <Typography color="white" variant="body2">
+                Coaches
+              </Typography>
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button variant="text" onClick={onInterviewsClick}>
+              <Typography color="white" variant="body2">
+                Interviews
+              </Typography>
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button variant="text" onClick={onSignUpClick}>
+              <Typography color="white" variant="body2">
+                Sign Up
+              </Typography>
+            </Button>
+          </Grid>
+        </Grid>
+        <Grid container alignItems="center" justifyContent="flex-end">
+          <Grid xs="auto">
+            <Button variant="text" onClick={onLogoutClick}>
+              <Typography color="white" variant="body2">
+                <span>LOG OUT: ***</span>
+              </Typography>
+            </Button>
           </Grid>
         </Grid>
       </Toolbar>
