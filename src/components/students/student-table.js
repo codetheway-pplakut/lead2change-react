@@ -413,8 +413,8 @@ export default function StudentTable() {
                 </InputAdornment>
               ),
             }}
-            onChange={(e) => {
-              onSearchChange(e.target.value);
+            onChange={(event) => {
+              onSearchChange(event.target.value);
             }}
           />
         </Grid>
@@ -473,6 +473,7 @@ export default function StudentTable() {
                     }
                     if (
                       post.coachId !== null &&
+                      getCoachById(post.coachId).coachFirstName !== undefined &&
                       getCoachById(post.coachId)
                         .coachFirstName.toLowerCase()
                         .includes(search.toLowerCase())
@@ -481,6 +482,7 @@ export default function StudentTable() {
                     }
                     if (
                       post.coachId !== null &&
+                      getCoachById(post.coachId).coachFirstName !== undefined &&
                       getCoachById(post.coachId)
                         .coachLastName.toLowerCase()
                         .includes(search.toLowerCase())
