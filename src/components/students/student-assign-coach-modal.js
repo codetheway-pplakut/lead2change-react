@@ -9,6 +9,7 @@ import {
   Grid,
   IconButton,
   Modal,
+  Stack,
   styled,
   Typography,
   Radio,
@@ -90,10 +91,13 @@ export default function CoachAssignModal(props) {
 
   return (
     <div>
-      {getCoachName(getCoachById(coachId))}
-      <IconButton onClick={handleOpen}>
-        <EditIcon />
-      </IconButton>
+      <Stack direction="row">
+        {coachId !== null && <p>{getCoachName(getCoachById(coachId))}</p>}
+        {coachId === null && <p>Unassigned</p>}
+        <IconButton onClick={handleOpen}>
+          <EditIcon />
+        </IconButton>
+      </Stack>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <Grid item xs={12}>
