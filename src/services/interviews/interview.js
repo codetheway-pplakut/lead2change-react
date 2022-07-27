@@ -10,3 +10,15 @@ export const getInterviews = () => {
 export const getInterviewsById = (id) => {
   return callApi({ endpoint: `${SERVICE_ROOT}/${id}` });
 };
+
+export const updateInterview = (id) => {
+  return callApi({
+    body: id,
+    endpoint: SERVICE_ROOT,
+    method: 'PUT',
+    headers: {
+      Accept: 'application/json, text/plain',
+      'Content-Type': 'application/json',
+    },
+  });
+};

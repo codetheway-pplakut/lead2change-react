@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Radio from '@mui/material/Radio';
 import Box from '@mui/material/Box';
@@ -10,7 +10,53 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { Button } from '@mui/material';
 
+function InterviewSaver() {
+  return null;
+}
 export default function InterviewQuestions() {
+  const [interviewIdealCareer, setinterviewIdealCareer] = useState('');
+  const [interviewPersonalStrengths, setinterviewPersonalStrengths] =
+    useState('');
+  const [interviewImportantWord, setinterviewImportantWord] = useState('');
+  const [interviewOvercomeDifficulty, setinterviewOvercomeDifficulty] =
+    useState('');
+  const [interviewOtherCommitments, setinterviewOtherCommitments] =
+    useState('');
+  const [interviewSacrificeTime, setinterviewSacrificeTime] = useState('');
+  const [interviewPostHighSchoolCoaching, setinterviewPostHighSchoolCoaching] =
+    useState('');
+  const [interviewScheduleManagement, setinterviewScheduleManagement] =
+    useState('');
+  const [interviewCommunicateWithMentors, setinterviewCommunicateWithMentors] =
+    useState('');
+  const [interviewDiverseClass, setinterviewDiverseClass] = useState('');
+  const [interviewOpenMinded, setinterviewOpenMinded] = useState('');
+  const [
+    interviewProfessionalRepresentation,
+    setinterviewProfessionalRepresentation,
+  ] = useState('');
+  const [interviewTryingNewThings, setinterviewTryingNewThings] = useState('');
+  const [interviewCommitToActivities, setinterviewCommitToActivities] =
+    useState('');
+  // const [interviewNewThingsDistract, setinterviewNewThingsDistract] =
+  //   useState('');
+  // const [
+  //   interviewSetbacksDoNotDiscourage,
+  //   setinterviewSetbacksDoNotDiscourage,
+  // ] = useState('');
+  // const [interviewLostInterest, setinterviewLostInterest] = useState('');
+  // const [interviewHardWorking, setinterviewHardWorking] = useState('');
+  // const [interviewDifferentGoals, setinterviewDifferentGoals] = useState('');
+  // const [interviewMaintainFocusOnGoals, setinterviewMaintainFocusOnGoals] =
+  //   useState('');
+  // const [interviewFinishGoals, setinterviewFinishGoals] = useState('');
+  // const [interviewIsDiligent, setinterviewIsDiligent] = useState('');
+  const Save = () => {
+    const interview = {};
+    console.log(interviewIdealCareer);
+    console.log(interviewSacrificeTime);
+  };
+
   return (
     <Container fixed textalign="true" justify="center">
       <Box
@@ -30,6 +76,10 @@ export default function InterviewQuestions() {
           fullWidth
           maxRows={4}
           variant="filled"
+          value={interviewIdealCareer}
+          onChange={(e) => {
+            setinterviewIdealCareer(e.target.value);
+          }}
         />
       </Box>
       <Box
@@ -50,6 +100,10 @@ export default function InterviewQuestions() {
           fullWidth
           maxRows={4}
           variant="filled"
+          value={interviewPersonalStrengths}
+          onChange={(e) => {
+            setinterviewPersonalStrengths(e.target.value);
+          }}
         />{' '}
       </Box>
       <Box
@@ -69,6 +123,10 @@ export default function InterviewQuestions() {
           fullWidth
           maxRows={4}
           variant="filled"
+          value={interviewImportantWord}
+          onChange={(e) => {
+            setinterviewImportantWord(e.target.value);
+          }}
         />{' '}
       </Box>
       <Box
@@ -87,6 +145,10 @@ export default function InterviewQuestions() {
           fullWidth
           maxRows={4}
           variant="filled"
+          value={interviewOvercomeDifficulty}
+          onChange={(e) => {
+            setinterviewOvercomeDifficulty(e.target.value);
+          }}
         />{' '}
       </Box>
 
@@ -108,6 +170,10 @@ export default function InterviewQuestions() {
           fullWidth
           maxRows={4}
           variant="filled"
+          value={interviewOtherCommitments}
+          onChange={(e) => {
+            setinterviewOtherCommitments(e.target.value);
+          }}
         />
       </Box>
       <Divider>For the following questions, choose only one option.</Divider>
@@ -119,17 +185,19 @@ export default function InterviewQuestions() {
           height: '100%',
         }}
       >
-        <FormControl>
+        <FormControl
+          value={interviewSacrificeTime}
+          onChange={(e) => {
+            setinterviewSacrificeTime();
+          }}
+        >
           <FormLabel id="radio-button-q6">
             {' '}
             6. Are you willing to sacrifice some things you usually do after
             school to prepare for a very fulfilling career that you were
             designed to do?
           </FormLabel>
-          <RadioGroup
-          // aria-labelledby="demo-radio-buttons-group-label"
-          // name="radio-buttons-group"
-          >
+          <RadioGroup>
             <FormControlLabel value="yes" control={<Radio />} label="Yes" />
             <FormControlLabel value="no" control={<Radio />} label="No" />
           </RadioGroup>
@@ -143,7 +211,12 @@ export default function InterviewQuestions() {
           height: '100%',
         }}
       >
-        <FormControl>
+        <FormControl
+          value={interviewPostHighSchoolCoaching}
+          onChange={(e) => {
+            setinterviewPostHighSchoolCoaching();
+          }}
+        >
           <FormLabel id="radio-button-q7">
             {' '}
             7. Are you interested in participating in one on one coaching
@@ -166,7 +239,12 @@ export default function InterviewQuestions() {
           height: '100%',
         }}
       >
-        <FormControl>
+        <FormControl
+          value={interviewScheduleManagement}
+          onChange={(e) => {
+            setinterviewScheduleManagement();
+          }}
+        >
           <FormLabel id="radio-button-q8">
             {' '}
             8. Are you willing to manage your schedule to meet the program
@@ -189,7 +267,12 @@ export default function InterviewQuestions() {
           height: '100%',
         }}
       >
-        <FormControl>
+        <FormControl
+          value={interviewCommunicateWithMentors}
+          onChange={(e) => {
+            setinterviewCommunicateWithMentors();
+          }}
+        >
           <FormLabel id="radio-button-q9">
             {' '}
             9. Are you able to communicate the expectations to your
@@ -212,7 +295,12 @@ export default function InterviewQuestions() {
           height: '100%',
         }}
       >
-        <FormControl>
+        <FormControl
+          value={interviewDiverseClass}
+          onChange={(e) => {
+            setinterviewDiverseClass();
+          }}
+        >
           <FormLabel id="radio-button-q10">
             {' '}
             10. Are you willing to be in a class with a diverse group of
@@ -235,7 +323,12 @@ export default function InterviewQuestions() {
           height: '100%',
         }}
       >
-        <FormControl>
+        <FormControl
+          value={interviewOpenMinded}
+          onChange={(e) => {
+            setinterviewOpenMinded();
+          }}
+        >
           <FormLabel id="radio-button-q11">
             {' '}
             11. Are you willing to be open minded and courteous to your peers so
@@ -258,7 +351,12 @@ export default function InterviewQuestions() {
           height: '100%',
         }}
       >
-        <FormControl>
+        <FormControl
+          value={interviewProfessionalRepresentation}
+          onChange={(e) => {
+            setinterviewProfessionalRepresentation();
+          }}
+        >
           <FormLabel id="demo-radio-buttons-group-label">
             {' '}
             12. Are you willing to do what is necessary to represent the
@@ -281,7 +379,12 @@ export default function InterviewQuestions() {
           height: '100%',
         }}
       >
-        <FormControl>
+        <FormControl
+          value={interviewTryingNewThings}
+          onChange={(e) => {
+            setinterviewTryingNewThings();
+          }}
+        >
           <FormLabel id="demo-radio-buttons-group-label">
             {' '}
             13. Are you willing to try new things and things that may have been
@@ -305,7 +408,12 @@ export default function InterviewQuestions() {
         }}
       >
         {' '}
-        <FormControl>
+        <FormControl
+          value={interviewCommitToActivities}
+          onChange={(e) => {
+            setinterviewCommitToActivities();
+          }}
+        >
           <FormLabel id="demo-radio-buttons-group-label">
             {' '}
             It&rsquo;s important that you understand what you are committing to.
@@ -344,7 +452,7 @@ export default function InterviewQuestions() {
       >
         <Button
           variant="contained"
-          onClick={null}
+          onClick={Save}
           style={{
             backgroundColor: '#004cbb',
           }}
