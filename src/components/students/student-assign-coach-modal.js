@@ -75,13 +75,13 @@ export default function CoachAssignModal(props) {
   };
 
   const getCoachName = (coach) => {
-    const coachName = `${coach.coachFirstName} ${coach.coachLastName}`;
+    const coachName = coach.id;
     return coachName;
   };
 
-  const handleCoachChange = (event, coachChangeValue) => {
+  const handleCoachChange = (event) => {
     setValue(event.target.value);
-    setNewCoachId(coachChangeValue);
+    setNewCoachId(value);
   };
 
   let denySubmit = true;
