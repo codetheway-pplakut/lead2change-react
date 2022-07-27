@@ -19,8 +19,15 @@ export default function RegisterCoachModal(props) {
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const Register = () => {
-    handleClose();
-    addFunction(firstName, lastName, email, phoneNumber);
+    if (
+      email.includes('@') &&
+      firstName.length > 0 &&
+      lastName.length > 0 &&
+      phoneNumber.length > 0
+    ) {
+      handleClose();
+      addFunction(firstName, lastName, email, phoneNumber);
+    }
   };
   return (
     <div>
@@ -67,6 +74,8 @@ export default function RegisterCoachModal(props) {
                   <TextField
                     value={firstName}
                     fullWidth
+                    helperText={firstName.length < 1 ? 'Enter First Name' : ' '}
+                    error={firstName.length < 1}
                     label="First Name"
                     variant="outlined"
                     size="small"
@@ -79,6 +88,8 @@ export default function RegisterCoachModal(props) {
                 <Grid item xs={6}>
                   <TextField
                     value={lastName}
+                    helperText={lastName.length < 1 ? 'Enter Last Name' : ' '}
+                    error={lastName.length < 1}
                     fullWidth
                     label="Last Name"
                     variant="outlined"
@@ -92,6 +103,10 @@ export default function RegisterCoachModal(props) {
                   <TextField
                     value={email}
                     fullWidth
+                    error={!email.includes('@')}
+                    helperText={
+                      !email.includes('@') ? 'Must contain an @ sign.' : ' '
+                    }
                     label="Email"
                     variant="outlined"
                     size="small"
@@ -104,11 +119,15 @@ export default function RegisterCoachModal(props) {
                   <TextField
                     value={phoneNumber}
                     fullWidth
+                    helperText={
+                      phoneNumber.length < 1 ? 'Enter Phone Number' : ' '
+                    }
+                    error={phoneNumber.length < 1}
                     label="Phone Number"
                     variant="outlined"
                     size="small"
                     onChange={(e) => {
-                      setPhoneNumber(e.target.value);
+                      setPhoneNumber(e.target.value.replace(' ', '-'));
                     }}
                   />
                 </Grid>
