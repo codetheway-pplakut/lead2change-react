@@ -882,10 +882,10 @@ function SignUpEdit(props) {
             </Grid>
           </Box>
         </TabPanel>
-        <Grid align="right">
-          <Button variant="contained" onClick={onSaveClick}>
+        <Grid align="center">
+          <Button variant="contained" onClick={onSaveClick} >
             Save
-          </Button>
+          </Button>{'   '}
           <Button variant="contained" onClick={onCancelClick}>
             Cancel
           </Button>

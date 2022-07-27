@@ -11,7 +11,7 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 
 import { useNavigate } from 'react-router-dom';
-import { TextField } from '@mui/material';
+import { Stack, TextField } from '@mui/material';
 import TabsFunction from './detailsTab';
 import ROUTES from '../../constants/routes';
 
@@ -38,23 +38,29 @@ const GridText = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+function DisplayBanner(){
+  return(
+    <Grid
+    item
+    align="center"
+    style={{
+      backgroundColor: '#2656A5',
+      marginBottom: '3vh',
+      color: '#FFFFFF',
+      padding: '0.1vh',
+    }}
+    sx={{ width: '100%' }}
+  >
+    <h1>Aadi&rsquo;s Details</h1>
+  </Grid>
+  );
+}
+
 function SignUpDisplay(props) {
   const { onEditClick } = props;
   return (
     <Grid container>
-      <Grid
-        item
-        align="center"
-        style={{
-          backgroundColor: '#2656A5',
-          marginBottom: '3vh',
-          color: '#FFFFFF',
-          padding: '0.1vh',
-        }}
-        sx={{ width: '100%' }}
-      >
-        <h1>Aadi&rsquo;s Details</h1>
-      </Grid>
+     
       <Grid item xs={4}>
         <Paper
           sx={{
@@ -116,9 +122,7 @@ function SignUpDisplay(props) {
           </Grid>
         </Paper>
       </Grid>
-      <Grid item xs={8}>
-        <TabsFunction />
-      </Grid>
+    
     </Grid>
   );
 }
@@ -131,20 +135,8 @@ function SignUpEdit(props) {
   const { onSaveClick, onCancelClick } = props;
   return (
     <Grid container>
-      <Grid
-        item
-        align="center"
-        style={{
-          backgroundColor: '#2656A5',
-          marginBottom: '3vh',
-          color: '#FFFFFF',
-          padding: '0.1vh',
-        }}
-        sx={{ width: '100%' }}
-      >
-        <h1>Aadi&rsquo;s Details</h1>
-      </Grid>
-      <Grid container item xs={4}>
+     
+      <Grid >
         <Paper
           sx={{
             backgroundColor: 'dark',
@@ -241,7 +233,7 @@ function SignUpEdit(props) {
               </Grid>
             </StudentInfo>
             <StudentInfo>
-              <Grid item marginBottom={2}>
+              <Grid item >
                 <TextField
                   size="small"
                   className="typing-container"
@@ -252,20 +244,19 @@ function SignUpEdit(props) {
             </StudentInfo>
           </Grid>
 
-          <Grid align="right">
+          <Grid align="center" marginTop={7}>
             <Button variant="contained" onClick={onSaveClick}>
               Save
-            </Button>
+            </Button>{'   '}
             <Button variant="contained" onClick={onCancelClick}>
               Cancel
             </Button>
           </Grid>
         </Paper>
+        
       </Grid>
 
-      <Grid item xs={8}>
-        <TabsFunction />
-      </Grid>
+      
     </Grid>
   );
 }
@@ -310,15 +301,7 @@ export default function ResponsiveGrid(props) {
 
   const [textInputName, setTextInputName] = useState('');
 
-  function handleGameClick() {
-    event.preventDefault();
-
-    if (message.trim().length !== 0) {
-      console.log('input value is NOT empty');
-    } else {
-      console.log('input value is empty');
-    }
-  }
+ 
 
   const [message, setMessage] = useState('');
 
@@ -328,11 +311,15 @@ export default function ResponsiveGrid(props) {
 
   return (
     <Grid container>
+      <DisplayBanner/>
+      <Stack direction="row" spacing={2}>
       {isEditing ? (
         <SignUpEdit onSaveClick={onSaveClick} onCancelClick={onCancelClick} />
       ) : (
         <SignUpDisplay onEditClick={startEditing} />
       )}
+    <TabsFunction/>
+    </Stack>
     </Grid>
   );
 }
