@@ -20,7 +20,13 @@ import {
   updateStudent,
 } from '../../services/students/students';
 import { getGoals, addGoal, getGoalById } from '../../services/goals/goals';
+import {
+  getCareers,
+  addCareer,
+  getCareerById,
+} from '../../services/careers/careers';
 import GoalRegistryModal from './goalModal';
+import CreateCareerModal from './createCareerModal';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -63,6 +69,21 @@ const GridText = styled(Paper)(({ theme }) => ({
 }));
 
 export default function TabsFunction() {
+  const refreshCareers = async () => {
+    const result = await getCareers();
+    setCareers(result);
+  };
+  const newCareers = async (careerss, cluster, specific, technical) => {
+    const career = {
+      collegeBound: careerss,
+      careerCluster: cluster,
+      specificCluster: specific,
+      technicalCollegeBound: technical,
+    };
+    await addCareer(career);
+    await refreshCareers();
+  };
+
   const refreshGoals = async () => {
     const result = await getGoals();
     setGoals(result);
@@ -86,11 +107,23 @@ export default function TabsFunction() {
     await addGoal(goal);
     await refreshGoals();
   };
+
   const [value, setValue] = React.useState(0);
   const { studentId } = useParams();
   const { goalId } = useParams();
   const [goals, setGoals] = useState({});
   const [students, setStudents] = useState({});
+  const { careerId } = useParams();
+  const [careers, setCareers] = useState({});
+
+  useEffect(() => {
+    const currentCareer = async () => {
+      const currCareer = await getCareerById(careerId);
+      setGoals(currCareer);
+    };
+    currentCareer();
+  }, [careerId]);
+
   useEffect(() => {
     const currentStudent = async () => {
       const currStudent = await getStudentById(studentId);
@@ -98,6 +131,7 @@ export default function TabsFunction() {
     };
     currentStudent();
   }, [studentId]);
+
   useEffect(() => {
     const currentGoal = async () => {
       const currGoal = await getGoalById(goalId);
@@ -105,10 +139,12 @@ export default function TabsFunction() {
     };
     currentGoal();
   }, [goalId]);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   console.log(goals);
+  console.log(careers);
 
   return (
     <div style={{ marginRight: '8vh' }}>
@@ -283,12 +319,13 @@ export default function TabsFunction() {
             <Grid container justifyContent="flex-end">
               <Grid item xs={12} style={{ height: '40vh' }}>
                 <Grid>
+                  <CreateCareerModal addFunction={newGoal} />
                   <h3 style={{ color: '#2656A5' }}>Career Information</h3>
-                  <h5>I am College Bound: {students.collegeBound}</h5>
-                  <h5>Number of Career Clusters: {students.careerCluster}</h5>
-                  <h5>Career of Choice: {students.specificCluster}</h5>
+                  <h5>I am College Bound: {careers.collegeBound}</h5>
+                  <h5>Number of Career Clusters: {careers.careerCluster}</h5>
+                  <h5>Career of Choice: {careers.specificCluster}</h5>
                   <h5>
-                    I am Techinical Bound: {students.technicalCollegeBound}
+                    I am Techinical Bound: {careers.technicalCollegeBound}
                   </h5>
                 </Grid>
               </Grid>

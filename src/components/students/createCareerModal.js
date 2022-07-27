@@ -6,7 +6,6 @@ import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import PropTypes from 'prop-types';
-import { Box } from '@mui/material';
 import ColorButton from '../coaches/Shared/ColoredButton';
 
 export default function CreateCareerModal(props) {

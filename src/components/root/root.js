@@ -19,6 +19,7 @@ import Student from '../students/student-test';
 import ResponsiveGrid from '../students/StudentInfo';
 import TabsFunction from '../students/detailsTab';
 import GoalRegistryModal from '../students/goalModal';
+import CreateCareerModal from '../students/createCareerModal';
 
 const theme = createTheme();
 
@@ -41,6 +42,10 @@ export default function Root() {
               <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
               <Route path={ROUTES.INTERVIEW_PAGE} element={<InterviewPage />} />
               <Route path={ROUTES.GOAL_MODAL} element={<GoalRegistryModal />} />
+              <Route
+                path={ROUTES.CREATE_CAREER_MODAL}
+                element={<CreateCareerModal />}
+              />
               <Route
                 path="/StudentInfo/:studentId"
                 element={<ResponsiveGrid />}
