@@ -47,16 +47,30 @@ export default function CreateGoalModal(props) {
       temp += 'Responsible Decision-making/';
     }
     setsel(temp);
-    const Goal = {
-      studentId,
-      goalSet,
-      sel,
-      dateGoalSet,
-      dateGoalReview,
-      wasItAccomplished,
-      explanation,
-    };
-    addGoal(Goal);
+    if (
+      studentId &&
+      goalSet &&
+      sel &&
+      dateGoalSet &&
+      dateGoalReview &&
+      wasItAccomplished &&
+      explanation
+    ) {
+      const Goal = {
+        studentId,
+        goalSet,
+        sel,
+        dateGoalSet,
+        dateGoalReview,
+        wasItAccomplished,
+        explanation,
+      };
+      addGoal(Goal);
+      // TODO: add success alert
+    } else {
+      // TODO: add failure alert
+      console.log('Did not submit to API');
+    }
   };
   const style = {
     position: 'absolute',
