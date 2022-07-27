@@ -96,9 +96,11 @@ export default function CoachAssignModal(props) {
       </IconButton>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
-          <Typography variant="h6" align="center" component="span">
-            Assign A Coach
-          </Typography>
+          <Grid item xs={12}>
+            <Typography variant="h6" align="center" component="span">
+              Assign A Coach
+            </Typography>
+          </Grid>
           <FormControl>
             <RadioGroup value={value} onChange={handleCoachChange}>
               <FormControlLabel
