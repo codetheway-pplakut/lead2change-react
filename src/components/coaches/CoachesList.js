@@ -100,11 +100,26 @@ function EnhancedTableHead(props) {
             align={headCell.numeric ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
+            sx={{ color: 'white' }}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
+              sx={{
+                '&.MuiTableSortLabel-root': {
+                  color: 'white',
+                },
+                '&.MuiTableSortLabel-root:hover': {
+                  color: 'white',
+                },
+                '&.Mui-active': {
+                  color: 'white',
+                },
+                '& .MuiTableSortLabel-icon': {
+                  color: 'white !important',
+                },
+              }}
             >
               {headCell.label}
             </TableSortLabel>
