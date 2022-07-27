@@ -29,10 +29,10 @@ export default function CreateCareerModal(props) {
 
   const [id] = useState('');
   const [currentStudentId] = useState('');
-  const [collegeBound, setCollegeBound] = useState('');
+  const [collegeBound, setCollegeBound] = useState(false);
   const [careerCluster, setCareerCluster] = useState('');
   const [specificCareer, setSpecificCareer] = useState('');
-  const [technicalCollegeBound, setTechnicalCollegeBound] = useState('');
+  const [technicalCollegeBound, setTechnicalCollegeBound] = useState(false);
 
   const Create = () => {
     handleClose();
