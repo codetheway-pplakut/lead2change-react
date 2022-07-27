@@ -33,11 +33,6 @@ export default function AddCareerModal(props) {
 
   const Complete = () => {
     handleClose();
-    console.log(studentId);
-    console.log(collegeBound);
-    console.log(careerCluster);
-    console.log(specificCareer);
-    console.log(technicalCollegeBound);
     const career = {
       studentId,
       collegeBound,
