@@ -155,12 +155,12 @@ export default function TabsFunction() {
                     <div> Date of PSAT: {students.psatTestDate}</div>
                   </h5>
                   <h5>
-                    ACT Score: {students.actTestDate}
-                    <div> Date of ACT: {students.actTestScore}</div>
+                    ACT Score: {students.actTestScore}
+                    <div> Date of ACT: {students.actTestDate}</div>
                   </h5>
                   <h5>
-                    SAT Score: {students.satTestDate}
-                    <div> Date of SAT: {students.satTestScore} </div>
+                    SAT Score: {students.satTestScore}
+                    <div> Date of SAT: {students.satTestDate} </div>
                   </h5>
                   <h3 style={{ color: '#2656A5' }}>Financial Aid:</h3>
                   <h5>
