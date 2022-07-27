@@ -9,9 +9,10 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import PropTypes from 'prop-types';
 import { Box, Checkbox } from '@mui/material';
 import ColorButton from '../coaches/Shared/ColoredButton';
+import { addGoal } from '../../services/goals/goals';
 
 export default function CreateGoalModal(props) {
-  const { addFunction } = props;
+  const { studentId } = props;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -46,16 +47,34 @@ export default function CreateGoalModal(props) {
       temp += 'Responsible Decision-making/';
     }
     setsel(temp);
-    addFunction(
+    console.log(temp);
+    console.log(goalSet);
+    console.log(sel);
+    console.log(dateGoalSet);
+    console.log(dateGoalReview);
+    console.log(wasItAccomplished);
+    console.log(explanation);
+    const Goal = {
+      studentId,
       goalSet,
       sel,
       dateGoalSet,
       dateGoalReview,
       wasItAccomplished,
-      explanation
-    );
+      explanation,
+    };
+    addGoal(Goal);
   };
-
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    minWidth: '750px',
+    width: '50%',
+    backgroundColor: 'white',
+    boxShadow: 12,
+  };
   return (
     <div>
       <ColorButton variant="contained" onClick={handleOpen}>
@@ -66,7 +85,7 @@ export default function CreateGoalModal(props) {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
       >
-        <Grid container variant="large">
+        <Grid container sx={style}>
           <Grid container>
             <Grid item sx={{ bgcolor: '#004cbb', color: 'white' }} xs={12}>
               <Grid container alignItems="center" sx={{ margin: 1 }}>
@@ -331,5 +350,5 @@ export default function CreateGoalModal(props) {
 }
 
 CreateGoalModal.propTypes = {
-  addFunction: PropTypes.func.isRequired,
+  studentId: PropTypes.string.isRequired,
 };

@@ -84,7 +84,7 @@ export default function Student(props) {
           justify="center"
           sx={{ mx: '20vh' }}
         >
-          <CreateGoalModal />
+          <CreateGoalModal studentId="3c0613fe-6fd8-4a63-333c-08da3cbdc08e" />
           <StudentTable />
         </Stack>
       </ThemeProvider>
