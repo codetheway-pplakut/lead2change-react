@@ -175,7 +175,7 @@ function StudentListModal(props) {
           </Grid>
           <Paper sx={{ width: '100%' }}>
             <TableContainer sx={{ height: '40vh' }}>
-              <Table aria-labelledby="tableTitle">
+              <Table aria-labelledby="tableTitle" stickyHeader>
                 <EnhancedTableHead
                   order={order}
                   orderBy={orderBy}

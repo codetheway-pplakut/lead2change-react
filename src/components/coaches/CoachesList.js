@@ -7,7 +7,6 @@ import {
   Box,
   Grid,
   styled,
-  Paper,
   Tab,
   Tabs,
   Table,
@@ -21,6 +20,9 @@ import {
   TextField,
   Stack,
 } from '@mui/material';
+import { Navigate } from 'react-router';
+import ROUTES from '../../constants/routes';
+import ColorButton from './Shared/ColoredButton';
 import StudentListModal from './StudentListModal';
 import InactivationModal from './Modals/DeactivateCoachModal';
 import EditCoachModal from './Modals/EditCoachModal';
@@ -144,6 +146,10 @@ export default function CoachesList(props) {
   const [searchTerm, setSearchTerm] = React.useState('');
   const [sortActive, setSortActive] = React.useState(true);
   const [value, setValue] = React.useState(0);
+  const onBackClick = () => {
+    Navigate(ROUTES.HOME);
+  };
+  const buttonText = '< Back to Home';
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -172,9 +178,9 @@ export default function CoachesList(props) {
           >
             <AppBar
               position="static"
+              elevation={0}
               sx={{
                 bgcolor: '#004cbb',
-                mt: '2vh',
                 borderTopLeftRadius: 5,
                 borderTopRightRadius: 5,
                 width: '20vw',
@@ -202,7 +208,6 @@ export default function CoachesList(props) {
                 <Tab
                   label="Inactive"
                   sx={{
-                    borderRight: 1,
                     borderLeft: 1,
                     borderBottom: 2,
                     borderColor: '#6f8abd',
@@ -240,8 +245,8 @@ export default function CoachesList(props) {
           </Stack>
         </Grid>
       </Grid>
-      <TableContainer component={Paper} sx={{ height: '68vh' }}>
-        <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
+      <TableContainer sx={{ height: '65vh', bgcolor: 'white' }}>
+        <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" stickyHeader>
           <EnhancedTableHead
             order={order}
             orderBy={orderBy}
@@ -313,6 +318,15 @@ export default function CoachesList(props) {
           </TableBody>
         </Table>
       </TableContainer>
+      <ColorButton
+        variant="outlined"
+        size="small"
+        justify="left"
+        onClick={onBackClick}
+        sx={{ mt: '1vh' }}
+      >
+        {buttonText}
+      </ColorButton>
     </Box>
   );
 }
