@@ -113,6 +113,7 @@ function SignUpDisplay(props) {
                   >
                     Edit
                   </Button>
+                  
                   <h3 style={{ color: '#2656A5' }}>Post Secondary Plan</h3>
                   <h5>
                     Plans After College: After College I plan to go and get a
@@ -261,10 +262,11 @@ function SignUpEdit(props) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  const [first, setFirst] = useState('');
   return (
     <div style={{ marginRight: '8vh' }}>
       <Box sx={{ bgcolor: 'background.paper', width: '100vh' }}>
+        <form onSubmit={onSaveClick}>
         <AppBar position="static">
           <Tabs
             value={value}
@@ -305,6 +307,8 @@ function SignUpEdit(props) {
                     variant="filled"
                     defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
                     label="Plans after college"
+                    onChange={event => setFirst(event.target.value)}
+                    required
                   />
                 </Grid>
                 <Grid marginTop={2} marginBottom={3}>
@@ -316,6 +320,8 @@ function SignUpEdit(props) {
                     variant="filled"
                     defaultValue="1. Purde, 2. Madison, 3. MIT"
                     label="Colleges Plan/Applied To"
+                    onChange={event => setFirst(event.target.value)}
+                    required
                   />
                 </Grid>
                 <Grid>
@@ -324,6 +330,8 @@ function SignUpEdit(props) {
                     className="typing-container"
                     defaultValue="Northwestern"
                     label="College First Choice"
+                    onChange={event => setFirst(event.target.value)}
+                    required
                   />
                 </Grid>
                 <Grid marginTop={1}>
@@ -389,12 +397,16 @@ function SignUpEdit(props) {
                     defaultValue="35"
                     label="PACT Score"
                     type="number"
+                    onChange={event => setFirst(event.target.value)}
+                    required
                   />
                   <TextField
                     size="small"
                     className="typing-container"
                     label="PSAT Date"
                     type="date"
+                    onChange={event => setFirst(event.target.value)}
+                    required
                   />
                 </Grid>
                 <Grid marginBottom={2}>
@@ -404,12 +416,16 @@ function SignUpEdit(props) {
                     defaultValue="35"
                     label="PSAT Score"
                     type="number"
+                    onChange={event => setFirst(event.target.value)}
+                    required
                   />
                   <TextField
                     size="small"
                     className="typing-container"
                     label="PSAT Date"
                     type="date"
+                    onChange={event => setFirst(event.target.value)}
+                    required
                   />
                 </Grid>
                 <Grid marginBottom={2}>
@@ -419,12 +435,16 @@ function SignUpEdit(props) {
                     defaultValue="35"
                     label="ACT Score"
                     type="number"
+                    onChange={event => setFirst(event.target.value)}
+                    required
                   />
                   <TextField
                     size="small"
                     className="typing-container"
                     label="ACT Date"
                     type="date"
+                    onChange={event => setFirst(event.target.value)}
+                    required
                   />
                 </Grid>
                 <Grid marginBottom={2}>
@@ -434,12 +454,16 @@ function SignUpEdit(props) {
                     defaultValue="35"
                     label="SAT Score"
                     type="number"
+                    onChange={event => setFirst(event.target.value)}
+                    required
                   />
                   <TextField
                     size="small"
                     className="typing-container"
                     label="SAT Date"
                     type="date"
+                    onChange={event => setFirst(event.target.value)}
+                    required
                   />
                 </Grid>
                 <h3 style={{ color: '#2656A5' }}>Financial Aid:</h3>
@@ -513,6 +537,8 @@ function SignUpEdit(props) {
                       variant="filled"
                       defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
                       label="Plans after college"
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -521,6 +547,8 @@ function SignUpEdit(props) {
                       className="typing-container"
                       label="Set Date"
                       type="date"
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -529,6 +557,8 @@ function SignUpEdit(props) {
                       className="typing-container"
                       defaultValue="Responsible-Decision Making"
                       label="SEL"
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -537,6 +567,8 @@ function SignUpEdit(props) {
                       className="typing-container"
                       type="date"
                       label="Review Date"
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -569,6 +601,8 @@ function SignUpEdit(props) {
                       variant="filled"
                       defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
                       label="Plans after college"
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
 
@@ -582,6 +616,8 @@ function SignUpEdit(props) {
                       variant="filled"
                       defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
                       label="Plans after college"
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -590,6 +626,8 @@ function SignUpEdit(props) {
                       className="typing-container"
                       label="Set Date"
                       type="date"
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -598,6 +636,8 @@ function SignUpEdit(props) {
                       className="typing-container"
                       defaultValue="Responsible-Decision Making"
                       label="SEL"
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -606,6 +646,8 @@ function SignUpEdit(props) {
                       className="typing-container"
                       type="date"
                       label="Review Date"
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -638,6 +680,8 @@ function SignUpEdit(props) {
                       variant="filled"
                       defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
                       label="Plans after college"
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
                   <h3 style={{ color: '#2656A5' }}>Goal Three</h3>
@@ -650,6 +694,8 @@ function SignUpEdit(props) {
                       variant="filled"
                       defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
                       label="Plans after college"
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -658,6 +704,8 @@ function SignUpEdit(props) {
                       className="typing-container"
                       label="Set Date"
                       type="date"
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -666,6 +714,8 @@ function SignUpEdit(props) {
                       className="typing-container"
                       defaultValue="Responsible-Decision Making"
                       label="SEL"
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -674,6 +724,8 @@ function SignUpEdit(props) {
                       className="typing-container"
                       type="date"
                       label="Review Date"
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -705,6 +757,8 @@ function SignUpEdit(props) {
                       variant="filled"
                       defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
                       label="Plans after college"
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
                 </GridText>
@@ -724,6 +778,8 @@ function SignUpEdit(props) {
                       className="typing-container"
                       defaultValue="Bob Joe"
                       label="Name"
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
 
@@ -733,6 +789,8 @@ function SignUpEdit(props) {
                       className="typing-container"
                       defaultValue="12345 demo street"
                       label="Adress"
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -741,6 +799,8 @@ function SignUpEdit(props) {
                       className="typing-container"
                       defaultValue="40"
                       label="Apt. #"
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -749,6 +809,8 @@ function SignUpEdit(props) {
                       className="typing-container"
                       defaultValue="Milwaukee"
                       label="City"
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -757,6 +819,8 @@ function SignUpEdit(props) {
                       className="typing-container"
                       defaultValue="WI"
                       label="State"
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -765,6 +829,8 @@ function SignUpEdit(props) {
                       className="typing-container"
                       defaultValue="50021"
                       label="Zip Code"
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -773,6 +839,8 @@ function SignUpEdit(props) {
                       className="typing-container"
                       defaultValue="312-315-5646"
                       label="Home Phone"
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -781,6 +849,8 @@ function SignUpEdit(props) {
                       className="typing-container"
                       defaultValue="314-654-7821"
                       label="Cell Phone"
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -789,6 +859,8 @@ function SignUpEdit(props) {
                       className="typing-container"
                       defaultValue="mdijd@gmail.com"
                       label="Email"
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
                   <h3 style={{ color: '#2656A5' }}>Guidance Couselor Info:</h3>
@@ -850,6 +922,10 @@ function SignUpEdit(props) {
                       className="typing-container"
                       defaultValue="Aadi Tiwair"
                       label="Student Signiture"
+                         
+                
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -858,6 +934,10 @@ function SignUpEdit(props) {
                       className="typing-container"
                       label="Date Signed"
                       type="date"
+                         
+              
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
 
@@ -867,6 +947,10 @@ function SignUpEdit(props) {
                       className="typing-container"
                       defaultValue="John Tiwair"
                       label="Parent Signiture"
+                         
+                  
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -875,6 +959,12 @@ function SignUpEdit(props) {
                       className="typing-container"
                       label="Date Signed"
                       type="date"
+                   
+                  
+                   
+                  
+                      onChange={event => setFirst(event.target.value)}
+                      required
                     />
                   </Grid>
                 </GridText>
@@ -883,13 +973,20 @@ function SignUpEdit(props) {
           </Box>
         </TabPanel>
         <Grid align="center">
-          <Button variant="contained" onClick={onSaveClick} >
+
+         
+          <Button variant="contained"  type="Submit">
             Save
           </Button>{'   '}
           <Button variant="contained" onClick={onCancelClick}>
             Cancel
           </Button>
+         
+        
+    
+     
         </Grid>
+         </form>
       </Box>
     </div>
   );
@@ -914,9 +1011,12 @@ export default function TabsFunction() {
     console.log('cancel');
   };
 
-  const onSaveClick = () => {
+  const onSaveClick = event => {
     saveStudentInfo();
     endEditing();
+    event.preventDefault();
+
+    console.log('form submitted ✅');
   };
 
   const onCancelClick = () => {
@@ -931,27 +1031,8 @@ export default function TabsFunction() {
   const navigate = useNavigate();
   const buttonText = '< Back to table';
 
-  const [disabled, setDisabled] = useState(false);
 
-  const [textInputName, setTextInputName] = useState('');
 
-  function handleGameClick() {
-    setDisabled(!disabled);
-
-    event.preventDefault();
-
-    if (message.trim().length !== 0) {
-      console.log('input value is NOT empty');
-    } else {
-      console.log('input value is empty');
-    }
-  }
-
-  const [message, setMessage] = useState('');
-
-  const handleChange = (event) => {
-    setMessage(event.target.value);
-  };
 
   return (
     <Grid container>
