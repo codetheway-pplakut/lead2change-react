@@ -6,7 +6,16 @@ import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import PropTypes from 'prop-types';
-import { Box, Checkbox, FormControlLabel } from '@mui/material';
+import {
+  Box,
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  InputLabel,
+  Select,
+  MenuItem,
+} from '@mui/material';
 import ColorButton from '../coaches/Shared/ColoredButton';
 
 export default function AddCareerModal(props) {
@@ -17,12 +26,17 @@ export default function AddCareerModal(props) {
 
   const [id] = useState('');
   const [collegeBound, setCollegeBound] = useState(false);
-  const [careerCluster, setCareerCluster] = useState(-1);
+  const [careerCluster, setCareerCluster] = useState(3);
   const [specificCareer, setSpecificCareer] = useState('');
   const [technicalCollegeBound, setTechnicalCollegeBound] = useState(false);
 
   const Complete = () => {
     handleClose();
+    console.log(id);
+    console.log(collegeBound);
+    console.log(careerCluster);
+    console.log(specificCareer);
+    console.log(technicalCollegeBound);
     addFunction(
       id,
       collegeBound,
@@ -72,30 +86,100 @@ export default function AddCareerModal(props) {
                 <Box
                   value={collegeBound}
                   fullWidth
-                  label="Is this student college bound?"
+                  label=""
                   justifyContent="center"
                   onChange={(e) => {
-                    setCollegeBound(collegeBound + e.target.value);
+                    setCollegeBound(e.target.value);
                   }}
                 >
-                  <FormControlLabel
-                    control={<Checkbox name="collegeBoundTrue" value="true" />}
-                    label="Yes"
-                  />
+                  <FormControl>
+                    <FormLabel>
+                      Is this student college bound?
+                      <FormControlLabel
+                        control={
+                          <Checkbox name="collegeBoundTrue" value="true" />
+                        }
+                        label="Yes"
+                      />
+                    </FormLabel>
+                  </FormControl>
+                </Box>
+                <Box
+                  value={collegeBound}
+                  fullWidth
+                  label="Is this student technical college bound?"
+                  justifyContent="center"
+                  onChange={(e) => {
+                    setTechnicalCollegeBound(e.target.value);
+                  }}
+                >
+                  {' '}
+                  <FormControl>
+                    <FormLabel>
+                      Is this student technical college bound?
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            name="technicalcollegeBoundTrue"
+                            value="true"
+                          />
+                        }
+                        label="Yes"
+                      />
+                    </FormLabel>
+                  </FormControl>
                 </Box>
                 <Grid item xs={12}>
                   What career cluster is the student interested in?
-                  <TextField
-                    value={careerCluster}
-                    fullWidth
-                    label="career cluster"
-                    variant="outlined"
-                    size="small"
-                    onChange={(e) => {
-                      setCareerCluster(e.target.value);
-                    }}
-                    inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
-                  />
+                  <Box sx={{ minWidth: 120 }}>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">
+                        Career Clusters
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={careerCluster}
+                        label="careerCluster"
+                        onChange={(e) => {
+                          setCareerCluster(e.target.value);
+                        }}
+                      >
+                        <MenuItem value={1}>
+                          Agriculture, Food &#38; Natural Resources
+                        </MenuItem>
+                        <MenuItem value={2}>
+                          Architecture &#38; Construction
+                        </MenuItem>
+                        <MenuItem value={3}>
+                          Arts, A/V Technology &#38; Communications
+                        </MenuItem>
+                        <MenuItem value={4}>
+                          Business Management &#38; Administration
+                        </MenuItem>
+                        <MenuItem value={5}>Education &#38; Training</MenuItem>
+                        <MenuItem value={6}>Finance</MenuItem>
+                        <MenuItem value={7}>
+                          Government &#38; Public Administration
+                        </MenuItem>
+                        <MenuItem value={8}>Health Science</MenuItem>
+                        <MenuItem value={9}>Hospitality &#38; Tourism</MenuItem>
+                        <MenuItem value={10}>Human Services</MenuItem>
+                        <MenuItem value={11}>Information Technology</MenuItem>
+                        <MenuItem value={12}>
+                          Law, Public Safety, Corrections &#38; Security
+                        </MenuItem>
+                        <MenuItem value={13}>Manufacturing</MenuItem>
+                        <MenuItem value={14}>Marketing</MenuItem>
+                        <MenuItem value={15}>
+                          Science, Technology, Engineering &#38; Mathematics
+                        </MenuItem>
+                        <MenuItem value={16}>
+                          Transportation, Distribution &#38; Logistics
+                        </MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Box>
                 </Grid>
                 <Grid item xs={12}>
                   What specific career did the student take interest in?
@@ -110,51 +194,37 @@ export default function AddCareerModal(props) {
                     }}
                   />
                   <Box
-                    value={collegeBound}
-                    fullWidth
-                    label="Is this student technical college bound?"
+                    components="span"
+                    display="flex"
                     justifyContent="center"
-                    onChange={(e) => {
-                      setTechnicalCollegeBound(
-                        technicalCollegeBound + e.target.value
-                      );
-                    }}
+                    alignItems="center"
                   >
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          name="technicalcollegeBoundTrue"
-                          value="true"
-                        />
-                      }
-                      label="Yes"
-                    />
+                    <Grid item xs={2}>
+                      <ColorButton
+                        variant="contained"
+                        fullWidth
+                        onClick={Complete}
+                        value={
+                          (id,
+                          collegeBound,
+                          careerCluster,
+                          specificCareer,
+                          technicalCollegeBound)
+                        }
+                      >
+                        Complete
+                      </ColorButton>
+                    </Grid>
+                    <Grid item xs={2}>
+                      <ColorButton
+                        variant="contained"
+                        fullWidth
+                        onClick={handleClose}
+                      >
+                        Cancel
+                      </ColorButton>
+                    </Grid>
                   </Box>
-                  <Grid item xs={2}>
-                    <ColorButton
-                      variant="contained"
-                      fullWidth
-                      onClick={Complete}
-                      value={
-                        (id,
-                        collegeBound,
-                        careerCluster,
-                        specificCareer,
-                        technicalCollegeBound)
-                      }
-                    >
-                      Complete
-                    </ColorButton>
-                  </Grid>
-                  <Grid item xs={2}>
-                    <ColorButton
-                      variant="contained"
-                      fullWidth
-                      onClick={handleClose}
-                    >
-                      Cancel
-                    </ColorButton>
-                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
