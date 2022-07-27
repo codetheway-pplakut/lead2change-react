@@ -84,7 +84,7 @@ export default function Student(props) {
           sx={{ mx: '20vh' }}
         >
           <StudentTable />
-          <AddCareerModal />
+          <AddCareerModal studentId="b0ba6354-eb97-49b1-a030-08da6b234c0f" />
         </Stack>
       </ThemeProvider>
     </div>
