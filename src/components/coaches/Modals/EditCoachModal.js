@@ -27,10 +27,10 @@ export default function EditCoachModal(props) {
   const [enteredEmail, setEnteredEmail] = React.useState(coach.coachEmail);
   const Edit = () => {
     if (
-      enteredEmail.length > 4 &&
+      enteredEmail.includes('@') &&
       enteredFirstName.length > 1 &&
       enteredLastName.length > 1 &&
-      !enteredPhoneNumber.replace('-', '').isNaN()
+      enteredPhoneNumber.length > 1
     ) {
       handleClose();
       if (coach.students === null) {
@@ -48,9 +48,6 @@ export default function EditCoachModal(props) {
       updateFunction(updatedCoach);
     }
   };
-  function containsNumber(str) {
-    return /\d/.test(str);
-  }
   return (
     <div>
       <IconButton sx={{ color: '#2656A5' }} size="small" onClick={handleOpen}>
@@ -91,6 +88,9 @@ export default function EditCoachModal(props) {
               <Grid container spacing={1} sx={{ p: 2 }} justifyContent="center">
                 <Grid item xs={6}>
                   <TextField
+                    helperText={
+                      enteredFirstName.length < 1 ? 'Enter First Name' : ' '
+                    }
                     error={enteredFirstName.length < 1}
                     value={enteredFirstName}
                     fullWidth
@@ -105,6 +105,9 @@ export default function EditCoachModal(props) {
 
                 <Grid item xs={6}>
                   <TextField
+                    helperText={
+                      enteredLastName.length < 1 ? 'Enter Last Name' : ' '
+                    }
                     error={enteredLastName.length < 1}
                     value={enteredLastName}
                     fullWidth
@@ -118,7 +121,12 @@ export default function EditCoachModal(props) {
                 </Grid>
                 <Grid item xs={14}>
                   <TextField
-                    error={!enteredEmail.contains('@')}
+                    error={!enteredEmail.includes('@')}
+                    helperText={
+                      !enteredEmail.includes('@')
+                        ? 'Must contain an @ sign.'
+                        : ' '
+                    }
                     value={enteredEmail}
                     fullWidth
                     label="Email"
@@ -131,14 +139,19 @@ export default function EditCoachModal(props) {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    error={!enteredPhoneNumber.replace('-', '').isNaN()}
+                    error={enteredPhoneNumber.length < 1}
+                    helperText={
+                      enteredPhoneNumber.length < 1
+                        ? 'Enter a Phone Number'
+                        : ' '
+                    }
                     value={enteredPhoneNumber}
                     fullWidth
                     label="Phone Number"
                     variant="outlined"
                     size="small"
                     onChange={(e) => {
-                      setEnteredPhoneNumber(e.target.value);
+                      setEnteredPhoneNumber(e.target.value.replace(' ', '-'));
                     }}
                   />
                 </Grid>
