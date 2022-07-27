@@ -24,7 +24,11 @@ export default function RegisterCoachModal(props) {
   };
   return (
     <div>
-      <ColorButton variant="contained" onClick={handleOpen}>
+      <ColorButton
+        sx={{ minWidth: '120px' }}
+        variant="contained"
+        onClick={handleOpen}
+      >
         + Register
       </ColorButton>
       <Modal

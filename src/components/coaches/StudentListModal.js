@@ -7,7 +7,6 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import TablePagination from '@mui/material/TablePagination';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
@@ -158,6 +157,7 @@ function StudentListModal(props) {
                 <Grid item xs={8} sx={{ margin: 2 }}>
                   <Typography variant="h5" component="h2" align="center">
                     {coach.coachFirstName} {coach.coachLastName}&#39;s Students
+                    ({coach.students.length})
                   </Typography>
                 </Grid>
                 <Grid item sx={{ margin: 1.5 }}>
@@ -174,7 +174,7 @@ function StudentListModal(props) {
             </Grid>
           </Grid>
           <Paper sx={{ width: '100%' }}>
-            <TableContainer sx={{ height: '14vh' }}>
+            <TableContainer sx={{ height: '40vh' }}>
               <Table aria-labelledby="tableTitle">
                 <EnhancedTableHead
                   order={order}

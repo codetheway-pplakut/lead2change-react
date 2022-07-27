@@ -1,21 +1,26 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import TableSortLabel from '@mui/material/TableSortLabel';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import { TextField } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
+import {
+  Box,
+  Grid,
+  styled,
+  Paper,
+  Tab,
+  Tabs,
+  Table,
+  TableCell,
+  TableHead,
+  TableRow,
+  TableBody,
+  TableContainer,
+  tableCellClasses,
+  TableSortLabel,
+  TextField,
+  Stack,
+} from '@mui/material';
 import StudentListModal from './StudentListModal';
 import InactivationModal from './Modals/DeactivateCoachModal';
 import EditCoachModal from './Modals/EditCoachModal';
@@ -51,7 +56,14 @@ function stableSort(array, comparator) {
   });
   return stabilizedThis.map((el) => el[0]);
 }
-
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: '#004cbb',
+    color: theme.palette.common.white,
+    textColor: theme.palette.common.white,
+  },
+  // [`&.${tableCellClasses.body}`]: { },
+}));
 const headCells = [
   {
     id: 'coachLastName',
@@ -83,7 +95,7 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
         {headCells.map((headCell) => (
-          <TableCell
+          <StyledTableCell
             key={headCell.id}
             align={headCell.numeric ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
@@ -96,9 +108,9 @@ function EnhancedTableHead(props) {
             >
               {headCell.label}
             </TableSortLabel>
-          </TableCell>
+          </StyledTableCell>
         ))}
-        <TableCell padding="normal">Options</TableCell>
+        <StyledTableCell padding="normal">Options</StyledTableCell>
       </TableRow>
     </TableHead>
   );
@@ -136,76 +148,81 @@ export default function CoachesList(props) {
   };
   return (
     <Box sx={{ width: '100%', height: '60%' }}>
-      <Grid container spacing={2} sx={{ pr: '2vh' }}>
+      <Grid container>
         <Grid item xs={12}>
-          <Grid container>
-            <Grid item>
-              <AppBar
-                position="static"
-                sx={{
-                  bgcolor: '#004cbb',
-                  mt: '2vh',
-                  ml: '0.5vh',
-                  borderTopLeftRadius: 5,
-                  borderTopRightRadius: 5,
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <AppBar
+              position="static"
+              sx={{
+                bgcolor: '#004cbb',
+                mt: '2vh',
+                borderTopLeftRadius: 5,
+                borderTopRightRadius: 5,
+                width: '20vw',
+                minWidth: '175px',
+              }}
+            >
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                textColor="inherit"
+                TabIndicatorProps={{
+                  style: { transition: 'none', background: '#004cbb' },
                 }}
-                width="3vh"
+                variant="fullWidth"
               >
-                <Tabs
-                  value={value}
-                  onChange={handleChange}
-                  textColor="inherit"
-                  TabIndicatorProps={{
-                    style: { transition: 'none', background: '#004cbb' },
+                <Tab
+                  label="Active"
+                  sx={{
+                    borderRight: 1,
+                    borderBottom: 2,
+                    borderColor: '#6f8abd',
                   }}
-                  variant="fullWidth"
-                >
-                  <Tab
-                    label="Active"
-                    sx={{
-                      borderRight: 1,
-                      borderBottom: 2,
-                      borderColor: '#6f8abd',
-                    }}
-                    disableRipple
+                  disableRipple
+                />
+                <Tab
+                  label="Inactive"
+                  sx={{
+                    borderRight: 1,
+                    borderLeft: 1,
+                    borderBottom: 2,
+                    borderColor: '#6f8abd',
+                  }}
+                  disableRipple
+                />
+              </Tabs>
+            </AppBar>
+            <div>
+              <Stack direction="row" spacing={1} alignItems="center">
+                <TextField
+                  value={searchTerm}
+                  placeholder="Search..."
+                  variant="outlined"
+                  size="small"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SearchIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                  onChange={(e) => {
+                    setSearchTerm(e.target.value);
+                  }}
+                />
+                <div sx={{ minWidth: '200px' }}>
+                  <RegisterCoachModal
+                    minWidth="1200px"
+                    addFunction={addFunction}
                   />
-                  <Tab
-                    label="Inactive"
-                    sx={{
-                      borderRight: 1,
-                      borderLeft: 1,
-                      borderBottom: 2,
-                      borderColor: '#6f8abd',
-                    }}
-                    disableRipple
-                  />
-                </Tabs>
-              </AppBar>
-            </Grid>
-
-            <Grid item xs={9} align="right">
-              <TextField
-                value={searchTerm}
-                placeholder="Search..."
-                variant="outlined"
-                size="small"
-                margin="normal"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <SearchIcon />
-                    </InputAdornment>
-                  ),
-                }}
-                onChange={(e) => {
-                  setSearchTerm(e.target.value);
-                }}
-              />
-            </Grid>
-            <Grid item xs={1} align="left">
-              <RegisterCoachModal addFunction={addFunction} />
-            </Grid>
-          </Grid>
+                </div>
+              </Stack>
+            </div>
+          </Stack>
         </Grid>
       </Grid>
       <TableContainer component={Paper} sx={{ height: '68vh' }}>
