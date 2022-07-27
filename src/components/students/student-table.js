@@ -113,9 +113,9 @@ const declineHandler = async (studentId) => {
   refreshPage();
 };
 
-const reassignCoachHandler = async (studentId, coachId) => {
+const reassignCoachHandler = async (studentId, coachsId) => {
   const updatedStudent = await getStudentById(studentId);
-  updatedStudent.coachId = coachId;
+  updatedStudent.coachId = coachsId;
   await updateStudent(updatedStudent);
   refreshPage();
 };
