@@ -47,13 +47,6 @@ export default function CreateGoalModal(props) {
       temp += 'Responsible Decision-making/';
     }
     setsel(temp);
-    console.log(temp);
-    console.log(goalSet);
-    console.log(sel);
-    console.log(dateGoalSet);
-    console.log(dateGoalReview);
-    console.log(wasItAccomplished);
-    console.log(explanation);
     const Goal = {
       studentId,
       goalSet,
@@ -210,60 +203,6 @@ export default function CreateGoalModal(props) {
                     </Box>
                   </Grid>
                 </Grid>
-                {/* <Grid item xs={12}>
-                  <Box
-                    value={SEL}
-                    fullWidth
-                    label="Social Emotional Learning"
-                    justifyContent="center"
-                    onChange={(e) => {
-                      {
-                        console.log(SEL + e.target.value);
-                      }
-                      setSEL(SEL + e.target.value);
-                    }}
-                  >
-                    <FormControlLabel
-                      control={
-                        <Checkbox name="checkedA" value="Self-Awareness/" />
-                      }
-                      label="Self-Awareness"
-                    />
-                    <FormControlLabel
-                      control={
-                        <Checkbox name="checkedB" value="Self-Management/" />
-                      }
-                      label="Self-management"
-                    />
-                    <FormControlLabel
-                      control={
-                        <Checkbox name="checkedC" value="Social Awareness/" />
-                      }
-                      label="Social Awareness"
-                    />
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          name="checkedD"
-                          value="Relationship Skills/"
-                        />
-                      }
-                      label="Relationship Skills"
-                    />
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          name="checkedE"
-                          value="Responsible Decision-Making"
-                        />
-                      }
-                      label="Responsible Decision-making"
-                    />
-
-                   
-                  </Box>
-                </Grid>
-                    */}
                 <Grid item xs={6}>
                   <TextField
                     value={dateGoalSet}
