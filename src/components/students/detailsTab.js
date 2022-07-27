@@ -73,16 +73,6 @@ export default function TabsFunction() {
     const result = await getCareers();
     setCareers(result);
   };
-  const newCareers = async (careerss, cluster, specific, technical) => {
-    const career = {
-      collegeBound: careerss,
-      careerCluster: cluster,
-      specificCluster: specific,
-      technicalCollegeBound: technical,
-    };
-    await addCareer(career);
-    await refreshCareers();
-  };
 
   const refreshGoals = async () => {
     const result = await getGoals();
@@ -115,6 +105,18 @@ export default function TabsFunction() {
   const [students, setStudents] = useState({});
   const { careerId } = useParams();
   const [careers, setCareers] = useState({});
+
+  const newCareers = async (careerss, cluster, specific, technical) => {
+    const career = {
+      currentStudentId: studentId,
+      collegeBound: careerss,
+      careerCluster: cluster,
+      specificCluster: specific,
+      technicalCollegeBound: technical,
+    };
+    await addCareer(career);
+    await refreshCareers();
+  };
 
   useEffect(() => {
     const currentCareer = async () => {
@@ -319,7 +321,7 @@ export default function TabsFunction() {
             <Grid container justifyContent="flex-end">
               <Grid item xs={12} style={{ height: '40vh' }}>
                 <Grid>
-                  <CreateCareerModal addFunction={newGoal} />
+                  <CreateCareerModal addFunction={newCareers} />
                   <h3 style={{ color: '#2656A5' }}>Career Information</h3>
                   <h5>I am College Bound: {careers.collegeBound}</h5>
                   <h5>Number of Career Clusters: {careers.careerCluster}</h5>
