@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import ColorButton from '../Shared/ColoredButton';
 
 export default function InactivationModal(props) {
-  const { coach, updateFunction } = props;
+  const { coach, updateFunction, unassignFunction } = props;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -23,6 +23,7 @@ export default function InactivationModal(props) {
       students: coach.students,
       active: false,
     };
+    unassignFunction(coach);
     updateFunction(updatedCoach, false);
   };
   return (
@@ -83,4 +84,5 @@ export default function InactivationModal(props) {
 InactivationModal.propTypes = {
   coach: PropTypes.object.isRequired,
   updateFunction: PropTypes.func.isRequired,
+  unassignFunction: PropTypes.func.isRequired,
 };

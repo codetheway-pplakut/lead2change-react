@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
+import { Typography } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CoachesList from './CoachesList';
@@ -81,6 +82,12 @@ export default function Coaches() {
     await addCoach(coach);
     await refreshCoaches();
   };
+  const unassignStudents = async (coach) => {
+    coach.students.forEach((element) => {
+      unassignStudent({ coachId: coach.id, studentId: element.id });
+    });
+    await refreshCoaches();
+  };
   const updateCoachInfo = async (coach, change) => {
     await updateCoach(coach);
     if (change === false) {
@@ -98,20 +105,10 @@ export default function Coaches() {
       {coachesExist && (
         <ThemeProvider theme={theme}>
           <CssBaseline>
-            <Grid container>
-              <Grid
-                item
-                align="center"
-                style={{
-                  color: '#FFFFFF',
-                  backgroundColor: '#2656A5',
-                  marginBottom: '3vh',
-                  padding: '1.5vh',
-                }}
-                sx={{ width: '100%' }}
-              >
-                <h1>COACHES</h1>
-              </Grid>
+            <Grid container justifyContent="center">
+              <Typography variant="h3" component="h4">
+                COACHES
+              </Typography>
             </Grid>
             <Grid container justifyContent="center" spacing={2}>
               <Grid item xs={10}>
@@ -122,6 +119,7 @@ export default function Coaches() {
                       addFunction={newCoach}
                       deleteFunction={deleteCoachById}
                       updateFunction={updateCoachInfo}
+                      unassignFunction={unassignStudents}
                     />
                   </Grid>
                 </Grid>

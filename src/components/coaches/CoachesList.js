@@ -1,19 +1,28 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import TableSortLabel from '@mui/material/TableSortLabel';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import { TextField } from '@mui/material';
+import AppBar from '@mui/material/AppBar';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
+import {
+  Box,
+  Grid,
+  styled,
+  Tab,
+  Tabs,
+  Table,
+  TableCell,
+  TableHead,
+  TableRow,
+  TableBody,
+  TableContainer,
+  tableCellClasses,
+  TableSortLabel,
+  TextField,
+  Stack,
+} from '@mui/material';
+import { Navigate } from 'react-router';
+import ROUTES from '../../constants/routes';
+import ColorButton from './Shared/ColoredButton';
 import StudentListModal from './StudentListModal';
 import InactivationModal from './Modals/DeactivateCoachModal';
 import EditCoachModal from './Modals/EditCoachModal';
@@ -49,7 +58,14 @@ function stableSort(array, comparator) {
   });
   return stabilizedThis.map((el) => el[0]);
 }
-
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: '#004cbb',
+    color: theme.palette.common.white,
+    textColor: theme.palette.common.white,
+  },
+  // [`&.${tableCellClasses.body}`]: { },
+}));
 const headCells = [
   {
     id: 'coachLastName',
@@ -81,22 +97,37 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
         {headCells.map((headCell) => (
-          <TableCell
+          <StyledTableCell
             key={headCell.id}
             align={headCell.numeric ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
+            sx={{ color: 'white' }}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
+              sx={{
+                '&.MuiTableSortLabel-root': {
+                  color: 'white',
+                },
+                '&.MuiTableSortLabel-root:hover': {
+                  color: 'white',
+                },
+                '&.Mui-active': {
+                  color: 'white',
+                },
+                '& .MuiTableSortLabel-icon': {
+                  color: 'white !important',
+                },
+              }}
             >
               {headCell.label}
             </TableSortLabel>
-          </TableCell>
+          </StyledTableCell>
         ))}
-        <TableCell padding="normal">Options</TableCell>
+        <StyledTableCell padding="normal">Options</StyledTableCell>
       </TableRow>
     </TableHead>
   );
@@ -109,12 +140,16 @@ EnhancedTableHead.propTypes = {
 };
 
 export default function CoachesList(props) {
-  const { rows, addFunction, updateFunction } = props;
+  const { rows, addFunction, updateFunction, unassignFunction } = props;
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('name');
   const [searchTerm, setSearchTerm] = React.useState('');
   const [sortActive, setSortActive] = React.useState(true);
   const [value, setValue] = React.useState(0);
+  const onBackClick = () => {
+    Navigate(ROUTES.HOME);
+  };
+  const buttonText = '< Back to Home';
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -133,52 +168,85 @@ export default function CoachesList(props) {
     }
   };
   return (
-    <Paper sx={{ width: '100%' }}>
-      <Grid container alignItems="center">
-        <Grid item xs={4}>
-          <Grid container alignItems="center">
-            <Grid item>
-              <Tabs value={value} onChange={handleChange}>
-                <Tab label="Active" />
-                <Tab label="Inactive" />
-              </Tabs>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item xs={8} p={1}>
-          <Grid
-            container
-            spacing={1}
+    <Box sx={{ width: '100%', height: '60%' }}>
+      <Grid container>
+        <Grid item xs={12}>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
             alignItems="center"
-            justifyContent="flex-end"
           >
-            <Grid item xs={6} align="right">
-              <TextField
-                value={searchTerm}
-                placeholder="Search..."
-                variant="outlined"
-                size="small"
-                margin="normal"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <SearchIcon />
-                    </InputAdornment>
-                  ),
+            <AppBar
+              position="static"
+              elevation={0}
+              sx={{
+                bgcolor: '#004cbb',
+                borderTopLeftRadius: 5,
+                borderTopRightRadius: 5,
+                width: '20vw',
+                minWidth: '175px',
+              }}
+            >
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                textColor="inherit"
+                TabIndicatorProps={{
+                  style: { transition: 'none', background: '#004cbb' },
                 }}
-                onChange={(e) => {
-                  setSearchTerm(e.target.value);
-                }}
-              />
-            </Grid>
-            <Grid item>
-              <RegisterCoachModal addFunction={addFunction} />
-            </Grid>
-          </Grid>
+                variant="fullWidth"
+              >
+                <Tab
+                  label="Active"
+                  sx={{
+                    borderRight: 1,
+                    borderBottom: 2,
+                    borderColor: '#6f8abd',
+                  }}
+                  disableRipple
+                />
+                <Tab
+                  label="Inactive"
+                  sx={{
+                    borderLeft: 1,
+                    borderBottom: 2,
+                    borderColor: '#6f8abd',
+                  }}
+                  disableRipple
+                />
+              </Tabs>
+            </AppBar>
+            <div>
+              <Stack direction="row" spacing={1} alignItems="center">
+                <TextField
+                  value={searchTerm}
+                  placeholder="Search..."
+                  variant="outlined"
+                  size="small"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SearchIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                  onChange={(e) => {
+                    setSearchTerm(e.target.value);
+                  }}
+                />
+                <div sx={{ minWidth: '200px' }}>
+                  <RegisterCoachModal
+                    minWidth="1200px"
+                    addFunction={addFunction}
+                  />
+                </div>
+              </Stack>
+            </div>
+          </Stack>
         </Grid>
       </Grid>
-      <TableContainer>
-        <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
+      <TableContainer sx={{ height: '65vh', bgcolor: 'white' }}>
+        <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" stickyHeader>
           <EnhancedTableHead
             order={order}
             orderBy={orderBy}
@@ -214,6 +282,7 @@ export default function CoachesList(props) {
                             <Grid item>
                               <InactivationModal
                                 updateFunction={updateFunction}
+                                unassignFunction={unassignFunction}
                                 coach={coach}
                               />
                             </Grid>
@@ -249,7 +318,16 @@ export default function CoachesList(props) {
           </TableBody>
         </Table>
       </TableContainer>
-    </Paper>
+      <ColorButton
+        variant="outlined"
+        size="small"
+        justify="left"
+        onClick={onBackClick}
+        sx={{ mt: '1vh' }}
+      >
+        {buttonText}
+      </ColorButton>
+    </Box>
   );
 }
 
@@ -257,4 +335,5 @@ CoachesList.propTypes = {
   rows: PropTypes.array.isRequired,
   addFunction: PropTypes.func.isRequired,
   updateFunction: PropTypes.func.isRequired,
+  unassignFunction: PropTypes.func.isRequired,
 };
