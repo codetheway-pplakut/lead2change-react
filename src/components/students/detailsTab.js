@@ -91,6 +91,22 @@ export default function TabsFunction() {
   const { goalId } = useParams();
   const [goals, setGoals] = useState({});
   const [students, setStudents] = useState({});
+
+  // const { addFunction } = props;
+  // const [collegeBound, setCollegeBound] = useState('');
+  // const [careerCluster, setCareerCluster] = useState('');
+  // const [specificCareer, setSpecificCareer] = useState('');
+  // const [technicalCollegeBound, setTechnicalCollegeBound] = useState('');
+
+  // const Register = () => {
+  //   handleClose();
+  //   addFunction(
+  //     goalSet,
+  //     dateGoalSet,
+  //     sel,
+  //     goalReviewDate,
+  //   );
+  // };
   useEffect(() => {
     const currentStudent = async () => {
       const currStudent = await getStudentById(studentId);
