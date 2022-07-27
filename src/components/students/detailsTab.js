@@ -57,30 +57,6 @@ const GridText = styled(Paper)(({ theme }) => ({
 }));
 
 export default function TabsFunction() {
-  const refreshGoals = async () => {
-    const result = await getGoals();
-    setGoals(result);
-  };
-  const newGoal = async (
-    goalss,
-    date,
-    social,
-    review,
-    accomplished,
-    explain
-  ) => {
-    const goal = {
-      goalSet: goalss,
-      dateGoalSet: date,
-      sel: social,
-      goalReviewDate: review,
-      wasItAccomplished: accomplished,
-      explanation: explain,
-    };
-    await addGoal(goal);
-    await refreshGoals();
-  };
-
   const [value, setValue] = React.useState(0);
   const { studentId } = useParams();
   const { goalId } = useParams();
@@ -267,7 +243,7 @@ export default function TabsFunction() {
                   <h5>
                     Explanation: Trying to get a 4.3 GPA in all of my classes{' '}
                   </h5>
-                </Grid>
+                </GridText>
               </Grid>
             </Grid>
           </Box>
