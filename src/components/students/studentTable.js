@@ -126,9 +126,6 @@ export default function StudentTable() {
   };
   const buttonText = '< Back to Home';
   const navigate = useNavigate();
-  const toDetailDemo = () => {
-    navigate(ROUTES.STUDENT_INFO);
-  };
 
   const [students, setStudents] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -242,7 +239,7 @@ export default function StudentTable() {
                       <Link
                         component="button"
                         variant="body2"
-                        onClick={toDetailDemo}
+                        onClick={() => navigate(`/StudentInfo/${student.id}`)}
                       >
                         {student.lastName}, {student.firstName}
                       </Link>
@@ -328,7 +325,7 @@ export default function StudentTable() {
                       <Link
                         component="button"
                         variant="body2"
-                        onClick={toDetailDemo}
+                        onClick={() => navigate(`/StudentInfo/${student.id}`)}
                       >
                         {student.lastName}, {student.firstName}
                       </Link>
@@ -408,7 +405,7 @@ export default function StudentTable() {
                       <Link
                         component="button"
                         variant="body2"
-                        onClick={toDetailDemo}
+                        onClick={() => navigate(`/StudentInfo/${student.id}`)}
                       >
                         {student.lastName}, {student.firstName}
                       </Link>
