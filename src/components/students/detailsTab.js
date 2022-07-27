@@ -62,6 +62,8 @@ export default function TabsFunction() {
   const { goalId } = useParams();
   const [goals, setGoals] = useState({});
   const [students, setStudents] = useState({});
+  const [careers, setCareers] = useState({});
+
   useEffect(() => {
     const currentStudent = async () => {
       const currStudent = await getStudentById(studentId);
@@ -69,6 +71,7 @@ export default function TabsFunction() {
     };
     currentStudent();
   }, [studentId]);
+
   useEffect(() => {
     const currentGoal = async () => {
       const currGoal = await getGoalById(goalId);
@@ -76,6 +79,7 @@ export default function TabsFunction() {
     };
     currentGoal();
   }, [goalId]);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -100,7 +104,8 @@ export default function TabsFunction() {
           >
             <Tab label="Education" {...a11yProps(0)} />
             <Tab label="Goals" {...a11yProps(1)} />
-            <Tab label="Other" {...a11yProps(2)} />
+            <Tab label="Careers" {...a11yProps(2)} />
+            <Tab label="Other" {...a11yProps(3)} />
           </Tabs>
         </AppBar>
         <TabPanel value={value} index={0} style={{ overflowY: 'auto' }}>
@@ -112,7 +117,7 @@ export default function TabsFunction() {
                 sx={{ minWidth: 10, height: 'max-content' }}
                 style={{ height: '64vh' }}
               >
-                <GridText>
+                <Grid>
                   <h3 style={{ color: '#2656A5' }}>Post Secondary Plan</h3>
                   <h5>
                     Plans After High school: {students.planAfterHighSchool}
@@ -142,20 +147,53 @@ export default function TabsFunction() {
                     College Entrance Exam Information:
                   </h3>
                   <h5>
-                    PACT Score: {students.pactTestScore}
-                    <div>Date of PACT: {students.pactTestDate}</div>
+                    PSAT Score:{' '}
+                    <Box component="span" style={{ fontWeight: 'normal' }}>
+                      {students.psatTestScore}
+                    </Box>{' '}
+                    <Box component="span" style={{ marginLeft: '28.35vh' }}>
+                      SAT Score:{' '}
+                      <Box component="span" style={{ fontWeight: 'normal' }}>
+                        {students.satTestDate}
+                      </Box>
+                    </Box>{' '}
+                    <div>
+                      Date of PSAT:{' '}
+                      <Box component="span" style={{ fontWeight: 'normal' }}>
+                        {students.psatTestDate}
+                      </Box>
+                      <Box component="span" style={{ marginLeft: '23.29vh' }}>
+                        Date of SAT:{' '}
+                        <Box component="span" style={{ fontWeight: 'normal' }}>
+                          {students.satTestDate}
+                        </Box>{' '}
+                      </Box>
+                    </div>
                   </h5>
                   <h5>
-                    PSAT Score: {students.psatTestScore}
-                    <div> Date of PSAT: {students.psatTestDate}</div>
-                  </h5>
-                  <h5>
-                    ACT Score: {students.actTestScore}
-                    <div> Date of ACT: {students.actTestDate}</div>
-                  </h5>
-                  <h5>
-                    SAT Score: {students.satTestScore}
-                    <div> Date of SAT: {students.satTestDate} </div>
+                    PACT Score:{' '}
+                    <Box component="span" style={{ fontWeight: 'normal' }}>
+                      {students.pactTestScore}
+                    </Box>{' '}
+                    <Box component="span" style={{ marginLeft: '28.35vh' }}>
+                      ACT Score:{' '}
+                      <Box component="span" style={{ fontWeight: 'normal' }}>
+                        {students.actTestScore}
+                      </Box>
+                    </Box>
+                    <div>
+                      {' '}
+                      Date of PACT: {students.pactTestDate}
+                      <Box component="span" style={{ fontWeight: 'normal' }}>
+                        {students.pactTestDate}
+                      </Box>
+                      <Box component="span" style={{ marginLeft: '23.29vh' }}>
+                        Date of PSAT:{' '}
+                        <Box component="span" style={{ fontWeight: 'normal' }}>
+                          {students.psatTestDate}
+                        </Box>{' '}
+                      </Box>
+                    </div>
                   </h5>
                   <h3 style={{ color: '#2656A5' }}>Financial Aid:</h3>
                   <h5>
@@ -167,7 +205,7 @@ export default function TabsFunction() {
                     {students.supportNeeded}
                   </h5>
                   <h5>Support they need: None</h5>
-                </GridText>
+                </Grid>
               </Grid>
             </Grid>
           </Box>
@@ -213,8 +251,25 @@ export default function TabsFunction() {
         <TabPanel value={value} index={2} style={{ overflowY: 'auto' }}>
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">
+              <Grid item xs={12} style={{ height: '30vh' }}>
+                <Grid>
+                  <h3 style={{ color: '#2656A5' }}>Career Information</h3>
+                  <h5>I am College Bound: {careers.collegeBound}</h5>
+                  <h5>Number of Career Clusters: {careers.careerCluster}</h5>
+                  <h5>Career of Choice: {careers.specificCluster}</h5>
+                  <h5>
+                    I am Techinical Bound: {careers.technicalCollegeBound}
+                  </h5>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Box>
+        </TabPanel>
+        <TabPanel value={value} index={3} style={{ overflowY: 'auto' }}>
+          <Box sx={{ flexGrow: 1 }}>
+            <Grid container justifyContent="flex-end">
               <Grid item xs={12} style={{ height: '64vh' }}>
-                <GridText>
+                <Grid>
                   <h3 style={{ color: '#2656A5' }}>Parent Information</h3>
                   <h5>First Name: {students.parentFirstName}</h5>
                   <h5>Last Name: {students.parentLastName}</h5>
@@ -240,7 +295,7 @@ export default function TabsFunction() {
                   <h5>Date Signed: {students.studentSignatureDate}</h5>
                   <h5>Parent Signature: {students.parentSignature}</h5>
                   <h5>Date Signed: {students.parentSignatureDate}</h5>
-                </GridText>
+                </Grid>
               </Grid>
             </Grid>
           </Box>
