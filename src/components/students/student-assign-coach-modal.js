@@ -87,8 +87,9 @@ export default function CoachAssignModal(props) {
     setNewCoachId(value);
   };
 
-  const getCoachNameById = async () => {
-    return coaches.find((coach) => coach.id === coachId);
+  const getCoachNameById = (id) => {
+    const thisCoach = coaches.find((coach) => coach.id === id);
+    return thisCoach;
   };
 
   let denySubmit = true;
@@ -102,7 +103,7 @@ export default function CoachAssignModal(props) {
   return (
     <div>
       <Stack direction="row">
-        {coachId !== null && <p>{console.log(getCoachNameById())}</p>}
+        {coachId !== null && <p>Coach Name</p>}
         {coachId === null && <p>Unassigned</p>}
         <IconButton onClick={handleOpen}>
           <EditIcon />
