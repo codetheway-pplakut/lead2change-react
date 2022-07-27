@@ -43,8 +43,10 @@ export default function Root() {
                 path="/StudentInfo/:studentId"
                 element={<ResponsiveGrid />}
               />
-              <Route path="/detailsTab/:goalId" element={<TabsFunction />} />
-              <Route path="/detailsTab/:studentId" element={<TabsFunction />} />
+              <Route
+                path="/detailsTab/:studentId:goalId"
+                element={<TabsFunction />}
+              />
               <Route path={ROUTES.TABS} element={<BasicTabs />} />
               <Route path={ROUTES.COACHES} element={<Coaches />} />
               <Route path={ROUTES.STUDENTS} element={<Student />} />

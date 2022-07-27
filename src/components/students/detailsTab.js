@@ -19,7 +19,7 @@ import {
   getStudentById,
   updateStudent,
 } from '../../services/students/students';
-// import { getGoals, addGoal, getGoalById } from '../../services/goals/goals';
+import { getGoals, addGoal, getGoalById } from '../../services/goals/goals';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -64,8 +64,8 @@ const GridText = styled(Paper)(({ theme }) => ({
 export default function TabsFunction() {
   const [value, setValue] = React.useState(0);
   const { studentId } = useParams();
-  // const { goalId } = useParams();
-  // const [goals, setGoals] = useState({});
+  const { goalId } = useParams();
+  const [goals, setGoals] = useState({});
   const [students, setStudents] = useState({});
   useEffect(() => {
     const currentStudent = async () => {
@@ -74,13 +74,13 @@ export default function TabsFunction() {
     };
     currentStudent();
   }, [studentId]);
-  // useEffect(() => {
-  //   const currentGoal = async () => {
-  //     const currGoal = await getGoalById(goalId);
-  //     setGoals(currGoal);
-  //   };
-  //   currentGoal();
-  // }, [goalId]);
+  useEffect(() => {
+    const currentGoal = async () => {
+      const currGoal = await getGoalById(goalId);
+      setGoals(currGoal);
+    };
+    currentGoal();
+  }, [goalId]);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -183,18 +183,15 @@ export default function TabsFunction() {
               <Grid item xs={12} style={{ height: '64vh' }}>
                 <GridText>
                   <h3 style={{ color: '#2656A5' }}>Goal One</h3>
-                  {/* <h5>Goal: {goals.collegeBound}</h5> */}
-                  <h5>Goal Set Date: 3/20/22</h5>
-                  <h5>SEL: Responsible-Decision Making</h5>
-                  <h5>Goal Review Date: 3/20/23</h5>
+                  <h5>Goal: {goals.goalSet}</h5>
+                  <h5>Goal Set Date: {goals.dateGoalSet}</h5>
+                  <h5>SEL: {goals.sel}</h5>
+                  <h5>Goal Review Date:{goals.goalReviewDate}</h5>
                   <h5>
                     Accomplishment State:
-                    <p>In progress</p>
+                    <p>{goals.wasItAccomplished}</p>
                   </h5>
-                  <h5>
-                    Explanation: Joined multiple clubs, trying to establish a
-                    role and get a leadership position
-                  </h5>
+                  <h5>Explanation: {goals.explanation}</h5>
                   <h3 style={{ color: '#2656A5' }}>Goal Two</h3>
                   <h5>Goal: Make it onto the Varsity Tennis Team</h5>
                   <h5>Goal Set Date: 11/22/21</h5>
