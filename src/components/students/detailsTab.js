@@ -413,6 +413,7 @@ function SignUpEdit(props) {
                       className="typing-container"
                       label="PSAT Date"
                       type="date"
+                      defaultValue="2017-05-24"
                       onChange={(event) => setFirst(event.target.value)}
                       required
                     />
@@ -432,6 +433,7 @@ function SignUpEdit(props) {
                       className="typing-container"
                       label="PSAT Date"
                       type="date"
+                      defaultValue="2017-05-24"
                       onChange={(event) => setFirst(event.target.value)}
                       required
                     />
@@ -451,6 +453,7 @@ function SignUpEdit(props) {
                       className="typing-container"
                       label="ACT Date"
                       type="date"
+                      defaultValue="2017-05-24"
                       onChange={(event) => setFirst(event.target.value)}
                       required
                     />
@@ -470,6 +473,7 @@ function SignUpEdit(props) {
                       className="typing-container"
                       label="SAT Date"
                       type="date"
+                      defaultValue="2017-05-24"
                       onChange={(event) => setFirst(event.target.value)}
                       required
                     />
@@ -564,6 +568,7 @@ function SignUpEdit(props) {
                         className="typing-container"
                         label="Set Date"
                         type="date"
+                        defaultValue="2017-05-24"
                         onChange={(event) => setFirst(event.target.value)}
                         required
                       />
@@ -584,6 +589,7 @@ function SignUpEdit(props) {
                         className="typing-container"
                         type="date"
                         label="Review Date"
+                        defaultValue="2017-05-24"
                         onChange={(event) => setFirst(event.target.value)}
                         required
                       />
@@ -643,6 +649,7 @@ function SignUpEdit(props) {
                         className="typing-container"
                         label="Set Date"
                         type="date"
+                        defaultValue="2017-05-24"
                         onChange={(event) => setFirst(event.target.value)}
                         required
                       />
@@ -663,6 +670,7 @@ function SignUpEdit(props) {
                         className="typing-container"
                         type="date"
                         label="Review Date"
+                        defaultValue="2017-05-24"
                         onChange={(event) => setFirst(event.target.value)}
                         required
                       />
@@ -721,6 +729,7 @@ function SignUpEdit(props) {
                         className="typing-container"
                         label="Set Date"
                         type="date"
+                        defaultValue="2017-05-24"
                         onChange={(event) => setFirst(event.target.value)}
                         required
                       />
@@ -741,6 +750,7 @@ function SignUpEdit(props) {
                         className="typing-container"
                         type="date"
                         label="Review Date"
+                        defaultValue="2017-05-24"
                         onChange={(event) => setFirst(event.target.value)}
                         required
                       />
@@ -957,6 +967,7 @@ function SignUpEdit(props) {
                         className="typing-container"
                         label="Date Signed"
                         type="date"
+                        defaultValue="2017-05-24"
                         onChange={(event) => setFirst(event.target.value)}
                         required
                       />
@@ -978,6 +989,7 @@ function SignUpEdit(props) {
                         className="typing-container"
                         label="Date Signed"
                         type="date"
+                        defaultValue="2017-05-24"
                         onChange={(event) => setFirst(event.target.value)}
                         required
                       />

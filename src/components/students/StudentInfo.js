@@ -56,6 +56,8 @@ function DisplayBanner() {
   );
 }
 
+
+
 function SignUpDisplay(props) {
   const { onEditClick } = props;
   return (
@@ -180,6 +182,7 @@ function SignUpEdit(props) {
                     className="typing-container"
                     label="Date of Birth"
                     type="date"
+                    defaultValue="2017-05-24"
                     onChange={(event) => setFirst(event.target.value)}
                     required
                   />
