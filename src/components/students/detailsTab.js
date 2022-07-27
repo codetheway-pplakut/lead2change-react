@@ -20,13 +20,7 @@ import {
   updateStudent,
 } from '../../services/students/students';
 import { getGoals, addGoal, getGoalById } from '../../services/goals/goals';
-import {
-  getCareers,
-  addCareer,
-  getCareerById,
-} from '../../services/careers/careers';
 import GoalRegistryModal from './goalModal';
-import CreateCareerModal from './createCareerModal';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -69,11 +63,6 @@ const GridText = styled(Paper)(({ theme }) => ({
 }));
 
 export default function TabsFunction() {
-  const refreshCareers = async () => {
-    const result = await getCareers();
-    setCareers(result);
-  };
-
   const refreshGoals = async () => {
     const result = await getGoals();
     setGoals(result);
@@ -103,28 +92,7 @@ export default function TabsFunction() {
   const { goalId } = useParams();
   const [goals, setGoals] = useState({});
   const [students, setStudents] = useState({});
-  const { careerId } = useParams();
   const [careers, setCareers] = useState({});
-
-  const newCareers = async (careerss, cluster, specific, technical) => {
-    const career = {
-      currentStudentId: studentId,
-      collegeBound: careerss,
-      careerCluster: cluster,
-      specificCluster: specific,
-      technicalCollegeBound: technical,
-    };
-    await addCareer(career);
-    await refreshCareers();
-  };
-
-  useEffect(() => {
-    const currentCareer = async () => {
-      const currCareer = await getCareerById(careerId);
-      setGoals(currCareer);
-    };
-    currentCareer();
-  }, [careerId]);
 
   useEffect(() => {
     const currentStudent = async () => {
@@ -146,7 +114,6 @@ export default function TabsFunction() {
     setValue(newValue);
   };
   console.log(goals);
-  console.log(careers);
 
   return (
     <div style={{ marginRight: '8vh' }}>
@@ -319,9 +286,8 @@ export default function TabsFunction() {
         <TabPanel value={value} index={2} style={{ overflowY: 'auto' }}>
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">
-              <Grid item xs={12} style={{ height: '40vh' }}>
+              <Grid item xs={12} style={{ height: '30vh' }}>
                 <Grid>
-                  <CreateCareerModal addFunction={newCareers} />
                   <h3 style={{ color: '#2656A5' }}>Career Information</h3>
                   <h5>I am College Bound: {careers.collegeBound}</h5>
                   <h5>Number of Career Clusters: {careers.careerCluster}</h5>
