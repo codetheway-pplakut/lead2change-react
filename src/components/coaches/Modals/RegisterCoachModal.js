@@ -21,9 +21,9 @@ export default function RegisterCoachModal(props) {
   const Register = () => {
     if (
       email.includes('@') &&
-      firstName.length > 1 &&
-      lastName.length > 1 &&
-      phoneNumber.length > 1
+      firstName.length > 0 &&
+      lastName.length > 0 &&
+      phoneNumber.length > 0
     ) {
       handleClose();
       addFunction(firstName, lastName, email, phoneNumber);
@@ -99,8 +99,10 @@ export default function RegisterCoachModal(props) {
                   <TextField
                     value={email}
                     fullWidth
-                    helperText={email.length < 1 ? 'Enter Email' : ' '}
-                    error={email.length < 1}
+                    error={!email.includes('@')}
+                    helperText={
+                      !email.includes('@') ? 'Must contain an @ sign.' : ' '
+                    }
                     label="Email"
                     variant="outlined"
                     size="small"
@@ -121,7 +123,7 @@ export default function RegisterCoachModal(props) {
                     variant="outlined"
                     size="small"
                     onChange={(e) => {
-                      setPhoneNumber(e.target.value);
+                      setPhoneNumber(e.target.value.replace(' ', '-'));
                     }}
                   />
                 </Grid>

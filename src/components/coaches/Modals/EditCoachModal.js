@@ -28,9 +28,9 @@ export default function EditCoachModal(props) {
   const Edit = () => {
     if (
       enteredEmail.includes('@') &&
-      enteredFirstName.length > 1 &&
-      enteredLastName.length > 1 &&
-      enteredPhoneNumber.length > 1
+      enteredFirstName.length > 0 &&
+      enteredLastName.length > 0 &&
+      enteredPhoneNumber.length > 0
     ) {
       handleClose();
       if (coach.students === null) {
