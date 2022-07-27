@@ -1,5 +1,5 @@
 import Container from '@mui/material/Container';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Button from '@mui/material/Button';
@@ -51,8 +51,23 @@ export default function RegisterAdminModal() {
       confirmPassword,
     };
     addAdmin(admin);
+    refreshAdmin();
   };
-  
+
+  const [admins, setAdmins] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const refreshAdmin = async () => {
+    setIsLoading(true);
+    const response = await getAdmins();
+
+    setIsLoading(false);
+    setAdmins(response);
+  };
+  useEffect(() => {
+    refreshAdmin();
+  }, []);
+
   const handleRegister = () => {
     setEmailErrorOne(null);
     setEmailErrorTwo(null);

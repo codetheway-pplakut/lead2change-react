@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -8,7 +8,11 @@ import { createTheme } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import PropTypes from 'prop-types';
-import { deleteAdmin, getAdminById } from '../../services/Admin/admin';
+import {
+  deleteAdmin,
+  getAdminById,
+  getAdmins,
+} from '../../services/Admin/admin';
 
 export default function DeleteAdminModal(props) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -22,7 +26,22 @@ export default function DeleteAdminModal(props) {
   const deleteAdministrator = () => {
     handleClose();
     deleteAdmin(id);
+    refreshAdmin();
   };
+
+  const [admins, setAdmins] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const refreshAdmin = async () => {
+    setIsLoading(true);
+    const response = await getAdmins();
+
+    setIsLoading(false);
+    setAdmins(response);
+  };
+  useEffect(() => {
+    refreshAdmin();
+  }, []);
 
   const style = {
     position: 'absolute',
