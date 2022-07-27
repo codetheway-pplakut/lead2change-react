@@ -26,20 +26,27 @@ export default function EditCoachModal(props) {
   );
   const [enteredEmail, setEnteredEmail] = React.useState(coach.coachEmail);
   const Edit = () => {
-    handleClose();
-    if (coach.students === null) {
-      coach.students = [];
+    if (
+      enteredEmail.length > 4 &&
+      enteredFirstName.length > 1 &&
+      enteredLastName.length > 1 &&
+      !enteredPhoneNumber.replace('-', '').isNaN()
+    ) {
+      handleClose();
+      if (coach.students === null) {
+        coach.students = [];
+      }
+      const updatedCoach = {
+        id: coach.id, // TODO : Update to agreed ID creation method
+        coachFirstName: enteredFirstName,
+        coachLastName: enteredLastName,
+        coachEmail: enteredEmail,
+        coachPhoneNumber: enteredPhoneNumber,
+        students: coach.students,
+        active: coach.active,
+      };
+      updateFunction(updatedCoach);
     }
-    const updatedCoach = {
-      id: coach.id, // TODO : Update to agreed ID creation method
-      coachFirstName: enteredFirstName,
-      coachLastName: enteredLastName,
-      coachEmail: enteredEmail,
-      coachPhoneNumber: enteredPhoneNumber,
-      students: coach.students,
-      active: coach.active,
-    };
-    updateFunction(updatedCoach);
   };
   function containsNumber(str) {
     return /\d/.test(str);
@@ -84,10 +91,7 @@ export default function EditCoachModal(props) {
               <Grid container spacing={1} sx={{ p: 2 }} justifyContent="center">
                 <Grid item xs={6}>
                   <TextField
-                    error={
-                      enteredFirstName.length < 1 ||
-                      containsNumber(enteredFirstName)
-                    }
+                    error={enteredFirstName.length < 1}
                     value={enteredFirstName}
                     fullWidth
                     label="First Name"
@@ -101,10 +105,7 @@ export default function EditCoachModal(props) {
 
                 <Grid item xs={6}>
                   <TextField
-                    error={
-                      enteredLastName.length < 1 ||
-                      containsNumber(enteredLastName)
-                    }
+                    error={enteredLastName.length < 1}
                     value={enteredLastName}
                     fullWidth
                     label="Last Name"
