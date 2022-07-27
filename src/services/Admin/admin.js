@@ -18,18 +18,6 @@ export const deleteAdmin = async (id) => {
   });
 };
 
-export const updateAdmin = (admin) => {
-  return callApi({
-    body: admin,
-    endpoint: SERVICE_ROOT,
-    method: 'PUT',
-    headers: {
-      Accept: 'application/json, text/plain',
-      'Content-Type': 'application/json',
-    },
-  });
-};
-
 export const addAdmin = async (admin) => {
   return callApi({
     body: admin,

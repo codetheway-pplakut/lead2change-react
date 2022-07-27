@@ -1,5 +1,5 @@
 import Container from '@mui/material/Container';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Button from '@mui/material/Button';
@@ -44,29 +44,19 @@ export default function RegisterAdminModal() {
   const handleOpen = () => {
     setOpen(true);
   };
-  const newAdmin = async () => {
+
+  const refreshPage = async () => {
+    window.location.reload(true);
+  };
+
+  const newAdmin = () => {
     const admin = {
       email,
       password,
       confirmPassword,
     };
     addAdmin(admin);
-    refreshAdmin();
   };
-
-  const [admins, setAdmins] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const refreshAdmin = async () => {
-    setIsLoading(true);
-    const response = await getAdmins();
-
-    setIsLoading(false);
-    setAdmins(response);
-  };
-  useEffect(() => {
-    refreshAdmin();
-  }, []);
 
   const handleRegister = () => {
     setEmailErrorOne(null);
@@ -129,8 +119,10 @@ export default function RegisterAdminModal() {
     }
 
     if (register === true) {
-      setOpen(false);
       newAdmin();
+      handleClose();
+      getAdmins();
+      refreshPage();
     }
   };
 

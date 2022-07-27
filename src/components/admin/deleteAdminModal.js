@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -8,11 +8,8 @@ import { createTheme } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import PropTypes from 'prop-types';
-import {
-  deleteAdmin,
-  getAdminById,
-  getAdmins,
-} from '../../services/Admin/admin';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import { deleteAdmin, getAdmins } from '../../services/Admin/admin';
 
 export default function DeleteAdminModal(props) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -20,28 +17,19 @@ export default function DeleteAdminModal(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const { id } = props;
-  const userId = {
-    id,
+
+  const refreshPage = async () => {
+    window.location.reload(true);
   };
+
   const deleteAdministrator = () => {
+    const adminID = id;
+    console.log(adminID);
+    deleteAdmin(adminID);
     handleClose();
-    deleteAdmin(id);
-    refreshAdmin();
+    getAdmins();
+    // refreshPage();
   };
-
-  const [admins, setAdmins] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const refreshAdmin = async () => {
-    setIsLoading(true);
-    const response = await getAdmins();
-
-    setIsLoading(false);
-    setAdmins(response);
-  };
-  useEffect(() => {
-    refreshAdmin();
-  }, []);
 
   const style = {
     position: 'absolute',
@@ -73,11 +61,11 @@ export default function DeleteAdminModal(props) {
   const buttonTheme = createTheme({
     palette: {
       delete: {
-        main: '#FF4D4D',
+        main: '#004cbb',
         contrastText: '#fff',
       },
       cancel: {
-        main: '#3764A8',
+        main: '#004cbb',
         contrastText: '#fff',
       },
     },
@@ -89,14 +77,14 @@ export default function DeleteAdminModal(props) {
 
   return (
     <div>
-      <Button
-        theme={buttonTheme}
-        color="delete"
-        onClick={handleOpen}
-        variant="contained"
-      >
-        <Typography padding="5px">Delete</Typography>
-      </Button>
+      <IconButton>
+        <DeleteOutlineIcon
+          color="delete"
+          theme={buttonTheme}
+          onClick={handleOpen}
+        />
+      </IconButton>
+
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <Grid

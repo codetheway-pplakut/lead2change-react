@@ -10,7 +10,6 @@ import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 
-import EditAdminModal from './editAdminModal';
 import DeleteAdminModal from './deleteAdminModal';
 import RegisterAdminModal from './registerAdminModal';
 import SearchBar from './SearchBar';
@@ -21,12 +20,6 @@ import {
   // updateAdmin,
   // getAdminById,
 } from '../../services/Admin/admin';
-
-import {
-  getStudents,
-  // getStudentById,
-  // updateStudent,
-} from '../../services/students/students';
 
 import ProgressIndicatorOverlay from '../progress-indicator-overlay/progress-indicator-overlay';
 
@@ -53,9 +46,13 @@ const tableDelete = {
 export default function AdminTable() {
   const [admins, setAdmins] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  
+  const [search, setSearch] = useState('');
+
   const refreshAdmins = async () => {
+    setIsLoading(true);
     const result = await getAdmins();
+
+    setIsLoading(false);
     setAdmins(result);
   };
 
@@ -63,23 +60,20 @@ export default function AdminTable() {
     refreshAdmins();
   }, []);
 
-
   return (
     <Box sx={{ width: '100%', height: '60%' }}>
       <ProgressIndicatorOverlay active={isLoading} />
 
       <Box sx={{ mt: '10px', mb: '10px' }}>
         <Grid container alignItems="center" justify="center">
-          <Grid item xs={3} />
-          <Grid item xs={4} align="right">
-            <RegisterAdminModal />
+          <Grid item xs={7.7} align="right">
+            <SearchBar setSearch={setSearch} />
           </Grid>
-          <Grid item xs={2} align="right">
+          <Grid item xs={1.5} align="right">
             <Box>
-              <SearchBar />
+              <RegisterAdminModal />
             </Box>
           </Grid>
-          <Grid item xs={3} />
         </Grid>
       </Box>
 
@@ -89,14 +83,11 @@ export default function AdminTable() {
             <TableRow>
               <TableCell align="left" sx={tableHeadingText}>
                 <Grid container>
-                  <Grid item xs={6} />
-                  <Grid item xs={2}>
-                    Name
+                  <Grid item xs={3} />
+                  <Grid item xs={7}>
+                    Email
                   </Grid>
                 </Grid>
-              </TableCell>
-              <TableCell align="left" sx={tableHeadingText}>
-                Email
               </TableCell>
               <TableCell align="left" sx={tableDelete}>
                 Delete
@@ -104,36 +95,41 @@ export default function AdminTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {admins.map((admin, index) => (
-              <TableRow
-                key={admin.id}
-                sx={
-                  index % 2
-                    ? { background: '#eeeeee' }
-                    : { background: 'white' }
+            {admins
+              .filter((post) => {
+                if (search === '') {
+                  return post;
                 }
-              >
-                <TableCell component="th" scope="row">
-                  <Grid container alignItems="center" justify="center">
-                    <Grid item xs={6}>
-                      <Box>
-                        <EditAdminModal />
-                      </Box>
+                if (post.email.toLowerCase().includes(search.toLowerCase())) {
+                  return post;
+                }
+                return null;
+              })
+
+              .map((admin, index) => (
+                <TableRow
+                  key={admin.id}
+                  sx={
+                    index % 2
+                      ? { background: '#eeeeee' }
+                      : { background: 'white' }
+                  }
+                >
+                  <TableCell component="th" scope="row">
+                    <Grid container>
+                      <Grid item xs={2} />
+                      <Grid item xs={8}>
+                        {admin.email}
+                      </Grid>
                     </Grid>
-                    <Grid item xs={6}>
-                      {admin.userName}
-                    </Grid>
-                  </Grid>
-                </TableCell>
-                <TableCell align="left">{admin.email}</TableCell>
-                <TableCell align="left">
-                  <DeleteAdminModal id={admin.id} />
-                </TableCell>
-              </TableRow>
-            ))}
+                  </TableCell>
+                  <TableCell align="left">
+                    <DeleteAdminModal id={admin.id} />
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
-
       </TableContainer>
     </Box>
   );
