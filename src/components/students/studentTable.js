@@ -121,10 +121,6 @@ function a11yProps(index) {
 }
 
 export default function StudentTable() {
-  const onBackClick = () => {
-    navigate(ROUTES.HOME);
-  };
-  const buttonText = '< Back to Home';
   const navigate = useNavigate();
 
   const [students, setStudents] = useState([]);
@@ -436,15 +432,6 @@ export default function StudentTable() {
           </Table>
         </TableContainer>
       </TabPanel>
-      <Button
-        variant="outlined"
-        size="small"
-        justify="left"
-        onClick={onBackClick}
-        sx={{ mt: '1vh' }}
-      >
-        {buttonText}
-      </Button>
     </Box>
   );
 }
