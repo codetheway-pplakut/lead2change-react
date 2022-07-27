@@ -20,7 +20,7 @@ import {
   TextField,
   Stack,
 } from '@mui/material';
-import { Navigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import ROUTES from '../../constants/routes';
 import ColorButton from './Shared/ColoredButton';
 import StudentListModal from './StudentListModal';
@@ -141,13 +141,14 @@ EnhancedTableHead.propTypes = {
 
 export default function CoachesList(props) {
   const { rows, addFunction, updateFunction, unassignFunction } = props;
+  const navigate = useNavigate();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('name');
   const [searchTerm, setSearchTerm] = React.useState('');
   const [sortActive, setSortActive] = React.useState(true);
   const [value, setValue] = React.useState(0);
   const onBackClick = () => {
-    Navigate(ROUTES.HOME);
+    navigate(ROUTES.HOME);
   };
   const buttonText = '< Back to Home';
 
