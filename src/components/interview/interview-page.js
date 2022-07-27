@@ -73,9 +73,8 @@ export default function InterviewPage() {
     console.log(response);
     response.questions.map((question) => {
       console.log(question.questionString);
-    });
-    response.questions.answers.map((answers) => {
-      console.log(answers.answerString);
+      console.log(question.answerString);
+      console.log(question);
     });
   };
   useEffect(() => {

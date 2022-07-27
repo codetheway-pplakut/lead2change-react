@@ -22,40 +22,47 @@ export default function InterviewQuestions() {
     useState('');
   const [interviewOtherCommitments, setinterviewOtherCommitments] =
     useState('');
-  const [interviewSacrificeTime, setinterviewSacrificeTime] = useState('');
+  const [interviewSacrificeTime, setinterviewSacrificeTime] = useState('Yes');
   const [interviewPostHighSchoolCoaching, setinterviewPostHighSchoolCoaching] =
-    useState('');
+    useState('Yes');
   const [interviewScheduleManagement, setinterviewScheduleManagement] =
-    useState('');
+    useState('Yes');
   const [interviewCommunicateWithMentors, setinterviewCommunicateWithMentors] =
-    useState('');
-  const [interviewDiverseClass, setinterviewDiverseClass] = useState('');
-  const [interviewOpenMinded, setinterviewOpenMinded] = useState('');
+    useState('Yes');
+  const [interviewDiverseClass, setinterviewDiverseClass] = useState('Yes');
+  const [interviewOpenMinded, setinterviewOpenMinded] = useState('Yes');
   const [
     interviewProfessionalRepresentation,
     setinterviewProfessionalRepresentation,
-  ] = useState('');
-  const [interviewTryingNewThings, setinterviewTryingNewThings] = useState('');
+  ] = useState('Yes');
+  const [interviewTryingNewThings, setinterviewTryingNewThings] =
+    useState('Yes');
   const [interviewCommitToActivities, setinterviewCommitToActivities] =
-    useState('');
-  // const [interviewNewThingsDistract, setinterviewNewThingsDistract] =
-  //   useState('');
-  // const [
-  //   interviewSetbacksDoNotDiscourage,
-  //   setinterviewSetbacksDoNotDiscourage,
-  // ] = useState('');
-  // const [interviewLostInterest, setinterviewLostInterest] = useState('');
-  // const [interviewHardWorking, setinterviewHardWorking] = useState('');
-  // const [interviewDifferentGoals, setinterviewDifferentGoals] = useState('');
-  // const [interviewMaintainFocusOnGoals, setinterviewMaintainFocusOnGoals] =
-  //   useState('');
-  // const [interviewFinishGoals, setinterviewFinishGoals] = useState('');
-  // const [interviewIsDiligent, setinterviewIsDiligent] = useState('');
+    useState('Yes');
+  const [interviewNewThingsDistract, setinterviewNewThingsDistract] =
+    useState('Yes');
+  const [
+    interviewSetbacksDoNotDiscourage,
+    setinterviewSetbacksDoNotDiscourage,
+  ] = useState('Yes');
+  const [interviewLostInterest, setinterviewLostInterest] = useState('Yes');
+  const [interviewHardWorking, setinterviewHardWorking] = useState('Yes');
+  const [interviewDifferentGoals, setinterviewDifferentGoals] = useState('Yes');
+  const [interviewMaintainFocusOnGoals, setinterviewMaintainFocusOnGoals] =
+    useState('Yes');
+  const [interviewFinishGoals, setinterviewFinishGoals] = useState('Yes');
+  const [interviewIsDiligent, setinterviewIsDiligent] = useState('Yes');
   const Save = () => {
     const interview = {};
     console.log(interviewIdealCareer);
     console.log(interviewSacrificeTime);
   };
+
+  // const [selectedValue, setSelectedValue] = React.useState('a');
+
+  // const handleChange = (event) => {
+  //   setSelectedValue(event.target.value);
+  // };
 
   return (
     <Container fixed textalign="true" justify="center">
@@ -185,12 +192,7 @@ export default function InterviewQuestions() {
           height: '100%',
         }}
       >
-        <FormControl
-          value={interviewSacrificeTime}
-          onChange={(e) => {
-            setinterviewSacrificeTime();
-          }}
-        >
+        <FormControl>
           <FormLabel id="radio-button-q6">
             {' '}
             6. Are you willing to sacrifice some things you usually do after
@@ -198,8 +200,8 @@ export default function InterviewQuestions() {
             designed to do?
           </FormLabel>
           <RadioGroup>
-            <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="no" control={<Radio />} label="No" />
+            <FormControlLabel value="yes" control={<Radio />} label="yes" />
+            <FormControlLabel value="no" control={<Radio />} label="no" />
           </RadioGroup>
         </FormControl>
       </Box>
