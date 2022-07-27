@@ -35,9 +35,6 @@ export default function ResponsiveGrid(props) {
   const { studentId } = useParams();
   const [students, setStudents] = useState({});
 
-  const onBackClick = () => {
-    navigate(ROUTES.STUDENTS);
-  };
   useEffect(() => {
     const currentStudent = async () => {
       const currStudent = await getStudentById(studentId);
@@ -113,15 +110,6 @@ export default function ResponsiveGrid(props) {
             </StudentInfo>
           </Grid>
         </Paper>
-        <Button
-          variant="outlined"
-          size="small"
-          justify="left"
-          onClick={onBackClick}
-          sx={{ mt: '1vh', ml: '17vh' }}
-        >
-          {buttonText}
-        </Button>
       </Grid>
       <Grid item xs={8}>
         <TabsFunction />
