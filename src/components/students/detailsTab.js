@@ -113,7 +113,6 @@ function SignUpDisplay(props) {
                   >
                     Edit
                   </Button>
-                  
                   <h3 style={{ color: '#2656A5' }}>Post Secondary Plan</h3>
                   <h5>
                     Plans After College: After College I plan to go and get a
@@ -267,268 +266,38 @@ function SignUpEdit(props) {
     <div style={{ marginRight: '8vh' }}>
       <Box sx={{ bgcolor: 'background.paper', width: '100vh' }}>
         <form onSubmit={onSaveClick}>
-        <AppBar position="static">
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            indicatorColor="secondary"
-            textColor="inherit"
-            variant="fullWidth"
-            aria-label="full width tabs example"
-            TabIndicatorProps={{
-              style: {
-                backgroundColor: '#FFFFFF',
-                height: '3px',
-              },
-            }}
-          >
-            <Tab label="Education" {...a11yProps(0)} />
-            <Tab label="Goals" {...a11yProps(1)} />
-            <Tab label="Other" {...a11yProps(2)} />
-          </Tabs>
-        </AppBar>
-        <TabPanel value={value} index={0} style={{ overflowY: 'auto' }}>
-          <Box sx={{ flexGrow: 1 }}>
-            <Grid container justifyContent="flex-end">
-              <Grid
-                item
-                xs={12}
-                sx={{ minWidth: 10, height: 'max-content' }}
-                style={{ height: '64vh' }}
-              >
-                <Grid>
-                  <h3 style={{ color: '#2656A5' }}>Post Secondary Plan</h3>
+          <AppBar position="static">
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              indicatorColor="secondary"
+              textColor="inherit"
+              variant="fullWidth"
+              aria-label="full width tabs example"
+              TabIndicatorProps={{
+                style: {
+                  backgroundColor: '#FFFFFF',
+                  height: '3px',
+                },
+              }}
+            >
+              <Tab label="Education" {...a11yProps(0)} />
+              <Tab label="Goals" {...a11yProps(1)} />
+              <Tab label="Other" {...a11yProps(2)} />
+            </Tabs>
+          </AppBar>
+          <TabPanel value={value} index={0} style={{ overflowY: 'auto' }}>
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid container justifyContent="flex-end">
+                <Grid
+                  item
+                  xs={12}
+                  sx={{ minWidth: 10, height: 'max-content' }}
+                  style={{ height: '64vh' }}
+                >
+                  <Grid>
+                    <h3 style={{ color: '#2656A5' }}>Post Secondary Plan</h3>
 
-                  <TextField
-                    id="text-area-q1"
-                    multiline
-                    fullWidth
-                    maxRows={4}
-                    variant="filled"
-                    defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
-                    label="Plans after college"
-                    onChange={event => setFirst(event.target.value)}
-                    required
-                  />
-                </Grid>
-                <Grid marginTop={2} marginBottom={3}>
-                  <TextField
-                    id="text-area-q1"
-                    multiline
-                    fullWidth
-                    maxRows={4}
-                    variant="filled"
-                    defaultValue="1. Purde, 2. Madison, 3. MIT"
-                    label="Colleges Plan/Applied To"
-                    onChange={event => setFirst(event.target.value)}
-                    required
-                  />
-                </Grid>
-                <Grid>
-                  <TextField
-                    size="small"
-                    className="typing-container"
-                    defaultValue="Northwestern"
-                    label="College First Choice"
-                    onChange={event => setFirst(event.target.value)}
-                    required
-                  />
-                </Grid>
-                <Grid marginTop={1}>
-                  <FormControl variant="standard" sx={{ m: 1, minWidth: 200 }}>
-                    <InputLabel id="demo-simple-select-standard-label">
-                      Have Applied To College
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-standard-label"
-                      id="demo-simple-select-standard"
-                      label="Age"
-                      defaultValue={10}
-                    >
-                      <MenuItem value=""></MenuItem>
-                      <MenuItem value={10}>Yes</MenuItem>
-                      <MenuItem value={20}>No</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-
-                <Grid>
-                  <FormControl variant="standard" sx={{ m: 1, minWidth: 200 }}>
-                    <InputLabel id="demo-simple-select-standard-label">
-                      Started College Essay
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-standard-label"
-                      id="demo-simple-select-standard"
-                      label="Age"
-                      defaultValue={10}
-                    >
-                      <MenuItem value=""></MenuItem>
-                      <MenuItem value={10}>Yes</MenuItem>
-                      <MenuItem value={20}>No</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid>
-                  <FormControl variant="standard" sx={{ m: 1, minWidth: 200 }}>
-                    <InputLabel id="demo-simple-select-standard-label">
-                      Need Help With College Essay
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-standard-label"
-                      id="demo-simple-select-standard"
-                      label="Age"
-                      defaultValue={10}
-                    >
-                      <MenuItem value=""></MenuItem>
-                      <MenuItem value={10}>Yes</MenuItem>
-                      <MenuItem value={20}>No</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-
-                <h3 style={{ color: '#2656A5' }}>
-                  College Entrance Exam Information:
-                </h3>
-                <Grid marginBottom={2}>
-                  <TextField
-                    size="small"
-                    className="typing-container"
-                    defaultValue="35"
-                    label="PACT Score"
-                    type="number"
-                    onChange={event => setFirst(event.target.value)}
-                    required
-                  />
-                  <TextField
-                    size="small"
-                    className="typing-container"
-                    label="PSAT Date"
-                    type="date"
-                    onChange={event => setFirst(event.target.value)}
-                    required
-                  />
-                </Grid>
-                <Grid marginBottom={2}>
-                  <TextField
-                    size="small"
-                    className="typing-container"
-                    defaultValue="35"
-                    label="PSAT Score"
-                    type="number"
-                    onChange={event => setFirst(event.target.value)}
-                    required
-                  />
-                  <TextField
-                    size="small"
-                    className="typing-container"
-                    label="PSAT Date"
-                    type="date"
-                    onChange={event => setFirst(event.target.value)}
-                    required
-                  />
-                </Grid>
-                <Grid marginBottom={2}>
-                  <TextField
-                    size="small"
-                    className="typing-container"
-                    defaultValue="35"
-                    label="ACT Score"
-                    type="number"
-                    onChange={event => setFirst(event.target.value)}
-                    required
-                  />
-                  <TextField
-                    size="small"
-                    className="typing-container"
-                    label="ACT Date"
-                    type="date"
-                    onChange={event => setFirst(event.target.value)}
-                    required
-                  />
-                </Grid>
-                <Grid marginBottom={2}>
-                  <TextField
-                    size="small"
-                    className="typing-container"
-                    defaultValue="35"
-                    label="SAT Score"
-                    type="number"
-                    onChange={event => setFirst(event.target.value)}
-                    required
-                  />
-                  <TextField
-                    size="small"
-                    className="typing-container"
-                    label="SAT Date"
-                    type="date"
-                    onChange={event => setFirst(event.target.value)}
-                    required
-                  />
-                </Grid>
-                <h3 style={{ color: '#2656A5' }}>Financial Aid:</h3>
-                <Grid>
-                  <FormControl variant="standard" sx={{ m: 1, minWidth: 200 }}>
-                    <InputLabel id="demo-simple-select-standard-label">
-                      Completed Finacial Aid Process
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-standard-label"
-                      id="demo-simple-select-standard"
-                      label="Age"
-                      defaultValue={10}
-                    >
-                      <MenuItem value=""></MenuItem>
-                      <MenuItem value={10}>Yes</MenuItem>
-                      <MenuItem value={20}>No</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid>
-                  <FormControl variant="standard" sx={{ m: 1, minWidth: 200 }}>
-                    <InputLabel id="demo-simple-select-standard-label">
-                      Need Help With FAFSA
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-standard-label"
-                      id="demo-simple-select-standard"
-                      label="Age"
-                      defaultValue={20}
-                    >
-                      <MenuItem value=""></MenuItem>
-                      <MenuItem value={10}>Yes</MenuItem>
-                      <MenuItem value={20}>No</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid marginBottom={2}>
-                  <FormControl variant="standard" sx={{ m: 1, minWidth: 200 }}>
-                    <InputLabel id="demo-simple-select-standard-label">
-                      Support Needed
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-standard-label"
-                      id="demo-simple-select-standard"
-                      label="Age"
-                      defaultValue={10}
-                    >
-                      <MenuItem value=""></MenuItem>
-                      <MenuItem value={10}>Yes</MenuItem>
-                      <MenuItem value={20}>No</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Box>
-        </TabPanel>
-        <TabPanel value={value} index={1} style={{ overflowY: 'auto' }}>
-          <Box sx={{ flexGrow: 1 }}>
-            <Grid container justifyContent="flex-end">
-              <Grid item xs={12} style={{ height: '64vh' }}>
-                <GridText>
-                  <h3 style={{ color: '#2656A5' }}>Goal One</h3>
-                  <Grid marginBottom={2}>
                     <TextField
                       id="text-area-q1"
                       multiline
@@ -537,47 +306,40 @@ function SignUpEdit(props) {
                       variant="filled"
                       defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
                       label="Plans after college"
-                      onChange={event => setFirst(event.target.value)}
+                      onChange={(event) => setFirst(event.target.value)}
                       required
                     />
                   </Grid>
-                  <Grid marginBottom={2}>
+                  <Grid marginTop={2} marginBottom={3}>
+                    <TextField
+                      id="text-area-q1"
+                      multiline
+                      fullWidth
+                      maxRows={4}
+                      variant="filled"
+                      defaultValue="1. Purde, 2. Madison, 3. MIT"
+                      label="Colleges Plan/Applied To"
+                      onChange={(event) => setFirst(event.target.value)}
+                      required
+                    />
+                  </Grid>
+                  <Grid>
                     <TextField
                       size="small"
                       className="typing-container"
-                      label="Set Date"
-                      type="date"
-                      onChange={event => setFirst(event.target.value)}
+                      defaultValue="Northwestern"
+                      label="College First Choice"
+                      onChange={(event) => setFirst(event.target.value)}
                       required
                     />
                   </Grid>
-                  <Grid marginBottom={2}>
-                    <TextField
-                      size="small"
-                      className="typing-container"
-                      defaultValue="Responsible-Decision Making"
-                      label="SEL"
-                      onChange={event => setFirst(event.target.value)}
-                      required
-                    />
-                  </Grid>
-                  <Grid marginBottom={2}>
-                    <TextField
-                      size="small"
-                      className="typing-container"
-                      type="date"
-                      label="Review Date"
-                      onChange={event => setFirst(event.target.value)}
-                      required
-                    />
-                  </Grid>
-                  <Grid marginBottom={2}>
+                  <Grid marginTop={1}>
                     <FormControl
                       variant="standard"
                       sx={{ m: 1, minWidth: 200 }}
                     >
                       <InputLabel id="demo-simple-select-standard-label">
-                        Accomplishment State{' '}
+                        Have Applied To College
                       </InputLabel>
                       <Select
                         labelId="demo-simple-select-standard-label"
@@ -586,307 +348,19 @@ function SignUpEdit(props) {
                         defaultValue={10}
                       >
                         <MenuItem value=""></MenuItem>
-                        <MenuItem value={10}>In Progress</MenuItem>
-                        <MenuItem value={20}>Completed</MenuItem>
+                        <MenuItem value={10}>Yes</MenuItem>
+                        <MenuItem value={20}>No</MenuItem>
                       </Select>
                     </FormControl>
                   </Grid>
 
-                  <Grid marginBottom={2}>
-                    <TextField
-                      id="text-area-q1"
-                      multiline
-                      fullWidth
-                      maxRows={4}
-                      variant="filled"
-                      defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
-                      label="Plans after college"
-                      onChange={event => setFirst(event.target.value)}
-                      required
-                    />
-                  </Grid>
-
-                  <h3 style={{ color: '#2656A5' }}>Goal Two</h3>
-                  <Grid marginBottom={2}>
-                    <TextField
-                      id="text-area-q1"
-                      multiline
-                      fullWidth
-                      maxRows={4}
-                      variant="filled"
-                      defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
-                      label="Plans after college"
-                      onChange={event => setFirst(event.target.value)}
-                      required
-                    />
-                  </Grid>
-                  <Grid marginBottom={2}>
-                    <TextField
-                      size="small"
-                      className="typing-container"
-                      label="Set Date"
-                      type="date"
-                      onChange={event => setFirst(event.target.value)}
-                      required
-                    />
-                  </Grid>
-                  <Grid marginBottom={2}>
-                    <TextField
-                      size="small"
-                      className="typing-container"
-                      defaultValue="Responsible-Decision Making"
-                      label="SEL"
-                      onChange={event => setFirst(event.target.value)}
-                      required
-                    />
-                  </Grid>
-                  <Grid marginBottom={2}>
-                    <TextField
-                      size="small"
-                      className="typing-container"
-                      type="date"
-                      label="Review Date"
-                      onChange={event => setFirst(event.target.value)}
-                      required
-                    />
-                  </Grid>
-                  <Grid marginBottom={2}>
-                    <FormControl
-                      variant="standard"
-                      sx={{ m: 1, minWidth: 200 }}
-                    >
-                      <InputLabel id="demo-simple-select-standard-label">
-                        Accomplishment State{' '}
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-standard-label"
-                        id="demo-simple-select-standard"
-                        label="Age"
-                        defaultValue={10}
-                      >
-                        <MenuItem value=""></MenuItem>
-                        <MenuItem value={10}>In Progress</MenuItem>
-                        <MenuItem value={20}>Completed</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Grid>
-
-                  <Grid marginBottom={2}>
-                    <TextField
-                      id="text-area-q1"
-                      multiline
-                      fullWidth
-                      maxRows={4}
-                      variant="filled"
-                      defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
-                      label="Plans after college"
-                      onChange={event => setFirst(event.target.value)}
-                      required
-                    />
-                  </Grid>
-                  <h3 style={{ color: '#2656A5' }}>Goal Three</h3>
-                  <Grid marginBottom={2}>
-                    <TextField
-                      id="text-area-q1"
-                      multiline
-                      fullWidth
-                      maxRows={4}
-                      variant="filled"
-                      defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
-                      label="Plans after college"
-                      onChange={event => setFirst(event.target.value)}
-                      required
-                    />
-                  </Grid>
-                  <Grid marginBottom={2}>
-                    <TextField
-                      size="small"
-                      className="typing-container"
-                      label="Set Date"
-                      type="date"
-                      onChange={event => setFirst(event.target.value)}
-                      required
-                    />
-                  </Grid>
-                  <Grid marginBottom={2}>
-                    <TextField
-                      size="small"
-                      className="typing-container"
-                      defaultValue="Responsible-Decision Making"
-                      label="SEL"
-                      onChange={event => setFirst(event.target.value)}
-                      required
-                    />
-                  </Grid>
-                  <Grid marginBottom={2}>
-                    <TextField
-                      size="small"
-                      className="typing-container"
-                      type="date"
-                      label="Review Date"
-                      onChange={event => setFirst(event.target.value)}
-                      required
-                    />
-                  </Grid>
-                  <Grid marginBottom={2}>
-                    <FormControl
-                      variant="standard"
-                      sx={{ m: 1, minWidth: 200 }}
-                    >
-                      <InputLabel id="demo-simple-select-standard-label">
-                        Accomplishment State{' '}
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-standard-label"
-                        id="demo-simple-select-standard"
-                        label="Age"
-                        defaultValue={10}
-                      >
-                        <MenuItem value=""></MenuItem>
-                        <MenuItem value={10}>In Progress</MenuItem>
-                        <MenuItem value={20}>Completed</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Grid>
-                  <Grid marginBottom={2}>
-                    <TextField
-                      id="text-area-q1"
-                      multiline
-                      fullWidth
-                      maxRows={4}
-                      variant="filled"
-                      defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
-                      label="Plans after college"
-                      onChange={event => setFirst(event.target.value)}
-                      required
-                    />
-                  </Grid>
-                </GridText>
-              </Grid>
-            </Grid>
-          </Box>
-        </TabPanel>
-        <TabPanel value={value} index={2} style={{ overflowY: 'auto' }}>
-          <Box sx={{ flexGrow: 1 }}>
-            <Grid container justifyContent="flex-end">
-              <Grid item xs={12} style={{ height: '64vh' }}>
-                <GridText>
-                  <h3 style={{ color: '#2656A5' }}>Parent Information</h3>
-                  <Grid marginBottom={2}>
-                    <TextField
-                      size="small"
-                      className="typing-container"
-                      defaultValue="Bob Joe"
-                      label="Name"
-                      onChange={event => setFirst(event.target.value)}
-                      required
-                    />
-                  </Grid>
-
-                  <Grid marginBottom={2}>
-                    <TextField
-                      size="small"
-                      className="typing-container"
-                      defaultValue="12345 demo street"
-                      label="Adress"
-                      onChange={event => setFirst(event.target.value)}
-                      required
-                    />
-                  </Grid>
-                  <Grid marginBottom={2}>
-                    <TextField
-                      size="small"
-                      className="typing-container"
-                      defaultValue="40"
-                      label="Apt. #"
-                      onChange={event => setFirst(event.target.value)}
-                      required
-                    />
-                  </Grid>
-                  <Grid marginBottom={2}>
-                    <TextField
-                      size="small"
-                      className="typing-container"
-                      defaultValue="Milwaukee"
-                      label="City"
-                      onChange={event => setFirst(event.target.value)}
-                      required
-                    />
-                  </Grid>
-                  <Grid marginBottom={2}>
-                    <TextField
-                      size="small"
-                      className="typing-container"
-                      defaultValue="WI"
-                      label="State"
-                      onChange={event => setFirst(event.target.value)}
-                      required
-                    />
-                  </Grid>
-                  <Grid marginBottom={2}>
-                    <TextField
-                      size="small"
-                      className="typing-container"
-                      defaultValue="50021"
-                      label="Zip Code"
-                      onChange={event => setFirst(event.target.value)}
-                      required
-                    />
-                  </Grid>
-                  <Grid marginBottom={2}>
-                    <TextField
-                      size="small"
-                      className="typing-container"
-                      defaultValue="312-315-5646"
-                      label="Home Phone"
-                      onChange={event => setFirst(event.target.value)}
-                      required
-                    />
-                  </Grid>
-                  <Grid marginBottom={2}>
-                    <TextField
-                      size="small"
-                      className="typing-container"
-                      defaultValue="314-654-7821"
-                      label="Cell Phone"
-                      onChange={event => setFirst(event.target.value)}
-                      required
-                    />
-                  </Grid>
-                  <Grid marginBottom={2}>
-                    <TextField
-                      size="small"
-                      className="typing-container"
-                      defaultValue="mdijd@gmail.com"
-                      label="Email"
-                      onChange={event => setFirst(event.target.value)}
-                      required
-                    />
-                  </Grid>
-                  <h3 style={{ color: '#2656A5' }}>Guidance Couselor Info:</h3>
-                  <FormControl variant="standard" sx={{ m: 1, minWidth: 200 }}>
-                    <InputLabel id="demo-simple-select-standard-label">
-                      Knows Guidance Cousoler{' '}
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-standard-label"
-                      id="demo-simple-select-standard"
-                      label="Age"
-                      defaultValue={10}
-                    >
-                      <MenuItem value=""></MenuItem>
-                      <MenuItem value={10}>Yes</MenuItem>
-                      <MenuItem value={20}>No</MenuItem>
-                    </Select>
-                  </FormControl>
-                  <h3 style={{ color: '#2656A5' }}>Admin Details:</h3>
                   <Grid>
                     <FormControl
                       variant="standard"
                       sx={{ m: 1, minWidth: 200 }}
                     >
                       <InputLabel id="demo-simple-select-standard-label">
-                        Activity Status{' '}
+                        Started College Essay
                       </InputLabel>
                       <Select
                         labelId="demo-simple-select-standard-label"
@@ -895,98 +369,634 @@ function SignUpEdit(props) {
                         defaultValue={10}
                       >
                         <MenuItem value=""></MenuItem>
-                        <MenuItem value={10}>Active</MenuItem>
-                        <MenuItem value={20}>Inactive</MenuItem>
+                        <MenuItem value={10}>Yes</MenuItem>
+                        <MenuItem value={20}>No</MenuItem>
                       </Select>
                     </FormControl>
                   </Grid>
-                  <FormControl variant="standard" sx={{ m: 1, minWidth: 200 }}>
-                    <InputLabel id="demo-simple-select-standard-label">
-                      Acceptance Status{' '}
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-standard-label"
-                      id="demo-simple-select-standard"
-                      label="Age"
-                      defaultValue={10}
+                  <Grid>
+                    <FormControl
+                      variant="standard"
+                      sx={{ m: 1, minWidth: 200 }}
                     >
-                      <MenuItem value=""></MenuItem>
-                      <MenuItem value={10}>Accepted</MenuItem>
-                      <MenuItem value={20}>Not Accepted</MenuItem>
-                    </Select>
-                  </FormControl>
-                  <h3 style={{ color: '#2656A5' }}>Signatures</h3>
-                  <Grid marginBottom={2}>
-                    <TextField
-                      size="small"
-                      className="typing-container"
-                      defaultValue="Aadi Tiwair"
-                      label="Student Signiture"
-                         
-                
-                      onChange={event => setFirst(event.target.value)}
-                      required
-                    />
-                  </Grid>
-                  <Grid marginBottom={2}>
-                    <TextField
-                      size="small"
-                      className="typing-container"
-                      label="Date Signed"
-                      type="date"
-                         
-              
-                      onChange={event => setFirst(event.target.value)}
-                      required
-                    />
+                      <InputLabel id="demo-simple-select-standard-label">
+                        Need Help With College Essay
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-standard-label"
+                        id="demo-simple-select-standard"
+                        label="Age"
+                        defaultValue={10}
+                      >
+                        <MenuItem value=""></MenuItem>
+                        <MenuItem value={10}>Yes</MenuItem>
+                        <MenuItem value={20}>No</MenuItem>
+                      </Select>
+                    </FormControl>
                   </Grid>
 
+                  <h3 style={{ color: '#2656A5' }}>
+                    College Entrance Exam Information:
+                  </h3>
                   <Grid marginBottom={2}>
                     <TextField
                       size="small"
                       className="typing-container"
-                      defaultValue="John Tiwair"
-                      label="Parent Signiture"
-                         
-                  
-                      onChange={event => setFirst(event.target.value)}
+                      defaultValue="35"
+                      label="PACT Score"
+                      type="number"
+                      onChange={(event) => setFirst(event.target.value)}
                       required
                     />
-                  </Grid>
-                  <Grid marginBottom={2}>
                     <TextField
                       size="small"
                       className="typing-container"
-                      label="Date Signed"
+                      label="PSAT Date"
                       type="date"
-                   
-                  
-                   
-                  
-                      onChange={event => setFirst(event.target.value)}
+                      onChange={(event) => setFirst(event.target.value)}
                       required
                     />
                   </Grid>
-                </GridText>
+                  <Grid marginBottom={2}>
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      defaultValue="35"
+                      label="PSAT Score"
+                      type="number"
+                      onChange={(event) => setFirst(event.target.value)}
+                      required
+                    />
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      label="PSAT Date"
+                      type="date"
+                      onChange={(event) => setFirst(event.target.value)}
+                      required
+                    />
+                  </Grid>
+                  <Grid marginBottom={2}>
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      defaultValue="35"
+                      label="ACT Score"
+                      type="number"
+                      onChange={(event) => setFirst(event.target.value)}
+                      required
+                    />
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      label="ACT Date"
+                      type="date"
+                      onChange={(event) => setFirst(event.target.value)}
+                      required
+                    />
+                  </Grid>
+                  <Grid marginBottom={2}>
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      defaultValue="35"
+                      label="SAT Score"
+                      type="number"
+                      onChange={(event) => setFirst(event.target.value)}
+                      required
+                    />
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      label="SAT Date"
+                      type="date"
+                      onChange={(event) => setFirst(event.target.value)}
+                      required
+                    />
+                  </Grid>
+                  <h3 style={{ color: '#2656A5' }}>Financial Aid:</h3>
+                  <Grid>
+                    <FormControl
+                      variant="standard"
+                      sx={{ m: 1, minWidth: 200 }}
+                    >
+                      <InputLabel id="demo-simple-select-standard-label">
+                        Completed Finacial Aid Process
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-standard-label"
+                        id="demo-simple-select-standard"
+                        label="Age"
+                        defaultValue={10}
+                      >
+                        <MenuItem value=""></MenuItem>
+                        <MenuItem value={10}>Yes</MenuItem>
+                        <MenuItem value={20}>No</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid>
+                    <FormControl
+                      variant="standard"
+                      sx={{ m: 1, minWidth: 200 }}
+                    >
+                      <InputLabel id="demo-simple-select-standard-label">
+                        Need Help With FAFSA
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-standard-label"
+                        id="demo-simple-select-standard"
+                        label="Age"
+                        defaultValue={20}
+                      >
+                        <MenuItem value=""></MenuItem>
+                        <MenuItem value={10}>Yes</MenuItem>
+                        <MenuItem value={20}>No</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid marginBottom={2}>
+                    <FormControl
+                      variant="standard"
+                      sx={{ m: 1, minWidth: 200 }}
+                    >
+                      <InputLabel id="demo-simple-select-standard-label">
+                        Support Needed
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-standard-label"
+                        id="demo-simple-select-standard"
+                        label="Age"
+                        defaultValue={10}
+                      >
+                        <MenuItem value=""></MenuItem>
+                        <MenuItem value={10}>Yes</MenuItem>
+                        <MenuItem value={20}>No</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                </Grid>
               </Grid>
-            </Grid>
-          </Box>
-        </TabPanel>
-        <Grid align="center">
+            </Box>
+          </TabPanel>
+          <TabPanel value={value} index={1} style={{ overflowY: 'auto' }}>
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid container justifyContent="flex-end">
+                <Grid item xs={12} style={{ height: '64vh' }}>
+                  <GridText>
+                    <h3 style={{ color: '#2656A5' }}>Goal One</h3>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        id="text-area-q1"
+                        multiline
+                        fullWidth
+                        maxRows={4}
+                        variant="filled"
+                        defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
+                        label="Plans after college"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        size="small"
+                        className="typing-container"
+                        label="Set Date"
+                        type="date"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        size="small"
+                        className="typing-container"
+                        defaultValue="Responsible-Decision Making"
+                        label="SEL"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        size="small"
+                        className="typing-container"
+                        type="date"
+                        label="Review Date"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+                    <Grid marginBottom={2}>
+                      <FormControl
+                        variant="standard"
+                        sx={{ m: 1, minWidth: 200 }}
+                      >
+                        <InputLabel id="demo-simple-select-standard-label">
+                          Accomplishment State{' '}
+                        </InputLabel>
+                        <Select
+                          labelId="demo-simple-select-standard-label"
+                          id="demo-simple-select-standard"
+                          label="Age"
+                          defaultValue={10}
+                        >
+                          <MenuItem value=""></MenuItem>
+                          <MenuItem value={10}>In Progress</MenuItem>
+                          <MenuItem value={20}>Completed</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Grid>
 
-         
-          <Button variant="contained"  type="Submit">
-            Save
-          </Button>{'   '}
-          <Button variant="contained" onClick={onCancelClick}>
-            Cancel
-          </Button>
-         
-        
-    
-     
-        </Grid>
-         </form>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        id="text-area-q1"
+                        multiline
+                        fullWidth
+                        maxRows={4}
+                        variant="filled"
+                        defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
+                        label="Plans after college"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+
+                    <h3 style={{ color: '#2656A5' }}>Goal Two</h3>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        id="text-area-q1"
+                        multiline
+                        fullWidth
+                        maxRows={4}
+                        variant="filled"
+                        defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
+                        label="Plans after college"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        size="small"
+                        className="typing-container"
+                        label="Set Date"
+                        type="date"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        size="small"
+                        className="typing-container"
+                        defaultValue="Responsible-Decision Making"
+                        label="SEL"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        size="small"
+                        className="typing-container"
+                        type="date"
+                        label="Review Date"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+                    <Grid marginBottom={2}>
+                      <FormControl
+                        variant="standard"
+                        sx={{ m: 1, minWidth: 200 }}
+                      >
+                        <InputLabel id="demo-simple-select-standard-label">
+                          Accomplishment State{' '}
+                        </InputLabel>
+                        <Select
+                          labelId="demo-simple-select-standard-label"
+                          id="demo-simple-select-standard"
+                          label="Age"
+                          defaultValue={10}
+                        >
+                          <MenuItem value=""></MenuItem>
+                          <MenuItem value={10}>In Progress</MenuItem>
+                          <MenuItem value={20}>Completed</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Grid>
+
+                    <Grid marginBottom={2}>
+                      <TextField
+                        id="text-area-q1"
+                        multiline
+                        fullWidth
+                        maxRows={4}
+                        variant="filled"
+                        defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
+                        label="Plans after college"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+                    <h3 style={{ color: '#2656A5' }}>Goal Three</h3>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        id="text-area-q1"
+                        multiline
+                        fullWidth
+                        maxRows={4}
+                        variant="filled"
+                        defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
+                        label="Plans after college"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        size="small"
+                        className="typing-container"
+                        label="Set Date"
+                        type="date"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        size="small"
+                        className="typing-container"
+                        defaultValue="Responsible-Decision Making"
+                        label="SEL"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        size="small"
+                        className="typing-container"
+                        type="date"
+                        label="Review Date"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+                    <Grid marginBottom={2}>
+                      <FormControl
+                        variant="standard"
+                        sx={{ m: 1, minWidth: 200 }}
+                      >
+                        <InputLabel id="demo-simple-select-standard-label">
+                          Accomplishment State{' '}
+                        </InputLabel>
+                        <Select
+                          labelId="demo-simple-select-standard-label"
+                          id="demo-simple-select-standard"
+                          label="Age"
+                          defaultValue={10}
+                        >
+                          <MenuItem value=""></MenuItem>
+                          <MenuItem value={10}>In Progress</MenuItem>
+                          <MenuItem value={20}>Completed</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        id="text-area-q1"
+                        multiline
+                        fullWidth
+                        maxRows={4}
+                        variant="filled"
+                        defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
+                        label="Plans after college"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+                  </GridText>
+                </Grid>
+              </Grid>
+            </Box>
+          </TabPanel>
+          <TabPanel value={value} index={2} style={{ overflowY: 'auto' }}>
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid container justifyContent="flex-end">
+                <Grid item xs={12} style={{ height: '64vh' }}>
+                  <GridText>
+                    <h3 style={{ color: '#2656A5' }}>Parent Information</h3>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        size="small"
+                        className="typing-container"
+                        defaultValue="Bob Joe"
+                        label="Name"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+
+                    <Grid marginBottom={2}>
+                      <TextField
+                        size="small"
+                        className="typing-container"
+                        defaultValue="12345 demo street"
+                        label="Adress"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        size="small"
+                        className="typing-container"
+                        defaultValue="40"
+                        label="Apt. #"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        size="small"
+                        className="typing-container"
+                        defaultValue="Milwaukee"
+                        label="City"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        size="small"
+                        className="typing-container"
+                        defaultValue="WI"
+                        label="State"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        size="small"
+                        className="typing-container"
+                        defaultValue="50021"
+                        label="Zip Code"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        size="small"
+                        className="typing-container"
+                        defaultValue="312-315-5646"
+                        label="Home Phone"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        size="small"
+                        className="typing-container"
+                        defaultValue="314-654-7821"
+                        label="Cell Phone"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        size="small"
+                        className="typing-container"
+                        defaultValue="mdijd@gmail.com"
+                        label="Email"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+                    <h3 style={{ color: '#2656A5' }}>
+                      Guidance Couselor Info:
+                    </h3>
+                    <FormControl
+                      variant="standard"
+                      sx={{ m: 1, minWidth: 200 }}
+                    >
+                      <InputLabel id="demo-simple-select-standard-label">
+                        Knows Guidance Cousoler{' '}
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-standard-label"
+                        id="demo-simple-select-standard"
+                        label="Age"
+                        defaultValue={10}
+                      >
+                        <MenuItem value=""></MenuItem>
+                        <MenuItem value={10}>Yes</MenuItem>
+                        <MenuItem value={20}>No</MenuItem>
+                      </Select>
+                    </FormControl>
+                    <h3 style={{ color: '#2656A5' }}>Admin Details:</h3>
+                    <Grid>
+                      <FormControl
+                        variant="standard"
+                        sx={{ m: 1, minWidth: 200 }}
+                      >
+                        <InputLabel id="demo-simple-select-standard-label">
+                          Activity Status{' '}
+                        </InputLabel>
+                        <Select
+                          labelId="demo-simple-select-standard-label"
+                          id="demo-simple-select-standard"
+                          label="Age"
+                          defaultValue={10}
+                        >
+                          <MenuItem value=""></MenuItem>
+                          <MenuItem value={10}>Active</MenuItem>
+                          <MenuItem value={20}>Inactive</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                    <FormControl
+                      variant="standard"
+                      sx={{ m: 1, minWidth: 200 }}
+                    >
+                      <InputLabel id="demo-simple-select-standard-label">
+                        Acceptance Status{' '}
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-standard-label"
+                        id="demo-simple-select-standard"
+                        label="Age"
+                        defaultValue={10}
+                      >
+                        <MenuItem value=""></MenuItem>
+                        <MenuItem value={10}>Accepted</MenuItem>
+                        <MenuItem value={20}>Not Accepted</MenuItem>
+                      </Select>
+                    </FormControl>
+                    <h3 style={{ color: '#2656A5' }}>Signatures</h3>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        size="small"
+                        className="typing-container"
+                        defaultValue="Aadi Tiwair"
+                        label="Student Signiture"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        size="small"
+                        className="typing-container"
+                        label="Date Signed"
+                        type="date"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+
+                    <Grid marginBottom={2}>
+                      <TextField
+                        size="small"
+                        className="typing-container"
+                        defaultValue="John Tiwair"
+                        label="Parent Signiture"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        size="small"
+                        className="typing-container"
+                        label="Date Signed"
+                        type="date"
+                        onChange={(event) => setFirst(event.target.value)}
+                        required
+                      />
+                    </Grid>
+                  </GridText>
+                </Grid>
+              </Grid>
+            </Box>
+          </TabPanel>
+          <Grid align="center">
+            <Button variant="contained" type="Submit">
+              Save
+            </Button>
+            {'   '}
+            <Button variant="contained" onClick={onCancelClick}>
+              Cancel
+            </Button>
+          </Grid>
+        </form>
       </Box>
     </div>
   );
@@ -1011,12 +1021,10 @@ export default function TabsFunction() {
     console.log('cancel');
   };
 
-  const onSaveClick = event => {
+  const onSaveClick = (event) => {
     saveStudentInfo();
     endEditing();
     event.preventDefault();
-
-    console.log('form submitted ✅');
   };
 
   const onCancelClick = () => {
@@ -1030,9 +1038,6 @@ export default function TabsFunction() {
   };
   const navigate = useNavigate();
   const buttonText = '< Back to table';
-
-
-
 
   return (
     <Grid container>

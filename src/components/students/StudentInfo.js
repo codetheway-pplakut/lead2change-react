@@ -38,21 +38,21 @@ const GridText = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-function DisplayBanner(){
-  return(
+function DisplayBanner() {
+  return (
     <Grid
-    item
-    align="center"
-    style={{
-      backgroundColor: '#2656A5',
-      marginBottom: '3vh',
-      color: '#FFFFFF',
-      padding: '0.1vh',
-    }}
-    sx={{ width: '100%' }}
-  >
-    <h1>Aadi&rsquo;s Details</h1>
-  </Grid>
+      item
+      align="center"
+      style={{
+        backgroundColor: '#2656A5',
+        marginBottom: '3vh',
+        color: '#FFFFFF',
+        padding: '0.1vh',
+      }}
+      sx={{ width: '100%' }}
+    >
+      <h1>Aadi&rsquo;s Details</h1>
+    </Grid>
   );
 }
 
@@ -60,7 +60,6 @@ function SignUpDisplay(props) {
   const { onEditClick } = props;
   return (
     <Grid container>
-     
       <Grid item xs={4}>
         <Paper
           sx={{
@@ -122,7 +121,6 @@ function SignUpDisplay(props) {
           </Grid>
         </Paper>
       </Grid>
-    
     </Grid>
   );
 }
@@ -133,130 +131,146 @@ SignUpDisplay.propTypes = {
 
 function SignUpEdit(props) {
   const { onSaveClick, onCancelClick } = props;
+  const [first, setFirst] = useState('');
   return (
     <Grid container>
-     
-      <Grid >
-        <Paper
-          sx={{
-            backgroundColor: 'dark',
-            '#1A2027': '#fff',
-            textAlign: 'center',
-            color: 'secondary',
-            width: '50vh',
-            mr: '10vh',
-            height: '70vh',
-            overflowY: 'auto',
-          }}
-          style={{ marginLeft: '3vh' }}
-        >
-          <Grid
-            container
-            spacing={0}
-            align="center"
-            justify="center"
-            direction="column"
-            style={{ backgroundColor: '#2656A5', color: '#FFFFFF' }}
-            marginBottom={2}
+      <form onSubmit={onSaveClick}>
+        <Grid>
+          <Paper
+            sx={{
+              backgroundColor: 'dark',
+              '#1A2027': '#fff',
+              textAlign: 'center',
+              color: 'secondary',
+              width: '50vh',
+              mr: '10vh',
+              height: '70vh',
+              overflowY: 'auto',
+            }}
+            style={{ marginLeft: '3vh' }}
           >
-            <h2>Student Info</h2>
-          </Grid>
-          <Grid container style={{ marginLeft: '2vh' }} direction="column">
-            <StudentInfo>
-              <Grid item marginBottom={2} marginTop={1}>
-                <TextField
-                  size="small"
-                  className="typing-container"
-                  defaultValue="Aaditya Tiwari"
-                  label="Name"
-                />
-              </Grid>
-            </StudentInfo>
-            <StudentInfo>
-              <Grid item marginBottom={2}>
-                <TextField
-                  size="small"
-                  className="typing-container"
-                  label="Date of Birth"
-                  type="date"
-                />
-              </Grid>
-            </StudentInfo>
-            <StudentInfo>
-              <Grid item marginBottom={2}>
-                <TextField
-                  size="small"
-                  className="typing-container"
-                  defaultValue="tiwari.aadi@gmail.com"
-                  label="Email Adress"
-                />
-              </Grid>
-            </StudentInfo>
-            <StudentInfo>
-              <Grid item marginBottom={2}>
-                <TextField
-                  size="small"
-                  className="typing-container"
-                  defaultValue="414-244-9848"
-                  label="Phone Number"
-                />
-              </Grid>
-            </StudentInfo>
-            <StudentInfo>
-              <Grid item marginBottom={2}>
-                <TextField
-                  size="small"
-                  className="typing-container"
-                  defaultValue="12345 demo street"
-                  label="Home Adress"
-                />
-              </Grid>
-            </StudentInfo>
-            <StudentInfo>
-              <Grid item marginBottom={2}>
-                <TextField
-                  size="small"
-                  className="typing-container"
-                  defaultValue="42"
-                  label="Apt. #"
-                />
-              </Grid>
-            </StudentInfo>
-            <StudentInfo>
-              <Grid item marginBottom={2}>
-                <TextField
-                  size="small"
-                  className="typing-container"
-                  defaultValue="WI"
-                  label="State"
-                />
-              </Grid>
-            </StudentInfo>
-            <StudentInfo>
-              <Grid item >
-                <TextField
-                  size="small"
-                  className="typing-container"
-                  defaultValue="50021"
-                  label="Zip Code"
-                />
-              </Grid>
-            </StudentInfo>
-          </Grid>
+            <Grid
+              container
+              spacing={0}
+              align="center"
+              justify="center"
+              direction="column"
+              style={{ backgroundColor: '#2656A5', color: '#FFFFFF' }}
+              marginBottom={2}
+            >
+              <h2>Student Info</h2>
+            </Grid>
+            <Grid container style={{ marginLeft: '2vh' }} direction="column">
+              <StudentInfo>
+                <Grid item marginBottom={2} marginTop={1}>
+                  <TextField
+                    size="small"
+                    className="typing-container"
+                    defaultValue="Aaditya Tiwari"
+                    label="Name"
+                    onChange={(event) => setFirst(event.target.value)}
+                    required
+                  />
+                </Grid>
+              </StudentInfo>
+              <StudentInfo>
+                <Grid item marginBottom={2}>
+                  <TextField
+                    size="small"
+                    className="typing-container"
+                    label="Date of Birth"
+                    type="date"
+                    onChange={(event) => setFirst(event.target.value)}
+                    required
+                  />
+                </Grid>
+              </StudentInfo>
+              <StudentInfo>
+                <Grid item marginBottom={2}>
+                  <TextField
+                    size="small"
+                    className="typing-container"
+                    defaultValue="tiwari.aadi@gmail.com"
+                    label="Email Adress"
+                    onChange={(event) => setFirst(event.target.value)}
+                    required
+                  />
+                </Grid>
+              </StudentInfo>
+              <StudentInfo>
+                <Grid item marginBottom={2}>
+                  <TextField
+                    size="small"
+                    className="typing-container"
+                    defaultValue="414-244-9848"
+                    label="Phone Number"
+                    onChange={(event) => setFirst(event.target.value)}
+                    required
+                  />
+                </Grid>
+              </StudentInfo>
+              <StudentInfo>
+                <Grid item marginBottom={2}>
+                  <TextField
+                    size="small"
+                    className="typing-container"
+                    defaultValue="12345 demo street"
+                    label="Home Adress"
+                    onChange={(event) => setFirst(event.target.value)}
+                    required
+                  />
+                </Grid>
+              </StudentInfo>
+              <StudentInfo>
+                <Grid item marginBottom={2}>
+                  <TextField
+                    size="small"
+                    className="typing-container"
+                    defaultValue="42"
+                    label="Apt. #"
+                    onChange={(event) => setFirst(event.target.value)}
+                    required
+                  />
+                </Grid>
+              </StudentInfo>
+              <StudentInfo>
+                <Grid item marginBottom={2}>
+                  <TextField
+                    size="small"
+                    className="typing-container"
+                    defaultValue="WI"
+                    label="State"
+                    onChange={(event) => setFirst(event.target.value)}
+                    required
+                  />
+                </Grid>
+              </StudentInfo>
+              <StudentInfo>
+                <Grid item>
+                  <TextField
+                    size="small"
+                    className="typing-container"
+                    defaultValue="50021"
+                    label="Zip Code"
+                    onChange={(event) => setFirst(event.target.value)}
+                    required
+                  />
+                </Grid>
+              </StudentInfo>
+            </Grid>
 
-          <Grid align="center" marginTop={7}>
-            <Button variant="contained" onClick={onSaveClick}>
-              Save
-            </Button>{'   '}
-            <Button variant="contained" onClick={onCancelClick}>
-              Cancel
-            </Button>
-          </Grid>
-        </Paper>
-        
-      </Grid>
-
-      
+            <Grid align="center" marginTop={7}>
+              <Button variant="contained" type="Submit">
+                Save
+              </Button>
+              {'   '}
+              <Button variant="contained" onClick={onCancelClick}>
+                Cancel
+              </Button>
+            </Grid>
+          </Paper>
+        </Grid>
+      </form>
     </Grid>
   );
 }
@@ -283,6 +297,7 @@ export default function ResponsiveGrid(props) {
   const onSaveClick = () => {
     saveStudentInfo();
     endEditing();
+    event.preventDefault();
   };
 
   const onCancelClick = () => {
@@ -301,8 +316,6 @@ export default function ResponsiveGrid(props) {
 
   const [textInputName, setTextInputName] = useState('');
 
- 
-
   const [message, setMessage] = useState('');
 
   const handleChange = (event) => {
@@ -311,15 +324,15 @@ export default function ResponsiveGrid(props) {
 
   return (
     <Grid container>
-      <DisplayBanner/>
+      <DisplayBanner />
       <Stack direction="row" spacing={2}>
-      {isEditing ? (
-        <SignUpEdit onSaveClick={onSaveClick} onCancelClick={onCancelClick} />
-      ) : (
-        <SignUpDisplay onEditClick={startEditing} />
-      )}
-    <TabsFunction/>
-    </Stack>
+        {isEditing ? (
+          <SignUpEdit onSaveClick={onSaveClick} onCancelClick={onCancelClick} />
+        ) : (
+          <SignUpDisplay onEditClick={startEditing} />
+        )}
+        <TabsFunction />
+      </Stack>
     </Grid>
   );
 }
