@@ -38,12 +38,13 @@ export default function AddCareerModal(props) {
     console.log(careerCluster);
     console.log(specificCareer);
     console.log(technicalCollegeBound);
-    const career =
-      (studentId,
+    const career = {
+      studentId,
       collegeBound,
       careerCluster,
       specificCareer,
-      technicalCollegeBound);
+      technicalCollegeBound,
+    };
     addCareers(career);
   };
 

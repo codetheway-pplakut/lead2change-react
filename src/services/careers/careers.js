@@ -22,7 +22,3 @@ export const getCareers = () => {
 export const getCareersById = (id) => {
   return callApi({ endpoint: `${SERVICE_ROOT}/${id}` });
 };
-
-// add all stuff in here
-// add careers to add career modal
-// addCareer(Career); NOT in return
