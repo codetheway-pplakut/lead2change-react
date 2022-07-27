@@ -27,6 +27,7 @@ export default function CreateCareerModal(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const [id] = useState('');
   const [collegeBound, setCollegeBound] = useState('');
   const [careerCluster, setCareerCluster] = useState('');
   const [specificCareer, setSpecificCareer] = useState('');
@@ -34,7 +35,13 @@ export default function CreateCareerModal(props) {
 
   const Create = () => {
     handleClose();
+    console.log(id);
+    console.log(collegeBound);
+    console.log(careerCluster);
+    console.log(specificCareer);
+    console.log(technicalCollegeBound);
     addFunction(
+      id,
       collegeBound,
       careerCluster,
       specificCareer,
