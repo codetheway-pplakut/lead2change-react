@@ -9,6 +9,8 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
+import { FormControl, FormLabel, FormControlLabel } from '@mui/material';
+import { CheckBox } from '@mui/icons-material';
 
 export default function CreateCareerModal(props) {
   const style = {
@@ -78,16 +80,28 @@ export default function CreateCareerModal(props) {
             </Box>
             <Box>
               <Stack direction="row" spacing={2} sx={{ my: 2 }}>
-                <TextField
+                <Box
                   value={collegeBound}
                   fullWidth
-                  label="Are you College Bound?"
+                  label=""
                   variant="outlined"
                   size="small"
                   onChange={(e) => {
                     setCollegeBound(e.target.value);
                   }}
-                />
+                >
+                  <FormControl>
+                    <FormLabel>
+                      Are you college bound?
+                      <FormControlLabel
+                        control={
+                          <CheckBox name="collegeBoundTrue" value="true" />
+                        }
+                        label="Yes"
+                      />
+                    </FormLabel>
+                  </FormControl>
+                </Box>
                 <TextField
                   value={careerCluster}
                   fullWidth
