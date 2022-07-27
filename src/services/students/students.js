@@ -35,7 +35,7 @@ export const updateStudent = (student) => {
   });
 };
 
-export const unassignStudent = (Ids) => {
+export const unassignStudent = async (Ids) => {
   return callApi({
     body: Ids,
     endpoint: SERVICE_ROOT,
