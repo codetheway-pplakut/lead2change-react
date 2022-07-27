@@ -130,7 +130,8 @@ export default function TabsFunction() {
           >
             <Tab label="Education" {...a11yProps(0)} />
             <Tab label="Goals" {...a11yProps(1)} />
-            <Tab label="Other" {...a11yProps(2)} />
+            <Tab label="Careers" {...a11yProps(2)} />
+            <Tab label="Other" {...a11yProps(3)} />
           </Tabs>
         </AppBar>
         <TabPanel value={value} index={0} style={{ overflowY: 'auto' }}>
@@ -278,6 +279,23 @@ export default function TabsFunction() {
           </Box>
         </TabPanel>
         <TabPanel value={value} index={2} style={{ overflowY: 'auto' }}>
+          <Box sx={{ flexGrow: 1 }}>
+            <Grid container justifyContent="flex-end">
+              <Grid item xs={12} style={{ height: '40vh' }}>
+                <Grid>
+                  <h3 style={{ color: '#2656A5' }}>Career Information</h3>
+                  <h5>I am College Bound: {students.collegeBound}</h5>
+                  <h5>Number of Career Clusters: {students.careerCluster}</h5>
+                  <h5>Career of Choice: {students.specificCluster}</h5>
+                  <h5>
+                    I am Techinical Bound: {students.technicalCollegeBound}
+                  </h5>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Box>
+        </TabPanel>
+        <TabPanel value={value} index={3} style={{ overflowY: 'auto' }}>
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">
               <Grid item xs={12} style={{ height: '64vh' }}>
