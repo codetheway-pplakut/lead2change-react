@@ -15,10 +15,9 @@ import ApiDemo from '../api-demo/api-demo';
 import BasicTabs from '../interview/tabs';
 import Coaches from '../coaches/Coaches';
 import InterviewPage from '../interview/interview-page';
-import Student from '../students/student-test';
+import Student from '../students/students-page';
 import ResponsiveGrid from '../students/StudentInfo';
 import TabsFunction from '../students/detailsTab';
-import MainInfoSidebar from '../students/student-info';
 
 const theme = createTheme();
 
@@ -51,7 +50,7 @@ export default function Root() {
               <Route path={ROUTES.TABS} element={<BasicTabs />} />
               <Route path={ROUTES.COACHES} element={<Coaches />} />
               <Route path={ROUTES.STUDENTS} element={<Student />} />
-              <Route path={ROUTES.STUDENT_INFO} element={<MainInfoSidebar />} />
+              <Route path={ROUTES.STUDENT_INFO} element={<ResponsiveGrid />} />
             </Route>
           </Routes>
         </BrowserRouter>

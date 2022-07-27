@@ -13,13 +13,8 @@ import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
 import { useParams } from 'react-router-dom';
-import StudentListModal from '../coaches/StudentListModal';
-import {
-  getStudents,
-  getStudentById,
-  updateStudent,
-} from '../../services/students/students';
-import { getGoals, addGoal, getGoalById } from '../../services/goals/goals';
+import { getStudentById } from '../../services/students/students';
+import { getGoalById } from '../../services/goals/goals';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
