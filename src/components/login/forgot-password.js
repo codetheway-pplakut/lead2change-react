@@ -36,7 +36,7 @@ function ForgotPassword() {
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
     if (re.test(enteredEmail)) {
-      console.log(enteredEmail);
+      // console.log(enteredEmail);
       setIsError(true);
     } else {
       setIsError(false);

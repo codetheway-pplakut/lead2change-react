@@ -15,7 +15,7 @@ export const addStudent = async (student) => {
   });
 };
 
-export const getStudents = () => {
+export const getStudents = async () => {
   return callApi({ endpoint: SERVICE_ROOT });
 };
 

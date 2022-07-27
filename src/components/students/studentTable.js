@@ -1,45 +1,52 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import * as React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Button from '@mui/material/Button';
 
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
-import Table from '@mui/material/Table';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableBody from '@mui/material/TableBody';
-import TableRow from '@mui/material/TableRow';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import { styled } from '@mui/material/styles';
+import {
+  AppBar,
+  Box,
+  Button,
+  Grid,
+  InputAdornment,
+  Link,
+  Paper,
+  styled,
+  Tab,
+  Tabs,
+  TextField,
+  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  tableCellClasses,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TableSortLabel,
+} from '@mui/material';
 
-import { useNavigate } from 'react-router-dom';
-import AppBar from '@mui/material/AppBar';
+import AddIcon from '@mui/icons-material/Add';
+import SearchIcon from '@mui/icons-material/Search';
+
+import { useNavigate } from 'react-router';
 import ROUTES from '../../constants/routes';
 
+import ProgressIndicatorOverlay from '../progress-indicator-overlay/progress-indicator-overlay';
+
+import CoachAssignModal from './student-assign-coach-modal';
+import StudentModal from './student-modal';
 import {
   getStudents,
   getStudentById,
   updateStudent,
 } from '../../services/students/students';
-
-import StudentModal from './studentModal';
-import StudentRegistryModal from './studentRegistryModal';
-import CoachAssignModal from './student-coach-assign-modal';
-import SearchBar from './searchBar';
-
-import ProgressIndicatorOverlay from '../progress-indicator-overlay/progress-indicator-overlay';
+import { getCoachById } from '../../services/coaches/coaches';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: '#2656A5',
+    backgroundColor: '#004cbb',
     color: theme.palette.common.white,
+    textColor: theme.palette.common.white,
   },
   // [`&.${tableCellClasses.body}`]: { },
 }));
@@ -54,6 +61,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+const StyledButton = styled(Button)({
+  backgroundColor: '#004cbb',
+  '&:hover': {
+    backgroundColor: '#005ade',
+  },
+});
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -67,7 +81,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 0 }}>
-          <Typography>{children}</Typography>
+          <Typography component="span">{children}</Typography>
         </Box>
       )}
     </div>
@@ -94,14 +108,14 @@ const activateHandler = async (studentId) => {
 
 const declineHandler = async (studentId) => {
   const updatedStudent = await getStudentById(studentId);
-  updatedStudent.state = 'Rejected';
+  updatedStudent.state = 'rejected';
   await updateStudent(updatedStudent);
   refreshPage();
 };
 
-const reassignCoachHandler = async (studentId, coachId) => {
+const reassignCoachHandler = async (studentId, coachsId) => {
   const updatedStudent = await getStudentById(studentId);
-  updatedStudent.coachId = coachId;
+  updatedStudent.coachId = coachsId;
   await updateStudent(updatedStudent);
   refreshPage();
 };
@@ -113,19 +127,183 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-function a11yProps(index) {
+function controlTabs(index) {
   return {
     id: `full-width-tab-${index}`,
     'aria-controls': `full-width-tabpanel-${index}`,
   };
 }
 
-export default function StudentTable() {
-  const navigate = useNavigate();
+function stableSort(array, comparator) {
+  const stabilizedThis = array.map((el, index) => [el, index]);
+  stabilizedThis.sort((a, b) => {
+    const order = comparator(a[0], b[0]);
+    if (order !== 0) {
+      return order;
+    }
+    return a[1] - b[1];
+  });
+  return stabilizedThis.map((el) => el[0]);
+}
 
-  const [students, setStudents] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [search, setSearch] = useState('');
+const headCellsActive = [
+  {
+    id: 'lastName',
+    numeric: false,
+    disablePadding: false,
+    label: 'Name',
+  },
+  {
+    id: 'email',
+    numeric: false,
+    disablePadding: false,
+    label: 'Email',
+  },
+  {
+    id: 'studentCellPhone',
+    numeric: false,
+    disablePadding: false,
+    label: 'Phone Number',
+  },
+  {
+    id: 'coach',
+    numeric: false,
+    disablePadding: false,
+    label: 'Coach',
+  },
+  {
+    id: 'deactivate',
+    numeric: false,
+    disablePadding: false,
+    label: '',
+  },
+];
+const headCellsInactive = [
+  {
+    id: 'lastName',
+    numeric: false,
+    disablePadding: false,
+    label: 'Name',
+  },
+  {
+    id: 'email',
+    numeric: false,
+    disablePadding: false,
+    label: 'Email',
+  },
+  {
+    id: 'studentCellPhone',
+    numeric: false,
+    disablePadding: false,
+    label: 'Phone Number',
+  },
+  {
+    id: 'reactivate',
+    numeric: false,
+    disablePadding: false,
+    label: '',
+  },
+  {
+    id: 'empty',
+    numeric: false,
+    disablePadding: false,
+    label: '',
+  },
+];
+const headCellsApplied = [
+  {
+    id: 'lastName',
+    numeric: false,
+    disablePadding: false,
+    label: 'Name',
+  },
+  {
+    id: 'email',
+    numeric: false,
+    disablePadding: false,
+    label: 'Email',
+  },
+  {
+    id: 'studentCellPhone',
+    numeric: false,
+    disablePadding: false,
+    label: 'Phone Number',
+  },
+  {
+    id: 'accept',
+    numeric: false,
+    disablePadding: false,
+    label: 'Accept',
+  },
+  {
+    id: 'reject',
+    numeric: false,
+    disablePadding: false,
+    label: 'Reject',
+  },
+];
+
+function EnhancedTableHead(props) {
+  const { order, orderBy, onRequestSort, headCells } = props;
+  const createSortHandler = (property) => (event) => {
+    onRequestSort(event, property);
+  };
+
+  return (
+    <TableHead>
+      <StyledTableRow>
+        {headCells.map((headCell) => (
+          <StyledTableCell
+            key={headCell.id}
+            align={headCell.numeric ? 'right' : 'left'}
+            padding={headCell.disablePadding ? 'none' : 'normal'}
+            sortDirection={orderBy === headCell.id ? order : false}
+          >
+            <TableSortLabel
+              active={orderBy === headCell.id}
+              direction={orderBy === headCell.id ? order : 'asc'}
+              onClick={createSortHandler(headCell.id)}
+            >
+              {headCell.label}
+            </TableSortLabel>
+          </StyledTableCell>
+        ))}
+      </StyledTableRow>
+    </TableHead>
+  );
+}
+
+EnhancedTableHead.propTypes = {
+  onRequestSort: PropTypes.func.isRequired,
+  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
+  orderBy: PropTypes.string.isRequired,
+  headCells: PropTypes.array.isRequired,
+};
+
+function descendingComparator(a, b, orderBy) {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+  return 0;
+}
+
+function getComparator(order, orderBy) {
+  return order === 'desc'
+    ? (a, b) => descendingComparator(a, b, orderBy)
+    : (a, b) => -descendingComparator(a, b, orderBy);
+}
+
+export default function StudentTable() {
+  const [students, setStudents] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [search, setSearch] = React.useState('');
+
+  const onSearchChange = (value) => {
+    setSearch(value);
+  };
 
   const refreshStudents = async () => {
     setIsLoading(true);
@@ -138,61 +316,239 @@ export default function StudentTable() {
     refreshStudents();
   }, []);
 
-  const [tabValue, setTabValue] = useState(0);
+  const [tabValue, setTabValue] = React.useState(0);
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
+  };
+  const [order, setOrder] = React.useState('asc');
+  const [orderBy, setOrderBy] = React.useState('lastName');
+
+  const handleRequestSort = (event, property) => {
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(property);
+  };
+
+  const navigate = useNavigate();
+
+  const onRegisterClick = () => {
+    navigate(ROUTES.SIGN_UP);
   };
 
   return (
     <Box sx={{ width: '100%', height: '60%' }}>
       <ProgressIndicatorOverlay active={isLoading} />
-      <Grid container spacing={0}>
-        <Box sx={{ bgcolor: 'background.paper', width: '25%' }}>
-          <AppBar position="static">
+      <Grid container spacing={2} sx={{ pr: '2vh' }}>
+        <Grid item xs={3}>
+          <AppBar
+            position="static"
+            sx={{
+              bgcolor: '#004cbb',
+              mt: '2vh',
+              ml: '0.5vh',
+              borderTopLeftRadius: 5,
+              borderTopRightRadius: 5,
+            }}
+            width="3vh"
+          >
             <Tabs
               value={tabValue}
               onChange={handleTabChange}
               textColor="inherit"
-              variant="fullWidth"
               TabIndicatorProps={{
-                style: {
-                  backgroundColor: '#FFFFFF',
-                  height: '3px',
-                },
+                style: { transition: 'none', background: '#004cbb' },
               }}
+              variant="fullWidth"
             >
-              <Tab label="Active" {...a11yProps(0)} />
-              <Tab label="Inactive" {...a11yProps(1)} />
-              <Tab label="Applicants" {...a11yProps(2)} />
+              <Tab
+                label="Active"
+                {...controlTabs(0)}
+                sx={{
+                  borderRight: 1,
+                  borderBottom: 2,
+                  borderColor: '#6f8abd',
+                }}
+                disableRipple
+              />
+              <Tab
+                label="Inactive"
+                {...controlTabs(1)}
+                sx={{
+                  borderRight: 1,
+                  borderLeft: 1,
+                  borderBottom: 2,
+                  borderColor: '#6f8abd',
+                }}
+                disableRipple
+              />
+              <Tab
+                label="Applicants"
+                {...controlTabs(2)}
+                sx={{
+                  borderLeft: 1,
+                  borderBottom: 2,
+                  borderColor: '#6f8abd',
+                }}
+                disableRipple
+              />
             </Tabs>
           </AppBar>
-        </Box>
-        <Grid item xs={3} />
-        <Grid item xs={4}>
-          <Box>
-            <SearchBar setSearch={setSearch} />
-          </Box>
         </Grid>
-        <Grid item xs={2}>
-          <StudentRegistryModal />
+        <Grid item xs={8} align="right">
+          <TextField
+            value={search}
+            placeholder="Search..."
+            variant="outlined"
+            size="small"
+            margin="normal"
+            align="right"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+            onChange={(event) => {
+              onSearchChange(event.target.value);
+            }}
+          />
+        </Grid>
+        <Grid item xs={1} align="left">
+          <StyledButton
+            variant="contained"
+            startIcon={<AddIcon />}
+            sx={{ mt: '2vh' }}
+            onClick={onRegisterClick}
+          >
+            Student
+          </StyledButton>
         </Grid>
       </Grid>
       <TabPanel value={tabValue} index={0}>
-        <TableContainer component={Paper} sx={{ height: '69vh' }}>
+        <TableContainer component={Paper} sx={{ height: '68vh' }}>
           <Table sx={{ minWidth: 10 }} stickyHeader>
-            <TableHead>
-              <StyledTableRow>
-                <StyledTableCell>Name</StyledTableCell>
-                <StyledTableCell align="left">Email</StyledTableCell>
-                <StyledTableCell align="left">Phone Number</StyledTableCell>
-                <StyledTableCell align="left">Coach</StyledTableCell>
-                <StyledTableCell align="left"> </StyledTableCell>
-              </StyledTableRow>
-            </TableHead>
+            <EnhancedTableHead
+              order={order}
+              orderBy={orderBy}
+              onRequestSort={handleRequestSort}
+              headCells={headCellsActive}
+            />
             <TableBody>
-              {students
+              {stableSort(students, getComparator(order, orderBy))
                 .filter((post) => {
                   if (post.state === 'active') {
+                    if (search === '') {
+                      return post;
+                    }
+                    if (
+                      post.firstName
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.lastName.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.email !== null &&
+                      post.email.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.studentCellPhone !== null &&
+                      post.studentCellPhone
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.coachId !== null &&
+                      getCoachById(post.coachId).coachFirstName !== undefined &&
+                      getCoachById(post.coachId)
+                        .coachFirstName.toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.coachId !== null &&
+                      getCoachById(post.coachId).coachFirstName !== undefined &&
+                      getCoachById(post.coachId)
+                        .coachLastName.toLowerCase()
+                        .includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                    if (
+                      post.coachId === null &&
+                      'unassigned'.includes(search.toLowerCase())
+                    ) {
+                      return post;
+                    }
+                  }
+                  return null;
+                })
+                .map((student) => {
+                  return (
+                    <StyledTableRow tabIndex={0} key={student.id}>
+                      <StyledTableCell>
+                        <Link
+                          onClick={() => navigate(`/StudentInfo/${student.id}`)}
+                        >
+                          {student.lastName}, {student.firstName}
+                        </Link>
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {student.email}
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {student.studentCellPhone}
+                      </StyledTableCell>
+                      <StyledTableCell>
+                        <CoachAssignModal
+                          confirmHandler={reassignCoachHandler}
+                          studentId={student.id}
+                          coachId={student.coachId}
+                        />
+                      </StyledTableCell>
+                      <StyledTableCell>
+                        <Grid container spacing={2}>
+                          <Grid item>
+                            <StudentModal
+                              modalType="deactivate"
+                              studentId={student.id}
+                              confirmHandler={deactivateHandler}
+                            />
+                          </Grid>
+                        </Grid>
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  );
+                })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </TabPanel>
+
+      <TabPanel value={tabValue} index={1}>
+        <TableContainer component={Paper} sx={{ height: '68vh' }}>
+          <Table sx={{ minWidth: 10 }} stickyHeader>
+            <EnhancedTableHead
+              order={order}
+              orderBy={orderBy}
+              onRequestSort={handleRequestSort}
+              headCells={headCellsInactive}
+            />
+            <TableBody>
+              {stableSort(students, getComparator(order, orderBy))
+                .filter((post) => {
+                  if (post.state === 'inactive') {
                     if (search === '') {
                       return post;
                     }
@@ -225,143 +581,56 @@ export default function StudentTable() {
                   }
                   return null;
                 })
+                .map((student) => {
+                  return (
+                    <StyledTableRow tabIndex={0} key={student.id}>
+                      <StyledTableCell>
+                        <Link
+                          onClick={() => navigate(`/StudentInfo/${student.id}`)}
+                        >
+                          {student.lastName}, {student.firstName}
+                        </Link>
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {student.email}
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {student.studentCellPhone}
+                      </StyledTableCell>
 
-                .map((student) => (
-                  <StyledTableRow
-                    key={student.id}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  >
-                    <StyledTableCell component="th" scope="row">
-                      <Link
-                        component="button"
-                        variant="body2"
-                        onClick={() => navigate(`/StudentInfo/${student.id}`)}
-                      >
-                        {student.lastName}, {student.firstName}
-                      </Link>
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {student.email || '--'}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {student.studentCellPhone || '--'}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      <CoachAssignModal
-                        confirmHandler={reassignCoachHandler}
-                        studentId={student.id}
-                        coachId={student.coachId}
-                      />
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      <StudentModal
-                        modalType="deactivate"
-                        studentId={student.id}
-                        confirmHandler={deactivateHandler}
-                      />
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </TabPanel>
-
-      <TabPanel value={tabValue} index={1}>
-        <TableContainer component={Paper} sx={{ height: '69vh' }}>
-          <Table sx={{ minWidth: 10 }}>
-            <TableHead>
-              <StyledTableRow>
-                <StyledTableCell>Name </StyledTableCell>
-                <StyledTableCell align="left">Email</StyledTableCell>
-                <StyledTableCell align="left">Phone Number</StyledTableCell>
-                <StyledTableCell align="left"> </StyledTableCell>
-              </StyledTableRow>
-            </TableHead>
-            <TableBody>
-              {students
-                .filter((post) => {
-                  if (post.state.includes('inactive')) {
-                    if (search === '') {
-                      return post;
-                    }
-                    if (
-                      post.firstName
-                        .toLowerCase()
-                        .includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                    if (
-                      post.lastName.toLowerCase().includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                    if (
-                      post.email.toLowerCase().includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                    if (
-                      post.studentCellPhone
-                        .toLowerCase()
-                        .includes(search.toLowerCase())
-                    ) {
-                      return post;
-                    }
-                  }
-                  return null;
-                })
-                .map((student) => (
-                  <StyledTableRow
-                    key={student.id}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  >
-                    <StyledTableCell component="th" scope="row">
-                      <Link
-                        component="button"
-                        variant="body2"
-                        onClick={() => navigate(`/StudentInfo/${student.id}`)}
-                      >
-                        {student.lastName}, {student.firstName}
-                      </Link>
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {student.email || '--'}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {student.studentCellPhone || '--'}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      <StudentModal
-                        modalType="reactivate"
-                        studentId={student.id}
-                        confirmHandler={activateHandler}
-                      />
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))}
+                      <StyledTableCell />
+                      <StyledTableCell>
+                        <Grid container spacing={2}>
+                          <Grid item>
+                            <StudentModal
+                              modalType="reactivate"
+                              studentId={student.id}
+                              confirmHandler={activateHandler}
+                            />
+                          </Grid>
+                        </Grid>
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  );
+                })}
             </TableBody>
           </Table>
         </TableContainer>
       </TabPanel>
 
       <TabPanel value={tabValue} index={2}>
-        <TableContainer component={Paper} sx={{ height: '69vh' }}>
-          <Table sx={{ minWidth: 10 }}>
-            <TableHead>
-              <StyledTableRow>
-                <StyledTableCell>Name </StyledTableCell>
-                <StyledTableCell align="left">Email</StyledTableCell>
-                <StyledTableCell align="left">Phone Number</StyledTableCell>
-                <StyledTableCell align="left"> </StyledTableCell>
-                <StyledTableCell align="left"> </StyledTableCell>
-              </StyledTableRow>
-            </TableHead>
+        <TableContainer component={Paper} sx={{ height: '68vh' }}>
+          <Table sx={{ minWidth: 10 }} stickyHeader>
+            <EnhancedTableHead
+              order={order}
+              orderBy={orderBy}
+              onRequestSort={handleRequestSort}
+              headCells={headCellsApplied}
+            />
             <TableBody>
-              {students
+              {stableSort(students, getComparator(order, orderBy))
                 .filter((post) => {
-                  if (post.state.includes('applied')) {
+                  if (post.state === 'applied') {
                     if (search === '') {
                       return post;
                     }
@@ -378,11 +647,13 @@ export default function StudentTable() {
                       return post;
                     }
                     if (
+                      post.email !== null &&
                       post.email.toLowerCase().includes(search.toLowerCase())
                     ) {
                       return post;
                     }
                     if (
+                      post.studentCellPhone !== null &&
                       post.studentCellPhone
                         .toLowerCase()
                         .includes(search.toLowerCase())
@@ -392,42 +663,47 @@ export default function StudentTable() {
                   }
                   return null;
                 })
-                .map((student) => (
-                  <StyledTableRow
-                    key={student.id}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  >
-                    <StyledTableCell component="th" scope="row">
-                      <Link
-                        component="button"
-                        variant="body2"
-                        onClick={() => navigate(`/StudentInfo/${student.id}`)}
-                      >
-                        {student.lastName}, {student.firstName}
-                      </Link>
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {student.email || '--'}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {student.studentCellPhone || '--'}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      <StudentModal
-                        modalType="accept"
-                        confirmHandler={activateHandler}
-                        studentId={student.id}
-                      />
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      <StudentModal
-                        modalType="decline"
-                        confirmHandler={declineHandler}
-                        studentId={student.id}
-                      />
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))}
+                .map((student) => {
+                  return (
+                    <StyledTableRow tabIndex={0} key={student.id}>
+                      <StyledTableCell>
+                        <Link
+                          onClick={() => navigate(`/StudentInfo/${student.id}`)}
+                        >
+                          {student.lastName}, {student.firstName}
+                        </Link>
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {student.email}
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {student.studentCellPhone}
+                      </StyledTableCell>
+                      <StyledTableCell>
+                        <Grid container spacing={2}>
+                          <Grid item>
+                            <StudentModal
+                              modalType="accept"
+                              studentId={student.id}
+                              confirmHandler={activateHandler}
+                            />
+                          </Grid>
+                        </Grid>
+                      </StyledTableCell>
+                      <StyledTableCell>
+                        <Grid container spacing={2}>
+                          <Grid item>
+                            <StudentModal
+                              modalType="decline"
+                              studentId={student.id}
+                              confirmHandler={declineHandler}
+                            />
+                          </Grid>
+                        </Grid>
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  );
+                })}
             </TableBody>
           </Table>
         </TableContainer>

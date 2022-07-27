@@ -13,14 +13,8 @@ import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
 import { useParams } from 'react-router-dom';
-import StudentListModal from '../coaches/StudentListModal';
-import {
-  getStudents,
-  getStudentById,
-  updateStudent,
-} from '../../services/students/students';
-import { getGoals, addGoal, getGoalById } from '../../services/goals/goals';
-import GoalRegistryModal from './goalModal';
+import { getStudentById } from '../../services/students/students';
+import { getGoalById } from '../../services/goals/goals';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -113,7 +107,6 @@ export default function TabsFunction() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  console.log(goals);
 
   return (
     <div style={{ marginRight: '8vh' }}>
@@ -245,21 +238,17 @@ export default function TabsFunction() {
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">
               <Grid item xs={12} style={{ height: '64vh' }}>
-                <Grid>
-                  <GoalRegistryModal addFunction={newGoal} />
+                <GridText>
                   <h3 style={{ color: '#2656A5' }}>Goal One</h3>
-                  <h5>Goal: {goals.collegeBound}</h5>
-                  <h5>Goal Set Date: 3/20/22</h5>
-                  <h5>SEL: Responsible-Decision Making</h5>
-                  <h5>Goal Review Date: 3/20/23</h5>
+                  <h5>Goal: {goals.goalSet}</h5>
+                  <h5>Goal Set Date: {goals.dateGoalSet}</h5>
+                  <h5>SEL: {goals.sel}</h5>
+                  <h5>Goal Review Date:{goals.goalReviewDate}</h5>
                   <h5>
                     Accomplishment State:
-                    <p>In progress</p>
+                    <p>{goals.wasItAccomplished}</p>
                   </h5>
-                  <h5>
-                    Explanation: Joined multiple clubs, trying to establish a
-                    role and get a leadership position
-                  </h5>
+                  <h5>Explanation: {goals.explanation}</h5>
                   <h3 style={{ color: '#2656A5' }}>Goal Two</h3>
                   <h5>Goal: Make it onto the Varsity Tennis Team</h5>
                   <h5>Goal Set Date: 11/22/21</h5>
