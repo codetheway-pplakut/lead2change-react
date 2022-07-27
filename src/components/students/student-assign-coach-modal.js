@@ -42,7 +42,7 @@ const StyledRadio = styled(Radio)({
 export default function CoachAssignModal(props) {
   const { confirmHandler, studentId, coachId } = props;
   const [coaches, setCoaches] = React.useState([]);
-  const [value, setValue] = React.useState('Unassigned');
+  const [value, setValue] = React.useState(coachId);
   const [newCoachId, setNewCoachId] = React.useState('');
   const refreshCoaches = async () => {
     const response = await getCoaches();
