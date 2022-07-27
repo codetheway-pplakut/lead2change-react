@@ -16,6 +16,7 @@ import {
   Select,
   MenuItem,
   Stack,
+  Alert,
 } from '@mui/material';
 import { addCareers } from '../../services/careers/careers';
 import ColorButton from '../coaches/Shared/ColoredButton';
@@ -27,20 +28,25 @@ export default function AddCareerModal(props) {
   const handleClose = () => setOpen(false);
 
   const [collegeBound, setCollegeBound] = useState(false);
-  const [careerCluster, setCareerCluster] = useState(3);
+  const [careerCluster, setCareerCluster] = useState(0);
   const [specificCareer, setSpecificCareer] = useState('');
   const [technicalCollegeBound, setTechnicalCollegeBound] = useState(false);
 
   const Complete = () => {
     handleClose();
-    const career = {
-      studentId,
-      collegeBound,
-      careerCluster,
-      specificCareer,
-      technicalCollegeBound,
-    };
-    addCareers(career);
+    if (specificCareer && careerCluster > 0) {
+      const career = {
+        studentId,
+        collegeBound,
+        careerCluster,
+        specificCareer,
+        technicalCollegeBound,
+      };
+      addCareers(career);
+      <Alert severity="success">The Career Was Sucessfully Submitted</Alert>;
+    } else {
+      <Alert severity="error">The Career Was Sucessfully Submitted</Alert>;
+    }
   };
 
   return (
@@ -145,6 +151,7 @@ export default function AddCareerModal(props) {
                             setCareerCluster(e.target.value);
                           }}
                         >
+                          <MenuItem value={0}>Select a career cluster</MenuItem>
                           <MenuItem value={1}>
                             Agriculture, Food &#38; Natural Resources
                           </MenuItem>
