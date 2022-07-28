@@ -26,24 +26,31 @@ export default function EditCoachModal(props) {
   );
   const [enteredEmail, setEnteredEmail] = React.useState(coach.coachEmail);
   const Edit = () => {
-    handleClose();
-    if (coach.students === null) {
-      coach.students = [];
+    if (
+      enteredEmail.includes('@') &&
+      enteredFirstName.length > 0 &&
+      enteredLastName.length > 0 &&
+      enteredPhoneNumber.length > 0
+    ) {
+      handleClose();
+      if (coach.students === null) {
+        coach.students = [];
+      }
+      const updatedCoach = {
+        id: coach.id, // TODO : Update to agreed ID creation method
+        coachFirstName: enteredFirstName,
+        coachLastName: enteredLastName,
+        coachEmail: enteredEmail,
+        coachPhoneNumber: enteredPhoneNumber,
+        students: coach.students,
+        active: coach.active,
+      };
+      updateFunction(updatedCoach);
     }
-    const updatedCoach = {
-      id: coach.id, // TODO : Update to agreed ID creation method
-      coachFirstName: enteredFirstName,
-      coachLastName: enteredLastName,
-      coachEmail: enteredEmail,
-      coachPhoneNumber: enteredPhoneNumber,
-      students: coach.students,
-      active: coach.active,
-    };
-    updateFunction(updatedCoach);
   };
   return (
     <div>
-      <IconButton sx={{ color: '#004cbb' }} size="small" onClick={handleOpen}>
+      <IconButton sx={{ color: '#2656A5' }} size="small" onClick={handleOpen}>
         <EditIcon />
       </IconButton>
       <Modal
@@ -53,7 +60,7 @@ export default function EditCoachModal(props) {
       >
         <Grid variant="large">
           <Grid container>
-            <Grid item sx={{ bgcolor: '#004cbb', color: 'white' }} xs={12}>
+            <Grid item sx={{ bgcolor: '#2656A5', color: 'white' }} xs={12}>
               <Grid container alignItems="center" sx={{ margin: 1 }}>
                 <Grid item xs={2} />
                 <Grid item xs={8}>
@@ -81,6 +88,10 @@ export default function EditCoachModal(props) {
               <Grid container spacing={1} sx={{ p: 2 }} justifyContent="center">
                 <Grid item xs={6}>
                   <TextField
+                    helperText={
+                      enteredFirstName.length < 1 ? 'Enter First Name' : ' '
+                    }
+                    error={enteredFirstName.length < 1}
                     value={enteredFirstName}
                     fullWidth
                     label="First Name"
@@ -94,6 +105,10 @@ export default function EditCoachModal(props) {
 
                 <Grid item xs={6}>
                   <TextField
+                    helperText={
+                      enteredLastName.length < 1 ? 'Enter Last Name' : ' '
+                    }
+                    error={enteredLastName.length < 1}
                     value={enteredLastName}
                     fullWidth
                     label="Last Name"
@@ -106,6 +121,12 @@ export default function EditCoachModal(props) {
                 </Grid>
                 <Grid item xs={14}>
                   <TextField
+                    error={!enteredEmail.includes('@')}
+                    helperText={
+                      !enteredEmail.includes('@')
+                        ? 'Must contain an @ sign.'
+                        : ' '
+                    }
                     value={enteredEmail}
                     fullWidth
                     label="Email"
@@ -118,13 +139,19 @@ export default function EditCoachModal(props) {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
+                    error={enteredPhoneNumber.length < 1}
+                    helperText={
+                      enteredPhoneNumber.length < 1
+                        ? 'Enter a Phone Number'
+                        : ' '
+                    }
                     value={enteredPhoneNumber}
                     fullWidth
                     label="Phone Number"
                     variant="outlined"
                     size="small"
                     onChange={(e) => {
-                      setEnteredPhoneNumber(e.target.value);
+                      setEnteredPhoneNumber(e.target.value.replace(' ', '-'));
                     }}
                   />
                 </Grid>
