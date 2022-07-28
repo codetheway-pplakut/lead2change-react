@@ -9,6 +9,7 @@ import TableHead from '@mui/material/TableHead';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
+import Stack from '@mui/material/Stack';
 import DeleteAdminModal from './deleteAdminModal';
 import RegisterAdminModal from './registerAdminModal';
 import SearchBar from './SearchBar';
@@ -54,16 +55,18 @@ export default function AdminTable() {
     >
       <ProgressIndicatorOverlay active={isLoading} />
 
-      <Box sx={{ mt: '10px', mb: '10px' }}>
-        <Grid container alignItems="center" spacing={1}>
-          <Grid item xs={10} align="right">
-            <SearchBar setSearch={setSearch} />
-          </Grid>
-          <Grid item xs={2} align="right" padding={2}>
-            <RegisterAdminModal />
-          </Grid>
+      <Grid container>
+        <Grid item sm={12} md={12} lg={12} xl={12}>
+          <Box display="flex" justifyContent="flex-end">
+            <Stack direction="row" spacing={0} alignItems="center">
+              <SearchBar setSearch={setSearch} />
+              <div sx={{ minWidth: '200px' }}>
+                <RegisterAdminModal inWidth="1200px" />
+              </div>
+            </Stack>
+          </Box>
         </Grid>
-      </Box>
+      </Grid>
 
       <TableContainer sx={tablePositioning}>
         <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" stickyHeader>
