@@ -65,14 +65,8 @@ export default function InterviewPage() {
     const response = await getInterviewsById(
       'b0ba6354-eb97-49b1-a030-08da6b234c0f'
     );
-    // setIsLoading(false);
-    // setInterview(response);
-    // console.log(response);
-    // response.questions.map((question) => {
-    //   // console.log(question.questionString);
-    //   // console.log(question.answerString);
-    // });
   };
+
   useEffect(() => {
     refreshInterview();
   }, []);

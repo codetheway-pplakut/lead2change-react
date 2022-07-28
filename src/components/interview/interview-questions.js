@@ -10,7 +10,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { Button } from '@mui/material';
 
-import { getInterviewsById } from '../../services/interviews/interview';
+import { createInterview } from '../../services/interviews/interview';
 
 export default function InterviewQuestions() {
   const [interviewIdealCareer, setinterviewIdealCareer] = useState('');
@@ -67,7 +67,7 @@ export default function InterviewQuestions() {
       interviewTryingNewThings,
       interviewCommitToActivities,
     };
-    getInterviewsById(interview);
+    createInterview(interview);
   };
 
   // const [selectedValue, setSelectedValue] = React.useState('a');
@@ -504,6 +504,22 @@ export default function InterviewQuestions() {
         <Button
           variant="contained"
           onClick={Save}
+          value={{
+            interviewIdealCareer,
+            interviewPersonalStrengths,
+            interviewImportantWord,
+            interviewOvercomeDifficulty,
+            interviewOtherCommitments,
+            interviewSacrificeTime,
+            interviewPostHighSchoolCoaching,
+            interviewScheduleManagement,
+            interviewCommunicateWithMentors,
+            interviewDiverseClass,
+            interviewOpenMinded,
+            interviewProfessionalRepresentation,
+            interviewTryingNewThings,
+            interviewCommitToActivities,
+          }}
           style={{
             backgroundColor: '#004cbb',
           }}
