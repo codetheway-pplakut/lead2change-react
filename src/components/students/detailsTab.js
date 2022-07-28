@@ -83,7 +83,9 @@ function SignUpDisplay(props) {
 
   return (
     <div style={{ marginRight: '8vh' }}>
-      <Box sx={{ bgcolor: 'background.paper', width: '100vh' }}>
+      <Box
+        sx={{ bgcolor: 'background.paper', width: '100vh', overflowY: 'auto' }}
+      >
         <AppBar position="static">
           <Tabs
             value={value}
