@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import {
   Button,
   Grid,
@@ -7,15 +8,17 @@ import {
   FormControl,
   Modal,
   TextField,
+  Container,
 } from '@mui/material';
+import { requestReset } from '../../services/users/users';
 
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  minWidth: '750px',
-  width: '50%',
+  minWidth: '500px',
+  width: '40%',
   bgcolor: 'background.paper',
   boxShadow: 12,
   // p: 4,
@@ -28,15 +31,18 @@ function ForgotPassword() {
   const handleClose = () => setOpen(false);
   const [enteredEmail, setEmail] = useState('');
 
-  const emailHandler = (event) => {
+  const emailHandler = async (event) => {
     // const validRegex = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.(com|edu|org)$/i; old /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
     event.preventDefault();
 
     const re =
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if (re.test(enteredEmail)) {
       console.log(enteredEmail);
+      await requestReset(enteredEmail);
+      console.log('Test');
+
       setIsError(true);
     } else {
       setIsError(false);
@@ -50,80 +56,77 @@ function ForgotPassword() {
   };
 
   return (
-    <>
-      <Button onClick={handleOpen}>Forgot Password?</Button>
-      <Modal
-        open={open}
-        onClose={reset}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+    <Container maxWidth="sm">
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
       >
-        <Box sx={style}>
-          <Grid container>
-            <Grid
-              item
-              sx={{ bgcolor: '#004cbb', color: 'white', mt: -4 }}
-              xs={12}
-            >
-              <Grid container>
-                <Grid item xs={2} />
-                <Grid item xs={8} sx={{ m: 2 }}>
-                  <Typography variant="h5" component="h2" align="center">
-                    Reset Password
-                  </Typography>
+        <Button onClick={handleOpen}>Forgot Password?</Button>
+        <Modal
+          open={open}
+          onClose={reset}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Grid container>
+              <Grid
+                item
+                sx={{ bgcolor: '#004cbb', color: 'white', mt: -4 }}
+                xs={12}
+              >
+                <Grid container>
+                  <Grid item xs={2} />
+                  <Grid item xs={8} sx={{ m: 2, pr: 4 }}>
+                    <Typography variant="h5" component="h2" align="center">
+                      Reset Password
+                    </Typography>
+                  </Grid>
                 </Grid>
-                {/* <Grid item sx={{ margin: 1.5 }}>
-                  <IconButton
-                    align="right"
-                    size="medium"
-                    onClick={handleClose}
-                    sx={{ color: 'white' }}
-                  >
-                    <CloseOutlinedIcon />
-                  </IconButton>
-                </Grid> */}
               </Grid>
             </Grid>
-          </Grid>
-          {/* <Typography
-            id="modal-modal-title"
-            variant="h6"
-            component="h2"
-            color="#004cbb"
-          >
-            Forgot Password?
-          </Typography> */}
-          <Typography id="modal-modal-description" sx={{ mt: 2, ml: 3 }}>
-            Please enter your email for password recovery:
-          </Typography>
-          <Grid item xs={6}>
-            <FormControl sx={{ bgcolor: 'common.white', mt: 1, mb: 2, ml: 3 }}>
-              {isError ? (
-                <TextField
-                  label="Email Address"
-                  required
-                  value={enteredEmail}
-                  onChange={(event) => setEmail(event.target.value)}
-                />
-              ) : (
-                <TextField
-                  error
-                  id="outlined-error-helper-text"
-                  label="Error"
-                  defaultValue="Hello World"
-                  helperText="Invaild Email Address."
-                  value={enteredEmail}
-                  onChange={(event) => setEmail(event.target.value)}
-                />
-              )}
-            </FormControl>
-          </Grid>
-          <Grid item xs={6} sx={{ ml: 3, mb: 2 }}>
-            <Button onClick={emailHandler}>Send email</Button>
-          </Grid>
-        </Box>
-      </Modal>
-    </>
+
+            <Typography
+              id="modal-modal-description"
+              align="center"
+              sx={{ mt: 1, ml: 3, pr: 4 }}
+            >
+              Please enter your email for password recovery
+            </Typography>
+            <Grid item align="center" xs={6}>
+              <FormControl
+                sx={{ bgcolor: 'common.white', mt: 3, mb: 2, ml: 3, pr: 4 }}
+              >
+                {isError ? (
+                  <TextField
+                    label="Email Address"
+                    required
+                    value={enteredEmail}
+                    onChange={(event) => setEmail(event.target.value)}
+                  />
+                ) : (
+                  <TextField
+                    error
+                    id="outlined-error-helper-text"
+                    label="Error"
+                    defaultValue="Hello World"
+                    helperText="Invaild Email Address."
+                    value={enteredEmail}
+                    onChange={(event) => setEmail(event.target.value)}
+                  />
+                )}
+              </FormControl>
+            </Grid>
+            <Grid item align="center" xs={6} sx={{ ml: 3, mb: 2, pr: 4 }}>
+              <Button onClick={emailHandler}>Send email</Button>
+            </Grid>
+          </Box>
+        </Modal>
+      </Box>
+    </Container>
   );
 }
 
