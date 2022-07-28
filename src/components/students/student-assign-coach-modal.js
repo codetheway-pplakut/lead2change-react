@@ -87,11 +87,6 @@ export default function CoachAssignModal(props) {
     setNewCoachId(value);
   };
 
-  const getCoachNameById = (id) => {
-    const thisCoach = coaches.find((coach) => coach.id === id);
-    return thisCoach;
-  };
-
   let denySubmit = true;
   if (newCoachId !== '') {
     denySubmit = false;

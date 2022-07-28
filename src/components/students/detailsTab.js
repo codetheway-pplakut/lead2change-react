@@ -1,7 +1,3 @@
-/* eslint-disable no-restricted-globals */
-/* eslint-disable react/require-default-props */
-/* eslint-disable react/self-closing-comp */
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect } from 'react';
 import { TextField } from '@mui/material';
 import PropTypes from 'prop-types';
@@ -14,19 +10,17 @@ import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import NativeSelect from '@mui/material/NativeSelect';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import ROUTES from '../../constants/routes';
 
 import { getStudentById } from '../../services/students/students';
 import { getGoalById } from '../../services/goals/goals';
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+  const { children, value, index } = props;
 
   return (
     <div
@@ -34,8 +28,6 @@ function TabPanel(props) {
       hidden={value !== index}
       id={`full-width-tabpanel-${index}`}
       aria-labelledby={`full-width-tab-${index}`}
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...other}
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
@@ -47,17 +39,11 @@ function TabPanel(props) {
 }
 
 TabPanel.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
 };
 
-function a11yProps(index) {
-  return {
-    id: `full-width-tab-${index}`,
-    'aria-controls': `full-width-tabpanel-${index}`,
-  };
-}
 const GridText = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -113,10 +99,10 @@ function SignUpDisplay(props) {
               },
             }}
           >
-            <Tab label="Education" {...a11yProps(0)} />
-            <Tab label="Goals" {...a11yProps(1)} />
-            <Tab label="Careers" {...a11yProps(2)} />
-            <Tab label="Other" {...a11yProps(3)} />
+            <Tab label="Education" />
+            <Tab label="Goals" />
+            <Tab label="Careers" />
+            <Tab label="Other" />
           </Tabs>
         </AppBar>
         <TabPanel value={value} index={0} style={{ overflowY: 'auto' }}>
@@ -369,9 +355,9 @@ function SignUpEdit(props) {
                 },
               }}
             >
-              <Tab label="Education" {...a11yProps(0)} />
-              <Tab label="Goals" {...a11yProps(1)} />
-              <Tab label="Other" {...a11yProps(2)} />
+              <Tab label="Education" />
+              <Tab label="Goals" />
+              <Tab label="Other" />
             </Tabs>
           </AppBar>
           <TabPanel value={value} index={0} style={{ overflowY: 'auto' }}>
@@ -435,7 +421,7 @@ function SignUpEdit(props) {
                         label="Age"
                         defaultValue={10}
                       >
-                        <MenuItem value=""></MenuItem>
+                        <MenuItem value="" />
                         <MenuItem value={10}>Yes</MenuItem>
                         <MenuItem value={20}>No</MenuItem>
                       </Select>
@@ -456,7 +442,7 @@ function SignUpEdit(props) {
                         label="Age"
                         defaultValue={10}
                       >
-                        <MenuItem value=""></MenuItem>
+                        <MenuItem value="" />
                         <MenuItem value={10}>Yes</MenuItem>
                         <MenuItem value={20}>No</MenuItem>
                       </Select>
@@ -476,7 +462,7 @@ function SignUpEdit(props) {
                         label="Age"
                         defaultValue={10}
                       >
-                        <MenuItem value=""></MenuItem>
+                        <MenuItem value="" />
                         <MenuItem value={10}>Yes</MenuItem>
                         <MenuItem value={20}>No</MenuItem>
                       </Select>
@@ -581,7 +567,7 @@ function SignUpEdit(props) {
                         label="Age"
                         defaultValue={10}
                       >
-                        <MenuItem value=""></MenuItem>
+                        <MenuItem value="" />
                         <MenuItem value={10}>Yes</MenuItem>
                         <MenuItem value={20}>No</MenuItem>
                       </Select>
@@ -601,7 +587,7 @@ function SignUpEdit(props) {
                         label="Age"
                         defaultValue={20}
                       >
-                        <MenuItem value=""></MenuItem>
+                        <MenuItem value="" />
                         <MenuItem value={10}>Yes</MenuItem>
                         <MenuItem value={20}>No</MenuItem>
                       </Select>
@@ -621,7 +607,7 @@ function SignUpEdit(props) {
                         label="Age"
                         defaultValue={10}
                       >
-                        <MenuItem value=""></MenuItem>
+                        <MenuItem value="" />
                         <MenuItem value={10}>Yes</MenuItem>
                         <MenuItem value={20}>No</MenuItem>
                       </Select>
@@ -696,7 +682,7 @@ function SignUpEdit(props) {
                           label="Age"
                           defaultValue={10}
                         >
-                          <MenuItem value=""></MenuItem>
+                          <MenuItem value="" />
                           <MenuItem value={10}>In Progress</MenuItem>
                           <MenuItem value={20}>Completed</MenuItem>
                         </Select>
@@ -777,7 +763,7 @@ function SignUpEdit(props) {
                           label="Age"
                           defaultValue={10}
                         >
-                          <MenuItem value=""></MenuItem>
+                          <MenuItem value="" />
                           <MenuItem value={10}>In Progress</MenuItem>
                           <MenuItem value={20}>Completed</MenuItem>
                         </Select>
@@ -857,7 +843,7 @@ function SignUpEdit(props) {
                           label="Age"
                           defaultValue={10}
                         >
-                          <MenuItem value=""></MenuItem>
+                          <MenuItem value="" />
                           <MenuItem value={10}>In Progress</MenuItem>
                           <MenuItem value={20}>Completed</MenuItem>
                         </Select>
@@ -994,7 +980,7 @@ function SignUpEdit(props) {
                         label="Age"
                         defaultValue={10}
                       >
-                        <MenuItem value=""></MenuItem>
+                        <MenuItem value="" />
                         <MenuItem value={10}>Yes</MenuItem>
                         <MenuItem value={20}>No</MenuItem>
                       </Select>
@@ -1014,7 +1000,7 @@ function SignUpEdit(props) {
                           label="Age"
                           defaultValue={10}
                         >
-                          <MenuItem value=""></MenuItem>
+                          <MenuItem value="" />
                           <MenuItem value={10}>Active</MenuItem>
                           <MenuItem value={20}>Inactive</MenuItem>
                         </Select>
@@ -1033,7 +1019,7 @@ function SignUpEdit(props) {
                         label="Age"
                         defaultValue={10}
                       >
-                        <MenuItem value=""></MenuItem>
+                        <MenuItem value="" />
                         <MenuItem value={10}>Accepted</MenuItem>
                         <MenuItem value={20}>Not Accepted</MenuItem>
                       </Select>
@@ -1131,13 +1117,6 @@ export default function TabsFunction() {
     cancelStudentInfo();
     cancelEditing();
   };
-
-  const num = 0;
-  const onBackClick = () => {
-    navigate(ROUTES.STUDENT_TEST);
-  };
-  const navigate = useNavigate();
-  const buttonText = '< Back to table';
 
   return (
     <Grid container>

@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
@@ -69,7 +68,7 @@ const StyledButton = styled(Button)({
 });
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+  const { children, value, index } = props;
 
   return (
     <div
@@ -77,7 +76,6 @@ function TabPanel(props) {
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
-      {...other}
     >
       {value === index && (
         <Box sx={{ p: 0 }}>
@@ -121,8 +119,7 @@ const reassignCoachHandler = async (studentId, coachsId) => {
 };
 
 TabPanel.propTypes = {
-  // eslint-disable-next-line react/require-default-props
-  children: PropTypes.node,
+  children: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
 };
@@ -362,7 +359,6 @@ export default function StudentTable() {
             >
               <Tab
                 label="Active"
-                {...controlTabs(0)}
                 sx={{
                   borderRight: 1,
                   borderBottom: 2,
@@ -372,7 +368,6 @@ export default function StudentTable() {
               />
               <Tab
                 label="Inactive"
-                {...controlTabs(1)}
                 sx={{
                   borderRight: 1,
                   borderLeft: 1,
@@ -383,7 +378,6 @@ export default function StudentTable() {
               />
               <Tab
                 label="Applicants"
-                {...controlTabs(2)}
                 sx={{
                   borderLeft: 1,
                   borderBottom: 2,
