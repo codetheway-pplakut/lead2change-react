@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
+// import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
-import FormControlLabel from '@mui/material/FormControlLabel';
+// import FormControlLabel from '@mui/material/FormControlLabel';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
@@ -18,20 +18,25 @@ export default function SignUpForm(props) {
     onEmailAddressChange,
     onFirstNameChange,
     onLastNameChange,
-    onPasswordChange,
+    // onPasswordChange,
     onSubmit,
-    password,
+    // password,
   } = props;
 
   const currentYear = new Date().getFullYear();
+  const studentYear = +studentDateOfBirth.substring(0, 4);
+  const studentAge = currentYear - studentYear;
+
+  const re =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   const onSubmitDisabled =
     !emailAddress ||
     !firstName ||
     !lastName ||
-    !password ||
+    // !password ||
     !studentDateOfBirth ||
-    (studentDateOfBirth !== null && studentDateOfBirth.includes(currentYear));
+    (studentDateOfBirth !== null && studentYear >= currentYear);
 
   return (
     <Box sx={{ mt: 3 }}>
@@ -44,6 +49,8 @@ export default function SignUpForm(props) {
             required
             type="email"
             value={emailAddress}
+            error={!re.test(emailAddress)}
+            helperText={re.test(emailAddress) ? '' : 'Invaild Email Address'}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -57,14 +64,14 @@ export default function SignUpForm(props) {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            fullWidth
             label="Last Name"
+            fullWidth
             onChange={(event) => onLastNameChange(event.target.value)}
             required
             value={lastName}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        {/* <Grid item xs={12} sm={6}>
           <TextField
             fullWidth
             label="Password"
@@ -73,8 +80,8 @@ export default function SignUpForm(props) {
             type="password"
             value={password}
           />
-        </Grid>
-        <Grid item xs={12} sm={6}>
+        </Grid> */}
+        <Grid item xs={12} sm={12}>
           <TextField
             fullWidth
             label="Cell Phone Number (Optional)"
@@ -89,25 +96,23 @@ export default function SignUpForm(props) {
             onChange={(event) => onStudentDateOfBirthChange(event.target.value)}
             type="date"
             value={studentDateOfBirth}
+            error={studentAge < 13}
+            helperText={studentAge > 13 ? ' ' : 'Age Must Be Atleast 13'}
           />
         </Grid>
         <Grid item xs={12}>
-          <FormControlLabel
-            control={<Checkbox value="allowExtraEmails" color="primary" />}
-            label="I want to receive inspiration, marketing promotions and updates via email."
-          />
+          <Button
+            fullWidth
+            disabled={onSubmitDisabled}
+            sx={{ mb: 2 }}
+            type="submit"
+            onClick={onSubmit}
+            variant="contained"
+          >
+            Sign Up
+          </Button>
         </Grid>
       </Grid>
-      <Button
-        disabled={onSubmitDisabled}
-        fullWidth
-        sx={{ mt: 3, mb: 2 }}
-        type="submit"
-        onClick={onSubmit}
-        variant="contained"
-      >
-        Sign Up
-      </Button>
     </Box>
   );
 }
@@ -123,7 +128,7 @@ SignUpForm.propTypes = {
   onEmailAddressChange: PropTypes.func.isRequired,
   onFirstNameChange: PropTypes.func.isRequired,
   onLastNameChange: PropTypes.func.isRequired,
-  onPasswordChange: PropTypes.func.isRequired,
+  // onPasswordChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  password: PropTypes.string.isRequired,
+  // password: PropTypes.string.isRequired,
 };
