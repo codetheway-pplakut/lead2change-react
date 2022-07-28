@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { Avatar, Container, Typography, Box } from '@mui/material';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import ProgressIndicatorOverlay from '../progress-indicator-overlay/progress-indicator-overlay';
 import LoginForm from './login-form/login-form';
 import AuthenticationContext from '../../context/authentication/authentication';
@@ -11,6 +11,7 @@ import ForgotPassword from './forgot-password';
 export default function Login() {
   const { login } = useContext(AuthenticationContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
