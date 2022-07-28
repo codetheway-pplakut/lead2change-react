@@ -7,9 +7,8 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import StudentTable from './studentTable';
 import StudentModal from './studentModal';
 
+import AddCareerModal from '../career/add-career-modal';
 import CreateGoalModal from './create-goal-modal';
-
-// TODO remove this once testing is done
 
 const theme = createTheme({
   components: {
@@ -84,8 +83,9 @@ export default function Student(props) {
           justify="center"
           sx={{ mx: '20vh' }}
         >
-          <CreateGoalModal studentId="3c0613fe-6fd8-4a63-333c-08da3cbdc08e" />
           <StudentTable />
+          <CreateGoalModal studentId="b0ba6354-eb97-49b1-a030-08da6b234c0f" />
+          <AddCareerModal studentId="b0ba6354-eb97-49b1-a030-08da6b234c0f" />
         </Stack>
       </ThemeProvider>
     </div>
