@@ -46,6 +46,16 @@ const GridText = styled(Paper)(({ theme }) => ({
 }));
 
 function DisplayBanner() {
+  const { studentId } = useParams();
+  const [students, setStudents] = useState({});
+
+  useEffect(() => {
+    const currentStudent = async () => {
+      const currStudent = await getStudentById(studentId);
+      setStudents(currStudent);
+    };
+    currentStudent();
+  }, [studentId]);
   return (
     <Grid
       item
@@ -66,6 +76,16 @@ function DisplayBanner() {
 }
 
 function SignUpDisplay(props) {
+  const { studentId } = useParams();
+  const [students, setStudents] = useState({});
+
+  useEffect(() => {
+    const currentStudent = async () => {
+      const currStudent = await getStudentById(studentId);
+      setStudents(currStudent);
+    };
+    currentStudent();
+  }, [studentId]);
   const { onEditClick } = props;
   return (
     <Grid container>
