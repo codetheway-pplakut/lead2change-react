@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
@@ -8,60 +7,90 @@ import Typography from '@mui/material/Typography';
 import { Grid } from '@mui/material';
 import GetName from '../../util/name/get-name';
 
- 
 export default function SampleNavbar() {
- 
-    const onStudentClick = () => {
-        // TODO document why this arrow function is empty
-    };
+  const onStudentClick = () => {
+    // TODO document why this arrow function is empty
+  };
 
-    const onCoachesClick = () => {
-      // TODO document why this arrow function is empty
-    };
+  const onCoachesClick = () => {
+    // TODO document why this arrow function is empty
+  };
 
-    const onInterviewsClick = () => {
-      // TODO document why this arrow function is empty
-    };
+  const onInterviewsClick = () => {
+    // TODO document why this arrow function is empty
+  };
 
-    const onQuestionsClick = () => {
-      // TODO document why this arrow function is empty
-    };
+  const onQuestionsClick = () => {
+    // TODO document why this arrow function is empty
+  };
 
-    const onAdminsClick = () => {
-      // TODO document why this arrow function is empty
-    };
- 
- 
-    // still need to make the text redirect to the correct page, grab login info from database to put correct name in right corner
+  const onAdminsClick = () => {
+    // TODO document why this arrow function is empty
+  };
+
+  // still need to make the text redirect to the correct page, grab login info from database to put correct name in right corner
   return (
     <Box>
-      <AppBar position="static" sx={{backgroundColor: '#212529'}}>
+      <AppBar position="static" sx={{ backgroundColor: '#212529' }}>
         <Toolbar>
           <Grid container spacing={1} alignItems="center" justify="center">
             <Grid item xl={3} lg={3} md={3}>
-                    <img src="https://dev-lead2change-ctw.azurewebsites.net/Images/Lead2ChangeLogo.png" width="100%" height="100%" alt="Lead2Change"/>
+              <img
+                src="https://dev-lead2change-ctw.azurewebsites.net/Images/Lead2ChangeLogo.png"
+                width="100%"
+                height="100%"
+                alt="Lead2Change"
+              />
             </Grid>
-            <Grid item xl={8} lg={8} md={8} sm={8} xs={8} >
+            <Grid item xl={8} lg={8} md={8} sm={8} xs={8}>
               <Grid container spacing={2} alignItems="center" justify="center">
                 <Grid item xl={2}>
-                    <Button variant="text" onClick={onStudentClick} justify="center"><Typography color="white">Students</Typography></Button>
+                  <Button
+                    variant="text"
+                    onClick={onStudentClick}
+                    justify="center"
+                  >
+                    <Typography color="white">Students</Typography>
+                  </Button>
                 </Grid>
                 <Grid item xl={2}>
-                    <Button variant="text" onClick={onCoachesClick} justify="center" ><Typography color="white">Coaches</Typography></Button>
+                  <Button
+                    variant="text"
+                    onClick={onCoachesClick}
+                    justify="center"
+                  >
+                    <Typography color="white">Coaches</Typography>
+                  </Button>
                 </Grid>
                 <Grid item xl={2}>
-                    <Button variant="text" onClick={onInterviewsClick} justify="center" ><Typography color="white">Interviews</Typography></Button>
+                  <Button
+                    variant="text"
+                    onClick={onInterviewsClick}
+                    justify="center"
+                  >
+                    <Typography color="white">Interviews</Typography>
+                  </Button>
                 </Grid>
                 <Grid item xl={2}>
-                    <Button variant="text" onClick={onQuestionsClick} justify="center" ><Typography color="white">Questions</Typography></Button>
+                  <Button
+                    variant="text"
+                    onClick={onQuestionsClick}
+                    justify="center"
+                  >
+                    <Typography color="white">Questions</Typography>
+                  </Button>
                 </Grid>
                 <Grid item xl={2}>
-                    <Button variant="text" onClick={onAdminsClick} justify="center" ><Typography color="white">Admins</Typography></Button>
+                  <Button
+                    variant="text"
+                    onClick={onAdminsClick}
+                    justify="center"
+                  >
+                    <Typography color="white">Admins</Typography>
+                  </Button>
                 </Grid>
                 <Grid item xl={2}>
-                    <Typography color="white">
-                        Hello {GetName()}
-                    </Typography>
+                  <Typography color="white">Hello {GetName()}</Typography>
                 </Grid>
               </Grid>
             </Grid>
