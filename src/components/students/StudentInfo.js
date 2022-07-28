@@ -1,8 +1,4 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-useless-return */
-/* eslint-disable no-restricted-globals */
-/* eslint-disable react/button-has-type */
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { experimentalStyled as styled } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
@@ -14,20 +10,13 @@ import Paper from '@mui/material/Paper';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Stack, TextField } from '@mui/material';
 import TabsFunction from './detailsTab';
-import ROUTES from '../../constants/routes';
 
-import {
-  getStudents,
-  getStudentById,
-  updateStudent,
-} from '../../services/students/students';
+import { getStudentById } from '../../services/students/students';
 
 const StudentInfo = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
   textAlign: 'center',
-  color: theme.palette.text.secondary,
-
   display: 'flex',
   alignItems: 'flex-start',
   flexDirection: 'column',
@@ -35,14 +24,6 @@ const StudentInfo = styled(Box)(({ theme }) => ({
   m: 0.1,
   bgcolor: 'background.paper',
   borderRadius: 1,
-}));
-
-const GridText = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'left',
-  color: theme.palette.text.secondary,
 }));
 
 function DisplayBanner() {
@@ -92,10 +73,8 @@ function SignUpDisplay(props) {
       <Grid item xs={4}>
         <Paper
           sx={{
-            backgroundColor: 'dark',
             '#1A2027': '#fff',
             textAlign: 'center',
-            color: 'secondary',
             width: '50vh',
             mr: '10vh',
             height: '70vh',
@@ -124,25 +103,60 @@ function SignUpDisplay(props) {
           </Grid>
           <Grid style={{ margin: '2vh' }}>
             <StudentInfo>
-              <h3>Date of Birth: {students.studentDateOfBirth} </h3>
+              <h3>
+                Date of Birth: {'  '}
+                <Box component="span" style={{ fontWeight: 'normal' }}>
+                  {students.studentDateOfBirth}
+                </Box>
+              </h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>Email Address: {students.studentEmail}</h3>
+              <h3>
+                Email Address:{' '}
+                <Box component="span" style={{ fontWeight: 'normal' }}>
+                  {students.studentEmail}
+                </Box>
+              </h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>Phone Number: {students.studentCellPhone}</h3>
+              <h3>
+                Phone Number:{' '}
+                <Box component="span" style={{ fontWeight: 'normal' }}>
+                  {students.studentCellPhone}
+                </Box>
+              </h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>Home Address: {students.studentAddress}</h3>
+              <h3>
+                Home Address:{' '}
+                <Box component="span" style={{ fontWeight: 'normal' }}>
+                  {students.studentAddress}
+                </Box>
+              </h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>Apt. #: {students.studentApartmentNumber}</h3>
+              <h3>
+                Apt. #:{' '}
+                <Box component="span" style={{ fontWeight: 'normal' }}>
+                  {students.studentApartmentNumber}
+                </Box>
+              </h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>State: {students.studentState}</h3>
+              <h3>
+                State:{' '}
+                <Box component="span" style={{ fontWeight: 'normal' }}>
+                  {students.studentState}
+                </Box>
+              </h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>Zip Code: {students.studentZipCode}</h3>
+              <h3>
+                Zip Code:{' '}
+                <Box component="span" style={{ fontWeight: 'normal' }}>
+                  {students.studentZipCode}
+                </Box>
+              </h3>
             </StudentInfo>
           </Grid>
         </Paper>
@@ -319,9 +333,6 @@ export default function ResponsiveGrid(props) {
     currentStudent();
   }, [studentId]);
 
-  const navigate = useNavigate();
-  const buttonText = '< Back to table';
-
   const [isEditing, setIsEditing] = useState(false);
   const startEditing = () => setIsEditing(true);
   const endEditing = () => setIsEditing(false);
@@ -335,7 +346,7 @@ export default function ResponsiveGrid(props) {
     console.log('cancel');
   };
 
-  const onSaveClick = () => {
+  const onSaveClick = (event) => {
     saveStudentInfo();
     endEditing();
     event.preventDefault();
@@ -344,21 +355,6 @@ export default function ResponsiveGrid(props) {
   const onCancelClick = () => {
     cancelStudentInfo();
     cancelEditing();
-  };
-
-  const num = 0;
-  const onBackClick = () => {
-    navigate(ROUTES.STUDENT_TEST);
-  };
-
-  const [disabled, setDisabled] = useState(false);
-
-  const [textInputName, setTextInputName] = useState('');
-
-  const [message, setMessage] = useState('');
-
-  const handleChange = (event) => {
-    setMessage(event.target.value);
   };
 
   return (
