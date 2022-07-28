@@ -2,7 +2,6 @@ import React from 'react';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-
 import { green, red } from '@mui/material/colors';
 
 export default function GritItem() {

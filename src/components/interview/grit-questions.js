@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import { Divider } from '@mui/material';
+import { Divider, Button } from '@mui/material';
 import GritItem from './grit-item';
 
 export default function GritSliderQuestions() {
@@ -172,6 +172,22 @@ export default function GritSliderQuestions() {
           </FormLabel>
           <GritItem />
         </FormControl>
+      </Box>
+      <Box
+        components="span"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Button
+          variant="contained"
+          onClick={null}
+          style={{
+            backgroundColor: '#004cbb',
+          }}
+        >
+          Save
+        </Button>
       </Box>
     </Container>
   );
