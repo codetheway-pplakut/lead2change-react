@@ -11,21 +11,16 @@ export const getAdminById = (id) => {
   return callApi({ endpoint: `${SERVICE_ROOT}/${id}` });
 };
 
-export const updateAdmin = (admin) => {
+export const deleteAdmin = async (id) => {
   return callApi({
-    body: admin,
-    endpoint: SERVICE_ROOT,
-    method: 'PUT',
-    headers: {
-      Accept: 'application/json, text/plain',
-      'Content-Type': 'application/json',
-    },
+    endpoint: `${SERVICE_ROOT}?id=${id}`,
+    method: 'DELETE',
   });
 };
 
 export const addAdmin = async (admin) => {
   return callApi({
-    body: JSON.stringify(admin),
+    body: admin,
     endpoint: SERVICE_ROOT,
     method: 'POST',
     headers: {

@@ -9,21 +9,9 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { createTheme } from '@mui/material/styles';
+import { addAdmin, getAdmins } from '../../services/Admin/admin';
 
 export default function RegisterAdminModal() {
-  const modalPosition = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    width: 430,
-    transform: 'translate(-50%, -50%)',
-    bgcolor: 'background.paper',
-    borderRadius: '10px',
-    boxShadow: 24,
-  };
-
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -31,8 +19,6 @@ export default function RegisterAdminModal() {
   const [open, setOpen] = useState(false);
   const [register, setRegister] = useState(false);
 
-  const [firstNameError, setFirstNameError] = useState('');
-  const [lastNameError, setLastNameError] = useState('');
   const [emailErrorOne, setEmailErrorOne] = useState('');
   const [emailErrorTwo, setEmailErrorTwo] = useState('');
   const [passwordError, setPasswordError] = useState('');
@@ -48,9 +34,34 @@ export default function RegisterAdminModal() {
     setOpen(true);
   };
 
+  const refreshPage = async () => {
+    window.location.reload(true);
+  };
+
+  const newAdmin = async (adminEmail, adminPass, adminConfirmPass) => {
+    const admin = {
+      email: adminEmail,
+      password: adminPass,
+      confirmPassword: adminConfirmPass,
+    };
+    await addAdmin(admin);
+    handleClose();
+    await getAdmins();
+    refreshPage();
+  };
+
+  const modalPosition = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    width: 430,
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'background.paper',
+    borderRadius: '10px',
+    boxShadow: 24,
+  };
+
   const handleRegister = () => {
-    setFirstNameError(null);
-    setLastNameError(null);
     setEmailErrorOne(null);
     setEmailErrorTwo(null);
     setPasswordError(null);
@@ -58,23 +69,6 @@ export default function RegisterAdminModal() {
     setPasswordErrorConfirmation(null);
 
     setRegister(true);
-
-    if (firstName.length < 1) {
-      setFirstNameError(
-        <Typography variant="subtitle2" sx={{ color: 'red' }}>
-          First Name Error; First Name Required.
-        </Typography>
-      );
-      setRegister(false);
-    }
-    if (lastName.length < 1) {
-      setLastNameError(
-        <Typography variant="subtitle2" sx={{ color: 'red' }}>
-          Last Name Error; Last Name Required.
-        </Typography>
-      );
-      setRegister(false);
-    }
     if (email.length < 1) {
       setEmailErrorOne(
         <Typography variant="subtitle2" sx={{ color: 'red' }}>
@@ -127,17 +121,11 @@ export default function RegisterAdminModal() {
       setRegister(false);
     }
 
-    if (register) {
-      setOpen(false);
+    if (register === true) {
+      newAdmin(email, password, confirmPassword);
     }
   };
 
-  const firstNameChangeHandler = (event) => {
-    setFirstName(event.target.value);
-  };
-  const lastNameChangeHandler = (event) => {
-    setLastName(event.target.value);
-  };
   const emailChangeHandler = (event) => {
     setEmail(event.target.value);
   };
@@ -212,25 +200,6 @@ export default function RegisterAdminModal() {
           <Box sx={{ mt: 1 }}>
             <Box container margin="20px">
               <Grid container spacing={2} rowSpacing={2}>
-                <Grid item xs={6} sm={6}>
-                  <TextField
-                    fullWidth
-                    label="Enter first name..."
-                    variant="filled"
-                    onChange={firstNameChangeHandler}
-                    value={firstName}
-                  />
-                </Grid>
-                <Grid item xs={6} sm={6}>
-                  <TextField
-                    fullWidth
-                    label="Enter last name..."
-                    variant="filled"
-                    onChange={lastNameChangeHandler}
-                    value={lastName}
-                  />
-                </Grid>
-
                 <Grid item xs={12}>
                   <TextField
                     fullWidth
@@ -301,8 +270,6 @@ export default function RegisterAdminModal() {
                 </Grid>
               </Grid>
               <div>
-                {firstNameError}
-                {lastNameError}
                 {emailErrorOne}
                 {emailErrorTwo}
                 {passwordError}

@@ -9,10 +9,9 @@ import TableHead from '@mui/material/TableHead';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
+import Paper from '@mui/material/Paper';
 
-import EditAdminModal from './editAdminModal';
 import DeleteAdminModal from './deleteAdminModal';
-import DeactivateAdminModal from './deactivateAdminModal';
 import RegisterAdminModal from './registerAdminModal';
 import SearchBar from './SearchBar';
 
@@ -22,12 +21,6 @@ import {
   // updateAdmin,
   // getAdminById,
 } from '../../services/Admin/admin';
-
-import {
-  getStudents,
-  // getStudentById,
-  // updateStudent,
-} from '../../services/students/students';
 
 import ProgressIndicatorOverlay from '../progress-indicator-overlay/progress-indicator-overlay';
 
@@ -43,62 +36,60 @@ const tablePositioning = {
 const tableHeadingText = {
   color: 'white',
   fontSize: 'large',
+  padding: 'normal',
+  align: 'left',
 };
 
 const tableDelete = {
   color: 'white',
   fontSize: 'large',
-  paddingLeft: '32px',
+  padding: 'normal',
+  align: 'left',
 };
 
 export default function AdminTable() {
-  const [students, setStudents] = useState([]);
+  const [admins, setAdmins] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [search, setSearch] = useState('');
 
-  const refreshStudents = async () => {
+  const refreshAdmins = async () => {
     setIsLoading(true);
-    const response = await getAdmins();
+    const result = await getAdmins();
 
     setIsLoading(false);
-    setStudents(response);
+    setAdmins(result);
   };
+
   useEffect(() => {
-    refreshStudents();
+    refreshAdmins();
   }, []);
 
   return (
-    <Box sx={{ width: '100%', height: '60%' }}>
+    <Paper sx={{ width: '100%' }}>
       <ProgressIndicatorOverlay active={isLoading} />
 
       <Box sx={{ mt: '10px', mb: '10px' }}>
-        <Grid container alignItems="center" justify="center">
-          <Grid item xs={3} />
-          <Grid item xs={4} align="right">
+        <Grid container alignItems="center" spacing={1}>
+          <Grid item xs={7.7} align="right">
+            <SearchBar setSearch={setSearch} />
+          </Grid>
+          <Grid item xs={1.5} align="right" padding={2}>
             <RegisterAdminModal />
           </Grid>
-          <Grid item xs={2} align="right">
-            <Box>
-              <SearchBar />
-            </Box>
-          </Grid>
-          <Grid item xs={3} />
         </Grid>
       </Box>
 
       <TableContainer sx={tablePositioning}>
-        <Table aria-label="customized table">
+        <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
           <TableHead>
             <TableRow>
               <TableCell align="left" sx={tableHeadingText}>
                 <Grid container>
-                  <Grid item xs={6} />
-                  <Grid item xs={2}>
-                    Name
+                  <Grid item xs={3} />
+                  <Grid item xs={7}>
+                    Email
                   </Grid>
                 </Grid>
-              </TableCell>
-              <TableCell align="left" sx={tableHeadingText}>
-                Email
               </TableCell>
               <TableCell align="left" sx={tableDelete}>
                 Delete
@@ -106,88 +97,42 @@ export default function AdminTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {students.map((student, index) => (
-              <TableRow
-                key={student.id}
-                sx={
-                  index % 2
-                    ? { background: '#eeeeee' }
-                    : { background: 'white' }
+            {admins
+              .filter((post) => {
+                if (search === '') {
+                  return post;
                 }
-              >
-                <TableCell component="th" scope="row">
-                  <Grid container alignItems="center" justify="center">
-                    <Grid item xs={6}>
-                      <Box>
-                        <EditAdminModal />
-                      </Box>
-                    </Grid>
-                    <Grid item xs={6}>
-                      {student.lastName}, {student.firstName}
-                    </Grid>
-                  </Grid>
-                </TableCell>
-                <TableCell align="left">{student.email}</TableCell>
-                <TableCell align="left">
-                  <DeactivateAdminModal adminId={student.id} />
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+                if (post.email.toLowerCase().includes(search.toLowerCase())) {
+                  return post;
+                }
+                return null;
+              })
 
-      <TableContainer sx={tablePositioning}>
-        <Table aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="left" sx={tableHeadingText}>
-                <Grid container>
-                  <Grid item xs={6} />
-                  <Grid item xs={2}>
-                    Name
-                  </Grid>
-                </Grid>
-              </TableCell>
-              <TableCell align="left" sx={tableHeadingText}>
-                Email
-              </TableCell>
-              <TableCell align="left" sx={tableDelete}>
-                Delete
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {students.map((student, index) => (
-              <TableRow
-                key={student.id}
-                sx={
-                  index % 2
-                    ? { background: '#eeeeee' }
-                    : { background: 'white' }
-                }
-              >
-                <TableCell component="th" scope="row">
-                  <Grid container alignItems="center" justify="center">
-                    <Grid item xs={6}>
-                      <Box>
-                        <EditAdminModal />
-                      </Box>
+              .map((admin, index) => (
+                <TableRow
+                  key={admin.id}
+                  sx={
+                    index % 2
+                      ? { background: '#eeeeee' }
+                      : { background: 'white' }
+                  }
+                >
+                  <TableCell component="th" scope="row">
+                    <Grid container>
+                      <Grid item xs={2} />
+                      <Grid item xs={8}>
+                        {admin.email}
+                      </Grid>
                     </Grid>
-                    <Grid item xs={6}>
-                      {student.lastName}, {student.firstName}
-                    </Grid>
-                  </Grid>
-                </TableCell>
-                <TableCell align="left">{student.email}</TableCell>
-                <TableCell align="left">
-                  <DeleteAdminModal adminId={student.id} />
-                </TableCell>
-              </TableRow>
-            ))}
+                  </TableCell>
+                  <TableCell align="left">
+                    <DeleteAdminModal id={admin.id} />
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
-    </Box>
+    </Paper>
   );
 }
