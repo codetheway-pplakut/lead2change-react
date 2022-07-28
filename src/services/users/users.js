@@ -13,3 +13,30 @@ export const authenticateUser = ({ username, password } = {}) => {
     method: 'POST',
   });
 };
+export const requestReset = ({ email } = {}) => {
+  // if (!email) return;
+
+  return callApi({
+    body: { email },
+    endpoint: `${SERVICE_ROOT}/request-password-reset`,
+    method: 'POST',
+    headers: {
+      Accept: 'application/json, text/plain',
+      'Content-Type': 'application/json',
+    },
+  });
+};
+export const resetPassword = ({
+  token,
+  email,
+  password,
+  confirmPassword,
+} = {}) => {
+  if (!email || !token || !password || !confirmPassword) return;
+
+  return callApi({
+    body: { token, email, password, confirmPassword },
+    endpoint: `${SERVICE_ROOT}/reset-password`,
+    method: 'POST',
+  });
+};

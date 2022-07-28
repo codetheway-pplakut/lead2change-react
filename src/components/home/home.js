@@ -83,6 +83,9 @@ export default function Home() {
           <Button variant="contained" onClick={() => navigate(ROUTES.STUDENTS)}>
             Students
           </Button>
+          <Button variant="contained" onClick={() => navigate(ROUTES.ADMIN)}>
+            Admin Page
+          </Button>
           <Button
             variant="contained"
             onClick={() => navigate(ROUTES.RESET_PASS)}
