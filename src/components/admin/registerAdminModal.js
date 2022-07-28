@@ -143,11 +143,11 @@ export default function RegisterAdminModal() {
   const buttonTheme = createTheme({
     palette: {
       save: {
-        main: '#3764A8',
+        main: '#004cbb',
         contrastText: '#fff',
       },
       cancel: {
-        main: '#3764A8',
+        main: '#004cbb',
         contrastText: '#fff',
       },
     },
@@ -173,7 +173,7 @@ export default function RegisterAdminModal() {
           <Grid spacing={2} alignItems="center" justifyContent="center">
             <Grid item xs={12} sx={{ borderRadius: '10px' }}>
               <Box
-                bgcolor="#3764A8"
+                bgcolor="#004cbb"
                 sx={{
                   borderTopLeftRadius: '10px',
                   borderTopRightRadius: '10px',

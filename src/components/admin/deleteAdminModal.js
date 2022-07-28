@@ -102,7 +102,7 @@ export default function DeleteAdminModal(props) {
           >
             <Grid item xs={12} sx={{ borderRadius: '10px' }}>
               <Box
-                bgcolor="#3764A8"
+                bgcolor="#004cbb"
                 sx={{
                   borderTopLeftRadius: '10px',
                   borderTopRightRadius: '10px',

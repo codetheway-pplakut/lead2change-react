@@ -9,7 +9,6 @@ import TableHead from '@mui/material/TableHead';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
-import { Stack } from '@mui/material';
 import DeleteAdminModal from './deleteAdminModal';
 import RegisterAdminModal from './registerAdminModal';
 import SearchBar from './SearchBar';
@@ -26,6 +25,7 @@ const tablePositioning = {
 const tableHeadingText = {
   padding: 'normal',
   align: 'left',
+  fontSize: 'medium',
   backgroundColor: '#004cbb',
   color: 'white',
   textColor: 'white',
@@ -50,24 +50,30 @@ export default function AdminTable() {
 
   return (
     <Box
-      sx={{ width: '75%', height: '60%', margin: 'auto', marginBottom: '5%' }}
+      sx={{ width: '80%', height: '60%', margin: 'auto', marginBottom: '5%' }}
     >
       <ProgressIndicatorOverlay active={isLoading} />
-      <div>
-        <Stack direction="row" spacing={1} alignItems="center">
-          <SearchBar setSearch={setSearch} />
-          <div sx={{ minWidth: '200px' }}>
-            <RegisterAdminModal minWidth="1200px" />
-          </div>
-        </Stack>
-      </div>
+
+      <Box sx={{ mt: '10px', mb: '10px' }}>
+        <Grid container alignItems="center" spacing={1}>
+          <Grid item xs={10} align="right">
+            <SearchBar setSearch={setSearch} />
+          </Grid>
+          <Grid item xs={2} align="right" padding={2}>
+            <RegisterAdminModal />
+          </Grid>
+        </Grid>
+      </Box>
 
       <TableContainer sx={tablePositioning}>
         <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" stickyHeader>
           <TableHead>
             <TableRow>
               <TableCell align="left" sx={tableHeadingText}>
-                Email
+                <Grid container>
+                  <Grid item xs={2} />
+                  Email
+                </Grid>
               </TableCell>
               <TableCell align="left" sx={tableHeadingText}>
                 Delete
