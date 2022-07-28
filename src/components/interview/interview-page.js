@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Stack from '@mui/material/Stack';
 import { Grid } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -6,10 +6,7 @@ import BasicTabs from './tabs';
 import Navbar from '../admin/sampleNavbar';
 import ExitModal from './exit-modal';
 
-import {
-  getInterviews,
-  getInterviewsById,
-} from '../../services/interviews/interview';
+import { getInterviewsById } from '../../services/interviews/interview';
 
 const theme = createTheme({
   components: {
@@ -60,22 +57,21 @@ const theme = createTheme({
 });
 
 export default function InterviewPage() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [interview, setInterview] = useState();
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [interview, setInterview] = useState();
 
   const refreshInterview = async () => {
-    setIsLoading(true);
+    // setIsLoading(true);
     const response = await getInterviewsById(
       'b0ba6354-eb97-49b1-a030-08da6b234c0f'
     );
-    setIsLoading(false);
-    setInterview(response);
-    console.log(response);
-    response.questions.map((question) => {
-      console.log(question.questionString);
-      console.log(question.answerString);
-      console.log(question);
-    });
+    // setIsLoading(false);
+    // setInterview(response);
+    // console.log(response);
+    // response.questions.map((question) => {
+    //   // console.log(question.questionString);
+    //   // console.log(question.answerString);
+    // });
   };
   useEffect(() => {
     refreshInterview();

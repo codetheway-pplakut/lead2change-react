@@ -10,9 +10,8 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { Button } from '@mui/material';
 
-function InterviewSaver() {
-  return null;
-}
+import { getInterviewsById } from '../../services/interviews/interview';
+
 export default function InterviewQuestions() {
   const [interviewIdealCareer, setinterviewIdealCareer] = useState('');
   const [interviewPersonalStrengths, setinterviewPersonalStrengths] =
@@ -22,47 +21,92 @@ export default function InterviewQuestions() {
     useState('');
   const [interviewOtherCommitments, setinterviewOtherCommitments] =
     useState('');
-  const [interviewSacrificeTime, setinterviewSacrificeTime] = useState('Yes');
+  const [interviewSacrificeTime, setinterviewSacrificeTime] = useState('');
   const [interviewPostHighSchoolCoaching, setinterviewPostHighSchoolCoaching] =
-    useState('Yes');
+    useState('');
   const [interviewScheduleManagement, setinterviewScheduleManagement] =
-    useState('Yes');
+    useState('');
   const [interviewCommunicateWithMentors, setinterviewCommunicateWithMentors] =
-    useState('Yes');
-  const [interviewDiverseClass, setinterviewDiverseClass] = useState('Yes');
-  const [interviewOpenMinded, setinterviewOpenMinded] = useState('Yes');
+    useState('');
+  const [interviewDiverseClass, setinterviewDiverseClass] = useState('');
+  const [interviewOpenMinded, setinterviewOpenMinded] = useState('');
   const [
     interviewProfessionalRepresentation,
     setinterviewProfessionalRepresentation,
-  ] = useState('Yes');
-  const [interviewTryingNewThings, setinterviewTryingNewThings] =
-    useState('Yes');
+  ] = useState('');
+  const [interviewTryingNewThings, setinterviewTryingNewThings] = useState('');
   const [interviewCommitToActivities, setinterviewCommitToActivities] =
-    useState('Yes');
-  const [interviewNewThingsDistract, setinterviewNewThingsDistract] =
-    useState('Yes');
-  const [
-    interviewSetbacksDoNotDiscourage,
-    setinterviewSetbacksDoNotDiscourage,
-  ] = useState('Yes');
-  const [interviewLostInterest, setinterviewLostInterest] = useState('Yes');
-  const [interviewHardWorking, setinterviewHardWorking] = useState('Yes');
-  const [interviewDifferentGoals, setinterviewDifferentGoals] = useState('Yes');
-  const [interviewMaintainFocusOnGoals, setinterviewMaintainFocusOnGoals] =
-    useState('Yes');
-  const [interviewFinishGoals, setinterviewFinishGoals] = useState('Yes');
-  const [interviewIsDiligent, setinterviewIsDiligent] = useState('Yes');
+    useState('');
+  // const [interviewNewThingsDistract, setinterviewNewThingsDistract] =
+  //   useState('');
+  // const [
+  //   interviewSetbacksDoNotDiscourage,
+  //   setinterviewSetbacksDoNotDiscourage,
+  // ] = useState('');
+  // const [interviewLostInterest, setinterviewLostInterest] = useState('');
+  // const [interviewHardWorking, setinterviewHardWorking] = useState('');
+  // const [interviewDifferentGoals, setinterviewDifferentGoals] = useState('');
+  // const [interviewMaintainFocusOnGoals, setinterviewMaintainFocusOnGoals] =
+  //   useState('');
+  // const [interviewFinishGoals, setinterviewFinishGoals] = useState('');
+  // const [interviewIsDiligent, setinterviewIsDiligent] = useState('');
   const Save = () => {
-    const interview = {};
-    console.log(interviewIdealCareer);
-    console.log(interviewSacrificeTime);
+    const interview = {
+      interviewIdealCareer,
+      interviewPersonalStrengths,
+      interviewImportantWord,
+      interviewOvercomeDifficulty,
+      interviewOtherCommitments,
+      interviewSacrificeTime,
+      interviewPostHighSchoolCoaching,
+      interviewScheduleManagement,
+      interviewCommunicateWithMentors,
+      interviewDiverseClass,
+      interviewOpenMinded,
+      interviewProfessionalRepresentation,
+      interviewTryingNewThings,
+      interviewCommitToActivities,
+    };
+    getInterviewsById(interview);
   };
 
   // const [selectedValue, setSelectedValue] = React.useState('a');
 
-  // const handleChange = (event) => {
-  //   setSelectedValue(event.target.value);
-  // };
+  const handleChange = (event) => {
+    setinterviewSacrificeTime(event.target.value);
+  };
+  const handleChange1 = (event) => {
+    setinterviewPostHighSchoolCoaching(event.target.value);
+  };
+  const handleChange2 = (event) => {
+    setinterviewScheduleManagement(event.target.value);
+  };
+  const handleChange3 = (event) => {
+    setinterviewCommunicateWithMentors(event.target.value);
+  };
+  const handleChange4 = (event) => {
+    setinterviewDiverseClass(event.target.value);
+  };
+  const handleChange5 = (event) => {
+    setinterviewOpenMinded(event.target.value);
+  };
+  const handleChange6 = (event) => {
+    setinterviewProfessionalRepresentation(event.target.value);
+  };
+  const handleChange7 = (event) => {
+    setinterviewTryingNewThings(event.target.value);
+  };
+  const handleChange8 = (event) => {
+    setinterviewCommitToActivities(event.target.value);
+  };
+  // setinterviewNewThingsDistract(event.target.value);
+  // setinterviewSetbacksDoNotDiscourage(event.target.value);
+  // setinterviewLostInterest(event.target.value);
+  // setinterviewHardWorking(event.target.value);
+  // setinterviewDifferentGoals(event.target.value);
+  // setinterviewMaintainFocusOnGoals(event.target.value);
+  // setinterviewFinishGoals(event.target.value);
+  // setinterviewIsDiligent(event.target.value);
 
   return (
     <Container fixed textalign="true" justify="center">
@@ -200,8 +244,14 @@ export default function InterviewQuestions() {
             designed to do?
           </FormLabel>
           <RadioGroup>
-            <FormControlLabel value="yes" control={<Radio />} label="yes" />
-            <FormControlLabel value="no" control={<Radio />} label="no" />
+            <FormControlLabel
+              control={<Radio value="yes" onChange={handleChange} />}
+              label="Yes"
+            />
+            <FormControlLabel
+              control={<Radio value="no" onChange={handleChange} />}
+              label="No"
+            />
           </RadioGroup>
         </FormControl>
       </Box>
@@ -213,12 +263,7 @@ export default function InterviewQuestions() {
           height: '100%',
         }}
       >
-        <FormControl
-          value={interviewPostHighSchoolCoaching}
-          onChange={(e) => {
-            setinterviewPostHighSchoolCoaching();
-          }}
-        >
+        <FormControl>
           <FormLabel id="radio-button-q7">
             {' '}
             7. Are you interested in participating in one on one coaching
@@ -228,8 +273,14 @@ export default function InterviewQuestions() {
           // aria-labelledby="demo-radio-buttons-group-label"
           // name="radio-buttons-group"
           >
-            <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="no" control={<Radio />} label="No" />
+            <FormControlLabel
+              control={<Radio value="yes" onChange={handleChange1} />}
+              label="Yes"
+            />
+            <FormControlLabel
+              control={<Radio value="no" onChange={handleChange1} />}
+              label="No"
+            />
           </RadioGroup>
         </FormControl>
       </Box>
@@ -241,12 +292,7 @@ export default function InterviewQuestions() {
           height: '100%',
         }}
       >
-        <FormControl
-          value={interviewScheduleManagement}
-          onChange={(e) => {
-            setinterviewScheduleManagement();
-          }}
-        >
+        <FormControl>
           <FormLabel id="radio-button-q8">
             {' '}
             8. Are you willing to manage your schedule to meet the program
@@ -256,8 +302,14 @@ export default function InterviewQuestions() {
           // aria-labelledby="demo-radio-buttons-group-label"
           // name="radio-buttons-group"
           >
-            <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="no" control={<Radio />} label="No" />
+            <FormControlLabel
+              control={<Radio value="yes" onChange={handleChange2} />}
+              label="Yes"
+            />
+            <FormControlLabel
+              control={<Radio value="no" onChange={handleChange2} />}
+              label="No"
+            />
           </RadioGroup>
         </FormControl>
       </Box>
@@ -269,12 +321,7 @@ export default function InterviewQuestions() {
           height: '100%',
         }}
       >
-        <FormControl
-          value={interviewCommunicateWithMentors}
-          onChange={(e) => {
-            setinterviewCommunicateWithMentors();
-          }}
-        >
+        <FormControl>
           <FormLabel id="radio-button-q9">
             {' '}
             9. Are you able to communicate the expectations to your
@@ -284,8 +331,14 @@ export default function InterviewQuestions() {
           // aria-labelledby="demo-radio-buttons-group-label"
           // name="radio-buttons-group"
           >
-            <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="no" control={<Radio />} label="No" />
+            <FormControlLabel
+              control={<Radio value="yes" onChange={handleChange3} />}
+              label="Yes"
+            />
+            <FormControlLabel
+              control={<Radio value="no" onChange={handleChange3} />}
+              label="No"
+            />
           </RadioGroup>
         </FormControl>
       </Box>
@@ -297,12 +350,7 @@ export default function InterviewQuestions() {
           height: '100%',
         }}
       >
-        <FormControl
-          value={interviewDiverseClass}
-          onChange={(e) => {
-            setinterviewDiverseClass();
-          }}
-        >
+        <FormControl>
           <FormLabel id="radio-button-q10">
             {' '}
             10. Are you willing to be in a class with a diverse group of
@@ -312,8 +360,14 @@ export default function InterviewQuestions() {
           // aria-labelledby="demo-radio-buttons-group-label"
           // name="radio-buttons-group"
           >
-            <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="no" control={<Radio />} label="No" />
+            <FormControlLabel
+              control={<Radio value="yes" onChange={handleChange4} />}
+              label="Yes"
+            />
+            <FormControlLabel
+              control={<Radio value="no" onChange={handleChange4} />}
+              label="No"
+            />
           </RadioGroup>
         </FormControl>
       </Box>
@@ -325,12 +379,7 @@ export default function InterviewQuestions() {
           height: '100%',
         }}
       >
-        <FormControl
-          value={interviewOpenMinded}
-          onChange={(e) => {
-            setinterviewOpenMinded();
-          }}
-        >
+        <FormControl>
           <FormLabel id="radio-button-q11">
             {' '}
             11. Are you willing to be open minded and courteous to your peers so
@@ -340,8 +389,14 @@ export default function InterviewQuestions() {
           // aria-labelledby="demo-radio-buttons-group-label"
           // name="radio-buttons-group"
           >
-            <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="no" control={<Radio />} label="No" />
+            <FormControlLabel
+              control={<Radio value="yes" onChange={handleChange5} />}
+              label="Yes"
+            />
+            <FormControlLabel
+              control={<Radio value="no" onChange={handleChange5} />}
+              label="No"
+            />
           </RadioGroup>
         </FormControl>
       </Box>
@@ -353,12 +408,7 @@ export default function InterviewQuestions() {
           height: '100%',
         }}
       >
-        <FormControl
-          value={interviewProfessionalRepresentation}
-          onChange={(e) => {
-            setinterviewProfessionalRepresentation();
-          }}
-        >
+        <FormControl>
           <FormLabel id="demo-radio-buttons-group-label">
             {' '}
             12. Are you willing to do what is necessary to represent the
@@ -368,8 +418,14 @@ export default function InterviewQuestions() {
             // aria-labelledby="demo-radio-buttons-group-label"
             name="radio-buttons-group"
           >
-            <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="no" control={<Radio />} label="No" />
+            <FormControlLabel
+              control={<Radio value="yes" onChange={handleChange6} />}
+              label="Yes"
+            />
+            <FormControlLabel
+              control={<Radio value="no" onChange={handleChange6} />}
+              label="No"
+            />
           </RadioGroup>
         </FormControl>
       </Box>
@@ -381,12 +437,7 @@ export default function InterviewQuestions() {
           height: '100%',
         }}
       >
-        <FormControl
-          value={interviewTryingNewThings}
-          onChange={(e) => {
-            setinterviewTryingNewThings();
-          }}
-        >
+        <FormControl>
           <FormLabel id="demo-radio-buttons-group-label">
             {' '}
             13. Are you willing to try new things and things that may have been
@@ -396,8 +447,14 @@ export default function InterviewQuestions() {
             // aria-labelledby="demo-radio-buttons-group-label"
             name="radio-buttons-group"
           >
-            <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-            <FormControlLabel value="no" control={<Radio />} label="No" />
+            <FormControlLabel
+              control={<Radio value="yes" onChange={handleChange7} />}
+              label="Yes"
+            />
+            <FormControlLabel
+              control={<Radio value="no" onChange={handleChange7} />}
+              label="No"
+            />
           </RadioGroup>
         </FormControl>
       </Box>
@@ -410,12 +467,7 @@ export default function InterviewQuestions() {
         }}
       >
         {' '}
-        <FormControl
-          value={interviewCommitToActivities}
-          onChange={(e) => {
-            setinterviewCommitToActivities();
-          }}
-        >
+        <FormControl>
           <FormLabel id="demo-radio-buttons-group-label">
             {' '}
             It&rsquo;s important that you understand what you are committing to.
@@ -429,18 +481,15 @@ export default function InterviewQuestions() {
             name="radio-buttons-group"
           >
             <FormControlLabel
-              value="yes"
-              control={<Radio />}
+              control={<Radio value="yes" onChange={handleChange8} />}
               label="Very Confident"
             />
             <FormControlLabel
-              value="maybe"
-              control={<Radio />}
+              control={<Radio value="maybe" onChange={handleChange8} />}
               label="Mildly Confident"
             />
             <FormControlLabel
-              value="no"
-              control={<Radio />}
+              control={<Radio value="no" onChange={handleChange8} />}
               label="Not Confident at all"
             />
           </RadioGroup>
