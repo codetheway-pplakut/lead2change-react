@@ -19,12 +19,23 @@ export default function RegisterCoachModal(props) {
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const Register = () => {
-    handleClose();
-    addFunction(firstName, lastName, email, phoneNumber);
+    if (
+      email.includes('@') &&
+      firstName.length > 0 &&
+      lastName.length > 0 &&
+      phoneNumber.length > 0
+    ) {
+      handleClose();
+      addFunction(firstName, lastName, email, phoneNumber);
+    }
   };
   return (
     <div>
-      <ColorButton variant="contained" onClick={handleOpen}>
+      <ColorButton
+        sx={{ minWidth: '120px' }}
+        variant="contained"
+        onClick={handleOpen}
+      >
         + Register
       </ColorButton>
       <Modal
@@ -34,12 +45,12 @@ export default function RegisterCoachModal(props) {
       >
         <Grid container variant="large">
           <Grid container>
-            <Grid item sx={{ bgcolor: '#004cbb', color: 'white' }} xs={12}>
+            <Grid item sx={{ bgcolor: '#2656A5', color: 'white' }} xs={12}>
               <Grid container alignItems="center" sx={{ margin: 1 }}>
                 <Grid item xs={2} />
                 <Grid item xs={8}>
                   <Typography variant="h5" component="h2" align="center">
-                    Register
+                    Register Coach
                   </Typography>
                 </Grid>
                 <Grid item xs={1} />
@@ -63,6 +74,8 @@ export default function RegisterCoachModal(props) {
                   <TextField
                     value={firstName}
                     fullWidth
+                    helperText={firstName.length < 1 ? 'Enter First Name' : ' '}
+                    error={firstName.length < 1}
                     label="First Name"
                     variant="outlined"
                     size="small"
@@ -75,6 +88,8 @@ export default function RegisterCoachModal(props) {
                 <Grid item xs={6}>
                   <TextField
                     value={lastName}
+                    helperText={lastName.length < 1 ? 'Enter Last Name' : ' '}
+                    error={lastName.length < 1}
                     fullWidth
                     label="Last Name"
                     variant="outlined"
@@ -88,6 +103,10 @@ export default function RegisterCoachModal(props) {
                   <TextField
                     value={email}
                     fullWidth
+                    error={!email.includes('@')}
+                    helperText={
+                      !email.includes('@') ? 'Must contain an @ sign.' : ' '
+                    }
                     label="Email"
                     variant="outlined"
                     size="small"
@@ -100,11 +119,15 @@ export default function RegisterCoachModal(props) {
                   <TextField
                     value={phoneNumber}
                     fullWidth
+                    helperText={
+                      phoneNumber.length < 1 ? 'Enter Phone Number' : ' '
+                    }
+                    error={phoneNumber.length < 1}
                     label="Phone Number"
                     variant="outlined"
                     size="small"
                     onChange={(e) => {
-                      setPhoneNumber(e.target.value);
+                      setPhoneNumber(e.target.value.replace(' ', '-'));
                     }}
                   />
                 </Grid>
