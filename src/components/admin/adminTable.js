@@ -9,42 +9,26 @@ import TableHead from '@mui/material/TableHead';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
-import Paper from '@mui/material/Paper';
-
+import { Stack } from '@mui/material';
 import DeleteAdminModal from './deleteAdminModal';
 import RegisterAdminModal from './registerAdminModal';
 import SearchBar from './SearchBar';
 
-import {
-  getAdmins,
-  // addAdmin,
-  // updateAdmin,
-  // getAdminById,
-} from '../../services/Admin/admin';
+import { getAdmins } from '../../services/Admin/admin';
 
 import ProgressIndicatorOverlay from '../progress-indicator-overlay/progress-indicator-overlay';
 
 const tablePositioning = {
-  backgroundColor: '#3764A8',
-  color: 'white',
-  fontSize: 'large',
-  width: '50%',
-  marginLeft: '25%',
-  marginRight: '25%',
+  height: '65vh',
+  bgcolor: 'white',
 };
 
 const tableHeadingText = {
-  color: 'white',
-  fontSize: 'large',
   padding: 'normal',
   align: 'left',
-};
-
-const tableDelete = {
+  backgroundColor: '#004cbb',
   color: 'white',
-  fontSize: 'large',
-  padding: 'normal',
-  align: 'left',
+  textColor: 'white',
 };
 
 export default function AdminTable() {
@@ -65,33 +49,27 @@ export default function AdminTable() {
   }, []);
 
   return (
-    <Paper sx={{ width: '100%' }}>
+    <Box
+      sx={{ width: '75%', height: '60%', margin: 'auto', marginBottom: '5%' }}
+    >
       <ProgressIndicatorOverlay active={isLoading} />
-
-      <Box sx={{ mt: '10px', mb: '10px' }}>
-        <Grid container alignItems="center" spacing={1}>
-          <Grid item xs={7.7} align="right">
-            <SearchBar setSearch={setSearch} />
-          </Grid>
-          <Grid item xs={1.5} align="right" padding={2}>
-            <RegisterAdminModal />
-          </Grid>
-        </Grid>
-      </Box>
+      <div>
+        <Stack direction="row" spacing={1} alignItems="center">
+          <SearchBar setSearch={setSearch} />
+          <div sx={{ minWidth: '200px' }}>
+            <RegisterAdminModal minWidth="1200px" />
+          </div>
+        </Stack>
+      </div>
 
       <TableContainer sx={tablePositioning}>
-        <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
+        <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" stickyHeader>
           <TableHead>
             <TableRow>
               <TableCell align="left" sx={tableHeadingText}>
-                <Grid container>
-                  <Grid item xs={3} />
-                  <Grid item xs={7}>
-                    Email
-                  </Grid>
-                </Grid>
+                Email
               </TableCell>
-              <TableCell align="left" sx={tableDelete}>
+              <TableCell align="left" sx={tableHeadingText}>
                 Delete
               </TableCell>
             </TableRow>
@@ -108,15 +86,8 @@ export default function AdminTable() {
                 return null;
               })
 
-              .map((admin, index) => (
-                <TableRow
-                  key={admin.id}
-                  sx={
-                    index % 2
-                      ? { background: '#eeeeee' }
-                      : { background: 'white' }
-                  }
-                >
+              .map((admin) => (
+                <TableRow key={admin.id}>
                   <TableCell component="th" scope="row">
                     <Grid container>
                       <Grid item xs={2} />
@@ -133,6 +104,6 @@ export default function AdminTable() {
           </TableBody>
         </Table>
       </TableContainer>
-    </Paper>
+    </Box>
   );
 }

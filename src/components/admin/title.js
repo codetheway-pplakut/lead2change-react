@@ -7,9 +7,10 @@ export default function Title(){
         <Box
         sx={{
             width: '100%',
-            mt: '20px',
+            marginTop: '2%',
+            marginBottom: '2%',
         }}>
-            <Typography align="center" variant="h2" color="black" fontWeight="bold">ADMINISTRATORS</Typography>
+            <Typography align="center" variant="h2" fontWeight="bold">ADMINISTRATORS</Typography>
         </Box>
     );
 }
