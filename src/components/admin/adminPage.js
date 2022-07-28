@@ -1,16 +1,13 @@
-/* eslint-disable prettier/prettier */
 import Navbar from './sampleNavbar';
 import Title from './title';
 import AdminTable from './adminTable';
- 
-export default function AdminPage(){
- 
- 
-    return (
-        <div>
-            <Navbar />
-            <Title />
-            <AdminTable />
-        </div>
-    );
+
+export default function AdminPage() {
+  return (
+    <div>
+      <Navbar />
+      <Title />
+      <AdminTable />
+    </div>
+  );
 }
