@@ -2,9 +2,8 @@
 /* eslint-disable no-useless-return */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable react/button-has-type */
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { experimentalStyled as styled } from '@mui/material/styles';
-import { useEffect, useState } from 'react';
 
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
@@ -47,20 +46,6 @@ const GridText = styled(Paper)(({ theme }) => ({
 }));
 
 function DisplayBanner() {
-export default function ResponsiveGrid(props) {
-  const { studentId } = useParams();
-  const [students, setStudents] = useState({});
-
-  useEffect(() => {
-    const currentStudent = async () => {
-      const currStudent = await getStudentById(studentId);
-      setStudents(currStudent);
-    };
-    currentStudent();
-  }, [studentId]);
-
-  const navigate = useNavigate();
-  const buttonText = '< Back to table';
   return (
     <Grid
       item
@@ -73,32 +58,17 @@ export default function ResponsiveGrid(props) {
       }}
       sx={{ width: '100%' }}
     >
-      <h1>Aadi&rsquo;s Details</h1>
+      <h1>
+        {students.studentFirstName} {students.studentLastName}&rsquo;s Details
+      </h1>
     </Grid>
   );
 }
-
-
 
 function SignUpDisplay(props) {
   const { onEditClick } = props;
   return (
     <Grid container>
-      <Grid
-        item
-        align="center"
-        style={{
-          backgroundColor: '#2656A5',
-          marginBottom: '3vh',
-          color: '#FFFFFF',
-          padding: '0.1vh',
-        }}
-        sx={{ width: '100%' }}
-      >
-        <h1>
-          {students.studentFirstName} {students.studentLastName}&rsquo;s Details
-        </h1>
-      </Grid>
       <Grid item xs={4}>
         <Paper
           sx={{
@@ -318,6 +288,20 @@ SignUpEdit.propTypes = {
 };
 
 export default function ResponsiveGrid(props) {
+  const { studentId } = useParams();
+  const [students, setStudents] = useState({});
+
+  useEffect(() => {
+    const currentStudent = async () => {
+      const currStudent = await getStudentById(studentId);
+      setStudents(currStudent);
+    };
+    currentStudent();
+  }, [studentId]);
+
+  const navigate = useNavigate();
+  const buttonText = '< Back to table';
+
   const [isEditing, setIsEditing] = useState(false);
   const startEditing = () => setIsEditing(true);
   const endEditing = () => setIsEditing(false);
@@ -346,8 +330,6 @@ export default function ResponsiveGrid(props) {
   const onBackClick = () => {
     navigate(ROUTES.STUDENT_TEST);
   };
-  const navigate = useNavigate();
-  const buttonText = '< Back to table';
 
   const [disabled, setDisabled] = useState(false);
 
