@@ -3,11 +3,11 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import SignUpForm from './sign-up-form/sign-up-form';
-// import signUp from '../../services/sign-up/sign-up';
-import { addStudent } from '../../services/students/students';
+
+import { addStudent, getStudents } from '../../services/students/students';
 import ROUTES from '../../constants/routes';
 import ProgressIndicatorOverlay from '../progress-indicator-overlay/progress-indicator-overlay';
 
@@ -21,21 +21,46 @@ export default function SignUp() {
 
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const [students, setStudents] = useState([]);
+
+  const refreshStudents = async () => {
+    setIsLoading(true);
+    const response = await getStudents();
+
+    setIsLoading(false);
+    setStudents(response);
+  };
+  useEffect(() => {
+    refreshStudents();
+  }, []);
 
   const onSignUpFormSubmit = async () => {
     const dateOfBirth = new Date(dob);
     const student = {
       email,
       firstName,
-      lastName /* password */,
+      lastName,
       dateOfBirth,
       cellPhone,
     };
-    setIsLoading(true);
 
-    await addStudent(student);
-    setIsLoading(false);
-    navigate(ROUTES.SIGN_UP_SUCCESS);
+    const filteredStudents = students.filter((studentx) => {
+      if (
+        studentx.email === student.email &&
+        studentx.firstName === student.firstName &&
+        studentx.lastName === student.lastName
+      ) {
+        return true;
+      }
+      return false;
+    });
+
+    if (filteredStudents.length > 0) {
+      console.log('Existing Student');
+    } else {
+      await addStudent(student);
+      navigate(ROUTES.SIGN_UP_SUCCESS);
+    }
   };
 
   return (

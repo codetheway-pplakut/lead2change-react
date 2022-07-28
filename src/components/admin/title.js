@@ -1,17 +1,16 @@
-/* eslint-disable prettier/prettier */
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-export default function title() {
+export default function Title() {
   return (
     <Box
       sx={{
         width: '100%',
-        backgroundColor: '#3764A8',
-        mt: '20px',
+        marginTop: '2%',
+        marginBottom: '2%',
       }}
     >
-      <Typography align="center" variant="h2" color="white" fontWeight="bold">
+      <Typography align="center" variant="h2" fontWeight="bold">
         ADMINISTRATORS
       </Typography>
     </Box>

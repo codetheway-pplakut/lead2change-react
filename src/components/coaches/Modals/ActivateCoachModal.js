@@ -23,7 +23,7 @@ export default function ReactivationModal(props) {
       students: coach.students,
       active: true,
     };
-    updateFunction(updatedCoach);
+    updateFunction(updatedCoach, true);
   };
   return (
     <div>
@@ -37,12 +37,12 @@ export default function ReactivationModal(props) {
       >
         <Grid container variant="small">
           <Grid container>
-            <Grid item sx={{ bgcolor: '#004cbb', color: 'white' }} xs={12}>
+            <Grid item sx={{ bgcolor: '#2656A5', color: 'white' }} xs={12}>
               <Grid container alignItems="center" sx={{ margin: 1 }}>
                 <Grid item xs={2} />
                 <Grid item xs={8}>
                   <Typography variant="h5" component="h2" align="center">
-                    Reactivation
+                    Reactivate Coach
                   </Typography>
                 </Grid>
                 <Grid item>
