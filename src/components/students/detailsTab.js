@@ -170,7 +170,7 @@ function SignUpDisplay(props) {
                     <Box component="span" style={{ fontWeight: 'normal' }}>
                       {students.psatTestScore}
                     </Box>{' '}
-                    <Box component="span" style={{ marginLeft: '28.35vh' }}>
+                    <Box component="span" style={{ marginLeft: '20.3vh' }}>
                       SAT Score:{' '}
                       <Box component="span" style={{ fontWeight: 'normal' }}>
                         {students.satTestDate}
@@ -194,7 +194,7 @@ function SignUpDisplay(props) {
                     <Box component="span" style={{ fontWeight: 'normal' }}>
                       {students.pactTestScore}
                     </Box>{' '}
-                    <Box component="span" style={{ marginLeft: '28.35vh' }}>
+                    <Box component="span" style={{ marginLeft: '22vh' }}>
                       ACT Score:{' '}
                       <Box component="span" style={{ fontWeight: 'normal' }}>
                         {students.actTestScore}
