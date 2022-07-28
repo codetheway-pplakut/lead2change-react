@@ -7,8 +7,8 @@ const ROUTES = {
   INTERVIEW_PAGE: '/interview/interviewPage',
   ADMIN: '/admin/adminPage',
   COACHES: '/coaches/Coaches',
-  STUDENTS: '/students/student-test',
-  STUDENT_INFO: '/students/StudentInfo',
+  STUDENTS: '/students/students-page',
+  STUDENT_INFO: '/students/student-info',
   RESET_PASS: '/login',
 };
 

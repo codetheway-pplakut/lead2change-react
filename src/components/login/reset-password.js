@@ -34,12 +34,12 @@ function ResetPassword() {
     // if ((newPassword && confirmNewPassword) !== validRegex) {
     // console.log('must match vaildRergex: 8 characters, 1 number, 1 special character)
     if (newPassword === confirmNewPassword) {
-      console.log('Both field match now the password will be changed.');
+      // console.log('Both field match now the password will be changed.');
       setChangeButton(true);
     } else {
-      console.log(
-        'Both fields do not match, so your password will not be changed'
-      );
+      // console.log(
+      //   'Both fields do not match, so your password will not be changed'
+      // );
     }
     // }
   };

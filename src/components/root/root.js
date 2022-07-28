@@ -15,9 +15,10 @@ import ApiDemo from '../api-demo/api-demo';
 import BasicTabs from '../interview/tabs';
 import Coaches from '../coaches/Coaches';
 import InterviewPage from '../interview/interview-page';
-import Student from '../students/student-test';
+import Student from '../students/students-page';
 import ResponsiveGrid from '../students/StudentInfo';
 import AdminPage from '../admin/adminPage';
+import TabsFunction from '../students/detailsTab';
 
 const theme = createTheme();
 
@@ -39,6 +40,14 @@ export default function Root() {
               <Route path={ROUTES.RESET_PASS} element={<Reset />} />
               <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
               <Route path={ROUTES.INTERVIEW_PAGE} element={<InterviewPage />} />
+              <Route
+                path="/StudentInfo/:studentId"
+                element={<ResponsiveGrid />}
+              />
+              <Route
+                path="/detailsTab/:studentId:goalId"
+                element={<TabsFunction />}
+              />
               <Route path={ROUTES.TABS} element={<BasicTabs />} />
               <Route path={ROUTES.COACHES} element={<Coaches />} />
               <Route path={ROUTES.STUDENTS} element={<Student />} />

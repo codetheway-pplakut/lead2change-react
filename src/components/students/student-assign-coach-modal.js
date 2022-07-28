@@ -1,28 +1,49 @@
 /* eslint-disable react/require-default-props */
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import Modal from '@mui/material/Modal';
-import IconButton from '@mui/material/IconButton';
+import {
+  Box,
+  Button,
+  Grid,
+  IconButton,
+  Modal,
+  Stack,
+  styled,
+  Typography,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
+} from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
-
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 
 import { getCoachById, getCoaches } from '../../services/coaches/coaches';
 
+const StyledButton = styled(Button)({
+  backgroundColor: '#004cbb',
+  '&:hover': {
+    backgroundColor: '#005ade',
+  },
+});
+const CancelButton = styled(Button)({
+  backgroundColor: '#7e8794',
+  '&:hover': {
+    backgroundColor: '#8698b3',
+  },
+});
+const StyledRadio = styled(Radio)({
+  '&.Mui-checked': {
+    color: '#005ade',
+  },
+});
+
 export default function CoachAssignModal(props) {
   const { confirmHandler, studentId, coachId } = props;
-  const [coaches, setCoaches] = useState([]);
-  const [value, setValue] = useState('Unassigned');
-  const [newCoachId, setNewCoachId] = useState('');
+  const [coaches, setCoaches] = React.useState([]);
+  const [value, setValue] = React.useState(coachId);
+  const [newCoachId, setNewCoachId] = React.useState('');
   const refreshCoaches = async () => {
     const response = await getCoaches();
     setCoaches(response);
@@ -43,7 +64,8 @@ export default function CoachAssignModal(props) {
     p: 4,
   };
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const confirm = () => {
@@ -53,19 +75,16 @@ export default function CoachAssignModal(props) {
     handleClose();
   };
 
-  const handleGetCoach = (id) => {
-    if (id !== null) {
-      const coachName = `${getCoachById(id).coachFirstName} ${
-        getCoachById(id).coachLastName
-      }`;
-      return coachName;
-    }
-    return 'Unassigned';
+  const getCoachName = (coach) => {
+    let coachName = coach.coachFirstName;
+    coachName += ' ';
+    coachName += coach.coachLastName;
+    return coachName;
   };
 
   const handleCoachChange = (event) => {
     setValue(event.target.value);
-    setNewCoachId(value.value);
+    setNewCoachId(value);
   };
 
   let denySubmit = true;
@@ -73,48 +92,57 @@ export default function CoachAssignModal(props) {
     denySubmit = false;
   }
 
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
   return (
     <div>
-      {handleGetCoach(coachId)}{' '}
-      <IconButton onClick={handleOpen}>
-        {' '}
-        <EditIcon />{' '}
-      </IconButton>
+      <Stack direction="row">
+        {coachId !== null && <p>Coach Name</p>}
+        {coachId === null && <p>Unassigned</p>}
+        <IconButton onClick={handleOpen}>
+          <EditIcon />
+        </IconButton>
+      </Stack>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
+          <Grid item xs={12}>
+            <Typography variant="h6" align="center" component="span">
+              Assign A Coach
+            </Typography>
+          </Grid>
           <FormControl>
-            <FormLabel>Coaches</FormLabel>
             <RadioGroup value={value} onChange={handleCoachChange}>
               <FormControlLabel
                 value="Unassigned"
-                control={<Radio />}
+                control={<StyledRadio />}
                 label="Unassigned"
               />
               {coaches.map((coach) => (
                 <FormControlLabel
                   value={coach.id}
-                  control={<Radio />}
-                  label={handleGetCoach(coach.id)}
+                  control={<StyledRadio />}
+                  label={getCoachName(coach)}
+                  key={coach.id}
                 />
               ))}
             </RadioGroup>
           </FormControl>
           <Grid container spacing={4} sx={{ mt: '1vh' }}>
             <Grid item xs={6} align="center">
-              <Button
+              <StyledButton
                 variant="contained"
-                color="warning"
                 onClick={confirm}
                 fullWidth
                 disabled={denySubmit}
               >
                 Assign
-              </Button>
+              </StyledButton>
             </Grid>
             <Grid item xs={6} align="center">
-              <Button variant="contained" onClick={handleClose} fullWidth>
+              <CancelButton variant="contained" onClick={handleClose} fullWidth>
                 Cancel
-              </Button>
+              </CancelButton>
             </Grid>
           </Grid>
         </Box>
