@@ -14,14 +14,14 @@ import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import ROUTES from '../../constants/routes';
-import { useParams } from 'react-router-dom';
+
 import { getStudentById } from '../../services/students/students';
 import { getGoalById } from '../../services/goals/goals';
 
@@ -224,7 +224,7 @@ function SignUpDisplay(props) {
                     {students.supportNeeded}
                   </h5>
                   <h5>Support they need: None</h5>
-                </Grid>
+                </GridText>
               </Grid>
             </Grid>
           </Box>
@@ -328,7 +328,7 @@ function SignUpDisplay(props) {
                   <h5>Date Signed: {students.studentSignatureDate}</h5>
                   <h5>Parent Signature: {students.parentSignature}</h5>
                   <h5>Date Signed: {students.parentSignatureDate}</h5>
-                </Grid>
+                </GridText>
               </Grid>
             </Grid>
           </Box>
