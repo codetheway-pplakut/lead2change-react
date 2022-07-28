@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-
 import StudentTable from './studentTable';
 import StudentModal from './studentModal';
 
 import AddCareerModal from '../career/add-career-modal';
+import CreateGoalModal from './create-goal-modal';
 
 const theme = createTheme({
   components: {
@@ -84,6 +84,7 @@ export default function Student(props) {
           sx={{ mx: '20vh' }}
         >
           <StudentTable />
+          <CreateGoalModal studentId="b0ba6354-eb97-49b1-a030-08da6b234c0f" />
           <AddCareerModal studentId="b0ba6354-eb97-49b1-a030-08da6b234c0f" />
         </Stack>
       </ThemeProvider>
