@@ -20,9 +20,6 @@ import {
   TextField,
   Stack,
 } from '@mui/material';
-import { useNavigate } from 'react-router';
-import ROUTES from '../../constants/routes';
-import ColorButton from './Shared/ColoredButton';
 import StudentListModal from './StudentListModal';
 import InactivationModal from './Modals/DeactivateCoachModal';
 import EditCoachModal from './Modals/EditCoachModal';
@@ -141,16 +138,11 @@ EnhancedTableHead.propTypes = {
 
 export default function CoachesList(props) {
   const { rows, addFunction, updateFunction, unassignFunction } = props;
-  const navigate = useNavigate();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('name');
   const [searchTerm, setSearchTerm] = React.useState('');
   const [sortActive, setSortActive] = React.useState(true);
   const [value, setValue] = React.useState(0);
-  const onBackClick = () => {
-    navigate(ROUTES.HOME);
-  };
-  const buttonText = '< Back to Home';
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -319,15 +311,6 @@ export default function CoachesList(props) {
           </TableBody>
         </Table>
       </TableContainer>
-      <ColorButton
-        variant="outlined"
-        size="small"
-        justify="left"
-        onClick={onBackClick}
-        sx={{ mt: '1vh' }}
-      >
-        {buttonText}
-      </ColorButton>
     </Box>
   );
 }
