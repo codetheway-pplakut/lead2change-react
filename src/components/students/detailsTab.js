@@ -128,7 +128,7 @@ function SignUpDisplay(props) {
                 sx={{ minWidth: 10, height: 'max-content' }}
                 style={{ height: '64vh' }}
               >
-                <GridText>
+                <Box>
                   {' '}
                   <Button
                     style={{ float: 'right' }}
@@ -224,7 +224,7 @@ function SignUpDisplay(props) {
                     {students.supportNeeded}
                   </h5>
                   <h5>Support they need: None</h5>
-                </GridText>
+                </Box>
               </Grid>
             </Grid>
           </Box>
@@ -233,7 +233,7 @@ function SignUpDisplay(props) {
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">
               <Grid item xs={12} style={{ height: '64vh' }}>
-                <GridText>
+                <Box>
                   <Button
                     style={{ float: 'right' }}
                     variant="contained"
@@ -269,7 +269,7 @@ function SignUpDisplay(props) {
                   <h5>
                     Explanation: Trying to get a 4.3 GPA in all of my classes{' '}
                   </h5>
-                </GridText>
+                </Box>
               </Grid>
             </Grid>
           </Box>
@@ -295,7 +295,7 @@ function SignUpDisplay(props) {
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">
               <Grid item xs={12} style={{ height: '64vh' }}>
-                <GridText>
+                <Box>
                   <Button
                     style={{ float: 'right' }}
                     variant="contained"
@@ -328,7 +328,7 @@ function SignUpDisplay(props) {
                   <h5>Date Signed: {students.studentSignatureDate}</h5>
                   <h5>Parent Signature: {students.parentSignature}</h5>
                   <h5>Date Signed: {students.parentSignatureDate}</h5>
-                </GridText>
+                </Box>
               </Grid>
             </Grid>
           </Box>
