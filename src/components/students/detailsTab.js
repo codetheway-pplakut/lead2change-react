@@ -333,6 +333,7 @@ SignUpDisplay.propTypes = {
 function SignUpEdit(props) {
   const { onSaveClick, onCancelClick } = props;
   const [value, setValue] = React.useState(0);
+  const [students, setStudents] = useState({});
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -340,7 +341,9 @@ function SignUpEdit(props) {
   const [first, setFirst] = useState('');
   return (
     <div style={{ marginRight: '8vh' }}>
-      <Box sx={{ bgcolor: 'background.paper', width: '100vh' }}>
+      <Box
+        sx={{ bgcolor: 'background.paper', width: '100vh', overflowY: 'auto' }}
+      >
         <form onSubmit={onSaveClick}>
           <AppBar position="static">
             <Tabs
@@ -380,7 +383,7 @@ function SignUpEdit(props) {
                       fullWidth
                       maxRows={4}
                       variant="filled"
-                      defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
+                      defaultValue={students.planAfterHighSchool}
                       label="Plans after college"
                       onChange={(event) => setFirst(event.target.value)}
                       required
@@ -393,7 +396,7 @@ function SignUpEdit(props) {
                       fullWidth
                       maxRows={4}
                       variant="filled"
-                      defaultValue="1. Purde, 2. Madison, 3. MIT"
+                      defaultValue={students.collegesList}
                       label="Colleges Plan/Applied To"
                       onChange={(event) => setFirst(event.target.value)}
                       required
@@ -403,7 +406,7 @@ function SignUpEdit(props) {
                     <TextField
                       size="small"
                       className="typing-container"
-                      defaultValue="Northwestern"
+                      defaultValue={students.firstChoiceCollege}
                       label="College First Choice"
                       onChange={(event) => setFirst(event.target.value)}
                       required
@@ -478,7 +481,7 @@ function SignUpEdit(props) {
                     <TextField
                       size="small"
                       className="typing-container"
-                      defaultValue="35"
+                      defaultValue={students.pactTestScore}
                       label="PACT Score"
                       type="number"
                       onChange={(event) => setFirst(event.target.value)}
@@ -498,10 +501,10 @@ function SignUpEdit(props) {
                     <TextField
                       size="small"
                       className="typing-container"
-                      defaultValue="35"
+                      defaultValue={students.psatTestScore}
                       label="PSAT Score"
                       type="number"
-                      onChange={(event) => setFirst(event.target.value)}
+                      onChange={(e) => setFirst(e.target.value)}
                       required
                     />
                     <TextField
