@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import {
   Button,
   Grid,
@@ -9,6 +10,7 @@ import {
   TextField,
   Container,
 } from '@mui/material';
+import { requestReset } from '../../services/users/users';
 
 const style = {
   position: 'absolute',
@@ -29,15 +31,18 @@ function ForgotPassword() {
   const handleClose = () => setOpen(false);
   const [enteredEmail, setEmail] = useState('');
 
-  const emailHandler = (event) => {
+  const emailHandler = async (event) => {
     // const validRegex = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.(com|edu|org)$/i; old /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
     event.preventDefault();
 
     const re =
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if (re.test(enteredEmail)) {
       console.log(enteredEmail);
+      await requestReset(enteredEmail);
+      console.log('Test');
+
       setIsError(true);
     } else {
       setIsError(false);
