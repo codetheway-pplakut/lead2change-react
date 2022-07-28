@@ -6,7 +6,7 @@ import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import SignUpForm from './sign-up-form/sign-up-form';
-import signUp from '../../services/sign-up/sign-up';
+// import signUp from '../../services/sign-up/sign-up';
 import { addStudent } from '../../services/students/students';
 import ROUTES from '../../constants/routes';
 import ProgressIndicatorOverlay from '../progress-indicator-overlay/progress-indicator-overlay';
@@ -31,10 +31,10 @@ export default function SignUp() {
       dateOfBirth,
       cellPhone,
     };
-    /* setIsLoading(true); */
+    setIsLoading(true);
 
     await addStudent(student);
-    /* setIsLoading(false); */
+    setIsLoading(false);
     navigate(ROUTES.SIGN_UP_SUCCESS);
   };
 
