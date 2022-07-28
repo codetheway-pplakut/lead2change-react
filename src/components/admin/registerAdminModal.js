@@ -12,17 +12,6 @@ import { createTheme } from '@mui/material/styles';
 import { addAdmin, getAdmins } from '../../services/Admin/admin';
 
 export default function RegisterAdminModal() {
-  const modalPosition = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    width: 430,
-    transform: 'translate(-50%, -50%)',
-    bgcolor: 'background.paper',
-    borderRadius: '10px',
-    boxShadow: 24,
-  };
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -49,13 +38,27 @@ export default function RegisterAdminModal() {
     window.location.reload(true);
   };
 
-  const newAdmin = () => {
+  const newAdmin = async (adminEmail, adminPass, adminConfirmPass) => {
     const admin = {
-      email,
-      password,
-      confirmPassword,
+      email: adminEmail,
+      password: adminPass,
+      confirmPassword: adminConfirmPass,
     };
-    addAdmin(admin);
+    await addAdmin(admin);
+    handleClose();
+    await getAdmins();
+    refreshPage();
+  };
+
+  const modalPosition = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    width: 430,
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'background.paper',
+    borderRadius: '10px',
+    boxShadow: 24,
   };
 
   const handleRegister = () => {
@@ -119,10 +122,7 @@ export default function RegisterAdminModal() {
     }
 
     if (register === true) {
-      newAdmin();
-      handleClose();
-      getAdmins();
-      refreshPage();
+      newAdmin(email, password, confirmPassword);
     }
   };
 

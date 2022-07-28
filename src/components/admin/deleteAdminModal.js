@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Grid from '@mui/material/Grid';
-import { createTheme } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import PropTypes from 'prop-types';
+import { createTheme } from '@mui/material/styles';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { deleteAdmin, getAdmins } from '../../services/Admin/admin';
 
 export default function DeleteAdminModal(props) {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -22,13 +21,15 @@ export default function DeleteAdminModal(props) {
     window.location.reload(true);
   };
 
+  const refreshAdmins = async () => {
+    await getAdmins();
+    refreshPage();
+  };
+
   const deleteAdministrator = () => {
-    const adminID = id;
-    console.log(adminID);
-    deleteAdmin(adminID);
     handleClose();
-    getAdmins();
-    // refreshPage();
+    deleteAdmin(id);
+    refreshAdmins();
   };
 
   const style = {
@@ -63,10 +64,16 @@ export default function DeleteAdminModal(props) {
       delete: {
         main: '#004cbb',
         contrastText: '#fff',
+        '&:hover': {
+          main: '#1F365E',
+        },
       },
       cancel: {
         main: '#004cbb',
         contrastText: '#fff',
+        '&:hover': {
+          main: '#1F365E',
+        },
       },
     },
     typography: {
