@@ -177,13 +177,10 @@ function SignUpEdit(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [enteredFirstName, setEnteredFirstName] = React.useState(
-    students.studentFirstName
-  );
-  const [enteredDateOfBirth, setEnteredDateOfBirth] = React.useState(
-    students.studentDateOfBirth
-  );
-  const [enteredEmail, setEnteredEmail] = React.useState(students.studentEmail);
+
+  const [enteredFirstName, setEnteredFirstName] = React.useState('');
+  const [enteredDateOfBirth, setEnteredDateOfBirth] = React.useState('');
+  const [enteredEmail, setEnteredEmail] = React.useState('');
 
   const EditField = () => {
     handleClose();
@@ -199,10 +196,18 @@ function SignUpEdit(props) {
   useEffect(() => {
     const currentStudent = async () => {
       const currStudent = await getStudentById(studentId);
+
+      const { studentFirstName, studentEmail, studentDateOfBirth } =
+        currStudent;
       setStudents(currStudent);
+
+      setEnteredFirstName(studentFirstName);
+      setEnteredDateOfBirth(studentDateOfBirth);
+      setEnteredEmail(studentEmail);
     };
     currentStudent();
   }, [studentId]);
+
   return (
     <Grid container>
       <form onSubmit={onSaveClick}>
