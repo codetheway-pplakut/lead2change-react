@@ -173,7 +173,6 @@ function SignUpEdit(props) {
   const { studentId } = useParams();
   const [students, setStudents] = useState({});
   const { onSaveClick, onCancelClick, updateFunction } = props;
-  const [first, setFirst] = useState('');
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -181,6 +180,12 @@ function SignUpEdit(props) {
   const [enteredFirstName, setEnteredFirstName] = React.useState('');
   const [enteredDateOfBirth, setEnteredDateOfBirth] = React.useState('');
   const [enteredEmail, setEnteredEmail] = React.useState('');
+  const [enteredCellPhone, setEnteredCellPhone] = React.useState('');
+  const [enteredAddress, setEnteredAddress] = React.useState('');
+  const [enteredApartmentNumber, setEnteredApartmentNumber] =
+    React.useState('');
+  const [enteredState, setEnteredState] = React.useState('');
+  const [enteredZipCode, setEnteredZipCode] = React.useState('');
 
   const EditField = () => {
     handleClose();
@@ -189,6 +194,11 @@ function SignUpEdit(props) {
       studentFirstName: enteredFirstName,
       studentDateOfBirth: enteredDateOfBirth,
       studentEmail: enteredEmail,
+      studentCellPhone: enteredCellPhone,
+      studentAddress: enteredAddress,
+      studentApartmentNumber: enteredApartmentNumber,
+      studentState: enteredState,
+      studentZipCode: enteredZipCode,
     };
     updateFunction(updatedStudent);
   };
@@ -197,13 +207,26 @@ function SignUpEdit(props) {
     const currentStudent = async () => {
       const currStudent = await getStudentById(studentId);
 
-      const { studentFirstName, studentEmail, studentDateOfBirth } =
-        currStudent;
+      const {
+        studentFirstName,
+        studentEmail,
+        studentDateOfBirth,
+        studentCellPhone,
+        studentAddress,
+        studentApartmentNumber,
+        studentState,
+        studentZipCode,
+      } = currStudent;
       setStudents(currStudent);
 
       setEnteredFirstName(studentFirstName);
       setEnteredDateOfBirth(studentDateOfBirth);
       setEnteredEmail(studentEmail);
+      setEnteredCellPhone(studentCellPhone);
+      setEnteredApartmentNumber(studentApartmentNumber);
+      setEnteredAddress(studentAddress);
+      setEnteredState(studentState);
+      setEnteredZipCode(studentZipCode);
     };
     currentStudent();
   }, [studentId]);
@@ -282,9 +305,9 @@ function SignUpEdit(props) {
                   <TextField
                     size="small"
                     className="typing-container"
-                    value={students.studentCellPhone}
+                    value={enteredCellPhone}
                     label="Cell Phone Number"
-                    onChange={(event) => setFirst(event.target.value)}
+                    onChange={(e) => setEnteredCellPhone(e.target.value)}
                     required
                     focused
                   />
@@ -295,9 +318,9 @@ function SignUpEdit(props) {
                   <TextField
                     size="small"
                     className="typing-container"
-                    value={students.studentAddress}
-                    label="Home Adress"
-                    onChange={(event) => setFirst(event.target.value)}
+                    value={enteredAddress}
+                    label="Home Address"
+                    onChange={(e) => setEnteredAddress(e.target.value)}
                     required
                     focused
                   />
@@ -308,9 +331,9 @@ function SignUpEdit(props) {
                   <TextField
                     size="small"
                     className="typing-container"
-                    value={students.studentApartmentNumber}
+                    value={enteredApartmentNumber}
                     label="Apt. #"
-                    onChange={(event) => setFirst(event.target.value)}
+                    onChange={(e) => setEnteredApartmentNumber(e.target.value)}
                     required
                     focused
                   />
@@ -321,9 +344,9 @@ function SignUpEdit(props) {
                   <TextField
                     size="small"
                     className="typing-container"
-                    value={students.studentState}
+                    value={enteredState}
                     label="State"
-                    onChange={(event) => setFirst(event.target.value)}
+                    onChange={(e) => setEnteredState(e.target.value)}
                     required
                     focused
                   />
@@ -334,9 +357,9 @@ function SignUpEdit(props) {
                   <TextField
                     size="small"
                     className="typing-container"
-                    value={students.studentZipCode}
+                    value={enteredZipCode}
                     label="Zip Code"
-                    onChange={(event) => setFirst(event.target.value)}
+                    onChange={(e) => setEnteredZipCode(e.target.value)}
                     required
                     focused
                   />
