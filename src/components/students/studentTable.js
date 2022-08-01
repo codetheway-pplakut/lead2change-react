@@ -116,7 +116,10 @@ const reassignCoachHandler = async (studentId, coachsId) => {
   updatedStudent.coachId = coachsId;
   await updateStudent(updatedStudent);
   const updatedCoach = await getCoachById(coachsId);
+
+  if (!Array.isArray(updatedCoach.students)) updatedCoach.students = [];
   updatedCoach.students.push(updatedStudent);
+
   await updateCoach(updatedCoach);
 };
 
@@ -125,13 +128,6 @@ TabPanel.propTypes = {
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
 };
-
-function controlTabs(index) {
-  return {
-    id: `full-width-tab-${index}`,
-    'aria-controls': `full-width-tabpanel-${index}`,
-  };
-}
 
 function stableSort(array, comparator) {
   const stabilizedThis = array.map((el, index) => [el, index]);
