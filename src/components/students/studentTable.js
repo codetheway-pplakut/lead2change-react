@@ -507,12 +507,11 @@ export default function StudentTable() {
                         {student.studentCellPhone}
                       </StyledTableCell>
                       <StyledTableCell>
-                        {console.log(student.coachId)}
-                        {/* <CoachAssignModal
+                        <CoachAssignModal
                           studentId={student.id}
                           coachId={student.coachId}
                           confirmHandler={reassignCoachHandler}
-                        /> */}
+                        />
                       </StyledTableCell>
                       <StyledTableCell>
                         <Grid container spacing={2}>
