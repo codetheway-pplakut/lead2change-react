@@ -38,6 +38,7 @@ import {
   getStudents,
   getStudentById,
   updateStudent,
+  assignStudent,
 } from '../../services/students/students';
 import { getCoachById, updateCoach } from '../../services/coaches/coaches';
 
@@ -111,8 +112,8 @@ const declineHandler = async (studentId) => {
   refreshPage();
 };
 
-const reassignCoachHandler = async (studentId, coachsId) => {
-  const updatedStudent = await getStudentById(studentId);
+const reassignCoachHandler = async (studentsId, coachsId) => {
+  const updatedStudent = await getStudentById(studentsId);
   updatedStudent.coachId = coachsId;
   await updateStudent(updatedStudent);
   const updatedCoach = await getCoachById(coachsId);
@@ -120,7 +121,7 @@ const reassignCoachHandler = async (studentId, coachsId) => {
   if (!Array.isArray(updatedCoach.students)) updatedCoach.students = [];
   updatedCoach.students.push(updatedStudent);
 
-  await updateCoach(updatedCoach);
+  await assignStudent({ coachId: coachsId, studentId: studentsId });
 };
 
 TabPanel.propTypes = {
