@@ -15,9 +15,10 @@ export const authenticateUser = ({ username, password } = {}) => {
 };
 export const requestReset = ({ email } = {}) => {
   // if (!email) return;
+  const emailx = 'admin-test@lead2changeinc.org';
 
   return callApi({
-    body: { email },
+    body: { emailx },
     endpoint: `${SERVICE_ROOT}/request-password-reset`,
     method: 'POST',
     headers: {
