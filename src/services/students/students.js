@@ -15,7 +15,7 @@ export const addStudent = async (student) => {
   });
 };
 
-export const getStudents = () => {
+export const getStudents = async () => {
   return callApi({ endpoint: SERVICE_ROOT });
 };
 
@@ -28,6 +28,18 @@ export const updateStudent = (student) => {
     body: student,
     endpoint: SERVICE_ROOT,
     method: 'PUT',
+    headers: {
+      Accept: 'application/json, text/plain',
+      'Content-Type': 'application/json',
+    },
+  });
+};
+
+export const unassignStudent = async (Ids) => {
+  return callApi({
+    body: Ids,
+    endpoint: SERVICE_ROOT,
+    method: 'POST',
     headers: {
       Accept: 'application/json, text/plain',
       'Content-Type': 'application/json',

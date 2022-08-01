@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import ColorButton from '../Shared/ColoredButton';
 
 export default function InactivationModal(props) {
-  const { coach, updateFunction } = props;
+  const { coach, updateFunction, unassignFunction } = props;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -23,7 +23,8 @@ export default function InactivationModal(props) {
       students: coach.students,
       active: false,
     };
-    updateFunction(updatedCoach);
+    unassignFunction(coach);
+    updateFunction(updatedCoach, false);
   };
   return (
     <div>
@@ -37,12 +38,12 @@ export default function InactivationModal(props) {
       >
         <Grid container variant="small">
           <Grid container>
-            <Grid item sx={{ bgcolor: '#004cbb', color: 'white' }} xs={12}>
+            <Grid item sx={{ bgcolor: '#2656A5', color: 'white' }} xs={12}>
               <Grid container alignItems="center" sx={{ margin: 1 }}>
                 <Grid item xs={2} />
                 <Grid item xs={8}>
                   <Typography variant="h5" component="h2" align="center">
-                    Deactivation
+                    Deactivate Coach
                   </Typography>
                 </Grid>
                 <Grid item>
@@ -83,4 +84,5 @@ export default function InactivationModal(props) {
 InactivationModal.propTypes = {
   coach: PropTypes.object.isRequired,
   updateFunction: PropTypes.func.isRequired,
+  unassignFunction: PropTypes.func.isRequired,
 };

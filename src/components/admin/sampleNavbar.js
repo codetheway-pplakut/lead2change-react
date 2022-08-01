@@ -1,18 +1,32 @@
-/* eslint-disable prettier/prettier */
-import * as React from 'react';
+import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Grid } from '@mui/material';
+import GetName from '../../util/name/get-name';
 
-export default function navbar() {
-  const onStudentClick = () => {};
-  const onCoachesClick = () => {};
-  const onInterviewsClick = () => {};
-  const onQuestionsClick = () => {};
-  const onAdminsClick = () => {};
+export default function SampleNavbar() {
+  const onStudentClick = () => {
+    // TODO document why this arrow function is empty
+  };
+
+  const onCoachesClick = () => {
+    // TODO document why this arrow function is empty
+  };
+
+  const onInterviewsClick = () => {
+    // TODO document why this arrow function is empty
+  };
+
+  const onQuestionsClick = () => {
+    // TODO document why this arrow function is empty
+  };
+
+  const onAdminsClick = () => {
+    // TODO document why this arrow function is empty
+  };
 
   // still need to make the text redirect to the correct page, grab login info from database to put correct name in right corner
   return (
@@ -25,7 +39,7 @@ export default function navbar() {
                 src="https://dev-lead2change-ctw.azurewebsites.net/Images/Lead2ChangeLogo.png"
                 width="100%"
                 height="100%"
-                alt="Lead2change"
+                alt="Lead2Change"
               />
             </Grid>
             <Grid item xl={8} lg={8} md={8} sm={8} xs={8}>
@@ -76,9 +90,7 @@ export default function navbar() {
                   </Button>
                 </Grid>
                 <Grid item xl={2}>
-                  <Typography color="white">
-                    <span>Hello *insert name here*</span>
-                  </Typography>
+                  <Typography color="white">Hello {GetName()}</Typography>
                 </Grid>
               </Grid>
             </Grid>
