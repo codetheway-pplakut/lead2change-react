@@ -39,7 +39,7 @@ import {
   getStudentById,
   updateStudent,
 } from '../../services/students/students';
-import { getCoachById } from '../../services/coaches/coaches';
+import { getCoachById, updateCoach } from '../../services/coaches/coaches';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -115,7 +115,9 @@ const reassignCoachHandler = async (studentId, coachsId) => {
   const updatedStudent = await getStudentById(studentId);
   updatedStudent.coachId = coachsId;
   await updateStudent(updatedStudent);
-  refreshPage();
+  const updatedCoach = await getCoachById(coachsId);
+  updatedCoach.students.push(updatedStudent);
+  await updateCoach(updatedCoach);
 };
 
 TabPanel.propTypes = {
@@ -505,11 +507,12 @@ export default function StudentTable() {
                         {student.studentCellPhone}
                       </StyledTableCell>
                       <StyledTableCell>
-                        <CoachAssignModal
-                          confirmHandler={reassignCoachHandler}
+                        {console.log(student.coachId)}
+                        {/* <CoachAssignModal
                           studentId={student.id}
                           coachId={student.coachId}
-                        />
+                          confirmHandler={reassignCoachHandler}
+                        /> */}
                       </StyledTableCell>
                       <StyledTableCell>
                         <Grid container spacing={2}>
