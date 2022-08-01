@@ -29,7 +29,7 @@ function ForgotPassword() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [enteredEmail, setEmail] = useState('');
+  const [email, setEmail] = useState('');
 
   const emailHandler = async (event) => {
     // const validRegex = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.(com|edu|org)$/i; old /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
@@ -38,14 +38,14 @@ function ForgotPassword() {
     const re =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    if (re.test(enteredEmail)) {
-      console.log(enteredEmail);
-      await requestReset(enteredEmail);
+    if (re.test(email)) {
+      console.log(email);
+      await requestReset(email);
       console.log('Test');
 
-      setIsError(true);
-    } else {
       setIsError(false);
+    } else {
+      setIsError(true);
     }
   };
 
@@ -104,7 +104,7 @@ function ForgotPassword() {
                   <TextField
                     label="Email Address"
                     required
-                    value={enteredEmail}
+                    value={email}
                     onChange={(event) => setEmail(event.target.value)}
                   />
                 ) : (
@@ -114,7 +114,7 @@ function ForgotPassword() {
                     label="Error"
                     defaultValue="Hello World"
                     helperText="Invaild Email Address."
-                    value={enteredEmail}
+                    value={email}
                     onChange={(event) => setEmail(event.target.value)}
                   />
                 )}

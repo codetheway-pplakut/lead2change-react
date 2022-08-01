@@ -13,12 +13,12 @@ export const authenticateUser = ({ username, password } = {}) => {
     method: 'POST',
   });
 };
-export const requestReset = ({ email } = {}) => {
+export const requestReset = (email) => {
   // if (!email) return;
-  const emailx = 'admin-test@lead2changeinc.org';
+  // const email = 'admin-test@lead2changeinc.org';
 
   return callApi({
-    body: { emailx },
+    body: { email },
     endpoint: `${SERVICE_ROOT}/request-password-reset`,
     method: 'POST',
     headers: {
