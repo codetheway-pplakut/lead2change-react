@@ -84,13 +84,17 @@ export default function CoachAssignModal(props) {
   const getCoachNameTest = async (coachIdPlaceHolder) => {
     const coach = await getCoachById(coachIdPlaceHolder);
     const coachName = `${coach.coachFirstName} ${coach.coachLastName}`;
-    return coach.coachFirstName;
+    return coachName;
   };
 
   const handleCoachChange = (event) => {
     setValue(event.target.value);
     setNewCoachId(value);
   };
+
+  const filteredArray = coaches.filter((coach) => {
+    return coach.id === coachId;
+  });
 
   let denySubmit = true;
   if (newCoachId !== '') {
@@ -100,7 +104,10 @@ export default function CoachAssignModal(props) {
   return (
     <div>
       <Stack direction="row">
-        {coachId !== null && <p>{`${getCoachNameTest(coachId)}`}</p>}
+        {coachId !== null &&
+          filteredArray.map((coach) => {
+            return getCoachName(coach);
+          })}
         {coachId === null && <p>Unassigned</p>}
         <IconButton onClick={handleOpen}>
           <EditIcon />
