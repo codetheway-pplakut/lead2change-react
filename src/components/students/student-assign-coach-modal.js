@@ -84,7 +84,7 @@ export default function CoachAssignModal(props) {
   const getCoachNameTest = async (coachIdPlaceHolder) => {
     const coach = await getCoachById(coachIdPlaceHolder);
     const coachName = `${coach.coachFirstName} ${coach.coachLastName}`;
-    return coachName;
+    return coach.coachFirstName;
   };
 
   const handleCoachChange = (event) => {
