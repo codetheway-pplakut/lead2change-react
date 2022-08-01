@@ -26,7 +26,7 @@ const tablePositioning = {
 const tableHeadingText = {
   padding: 'normal',
   align: 'left',
-  fontSize: 'medium',
+  fontSize: 'small',
   backgroundColor: '#004cbb',
   color: 'white',
   textColor: 'white',
