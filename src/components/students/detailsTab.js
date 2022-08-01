@@ -341,83 +341,69 @@ SignUpDisplay.propTypes = {
 
 function SignUpEdit(props) {
   const { onCancelClick, updateFunction } = props;
-  const { studentId } = useParams();
+  const { studentId, goalId } = useParams();
   const [value, setValue] = React.useState(0);
   const [students, setStudents] = useState({});
+  const [goals, setGoals] = useState({});
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  useEffect(() => {
-    const currentStudent = async () => {
-      const currStudent = await getStudentById(studentId);
-      setStudents(currStudent);
-    };
-    currentStudent();
-  }, [studentId]);
 
   const [enteredPlanAfterHighSchool, setEnteredPlanAfterHighSchool] =
-    React.useState(students.planAfterHighSchool);
+    React.useState('');
 
-  const [enteredCollegesList, setEnteredCollegesList] = React.useState(
-    students.collegesList
-  );
+  const [enteredCollegesList, setEnteredCollegesList] = React.useState('');
 
   const [enteredFirstChoiceCollege, setEnteredFirstChoiceCollege] =
-    React.useState(students.firstChoiceCollege);
+    React.useState('');
 
   const [enteredCollegeApplicationStatus, setEnteredCollegeApplicationStatus] =
-    React.useState(students.collegeApplicationStatus);
+    React.useState('');
 
   const [enteredCollegeEssayStatus, setEnteredCollegeEssayStatus] =
-    React.useState(students.collegeEssayStatus);
+    React.useState('');
 
-  const [enteredCollegeEssayHelp, setEnteredCollegeEssayHelp] = React.useState(
-    students.collegeEssayHelp
-  );
+  const [enteredCollegeEssayHelp, setEnteredCollegeEssayHelp] =
+    React.useState('');
 
-  const [enteredPactTestScore, setEnteredPactTestScore] = React.useState(
-    students.pactTestScore
-  );
+  const [enteredPactTestScore, setEnteredPactTestScore] = React.useState('');
 
-  const [enteredPsatTestDate, setEnteredPsatTestDate] = React.useState(
-    students.psatTestDate
-  );
+  const [enteredPsatTestDate, setEnteredPsatTestDate] = React.useState('');
 
-  const [enteredPsatTestScore, setEnteredPsatTestScore] = React.useState(
-    students.psatTestScore
-  );
+  const [enteredPsatTestScore, setEnteredPsatTestScore] = React.useState('');
 
-  const [enteredPactTestDate, setEnteredPactTestDate] = React.useState(
-    students.pactTestDate
-  );
+  const [enteredPactTestDate, setEnteredPactTestDate] = React.useState('');
 
-  const [enteredActTestScore, setEnteredActTestScore] = React.useState(
-    students.actTestScore
-  );
+  const [enteredActTestScore, setEnteredActTestScore] = React.useState('');
 
-  const [enteredActTestDate, setEnteredActTestDate] = React.useState(
-    students.actTestDate
-  );
+  const [enteredActTestDate, setEnteredActTestDate] = React.useState('');
 
-  const [enteredSatTestScore, setEnteredSatTestScore] = React.useState(
-    students.satTestScore
-  );
+  const [enteredSatTestScore, setEnteredSatTestScore] = React.useState('');
 
-  const [enteredSatTestDate, setEnteredSatTestDate] = React.useState(
-    students.satTestDate
-  );
+  const [enteredSatTestDate, setEnteredSatTestDate] = React.useState('');
 
   const [
     enteredFinancialAidProcessComplete,
     setEnteredFinancialAidProcessComplete,
-  ] = React.useState(students.financialAidProcessComplete);
+  ] = React.useState('');
 
   const [enteredAssistanceForForms, setEnteredAssistanceForForms] =
-    React.useState(students.assistanceForForms);
+    React.useState('');
 
-  const [enteredSupportNeeded, setEnteredSupportNeeded] = React.useState(
-    students.supportNeeded
-  );
+  const [enteredSupportNeeded, setEnteredSupportNeeded] = React.useState('');
+
+  const [enteredGoalSet, setEnteredGoalSet] = React.useState('');
+
+  const [enteredDateGoalSet, setEnteredDateGoalSet] = React.useState('');
+
+  const [enteredSel, setEnteredSel] = React.useState('');
+
+  const [enteredGoalReviewDate, setEnteredGoalReviewDate] = React.useState('');
+
+  const [enteredWasItAccomplished, setEnteredWasItAccomplished] =
+    React.useState('');
+
+  const [enteredExplanation, setEnteredExplanation] = React.useState('');
 
   const EditField = () => {
     handleClose();
@@ -437,9 +423,75 @@ function SignUpEdit(props) {
       actTestDate: enteredActTestDate,
       satTestScore: enteredSatTestScore,
       satTestDate: enteredSatTestDate,
+      goalSet: enteredGoalSet,
+      dateGoalSet: enteredGoalSet,
+      sel: enteredSel,
+      goalReviewDate: enteredGoalReviewDate,
+      wasItAccomplished: enteredWasItAccomplished,
+      explanation: enteredExplanation,
     };
     updateFunction(updatedStudent);
   };
+  useEffect(() => {
+    const currentStudent = async () => {
+      const currStudent = await getStudentById(studentId);
+
+      const {
+        planAfterHighSchool,
+        collegesList,
+        firstChoiceCollege,
+        collegeApplicationStatus,
+        collegeEssayStatus,
+        collegeEssayHelp,
+        pactTestScore,
+        psatTestDate,
+        psatTestScore,
+        pactTestDate,
+        actTestScore,
+        actTestDate,
+        satTestScore,
+        satTestDate,
+      } = currStudent;
+      setStudents(currStudent);
+
+      setEnteredPlanAfterHighSchool(planAfterHighSchool);
+      setEnteredCollegesList(collegesList);
+      setEnteredFirstChoiceCollege(firstChoiceCollege);
+      setEnteredCollegeApplicationStatus(collegeApplicationStatus);
+      setEnteredCollegeEssayStatus(collegeEssayStatus);
+      setEnteredCollegeEssayHelp(collegeEssayHelp);
+      setEnteredPactTestScore(pactTestScore);
+      setEnteredPsatTestDate(psatTestDate);
+      setEnteredPsatTestScore(psatTestScore);
+      setEnteredPactTestDate(pactTestDate);
+      setEnteredActTestScore(actTestScore);
+      setEnteredActTestDate(actTestDate);
+      setEnteredSatTestScore(satTestScore);
+      setEnteredSatTestDate(satTestDate);
+    };
+    const currentGoal = async () => {
+      const currGoal = await getGoalById(goalId);
+
+      const {
+        goalSet,
+        dateGoalSet,
+        sel,
+        goalReviewDate,
+        wasItAccomplished,
+        explanation,
+      } = currGoal;
+      setGoals(currGoal);
+
+      setEnteredGoalSet(goalSet);
+      setEnteredDateGoalSet(dateGoalSet);
+      setEnteredSel(sel);
+      setEnteredGoalReviewDate(goalReviewDate);
+      setEnteredWasItAccomplished(wasItAccomplished);
+      setEnteredExplanation(explanation);
+    };
+    currentStudent();
+    currentGoal();
+  }, [studentId]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -486,7 +538,7 @@ function SignUpEdit(props) {
                     <TextField
                       fullWidth
                       variant="filled"
-                      value={students.planAfterHighSchool}
+                      value={enteredPlanAfterHighSchool}
                       label="Plans after High School"
                       onChange={(e) =>
                         setEnteredPlanAfterHighSchool(e.target.value)
@@ -501,9 +553,11 @@ function SignUpEdit(props) {
                       fullWidth
                       maxRows={4}
                       variant="filled"
-                      defaultValue={students.collegesList}
+                      value={enteredCollegesList}
                       label="Colleges Plan/Applied To"
-                      onChange={(event) => setFirst(event.target.value)}
+                      onChange={(event) =>
+                        setEnteredCollegesList(event.target.value)
+                      }
                       required
                     />
                   </Grid>
@@ -511,9 +565,11 @@ function SignUpEdit(props) {
                     <TextField
                       size="small"
                       className="typing-container"
-                      defaultValue={students.firstChoiceCollege}
+                      value={enteredFirstChoiceCollege}
                       label="College First Choice"
-                      onChange={(event) => setFirst(event.target.value)}
+                      onChange={(event) =>
+                        setEnteredFirstChoiceCollege(event.target.value)
+                      }
                       required
                     />
                   </Grid>
@@ -529,7 +585,7 @@ function SignUpEdit(props) {
                         labelId="demo-simple-select-standard-label"
                         id="demo-simple-select-standard"
                         label="Age"
-                        defaultValue={10}
+                        value={enteredCollegeApplicationStatus}
                       >
                         <MenuItem value="" />
                         <MenuItem value={10}>Yes</MenuItem>
@@ -550,7 +606,7 @@ function SignUpEdit(props) {
                         labelId="demo-simple-select-standard-label"
                         id="demo-simple-select-standard"
                         label="Age"
-                        defaultValue={10}
+                        value={enteredCollegeEssayStatus}
                       >
                         <MenuItem value="" />
                         <MenuItem value={10}>Yes</MenuItem>
@@ -570,7 +626,7 @@ function SignUpEdit(props) {
                         labelId="demo-simple-select-standard-label"
                         id="demo-simple-select-standard"
                         label="Age"
-                        defaultValue={10}
+                        value={enteredCollegeEssayHelp}
                       >
                         <MenuItem value="" />
                         <MenuItem value={10}>Yes</MenuItem>
@@ -586,10 +642,12 @@ function SignUpEdit(props) {
                     <TextField
                       size="small"
                       className="typing-container"
-                      defaultValue={students.pactTestScore}
+                      value={enteredPactTestScore}
                       label="PACT Score"
                       type="number"
-                      onChange={(event) => setFirst(event.target.value)}
+                      onChange={(event) =>
+                        setEnteredPactTestScore(event.target.value)
+                      }
                       required
                     />
                     <TextField
@@ -597,8 +655,10 @@ function SignUpEdit(props) {
                       className="typing-container"
                       label="PACT Date"
                       type="date"
-                      defaultValue="2017-05-24"
-                      onChange={(event) => setFirst(event.target.value)}
+                      value={enteredPactTestDate}
+                      onChange={(event) =>
+                        setEnteredPactTestDate(event.target.value)
+                      }
                       required
                     />
                   </Grid>
@@ -606,10 +666,10 @@ function SignUpEdit(props) {
                     <TextField
                       size="small"
                       className="typing-container"
-                      defaultValue={students.psatTestScore}
+                      value={enteredPsatTestScore}
                       label="PSAT Score"
                       type="number"
-                      onChange={(e) => setFirst(e.target.value)}
+                      onChange={(e) => setEnteredPsatTestScore(e.target.value)}
                       required
                     />
                     <TextField
@@ -617,8 +677,10 @@ function SignUpEdit(props) {
                       className="typing-container"
                       label="PSAT Date"
                       type="date"
-                      defaultValue="2017-05-24"
-                      onChange={(event) => setFirst(event.target.value)}
+                      value={enteredPsatTestDate}
+                      onChange={(event) =>
+                        setEnteredPsatTestDate(event.target.value)
+                      }
                       required
                     />
                   </Grid>
@@ -626,10 +688,12 @@ function SignUpEdit(props) {
                     <TextField
                       size="small"
                       className="typing-container"
-                      defaultValue="35"
+                      value={enteredActTestScore}
                       label="ACT Score"
                       type="number"
-                      onChange={(event) => setFirst(event.target.value)}
+                      onChange={(event) =>
+                        setEnteredActTestScore(event.target.value)
+                      }
                       required
                     />
                     <TextField
@@ -637,8 +701,10 @@ function SignUpEdit(props) {
                       className="typing-container"
                       label="ACT Date"
                       type="date"
-                      defaultValue="2017-05-24"
-                      onChange={(event) => setFirst(event.target.value)}
+                      value={enteredActTestDate}
+                      onChange={(event) =>
+                        setEnteredActTestDate(event.target.value)
+                      }
                       required
                     />
                   </Grid>
@@ -646,10 +712,12 @@ function SignUpEdit(props) {
                     <TextField
                       size="small"
                       className="typing-container"
-                      defaultValue="35"
+                      value={enteredSatTestScore}
                       label="SAT Score"
                       type="number"
-                      onChange={(event) => setFirst(event.target.value)}
+                      onChange={(event) =>
+                        setEnteredSatTestScore(event.target.value)
+                      }
                       required
                     />
                     <TextField
@@ -657,8 +725,10 @@ function SignUpEdit(props) {
                       className="typing-container"
                       label="SAT Date"
                       type="date"
-                      defaultValue="2017-05-24"
-                      onChange={(event) => setFirst(event.target.value)}
+                      value={enteredSatTestDate}
+                      onChange={(event) =>
+                        setEnteredSatTestDate(event.target.value)
+                      }
                       required
                     />
                   </Grid>
@@ -675,7 +745,12 @@ function SignUpEdit(props) {
                         labelId="demo-simple-select-standard-label"
                         id="demo-simple-select-standard"
                         label="Age"
-                        defaultValue={10}
+                        value={enteredFinancialAidProcessComplete}
+                        onChange={(event) =>
+                          setEnteredFinancialAidProcessComplete(
+                            event.target.value
+                          )
+                        }
                       >
                         <MenuItem value="" />
                         <MenuItem value={10}>Yes</MenuItem>
@@ -695,7 +770,10 @@ function SignUpEdit(props) {
                         labelId="demo-simple-select-standard-label"
                         id="demo-simple-select-standard"
                         label="Age"
-                        defaultValue={20}
+                        value={enteredAssistanceForForms}
+                        onChange={(event) =>
+                          setEnteredAssistanceForForms(event.target.value)
+                        }
                       >
                         <MenuItem value="" />
                         <MenuItem value={10}>Yes</MenuItem>
@@ -715,7 +793,10 @@ function SignUpEdit(props) {
                         labelId="demo-simple-select-standard-label"
                         id="demo-simple-select-standard"
                         label="Age"
-                        defaultValue={10}
+                        value={enteredSupportNeeded}
+                        onChange={(event) =>
+                          setEnteredSupportNeeded(event.target.value)
+                        }
                       >
                         <MenuItem value="" />
                         <MenuItem value={10}>Yes</MenuItem>
@@ -740,9 +821,11 @@ function SignUpEdit(props) {
                         fullWidth
                         maxRows={4}
                         variant="filled"
-                        defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
-                        label="Plans after college"
-                        onChange={(event) => setFirst(event.target.value)}
+                        value={enteredGoalSet}
+                        label="Set Goal"
+                        onChange={(event) =>
+                          setEnteredGoalSet(event.target.value)
+                        }
                         required
                       />
                     </Grid>
@@ -752,8 +835,10 @@ function SignUpEdit(props) {
                         className="typing-container"
                         label="Set Date"
                         type="date"
-                        defaultValue="2017-05-24"
-                        onChange={(event) => setFirst(event.target.value)}
+                        value={enteredDateGoalSet}
+                        onChange={(event) =>
+                          setEnteredDateGoalSet(event.target.value)
+                        }
                         required
                       />
                     </Grid>
@@ -761,9 +846,9 @@ function SignUpEdit(props) {
                       <TextField
                         size="small"
                         className="typing-container"
-                        defaultValue="Responsible-Decision Making"
+                        value={enteredSel}
                         label="SEL"
-                        onChange={(event) => setFirst(event.target.value)}
+                        onChange={(event) => setEnteredSel(event.target.value)}
                         required
                       />
                     </Grid>
@@ -773,8 +858,10 @@ function SignUpEdit(props) {
                         className="typing-container"
                         type="date"
                         label="Review Date"
-                        defaultValue="2017-05-24"
-                        onChange={(event) => setFirst(event.target.value)}
+                        value={enteredGoalReviewDate}
+                        onChange={(event) =>
+                          setEnteredGoalReviewDate(event.target.value)
+                        }
                         required
                       />
                     </Grid>
@@ -789,8 +876,10 @@ function SignUpEdit(props) {
                         <Select
                           labelId="demo-simple-select-standard-label"
                           id="demo-simple-select-standard"
-                          label="Age"
-                          defaultValue={10}
+                          value={enteredWasItAccomplished}
+                          onChange={(event) =>
+                            setEnteredWasItAccomplished(event.target.value)
+                          }
                         >
                           <MenuItem value="" />
                           <MenuItem value={10}>In Progress</MenuItem>
@@ -806,9 +895,11 @@ function SignUpEdit(props) {
                         fullWidth
                         maxRows={4}
                         variant="filled"
-                        defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
-                        label="Plans after college"
-                        onChange={(event) => setFirst(event.target.value)}
+                        value={enteredExplanation}
+                        label="Explanation"
+                        onChange={(event) =>
+                          setEnteredExplanation(event.target.value)
+                        }
                         required
                       />
                     </Grid>
@@ -821,9 +912,11 @@ function SignUpEdit(props) {
                         fullWidth
                         maxRows={4}
                         variant="filled"
-                        defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
-                        label="Plans after college"
-                        onChange={(event) => setFirst(event.target.value)}
+                        value={enteredGoalSet}
+                        label="Set Goal"
+                        onChange={(event) =>
+                          setEnteredGoalSet(event.target.value)
+                        }
                         required
                       />
                     </Grid>
@@ -833,8 +926,10 @@ function SignUpEdit(props) {
                         className="typing-container"
                         label="Set Date"
                         type="date"
-                        defaultValue="2017-05-24"
-                        onChange={(event) => setFirst(event.target.value)}
+                        value={enteredDateGoalSet}
+                        onChange={(event) =>
+                          setEnteredDateGoalSet(event.target.value)
+                        }
                         required
                       />
                     </Grid>
@@ -842,9 +937,9 @@ function SignUpEdit(props) {
                       <TextField
                         size="small"
                         className="typing-container"
-                        defaultValue="Responsible-Decision Making"
+                        value={enteredSel}
                         label="SEL"
-                        onChange={(event) => setFirst(event.target.value)}
+                        onChange={(event) => setEnteredSel(event.target.value)}
                         required
                       />
                     </Grid>
@@ -854,8 +949,10 @@ function SignUpEdit(props) {
                         className="typing-container"
                         type="date"
                         label="Review Date"
-                        defaultValue="2017-05-24"
-                        onChange={(event) => setFirst(event.target.value)}
+                        value={enteredGoalReviewDate}
+                        onChange={(event) =>
+                          setEnteredGoalReviewDate(event.target.value)
+                        }
                         required
                       />
                     </Grid>
@@ -870,8 +967,10 @@ function SignUpEdit(props) {
                         <Select
                           labelId="demo-simple-select-standard-label"
                           id="demo-simple-select-standard"
-                          label="Age"
-                          defaultValue={10}
+                          value={enteredWasItAccomplished}
+                          onChange={(event) =>
+                            setEnteredWasItAccomplished(event.target.value)
+                          }
                         >
                           <MenuItem value="" />
                           <MenuItem value={10}>In Progress</MenuItem>
@@ -887,9 +986,11 @@ function SignUpEdit(props) {
                         fullWidth
                         maxRows={4}
                         variant="filled"
-                        defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
-                        label="Plans after college"
-                        onChange={(event) => setFirst(event.target.value)}
+                        value={enteredExplanation}
+                        label="Explanation"
+                        onChange={(event) =>
+                          setEnteredExplanation(event.target.value)
+                        }
                         required
                       />
                     </Grid>
@@ -901,9 +1002,11 @@ function SignUpEdit(props) {
                         fullWidth
                         maxRows={4}
                         variant="filled"
-                        defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
-                        label="Plans after college"
-                        onChange={(event) => setFirst(event.target.value)}
+                        value={enteredGoalSet}
+                        label="Set Goal"
+                        onChange={(event) =>
+                          setEnteredGoalSet(event.target.value)
+                        }
                         required
                       />
                     </Grid>
@@ -913,8 +1016,10 @@ function SignUpEdit(props) {
                         className="typing-container"
                         label="Set Date"
                         type="date"
-                        defaultValue="2017-05-24"
-                        onChange={(event) => setFirst(event.target.value)}
+                        value={enteredDateGoalSet}
+                        onChange={(event) =>
+                          setEnteredDateGoalSet(event.target.value)
+                        }
                         required
                       />
                     </Grid>
@@ -922,9 +1027,9 @@ function SignUpEdit(props) {
                       <TextField
                         size="small"
                         className="typing-container"
-                        defaultValue="Responsible-Decision Making"
+                        value={enteredSel}
                         label="SEL"
-                        onChange={(event) => setFirst(event.target.value)}
+                        onChange={(event) => setEnteredSel(event.target.value)}
                         required
                       />
                     </Grid>
@@ -934,8 +1039,10 @@ function SignUpEdit(props) {
                         className="typing-container"
                         type="date"
                         label="Review Date"
-                        defaultValue="2017-05-24"
-                        onChange={(event) => setFirst(event.target.value)}
+                        value={enteredGoalReviewDate}
+                        onChange={(event) =>
+                          setEnteredGoalReviewDate(event.target.value)
+                        }
                         required
                       />
                     </Grid>
@@ -950,8 +1057,10 @@ function SignUpEdit(props) {
                         <Select
                           labelId="demo-simple-select-standard-label"
                           id="demo-simple-select-standard"
-                          label="Age"
-                          defaultValue={10}
+                          value={enteredWasItAccomplished}
+                          onChange={(event) =>
+                            setEnteredWasItAccomplished(event.target.value)
+                          }
                         >
                           <MenuItem value="" />
                           <MenuItem value={10}>In Progress</MenuItem>
@@ -959,6 +1068,7 @@ function SignUpEdit(props) {
                         </Select>
                       </FormControl>
                     </Grid>
+
                     <Grid marginBottom={2}>
                       <TextField
                         id="text-area-q1"
@@ -966,9 +1076,11 @@ function SignUpEdit(props) {
                         fullWidth
                         maxRows={4}
                         variant="filled"
-                        defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
-                        label="Plans after college"
-                        onChange={(event) => setFirst(event.target.value)}
+                        value={enteredExplanation}
+                        label="Explanation"
+                        onChange={(event) =>
+                          setEnteredExplanation(event.target.value)
+                        }
                         required
                       />
                     </Grid>
