@@ -5,7 +5,6 @@ export default function Title() {
   return (
     <Box
       sx={{
-        width: '100%',
         marginTop: '2%',
         marginBottom: '2%',
       }}

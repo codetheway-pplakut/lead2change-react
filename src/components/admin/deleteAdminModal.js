@@ -64,21 +64,11 @@ export default function DeleteAdminModal(props) {
       delete: {
         main: '#004cbb',
         contrastText: '#fff',
-        '&:hover': {
-          main: '#1F365E',
-        },
       },
       cancel: {
         main: '#004cbb',
         contrastText: '#fff',
-        '&:hover': {
-          main: '#1F365E',
-        },
       },
-    },
-    typography: {
-      fontFamily: 'Calibri',
-      fontSize: 20,
     },
   });
 
@@ -94,12 +84,7 @@ export default function DeleteAdminModal(props) {
 
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
-          <Grid
-            container
-            spacing={2}
-            alignItems="center"
-            justifyContent="center"
-          >
+          <Grid container>
             <Grid item xs={12} sx={{ borderRadius: '10px' }}>
               <Box
                 bgcolor="#004cbb"
@@ -135,7 +120,6 @@ export default function DeleteAdminModal(props) {
           <Grid
             container
             spacing={2}
-            alignItems="center"
             justifyContent="center"
             padding="20px"
             align="center"
@@ -153,7 +137,7 @@ export default function DeleteAdminModal(props) {
               </Box>
             </Grid>
 
-            <Grid item xs={4} sx={{ borderRadius: '10px' }}>
+            <Grid item xs={4}>
               <Box>
                 <Button
                   theme={buttonTheme}
