@@ -111,7 +111,7 @@ export default function Coaches() {
         <ThemeProvider theme={theme}>
           <CssBaseline>
             <Grid container justifyContent="center">
-              <Typography variant="h3" component="h4">
+              <Typography align="center" variant="h3" component="h4">
                 COACHES
               </Typography>
             </Grid>
