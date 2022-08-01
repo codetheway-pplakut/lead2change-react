@@ -19,7 +19,7 @@ import {
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 
-import { getCoaches } from '../../services/coaches/coaches';
+import { getCoachById, getCoaches } from '../../services/coaches/coaches';
 
 const StyledButton = styled(Button)({
   backgroundColor: '#004cbb',
@@ -82,6 +82,14 @@ export default function CoachAssignModal(props) {
     return coachName;
   };
 
+  const getCoachNameTest = async (coachIdPlaceHolder) => {
+    const coach = await getCoachById(coachIdPlaceHolder);
+    let coachName = coach.coachFirstName;
+    coachName += ' ';
+    coachName += coach.coachLastName;
+    return coachName;
+  };
+
   const handleCoachChange = (event) => {
     setValue(event.target.value);
     setNewCoachId(value);
@@ -98,7 +106,7 @@ export default function CoachAssignModal(props) {
   return (
     <div>
       <Stack direction="row">
-        {coachId !== null && <p>Coach Name</p>}
+        {coachId !== null && <p>{getCoachNameTest(coachId)}</p>}
         {coachId === null && <p>Unassigned</p>}
         <IconButton onClick={handleOpen}>
           <EditIcon />

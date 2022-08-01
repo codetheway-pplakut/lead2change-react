@@ -112,11 +112,13 @@ const declineHandler = async (studentId) => {
   refreshPage();
 };
 
-const reassignCoachHandler = async (studentsId, coachsId) => {
-  console.log(getStudentById(studentsId));
-  await assignStudent({ coachId: coachsId, studentId: studentsId });
-  console.log(coachsId);
-  console.log(getStudentById(studentsId));
+const reassignCoachHandler = async (studentId, coachId) => {
+  console.log(getStudentById(studentId));
+  await assignStudent({ coachId, studentId });
+  console.log(coachId);
+  console.log(getStudentById(studentId));
+
+  refreshPage();
 };
 
 TabPanel.propTypes = {
