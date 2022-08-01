@@ -41,3 +41,6 @@ export const resetPassword = ({
     method: 'POST',
   });
 };
+export const getUsers = () => {
+  return callApi({ endpoint: SERVICE_ROOT });
+};

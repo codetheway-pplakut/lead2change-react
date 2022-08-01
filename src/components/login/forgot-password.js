@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
   Button,
@@ -10,7 +10,7 @@ import {
   TextField,
   Container,
 } from '@mui/material';
-import { requestReset } from '../../services/users/users';
+import { requestReset, getUsers } from '../../services/users/users';
 
 const style = {
   position: 'absolute',
@@ -30,7 +30,6 @@ function ForgotPassword() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [email, setEmail] = useState('');
-
   const emailHandler = async (event) => {
     // const validRegex = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.(com|edu|org)$/i; old /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
     event.preventDefault();
