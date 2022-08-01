@@ -63,9 +63,9 @@ export default function InterviewPage() {
 
   const refreshInterview = async () => {
     // setIsLoading(true);
-    const response = await getInterviewsById(
-      'b0ba6354-eb97-49b1-a030-08da6b234c0f'
-    );
+    // const response = await getInterviewsById(
+    //   'b0ba6354-eb97-49b1-a030-08da6b234c0f'
+    // );
   };
 
   useEffect(() => {

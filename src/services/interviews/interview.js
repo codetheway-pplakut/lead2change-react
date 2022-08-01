@@ -23,10 +23,10 @@ export const updateInterview = (interview) => {
   });
 };
 
-export const createInterview = async (interview) => {
+export const createStudentResponse = async (answers) => {
   return callApi({
-    body: interview,
-    endpoint: `${SERVICE_ROOT}/create-student-response`,
+    body: answers,
+    endpoint: SERVICE_ROOT,
     method: 'POST',
     headers: {
       Accept: 'application/json, text/plain',
