@@ -10,10 +10,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { Button } from '@mui/material';
 
-import {
-  createStudentResponse,
-  getInterviewsById,
-} from '../../services/interviews/interview';
+import { createStudentResponse } from '../../services/interviews/interview';
 import { getStudentById } from '../../services/students/students';
 
 export default function InterviewQuestions() {
@@ -56,7 +53,7 @@ export default function InterviewQuestions() {
   // const [interviewIsDiligent, setinterviewIsDiligent] = useState('');
   const Save = () => {
     const answers = [];
-    answers.push({
+    answers[0] = {
       answerString: interviewCommitToActivities,
       studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
       questionId: 'd68119f8-26ef-4936-cde0-08d95db8fbe0',
@@ -66,163 +63,255 @@ export default function InterviewQuestions() {
       isArchived: false,
       studentName: '',
       interviewName: '',
-    });
-    // answers[1] = {
-    //   answerString: interviewPersonalStrengths,
-    //   studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
-    //   questionId: 'bcd51d11-0289-4f13-cde4-08d95db8fbe0',
-    //   questionString:
-    //     '2. Describe your personal strengths? Why do you describe those as strengths?',
-    //   interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
-    //   isArchived: false,
-    //   studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
-    //     .studentFirstname,
-    //   interviewName: '',
-    // };
-    // answers[2] = {
-    //   answerString: interviewImportantWord,
-    //   studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
-    //   questionId: 'ca080589-073d-4432-cde5-08d95db8fbe0',
-    //   questionString:
-    //     '3. Of the following words - Commitment, Leadership, and Achievement; which is most important? Why is it important to you?',
-    //   interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
-    //   isArchived: false,
-    //   studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
-    //     .studentFirstname,
-    //   interviewName: '',
-    // };
-    // answers[3] = {
-    //   answerString: interviewOvercomeDifficulty,
-    //   studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
-    //   questionId: '10a9e191-a426-409c-cde7-08d95db8fbe0',
-    //   questionString:
-    //     '4. Describe a difficult situation/project and how you overcame it?',
-    //   interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
-    //   isArchived: false,
-    //   studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
-    //     .studentFirstname,
-    //   interviewName: '',
-    // };
-    // answers[4] = {
-    //   answerString: interviewOtherCommitments,
-    //   studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
-    //   questionId: '7827a50d-f932-40c4-cde2-08d95db8fbe0',
-    //   questionString:
-    //     '5. What other extra-curricular activities, employment opportunities or other programs are you currently involved in or will you become involved in this year?',
-    //   interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
-    //   isArchived: false,
-    //   studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
-    //     .studentFirstname,
-    //   interviewName: '',
-    // };
-    // answers[5] = {
-    //   answerString: interviewSacrificeTime,
-    //   studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
-    //   questionId: '63e82d00-bcf8-4a04-cde3-08d95db8fbe0',
-    //   questionString:
-    //     '6. Are you willing to sacrifice some things you usually do after school to prepare for a very fulfilling career that you were designed to do?',
-    //   interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
-    //   isArchived: false,
-    //   studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
-    //     .studentFirstname,
-    //   interviewName: '',
-    // };
-    // answers[6] = {
-    //   answerString: interviewPostHighSchoolCoaching,
-    //   studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
-    //   questionId: '1f3a4a74-4236-46ef-cde9-08d95db8fbe0',
-    //   questionString:
-    //     '7. Are you interested in participating in one on one coaching concerning life after high school?',
-    //   interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
-    //   isArchived: false,
-    //   studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
-    //     .studentFirstname,
-    //   interviewName: '',
-    // };
-    // answers[7] = {
-    //   answerString: interviewScheduleManagement,
-    //   studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
-    //   questionId: '3bab2c58-942d-46db-cdea-08d95db8fbe0',
-    //   questionString:
-    //     '8. Are you willing to manage your schedule to meet the program requirements?',
-    //   interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
-    //   isArchived: false,
-    //   studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
-    //     .studentFirstname,
-    //   interviewName: '',
-    // };
-    // answers[8] = {
-    //   answerString: interviewCommunicateWithMentors,
-    //   studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
-    //   questionId: '73455ba8-7379-401d-cdec-08d95db8fbe0',
-    //   questionString:
-    //     '9. Are you able to communicate the expectations to your parent/guardian or mentor and ask for their support?',
-    //   interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
-    //   isArchived: false,
-    //   studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
-    //     .studentFirstname,
-    //   interviewName: '',
-    // };
-    // answers[9] = {
-    //   answerString: interviewDiverseClass,
-    //   studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
-    //   questionId: 'bb96a326-5117-430f-cded-08d95db8fbe0',
-    //   questionString:
-    //     '10. Are you willing to be in a class with a diverse group of learners that may or may not know what you know?',
-    //   interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
-    //   isArchived: false,
-    //   studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
-    //     .studentFirstname,
-    //   interviewName: '',
-    // };
-    // answers[10] = {
-    //   answerString: interviewOpenMinded,
-    //   studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
-    //   questionId: 'ed60a032-7712-43ed-cdf0-08d95db8fbe0',
-    //   questionString:
-    //     '11. Are you willing to be open minded and courteous to your peers so that everyone in your class benefits from this experience?',
-    //   interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
-    //   isArchived: false,
-    //   studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
-    //     .studentFirstname,
-    //   interviewName: '',
-    // };
-    // answers[11] = {
-    //   answerString: interviewProfessionalRepresentation,
-    //   studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
-    //   questionId: 'e346f9ec-f527-4d4f-b4e2-0ea386e9992e',
-    //   questionString:
-    //     '12. Are you willing to do what is necessary to represent the Lead2Change brand of excellence and professionalism?',
-    //   interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
-    //   isArchived: false,
-    //   studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
-    //     .studentFirstname,
-    //   interviewName: '',
-    // };
-    // answers[12] = {
-    //   answerString: interviewTryingNewThings,
-    //   studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
-    //   questionId: '41a23c18-a7a3-4815-963f-96a5a100019e',
-    //   questionString:
-    //     '13. Are you willing to try new things and things that may have been hard for you in the past?',
-    //   interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
-    //   isArchived: false,
-    //   studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
-    //     .studentFirstname,
-    //   interviewName: '',
-    // };
-    // answers[13] = {
-    //   answerString: interviewCommitToActivities,
-    //   studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
-    //   questionId: 'cddf1ee2-c1c6-4123-81c1-7d5ca938ad4e',
-    //   questionString:
-    //     '14. It’s important that you understand what you are committing to. We are looking for you to participate in weekly class sessions, bi-monthly Etiquette Boot Camps on a Saturday and a summer internship experience. How confident are you that you can completely commit to the activities of this program?',
-    //   interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
-    //   isArchived: false,
-    //   studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
-    //     .studentFirstname,
-    //   interviewName: '',
-    // };
+    };
+    answers[1] = {
+      answerString: interviewPersonalStrengths,
+      studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
+      questionId: 'bcd51d11-0289-4f13-cde4-08d95db8fbe0',
+      questionString:
+        '2. Describe your personal strengths? Why do you describe those as strengths?',
+      interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
+      isArchived: false,
+      studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
+        .studentFirstname,
+      interviewName: '',
+    };
+    answers[2] = {
+      answerString: interviewImportantWord,
+      studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
+      questionId: 'ca080589-073d-4432-cde5-08d95db8fbe0',
+      questionString:
+        '3. Of the following words - Commitment, Leadership, and Achievement; which is most important? Why is it important to you?',
+      interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
+      isArchived: false,
+      studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
+        .studentFirstname,
+      interviewName: '',
+    };
+    answers[3] = {
+      answerString: interviewOvercomeDifficulty,
+      studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
+      questionId: '10a9e191-a426-409c-cde7-08d95db8fbe0',
+      questionString:
+        '4. Describe a difficult situation/project and how you overcame it?',
+      interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
+      isArchived: false,
+      studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
+        .studentFirstname,
+      interviewName: '',
+    };
+    answers[4] = {
+      answerString: interviewOtherCommitments,
+      studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
+      questionId: '7827a50d-f932-40c4-cde2-08d95db8fbe0',
+      questionString:
+        '5. What other extra-curricular activities, employment opportunities or other programs are you currently involved in or will you become involved in this year?',
+      interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
+      isArchived: false,
+      studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
+        .studentFirstname,
+      interviewName: '',
+    };
+    answers[5] = {
+      answerString: interviewSacrificeTime,
+      studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
+      questionId: '63e82d00-bcf8-4a04-cde3-08d95db8fbe0',
+      questionString:
+        '6. Are you willing to sacrifice some things you usually do after school to prepare for a very fulfilling career that you were designed to do?',
+      interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
+      isArchived: false,
+      studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
+        .studentFirstname,
+      interviewName: '',
+    };
+    answers[6] = {
+      answerString: interviewPostHighSchoolCoaching,
+      studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
+      questionId: '1f3a4a74-4236-46ef-cde9-08d95db8fbe0',
+      questionString:
+        '7. Are you interested in participating in one on one coaching concerning life after high school?',
+      interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
+      isArchived: false,
+      studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
+        .studentFirstname,
+      interviewName: '',
+    };
+    answers[7] = {
+      answerString: interviewScheduleManagement,
+      studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
+      questionId: '3bab2c58-942d-46db-cdea-08d95db8fbe0',
+      questionString:
+        '8. Are you willing to manage your schedule to meet the program requirements?',
+      interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
+      isArchived: false,
+      studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
+        .studentFirstname,
+      interviewName: '',
+    };
+    answers[8] = {
+      answerString: interviewCommunicateWithMentors,
+      studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
+      questionId: '73455ba8-7379-401d-cdec-08d95db8fbe0',
+      questionString:
+        '9. Are you able to communicate the expectations to your parent/guardian or mentor and ask for their support?',
+      interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
+      isArchived: false,
+      studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
+        .studentFirstname,
+      interviewName: '',
+    };
+    answers[9] = {
+      answerString: interviewDiverseClass,
+      studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
+      questionId: 'bb96a326-5117-430f-cded-08d95db8fbe0',
+      questionString:
+        '10. Are you willing to be in a class with a diverse group of learners that may or may not know what you know?',
+      interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
+      isArchived: false,
+      studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
+        .studentFirstname,
+      interviewName: '',
+    };
+    answers[10] = {
+      answerString: interviewOpenMinded,
+      studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
+      questionId: 'ed60a032-7712-43ed-cdf0-08d95db8fbe0',
+      questionString:
+        '11. Are you willing to be open minded and courteous to your peers so that everyone in your class benefits from this experience?',
+      interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
+      isArchived: false,
+      studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
+        .studentFirstname,
+      interviewName: '',
+    };
+    answers[11] = {
+      answerString: interviewProfessionalRepresentation,
+      studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
+      questionId: 'e346f9ec-f527-4d4f-b4e2-0ea386e9992e',
+      questionString:
+        '12. Are you willing to do what is necessary to represent the Lead2Change brand of excellence and professionalism?',
+      interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
+      isArchived: false,
+      studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
+        .studentFirstname,
+      interviewName: '',
+    };
+    answers[12] = {
+      answerString: interviewTryingNewThings,
+      studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
+      questionId: '41a23c18-a7a3-4815-963f-96a5a100019e',
+      questionString:
+        '13. Are you willing to try new things and things that may have been hard for you in the past?',
+      interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
+      isArchived: false,
+      studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
+        .studentFirstname,
+      interviewName: '',
+    };
+    answers[13] = {
+      answerString: interviewCommitToActivities,
+      studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
+      questionId: 'cddf1ee2-c1c6-4123-81c1-7d5ca938ad4e',
+      questionString:
+        '14. It’s important that you understand what you are committing to. We are looking for you to participate in weekly class sessions, bi-monthly Etiquette Boot Camps on a Saturday and a summer internship experience. How confident are you that you can completely commit to the activities of this program?',
+      interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
+      isArchived: false,
+      studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
+        .studentFirstname,
+      interviewName: '',
+    };
+    answers[14] = {
+      answerString: '',
+      studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
+      questionId: 'ef016860-a37c-4cd9-bdda-2db31471a0f3',
+      questionString:
+        '1. New ideas and projects sometimes distract me from previous ones.',
+      interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
+      isArchived: false,
+      studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
+        .studentFirstname,
+      interviewName: '',
+    };
+    answers[15] = {
+      answerString: '',
+      studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
+      questionId: 'a0298dcb-9145-45bf-9b77-a16210fc989f',
+      questionString: '2. Setbacks do not discourage me.',
+      interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
+      isArchived: false,
+      studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
+        .studentFirstname,
+      interviewName: '',
+    };
+    answers[16] = {
+      answerString: '',
+      studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
+      questionId: 'aa11692a-db27-4e96-8516-6fd1f2b430c2',
+      questionString:
+        '3. I have been obsessed with a certain idea or project for a short time but later lost interest.',
+      interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
+      isArchived: false,
+      studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
+        .studentFirstname,
+      interviewName: '',
+    };
+    answers[17] = {
+      answerString: '',
+      studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
+      questionId: 'f73e90f5-a846-4f5b-9dec-56c4e8ea9a47',
+      questionString: '4. I am a hardworker.',
+      interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
+      isArchived: false,
+      studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
+        .studentFirstname,
+      interviewName: '',
+    };
+    answers[18] = {
+      answerString: '',
+      studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
+      questionId: '1a846eb0-b51d-49d2-bf60-da9c73fbbf97',
+      questionString:
+        '5. I often set goals but later choose to pursue a different one.',
+      interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
+      isArchived: false,
+      studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
+        .studentFirstname,
+      interviewName: '',
+    };
+    answers[19] = {
+      answerString: '',
+      studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
+      questionId: 'cd87d632-510d-4aa9-bee1-cbb1b789f6a3',
+      questionString:
+        '6. I have a difficulty maintaining my focus on projects that take more than a few months to complete.',
+      interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
+      isArchived: false,
+      studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
+        .studentFirstname,
+      interviewName: '',
+    };
+    answers[20] = {
+      answerString: '',
+      studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
+      questionId: '899f29ef-4910-4580-ab06-05d5993d8f69',
+      questionString: '7. I finish whatever I begin.',
+      interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
+      isArchived: false,
+      studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
+        .studentFirstname,
+      interviewName: '',
+    };
+    answers[21] = {
+      answerString: '',
+      studentId: 'b0ba6354-eb97-49b1-a030-08da6b234c0f',
+      questionId: '1794e461-ca4d-4249-8124-c7bcf7d29f4d',
+      questionString: ' 8. I am diligent',
+      interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
+      isArchived: false,
+      studentName: getStudentById('b0ba6354-eb97-49b1-a030-08da6b234c0f')
+        .studentFirstname,
+      interviewName: '',
+    };
 
     // const interview = {
     //   interviewIdealCareer,
