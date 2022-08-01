@@ -341,11 +341,19 @@ SignUpDisplay.propTypes = {
 
 function SignUpEdit(props) {
   const { onCancelClick, updateFunction } = props;
+  const { studentId } = useParams();
   const [value, setValue] = React.useState(0);
   const [students, setStudents] = useState({});
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  useEffect(() => {
+    const currentStudent = async () => {
+      const currStudent = await getStudentById(studentId);
+      setStudents(currStudent);
+    };
+    currentStudent();
+  }, [studentId]);
 
   const [enteredPlanAfterHighSchool, setEnteredPlanAfterHighSchool] =
     React.useState(students.planAfterHighSchool);
@@ -478,12 +486,7 @@ function SignUpEdit(props) {
                     <TextField
                       fullWidth
                       variant="filled"
-                      helperText={
-                        enteredPlanAfterHighSchool
-                          ? 'Enter Plans After High School'
-                          : ' '
-                      }
-                      value={enteredPlanAfterHighSchool}
+                      value={students.planAfterHighSchool}
                       label="Plans after High School"
                       onChange={(e) =>
                         setEnteredPlanAfterHighSchool(e.target.value)

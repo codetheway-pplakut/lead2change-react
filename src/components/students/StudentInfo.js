@@ -170,8 +170,18 @@ SignUpDisplay.propTypes = {
 };
 
 function SignUpEdit(props) {
+  const { studentId } = useParams();
+  const [students, setStudents] = useState({});
   const { onSaveClick, onCancelClick } = props;
   const [first, setFirst] = useState('');
+
+  useEffect(() => {
+    const currentStudent = async () => {
+      const currStudent = await getStudentById(studentId);
+      setStudents(currStudent);
+    };
+    currentStudent();
+  }, [studentId]);
   return (
     <Grid container>
       <form onSubmit={onSaveClick}>
@@ -206,10 +216,11 @@ function SignUpEdit(props) {
                   <TextField
                     size="small"
                     className="typing-container"
-                    defaultValue="Aaditya Tiwari"
+                    value={students.studentFirstName}
                     label="Name"
-                    onChange={(event) => setFirst(event.target.value)}
+                    onChange={(e) => setFirst(e.target.value)}
                     required
+                    focused
                   />
                 </Grid>
               </StudentInfo>
@@ -220,9 +231,10 @@ function SignUpEdit(props) {
                     className="typing-container"
                     label="Date of Birth"
                     type="date"
-                    defaultValue="2017-05-24"
+                    value={students.studentDateOfBirth}
                     onChange={(event) => setFirst(event.target.value)}
                     required
+                    focused
                   />
                 </Grid>
               </StudentInfo>
@@ -231,10 +243,11 @@ function SignUpEdit(props) {
                   <TextField
                     size="small"
                     className="typing-container"
-                    defaultValue="tiwari.aadi@gmail.com"
+                    value={students.studentEmail}
                     label="Email Adress"
                     onChange={(event) => setFirst(event.target.value)}
                     required
+                    focused
                   />
                 </Grid>
               </StudentInfo>
@@ -243,10 +256,11 @@ function SignUpEdit(props) {
                   <TextField
                     size="small"
                     className="typing-container"
-                    defaultValue="414-244-9848"
-                    label="Phone Number"
+                    value={students.studentCellPhone}
+                    label="Cell Phone Number"
                     onChange={(event) => setFirst(event.target.value)}
                     required
+                    focused
                   />
                 </Grid>
               </StudentInfo>
@@ -255,10 +269,11 @@ function SignUpEdit(props) {
                   <TextField
                     size="small"
                     className="typing-container"
-                    defaultValue="12345 demo street"
+                    value={students.studentAddress}
                     label="Home Adress"
                     onChange={(event) => setFirst(event.target.value)}
                     required
+                    focused
                   />
                 </Grid>
               </StudentInfo>
@@ -267,10 +282,11 @@ function SignUpEdit(props) {
                   <TextField
                     size="small"
                     className="typing-container"
-                    defaultValue="42"
+                    value={students.studentApartmentNumber}
                     label="Apt. #"
                     onChange={(event) => setFirst(event.target.value)}
                     required
+                    focused
                   />
                 </Grid>
               </StudentInfo>
@@ -279,10 +295,11 @@ function SignUpEdit(props) {
                   <TextField
                     size="small"
                     className="typing-container"
-                    defaultValue="WI"
+                    value={students.studentState}
                     label="State"
                     onChange={(event) => setFirst(event.target.value)}
                     required
+                    focused
                   />
                 </Grid>
               </StudentInfo>
@@ -291,10 +308,11 @@ function SignUpEdit(props) {
                   <TextField
                     size="small"
                     className="typing-container"
-                    defaultValue="50021"
+                    value={students.studentZipCode}
                     label="Zip Code"
                     onChange={(event) => setFirst(event.target.value)}
                     required
+                    focused
                   />
                 </Grid>
               </StudentInfo>
