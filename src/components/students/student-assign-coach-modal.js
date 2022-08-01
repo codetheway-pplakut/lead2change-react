@@ -19,7 +19,7 @@ import {
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 
-import { getCoachById, getCoaches } from '../../services/coaches/coaches';
+import { getCoaches } from '../../services/coaches/coaches';
 
 const StyledButton = styled(Button)({
   backgroundColor: '#004cbb',
