@@ -17,12 +17,9 @@ export default function RegisterAdminModal() {
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const [open, setOpen] = useState(false);
-  const [register, setRegister] = useState(false);
 
-  const [emailErrorOne, setEmailErrorOne] = useState('');
-  const [emailErrorTwo, setEmailErrorTwo] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  const [passwordErrorTwo, setPasswordErrorTwo] = useState('');
   const [passwordErrorConfirmation, setPasswordErrorConfirmation] =
     useState('');
 
@@ -62,67 +59,40 @@ export default function RegisterAdminModal() {
   };
 
   const handleRegister = () => {
-    setEmailErrorOne(null);
-    setEmailErrorTwo(null);
+    setEmailError(null);
     setPasswordError(null);
-    setPasswordErrorTwo(null);
     setPasswordErrorConfirmation(null);
 
-    setRegister(true);
-    if (email.length < 1) {
-      setEmailErrorOne(
-        <Typography variant="subtitle2" sx={{ color: 'red' }}>
-          Email Error; Email Required.
-        </Typography>
-      );
-      setRegister(false);
-    }
-    if (email.indexOf('@') < 0) {
-      setEmailErrorTwo(
-        <Typography variant="subtitle2" sx={{ color: 'red' }}>
-          Email Error; Please enter a valid email of the form ___@___.___
-        </Typography>
-      );
-      setRegister(false);
-    }
-    if (password.length < 1) {
-      setPasswordError(
-        <Typography variant="subtitle2" sx={{ color: 'red' }}>
-          Password Error; Password Required.
-        </Typography>
-      );
-      setRegister(false);
-    }
     if (
-      password.indexOf('1') < 0 &&
-      password.indexOf('2') < 0 &&
-      password.indexOf('3') < 0 &&
-      password.indexOf('4') < 0 &&
-      password.indexOf('5') < 0 &&
-      password.indexOf('6') < 0 &&
-      password.indexOf('7') < 0 &&
-      password.indexOf('8') < 0 &&
-      password.indexOf('9') < 0 &&
-      password.indexOf('0') < 0
+      email.includes('@') &&
+      password.length > 0 &&
+      confirmPassword.length > 0 &&
+      password === confirmPassword
     ) {
-      setPasswordErrorTwo(
-        <Typography variant="subtitle2" sx={{ color: 'red' }}>
-          Password Error; Password must contain a digit (0,1,2,3,4,5,6,7,8,9).
-        </Typography>
-      );
-      setRegister(false);
-    }
-    if (password !== confirmPassword) {
-      setPasswordErrorConfirmation(
-        <Typography variant="subtitle2" sx={{ color: 'red' }}>
-          Password Error; Password and Confirm Password do not match.
-        </Typography>
-      );
-      setRegister(false);
-    }
-
-    if (register === true) {
+      handleClose();
       newAdmin(email, password, confirmPassword);
+    } else {
+      if (email.indexOf('@') < 0) {
+        setEmailError(
+          <Typography variant="subtitle2" sx={{ color: 'red' }}>
+            Email Error; Please enter a valid email of the form ___@___.___
+          </Typography>
+        );
+      }
+      if (password.length < 1) {
+        setPasswordError(
+          <Typography variant="subtitle2" sx={{ color: 'red' }}>
+            Password Error; Password Required.
+          </Typography>
+        );
+      }
+      if (password !== confirmPassword) {
+        setPasswordErrorConfirmation(
+          <Typography variant="subtitle2" sx={{ color: 'red' }}>
+            Password Error; Password and Confirm Password do not match.
+          </Typography>
+        );
+      }
     }
   };
 
@@ -167,7 +137,6 @@ export default function RegisterAdminModal() {
       >
         + Admin
       </Button>
-      {/* <UpdateAdmin onSubmit={updateModalChange} handleClose={handleClose} /> */}
       <Modal open={open} onClose={handleClose}>
         <Box sx={modalPosition}>
           <Grid spacing={2} alignItems="center" justifyContent="center">
@@ -270,10 +239,8 @@ export default function RegisterAdminModal() {
                 </Grid>
               </Grid>
               <div>
-                {emailErrorOne}
-                {emailErrorTwo}
+                {emailError}
                 {passwordError}
-                {passwordErrorTwo}
                 {passwordErrorConfirmation}
               </div>
             </Box>
