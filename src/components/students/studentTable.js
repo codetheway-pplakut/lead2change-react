@@ -113,15 +113,8 @@ const declineHandler = async (studentId) => {
 };
 
 const reassignCoachHandler = async (studentsId, coachsId) => {
-  const updatedStudent = await getStudentById(studentsId);
-  updatedStudent.coachId = coachsId;
-  await updateStudent(updatedStudent);
-  const updatedCoach = await getCoachById(coachsId);
-
-  if (!Array.isArray(updatedCoach.students)) updatedCoach.students = [];
-  updatedCoach.students.push(updatedStudent);
-
   await assignStudent({ coachId: coachsId, studentId: studentsId });
+  console.log(getStudentById(studentsId));
 };
 
 TabPanel.propTypes = {
