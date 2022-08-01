@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 import {
   Button,
@@ -10,7 +11,8 @@ import {
   TextField,
   Container,
 } from '@mui/material';
-import { requestReset, getUsers } from '../../services/users/users';
+import { requestReset } from '../../services/users/users';
+import { getStudentById } from '../../services/students/students';
 
 const style = {
   position: 'absolute',
@@ -25,6 +27,19 @@ const style = {
 };
 
 function ForgotPassword() {
+  const { studentId } = useParams();
+  const [students, setStudents] = useState({});
+
+  useEffect(() => {
+    const currentStudent = async () => {
+      const currStudent = await getStudentById(studentId);
+      setStudents(currStudent);
+    };
+    currentStudent();
+  }, [studentId]);
+  const x = students.studentEmail;
+  console.log(`${x}`);
+
   const [isError, setIsError] = useState(true);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
