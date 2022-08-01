@@ -26,7 +26,7 @@ export const updateInterview = (interview) => {
 export const createInterview = async (interview) => {
   return callApi({
     body: interview,
-    endpoint: SERVICE_ROOT,
+    endpoint: `${SERVICE_ROOT}/create-student-response`,
     method: 'POST',
     headers: {
       Accept: 'application/json, text/plain',

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Stack from '@mui/material/Stack';
 import { Grid } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Alert from '@mui/material/Alert';
 import BasicTabs from './tabs';
 import Navbar from '../admin/sampleNavbar';
 import ExitModal from './exit-modal';
@@ -90,6 +91,9 @@ export default function InterviewPage() {
             <h1>STUDENT NAME INTERVIEW</h1>
           </Grid>
         </Grid>
+        <Alert severity="warning" align="center">
+          Please make sure to finish all InterviewQuestions before saving!
+        </Alert>
         <BasicTabs />
         <Stack
           spacing={75}
