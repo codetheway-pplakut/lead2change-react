@@ -267,13 +267,22 @@ function SignUpDisplay(props) {
             <Grid container justifyContent="flex-end">
               <Grid item xs={12} style={{ height: '30vh' }}>
                 <Grid>
-                  <h3 style={{ color: '#2656A5' }}>Career Information</h3>
-                  <h5>I am College Bound: {careers.collegeBound}</h5>
-                  <h5>Number of Career Clusters: {careers.careerCluster}</h5>
-                  <h5>Career of Choice: {careers.specificCluster}</h5>
-                  <h5>
-                    I am Techinical Bound: {careers.technicalCollegeBound}
-                  </h5>
+                  <Box>
+                    <Button
+                      style={{ float: 'right' }}
+                      variant="contained"
+                      onClick={onEditClick}
+                    >
+                      Edit
+                    </Button>
+                    <h3 style={{ color: '#2656A5' }}>Career Information</h3>
+                    <h5>I am College Bound: {careers.collegeBound}</h5>
+                    <h5>Number of Career Clusters: {careers.careerCluster}</h5>
+                    <h5>Career of Choice: {careers.specificCluster}</h5>
+                    <h5>
+                      I am Techinical Bound: {careers.technicalCollegeBound}
+                    </h5>
+                  </Box>
                 </Grid>
               </Grid>
             </Grid>
@@ -331,9 +340,98 @@ SignUpDisplay.propTypes = {
 };
 
 function SignUpEdit(props) {
-  const { onSaveClick, onCancelClick } = props;
+  const { onSaveClick, onCancelClick, updateFunction } = props;
   const [value, setValue] = React.useState(0);
   const [students, setStudents] = useState({});
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const [enteredPlanAfterHighSchool, setEnteredPlanAfterHighSchool] =
+    React.useState(students.planAfterHighSchool);
+
+  const [enteredCollegesList, setEnteredCollegesList] = React.useState(
+    students.collegesList
+  );
+
+  const [enteredFirstChoiceCollege, setEnteredFirstChoiceCollege] =
+    React.useState(students.firstChoiceCollege);
+
+  const [enteredCollegeApplicationStatus, setEnteredCollegeApplicationStatus] =
+    React.useState(students.collegeApplicationStatus);
+
+  const [enteredCollegeEssayStatus, setEnteredCollegeEssayStatus] =
+    React.useState(students.collegeEssayStatus);
+
+  const [enteredCollegeEssayHelp, setEnteredCollegeEssayHelp] = React.useState(
+    students.collegeEssayHelp
+  );
+
+  const [enteredPactTestScore, setEnteredPactTestScore] = React.useState(
+    students.pactTestScore
+  );
+
+  const [enteredPsatTestDate, setEnteredPsatTestDate] = React.useState(
+    students.psatTestDate
+  );
+
+  const [enteredPsatTestScore, setEnteredPsatTestScore] = React.useState(
+    students.psatTestScore
+  );
+
+  const [enteredPactTestDate, setEnteredPactTestDate] = React.useState(
+    students.pactTestDate
+  );
+
+  const [enteredActTestScore, setEnteredActTestScore] = React.useState(
+    students.actTestScore
+  );
+
+  const [enteredActTestDate, setEnteredActTestDate] = React.useState(
+    students.actTestDate
+  );
+
+  const [enteredSatTestScore, setEnteredSatTestScore] = React.useState(
+    students.satTestScore
+  );
+
+  const [enteredSatTestDate, setEnteredSatTestDate] = React.useState(
+    students.satTestDate
+  );
+
+  const [
+    enteredFinancialAidProcessComplete,
+    setEnteredFinancialAidProcessComplete,
+  ] = React.useState(students.financialAidProcessComplete);
+
+  const [enteredAssistanceForForms, setEnteredAssistanceForForms] =
+    React.useState(students.assistanceForForms);
+
+  const [enteredSupportNeeded, setEnteredSupportNeeded] = React.useState(
+    students.supportNeeded
+  );
+
+  const EditField = () => {
+    handleClose();
+    const updatedStudent = {
+      id: students.id, // TODO : Update to agreed ID creation method
+      planAfterHighSchool: enteredPlanAfterHighSchool,
+      collegesList: enteredCollegesList,
+      firstChoiceCollege: enteredFirstChoiceCollege,
+      collegeApplicationStatus: enteredCollegeApplicationStatus,
+      collegeEssayStatus: enteredCollegeEssayStatus,
+      collegeEssayHelp: enteredCollegeEssayHelp,
+      pactTestScore: enteredPactTestScore,
+      psatTestDate: enteredPsatTestDate,
+      psatTestScore: enteredPsatTestScore,
+      pactTestDate: enteredPactTestDate,
+      actTestScore: enteredActTestScore,
+      actTestDate: enteredActTestDate,
+      satTestScore: enteredSatTestScore,
+      satTestDate: enteredSatTestDate,
+    };
+    updateFunction(updatedStudent);
+  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -378,14 +476,19 @@ function SignUpEdit(props) {
                     <h3 style={{ color: '#2656A5' }}>Post Secondary Plan</h3>
 
                     <TextField
-                      id="text-area-q1"
-                      multiline
                       fullWidth
-                      maxRows={4}
                       variant="filled"
-                      defaultValue={students.planAfterHighSchool}
-                      label="Plans after college"
-                      onChange={(event) => setFirst(event.target.value)}
+                      helperText={
+                        enteredPlanAfterHighSchool.length < 1
+                          ? 'Enter Plans After High School'
+                          : ' '
+                      }
+                      error={enteredPlanAfterHighSchool.length < 1}
+                      value={enteredPlanAfterHighSchool}
+                      label="Plans after High School"
+                      onChange={(e) =>
+                        setEnteredPlanAfterHighSchool(e.target.value)
+                      }
                       required
                     />
                   </Grid>
@@ -490,7 +593,7 @@ function SignUpEdit(props) {
                     <TextField
                       size="small"
                       className="typing-container"
-                      label="PSAT Date"
+                      label="PACT Date"
                       type="date"
                       defaultValue="2017-05-24"
                       onChange={(event) => setFirst(event.target.value)}
@@ -1079,7 +1182,7 @@ function SignUpEdit(props) {
             </Box>
           </TabPanel>
           <Grid align="center">
-            <Button variant="contained" type="Submit">
+            <Button variant="contained" type="Submit" onClick={EditField}>
               Save
             </Button>
             {'   '}
@@ -1096,6 +1199,7 @@ function SignUpEdit(props) {
 SignUpEdit.propTypes = {
   onSaveClick: PropTypes.func.isRequired,
   onCancelClick: PropTypes.func.isRequired,
+  updateFunction: PropTypes.func.isRequired,
 };
 
 export default function TabsFunction() {

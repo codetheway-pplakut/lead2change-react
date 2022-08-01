@@ -19,11 +19,11 @@ export default function CreateGoalModal(props) {
 
   const [goalSet, setGoalSet] = useState('');
   const [dateGoalSet, setDateGoalSet] = useState('');
-  const [sel1, setsel1] = useState('');
-  const [sel2, setsel2] = useState('');
-  const [sel3, setsel3] = useState('');
-  const [sel4, setsel4] = useState('');
-  const [sel5, setsel5] = useState('');
+  const [sel1, setsel1] = useState(false);
+  const [sel2, setsel2] = useState(false);
+  const [sel3, setsel3] = useState(false);
+  const [sel4, setsel4] = useState(false);
+  const [sel5, setsel5] = useState(false);
   const [sel, setsel] = useState('');
   const [dateGoalReview, setDateGoalReview] = useState('');
   const [wasItAccomplished, setWasItAccomplished] = useState('');
@@ -32,7 +32,7 @@ export default function CreateGoalModal(props) {
     handleClose();
     let temp = '';
     if (sel1) {
-      temp += 'Self-Awareness/';
+      temp += ('Self-Awareness/');
     }
     if (sel2) {
       temp += 'Self-Management/';
@@ -46,7 +46,6 @@ export default function CreateGoalModal(props) {
     if (sel5) {
       temp += 'Responsible Decision-making/';
     }
-    setsel(temp);
     if (
       studentId &&
       goalSet &&
@@ -69,7 +68,19 @@ export default function CreateGoalModal(props) {
       // TODO: add success alert
     } else {
       // TODO: add failure alert
-      console.log('Did not submit to API');
+      const Goal = {
+        studentId,
+        goalSet,
+        sel1,
+        sel2,
+        sel,
+        temp,
+        dateGoalSet,
+        dateGoalReview,
+        wasItAccomplished,
+        explanation,
+      };
+      console.log(Goal);
     }
   };
   const style = {
