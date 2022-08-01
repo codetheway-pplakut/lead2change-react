@@ -340,7 +340,7 @@ SignUpDisplay.propTypes = {
 };
 
 function SignUpEdit(props) {
-  const { onSaveClick, onCancelClick, updateFunction } = props;
+  const { onCancelClick, updateFunction } = props;
   const [value, setValue] = React.useState(0);
   const [students, setStudents] = useState({});
   const [open, setOpen] = React.useState(false);
@@ -442,7 +442,7 @@ function SignUpEdit(props) {
       <Box
         sx={{ bgcolor: 'background.paper', width: '100vh', overflowY: 'auto' }}
       >
-        <form onSubmit={onSaveClick}>
+        <form onSubmit={EditField}>
           <AppBar position="static">
             <Tabs
               value={value}
@@ -479,11 +479,10 @@ function SignUpEdit(props) {
                       fullWidth
                       variant="filled"
                       helperText={
-                        enteredPlanAfterHighSchool.length < 1
+                        enteredPlanAfterHighSchool
                           ? 'Enter Plans After High School'
                           : ' '
                       }
-                      error={enteredPlanAfterHighSchool.length < 1}
                       value={enteredPlanAfterHighSchool}
                       label="Plans after High School"
                       onChange={(e) =>
@@ -1197,7 +1196,6 @@ function SignUpEdit(props) {
 }
 
 SignUpEdit.propTypes = {
-  onSaveClick: PropTypes.func.isRequired,
   onCancelClick: PropTypes.func.isRequired,
   updateFunction: PropTypes.func.isRequired,
 };
