@@ -172,8 +172,29 @@ SignUpDisplay.propTypes = {
 function SignUpEdit(props) {
   const { studentId } = useParams();
   const [students, setStudents] = useState({});
-  const { onSaveClick, onCancelClick } = props;
+  const { onSaveClick, onCancelClick, updateFunction } = props;
   const [first, setFirst] = useState('');
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const [enteredFirstName, setEnteredFirstName] = React.useState(
+    students.studentFirstName
+  );
+  const [enteredDateOfBirth, setEnteredDateOfBirth] = React.useState(
+    students.studentDateOfBirth
+  );
+  const [enteredEmail, setEnteredEmail] = React.useState(students.studentEmail);
+
+  const EditField = () => {
+    handleClose();
+    const updatedStudent = {
+      id: students.id, // TODO : Update to agreed ID creation method
+      studentFirstName: enteredFirstName,
+      studentDateOfBirth: enteredDateOfBirth,
+      studentEmail: enteredEmail,
+    };
+    updateFunction(updatedStudent);
+  };
 
   useEffect(() => {
     const currentStudent = async () => {
@@ -215,11 +236,11 @@ function SignUpEdit(props) {
                 <Grid item marginBottom={2} marginTop={1}>
                   <TextField
                     size="small"
-                    className="typing-container"
-                    value={students.studentFirstName}
+                    value={enteredFirstName}
                     label="Name"
-                    onChange={(e) => setFirst(e.target.value)}
-                    required
+                    onChange={(e) => {
+                      setEnteredFirstName(e.target.value);
+                    }}
                     focused
                   />
                 </Grid>
@@ -231,8 +252,8 @@ function SignUpEdit(props) {
                     className="typing-container"
                     label="Date of Birth"
                     type="date"
-                    value={students.studentDateOfBirth}
-                    onChange={(event) => setFirst(event.target.value)}
+                    value={enteredDateOfBirth}
+                    onChange={(e) => setEnteredDateOfBirth(e.target.value)}
                     required
                     focused
                   />
@@ -243,9 +264,9 @@ function SignUpEdit(props) {
                   <TextField
                     size="small"
                     className="typing-container"
-                    value={students.studentEmail}
+                    value={enteredEmail}
                     label="Email Adress"
-                    onChange={(event) => setFirst(event.target.value)}
+                    onChange={(e) => setEnteredEmail(e.target.value)}
                     required
                     focused
                   />
@@ -319,7 +340,7 @@ function SignUpEdit(props) {
             </Grid>
 
             <Grid align="center" marginTop={7}>
-              <Button variant="contained" type="Submit">
+              <Button variant="contained" type="Submit" onClick={EditField}>
                 Save
               </Button>
               {'   '}
@@ -337,6 +358,7 @@ function SignUpEdit(props) {
 SignUpEdit.propTypes = {
   onSaveClick: PropTypes.func.isRequired,
   onCancelClick: PropTypes.func.isRequired,
+  updateFunction: PropTypes.func.isRequired,
 };
 
 export default function ResponsiveGrid(props) {
