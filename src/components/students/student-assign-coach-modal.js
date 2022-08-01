@@ -65,7 +65,6 @@ export default function CoachAssignModal(props) {
   };
 
   const [open, setOpen] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const confirm = () => {
@@ -84,9 +83,7 @@ export default function CoachAssignModal(props) {
 
   const getCoachNameTest = async (coachIdPlaceHolder) => {
     const coach = await getCoachById(coachIdPlaceHolder);
-    let coachName = coach.coachFirstName;
-    coachName += ' ';
-    coachName += coach.coachLastName;
+    const coachName = `${coach.coachFirstName} ${coach.coachLastName}`;
     return coachName;
   };
 
@@ -100,13 +97,10 @@ export default function CoachAssignModal(props) {
     denySubmit = false;
   }
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
   return (
     <div>
       <Stack direction="row">
-        {coachId !== null && <p>{getCoachNameTest(coachId)}</p>}
+        {coachId !== null && <p>{`${getCoachNameTest(coachId)}`}</p>}
         {coachId === null && <p>Unassigned</p>}
         <IconButton onClick={handleOpen}>
           <EditIcon />
