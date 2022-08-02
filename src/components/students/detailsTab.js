@@ -51,8 +51,7 @@ function SignUpDisplay(props) {
   const { onEditClick } = props;
   const [value, setValue] = React.useState(0);
   const { studentId } = useParams();
-  const { goalId } = useParams();
-  const [goals, setGoals] = useState({});
+  const [goals, setGoals] = useState([]);
   const [students, setStudents] = useState({});
   const [careers, setCareers] = useState({});
 
@@ -61,16 +60,18 @@ function SignUpDisplay(props) {
       const currStudent = await getStudentById(studentId);
       setStudents(currStudent);
     };
-    currentStudent();
-  }, [studentId]);
-
-  useEffect(() => {
     const currentGoal = async () => {
-      const currGoal = await getGoalById(goalId);
+      const currGoal = await getGoalsByStudentId(studentId);
       setGoals(currGoal);
     };
+    const currentCareer = async () => {
+      const currCareer = await getCareersById(studentId);
+      setCareers(currCareer);
+    };
+    currentStudent();
     currentGoal();
-  }, [goalId]);
+    currentCareer();
+  }, [studentId]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -295,9 +296,7 @@ function SignUpDisplay(props) {
                   <h5>First Name: {students.parentFirstName}</h5>
                   <h5>Last Name: {students.parentLastName}</h5>
                   <h5>Address: {students.address}</h5>
-                  <h5>
-                    Parent Apartment Number: {students.parentApartmentNumber}
-                  </h5>
+                  <h5>Apartment Number: {students.parentApartmentNumber}</h5>
                   <h5>City: {students.parentCity}</h5>
                   <h5>State: {students.parentState}</h5>
                   <h5>Zip Code: {students.parentZipCode}</h5>
@@ -331,7 +330,7 @@ SignUpDisplay.propTypes = {
 };
 
 function AddCareer(props) {
-  const { studentId } = props;
+  const { studentId } = useParams;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -511,9 +510,6 @@ function AddCareer(props) {
     </div>
   );
 }
-AddCareer.propTypes = {
-  studentId: PropTypes.string.isRequired,
-};
 
 function SignUpEdit(props) {
   const { onCancelClick, updateFunction } = props;
