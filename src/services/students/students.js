@@ -34,7 +34,17 @@ export const updateStudent = (student) => {
     },
   });
 };
-
+export const assignStudent = async (Ids) => {
+  return callApi({
+    body: Ids,
+    endpoint: 'students/assign-student',
+    method: 'POST',
+    headers: {
+      Accept: 'application/json, text/plain',
+      'Content-Type': 'application/json',
+    },
+  });
+};
 export const unassignStudent = async (Ids) => {
   return callApi({
     body: Ids,

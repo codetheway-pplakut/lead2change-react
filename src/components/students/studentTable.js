@@ -38,9 +38,10 @@ import {
   getStudents,
   getStudentById,
   updateStudent,
+  assignStudent,
   unassignStudent,
 } from '../../services/students/students';
-import { getCoachById } from '../../services/coaches/coaches';
+import { getCoachById, getCoaches } from '../../services/coaches/coaches';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -270,9 +271,22 @@ function getComparator(order, orderBy) {
 
 export default function StudentTable() {
   const [students, setStudents] = React.useState([]);
+  const [coaches, setCoaches] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [search, setSearch] = React.useState('');
 
+  const reassignCoachHandler = async (studentsId, coachsId) => {
+    const updatedStudent = await getStudentById(studentsId);
+    if (coachsId === 'Unassigned' && updatedStudent.coachId !== null) {
+      await unassignStudent({
+        coachId: updatedStudent.coachId,
+        studentId: studentsId,
+      });
+    } else if (coachsId !== 'Unassigned') {
+      await assignStudent({ coachId: coachsId, studentId: studentsId });
+    }
+    refreshStudents();
+  };
   const deactivateHandler = async (studentsId) => {
     const updatedStudent = await getStudentById(studentsId);
     updatedStudent.state = 'inactive';
@@ -295,12 +309,13 @@ export default function StudentTable() {
     refreshStudents();
   };
 
-  const reassignCoachHandler = async (studentId, coachsId) => {
-    const updatedStudent = await getStudentById(studentId);
-    updatedStudent.coachId = coachsId;
-    await updateStudent(updatedStudent);
-    refreshStudents();
+  const refreshCoaches = async () => {
+    const response = await getCoaches();
+    setCoaches(response);
   };
+  useEffect(() => {
+    refreshCoaches();
+  }, []);
   const onSearchChange = (value) => {
     setSearch(value);
   };
@@ -523,9 +538,10 @@ export default function StudentTable() {
                       </StyledTableCell>
                       <StyledTableCell>
                         <CoachAssignModal
-                          confirmHandler={reassignCoachHandler}
                           studentId={student.id}
                           coachId={student.coachId}
+                          confirmHandler={reassignCoachHandler}
+                          coaches={coaches}
                         />
                       </StyledTableCell>
                       <StyledTableCell>
@@ -729,6 +745,16 @@ export default function StudentTable() {
                             />
                           </Grid>
                         </Grid>
+                      </StyledTableCell>
+                      <StyledTableCell>
+                        <StyledButton
+                          onClick={() =>
+                            navigate(`/interview-page/${student.id}`)
+                          }
+                          variant="contained"
+                        >
+                          Interviews
+                        </StyledButton>
                       </StyledTableCell>
                     </StyledTableRow>
                   );
