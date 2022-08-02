@@ -8,6 +8,7 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
+import getName from '../../../util/name/get-name';
 import ROUTES from '../../../constants/routes';
 
 export default function AppBar(props) {
@@ -31,8 +32,8 @@ export default function AppBar(props) {
     navigate(ROUTES.SIGN_UP);
   };
   const onLogoutClick = () => {
-    navigate(ROUTES.LOGIN);
-    // localStorage.removeItem('token');
+    sessionStorage.removeItem('lead2change-token');
+    window.location.href = '/';
   };
 
   return location.pathname === '/' ? (
@@ -90,15 +91,6 @@ export default function AppBar(props) {
             </Button>
           </Grid>
         </Grid>
-        {/* <Grid container alignItems="center" justifyContent="flex-end">
-          <Grid xs="auto">
-            <Button variant="text">
-              <Typography color="white" variant="body2">
-                <span>LOG OUT: ***</span>
-              </Typography>
-            </Button>
-          </Grid>
-        </Grid> */}
       </Toolbar>
     </MaterialAppBar>
   ) : (
@@ -156,15 +148,15 @@ export default function AppBar(props) {
             </Button>
           </Grid>
         </Grid>
-        {/* <Grid container alignItems="center" justifyContent="flex-end">
+        <Grid container alignItems="center" justifyContent="flex-end">
           <Grid xs="auto">
             <Button variant="text" onClick={onLogoutClick}>
               <Typography color="white" variant="body2">
-                <span>LOG OUT: ***</span>
+                <span>LOG OUT: {getName()}</span>
               </Typography>
             </Button>
           </Grid>
-        </Grid> */}
+        </Grid>
       </Toolbar>
     </MaterialAppBar>
   );
