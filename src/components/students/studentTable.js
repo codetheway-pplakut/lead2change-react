@@ -38,6 +38,7 @@ import {
   getStudents,
   getStudentById,
   updateStudent,
+  unassignStudent,
 } from '../../services/students/students';
 import { getCoachById } from '../../services/coaches/coaches';
 
@@ -85,39 +86,6 @@ function TabPanel(props) {
     </div>
   );
 }
-
-const refreshPage = async () => {
-  window.location.reload(true);
-};
-
-const deactivateHandler = async (studentId) => {
-  const updatedStudent = await getStudentById(studentId);
-  updatedStudent.state = 'inactive';
-  await updateStudent(updatedStudent);
-  refreshPage();
-};
-
-const activateHandler = async (studentId) => {
-  const updatedStudent = await getStudentById(studentId);
-  updatedStudent.state = 'active';
-  await updateStudent(updatedStudent);
-  refreshPage();
-};
-
-const declineHandler = async (studentId) => {
-  const updatedStudent = await getStudentById(studentId);
-  updatedStudent.state = 'rejected';
-  await updateStudent(updatedStudent);
-  refreshPage();
-};
-
-const reassignCoachHandler = async (studentId, coachsId) => {
-  const updatedStudent = await getStudentById(studentId);
-  updatedStudent.coachId = coachsId;
-  await updateStudent(updatedStudent);
-  refreshPage();
-};
-
 TabPanel.propTypes = {
   children: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
@@ -305,6 +273,34 @@ export default function StudentTable() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [search, setSearch] = React.useState('');
 
+  const deactivateHandler = async (studentsId) => {
+    const updatedStudent = await getStudentById(studentsId);
+    updatedStudent.state = 'inactive';
+    await updateStudent(updatedStudent);
+    unassignStudent({ coachId: updatedStudent.coachId, studentId: studentsId });
+    refreshStudents();
+  };
+
+  const activateHandler = async (studentId) => {
+    const updatedStudent = await getStudentById(studentId);
+    updatedStudent.state = 'active';
+    await updateStudent(updatedStudent);
+    refreshStudents();
+  };
+
+  const declineHandler = async (studentId) => {
+    const updatedStudent = await getStudentById(studentId);
+    updatedStudent.state = 'rejected';
+    await updateStudent(updatedStudent);
+    refreshStudents();
+  };
+
+  const reassignCoachHandler = async (studentId, coachsId) => {
+    const updatedStudent = await getStudentById(studentId);
+    updatedStudent.coachId = coachsId;
+    await updateStudent(updatedStudent);
+    refreshStudents();
+  };
   const onSearchChange = (value) => {
     setSearch(value);
   };
