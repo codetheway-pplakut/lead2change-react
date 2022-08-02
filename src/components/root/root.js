@@ -45,6 +45,10 @@ export default function Root() {
                 element={<ResponsiveGrid />}
               />
               <Route
+                path="/interview-page/:studentId"
+                element={<InterviewPage />}
+              />
+              <Route
                 path="/detailsTab/:studentId:goalId"
                 element={<TabsFunction />}
               />

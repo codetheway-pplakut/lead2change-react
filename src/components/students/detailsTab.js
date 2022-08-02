@@ -784,6 +784,9 @@ function SignUpEdit(props) {
     setValue(newValue);
   };
   const [first, setFirst] = useState('');
+  const [newPlanAfterHighSchool, setNewPlanAfterHighSchool] = useState('');
+  const [newCollegesList, setNewCollegesList] = useState('');
+  const [newFirstChoiceCollege, setNewFirstChoiceCollege] = useState('');
   return (
     <div style={{ marginRight: '8vh' }}>
       <Box
