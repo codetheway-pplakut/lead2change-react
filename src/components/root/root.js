@@ -19,11 +19,13 @@ import Coaches from '../coaches/Coaches';
 import InterviewPage from '../interview/interview-page';
 import Student from '../students/student-test';
 import ResponsiveGrid from '../students/StudentInfo';
+import ErrorPage from '../login/ErrorPage';
 
 const theme = createTheme();
 
 export default function Root() {
   const errorHandler = (error, errorInfo) => {
+    const errorInformation = errorInfo;
     console.log('logging', error, errorInfo);
   };
 
@@ -49,6 +51,7 @@ export default function Root() {
               <Route path={ROUTES.COACHES} element={<Coaches />} />
               <Route path={ROUTES.STUDENTS} element={<Student />} />
               <Route path={ROUTES.STUDENT_INFO} element={<ResponsiveGrid />} />
+              <Route path={ROUTES.ERROR_PAGE} element={<ErrorPage />} />
             </Route>
           </Routes>
         </BrowserRouter>
