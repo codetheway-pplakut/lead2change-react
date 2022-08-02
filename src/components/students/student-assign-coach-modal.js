@@ -112,14 +112,16 @@ export default function CoachAssignModal(props) {
                 control={<StyledRadio />}
                 label="Unassigned"
               />
-              {coaches.map((coach) => (
-                <FormControlLabel
-                  value={coach.id}
-                  control={<StyledRadio />}
-                  label={getCoachName(coach)}
-                  key={coach.id}
-                />
-              ))}
+              {coaches
+                .filter((item) => item.active === true)
+                .map((coach) => (
+                  <FormControlLabel
+                    value={coach.id}
+                    control={<StyledRadio />}
+                    label={getCoachName(coach)}
+                    key={coach.id}
+                  />
+                ))}
             </RadioGroup>
           </FormControl>
           <Grid container spacing={4} sx={{ mt: '1vh' }}>
