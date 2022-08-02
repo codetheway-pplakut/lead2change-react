@@ -24,12 +24,9 @@ const tablePositioning = {
 };
 
 const tableHeadingText = {
-  padding: 'normal',
   align: 'left',
-  fontSize: 'small',
   backgroundColor: '#004cbb',
   color: 'white',
-  textColor: 'white',
 };
 
 export default function AdminTable() {
@@ -55,32 +52,28 @@ export default function AdminTable() {
     >
       <ProgressIndicatorOverlay active={isLoading} />
 
-      <Grid container>
-        <Grid item sm={12} md={12} lg={12} xl={12}>
-          <Box display="flex" justifyContent="flex-end">
-            <Stack direction="row" spacing={0} alignItems="center">
-              <SearchBar setSearch={setSearch} />
-              <div sx={{ minWidth: '200px' }}>
-                <RegisterAdminModal inWidth="1200px" />
-              </div>
-            </Stack>
-          </Box>
-        </Grid>
+      <Grid item sm={12} md={12} lg={12} xl={12}>
+        <Box display="flex" justifyContent="flex-end">
+          <Stack direction="row" spacing={0} alignItems="center">
+            <SearchBar setSearch={setSearch} />
+            <div>
+              <RegisterAdminModal />
+            </div>
+          </Stack>
+        </Box>
       </Grid>
 
       <TableContainer sx={tablePositioning}>
-        <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" stickyHeader>
+        <Table stickyHeader>
           <TableHead>
             <TableRow>
-              <TableCell align="left" sx={tableHeadingText}>
+              <TableCell sx={tableHeadingText}>
                 <Grid container>
                   <Grid item xs={2} />
                   Email
                 </Grid>
               </TableCell>
-              <TableCell align="left" sx={tableHeadingText}>
-                Delete
-              </TableCell>
+              <TableCell sx={tableHeadingText}>Delete</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -105,7 +98,7 @@ export default function AdminTable() {
                       </Grid>
                     </Grid>
                   </TableCell>
-                  <TableCell align="left">
+                  <TableCell>
                     <DeleteAdminModal id={admin.id} />
                   </TableCell>
                 </TableRow>

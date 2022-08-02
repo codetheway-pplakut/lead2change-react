@@ -117,36 +117,32 @@ export default function RegisterAdminModal() {
       </Button>
       <Modal open={open} onClose={handleClose}>
         <Box sx={modalPosition}>
-          <Grid spacing={2} alignItems="center" justifyContent="center">
-            <Grid item xs={12} sx={{ borderRadius: '10px' }}>
-              <Box
-                bgcolor="#004cbb"
-                sx={{
-                  borderTopLeftRadius: '10px',
-                  borderTopRightRadius: '10px',
-                }}
-              >
-                <Typography
-                  textAlign="center"
-                  color="white"
-                  variant="h4"
-                  fontWeight="bold"
-                  padding="10px"
-                >
-                  Register Admin
-                </Typography>
-                <IconButton
-                  onClick={handleClose}
-                  sx={{ position: 'absolute', right: 8, top: 8 }}
-                >
-                  <CloseIcon fontSize="large" sx={closeIconColor} />
-                </IconButton>
-              </Box>
-            </Grid>
-          </Grid>
+          <Box
+            bgcolor="#004cbb"
+            sx={{
+              borderTopLeftRadius: '10px',
+              borderTopRightRadius: '10px',
+            }}
+          >
+            <Typography
+              textAlign="center"
+              color="white"
+              variant="h4"
+              fontWeight="bold"
+              padding="10px"
+            >
+              Register Admin
+            </Typography>
+            <IconButton
+              onClick={handleClose}
+              sx={{ position: 'absolute', right: 8, top: 8 }}
+            >
+              <CloseIcon fontSize="large" sx={closeIconColor} />
+            </IconButton>
+          </Box>
           <Box sx={{ mt: 1 }}>
             <Box container margin="20px">
-              <Grid container spacing={2} rowSpacing={2}>
+              <Grid container rowSpacing={2}>
                 <Grid item xs={12}>
                   <TextField
                     error={!email.includes('@')}
@@ -195,7 +191,6 @@ export default function RegisterAdminModal() {
                 <Grid
                   container
                   spacing={2}
-                  alignItems="center"
                   justifyContent="center"
                   padding="20px"
                   align="center"
