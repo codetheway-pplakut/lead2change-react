@@ -405,6 +405,45 @@ function SignUpEdit(props) {
 
   const [enteredExplanation, setEnteredExplanation] = React.useState('');
 
+  const [enteredParentFirstName, setEnteredParentFirstName] =
+    React.useState('');
+
+  const [enteredParentAddress, setEnteredParentAddress] = React.useState('');
+
+  const [enteredParentApartmentNumber, setEnteredParentApartmentNumber] =
+    React.useState('');
+
+  const [enteredParentCity, setEnteredParentCity] = React.useState('');
+
+  const [enteredParentState, setEnteredParentState] = React.useState('');
+
+  const [enteredParentZipCode, setEnteredParentZipCode] = React.useState('');
+
+  const [enteredParentCellPhone, setEnteredParentCellPhone] =
+    React.useState('');
+
+  const [enteredParentEmail, setEnteredParentEmail] = React.useState('');
+
+  const [enteredGuidanceCounselor, setEnteredGuidanceCounselor] =
+    React.useState('');
+
+  // const [enteredWorkStatus, setEnteredWorkStatus] = React.useState('');
+
+  // const [enteredAcceptanceState, setEnteredAcceptanceStatus] =
+  //   React.useState('');
+
+  const [enteredStudentSignature, setEnteredStudentSignature] =
+    React.useState('');
+
+  const [enteredStudentSignatureDate, setEnteredStudentSignatureDate] =
+    React.useState('');
+
+  const [enteredParentSignature, setEnteredParentSignature] =
+    React.useState('');
+
+  const [enteredParentSignatureDate, setEnteredParentSignatureDate] =
+    React.useState('');
+
   const EditField = () => {
     handleClose();
     const updatedStudent = {
@@ -429,6 +468,21 @@ function SignUpEdit(props) {
       goalReviewDate: enteredGoalReviewDate,
       wasItAccomplished: enteredWasItAccomplished,
       explanation: enteredExplanation,
+      parentFirstName: enteredParentFirstName,
+      address: enteredParentAddress,
+      parentApartmentNumber: enteredParentApartmentNumber,
+      parentCity: enteredParentCity,
+      parentState: enteredParentState,
+      parentZipCode: enteredParentZipCode,
+      parentCellPhone: enteredParentCellPhone,
+      parentEmail: enteredParentEmail,
+      knowGuidanceCounselor: enteredGuidanceCounselor,
+      // workStatus: enteredWorkStatus,
+      // acceptanceState: enteredAcceptanceState,
+      studentSignature: enteredStudentSignature,
+      studentSignatureDate: enteredStudentSignatureDate,
+      parentSignature: enteredParentSignature,
+      parentSignatureDate: enteredParentSignatureDate,
     };
     updateFunction(updatedStudent);
   };
@@ -451,6 +505,21 @@ function SignUpEdit(props) {
         actTestDate,
         satTestScore,
         satTestDate,
+        parentFirstName,
+        address,
+        parentApartmentNumber,
+        parentCity,
+        parentZipCode,
+        parentState,
+        parentCellPhone,
+        parentEmail,
+        knowGuidanceCounselor,
+        // workStatus,
+        // acceptanceStatus,
+        studentSignature,
+        studentSignatureDate,
+        parentSignature,
+        parentSignatureDate,
       } = currStudent;
       setStudents(currStudent);
 
@@ -468,7 +537,21 @@ function SignUpEdit(props) {
       setEnteredActTestDate(actTestDate);
       setEnteredSatTestScore(satTestScore);
       setEnteredSatTestDate(satTestDate);
+      setEnteredParentFirstName(parentFirstName);
+      setEnteredParentAddress(address);
+      setEnteredParentApartmentNumber(parentApartmentNumber);
+      setEnteredParentCity(parentCity);
+      setEnteredParentState(parentState);
+      setEnteredParentZipCode(parentZipCode);
+      setEnteredParentCellPhone(parentCellPhone);
+      setEnteredParentEmail(parentEmail);
+      setEnteredGuidanceCounselor(knowGuidanceCounselor);
+      setEnteredStudentSignature(studentSignature);
+      setEnteredStudentSignatureDate(studentSignatureDate);
+      setEnteredParentSignature(parentSignature);
+      setEnteredParentSignatureDate(parentSignatureDate);
     };
+
     const currentGoal = async () => {
       const currGoal = await getGoalById(goalId);
 
@@ -1099,9 +1182,11 @@ function SignUpEdit(props) {
                       <TextField
                         size="small"
                         className="typing-container"
-                        defaultValue="Bob Joe"
+                        value={enteredParentFirstName}
                         label="Name"
-                        onChange={(event) => setFirst(event.target.value)}
+                        onChange={(event) =>
+                          setEnteredParentFirstName(event.target.value)
+                        }
                         required
                       />
                     </Grid>
@@ -1110,9 +1195,11 @@ function SignUpEdit(props) {
                       <TextField
                         size="small"
                         className="typing-container"
-                        defaultValue="12345 demo street"
-                        label="Adress"
-                        onChange={(event) => setFirst(event.target.value)}
+                        value={enteredParentAddress}
+                        label="Address"
+                        onChange={(event) =>
+                          setEnteredParentAddress(event.target.value)
+                        }
                         required
                       />
                     </Grid>
@@ -1120,9 +1207,11 @@ function SignUpEdit(props) {
                       <TextField
                         size="small"
                         className="typing-container"
-                        defaultValue="40"
+                        value={enteredParentApartmentNumber}
                         label="Apt. #"
-                        onChange={(event) => setFirst(event.target.value)}
+                        onChange={(event) =>
+                          setEnteredParentApartmentNumber(event.target.value)
+                        }
                         required
                       />
                     </Grid>
@@ -1130,9 +1219,11 @@ function SignUpEdit(props) {
                       <TextField
                         size="small"
                         className="typing-container"
-                        defaultValue="Milwaukee"
+                        value={enteredParentCity}
                         label="City"
-                        onChange={(event) => setFirst(event.target.value)}
+                        onChange={(event) =>
+                          setEnteredParentCity(event.target.value)
+                        }
                         required
                       />
                     </Grid>
@@ -1140,9 +1231,11 @@ function SignUpEdit(props) {
                       <TextField
                         size="small"
                         className="typing-container"
-                        defaultValue="WI"
+                        value={enteredParentState}
                         label="State"
-                        onChange={(event) => setFirst(event.target.value)}
+                        onChange={(event) =>
+                          setEnteredParentState(event.target.value)
+                        }
                         required
                       />
                     </Grid>
@@ -1150,9 +1243,11 @@ function SignUpEdit(props) {
                       <TextField
                         size="small"
                         className="typing-container"
-                        defaultValue="50021"
+                        value={enteredParentZipCode}
                         label="Zip Code"
-                        onChange={(event) => setFirst(event.target.value)}
+                        onChange={(event) =>
+                          setEnteredParentZipCode(event.target.value)
+                        }
                         required
                       />
                     </Grid>
@@ -1160,19 +1255,11 @@ function SignUpEdit(props) {
                       <TextField
                         size="small"
                         className="typing-container"
-                        defaultValue="312-315-5646"
-                        label="Home Phone"
-                        onChange={(event) => setFirst(event.target.value)}
-                        required
-                      />
-                    </Grid>
-                    <Grid marginBottom={2}>
-                      <TextField
-                        size="small"
-                        className="typing-container"
-                        defaultValue="314-654-7821"
+                        value={enteredParentCellPhone}
                         label="Cell Phone"
-                        onChange={(event) => setFirst(event.target.value)}
+                        onChange={(event) =>
+                          setEnteredParentCellPhone(event.target.value)
+                        }
                         required
                       />
                     </Grid>
@@ -1180,9 +1267,11 @@ function SignUpEdit(props) {
                       <TextField
                         size="small"
                         className="typing-container"
-                        defaultValue="mdijd@gmail.com"
+                        value={enteredParentEmail}
                         label="Email"
-                        onChange={(event) => setFirst(event.target.value)}
+                        onChange={(event) =>
+                          setEnteredParentEmail(event.target.value)
+                        }
                         required
                       />
                     </Grid>
@@ -1194,13 +1283,16 @@ function SignUpEdit(props) {
                       sx={{ m: 1, minWidth: 200 }}
                     >
                       <InputLabel id="demo-simple-select-standard-label">
-                        Knows Guidance Cousoler{' '}
+                        Knows Guidance Counselor{' '}
                       </InputLabel>
                       <Select
                         labelId="demo-simple-select-standard-label"
                         id="demo-simple-select-standard"
                         label="Age"
-                        defaultValue={10}
+                        value={enteredGuidanceCounselor}
+                        onChange={(event) =>
+                          setEnteredGuidanceCounselor(event.target.value)
+                        }
                       >
                         <MenuItem value="" />
                         <MenuItem value={10}>Yes</MenuItem>
@@ -1214,13 +1306,17 @@ function SignUpEdit(props) {
                         sx={{ m: 1, minWidth: 200 }}
                       >
                         <InputLabel id="demo-simple-select-standard-label">
-                          Activity Status{' '}
+                          Work Status{' '}
                         </InputLabel>
                         <Select
                           labelId="demo-simple-select-standard-label"
                           id="demo-simple-select-standard"
-                          label="Age"
+                          label="Work Status"
+                          // value={enteredWorkStatus}
                           defaultValue={10}
+                          // onChange={(event) =>
+                          //   setEnteredWorkStatus(event.target.value)
+                          // }
                         >
                           <MenuItem value="" />
                           <MenuItem value={10}>Active</MenuItem>
@@ -1238,8 +1334,12 @@ function SignUpEdit(props) {
                       <Select
                         labelId="demo-simple-select-standard-label"
                         id="demo-simple-select-standard"
-                        label="Age"
+                        label="Acceptance Status"
                         defaultValue={10}
+                        // value={enteredAcceptanceStatus}
+                        // onChancge={(event) =>
+                        //   setEnteredAcceptanceStatus(event.target.value)
+                        // }
                       >
                         <MenuItem value="" />
                         <MenuItem value={10}>Accepted</MenuItem>
@@ -1251,9 +1351,11 @@ function SignUpEdit(props) {
                       <TextField
                         size="small"
                         className="typing-container"
-                        defaultValue="Aadi Tiwair"
+                        value={enteredStudentSignature}
                         label="Student Signiture"
-                        onChange={(event) => setFirst(event.target.value)}
+                        onChange={(event) =>
+                          setEnteredStudentSignature(event.target.value)
+                        }
                         required
                       />
                     </Grid>
@@ -1263,8 +1365,10 @@ function SignUpEdit(props) {
                         className="typing-container"
                         label="Date Signed"
                         type="date"
-                        defaultValue="2017-05-24"
-                        onChange={(event) => setFirst(event.target.value)}
+                        value={enteredStudentSignatureDate}
+                        onChange={(event) =>
+                          setEnteredStudentSignatureDate(event.target.value)
+                        }
                         required
                       />
                     </Grid>
@@ -1273,9 +1377,11 @@ function SignUpEdit(props) {
                       <TextField
                         size="small"
                         className="typing-container"
-                        defaultValue="John Tiwair"
+                        value={enteredParentSignature}
                         label="Parent Signiture"
-                        onChange={(event) => setFirst(event.target.value)}
+                        onChange={(event) =>
+                          setEnteredParentSignature(event.target.value)
+                        }
                         required
                       />
                     </Grid>
@@ -1285,8 +1391,10 @@ function SignUpEdit(props) {
                         className="typing-container"
                         label="Date Signed"
                         type="date"
-                        defaultValue="2017-05-24"
-                        onChange={(event) => setFirst(event.target.value)}
+                        value={enteredParentSignatureDate}
+                        onChange={(event) =>
+                          setEnteredParentSignatureDate(event.target.value)
+                        }
                         required
                       />
                     </Grid>
