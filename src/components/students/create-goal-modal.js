@@ -8,28 +8,46 @@ import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import PropTypes from 'prop-types';
 import { Box, Checkbox } from '@mui/material';
+import { useParams } from 'react-router';
 import ColorButton from '../coaches/Shared/ColoredButton';
 import { addGoal } from '../../services/goals/goals';
 
 export default function CreateGoalModal(props) {
-  const { studentId } = props;
+  const { studentId } = useParams;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const [goalSet, setGoalSet] = useState('');
   const [dateGoalSet, setDateGoalSet] = useState('');
-  const [sel1, setsel1] = useState('');
-  const [sel2, setsel2] = useState('');
-  const [sel3, setsel3] = useState('');
-  const [sel4, setsel4] = useState('');
-  const [sel5, setsel5] = useState('');
+  const [sel1, setsel1] = useState(false);
+  const [sel2, setsel2] = useState(false);
+  const [sel3, setsel3] = useState(false);
+  const [sel4, setsel4] = useState(false);
+  const [sel5, setsel5] = useState(false);
   const [sel, setsel] = useState('');
   const [dateGoalReview, setDateGoalReview] = useState('');
   const [wasItAccomplished, setWasItAccomplished] = useState('');
   const [explanation, setExplanation] = useState('');
-  const Create = () => {
+
+  const Create = async () => {
     handleClose();
+    handleSel();
+    {
+      const Goal = {
+        studentId,
+        goalSet,
+        sel,
+        dateGoalSet,
+        dateGoalReview,
+        wasItAccomplished,
+        explanation,
+      };
+      await addGoal(Goal);
+    }
+  };
+
+  const handleSel = () => {
     let temp = '';
     if (sel1) {
       temp += 'Self-Awareness/';
@@ -46,32 +64,10 @@ export default function CreateGoalModal(props) {
     if (sel5) {
       temp += 'Responsible Decision-making/';
     }
+
     setsel(temp);
-    if (
-      studentId &&
-      goalSet &&
-      sel &&
-      dateGoalSet &&
-      dateGoalReview &&
-      wasItAccomplished &&
-      explanation
-    ) {
-      const Goal = {
-        studentId,
-        goalSet,
-        sel,
-        dateGoalSet,
-        dateGoalReview,
-        wasItAccomplished,
-        explanation,
-      };
-      addGoal(Goal);
-      // TODO: add success alert
-    } else {
-      // TODO: add failure alert
-      console.log('Did not submit to API');
-    }
   };
+
   const style = {
     position: 'absolute',
     top: '50%',
@@ -301,7 +297,3 @@ export default function CreateGoalModal(props) {
     </div>
   );
 }
-
-CreateGoalModal.propTypes = {
-  studentId: PropTypes.string.isRequired,
-};
