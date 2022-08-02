@@ -19,6 +19,7 @@ import Student from '../students/students-page';
 import ResponsiveGrid from '../students/StudentInfo';
 import AdminPage from '../admin/adminPage';
 import TabsFunction from '../students/detailsTab';
+import ForgotPassword from '../login/forgot-password';
 
 const theme = createTheme();
 
@@ -53,6 +54,10 @@ export default function Root() {
               <Route path={ROUTES.STUDENTS} element={<Student />} />
               <Route path={ROUTES.ADMIN} element={<AdminPage />} />
               <Route path={ROUTES.STUDENT_INFO} element={<ResponsiveGrid />} />
+              <Route
+                path="/ForgotPassword/:studentId"
+                element={<ForgotPassword />}
+              />
             </Route>
           </Routes>
         </BrowserRouter>
