@@ -315,9 +315,7 @@ function SignUpDisplay(props) {
                   <h5>First Name: {students.parentFirstName}</h5>
                   <h5>Last Name: {students.parentLastName}</h5>
                   <h5>Address: {students.address}</h5>
-                  <h5>
-                    Parent Apartment Number: {students.parentApartmentNumber}
-                  </h5>
+                  <h5>Apartment Number: {students.parentApartmentNumber}</h5>
                   <h5>City: {students.parentCity}</h5>
                   <h5>State: {students.parentState}</h5>
                   <h5>Zip Code: {students.parentZipCode}</h5>

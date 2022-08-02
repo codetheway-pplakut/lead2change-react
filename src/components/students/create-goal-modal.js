@@ -28,11 +28,28 @@ export default function CreateGoalModal(props) {
   const [dateGoalReview, setDateGoalReview] = useState('');
   const [wasItAccomplished, setWasItAccomplished] = useState('');
   const [explanation, setExplanation] = useState('');
-  const Create = () => {
+
+  const Create = async () => {
     handleClose();
+    handleSel();
+    {
+      const Goal = {
+        studentId,
+        goalSet,
+        sel,
+        dateGoalSet,
+        dateGoalReview,
+        wasItAccomplished,
+        explanation,
+      };
+      await addGoal(Goal);
+    }
+  };
+
+  const handleSel = () => {
     let temp = '';
     if (sel1) {
-      temp += ('Self-Awareness/');
+      temp += 'Self-Awareness/';
     }
     if (sel2) {
       temp += 'Self-Management/';
@@ -46,43 +63,10 @@ export default function CreateGoalModal(props) {
     if (sel5) {
       temp += 'Responsible Decision-making/';
     }
-    if (
-      studentId &&
-      goalSet &&
-      sel &&
-      dateGoalSet &&
-      dateGoalReview &&
-      wasItAccomplished &&
-      explanation
-    ) {
-      const Goal = {
-        studentId,
-        goalSet,
-        sel,
-        dateGoalSet,
-        dateGoalReview,
-        wasItAccomplished,
-        explanation,
-      };
-      addGoal(Goal);
-      // TODO: add success alert
-    } else {
-      // TODO: add failure alert
-      const Goal = {
-        studentId,
-        goalSet,
-        sel1,
-        sel2,
-        sel,
-        temp,
-        dateGoalSet,
-        dateGoalReview,
-        wasItAccomplished,
-        explanation,
-      };
-      console.log(Goal);
-    }
+
+    setsel(temp);
   };
+
   const style = {
     position: 'absolute',
     top: '50%',
