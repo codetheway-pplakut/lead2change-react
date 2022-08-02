@@ -2,7 +2,7 @@
 import callApi from '../../util/call-api/call-api';
 
 const SERVICE_ROOT = 'Goals';
-
+const SERVICE_ROOT_STUDENT_GOALS = 'goals/student-goals';
 export const addGoal = async (goal) => {
   return callApi({
     body: goal,
@@ -23,13 +23,7 @@ export const getGoalById = (id) => {
   return callApi({ endpoint: `${SERVICE_ROOT}/${id}` });
 };
 
+
 export const getGoalsByStudentId = async (id) => {
-  return callApi({
-    body: id,
-    endpoint: 'goals/student-goals',
-    headers: {
-      Accept: 'application/json, text/plain',
-      'Content-Type': 'application/json',
-    },
-  });
+  return callApi({endpoint: `${SERVICE_ROOT_STUDENT_GOALS}/${id}` });
 };
