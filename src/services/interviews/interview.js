@@ -23,9 +23,9 @@ export const updateInterview = (interview) => {
   });
 };
 
-export const createStudentResponse = async (interview) => {
+export const createStudentResponse = async (answers) => {
   return callApi({
-    body: interview,
+    body: answers,
     endpoint: SERVICE_ROOT,
     method: 'POST',
     headers: {
