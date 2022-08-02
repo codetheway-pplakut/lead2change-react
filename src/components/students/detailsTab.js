@@ -909,7 +909,7 @@ function SignUpEdit(props) {
             <Box sx={{ flexGrow: 1 }}>
               <Grid container justifyContent="flex-end">
                 <Grid item xs={12} style={{ height: '64vh' }}>
-                  <GridText>
+                  <Grid>
                     <h3 style={{ color: '#2656A5' }}>Goal One</h3>
                     <Grid marginBottom={2}>
                       <TextField
@@ -1181,7 +1181,7 @@ function SignUpEdit(props) {
                         required
                       />
                     </Grid>
-                  </GridText>
+                  </Grid>
                 </Grid>
               </Grid>
             </Box>
@@ -1190,11 +1190,11 @@ function SignUpEdit(props) {
             <Box sx={{ flexGrow: 1 }}>
               <Grid container justifyContent="flex-end">
                 <Grid item xs={12} style={{ height: '64vh' }}>
-                  <GridText>
+                  <Grid>
                     <h3 style={{ color: '#2656A5' }}>Career Information</h3>
                     <FormControl
                       variant="standard"
-                      sx={{ m: 1, minWidth: 200 }}
+                      sx={{ m: 1, minWidth: '22vh' }}
                     >
                       <InputLabel id="demo-simple-select-standard-label">
                         I am College Bound{' '}
@@ -1203,6 +1203,7 @@ function SignUpEdit(props) {
                         labelId="demo-simple-select-standard-label"
                         id="demo-simple-select-standard"
                         label="College Bound?"
+                        fullWidth
                         value={enteredIsCollegeBound}
                         onChange={(event) =>
                           setEnteredIsCollegeBound(event.target.value)
@@ -1242,7 +1243,7 @@ function SignUpEdit(props) {
                       sx={{ m: 1, minWidth: 200 }}
                     >
                       <InputLabel id="demo-simple-select-standard-label">
-                        I am Techincal Bound{' '}
+                        I am Technical Bound{' '}
                       </InputLabel>
                       <Select
                         labelId="demo-simple-select-standard-label"
@@ -1258,8 +1259,7 @@ function SignUpEdit(props) {
                         <MenuItem value={20}>No</MenuItem>
                       </Select>
                     </FormControl>
-                    i
-                  </GridText>
+                  </Grid>
                 </Grid>
               </Grid>
             </Box>
@@ -1268,7 +1268,7 @@ function SignUpEdit(props) {
             <Box sx={{ flexGrow: 1 }}>
               <Grid container justifyContent="flex-end">
                 <Grid item xs={12} style={{ height: '64vh' }}>
-                  <GridText>
+                  <Grid>
                     <h3 style={{ color: '#2656A5' }}>Parent Information</h3>
                     <Grid marginBottom={2}>
                       <TextField
@@ -1444,7 +1444,7 @@ function SignUpEdit(props) {
                         size="small"
                         className="typing-container"
                         value={enteredStudentSignature}
-                        label="Student Signiture"
+                        label="Student Signature"
                         onChange={(event) =>
                           setEnteredStudentSignature(event.target.value)
                         }
@@ -1470,7 +1470,7 @@ function SignUpEdit(props) {
                         size="small"
                         className="typing-container"
                         value={enteredParentSignature}
-                        label="Parent Signiture"
+                        label="Parent Signature"
                         onChange={(event) =>
                           setEnteredParentSignature(event.target.value)
                         }
@@ -1490,7 +1490,7 @@ function SignUpEdit(props) {
                         required
                       />
                     </Grid>
-                  </GridText>
+                  </Grid>
                 </Grid>
               </Grid>
             </Box>
