@@ -238,7 +238,9 @@ function SignUpDisplay(props) {
                   >
                     Edit
                   </ColorButton>
-                  <CreateGoalModal>+ goal</CreateGoalModal>
+                  <CreateGoalModal studentId={students.id}>
+                    + goal
+                  </CreateGoalModal>
                   <h3 style={{ color: '#2656A5' }}>Goal One</h3>
                   <h5>Goal: {goals.goalSet}</h5>
                   <h5>Goal Set Date: {goals.dateGoalSet}</h5>

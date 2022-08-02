@@ -32,7 +32,7 @@ export default function CreateGoalModal(props) {
     handleClose();
     let temp = '';
     if (sel1) {
-      temp += ('Self-Awareness/');
+      temp += 'Self-Awareness/';
     }
     if (sel2) {
       temp += 'Self-Management/';
@@ -46,6 +46,9 @@ export default function CreateGoalModal(props) {
     if (sel5) {
       temp += 'Responsible Decision-making/';
     }
+
+    setsel(temp);
+
     if (
       studentId &&
       goalSet &&
@@ -65,6 +68,8 @@ export default function CreateGoalModal(props) {
         explanation,
       };
       addGoal(Goal);
+      console.log('if statement');
+      console.log(Goal);
       // TODO: add success alert
     } else {
       // TODO: add failure alert
@@ -80,6 +85,7 @@ export default function CreateGoalModal(props) {
         wasItAccomplished,
         explanation,
       };
+      console.log('else statement');
       console.log(Goal);
     }
   };
