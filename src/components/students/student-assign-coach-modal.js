@@ -81,12 +81,6 @@ export default function CoachAssignModal(props) {
     return coachName;
   };
 
-  const getCoachNameTest = async (coachIdPlaceHolder) => {
-    const coach = await getCoachById(coachIdPlaceHolder);
-    const coachName = `${coach.coachFirstName} ${coach.coachLastName}`;
-    return coachName;
-  };
-
   const handleCoachChange = (event) => {
     setValue(event.target.value);
     setNewCoachId(event.target.value);
@@ -103,7 +97,7 @@ export default function CoachAssignModal(props) {
 
   return (
     <div>
-      <Stack direction="row">
+      <Grid direction="row">
         {coachId !== null &&
           filteredArray.map((coach) => {
             return getCoachName(coach);
@@ -112,7 +106,7 @@ export default function CoachAssignModal(props) {
         <IconButton onClick={handleOpen}>
           <EditIcon />
         </IconButton>
-      </Stack>
+      </Grid>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <Grid item xs={12}>
