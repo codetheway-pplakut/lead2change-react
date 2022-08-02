@@ -19,7 +19,7 @@ import {
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 
-import { getCoachById, getCoaches } from '../../services/coaches/coaches';
+import { getCoaches } from '../../services/coaches/coaches';
 
 const StyledButton = styled(Button)({
   backgroundColor: '#004cbb',
@@ -65,7 +65,6 @@ export default function CoachAssignModal(props) {
   };
 
   const [open, setOpen] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const confirm = () => {
@@ -90,10 +89,6 @@ export default function CoachAssignModal(props) {
   let denySubmit = true;
   if (newCoachId !== '') {
     denySubmit = false;
-  }
-
-  if (isLoading) {
-    return <p>Loading...</p>;
   }
   return (
     <div>
