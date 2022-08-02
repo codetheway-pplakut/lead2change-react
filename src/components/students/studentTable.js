@@ -509,6 +509,11 @@ export default function StudentTable() {
                     <StyledTableRow tabIndex={0} key={student.id}>
                       <StyledTableCell>
                         <Link
+                          sx={{
+                            '&:hover': {
+                              cursor: 'pointer',
+                            },
+                          }}
                           onClick={() => navigate(`/StudentInfo/${student.id}`)}
                         >
                           {student.lastName}, {student.firstName}
@@ -600,6 +605,11 @@ export default function StudentTable() {
                     <StyledTableRow tabIndex={0} key={student.id}>
                       <StyledTableCell>
                         <Link
+                          sx={{
+                            '&:hover': {
+                              cursor: 'pointer',
+                            },
+                          }}
                           onClick={() => navigate(`/StudentInfo/${student.id}`)}
                         >
                           {student.lastName}, {student.firstName}
@@ -686,6 +696,11 @@ export default function StudentTable() {
                     <StyledTableRow tabIndex={0} key={student.id}>
                       <StyledTableCell>
                         <Link
+                          sx={{
+                            '&:hover': {
+                              cursor: 'pointer',
+                            },
+                          }}
                           onClick={() => navigate(`/StudentInfo/${student.id}`)}
                         >
                           {student.lastName}, {student.firstName}
