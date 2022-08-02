@@ -1,7 +1,7 @@
 import React from 'react';
-import Stack from '@mui/material/Stack';
-import { Grid } from '@mui/material';
+import { Grid, Stack } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { useParams } from 'react-router-dom';
 import BasicTabs from './tabs';
 import Navbar from '../admin/sampleNavbar';
 import ExitModal from './exit-modal';
@@ -55,6 +55,7 @@ const theme = createTheme({
 });
 
 export default function InterviewPage() {
+  const { studentId } = useParams();
   return (
     <div>
       <ThemeProvider theme={theme}>
