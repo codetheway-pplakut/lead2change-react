@@ -40,7 +40,7 @@ import {
   updateStudent,
   assignStudent,
 } from '../../services/students/students';
-import { getCoachById, updateCoach } from '../../services/coaches/coaches';
+import { getCoachById } from '../../services/coaches/coaches';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
