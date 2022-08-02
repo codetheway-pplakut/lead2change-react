@@ -42,6 +42,7 @@ export default function CreateGoalModal(props) {
         wasItAccomplished,
         explanation,
       };
+      console.log(studentId);
       console.log(Goal);
       await addGoal(Goal);
     }
@@ -80,7 +81,11 @@ export default function CreateGoalModal(props) {
   };
   return (
     <div>
-      <ColorButton variant="contained" onClick={handleOpen}>
+      <ColorButton
+        variant="contained"
+        onClick={handleOpen}
+        studentId={studentId}
+      >
         + New Goal
       </ColorButton>
       <Modal
@@ -94,7 +99,7 @@ export default function CreateGoalModal(props) {
               <Grid container alignItems="center" sx={{ margin: 1 }}>
                 <Grid item xs={2} />
                 <Grid item xs={8}>
-                  <Typography variant="h5" component="h2" align="center">
+                  <Typography variant="h5" component="span" align="center">
                     New Goal
                   </Typography>
                 </Grid>
@@ -133,6 +138,7 @@ export default function CreateGoalModal(props) {
                     label="Self-Awareness"
                     onChange={(e) => {
                       setsel1(e.target.checked);
+                      handleSel();
                     }}
                   >
                     <FormControlLabel
@@ -149,6 +155,7 @@ export default function CreateGoalModal(props) {
                     label="Self-Management"
                     onChange={(e) => {
                       setsel2(e.target.checked);
+                      handleSel();
                     }}
                   >
                     <FormControlLabel
@@ -165,6 +172,7 @@ export default function CreateGoalModal(props) {
                     label="Social Awareness"
                     onChange={(e) => {
                       setsel3(e.target.checked);
+                      handleSel();
                     }}
                   >
                     <FormControlLabel
@@ -181,6 +189,7 @@ export default function CreateGoalModal(props) {
                     label="Relationship Skills"
                     onChange={(e) => {
                       setsel4(e.target.checked);
+                      handleSel();
                     }}
                   >
                     <FormControlLabel
@@ -199,6 +208,7 @@ export default function CreateGoalModal(props) {
                       label="Responsible Decision-making"
                       onChange={(e) => {
                         setsel5(e.target.checked);
+                        handleSel();
                       }}
                     >
                       <FormControlLabel
