@@ -77,7 +77,7 @@ function SignUpDisplay(props) {
 
   useEffect(() => {
     const currentGoal = async () => {
-      const currGoal = await getGoalById(goalId);
+      const currGoal = await getGoalsByStudentId(goalId);
       setGoals(currGoal);
     };
     currentGoal();
