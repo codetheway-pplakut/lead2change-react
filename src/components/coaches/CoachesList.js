@@ -148,7 +148,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function CoachesList(props) {
   const { rows, addFunction, updateFunction, unassignFunction } = props;
   const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('name');
+  const [orderBy, setOrderBy] = React.useState('coachLastName');
   const [searchTerm, setSearchTerm] = React.useState('');
   const [sortActive, setSortActive] = React.useState(true);
   const [value, setValue] = React.useState(0);
