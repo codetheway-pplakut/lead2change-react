@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { green, red } from '@mui/material/colors';
+
+import { createStudentResponse } from '../../services/interviews/interview';
+import { getStudentById } from '../../services/students/students';
 
 export default function GritItem() {
   const [interviewNewThingsDistract, setinterviewNewThingsDistract] =
@@ -18,6 +22,16 @@ export default function GritItem() {
     useState('');
   const [interviewFinishGoals, setinterviewFinishGoals] = useState('');
   const [interviewIsDiligent, setinterviewIsDiligent] = useState('');
+  const { studentId } = useParams();
+  const [students, setStudents] = useState({});
+
+  useEffect(() => {
+    const currentStudent = async () => {
+      const currStudent = await getStudentById(studentId);
+      setStudents(currStudent);
+    };
+    currentStudent();
+  }, [studentId]);
 
   const Save = () => {
     const response = {
@@ -34,11 +48,10 @@ export default function GritItem() {
           interviewName: '',
         },
         {
-          answerString: interviewSetbacksDoNotDiscourage ,
+          answerString: interviewSetbacksDoNotDiscourage,
           studentId: students.id,
           questionId: 'bcd51d11-0289-4f13-cde4-08d95db8fbe0',
-          questionString:
-            '2. Setbacks do not discourage me.',
+          questionString: '2. Setbacks do not discourage me.',
           interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
           isArchived: false,
           studentName: students.studentFirstName,
@@ -59,8 +72,7 @@ export default function GritItem() {
           answerString: interviewHardWorking,
           studentId: students.id,
           questionId: '10a9e191-a426-409c-cde7-08d95db8fbe0',
-          questionString:
-            '4. I am a hardworker.',
+          questionString: '4. I am a hardworker.',
           interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
           isArchived: false,
           studentName: students.studentFirstName,
@@ -92,8 +104,7 @@ export default function GritItem() {
           answerString: interviewFinishGoals,
           studentId: students.id,
           questionId: '1f3a4a74-4236-46ef-cde9-08d95db8fbe0',
-          questionString:
-            '7. I finish whatever I begin.',
+          questionString: '7. I finish whatever I begin.',
           interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
           isArchived: false,
           studentName: students.studentFirstName,
@@ -103,16 +114,15 @@ export default function GritItem() {
           answerString: interviewIsDiligent,
           studentId: students.id,
           questionId: '3bab2c58-942d-46db-cdea-08d95db8fbe0',
-          questionString:
-            '8. I am diligent',
+          questionString: '8. I am diligent',
           interviewId: '92ad7555-1de2-4c82-9cbb-1e24117f0626',
           isArchived: false,
           studentName: students.studentFirstName,
           interviewName: '',
         },
-        
       ],
     };
+  };
   const handleChange = (event) => {
     setinterviewNewThingsDistract(event.target.value);
   };
