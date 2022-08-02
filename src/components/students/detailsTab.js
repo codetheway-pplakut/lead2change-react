@@ -228,7 +228,7 @@ function SignUpDisplay(props) {
                   >
                     Edit
                   </ColorButton>
-                  <CreateGoalModal studentId={students.id}>
+                  <CreateGoalModal studentId={studentId}>
                     + goal
                   </CreateGoalModal>
                   <h3 style={{ color: '#2656A5' }}>Goal One</h3>
@@ -265,7 +265,7 @@ function SignUpDisplay(props) {
                     >
                       Edit
                     </ColorButton>
-                    <AddCareer>+ New Career</AddCareer>
+                    <AddCareer studentId={studentId}>+ New Career</AddCareer>
                     <h3 style={{ color: '#2656A5' }}>Career Information</h3>
                     <h5>I am College Bound: {careers.collegeBound}</h5>
                     <h5>Number of Career Clusters: {careers.careerCluster}</h5>
