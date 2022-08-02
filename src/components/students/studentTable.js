@@ -8,7 +8,6 @@ import {
   Grid,
   InputAdornment,
   Link,
-  Paper,
   Stack,
   styled,
   Tab,
@@ -124,13 +123,6 @@ TabPanel.propTypes = {
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
 };
-
-function controlTabs(index) {
-  return {
-    id: `full-width-tab-${index}`,
-    'aria-controls': `full-width-tabpanel-${index}`,
-  };
-}
 
 function stableSort(array, comparator) {
   const stabilizedThis = array.map((el, index) => [el, index]);
