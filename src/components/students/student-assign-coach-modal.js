@@ -96,7 +96,7 @@ export default function CoachAssignModal(props) {
 
   return (
     <div>
-      <Grid direction="row">
+      <Grid>
         {coachId !== null &&
           filteredArray.map((coach) => {
             return getCoachName(coach);
