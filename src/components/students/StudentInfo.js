@@ -6,9 +6,9 @@ import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-
 import { useParams } from 'react-router-dom';
 import { Stack, TextField } from '@mui/material';
+import ColorButton from '../coaches/Shared/ColoredButton';
 import TabsFunction from './detailsTab';
 
 import { getStudentById } from '../../services/students/students';
@@ -93,17 +93,17 @@ function SignUpDisplay(props) {
             <h2>Student Info</h2>
           </Grid>
           <Grid marginRight={1} marginTop={1}>
-            <Button
+            <ColorButton
               style={{ float: 'right' }}
               variant="contained"
               onClick={onEditClick}
             >
               Edit
-            </Button>
+            </ColorButton>
           </Grid>
           <Grid style={{ margin: '2vh' }}>
             <StudentInfo>
-              <h3>
+              <h3 component="span">
                 Date of Birth: {'  '}
                 <Box component="span" style={{ fontWeight: 'normal' }}>
                   {students.studentDateOfBirth}
@@ -111,7 +111,7 @@ function SignUpDisplay(props) {
               </h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>
+              <h3 component="span">
                 Email Address:{' '}
                 <Box component="span" style={{ fontWeight: 'normal' }}>
                   {students.studentEmail}
@@ -119,7 +119,7 @@ function SignUpDisplay(props) {
               </h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>
+              <h3 component="span">
                 Phone Number:{' '}
                 <Box component="span" style={{ fontWeight: 'normal' }}>
                   {students.studentCellPhone}
@@ -170,8 +170,67 @@ SignUpDisplay.propTypes = {
 };
 
 function SignUpEdit(props) {
-  const { onSaveClick, onCancelClick } = props;
-  const [first, setFirst] = useState('');
+  const { studentId } = useParams();
+  const [students, setStudents] = useState({});
+  const { onSaveClick, onCancelClick, updateFunction } = props;
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const [enteredFirstName, setEnteredFirstName] = React.useState('');
+  const [enteredDateOfBirth, setEnteredDateOfBirth] = React.useState('');
+  const [enteredEmail, setEnteredEmail] = React.useState('');
+  const [enteredCellPhone, setEnteredCellPhone] = React.useState('');
+  const [enteredAddress, setEnteredAddress] = React.useState('');
+  const [enteredApartmentNumber, setEnteredApartmentNumber] =
+    React.useState('');
+  const [enteredState, setEnteredState] = React.useState('');
+  const [enteredZipCode, setEnteredZipCode] = React.useState('');
+
+  const EditField = () => {
+    handleClose();
+    const updatedStudent = {
+      id: students.id, // TODO : Update to agreed ID creation method
+      studentFirstName: enteredFirstName,
+      studentDateOfBirth: enteredDateOfBirth,
+      studentEmail: enteredEmail,
+      studentCellPhone: enteredCellPhone,
+      studentAddress: enteredAddress,
+      studentApartmentNumber: enteredApartmentNumber,
+      studentState: enteredState,
+      studentZipCode: enteredZipCode,
+    };
+    updateFunction(updatedStudent);
+  };
+
+  useEffect(() => {
+    const currentStudent = async () => {
+      const currStudent = await getStudentById(studentId);
+
+      const {
+        studentFirstName,
+        studentEmail,
+        studentDateOfBirth,
+        studentCellPhone,
+        studentAddress,
+        studentApartmentNumber,
+        studentState,
+        studentZipCode,
+      } = currStudent;
+      setStudents(currStudent);
+
+      setEnteredFirstName(studentFirstName);
+      setEnteredDateOfBirth(studentDateOfBirth);
+      setEnteredEmail(studentEmail);
+      setEnteredCellPhone(studentCellPhone);
+      setEnteredApartmentNumber(studentApartmentNumber);
+      setEnteredAddress(studentAddress);
+      setEnteredState(studentState);
+      setEnteredZipCode(studentZipCode);
+    };
+    currentStudent();
+  }, [studentId]);
+
   return (
     <Grid container>
       <form onSubmit={onSaveClick}>
@@ -205,11 +264,12 @@ function SignUpEdit(props) {
                 <Grid item marginBottom={2} marginTop={1}>
                   <TextField
                     size="small"
-                    className="typing-container"
-                    defaultValue="Aaditya Tiwari"
+                    value={enteredFirstName}
                     label="Name"
-                    onChange={(event) => setFirst(event.target.value)}
-                    required
+                    onChange={(e) => {
+                      setEnteredFirstName(e.target.value);
+                    }}
+                    focused
                   />
                 </Grid>
               </StudentInfo>
@@ -220,9 +280,10 @@ function SignUpEdit(props) {
                     className="typing-container"
                     label="Date of Birth"
                     type="date"
-                    defaultValue="2017-05-24"
-                    onChange={(event) => setFirst(event.target.value)}
+                    value={enteredDateOfBirth}
+                    onChange={(e) => setEnteredDateOfBirth(e.target.value)}
                     required
+                    focused
                   />
                 </Grid>
               </StudentInfo>
@@ -231,10 +292,11 @@ function SignUpEdit(props) {
                   <TextField
                     size="small"
                     className="typing-container"
-                    defaultValue="tiwari.aadi@gmail.com"
+                    value={enteredEmail}
                     label="Email Adress"
-                    onChange={(event) => setFirst(event.target.value)}
+                    onChange={(e) => setEnteredEmail(e.target.value)}
                     required
+                    focused
                   />
                 </Grid>
               </StudentInfo>
@@ -243,10 +305,11 @@ function SignUpEdit(props) {
                   <TextField
                     size="small"
                     className="typing-container"
-                    defaultValue="414-244-9848"
-                    label="Phone Number"
-                    onChange={(event) => setFirst(event.target.value)}
+                    value={enteredCellPhone}
+                    label="Cell Phone Number"
+                    onChange={(e) => setEnteredCellPhone(e.target.value)}
                     required
+                    focused
                   />
                 </Grid>
               </StudentInfo>
@@ -255,10 +318,11 @@ function SignUpEdit(props) {
                   <TextField
                     size="small"
                     className="typing-container"
-                    defaultValue="12345 demo street"
-                    label="Home Adress"
-                    onChange={(event) => setFirst(event.target.value)}
+                    value={enteredAddress}
+                    label="Home Address"
+                    onChange={(e) => setEnteredAddress(e.target.value)}
                     required
+                    focused
                   />
                 </Grid>
               </StudentInfo>
@@ -267,10 +331,11 @@ function SignUpEdit(props) {
                   <TextField
                     size="small"
                     className="typing-container"
-                    defaultValue="42"
+                    value={enteredApartmentNumber}
                     label="Apt. #"
-                    onChange={(event) => setFirst(event.target.value)}
+                    onChange={(e) => setEnteredApartmentNumber(e.target.value)}
                     required
+                    focused
                   />
                 </Grid>
               </StudentInfo>
@@ -279,10 +344,11 @@ function SignUpEdit(props) {
                   <TextField
                     size="small"
                     className="typing-container"
-                    defaultValue="WI"
+                    value={enteredState}
                     label="State"
-                    onChange={(event) => setFirst(event.target.value)}
+                    onChange={(e) => setEnteredState(e.target.value)}
                     required
+                    focused
                   />
                 </Grid>
               </StudentInfo>
@@ -291,23 +357,28 @@ function SignUpEdit(props) {
                   <TextField
                     size="small"
                     className="typing-container"
-                    defaultValue="50021"
+                    value={enteredZipCode}
                     label="Zip Code"
-                    onChange={(event) => setFirst(event.target.value)}
+                    onChange={(e) => setEnteredZipCode(e.target.value)}
                     required
+                    focused
                   />
                 </Grid>
               </StudentInfo>
             </Grid>
 
             <Grid align="center" marginTop={7}>
-              <Button variant="contained" type="Submit">
+              <ColorButton
+                variant="contained"
+                type="Submit"
+                onClick={EditField}
+              >
                 Save
-              </Button>
+              </ColorButton>
               {'   '}
-              <Button variant="contained" onClick={onCancelClick}>
+              <ColorButton variant="contained" onClick={onCancelClick}>
                 Cancel
-              </Button>
+              </ColorButton>
             </Grid>
           </Paper>
         </Grid>
@@ -319,6 +390,7 @@ function SignUpEdit(props) {
 SignUpEdit.propTypes = {
   onSaveClick: PropTypes.func.isRequired,
   onCancelClick: PropTypes.func.isRequired,
+  updateFunction: PropTypes.func.isRequired,
 };
 
 export default function ResponsiveGrid(props) {

@@ -8,8 +8,8 @@ import { useNavigate } from 'react-router';
 import SignUpForm from './sign-up-form/sign-up-form';
 
 import { addStudent, getStudents } from '../../services/students/students';
-import ROUTES from '../../constants/routes';
 import ProgressIndicatorOverlay from '../progress-indicator-overlay/progress-indicator-overlay';
+import ROUTES from '../../constants/routes';
 
 export default function SignUp() {
   const [email, setEmail] = useState('');

@@ -17,12 +17,9 @@ export default function RegisterAdminModal() {
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const [open, setOpen] = useState(false);
-  const [register, setRegister] = useState(false);
 
-  const [emailErrorOne, setEmailErrorOne] = useState('');
-  const [emailErrorTwo, setEmailErrorTwo] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  const [passwordErrorTwo, setPasswordErrorTwo] = useState('');
   const [passwordErrorConfirmation, setPasswordErrorConfirmation] =
     useState('');
 
@@ -62,66 +59,17 @@ export default function RegisterAdminModal() {
   };
 
   const handleRegister = () => {
-    setEmailErrorOne(null);
-    setEmailErrorTwo(null);
+    setEmailError(null);
     setPasswordError(null);
-    setPasswordErrorTwo(null);
     setPasswordErrorConfirmation(null);
 
-    setRegister(true);
-    if (email.length < 1) {
-      setEmailErrorOne(
-        <Typography variant="subtitle2" sx={{ color: 'red' }}>
-          Email Error; Email Required.
-        </Typography>
-      );
-      setRegister(false);
-    }
-    if (email.indexOf('@') < 0) {
-      setEmailErrorTwo(
-        <Typography variant="subtitle2" sx={{ color: 'red' }}>
-          Email Error; Please enter a valid email of the form ___@___.___
-        </Typography>
-      );
-      setRegister(false);
-    }
-    if (password.length < 1) {
-      setPasswordError(
-        <Typography variant="subtitle2" sx={{ color: 'red' }}>
-          Password Error; Password Required.
-        </Typography>
-      );
-      setRegister(false);
-    }
     if (
-      password.indexOf('1') < 0 &&
-      password.indexOf('2') < 0 &&
-      password.indexOf('3') < 0 &&
-      password.indexOf('4') < 0 &&
-      password.indexOf('5') < 0 &&
-      password.indexOf('6') < 0 &&
-      password.indexOf('7') < 0 &&
-      password.indexOf('8') < 0 &&
-      password.indexOf('9') < 0 &&
-      password.indexOf('0') < 0
+      email.includes('@') &&
+      password.length > 0 &&
+      confirmPassword.length > 0 &&
+      password === confirmPassword
     ) {
-      setPasswordErrorTwo(
-        <Typography variant="subtitle2" sx={{ color: 'red' }}>
-          Password Error; Password must contain a digit (0,1,2,3,4,5,6,7,8,9).
-        </Typography>
-      );
-      setRegister(false);
-    }
-    if (password !== confirmPassword) {
-      setPasswordErrorConfirmation(
-        <Typography variant="subtitle2" sx={{ color: 'red' }}>
-          Password Error; Password and Confirm Password do not match.
-        </Typography>
-      );
-      setRegister(false);
-    }
-
-    if (register === true) {
+      handleClose();
       newAdmin(email, password, confirmPassword);
     }
   };
@@ -167,41 +115,42 @@ export default function RegisterAdminModal() {
       >
         + Admin
       </Button>
-      {/* <UpdateAdmin onSubmit={updateModalChange} handleClose={handleClose} /> */}
       <Modal open={open} onClose={handleClose}>
         <Box sx={modalPosition}>
-          <Grid spacing={2} alignItems="center" justifyContent="center">
-            <Grid item xs={12} sx={{ borderRadius: '10px' }}>
-              <Box
-                bgcolor="#004cbb"
-                sx={{
-                  borderTopLeftRadius: '10px',
-                  borderTopRightRadius: '10px',
-                }}
-              >
-                <Typography
-                  textAlign="center"
-                  color="white"
-                  variant="h4"
-                  fontWeight="bold"
-                  padding="10px"
-                >
-                  Register Admin
-                </Typography>
-                <IconButton
-                  onClick={handleClose}
-                  sx={{ position: 'absolute', right: 8, top: 8 }}
-                >
-                  <CloseIcon fontSize="large" sx={closeIconColor} />
-                </IconButton>
-              </Box>
-            </Grid>
-          </Grid>
+          <Box
+            bgcolor="#004cbb"
+            sx={{
+              borderTopLeftRadius: '10px',
+              borderTopRightRadius: '10px',
+            }}
+          >
+            <Typography
+              textAlign="center"
+              color="white"
+              variant="h4"
+              fontWeight="bold"
+              padding="10px"
+            >
+              Register Admin
+            </Typography>
+            <IconButton
+              onClick={handleClose}
+              sx={{ position: 'absolute', right: 8, top: 8 }}
+            >
+              <CloseIcon fontSize="large" sx={closeIconColor} />
+            </IconButton>
+          </Box>
           <Box sx={{ mt: 1 }}>
             <Box container margin="20px">
-              <Grid container spacing={2} rowSpacing={2}>
+              <Grid container rowSpacing={2}>
                 <Grid item xs={12}>
                   <TextField
+                    error={!email.includes('@')}
+                    helperText={
+                      !email.includes('@') && email.length > 0
+                        ? 'Must contain an @ sign.'
+                        : ' '
+                    }
                     fullWidth
                     label="Enter email address..."
                     variant="filled"
@@ -212,6 +161,7 @@ export default function RegisterAdminModal() {
 
                 <Grid item xs={12}>
                   <TextField
+                    error={!(password.length > 0)}
                     fullWidth
                     label="Enter password..."
                     variant="filled"
@@ -223,6 +173,12 @@ export default function RegisterAdminModal() {
 
                 <Grid item xs={12}>
                   <TextField
+                    error={!(confirmPassword == password)}
+                    helperText={
+                      !(confirmPassword == password)
+                        ? 'Passwords must match.'
+                        : ' '
+                    }
                     fullWidth
                     label="Enter same password..."
                     variant="filled"
@@ -235,7 +191,6 @@ export default function RegisterAdminModal() {
                 <Grid
                   container
                   spacing={2}
-                  alignItems="center"
                   justifyContent="center"
                   padding="20px"
                   align="center"
@@ -270,10 +225,8 @@ export default function RegisterAdminModal() {
                 </Grid>
               </Grid>
               <div>
-                {emailErrorOne}
-                {emailErrorTwo}
+                {emailError}
                 {passwordError}
-                {passwordErrorTwo}
                 {passwordErrorConfirmation}
               </div>
             </Box>

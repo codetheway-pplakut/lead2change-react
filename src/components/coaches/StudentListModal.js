@@ -1,17 +1,22 @@
 import * as React from 'react';
 import Modal from '@mui/material/Modal';
 import PropTypes from 'prop-types';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import TableSortLabel from '@mui/material/TableSortLabel';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import IconButton from '@mui/material/IconButton';
+import {
+  styled,
+  Link,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TableSortLabel,
+  Typography,
+  Paper,
+  Grid,
+  IconButton,
+} from '@mui/material';
+import { useNavigate } from 'react-router';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import ColorButton from './Shared/ColoredButton';
 
@@ -101,9 +106,18 @@ EnhancedTableHead.propTypes = {
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
   orderBy: PropTypes.string.isRequired,
 };
-
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+}));
 function StudentListModal(props) {
   const { coach } = props;
+  const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -113,6 +127,7 @@ function StudentListModal(props) {
   if (coach.students === null) {
     coach.students = [];
   }
+
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -188,14 +203,26 @@ function StudentListModal(props) {
                     getComparator(order, orderBy)
                   ).map((student, index) => {
                     return (
-                      <TableRow
+                      <StyledTableRow
                         hover
                         onClick={(event) => handleClick(event, student.id)}
                         tabIndex={-1}
                         key={student.id}
                       >
                         <TableCell>
-                          {student.studentLastName}, {student.studentFirstName}
+                          <Link
+                            sx={{
+                              '&:hover': {
+                                cursor: 'pointer',
+                              },
+                            }}
+                            onClick={() =>
+                              navigate(`/StudentInfo/${student.id}`)
+                            }
+                          >
+                            {student.studentLastName},{' '}
+                            {student.studentFirstName}
+                          </Link>
                         </TableCell>
                         <TableCell align="left">
                           {student.studentEmail}
@@ -203,7 +230,7 @@ function StudentListModal(props) {
                         <TableCell align="left">
                           {student.studentPhoneNumber}
                         </TableCell>
-                      </TableRow>
+                      </StyledTableRow>
                     );
                   })}
                 </TableBody>
