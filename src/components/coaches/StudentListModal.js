@@ -2,6 +2,7 @@ import * as React from 'react';
 import Modal from '@mui/material/Modal';
 import PropTypes from 'prop-types';
 import {
+  styled,
   Link,
   Table,
   TableBody,
@@ -105,7 +106,15 @@ EnhancedTableHead.propTypes = {
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
   orderBy: PropTypes.string.isRequired,
 };
-
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+}));
 function StudentListModal(props) {
   const { coach } = props;
   const navigate = useNavigate();
@@ -118,6 +127,7 @@ function StudentListModal(props) {
   if (coach.students === null) {
     coach.students = [];
   }
+
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -193,7 +203,7 @@ function StudentListModal(props) {
                     getComparator(order, orderBy)
                   ).map((student, index) => {
                     return (
-                      <TableRow
+                      <StyledTableRow
                         hover
                         onClick={(event) => handleClick(event, student.id)}
                         tabIndex={-1}
@@ -220,7 +230,7 @@ function StudentListModal(props) {
                         <TableCell align="left">
                           {student.studentPhoneNumber}
                         </TableCell>
-                      </TableRow>
+                      </StyledTableRow>
                     );
                   })}
                 </TableBody>
