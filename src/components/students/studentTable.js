@@ -40,7 +40,7 @@ import {
   updateStudent,
   assignStudent,
 } from '../../services/students/students';
-import { getCoachById } from '../../services/coaches/coaches';
+import { getCoachById, getCoaches } from '../../services/coaches/coaches';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -291,9 +291,16 @@ function getComparator(order, orderBy) {
 
 export default function StudentTable() {
   const [students, setStudents] = React.useState([]);
+  const [coaches, setCoaches] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [search, setSearch] = React.useState('');
-
+  const refreshCoaches = async () => {
+    const response = await getCoaches();
+    setCoaches(response);
+  };
+  useEffect(() => {
+    refreshCoaches();
+  }, []);
   const onSearchChange = (value) => {
     setSearch(value);
   };
@@ -505,6 +512,7 @@ export default function StudentTable() {
                           studentId={student.id}
                           coachId={student.coachId}
                           confirmHandler={reassignCoachHandler}
+                          coaches={coaches}
                         />
                       </StyledTableCell>
                       <StyledTableCell>
