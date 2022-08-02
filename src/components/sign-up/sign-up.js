@@ -63,9 +63,14 @@ export default function SignUp() {
     }
   };
 
+  // const errorHandler = (error, errorInfo) => {
+  //   console.log('logging', error, errorInfo);
+  // };
+
   return (
     <>
       <ProgressIndicatorOverlay active={isLoading} />
+      {/* <ErrorBoundary FallbackComponent={Fallback} onError={errorHandler}> */}
       <Container maxWidth="sm">
         <Box
           sx={{
@@ -95,6 +100,7 @@ export default function SignUp() {
           />
         </Box>
       </Container>
+      {/* </ErrorBoundary> */}
     </>
   );
 }

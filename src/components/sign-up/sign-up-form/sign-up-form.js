@@ -1,3 +1,4 @@
+import { React, useState } from 'react';
 import Button from '@mui/material/Button';
 // import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
@@ -7,6 +8,7 @@ import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
 
 export default function SignUpForm(props) {
+
   const {
     emailAddress,
     firstName,
