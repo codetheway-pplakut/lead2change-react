@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ErrorPage from './ErrorPage';
 
-class ErrorBoundary extends Component {
+function ErrorPage() {
+  return <div>Error</div>;
+}
+
+export default class ErrorBoundary extends Component {
   static getDerivedStateFromError() {
     return { hasError: true };
   }

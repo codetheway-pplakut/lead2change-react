@@ -5,6 +5,9 @@ import Box from '@mui/material/Box';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
+// import { ErrorBoundary } from 'react-error-boundary';
+// import Fallback from '../login/login-form/Fallback';
+import Clicker from '../login/login-form/clicker';
 import SignUpForm from './sign-up-form/sign-up-form';
 
 import { addStudent, getStudents } from '../../services/students/students';
@@ -63,38 +66,45 @@ export default function SignUp() {
     }
   };
 
+  // const errorHandler = (error, errorInfo) => {
+  //   console.log('logging', error, errorInfo);
+  // };
+
   return (
     <>
       <ProgressIndicatorOverlay active={isLoading} />
+      {/* <ErrorBoundary FallbackComponent={Fallback} onError={errorHandler}> */}
       <Container maxWidth="sm">
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <SupervisedUserCircleIcon />
-          </Avatar>
-          <Typography variant="h5">Sign up</Typography>
-          <SignUpForm
-            emailAddress={email}
-            firstName={firstName}
-            lastName={lastName}
-            studentCellPhone={cellPhone}
-            studentDateOfBirth={dob}
-            onEmailAddressChange={setEmail}
-            onStudentDateOfBirthChange={setDOB}
-            onStudentCellPhoneChange={setCellPhone}
-            onFirstNameChange={setFirstName}
-            onLastNameChange={setLastName}
-            onPasswordChange={setPassword}
-            onSubmit={onSignUpFormSubmit}
-            password={password}
-          />
-        </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <SupervisedUserCircleIcon />
+            </Avatar>
+            <Typography variant="h5">Sign up</Typography>
+            <SignUpForm
+              emailAddress={email}
+              firstName={firstName}
+              lastName={lastName}
+              studentCellPhone={cellPhone}
+              studentDateOfBirth={dob}
+              onEmailAddressChange={setEmail}
+              onStudentDateOfBirthChange={setDOB}
+              onStudentCellPhoneChange={setCellPhone}
+              onFirstNameChange={setFirstName}
+              onLastNameChange={setLastName}
+              onPasswordChange={setPassword}
+              onSubmit={onSignUpFormSubmit}
+              password={password}
+            />
+          </Box>
+          <Clicker />
       </Container>
+        {/* </ErrorBoundary> */}
     </>
   );
 }

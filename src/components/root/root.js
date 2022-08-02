@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ErrorBoundary } from 'react-error-boundary';
+import Fallback from '../login/login-form/Fallback';
 import ROUTES from '../../constants/routes';
 import SignUp from '../sign-up/sign-up';
 import App from '../app/app';
@@ -21,7 +23,12 @@ import ResponsiveGrid from '../students/StudentInfo';
 const theme = createTheme();
 
 export default function Root() {
+  const errorHandler = (error, errorInfo) => {
+    console.log('logging', error, errorInfo);
+  };
+
   return (
+    <ErrorBoundary FallbackComponent={Fallback} onError={errorHandler}>
     <ThemeProvider theme={theme}>
       <AuthenticationProvider>
         <BrowserRouter>
@@ -47,5 +54,6 @@ export default function Root() {
         </BrowserRouter>
       </AuthenticationProvider>
     </ThemeProvider>
+    </ErrorBoundary>
   );
 }
