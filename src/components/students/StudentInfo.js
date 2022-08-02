@@ -11,7 +11,11 @@ import { Stack, TextField } from '@mui/material';
 import ColorButton from '../coaches/Shared/ColoredButton';
 import TabsFunction from './detailsTab';
 
-import { getStudentById } from '../../services/students/students';
+import {
+  getStudentById,
+  getStudents,
+  updateStudent,
+} from '../../services/students/students';
 
 const StudentInfo = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -168,7 +172,6 @@ function SignUpDisplay(props) {
 SignUpDisplay.propTypes = {
   onEditClick: PropTypes.func.isRequired,
 };
-
 function SignUpEdit(props) {
   const { studentId } = useParams();
   const [students, setStudents] = useState({});
@@ -218,7 +221,6 @@ function SignUpEdit(props) {
         studentZipCode,
       } = currStudent;
       setStudents(currStudent);
-
       setEnteredFirstName(studentFirstName);
       setEnteredDateOfBirth(studentDateOfBirth);
       setEnteredEmail(studentEmail);
@@ -394,8 +396,20 @@ SignUpEdit.propTypes = {
 };
 
 export default function ResponsiveGrid(props) {
+  const [isLoading, setIsLoading] = React.useState(false);
   const { studentId } = useParams();
   const [students, setStudents] = useState({});
+
+  const refreshStudents = async () => {
+    setIsLoading(true);
+    const result = await getStudents();
+    setIsLoading(false);
+    setStudents(result);
+  };
+  const updateStudentInfo = async (student) => {
+    await updateStudent(student);
+    await refreshStudents();
+  };
 
   useEffect(() => {
     const currentStudent = async () => {
@@ -434,7 +448,11 @@ export default function ResponsiveGrid(props) {
       <DisplayBanner />
       <Stack direction="row" spacing={2}>
         {isEditing ? (
-          <SignUpEdit onSaveClick={onSaveClick} onCancelClick={onCancelClick} />
+          <SignUpEdit
+            onSaveClick={onSaveClick}
+            onCancelClick={onCancelClick}
+            updateFunction={updateStudentInfo}
+          />
         ) : (
           <SignUpDisplay onEditClick={startEditing} />
         )}
