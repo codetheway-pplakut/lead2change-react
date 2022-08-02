@@ -8,11 +8,12 @@ import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import PropTypes from 'prop-types';
 import { Box, Checkbox } from '@mui/material';
+import { useParams } from 'react-router';
 import ColorButton from '../coaches/Shared/ColoredButton';
 import { addGoal } from '../../services/goals/goals';
 
 export default function CreateGoalModal(props) {
-  const { studentId } = props;
+  const { studentId } = useParams;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -296,7 +297,3 @@ export default function CreateGoalModal(props) {
     </div>
   );
 }
-
-CreateGoalModal.propTypes = {
-  studentId: PropTypes.string.isRequired,
-};

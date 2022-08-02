@@ -61,9 +61,7 @@ function SignUpDisplay(props) {
   const { onEditClick } = props;
   const [value, setValue] = React.useState(0);
   const { studentId } = useParams();
-  const { goalId } = useParams();
-  const { careerId } = useParams();
-  const [goals, setGoals] = useState({});
+  const [goals, setGoals] = useState([]);
   const [students, setStudents] = useState({});
   const [careers, setCareers] = useState({});
 
@@ -72,24 +70,18 @@ function SignUpDisplay(props) {
       const currStudent = await getStudentById(studentId);
       setStudents(currStudent);
     };
-    currentStudent();
-  }, [studentId]);
-
-  useEffect(() => {
     const currentGoal = async () => {
-      const currGoal = await getGoalsByStudentId(goalId);
+      const currGoal = await getGoalsByStudentId(studentId);
       setGoals(currGoal);
     };
-    currentGoal();
-  }, [goalId]);
-
-  useEffect(() => {
     const currentCareer = async () => {
-      const currCareer = await getCareersById(careerId);
+      const currCareer = await getCareersById(studentId);
       setCareers(currCareer);
     };
+    currentStudent();
+    currentGoal();
     currentCareer();
-  }, [careerId]);
+  }, [studentId]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -349,7 +341,7 @@ SignUpDisplay.propTypes = {
 };
 
 function AddCareer(props) {
-  const { careerId } = props;
+  const { studentId } = useParams;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -376,7 +368,7 @@ function AddCareer(props) {
 
   useEffect(() => {
     const currentCareer = async () => {
-      const currCareer = await getCareersById(careerId);
+      const currCareer = await getCareersById(studentId);
 
       const {
         collegeBound,
@@ -392,7 +384,7 @@ function AddCareer(props) {
       setEnteredTechnicalCollegeBound(technicalCollegeBound);
     };
     currentCareer();
-  }, [careerId]);
+  }, [studentId]);
 
   return (
     <div>
@@ -529,9 +521,6 @@ function AddCareer(props) {
     </div>
   );
 }
-AddCareer.propTypes = {
-  careerId: PropTypes.string.isRequired,
-};
 
 function SignUpEdit(props) {
   const { onCancelClick, updateFunction } = props;
