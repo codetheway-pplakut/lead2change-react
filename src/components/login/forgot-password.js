@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 import {
   Button,
@@ -11,6 +12,7 @@ import {
   Container,
 } from '@mui/material';
 import { requestReset } from '../../services/users/users';
+import { getStudentById } from '../../services/students/students';
 
 const style = {
   position: 'absolute',
@@ -25,12 +27,24 @@ const style = {
 };
 
 function ForgotPassword() {
+  const { studentId } = useParams();
+  const [students, setStudents] = useState({});
+
+  useEffect(() => {
+    const currentStudent = async () => {
+      const currStudent = await getStudentById(studentId);
+      setStudents(currStudent);
+    };
+    currentStudent();
+  }, [studentId]);
+  const x = students.studentEmail;
+  console.log(`${x}`);
+
   const [isError, setIsError] = useState(true);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [enteredEmail, setEmail] = useState('');
-
+  const [email, setEmail] = useState('');
   const emailHandler = async (event) => {
     // const validRegex = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.(com|edu|org)$/i; old /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
     event.preventDefault();
@@ -38,14 +52,14 @@ function ForgotPassword() {
     const re =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    if (re.test(enteredEmail)) {
-      console.log(enteredEmail);
-      await requestReset(enteredEmail);
+    if (re.test(email)) {
+      console.log(email);
+      await requestReset(email);
       console.log('Test');
 
-      setIsError(true);
-    } else {
       setIsError(false);
+    } else {
+      setIsError(true);
     }
   };
 
@@ -104,7 +118,7 @@ function ForgotPassword() {
                   <TextField
                     label="Email Address"
                     required
-                    value={enteredEmail}
+                    value={email}
                     onChange={(event) => setEmail(event.target.value)}
                   />
                 ) : (
@@ -114,7 +128,7 @@ function ForgotPassword() {
                     label="Error"
                     defaultValue="Hello World"
                     helperText="Invaild Email Address."
-                    value={enteredEmail}
+                    value={email}
                     onChange={(event) => setEmail(event.target.value)}
                   />
                 )}
