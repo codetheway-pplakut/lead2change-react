@@ -8,7 +8,7 @@ import {
   Grid,
   InputAdornment,
   Link,
-  Paper,
+  Stack,
   styled,
   Tab,
   Tabs,
@@ -38,8 +38,10 @@ import {
   getStudents,
   getStudentById,
   updateStudent,
+  assignStudent,
+  unassignStudent,
 } from '../../services/students/students';
-import { getCoachById } from '../../services/coaches/coaches';
+import { getCoachById, getCoaches } from '../../services/coaches/coaches';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -85,51 +87,11 @@ function TabPanel(props) {
     </div>
   );
 }
-
-const refreshPage = async () => {
-  window.location.reload(true);
-};
-
-const deactivateHandler = async (studentId) => {
-  const updatedStudent = await getStudentById(studentId);
-  updatedStudent.state = 'inactive';
-  await updateStudent(updatedStudent);
-  refreshPage();
-};
-
-const activateHandler = async (studentId) => {
-  const updatedStudent = await getStudentById(studentId);
-  updatedStudent.state = 'active';
-  await updateStudent(updatedStudent);
-  refreshPage();
-};
-
-const declineHandler = async (studentId) => {
-  const updatedStudent = await getStudentById(studentId);
-  updatedStudent.state = 'rejected';
-  await updateStudent(updatedStudent);
-  refreshPage();
-};
-
-const reassignCoachHandler = async (studentId, coachsId) => {
-  const updatedStudent = await getStudentById(studentId);
-  updatedStudent.coachId = coachsId;
-  await updateStudent(updatedStudent);
-  refreshPage();
-};
-
 TabPanel.propTypes = {
   children: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
 };
-
-function controlTabs(index) {
-  return {
-    id: `full-width-tab-${index}`,
-    'aria-controls': `full-width-tabpanel-${index}`,
-  };
-}
 
 function stableSort(array, comparator) {
   const stabilizedThis = array.map((el, index) => [el, index]);
@@ -260,6 +222,20 @@ function EnhancedTableHead(props) {
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
+              sx={{
+                '&.MuiTableSortLabel-root': {
+                  color: 'white',
+                },
+                '&.MuiTableSortLabel-root:hover': {
+                  color: 'white',
+                },
+                '&.Mui-active': {
+                  color: 'white',
+                },
+                '& .MuiTableSortLabel-icon': {
+                  color: 'white !important',
+                },
+              }}
             >
               {headCell.label}
             </TableSortLabel>
@@ -295,9 +271,51 @@ function getComparator(order, orderBy) {
 
 export default function StudentTable() {
   const [students, setStudents] = React.useState([]);
+  const [coaches, setCoaches] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [search, setSearch] = React.useState('');
 
+  const reassignCoachHandler = async (studentsId, coachsId) => {
+    const updatedStudent = await getStudentById(studentsId);
+    if (coachsId === 'Unassigned' && updatedStudent.coachId !== null) {
+      await unassignStudent({
+        coachId: updatedStudent.coachId,
+        studentId: studentsId,
+      });
+    } else if (coachsId !== 'Unassigned') {
+      await assignStudent({ coachId: coachsId, studentId: studentsId });
+    }
+    refreshStudents();
+  };
+  const deactivateHandler = async (studentsId) => {
+    const updatedStudent = await getStudentById(studentsId);
+    updatedStudent.state = 'inactive';
+    await updateStudent(updatedStudent);
+    unassignStudent({ coachId: updatedStudent.coachId, studentId: studentsId });
+    refreshStudents();
+  };
+
+  const activateHandler = async (studentId) => {
+    const updatedStudent = await getStudentById(studentId);
+    updatedStudent.state = 'active';
+    await updateStudent(updatedStudent);
+    refreshStudents();
+  };
+
+  const declineHandler = async (studentId) => {
+    const updatedStudent = await getStudentById(studentId);
+    updatedStudent.state = 'rejected';
+    await updateStudent(updatedStudent);
+    refreshStudents();
+  };
+
+  const refreshCoaches = async () => {
+    const response = await getCoaches();
+    setCoaches(response);
+  };
+  useEffect(() => {
+    refreshCoaches();
+  }, []);
   const onSearchChange = (value) => {
     setSearch(value);
   };
@@ -335,93 +353,102 @@ export default function StudentTable() {
   return (
     <Box sx={{ width: '100%', height: '60%' }}>
       <ProgressIndicatorOverlay active={isLoading} />
-      <Grid container spacing={2} sx={{ pr: '2vh' }}>
-        <Grid item xs={3}>
-          <AppBar
-            position="static"
-            sx={{
-              bgcolor: '#004cbb',
-              mt: '2vh',
-              ml: '0.5vh',
-              borderTopLeftRadius: 5,
-              borderTopRightRadius: 5,
-            }}
-            width="3vh"
+      <Grid container>
+        <Grid item xs={12}>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
           >
-            <Tabs
-              value={tabValue}
-              onChange={handleTabChange}
-              textColor="inherit"
-              TabIndicatorProps={{
-                style: { transition: 'none', background: '#004cbb' },
+            <AppBar
+              position="static"
+              elevation={0}
+              sx={{
+                bgcolor: '#004cbb',
+                borderTopLeftRadius: 5,
+                borderTopRightRadius: 5,
+                width: '30vw',
+                minWidth: '275px',
               }}
-              variant="fullWidth"
             >
-              <Tab
-                label="Active"
-                sx={{
-                  borderRight: 1,
-                  borderBottom: 2,
-                  borderColor: '#6f8abd',
+              <Tabs
+                value={tabValue}
+                onChange={handleTabChange}
+                textColor="inherit"
+                TabIndicatorProps={{
+                  style: { transition: 'none', background: '#004cbb' },
                 }}
-                disableRipple
-              />
-              <Tab
-                label="Inactive"
-                sx={{
-                  borderRight: 1,
-                  borderLeft: 1,
-                  borderBottom: 2,
-                  borderColor: '#6f8abd',
-                }}
-                disableRipple
-              />
-              <Tab
-                label="Applicants"
-                sx={{
-                  borderLeft: 1,
-                  borderBottom: 2,
-                  borderColor: '#6f8abd',
-                }}
-                disableRipple
-              />
-            </Tabs>
-          </AppBar>
-        </Grid>
-        <Grid item xs={8} align="right">
-          <TextField
-            value={search}
-            placeholder="Search..."
-            variant="outlined"
-            size="small"
-            margin="normal"
-            align="right"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-            onChange={(event) => {
-              onSearchChange(event.target.value);
-            }}
-          />
-        </Grid>
-        <Grid item xs={1} align="left">
-          <StyledButton
-            variant="contained"
-            startIcon={<AddIcon />}
-            sx={{ mt: '2vh' }}
-            onClick={onRegisterClick}
-          >
-            Student
-          </StyledButton>
+                variant="fullWidth"
+              >
+                <Tab
+                  label="Active"
+                  sx={{
+                    borderRight: 1,
+                    borderBottom: 2,
+                    borderColor: '#6f8abd',
+                  }}
+                  disableRipple
+                />
+                <Tab
+                  label="Inactive"
+                  sx={{
+                    borderRight: 1,
+                    borderLeft: 1,
+                    borderBottom: 2,
+                    borderColor: '#6f8abd',
+                  }}
+                  disableRipple
+                />
+                <Tab
+                  label="Applicants"
+                  sx={{
+                    borderLeft: 1,
+                    borderBottom: 2,
+                    borderColor: '#6f8abd',
+                  }}
+                  disableRipple
+                />
+              </Tabs>
+            </AppBar>
+            <div>
+              <Stack direction="row" spacing={1} alignItems="center">
+                <TextField
+                  value={search}
+                  placeholder="Search..."
+                  variant="outlined"
+                  size="small"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SearchIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                  onChange={(event) => {
+                    onSearchChange(event.target.value);
+                  }}
+                />
+                <div sx={{ minWidth: '200px' }}>
+                  <StyledButton
+                    variant="contained"
+                    startIcon={<AddIcon />}
+                    onClick={onRegisterClick}
+                  >
+                    Student
+                  </StyledButton>
+                </div>
+              </Stack>
+            </div>
+          </Stack>
         </Grid>
       </Grid>
       <TabPanel value={tabValue} index={0}>
-        <TableContainer component={Paper} sx={{ height: '68vh' }}>
-          <Table sx={{ minWidth: 10 }} stickyHeader>
+        <TableContainer sx={{ height: '65vh', bgcolor: 'white' }}>
+          <Table
+            sx={{ minWidth: 750 }}
+            aria-labelledby="tableTitle"
+            stickyHeader
+          >
             <EnhancedTableHead
               order={order}
               orderBy={orderBy}
@@ -493,6 +520,11 @@ export default function StudentTable() {
                     <StyledTableRow tabIndex={0} key={student.id}>
                       <StyledTableCell>
                         <Link
+                          sx={{
+                            '&:hover': {
+                              cursor: 'pointer',
+                            },
+                          }}
                           onClick={() => navigate(`/StudentInfo/${student.id}`)}
                         >
                           {student.lastName}, {student.firstName}
@@ -506,9 +538,10 @@ export default function StudentTable() {
                       </StyledTableCell>
                       <StyledTableCell>
                         <CoachAssignModal
-                          confirmHandler={reassignCoachHandler}
                           studentId={student.id}
                           coachId={student.coachId}
+                          confirmHandler={reassignCoachHandler}
+                          coaches={coaches}
                         />
                       </StyledTableCell>
                       <StyledTableCell>
@@ -531,8 +564,12 @@ export default function StudentTable() {
       </TabPanel>
 
       <TabPanel value={tabValue} index={1}>
-        <TableContainer component={Paper} sx={{ height: '68vh' }}>
-          <Table sx={{ minWidth: 10 }} stickyHeader>
+        <TableContainer sx={{ height: '65vh', bgcolor: 'white' }}>
+          <Table
+            sx={{ minWidth: 750 }}
+            aria-labelledby="tableTitle"
+            stickyHeader
+          >
             <EnhancedTableHead
               order={order}
               orderBy={orderBy}
@@ -580,6 +617,11 @@ export default function StudentTable() {
                     <StyledTableRow tabIndex={0} key={student.id}>
                       <StyledTableCell>
                         <Link
+                          sx={{
+                            '&:hover': {
+                              cursor: 'pointer',
+                            },
+                          }}
                           onClick={() => navigate(`/StudentInfo/${student.id}`)}
                         >
                           {student.lastName}, {student.firstName}
@@ -613,8 +655,12 @@ export default function StudentTable() {
       </TabPanel>
 
       <TabPanel value={tabValue} index={2}>
-        <TableContainer component={Paper} sx={{ height: '68vh' }}>
-          <Table sx={{ minWidth: 10 }} stickyHeader>
+        <TableContainer sx={{ height: '65vh', bgcolor: 'white' }}>
+          <Table
+            sx={{ minWidth: 750 }}
+            aria-labelledby="tableTitle"
+            stickyHeader
+          >
             <EnhancedTableHead
               order={order}
               orderBy={orderBy}
@@ -662,6 +708,11 @@ export default function StudentTable() {
                     <StyledTableRow tabIndex={0} key={student.id}>
                       <StyledTableCell>
                         <Link
+                          sx={{
+                            '&:hover': {
+                              cursor: 'pointer',
+                            },
+                          }}
                           onClick={() => navigate(`/StudentInfo/${student.id}`)}
                         >
                           {student.lastName}, {student.firstName}
@@ -694,6 +745,16 @@ export default function StudentTable() {
                             />
                           </Grid>
                         </Grid>
+                      </StyledTableCell>
+                      <StyledTableCell>
+                        <StyledButton
+                          onClick={() =>
+                            navigate(`/interview-page/${student.id}`)
+                          }
+                          variant="contained"
+                        >
+                          Interviews
+                        </StyledButton>
                       </StyledTableCell>
                     </StyledTableRow>
                   );

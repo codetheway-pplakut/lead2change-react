@@ -31,7 +31,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Typography component="span">{children}</Typography>
         </Box>
       )}
     </div>
@@ -336,6 +336,9 @@ function SignUpEdit(props) {
     setValue(newValue);
   };
   const [first, setFirst] = useState('');
+  const [newPlanAfterHighSchool, setNewPlanAfterHighSchool] = useState('');
+  const [newCollegesList, setNewCollegesList] = useState('');
+  const [newFirstChoiceCollege, setNewFirstChoiceCollege] = useState('');
   return (
     <div style={{ marginRight: '8vh' }}>
       <Box sx={{ bgcolor: 'background.paper', width: '100vh' }}>
@@ -380,7 +383,9 @@ function SignUpEdit(props) {
                       variant="filled"
                       defaultValue="After college i plan to go and get a job as a Software Developer at a company such as google."
                       label="Plans after college"
-                      onChange={(event) => setFirst(event.target.value)}
+                      onChange={(event) =>
+                        setNewPlanAfterHighSchool(event.target.value)
+                      }
                       required
                     />
                   </Grid>
@@ -393,7 +398,9 @@ function SignUpEdit(props) {
                       variant="filled"
                       defaultValue="1. Purde, 2. Madison, 3. MIT"
                       label="Colleges Plan/Applied To"
-                      onChange={(event) => setFirst(event.target.value)}
+                      onChange={(event) =>
+                        setNewCollegesList(event.target.value)
+                      }
                       required
                     />
                   </Grid>
@@ -403,7 +410,9 @@ function SignUpEdit(props) {
                       className="typing-container"
                       defaultValue="Northwestern"
                       label="College First Choice"
-                      onChange={(event) => setFirst(event.target.value)}
+                      onChange={(event) =>
+                        setNewFirstChoiceCollege(event.target.value)
+                      }
                       required
                     />
                   </Grid>

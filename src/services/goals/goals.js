@@ -22,3 +22,15 @@ export const getGoals = () => {
 export const getGoalById = (id) => {
   return callApi({ endpoint: `${SERVICE_ROOT}/${id}` });
 };
+
+export const getGoalsByStudentId = async (id) => {
+  return callApi({
+    body: id,
+    endpoint: 'goals/student-goals',
+    method: 'POST',
+    headers: {
+      Accept: 'application/json, text/plain',
+      'Content-Type': 'application/json',
+    },
+  });
+};
