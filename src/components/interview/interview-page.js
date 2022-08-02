@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid, Stack } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Alert from '@mui/material/Alert';
@@ -8,6 +8,7 @@ import Navbar from '../admin/sampleNavbar';
 import ExitModal from './exit-modal';
 
 import { getInterviewsById } from '../../services/interviews/interview';
+import { getStudentById } from '../../services/students/students';
 
 const theme = createTheme({
   components: {
@@ -59,6 +60,15 @@ const theme = createTheme({
 
 export default function InterviewPage() {
   const { studentId } = useParams();
+  const [students, setStudents] = useState({});
+
+  useEffect(() => {
+    const currentStudent = async () => {
+      const currStudent = await getStudentById(studentId);
+      setStudents(currStudent);
+    };
+    currentStudent();
+  }, [studentId]);
   return (
     <div>
       <ThemeProvider theme={theme}>
@@ -75,7 +85,7 @@ export default function InterviewPage() {
             }}
             sx={{ width: '100%' }}
           >
-            <h1>STUDENT NAME INTERVIEW</h1>
+            <h1>{students.studentFirstName}&#39;s Interview</h1>
           </Grid>
         </Grid>
         <Alert severity="warning" align="center">
