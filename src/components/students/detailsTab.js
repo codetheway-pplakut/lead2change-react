@@ -62,6 +62,7 @@ function SignUpDisplay(props) {
   const [value, setValue] = React.useState(0);
   const { studentId } = useParams();
   const { goalId } = useParams();
+  const { careerId } = useParams();
   const [goals, setGoals] = useState({});
   const [students, setStudents] = useState({});
   const [careers, setCareers] = useState({});
@@ -81,6 +82,14 @@ function SignUpDisplay(props) {
     };
     currentGoal();
   }, [goalId]);
+
+  useEffect(() => {
+    const currentCareer = async () => {
+      const currCareer = await getCareersById(careerId);
+      setCareers(currCareer);
+    };
+    currentCareer();
+  }, [careerId]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
