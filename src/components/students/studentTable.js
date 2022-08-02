@@ -695,6 +695,16 @@ export default function StudentTable() {
                           </Grid>
                         </Grid>
                       </StyledTableCell>
+                      <StyledTableCell>
+                        <StyledButton
+                          onClick={() =>
+                            navigate(`/interview-page/${student.id}`)
+                          }
+                          variant="contained"
+                        >
+                          Interviews
+                        </StyledButton>
+                      </StyledTableCell>
                     </StyledTableRow>
                   );
                 })}
