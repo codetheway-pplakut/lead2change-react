@@ -248,15 +248,6 @@ function SignUpDisplay(props) {
                   <h5>
                     Explanation: Tryouts will be in April, currently on JV
                   </h5>
-                  <h3 style={{ color: '#2656A5' }}>Goal Three</h3>
-                  <h5>Goal: 4.3 GPA</h5>
-                  <h5>Goal Set Date: 11/10/21</h5>
-                  <h5>SEL: Social Awareness</h5>
-                  <h5>Goal Review Date: 6/10/22</h5>
-                  <h5>Accomplishment State: In Progress</h5>
-                  <h5>
-                    Explanation: Trying to get a 4.3 GPA in all of my classes{' '}
-                  </h5>
                 </Box>
               </Grid>
             </Grid>
@@ -444,6 +435,16 @@ function SignUpEdit(props) {
   const [enteredParentSignatureDate, setEnteredParentSignatureDate] =
     React.useState('');
 
+  const [enteredIsCollegeBound, setEnteredIsCollegeBound] = React.useState('');
+
+  const [enteredCareerCluster, setEnteredCareerCluster] = React.useState('');
+
+  const [enteredSpecificCluster, setEnteredSpecificCluster] =
+    React.useState('');
+
+  const [enteredTechnicalCollegeBound, setEnteredTechnicalCollegeBound] =
+    React.useState('');
+
   const EditField = () => {
     handleClose();
     const updatedStudent = {
@@ -483,6 +484,10 @@ function SignUpEdit(props) {
       studentSignatureDate: enteredStudentSignatureDate,
       parentSignature: enteredParentSignature,
       parentSignatureDate: enteredParentSignatureDate,
+      collegeBound: enteredIsCollegeBound,
+      careerCluster: enteredCareerCluster,
+      specificCluster: enteredSpecificCluster,
+      technicalCollegeBound: enteredTechnicalCollegeBound,
     };
     updateFunction(updatedStudent);
   };
@@ -520,6 +525,10 @@ function SignUpEdit(props) {
         studentSignatureDate,
         parentSignature,
         parentSignatureDate,
+        collegeBound,
+        careerCluster,
+        specificCluster,
+        technicalCollegeBound,
       } = currStudent;
       setStudents(currStudent);
 
@@ -550,6 +559,10 @@ function SignUpEdit(props) {
       setEnteredStudentSignatureDate(studentSignatureDate);
       setEnteredParentSignature(parentSignature);
       setEnteredParentSignatureDate(parentSignatureDate);
+      setEnteredIsCollegeBound(collegeBound);
+      setEnteredCareerCluster(careerCluster);
+      setEnteredSpecificCluster(specificCluster);
+      setEnteredTechnicalCollegeBound(technicalCollegeBound);
     };
 
     const currentGoal = async () => {
@@ -603,6 +616,7 @@ function SignUpEdit(props) {
             >
               <Tab label="Education" />
               <Tab label="Goals" />
+              <Tab label="Careers" />
               <Tab label="Other" />
             </Tabs>
           </AppBar>
@@ -1177,6 +1191,84 @@ function SignUpEdit(props) {
               <Grid container justifyContent="flex-end">
                 <Grid item xs={12} style={{ height: '64vh' }}>
                   <GridText>
+                    <h3 style={{ color: '#2656A5' }}>Career Information</h3>
+                    <FormControl
+                      variant="standard"
+                      sx={{ m: 1, minWidth: 200 }}
+                    >
+                      <InputLabel id="demo-simple-select-standard-label">
+                        I am College Bound{' '}
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-standard-label"
+                        id="demo-simple-select-standard"
+                        label="College Bound?"
+                        value={enteredIsCollegeBound}
+                        onChange={(event) =>
+                          setEnteredIsCollegeBound(event.target.value)
+                        }
+                      >
+                        <MenuItem value="" />
+                        <MenuItem value={10}>Yes</MenuItem>
+                        <MenuItem value={20}>No</MenuItem>
+                      </Select>
+                    </FormControl>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        size="small"
+                        className="typing-container"
+                        value={enteredCareerCluster}
+                        label="Number of Career Clusters"
+                        onChange={(event) =>
+                          setEnteredCareerCluster(event.target.value)
+                        }
+                        required
+                      />
+                    </Grid>
+                    <Grid marginBottom={2}>
+                      <TextField
+                        size="small"
+                        className="typing-container"
+                        value={enteredSpecificCluster}
+                        label="Career of Choice"
+                        onChange={(event) =>
+                          setEnteredSpecificCluster(event.target.value)
+                        }
+                        required
+                      />
+                    </Grid>
+                    <FormControl
+                      variant="standard"
+                      sx={{ m: 1, minWidth: 200 }}
+                    >
+                      <InputLabel id="demo-simple-select-standard-label">
+                        I am Techincal Bound{' '}
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-standard-label"
+                        id="demo-simple-select-standard"
+                        label="Technical Bound?"
+                        value={enteredTechnicalCollegeBound}
+                        onChange={(event) =>
+                          setEnteredTechnicalCollegeBound(event.target.value)
+                        }
+                      >
+                        <MenuItem value="" />
+                        <MenuItem value={10}>Yes</MenuItem>
+                        <MenuItem value={20}>No</MenuItem>
+                      </Select>
+                    </FormControl>
+                    i
+                  </GridText>
+                </Grid>
+              </Grid>
+            </Box>
+          </TabPanel>
+          <TabPanel value={value} index={3} style={{ overflowY: 'auto' }}>
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid container justifyContent="flex-end">
+                <Grid item xs={12} style={{ height: '64vh' }}>
+                  <GridText>
                     <h3 style={{ color: '#2656A5' }}>Parent Information</h3>
                     <Grid marginBottom={2}>
                       <TextField
@@ -1337,7 +1429,7 @@ function SignUpEdit(props) {
                         label="Acceptance Status"
                         defaultValue={10}
                         // value={enteredAcceptanceStatus}
-                        // onChancge={(event) =>
+                        // onChange={(event) =>
                         //   setEnteredAcceptanceStatus(event.target.value)
                         // }
                       >
