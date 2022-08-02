@@ -246,10 +246,7 @@ function SignUpDisplay(props) {
                   <h5>Goal Set Date: {goals.dateGoalSet}</h5>
                   <h5>SEL: {goals.sel}</h5>
                   <h5>Goal Review Date:{goals.goalReviewDate}</h5>
-                  <h5>
-                    Accomplishment State:
-                    <p>{goals.wasItAccomplished}</p>
-                  </h5>
+                  <h5>Accomplishment State: {goals.wasItAccomplished}</h5>
                   <h5>Explanation: {goals.explanation}</h5>
                   <h3 style={{ color: '#2656A5' }}>Goal Two</h3>
                   <h5>Goal: Make it onto the Varsity Tennis Team</h5>

@@ -42,6 +42,7 @@ export default function CreateGoalModal(props) {
         wasItAccomplished,
         explanation,
       };
+      console.log(Goal);
       await addGoal(Goal);
     }
   };
