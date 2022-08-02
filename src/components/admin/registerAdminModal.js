@@ -71,28 +71,6 @@ export default function RegisterAdminModal() {
     ) {
       handleClose();
       newAdmin(email, password, confirmPassword);
-    } else {
-      if (email.indexOf('@') < 0) {
-        setEmailError(
-          <Typography variant="subtitle2" sx={{ color: 'red' }}>
-            Email Error; Please enter a valid email of the form ___@___.___
-          </Typography>
-        );
-      }
-      if (password.length < 1) {
-        setPasswordError(
-          <Typography variant="subtitle2" sx={{ color: 'red' }}>
-            Password Error; Password Required.
-          </Typography>
-        );
-      }
-      if (password !== confirmPassword) {
-        setPasswordErrorConfirmation(
-          <Typography variant="subtitle2" sx={{ color: 'red' }}>
-            Password Error; Password and Confirm Password do not match.
-          </Typography>
-        );
-      }
     }
   };
 
@@ -171,6 +149,12 @@ export default function RegisterAdminModal() {
               <Grid container spacing={2} rowSpacing={2}>
                 <Grid item xs={12}>
                   <TextField
+                    error={!email.includes('@')}
+                    helperText={
+                      !email.includes('@') && email.length > 0
+                        ? 'Must contain an @ sign.'
+                        : ' '
+                    }
                     fullWidth
                     label="Enter email address..."
                     variant="filled"
@@ -181,6 +165,7 @@ export default function RegisterAdminModal() {
 
                 <Grid item xs={12}>
                   <TextField
+                    error={!(password.length > 0)}
                     fullWidth
                     label="Enter password..."
                     variant="filled"
@@ -192,6 +177,12 @@ export default function RegisterAdminModal() {
 
                 <Grid item xs={12}>
                   <TextField
+                    error={!(confirmPassword == password)}
+                    helperText={
+                      !(confirmPassword == password)
+                        ? 'Passwords must match.'
+                        : ' '
+                    }
                     fullWidth
                     label="Enter same password..."
                     variant="filled"
