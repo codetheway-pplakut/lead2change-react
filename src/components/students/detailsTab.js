@@ -85,6 +85,10 @@ function SignUpDisplay(props) {
     setValue(newValue);
   };
 
+  const filteredArray = students.filter((student) => {
+    return goals.id === goalId;
+  });
+
   return (
     <div style={{ marginRight: '8vh' }}>
       <Box
