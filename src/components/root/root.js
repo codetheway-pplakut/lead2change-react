@@ -60,6 +60,10 @@ export default function Root() {
                   element={<ResponsiveGrid />}
                 />
                 <Route path={ROUTES.ERROR_PAGE} element={<ErrorPage />} />
+                <Route
+                  path="/ForgotPassword/:studentId"
+                  element={<ForgotPassword />}
+                />
               </Route>
             </Routes>
           </BrowserRouter>
