@@ -39,17 +39,9 @@ const StyledRadio = styled(Radio)({
 });
 
 export default function CoachAssignModal(props) {
-  const { confirmHandler, studentId, coachId } = props;
-  const [coaches, setCoaches] = React.useState([]);
+  const { confirmHandler, studentId, coachId, coaches } = props;
   const [value, setValue] = React.useState(coachId);
   const [newCoachId, setNewCoachId] = React.useState('');
-  const refreshCoaches = async () => {
-    const response = await getCoaches();
-    setCoaches(response);
-  };
-  useEffect(() => {
-    refreshCoaches();
-  }, []);
 
   const style = {
     position: 'absolute',
@@ -157,4 +149,5 @@ CoachAssignModal.propTypes = {
   confirmHandler: PropTypes.func.isRequired,
   studentId: PropTypes.string.isRequired,
   coachId: PropTypes.string,
+  coaches: PropTypes.array.isRequired,
 };
