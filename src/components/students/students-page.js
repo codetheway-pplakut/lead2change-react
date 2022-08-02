@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography, Grid } from '@mui/material';
 import StudentTable from './studentTable';
 
 export default function Student(props) {
@@ -8,14 +8,15 @@ export default function Student(props) {
       <Typography align="center" variant="h3" component="h4">
         STUDENTS
       </Typography>
-      <Stack
-        spacing={2}
-        justifyContent="center"
-        justify="center"
-        sx={{ mx: '20vh' }}
-      >
-        <StudentTable />
-      </Stack>
+      <Grid container justifyContent="center" spacing={2}>
+        <Grid item xs={10}>
+          <Grid container justifyContent="right" spacing={1}>
+            <Grid item xs={12}>
+              <StudentTable />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
     </Box>
   );
 }
