@@ -135,6 +135,15 @@ EnhancedTableHead.propTypes = {
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
   orderBy: PropTypes.string.isRequired,
 };
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(even)': {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+}));
 
 export default function CoachesList(props) {
   const { rows, addFunction, updateFunction, unassignFunction } = props;
@@ -259,7 +268,7 @@ export default function CoachesList(props) {
               )
               .map((coach, index) => {
                 return (
-                  <TableRow hover tabIndex={-1} key={coach.id}>
+                  <StyledTableRow hover tabIndex={-1} key={coach.id}>
                     <TableCell>
                       {coach.coachLastName}, {coach.coachFirstName}
                     </TableCell>
@@ -305,7 +314,7 @@ export default function CoachesList(props) {
                         )}
                       </Grid>
                     </TableCell>
-                  </TableRow>
+                  </StyledTableRow>
                 );
               })}
           </TableBody>
