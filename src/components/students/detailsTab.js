@@ -349,7 +349,7 @@ SignUpDisplay.propTypes = {
 };
 
 function AddCareer(props) {
-  const { studentId } = props;
+  const { careerId } = props;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -376,7 +376,7 @@ function AddCareer(props) {
 
   useEffect(() => {
     const currentCareer = async () => {
-      const currCareer = await getCareersById(studentId);
+      const currCareer = await getCareersById(careerId);
 
       const {
         collegeBound,
@@ -392,7 +392,7 @@ function AddCareer(props) {
       setEnteredTechnicalCollegeBound(technicalCollegeBound);
     };
     currentCareer();
-  }, [studentId]);
+  }, [careerId]);
 
   return (
     <div>
@@ -530,7 +530,7 @@ function AddCareer(props) {
   );
 }
 AddCareer.propTypes = {
-  studentId: PropTypes.string.isRequired,
+  careerId: PropTypes.string.isRequired,
 };
 
 function SignUpEdit(props) {
