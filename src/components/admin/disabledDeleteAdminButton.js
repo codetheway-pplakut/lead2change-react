@@ -10,14 +10,6 @@ export default function DisabledDeleteAdminButton() {
         main: 'orange',
         contrastText: '#fff',
       },
-      cancel: {
-        main: '#3764A8',
-        contrastText: '#fff',
-      },
-    },
-    typography: {
-      fontFamily: 'Calibri',
-      fontSize: 18,
     },
   });
 
