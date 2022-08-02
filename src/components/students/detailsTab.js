@@ -21,7 +21,8 @@ import ColorButton from '../coaches/Shared/ColoredButton';
 import CreateGoalModal from './create-goal-modal';
 
 import { getStudentById } from '../../services/students/students';
-import { getGoalById } from '../../services/goals/goals';
+import { getGoalById, getGoalsByStudentId } from '../../services/goals/goals';
+import { getCareersById } from '../../services/careers/careers';
 
 function TabPanel(props) {
   const { children, value, index } = props;
@@ -85,9 +86,9 @@ function SignUpDisplay(props) {
     setValue(newValue);
   };
 
-  const filteredArray = students.filter((student) => {
-    return goals.id === goalId;
-  });
+  // const filteredArray = students.filter((student) => {
+  //   return goals.id === goalId;
+  // });
 
   return (
     <div style={{ marginRight: '8vh' }}>
@@ -367,23 +368,23 @@ function AddCareer(props) {
     React.useState('');
 
   useEffect(() => {
-    const currentStudent = async () => {
-      const currStudent = await getStudentById(studentId);
+    const currentCareer = async () => {
+      const currCareer = await getCareersById(studentId);
 
       const {
         collegeBound,
         careerCluster,
         specificCluster,
         technicalCollegeBound,
-      } = currStudent;
-      setStudents(currStudent);
+      } = currCareer;
+      setStudents(currCareer);
 
       setEnteredIsCollegeBound(collegeBound);
       setEnteredCareerCluster(careerCluster);
       setEnteredSpecificCluster(specificCluster);
       setEnteredTechnicalCollegeBound(technicalCollegeBound);
     };
-    currentStudent();
+    currentCareer();
   }, [studentId]);
 
   return (
@@ -720,10 +721,6 @@ function SignUpEdit(props) {
         studentSignatureDate,
         parentSignature,
         parentSignatureDate,
-        collegeBound,
-        careerCluster,
-        specificCluster,
-        technicalCollegeBound,
       } = currStudent;
       setStudents(currStudent);
 
@@ -754,10 +751,6 @@ function SignUpEdit(props) {
       setEnteredStudentSignatureDate(studentSignatureDate);
       setEnteredParentSignature(parentSignature);
       setEnteredParentSignatureDate(parentSignatureDate);
-      setEnteredIsCollegeBound(collegeBound);
-      setEnteredCareerCluster(careerCluster);
-      setEnteredSpecificCluster(specificCluster);
-      setEnteredTechnicalCollegeBound(technicalCollegeBound);
     };
 
     const currentGoal = async () => {
@@ -780,9 +773,27 @@ function SignUpEdit(props) {
       setEnteredWasItAccomplished(wasItAccomplished);
       setEnteredExplanation(explanation);
     };
+
+    const currentCareer = async () => {
+      const currCareer = await getCareersById(studentId);
+
+      const {
+        collegeBound,
+        careerCluster,
+        specificCluster,
+        technicalCollegeBound,
+      } = currCareer;
+      setStudents(currCareer);
+
+      setEnteredIsCollegeBound(collegeBound);
+      setEnteredCareerCluster(careerCluster);
+      setEnteredSpecificCluster(specificCluster);
+      setEnteredTechnicalCollegeBound(technicalCollegeBound);
+    };
+    currentCareer();
     currentStudent();
     currentGoal();
-  }, [studentId]);
+  }, [studentId, goalId]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
