@@ -9,7 +9,6 @@ import {
   Grid,
   IconButton,
   Modal,
-  Stack,
   styled,
   Typography,
   Radio,
@@ -40,17 +39,9 @@ const StyledRadio = styled(Radio)({
 });
 
 export default function CoachAssignModal(props) {
-  const { confirmHandler, studentId, coachId } = props;
-  const [coaches, setCoaches] = React.useState([]);
+  const { confirmHandler, studentId, coachId, coaches } = props;
   const [value, setValue] = React.useState(coachId);
   const [newCoachId, setNewCoachId] = React.useState('');
-  const refreshCoaches = async () => {
-    const response = await getCoaches();
-    setCoaches(response);
-  };
-  useEffect(() => {
-    refreshCoaches();
-  }, []);
 
   const style = {
     position: 'absolute',
@@ -83,22 +74,30 @@ export default function CoachAssignModal(props) {
 
   const handleCoachChange = (event) => {
     setValue(event.target.value);
-    setNewCoachId(value);
+    setNewCoachId(event.target.value);
   };
+
+  const filteredArray = coaches.filter((coach) => {
+    return coach.id === coachId;
+  });
 
   let denySubmit = true;
   if (newCoachId !== '') {
     denySubmit = false;
   }
+
   return (
     <div>
-      <Stack direction="row">
-        {coachId !== null && <p>Coach Name</p>}
+      <Grid>
+        {coachId !== null &&
+          filteredArray.map((coach) => {
+            return getCoachName(coach);
+          })}
         {coachId === null && <p>Unassigned</p>}
         <IconButton onClick={handleOpen}>
           <EditIcon />
         </IconButton>
-      </Stack>
+      </Grid>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <Grid item xs={12}>
@@ -152,4 +151,5 @@ CoachAssignModal.propTypes = {
   confirmHandler: PropTypes.func.isRequired,
   studentId: PropTypes.string.isRequired,
   coachId: PropTypes.string,
+  coaches: PropTypes.array.isRequired,
 };
