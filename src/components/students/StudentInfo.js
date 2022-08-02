@@ -103,7 +103,7 @@ function SignUpDisplay(props) {
           </Grid>
           <Grid style={{ margin: '2vh' }}>
             <StudentInfo>
-              <h3>
+              <h3 component="span">
                 Date of Birth: {'  '}
                 <Box component="span" style={{ fontWeight: 'normal' }}>
                   {students.studentDateOfBirth}
@@ -111,7 +111,7 @@ function SignUpDisplay(props) {
               </h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>
+              <h3 component="span">
                 Email Address:{' '}
                 <Box component="span" style={{ fontWeight: 'normal' }}>
                   {students.studentEmail}
@@ -119,7 +119,7 @@ function SignUpDisplay(props) {
               </h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>
+              <h3 component="span">
                 Phone Number:{' '}
                 <Box component="span" style={{ fontWeight: 'normal' }}>
                   {students.studentCellPhone}

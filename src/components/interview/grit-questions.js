@@ -6,6 +6,10 @@ import FormLabel from '@mui/material/FormLabel';
 import { Divider, Button } from '@mui/material';
 import GritItem from './grit-item';
 
+function GritSaver() {
+  return null;
+}
+
 export default function GritSliderQuestions() {
   return (
     <Container>
@@ -181,7 +185,7 @@ export default function GritSliderQuestions() {
       >
         <Button
           variant="contained"
-          onClick={null}
+          onClick={GritSaver}
           style={{
             backgroundColor: '#004cbb',
           }}
