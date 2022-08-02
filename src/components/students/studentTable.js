@@ -9,6 +9,7 @@ import {
   InputAdornment,
   Link,
   Paper,
+  Stack,
   styled,
   Tab,
   Tabs,
@@ -260,6 +261,20 @@ function EnhancedTableHead(props) {
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
+              sx={{
+                '&.MuiTableSortLabel-root': {
+                  color: 'white',
+                },
+                '&.MuiTableSortLabel-root:hover': {
+                  color: 'white',
+                },
+                '&.Mui-active': {
+                  color: 'white',
+                },
+                '& .MuiTableSortLabel-icon': {
+                  color: 'white !important',
+                },
+              }}
             >
               {headCell.label}
             </TableSortLabel>
@@ -335,93 +350,102 @@ export default function StudentTable() {
   return (
     <Box sx={{ width: '100%', height: '60%' }}>
       <ProgressIndicatorOverlay active={isLoading} />
-      <Grid container spacing={2} sx={{ pr: '2vh' }}>
-        <Grid item xs={3}>
-          <AppBar
-            position="static"
-            sx={{
-              bgcolor: '#004cbb',
-              mt: '2vh',
-              ml: '0.5vh',
-              borderTopLeftRadius: 5,
-              borderTopRightRadius: 5,
-            }}
-            width="3vh"
+      <Grid container>
+        <Grid item xs={12}>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
           >
-            <Tabs
-              value={tabValue}
-              onChange={handleTabChange}
-              textColor="inherit"
-              TabIndicatorProps={{
-                style: { transition: 'none', background: '#004cbb' },
+            <AppBar
+              position="static"
+              elevation={0}
+              sx={{
+                bgcolor: '#004cbb',
+                borderTopLeftRadius: 5,
+                borderTopRightRadius: 5,
+                width: '30vw',
+                minWidth: '275px',
               }}
-              variant="fullWidth"
             >
-              <Tab
-                label="Active"
-                sx={{
-                  borderRight: 1,
-                  borderBottom: 2,
-                  borderColor: '#6f8abd',
+              <Tabs
+                value={tabValue}
+                onChange={handleTabChange}
+                textColor="inherit"
+                TabIndicatorProps={{
+                  style: { transition: 'none', background: '#004cbb' },
                 }}
-                disableRipple
-              />
-              <Tab
-                label="Inactive"
-                sx={{
-                  borderRight: 1,
-                  borderLeft: 1,
-                  borderBottom: 2,
-                  borderColor: '#6f8abd',
-                }}
-                disableRipple
-              />
-              <Tab
-                label="Applicants"
-                sx={{
-                  borderLeft: 1,
-                  borderBottom: 2,
-                  borderColor: '#6f8abd',
-                }}
-                disableRipple
-              />
-            </Tabs>
-          </AppBar>
-        </Grid>
-        <Grid item xs={8} align="right">
-          <TextField
-            value={search}
-            placeholder="Search..."
-            variant="outlined"
-            size="small"
-            margin="normal"
-            align="right"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-            onChange={(event) => {
-              onSearchChange(event.target.value);
-            }}
-          />
-        </Grid>
-        <Grid item xs={1} align="left">
-          <StyledButton
-            variant="contained"
-            startIcon={<AddIcon />}
-            sx={{ mt: '2vh' }}
-            onClick={onRegisterClick}
-          >
-            Student
-          </StyledButton>
+                variant="fullWidth"
+              >
+                <Tab
+                  label="Active"
+                  sx={{
+                    borderRight: 1,
+                    borderBottom: 2,
+                    borderColor: '#6f8abd',
+                  }}
+                  disableRipple
+                />
+                <Tab
+                  label="Inactive"
+                  sx={{
+                    borderRight: 1,
+                    borderLeft: 1,
+                    borderBottom: 2,
+                    borderColor: '#6f8abd',
+                  }}
+                  disableRipple
+                />
+                <Tab
+                  label="Applicants"
+                  sx={{
+                    borderLeft: 1,
+                    borderBottom: 2,
+                    borderColor: '#6f8abd',
+                  }}
+                  disableRipple
+                />
+              </Tabs>
+            </AppBar>
+            <div>
+              <Stack direction="row" spacing={1} alignItems="center">
+                <TextField
+                  value={search}
+                  placeholder="Search..."
+                  variant="outlined"
+                  size="small"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SearchIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                  onChange={(event) => {
+                    onSearchChange(event.target.value);
+                  }}
+                />
+                <div sx={{ minWidth: '200px' }}>
+                  <StyledButton
+                    variant="contained"
+                    startIcon={<AddIcon />}
+                    onClick={onRegisterClick}
+                  >
+                    Student
+                  </StyledButton>
+                </div>
+              </Stack>
+            </div>
+          </Stack>
         </Grid>
       </Grid>
       <TabPanel value={tabValue} index={0}>
-        <TableContainer component={Paper} sx={{ height: '68vh' }}>
-          <Table sx={{ minWidth: 10 }} stickyHeader>
+        <TableContainer sx={{ height: '65vh', bgcolor: 'white' }}>
+          <Table
+            sx={{ minWidth: 750 }}
+            aria-labelledby="tableTitle"
+            stickyHeader
+          >
             <EnhancedTableHead
               order={order}
               orderBy={orderBy}
@@ -531,8 +555,12 @@ export default function StudentTable() {
       </TabPanel>
 
       <TabPanel value={tabValue} index={1}>
-        <TableContainer component={Paper} sx={{ height: '68vh' }}>
-          <Table sx={{ minWidth: 10 }} stickyHeader>
+        <TableContainer sx={{ height: '65vh', bgcolor: 'white' }}>
+          <Table
+            sx={{ minWidth: 750 }}
+            aria-labelledby="tableTitle"
+            stickyHeader
+          >
             <EnhancedTableHead
               order={order}
               orderBy={orderBy}
@@ -613,8 +641,12 @@ export default function StudentTable() {
       </TabPanel>
 
       <TabPanel value={tabValue} index={2}>
-        <TableContainer component={Paper} sx={{ height: '68vh' }}>
-          <Table sx={{ minWidth: 10 }} stickyHeader>
+        <TableContainer sx={{ height: '65vh', bgcolor: 'white' }}>
+          <Table
+            sx={{ minWidth: 750 }}
+            aria-labelledby="tableTitle"
+            stickyHeader
+          >
             <EnhancedTableHead
               order={order}
               orderBy={orderBy}

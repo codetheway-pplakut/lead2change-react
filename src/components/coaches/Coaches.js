@@ -71,7 +71,6 @@ export default function Coaches() {
     setIsLoading(false);
     setCoaches(result);
   };
-
   useEffect(() => {
     refreshCoaches();
   }, []);
@@ -87,16 +86,16 @@ export default function Coaches() {
     await refreshCoaches();
   };
   const unassignStudents = async (coach) => {
-    coach.students.forEach((element) => {
+    await coach.students.forEach((element) => {
       unassignStudent({ coachId: coach.id, studentId: element.id });
     });
+    const updatedCoach = coach;
+    updatedCoach.active = false;
+    await updateCoachInfo(updatedCoach);
     await refreshCoaches();
   };
-  const updateCoachInfo = async (coach, change) => {
+  const updateCoachInfo = async (coach) => {
     await updateCoach(coach);
-    if (change === false) {
-      // Remove Students
-    }
     await refreshCoaches();
   };
   const deleteCoachById = async (id) => {
@@ -111,7 +110,7 @@ export default function Coaches() {
         <ThemeProvider theme={theme}>
           <CssBaseline>
             <Grid container justifyContent="center">
-              <Typography variant="h3" component="h4">
+              <Typography align="center" variant="h3" component="h4">
                 COACHES
               </Typography>
             </Grid>

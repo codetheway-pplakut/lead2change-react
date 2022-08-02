@@ -14,17 +14,7 @@ export default function InactivationModal(props) {
   const handleClose = () => setOpen(false);
   const Inactivate = () => {
     handleClose();
-    const updatedCoach = {
-      id: coach.id, // TODO : Update to agreed ID creation method
-      coachFirstName: coach.coachFirstName,
-      coachLastName: coach.coachLastName,
-      coachEmail: coach.coachEmail,
-      coachPhoneNumber: coach.coachPhoneNumber,
-      students: coach.students,
-      active: false,
-    };
     unassignFunction(coach);
-    updateFunction(updatedCoach, false);
   };
   return (
     <div>

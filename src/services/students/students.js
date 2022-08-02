@@ -38,7 +38,7 @@ export const updateStudent = (student) => {
 export const unassignStudent = async (Ids) => {
   return callApi({
     body: Ids,
-    endpoint: SERVICE_ROOT,
+    endpoint: 'students/unassign-student',
     method: 'POST',
     headers: {
       Accept: 'application/json, text/plain',
