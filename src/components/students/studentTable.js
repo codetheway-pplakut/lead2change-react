@@ -113,7 +113,7 @@ const declineHandler = async (studentId) => {
 };
 
 const reassignCoachHandler = async (studentId, coachId) => {
-  console.log(getStudentById(studentId));
+  console.log(coachId);
   await assignStudent({ coachId, studentId });
   console.log(coachId);
   console.log(getStudentById(studentId));

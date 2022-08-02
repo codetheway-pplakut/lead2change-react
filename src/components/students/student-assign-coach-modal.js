@@ -89,7 +89,7 @@ export default function CoachAssignModal(props) {
 
   const handleCoachChange = (event) => {
     setValue(event.target.value);
-    setNewCoachId(value);
+    setNewCoachId(event.target.value);
   };
 
   const filteredArray = coaches.filter((coach) => {
