@@ -6,9 +6,9 @@ import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-
 import { useParams } from 'react-router-dom';
 import { Stack, TextField } from '@mui/material';
+import ColorButton from '../coaches/Shared/ColoredButton';
 import TabsFunction from './detailsTab';
 
 import { getStudentById } from '../../services/students/students';
@@ -93,13 +93,13 @@ function SignUpDisplay(props) {
             <h2>Student Info</h2>
           </Grid>
           <Grid marginRight={1} marginTop={1}>
-            <Button
+            <ColorButton
               style={{ float: 'right' }}
               variant="contained"
               onClick={onEditClick}
             >
               Edit
-            </Button>
+            </ColorButton>
           </Grid>
           <Grid style={{ margin: '2vh' }}>
             <StudentInfo>
@@ -368,13 +368,17 @@ function SignUpEdit(props) {
             </Grid>
 
             <Grid align="center" marginTop={7}>
-              <Button variant="contained" type="Submit" onClick={EditField}>
+              <ColorButton
+                variant="contained"
+                type="Submit"
+                onClick={EditField}
+              >
                 Save
-              </Button>
+              </ColorButton>
               {'   '}
-              <Button variant="contained" onClick={onCancelClick}>
+              <ColorButton variant="contained" onClick={onCancelClick}>
                 Cancel
-              </Button>
+              </ColorButton>
             </Grid>
           </Paper>
         </Grid>

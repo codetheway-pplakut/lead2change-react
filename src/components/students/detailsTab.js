@@ -8,13 +8,17 @@ import Grid from '@mui/material/Grid';
 import AppBar from '@mui/material/AppBar';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
+import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import { useParams } from 'react-router-dom';
+import IconButton from '@mui/material/IconButton';
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import ColorButton from '../coaches/Shared/ColoredButton';
+import CreateGoalModal from './create-goal-modal';
 
 import { getStudentById } from '../../services/students/students';
 import { getGoalById } from '../../services/goals/goals';
@@ -118,13 +122,13 @@ function SignUpDisplay(props) {
               >
                 <Box>
                   {' '}
-                  <Button
+                  <ColorButton
                     style={{ float: 'right' }}
                     variant="contained"
                     onClick={onEditClick}
                   >
                     Edit
-                  </Button>
+                  </ColorButton>
                   <h3 style={{ color: '#2656A5' }}>Post Secondary Plan</h3>
                   <h5>
                     Plans After High school: {students.planAfterHighSchool}
@@ -222,13 +226,14 @@ function SignUpDisplay(props) {
             <Grid container justifyContent="flex-end">
               <Grid item xs={12} style={{ height: '64vh' }}>
                 <Box>
-                  <Button
+                  <ColorButton
                     style={{ float: 'right' }}
                     variant="contained"
                     onClick={onEditClick}
                   >
                     Edit
-                  </Button>
+                  </ColorButton>
+                  <CreateGoalModal>+ goal</CreateGoalModal>
                   <h3 style={{ color: '#2656A5' }}>Goal One</h3>
                   <h5>Goal: {goals.goalSet}</h5>
                   <h5>Goal Set Date: {goals.dateGoalSet}</h5>
@@ -259,13 +264,14 @@ function SignUpDisplay(props) {
               <Grid item xs={12} style={{ height: '30vh' }}>
                 <Grid>
                   <Box>
-                    <Button
+                    <ColorButton
                       style={{ float: 'right' }}
                       variant="contained"
                       onClick={onEditClick}
                     >
                       Edit
-                    </Button>
+                    </ColorButton>
+                    <AddCareer>+ New Career</AddCareer>
                     <h3 style={{ color: '#2656A5' }}>Career Information</h3>
                     <h5>I am College Bound: {careers.collegeBound}</h5>
                     <h5>Number of Career Clusters: {careers.careerCluster}</h5>
@@ -284,13 +290,13 @@ function SignUpDisplay(props) {
             <Grid container justifyContent="flex-end">
               <Grid item xs={12} style={{ height: '64vh' }}>
                 <Box>
-                  <Button
+                  <ColorButton
                     style={{ float: 'right' }}
                     variant="contained"
                     onClick={onEditClick}
                   >
                     Edit
-                  </Button>
+                  </ColorButton>
                   <h3 style={{ color: '#2656A5' }}>Parent Information</h3>
                   <h5>First Name: {students.parentFirstName}</h5>
                   <h5>Last Name: {students.parentLastName}</h5>
@@ -328,6 +334,191 @@ function SignUpDisplay(props) {
 
 SignUpDisplay.propTypes = {
   onEditClick: PropTypes.func.isRequired,
+};
+
+function AddCareer(props) {
+  const { studentId } = props;
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const [students, setStudents] = useState({});
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    minWidth: '750px',
+    width: '50%',
+    backgroundColor: 'white',
+    boxShadow: 12,
+  };
+  const [enteredIsCollegeBound, setEnteredIsCollegeBound] = React.useState('');
+
+  const [enteredCareerCluster, setEnteredCareerCluster] = React.useState('');
+
+  const [enteredSpecificCluster, setEnteredSpecificCluster] =
+    React.useState('');
+
+  const [enteredTechnicalCollegeBound, setEnteredTechnicalCollegeBound] =
+    React.useState('');
+
+  useEffect(() => {
+    const currentStudent = async () => {
+      const currStudent = await getStudentById(studentId);
+
+      const {
+        collegeBound,
+        careerCluster,
+        specificCluster,
+        technicalCollegeBound,
+      } = currStudent;
+      setStudents(currStudent);
+
+      setEnteredIsCollegeBound(collegeBound);
+      setEnteredCareerCluster(careerCluster);
+      setEnteredSpecificCluster(specificCluster);
+      setEnteredTechnicalCollegeBound(technicalCollegeBound);
+    };
+    currentStudent();
+  }, [studentId]);
+
+  return (
+    <div>
+      <ColorButton variant="contained" onClick={handleOpen}>
+        + New Career
+      </ColorButton>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+      >
+        <Grid container sx={style}>
+          <Grid container>
+            <Grid item sx={{ bgcolor: '#004cbb', color: 'white' }} xs={12}>
+              <Grid container alignItems="center" sx={{ margin: 1 }}>
+                <Grid item xs={2} />
+                <Grid item xs={8}>
+                  <Typography variant="h5" component="h2" align="center">
+                    New Career
+                  </Typography>
+                </Grid>
+                <Grid item xs={1} />
+                <Grid item>
+                  <IconButton
+                    align="right"
+                    size="medium"
+                    onClick={handleClose}
+                    sx={{ color: 'white' }}
+                  >
+                    <CloseOutlinedIcon />
+                  </IconButton>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs={12}>
+            <Grid container spacing={1} sx={{ p: 2 }} justifyContent="center">
+              <Grid item xs={12}>
+                <FormControl variant="standard" sx={{ m: 1, minWidth: '40vh' }}>
+                  <InputLabel id="demo-simple-select-standard-label">
+                    I am College Bound{' '}
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-standard-label"
+                    id="demo-simple-select-standard"
+                    label="College Bound?"
+                    fullWidth
+                    value={enteredIsCollegeBound}
+                    onChange={(event) =>
+                      setEnteredIsCollegeBound(event.target.value)
+                    }
+                  >
+                    <MenuItem value="" />
+                    <MenuItem value={10}>Yes</MenuItem>
+                    <MenuItem value={20}>No</MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl
+                  variant="standard"
+                  sx={{
+                    m: 1,
+                    minWidth: '42vh',
+                    marginBottom: '1.5vh',
+                    marginLeft: '2vh',
+                  }}
+                >
+                  <InputLabel id="demo-simple-select-standard-label">
+                    I am Technical Bound{' '}
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-standard-label"
+                    id="demo-simple-select-standard"
+                    label="Technical Bound?"
+                    value={enteredTechnicalCollegeBound}
+                    onChange={(event) =>
+                      setEnteredTechnicalCollegeBound(event.target.value)
+                    }
+                  >
+                    <MenuItem value="" />
+                    <MenuItem value={10}>Yes</MenuItem>
+                    <MenuItem value={20}>No</MenuItem>
+                  </Select>
+                </FormControl>
+                <Grid item xs={12} sx={{ marginBottom: '1.5vh' }}>
+                  <TextField
+                    size="small"
+                    className="typing-container"
+                    variant="outlined"
+                    value={enteredCareerCluster}
+                    label="Number of Career Clusters"
+                    fullWidth
+                    onChange={(event) =>
+                      setEnteredCareerCluster(event.target.value)
+                    }
+                    required
+                  />
+                </Grid>
+                <Grid item xs={12} sx={{ marginBottom: '1.5vh' }}>
+                  <TextField
+                    size="small"
+                    className="typing-container"
+                    value={enteredSpecificCluster}
+                    fullWidth
+                    label="Career of Choice"
+                    onChange={(event) =>
+                      setEnteredSpecificCluster(event.target.value)
+                    }
+                    required
+                  />
+                </Grid>
+                <Grid item xs={2}>
+                  <ColorButton
+                    variant="contained"
+                    fullWidth
+                    style={{ marginBottom: '1.5vh' }}
+                  >
+                    Create
+                  </ColorButton>
+                </Grid>
+                <Grid item xs={2}>
+                  <ColorButton
+                    variant="contained"
+                    fullWidth
+                    onClick={handleClose}
+                  >
+                    Cancel
+                  </ColorButton>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Modal>
+    </div>
+  );
+}
+AddCareer.propTypes = {
+  studentId: PropTypes.string.isRequired,
 };
 
 function SignUpEdit(props) {
@@ -1496,13 +1687,13 @@ function SignUpEdit(props) {
             </Box>
           </TabPanel>
           <Grid align="center">
-            <Button variant="contained" type="Submit" onClick={EditField}>
+            <ColorButton variant="contained" type="Submit" onClick={EditField}>
               Save
-            </Button>
+            </ColorButton>
             {'   '}
-            <Button variant="contained" onClick={onCancelClick}>
+            <ColorButton variant="contained" onClick={onCancelClick}>
               Cancel
-            </Button>
+            </ColorButton>
           </Grid>
         </form>
       </Box>
