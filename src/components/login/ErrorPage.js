@@ -21,7 +21,7 @@ function ErrorPage(props) {
           variant="h2"
           sx={{ mt: 5 }}
         >
-          Error 404
+          Something went wrong
         </Typography>
       </Box>
     </Container>
