@@ -41,6 +41,10 @@ export default function Root() {
               <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
               <Route path={ROUTES.INTERVIEW_PAGE} element={<InterviewPage />} />
               <Route
+                path="/interview-page/:studentId"
+                element={<InterviewPage />}
+              />
+              <Route
                 path="/StudentInfo/:studentId"
                 element={<ResponsiveGrid />}
               />
