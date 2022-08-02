@@ -13,7 +13,7 @@ import ColorButton from '../coaches/Shared/ColoredButton';
 import { addGoal } from '../../services/goals/goals';
 
 export default function CreateGoalModal(props) {
-  const { studentId } = useParams;
+  const { studentId } = props;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -50,7 +50,7 @@ export default function CreateGoalModal(props) {
   };
 
   const handleSel = () => {
-    let temp = '';
+    let temp = `${sel}`;
     if (sel1) {
       temp += 'Self-Awareness/';
     }
@@ -308,3 +308,7 @@ export default function CreateGoalModal(props) {
     </div>
   );
 }
+
+CreateGoalModal.propTypes = {
+  studentId: PropTypes.string.isRequired,
+};

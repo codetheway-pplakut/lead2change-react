@@ -20,7 +20,10 @@ import CreateGoalModal from './create-goal-modal';
 
 import { getStudentById } from '../../services/students/students';
 import { getGoalsByStudentId } from '../../services/goals/goals';
-import { getCareersById, getStudentCareers } from '../../services/careers/careers';
+import {
+  getCareersById,
+  getStudentCareers,
+} from '../../services/careers/careers';
 
 function TabPanel(props) {
   const { children, value, index } = props;
@@ -57,17 +60,16 @@ function SignUpDisplay(props) {
 
   useEffect(() => {
     const currentStudent = async () => {
-    const currStudent = await getStudentById(studentId);
-    setStudents(currStudent);
+      const currStudent = await getStudentById(studentId);
+      setStudents(currStudent);
     };
     const currentGoal = async () => {
-    const currGoal = await getGoalsByStudentId(studentId);
-    setGoals(currGoal);
+      const currGoal = await getGoalsByStudentId(studentId);
+      setGoals(currGoal);
     };
     const currentCareer = async () => {
-    const currCareer = await getStudentCareers(studentId);
-    setCareers(currCareer);
-       
+      const currCareer = await getStudentCareers(studentId);
+      setCareers(currCareer);
     };
     currentStudent();
     currentGoal();
@@ -349,17 +351,17 @@ function AddCareer(props) {
   const [enteredIsCollegeBound, setEnteredIsCollegeBound] = React.useState('');
 
   const [enteredCareerCluster, setEnteredCareerCluster] = React.useState('');
-  
+
   const [enteredSpecificCluster, setEnteredSpecificCluster] =
-  React.useState('');
+    React.useState('');
 
   const [enteredTechnicalCollegeBound, setEnteredTechnicalCollegeBound] =
     React.useState('');
 
   useEffect(() => {
     const currentCareer = async () => {
-    // const currCareers = await getCareersById(studentId);
-    // setCareers(currCareers);
+      // const currCareers = await getCareersById(studentId);
+      // setCareers(currCareers);
       // const {
       //   collegeBound,
       //   careerCluster,
@@ -367,7 +369,6 @@ function AddCareer(props) {
       //   technicalCollegeBound,
       // } = currCareer;
       // setStudents(currCareer);
-
       // setEnteredIsCollegeBound(collegeBound);
       // setEnteredCareerCluster(careerCluster);
       // setEnteredSpecificCluster(specificCluster);
@@ -517,7 +518,7 @@ function SignUpEdit(props) {
   const { studentId } = useParams();
   const [value, setValue] = React.useState(0);
   const [students, setStudents] = useState({});
-  const [goals, setGoals] = useState([]);  
+  const [goals, setGoals] = useState([]);
   const [open, setOpen] = React.useState(false);
   // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
