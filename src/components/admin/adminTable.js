@@ -13,7 +13,7 @@ import Stack from '@mui/material/Stack';
 import DeleteAdminModal from './deleteAdminModal';
 import RegisterAdminModal from './registerAdminModal';
 import SearchBar from './SearchBar';
-
+import IsActive from './isActive';
 import { getAdmins } from '../../services/Admin/admin';
 
 import ProgressIndicatorOverlay from '../progress-indicator-overlay/progress-indicator-overlay';
@@ -99,7 +99,7 @@ export default function AdminTable() {
                     </Grid>
                   </TableCell>
                   <TableCell>
-                    <DeleteAdminModal id={admin.id} />
+                    <IsActive admin={admin}/>
                   </TableCell>
                 </TableRow>
               ))}
