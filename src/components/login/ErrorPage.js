@@ -28,8 +28,8 @@ function ErrorPage() {
           Something went wrong
         </Typography>
         <Button variant="contained" onClick={() => navigate(ROUTES.HOME)}>
-        Go Back To Home
-      </Button>
+          Go Back To Home
+        </Button>
       </Box>
     </Container>
   );
