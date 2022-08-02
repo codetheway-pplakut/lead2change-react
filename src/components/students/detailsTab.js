@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { TextField } from '@mui/material';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import AppBar from '@mui/material/AppBar';
 import Tab from '@mui/material/Tab';
@@ -36,7 +34,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Typography component="span">{children}</Typography>
         </Box>
       )}
     </div>
@@ -48,14 +46,6 @@ TabPanel.propTypes = {
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
 };
-
-const GridText = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'left',
-  color: theme.palette.text.secondary,
-}));
 
 function SignUpDisplay(props) {
   const { onEditClick } = props;
@@ -239,16 +229,15 @@ function SignUpDisplay(props) {
                   >
                     Edit
                   </ColorButton>
-                  <CreateGoalModal>+ goal</CreateGoalModal>
+                  <CreateGoalModal studentId={studentId}>
+                    + goal
+                  </CreateGoalModal>
                   <h3 style={{ color: '#2656A5' }}>Goal One</h3>
                   <h5>Goal: {goals.goalSet}</h5>
                   <h5>Goal Set Date: {goals.dateGoalSet}</h5>
                   <h5>SEL: {goals.sel}</h5>
                   <h5>Goal Review Date:{goals.goalReviewDate}</h5>
-                  <h5>
-                    Accomplishment State:
-                    <p>{goals.wasItAccomplished}</p>
-                  </h5>
+                  <h5>Accomplishment State: {goals.wasItAccomplished}</h5>
                   <h5>Explanation: {goals.explanation}</h5>
                   <h3 style={{ color: '#2656A5' }}>Goal Two</h3>
                   <h5>Goal: Make it onto the Varsity Tennis Team</h5>
@@ -277,7 +266,7 @@ function SignUpDisplay(props) {
                     >
                       Edit
                     </ColorButton>
-                    <AddCareer>+ New Career</AddCareer>
+                    <AddCareer studentId={studentId}>+ New Career</AddCareer>
                     <h3 style={{ color: '#2656A5' }}>Career Information</h3>
                     <h5>I am College Bound: {careers.collegeBound}</h5>
                     <h5>Number of Career Clusters: {careers.careerCluster}</h5>
