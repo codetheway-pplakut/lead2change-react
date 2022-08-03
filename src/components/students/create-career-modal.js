@@ -39,6 +39,7 @@ export default function CreateCareerModal(props) {
       console.log(studentId);
       console.log(Career);
       await addCareers(Career);
+      console.log('add function met');
     }
   };
 
