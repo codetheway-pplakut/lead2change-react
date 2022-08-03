@@ -23,7 +23,7 @@ export default function CreateCareerModal(props) {
 
   const [collegeBound, setCollegeBound] = React.useState('');
   const [careerCluster, setCareerCluster] = React.useState('');
-  const [specificCluster, setSpecificCluster] = React.useState('');
+  const [specificCareer, setSpecificCareer] = React.useState('');
   const [technicalCollegeBound, setTechnicalCollegeBound] = React.useState('');
 
   const Create = async () => {
@@ -33,7 +33,7 @@ export default function CreateCareerModal(props) {
         studentId,
         collegeBound,
         careerCluster,
-        specificCluster,
+        specificCareer,
         technicalCollegeBound,
       };
       console.log(studentId);
@@ -154,10 +154,10 @@ export default function CreateCareerModal(props) {
                   <TextField
                     size="small"
                     className="typing-container"
-                    value={specificCluster}
+                    value={specificCareer}
                     fullWidth
                     label="Career of Choice"
-                    onChange={(event) => setSpecificCluster(event.target.value)}
+                    onChange={(event) => setSpecificCareer(event.target.value)}
                     required
                   />
                 </Grid>
@@ -169,7 +169,7 @@ export default function CreateCareerModal(props) {
                     value={
                       (collegeBound,
                       careerCluster,
-                      specificCluster,
+                      specificCareer,
                       technicalCollegeBound)
                     }
                   >
