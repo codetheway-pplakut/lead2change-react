@@ -274,12 +274,22 @@ function SignUpDisplay(props) {
                       + career
                     </CreateCareerModal>
                     <h3 style={{ color: '#2656A5' }}>Career Information</h3>
-                    <h5>I am College Bound: {careers.collegeBound}</h5>
-                    <h5>Number of Career Clusters: {careers.careerCluster}</h5>
-                    <h5>Career of Choice: {careers.specificCluster}</h5>
-                    <h5>
-                      I am Techinical Bound: {careers.technicalCollegeBound}
+                    {/* <h5>
+                      I am College Bound:{' '}
+                      {students.careerDeclaration.collegeBound}
                     </h5>
+                    <h5>
+                      Number of Career Clusters:{' '}
+                      {students.careerDeclaration.careerCluster}
+                    </h5>
+                    <h5>
+                      Career of Choice:{' '}
+                      {students.careerDeclaration.specificCluster}
+                    </h5>
+                    <h5>
+                      I am Techinical Bound:{' '}
+                      {students.careerDeclaration.technicalCollegeBound}
+                    </h5> */}
                   </Box>
                 </Grid>
               </Grid>
