@@ -13,10 +13,6 @@ import { green, red } from '@mui/material/colors';
 import { createStudentResponse } from '../../services/interviews/interview';
 import { getStudentById } from '../../services/students/students';
 
-function GritSaver() {
-  return null;
-}
-
 export default function GritSliderQuestions() {
   const [interviewNewThingsDistract, setinterviewNewThingsDistract] =
     useState('');
