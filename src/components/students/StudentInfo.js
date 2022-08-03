@@ -97,6 +97,9 @@ export default function ResponsiveGrid(props) {
   const [enteredFirstName, setEnteredFirstName] = React.useState(
     students.studentFirstName
   );
+  const [enteredLastName, setEnteredLastName] = React.useState(
+    students.studentLastName
+  );
   const [enteredDateOfBirth, setEnteredDateOfBirth] = React.useState(
     students.studentDateOfBirth
   );
@@ -117,6 +120,7 @@ export default function ResponsiveGrid(props) {
 
   const Edit = () => {
     students.studentFirstName = enteredFirstName;
+    students.studentLastName = enteredLastName;
     students.studentDateOfBirth = enteredDateOfBirth;
     students.studentEmail = enteredEmail;
     students.studentCellPhone = enteredCellPhone;

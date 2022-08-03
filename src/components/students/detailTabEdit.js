@@ -44,7 +44,7 @@ TabPanel.propTypes = {
 };
 
 export default function DetailsTabEdit(props) {
-  const { onCancelClick, updateFunction } = props;
+  const { onCancelClick, updateFunction, onSaveClick } = props;
   const { studentId, goalId } = useParams();
   const [value, setValue] = React.useState(0);
   const [students, setStudents] = useState({});
@@ -53,156 +53,206 @@ export default function DetailsTabEdit(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [enteredPlanAfterHighSchool, setEnteredPlanAfterHighSchool] =
-    React.useState('');
+  function currentStudentTest() {
+    return getStudentById(studentId);
+  }
 
-  const [enteredCollegesList, setEnteredCollegesList] = React.useState('');
+  const [enteredPlanAfterHighSchool, setEnteredPlanAfterHighSchool] =
+    React.useState(currentStudentTest.planAfterHighSchool);
+
+  const [enteredCollegesList, setEnteredCollegesList] = React.useState(
+    currentStudentTest.collegesList
+  );
 
   const [enteredFirstChoiceCollege, setEnteredFirstChoiceCollege] =
-    React.useState('');
+    React.useState(currentStudentTest.firstChoiceCollege);
 
   const [enteredCollegeApplicationStatus, setEnteredCollegeApplicationStatus] =
-    React.useState('');
+    React.useState(currentStudentTest.collegeApplicationStatus);
 
   const [enteredCollegeEssayStatus, setEnteredCollegeEssayStatus] =
-    React.useState('');
+    React.useState(currentStudentTest.collegeEssayStatus);
 
-  const [enteredCollegeEssayHelp, setEnteredCollegeEssayHelp] =
-    React.useState('');
+  const [enteredCollegeEssayHelp, setEnteredCollegeEssayHelp] = React.useState(
+    currentStudentTest.collegeEssayHelp
+  );
 
-  const [enteredPactTestScore, setEnteredPactTestScore] = React.useState('');
+  const [enteredPactTestScore, setEnteredPactTestScore] = React.useState(
+    currentStudentTest.pactTestScore
+  );
 
-  const [enteredPsatTestDate, setEnteredPsatTestDate] = React.useState('');
+  const [enteredPsatTestDate, setEnteredPsatTestDate] = React.useState(
+    currentStudentTest.psatTestDate
+  );
 
-  const [enteredPsatTestScore, setEnteredPsatTestScore] = React.useState('');
+  const [enteredPsatTestScore, setEnteredPsatTestScore] = React.useState(
+    currentStudentTest.psatTestScore
+  );
 
-  const [enteredPactTestDate, setEnteredPactTestDate] = React.useState('');
+  const [enteredPactTestDate, setEnteredPactTestDate] = React.useState(
+    currentStudentTest.pactTestDate
+  );
 
-  const [enteredActTestScore, setEnteredActTestScore] = React.useState('');
+  const [enteredActTestScore, setEnteredActTestScore] = React.useState(
+    currentStudentTest.actTestScore
+  );
 
-  const [enteredActTestDate, setEnteredActTestDate] = React.useState('');
+  const [enteredActTestDate, setEnteredActTestDate] = React.useState(
+    currentStudentTest.actTestDate
+  );
 
-  const [enteredSatTestScore, setEnteredSatTestScore] = React.useState('');
+  const [enteredSatTestScore, setEnteredSatTestScore] = React.useState(
+    currentStudentTest.satTestScore
+  );
 
-  const [enteredSatTestDate, setEnteredSatTestDate] = React.useState('');
+  const [enteredSatTestDate, setEnteredSatTestDate] = React.useState(
+    currentStudentTest.satTestDate
+  );
 
   const [
     enteredFinancialAidProcessComplete,
     setEnteredFinancialAidProcessComplete,
-  ] = React.useState('');
+  ] = React.useState(currentStudentTest.financialAidProcessComplete);
 
   const [enteredAssistanceForForms, setEnteredAssistanceForForms] =
-    React.useState('');
+    React.useState(currentStudentTest.assistanceForForms);
 
-  const [enteredSupportNeeded, setEnteredSupportNeeded] = React.useState('');
+  const [enteredSupportNeeded, setEnteredSupportNeeded] = React.useState(
+    currentStudentTest.supportNeeded
+  );
 
-  const [enteredGoalSet, setEnteredGoalSet] = React.useState('');
+  const [enteredGoalSet, setEnteredGoalSet] = React.useState(
+    currentStudentTest.goalSet
+  );
 
-  const [enteredDateGoalSet, setEnteredDateGoalSet] = React.useState('');
+  const [enteredDateGoalSet, setEnteredDateGoalSet] = React.useState(
+    currentStudentTest.dateGoalSet
+  );
 
-  const [enteredSel, setEnteredSel] = React.useState('');
+  const [enteredSel, setEnteredSel] = React.useState(currentStudentTest.sel);
 
-  const [enteredGoalReviewDate, setEnteredGoalReviewDate] = React.useState('');
+  const [enteredGoalReviewDate, setEnteredGoalReviewDate] = React.useState(
+    currentStudentTest.goalReviewDate
+  );
 
   const [enteredWasItAccomplished, setEnteredWasItAccomplished] =
-    React.useState('');
+    React.useState(currentStudentTest.wasItAccomplished);
 
-  const [enteredExplanation, setEnteredExplanation] = React.useState('');
+  const [enteredExplanation, setEnteredExplanation] = React.useState(
+    currentStudentTest.explanation
+  );
 
-  const [enteredParentFirstName, setEnteredParentFirstName] =
-    React.useState('');
+  const [enteredParentFirstName, setEnteredParentFirstName] = React.useState(
+    currentStudentTest.parentFirstName
+  );
 
-  const [enteredParentAddress, setEnteredParentAddress] = React.useState('');
+  const [enteredParentAddress, setEnteredParentAddress] = React.useState(
+    currentStudentTest.parentAddress
+  );
 
   const [enteredParentApartmentNumber, setEnteredParentApartmentNumber] =
-    React.useState('');
+    React.useState(currentStudentTest.parentApartmentNumber);
 
-  const [enteredParentCity, setEnteredParentCity] = React.useState('');
+  const [enteredParentCity, setEnteredParentCity] = React.useState(
+    currentStudentTest.parentCity
+  );
 
-  const [enteredParentState, setEnteredParentState] = React.useState('');
+  const [enteredParentState, setEnteredParentState] = React.useState(
+    currentStudentTest.parentState
+  );
 
-  const [enteredParentZipCode, setEnteredParentZipCode] = React.useState('');
+  const [enteredParentZipCode, setEnteredParentZipCode] = React.useState(
+    currentStudentTest.parentZipCode
+  );
 
-  const [enteredParentCellPhone, setEnteredParentCellPhone] =
-    React.useState('');
+  const [enteredParentCellPhone, setEnteredParentCellPhone] = React.useState(
+    currentStudentTest.parentCellPhone
+  );
 
-  const [enteredParentEmail, setEnteredParentEmail] = React.useState('');
+  const [enteredParentEmail, setEnteredParentEmail] = React.useState(
+    currentStudentTest.parentEmail
+  );
 
   const [enteredGuidanceCounselor, setEnteredGuidanceCounselor] =
-    React.useState('');
+    React.useState(currentStudentTest.guidanceConselor);
 
   // const [enteredWorkStatus, setEnteredWorkStatus] = React.useState('');
 
   // const [enteredAcceptanceState, setEnteredAcceptanceStatus] =
   //   React.useState('');
 
-  const [enteredStudentSignature, setEnteredStudentSignature] =
-    React.useState('');
+  const [enteredStudentSignature, setEnteredStudentSignature] = React.useState(
+    currentStudentTest.studentSignature
+  );
 
   const [enteredStudentSignatureDate, setEnteredStudentSignatureDate] =
-    React.useState('');
+    React.useState(currentStudentTest.studentSignatureDate);
 
-  const [enteredParentSignature, setEnteredParentSignature] =
-    React.useState('');
+  const [enteredParentSignature, setEnteredParentSignature] = React.useState(
+    currentStudentTest.parentSignature
+  );
 
   const [enteredParentSignatureDate, setEnteredParentSignatureDate] =
-    React.useState('');
+    React.useState(currentStudentTest.parentSignatureDate);
 
-  const [enteredIsCollegeBound, setEnteredIsCollegeBound] = React.useState('');
+  const [enteredIsCollegeBound, setEnteredIsCollegeBound] = React.useState(
+    currentStudentTest.isCollegeBound
+  );
 
-  const [enteredCareerCluster, setEnteredCareerCluster] = React.useState('');
+  const [enteredCareerCluster, setEnteredCareerCluster] = React.useState(
+    currentStudentTest.careerCluster
+  );
 
-  const [enteredSpecificCluster, setEnteredSpecificCluster] =
-    React.useState('');
+  const [enteredSpecificCluster, setEnteredSpecificCluster] = React.useState(
+    currentStudentTest.specificCluster
+  );
 
   const [enteredTechnicalCollegeBound, setEnteredTechnicalCollegeBound] =
-    React.useState('');
+    React.useState(currentStudentTest.technicalCollegeBound);
 
   const EditField = () => {
+    onSaveClick();
     handleClose();
-    const updatedStudent = {
-      id: students.id, // TODO : Update to agreed ID creation method
-      planAfterHighSchool: enteredPlanAfterHighSchool,
-      collegesList: enteredCollegesList,
-      firstChoiceCollege: enteredFirstChoiceCollege,
-      collegeApplicationStatus: enteredCollegeApplicationStatus,
-      collegeEssayStatus: enteredCollegeEssayStatus,
-      collegeEssayHelp: enteredCollegeEssayHelp,
-      pactTestScore: enteredPactTestScore,
-      psatTestDate: enteredPsatTestDate,
-      psatTestScore: enteredPsatTestScore,
-      pactTestDate: enteredPactTestDate,
-      actTestScore: enteredActTestScore,
-      actTestDate: enteredActTestDate,
-      satTestScore: enteredSatTestScore,
-      satTestDate: enteredSatTestDate,
-      goalSet: enteredGoalSet,
-      dateGoalSet: enteredGoalSet,
-      sel: enteredSel,
-      goalReviewDate: enteredGoalReviewDate,
-      wasItAccomplished: enteredWasItAccomplished,
-      explanation: enteredExplanation,
-      parentFirstName: enteredParentFirstName,
-      address: enteredParentAddress,
-      parentApartmentNumber: enteredParentApartmentNumber,
-      parentCity: enteredParentCity,
-      parentState: enteredParentState,
-      parentZipCode: enteredParentZipCode,
-      parentCellPhone: enteredParentCellPhone,
-      parentEmail: enteredParentEmail,
-      knowGuidanceCounselor: enteredGuidanceCounselor,
-      // workStatus: enteredWorkStatus,
-      // acceptanceState: enteredAcceptanceState,
-      studentSignature: enteredStudentSignature,
-      studentSignatureDate: enteredStudentSignatureDate,
-      parentSignature: enteredParentSignature,
-      parentSignatureDate: enteredParentSignatureDate,
-      collegeBound: enteredIsCollegeBound,
-      careerCluster: enteredCareerCluster,
-      specificCluster: enteredSpecificCluster,
-      technicalCollegeBound: enteredTechnicalCollegeBound,
-    };
-    updateFunction(updatedStudent);
+    students.planAfterHighSchool = enteredPlanAfterHighSchool;
+    students.collegesList = enteredCollegesList;
+    students.firstChoiceCollege = enteredFirstChoiceCollege;
+    students.collegeApplicationStatus = enteredCollegeApplicationStatus;
+    students.collegeEssayStatus = enteredCollegeEssayStatus;
+    students.collegeEssayHelp = enteredCollegeEssayHelp;
+    students.pactTestScore = enteredPactTestScore;
+    students.psatTestDate = enteredPsatTestDate;
+    students.psatTestScore = enteredPsatTestScore;
+    students.pactTestDate = enteredPactTestDate;
+    students.actTestScore = enteredActTestScore;
+    students.actTestDate = enteredActTestDate;
+    students.satTestScore = enteredSatTestScore;
+    students.satTestDate = enteredSatTestDate;
+    students.goalSet = enteredGoalSet;
+    students.dateGoalSet = enteredGoalSet;
+    students.sel = enteredSel;
+    students.goalReviewDate = enteredGoalReviewDate;
+    students.wasItAccomplished = enteredWasItAccomplished;
+    students.explanation = enteredExplanation;
+    students.parentFirstName = enteredParentFirstName;
+    students.address = enteredParentAddress;
+    students.parentApartmentNumber = enteredParentApartmentNumber;
+    students.parentCity = enteredParentCity;
+    students.parentState = enteredParentState;
+    students.parentZipCode = enteredParentZipCode;
+    students.parentCellPhone = enteredParentCellPhone;
+    students.parentEmail = enteredParentEmail;
+    students.knowGuidanceCounselor = enteredGuidanceCounselor;
+    // workStatus: enteredWorkStatus,
+    // acceptanceState: enteredAcceptanceState,
+    students.studentSignature = enteredStudentSignature;
+    students.studentSignatureDate = enteredStudentSignatureDate;
+    students.parentSignature = enteredParentSignature;
+    students.parentSignatureDate = enteredParentSignatureDate;
+    students.collegeBound = enteredIsCollegeBound;
+    students.careerCluster = enteredCareerCluster;
+    students.specificCluster = enteredSpecificCluster;
+    students.technicalCollegeBound = enteredTechnicalCollegeBound;
+    updateFunction(students);
   };
   useEffect(() => {
     const currentStudent = async () => {
@@ -315,16 +365,12 @@ export default function DetailsTabEdit(props) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const [first, setFirst] = useState('');
-  const [newPlanAfterHighSchool, setNewPlanAfterHighSchool] = useState('');
-  const [newCollegesList, setNewCollegesList] = useState('');
-  const [newFirstChoiceCollege, setNewFirstChoiceCollege] = useState('');
   return (
     <div style={{ marginRight: '8vh' }}>
       <Box
         sx={{ bgcolor: 'background.paper', width: '100vh', overflowY: 'auto' }}
       >
-        <form onSubmit={EditField}>
+        <form onSubmit={onSaveClick}>
           <AppBar position="static">
             <Tabs
               value={value}
@@ -1239,4 +1285,5 @@ export default function DetailsTabEdit(props) {
 DetailsTabEdit.propTypes = {
   onCancelClick: PropTypes.func.isRequired,
   updateFunction: PropTypes.func.isRequired,
+  onSaveClick: PropTypes.func.isRequired,
 };
