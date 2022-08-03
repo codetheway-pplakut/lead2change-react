@@ -10,13 +10,12 @@ import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import PropTypes from 'prop-types';
-import { Box, Checkbox } from '@mui/material';
 import { useParams } from 'react-router';
 import ColorButton from '../coaches/Shared/ColoredButton';
 import { addCareers } from '../../services/careers/careers';
 
 export default function CreateCareerModal(props) {
-  const { studentId } = useParams;
+  const { studentId } = props;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -193,3 +192,7 @@ export default function CreateCareerModal(props) {
     </div>
   );
 }
+
+CreateCareerModal.propTypes = {
+  studentId: PropTypes.string.isRequired,
+};
