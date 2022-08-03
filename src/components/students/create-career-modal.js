@@ -108,8 +108,8 @@ export default function CreateCareerModal(props) {
                     onChange={(event) => setCollegeBound(event.target.value)}
                   >
                     <MenuItem value="" />
-                    <MenuItem value={10}>Yes</MenuItem>
-                    <MenuItem value={20}>No</MenuItem>
+                    <MenuItem value>Yes</MenuItem>
+                    <MenuItem value={false}>No</MenuItem>
                   </Select>
                 </FormControl>
                 <FormControl
@@ -134,8 +134,8 @@ export default function CreateCareerModal(props) {
                     }
                   >
                     <MenuItem value="" />
-                    <MenuItem value={10}>Yes</MenuItem>
-                    <MenuItem value={20}>No</MenuItem>
+                    <MenuItem value>Yes</MenuItem>
+                    <MenuItem value={false}>No</MenuItem>
                   </Select>
                 </FormControl>
                 <Grid item xs={12} sx={{ marginBottom: '1.5vh' }}>
