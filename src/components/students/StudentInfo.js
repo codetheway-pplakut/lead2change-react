@@ -479,7 +479,7 @@ export default function ResponsiveGrid(props) {
       <Stack direction="row" spacing={2}>
         {isEditing ? (
           <SignUpEdit
-            onSaveClick={Edit}
+            onSaveClick={updateStudentInfo}
             onCancelClick={onCancelClick}
             updateFunction={updateStudentInfo}
           />
