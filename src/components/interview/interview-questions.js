@@ -227,7 +227,7 @@ export default function InterviewQuestions() {
     };
 
     createStudentResponse(response);
-    console.log(getInterviewsById(studentId).questions);
+    console.log(getInterviewsById(studentId));
   };
   // const num1 = {
   //   answerString: interviewCommitToActivities,
