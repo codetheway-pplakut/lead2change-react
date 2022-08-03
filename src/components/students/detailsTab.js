@@ -233,22 +233,20 @@ function SignUpDisplay(props) {
                     Edit
                   </ColorButton>
                   <CreateGoalModal studentId={studentId} />
-                  <h3 style={{ color: '#2656A5' }}>Goal One</h3>
-                  <h5>Goal: {goals.goalSet}</h5>
-                  <h5>Goal Set Date: {goals.dateGoalSet}</h5>
-                  <h5>SEL: {goals.sel}</h5>
-                  <h5>Goal Review Date:{goals.goalReviewDate}</h5>
-                  <h5>Accomplishment State: {goals.wasItAccomplished}</h5>
-                  <h5>Explanation: {goals.explanation}</h5>
-                  <h3 style={{ color: '#2656A5' }}>Goal Two</h3>
-                  <h5>Goal: Make it onto the Varsity Tennis Team</h5>
-                  <h5>Goal Set Date: 11/22/21</h5>
-                  <h5>SEL:Social Awareness</h5>
-                  <h5>Goal Review Date: 4/30/22</h5>
-                  <h5>Accomplishment State: In Progress</h5>
-                  <h5>
-                    Explanation: Tryouts will be in April, currently on JV
-                  </h5>
+
+                  {goals.map((goal) => {
+                    return (
+                      <div key={goal.id}>
+                        <h3 style={{ color: '#2656A5' }}>Goal </h3>
+                        <h5>Goal: {goal.goalSet}</h5>
+                        <h5>Goal Set Date: {goal.dateGoalSet}</h5>
+                        <h5>SEL: {goal.sel}</h5>
+                        <h5>Goal Review Date:{goal.goalReviewDate}</h5>
+                        <h5>Accomplishment State: {goal.wasItAccomplished}</h5>
+                        <h5>Explanation: {goal.explanation}</h5>
+                      </div>
+                    );
+                  })}
                 </Box>
               </Grid>
             </Grid>
