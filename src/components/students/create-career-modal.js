@@ -12,7 +12,7 @@ import { useParams } from 'react-router';
 import ColorButton from '../coaches/Shared/ColoredButton';
 import { addCareers } from '../../services/careers/careers';
 
-export default function CreateGoalModal(props) {
+export default function CreateCareerModal(props) {
   const { studentId } = useParams;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
