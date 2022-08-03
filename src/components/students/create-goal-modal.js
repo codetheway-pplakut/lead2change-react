@@ -46,6 +46,7 @@ export default function CreateGoalModal(props) {
       console.log(studentId);
       console.log(Goal);
       await addGoal(Goal);
+      console.log('Add method has been completed');
     }
   };
 
