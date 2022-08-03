@@ -11,7 +11,10 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { Button } from '@mui/material';
 
-import { createStudentResponse } from '../../services/interviews/interview';
+import {
+  createStudentResponse,
+  getInterviewsById,
+} from '../../services/interviews/interview';
 import { getStudentById } from '../../services/students/students';
 
 export default function InterviewQuestions() {
@@ -223,8 +226,8 @@ export default function InterviewQuestions() {
       ],
     };
 
-    console.log(response.answers.length);
     createStudentResponse(response);
+    console.log(getInterviewsById(studentId).questions);
   };
   // const num1 = {
   //   answerString: interviewCommitToActivities,
