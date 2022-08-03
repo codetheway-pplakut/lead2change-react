@@ -155,7 +155,7 @@ export default function AppBar(props) {
               */}
         </Grid>
         <Grid container alignItems="center" justifyContent="flex-end">
-          <Grid xs="auto">
+          <Grid item xs="auto">
             <Button variant="text" onClick={onLogoutClick}>
               <Typography color="white" variant="body2">
                 <span>LOG OUT: {getName()}</span>
