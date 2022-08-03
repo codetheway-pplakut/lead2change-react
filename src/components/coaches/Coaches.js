@@ -10,6 +10,7 @@ import {
   updateCoach,
 } from '../../services/coaches/coaches';
 import { unassignStudent } from '../../services/students/students';
+import ProgressIndicatorOverlay from '../progress-indicator-overlay/progress-indicator-overlay';
 
 const theme = createTheme({
   components: {
@@ -62,12 +63,14 @@ const theme = createTheme({
 export default function Coaches() {
   const [coaches, setCoaches] = useState([]);
   const coachesExist = Boolean(coaches.length);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const refreshCoaches = async () => {
+    setIsLoading(true);
     const result = await getCoaches();
+    setIsLoading(false);
     setCoaches(result);
   };
-
   useEffect(() => {
     refreshCoaches();
   }, []);
@@ -83,16 +86,16 @@ export default function Coaches() {
     await refreshCoaches();
   };
   const unassignStudents = async (coach) => {
-    coach.students.forEach((element) => {
+    await coach.students.forEach((element) => {
       unassignStudent({ coachId: coach.id, studentId: element.id });
     });
+    const updatedCoach = coach;
+    updatedCoach.active = false;
+    await updateCoachInfo(updatedCoach);
     await refreshCoaches();
   };
-  const updateCoachInfo = async (coach, change) => {
+  const updateCoachInfo = async (coach) => {
     await updateCoach(coach);
-    if (change === false) {
-      // Remove Students
-    }
     await refreshCoaches();
   };
   const deleteCoachById = async (id) => {
@@ -102,11 +105,12 @@ export default function Coaches() {
 
   return (
     <div>
+      <ProgressIndicatorOverlay active={isLoading} />
       {coachesExist && (
         <ThemeProvider theme={theme}>
           <CssBaseline>
             <Grid container justifyContent="center">
-              <Typography variant="h3" component="h4">
+              <Typography align="center" variant="h3" component="h4">
                 COACHES
               </Typography>
             </Grid>
