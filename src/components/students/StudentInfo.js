@@ -419,6 +419,37 @@ export default function ResponsiveGrid(props) {
     currentStudent();
   }, [studentId]);
 
+  const { updateFunction } = props;
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const [enteredFirstName, setEnteredFirstName] = React.useState('');
+  const [enteredDateOfBirth, setEnteredDateOfBirth] = React.useState('');
+  const [enteredEmail, setEnteredEmail] = React.useState('');
+  const [enteredCellPhone, setEnteredCellPhone] = React.useState('');
+  const [enteredAddress, setEnteredAddress] = React.useState('');
+  const [enteredApartmentNumber, setEnteredApartmentNumber] =
+    React.useState('');
+  const [enteredState, setEnteredState] = React.useState('');
+  const [enteredZipCode, setEnteredZipCode] = React.useState('');
+
+  const Edit = () => {
+    handleClose();
+    const updatedStudent = {
+      id: students.id, // TODO : Update to agreed ID creation method
+      studentFirstName: enteredFirstName,
+      studentDateOfBirth: enteredDateOfBirth,
+      studentEmail: enteredEmail,
+      studentCellPhone: enteredCellPhone,
+      studentAddress: enteredAddress,
+      studentApartmentNumber: enteredApartmentNumber,
+      studentState: enteredState,
+      studentZipCode: enteredZipCode,
+    };
+    updateFunction(updatedStudent);
+  };
+
   const [isEditing, setIsEditing] = useState(false);
   const startEditing = () => setIsEditing(true);
   const endEditing = () => setIsEditing(false);
@@ -432,11 +463,10 @@ export default function ResponsiveGrid(props) {
     console.log('cancel');
   };
 
-  const onSaveClick = (event) => {
-    saveStudentInfo();
-    endEditing();
-    event.preventDefault();
-  };
+  // const onSaveClick = (event) => {
+  //   saveStudentInfo();
+  //   endEditing();
+  // };
 
   const onCancelClick = () => {
     cancelStudentInfo();
@@ -449,7 +479,7 @@ export default function ResponsiveGrid(props) {
       <Stack direction="row" spacing={2}>
         {isEditing ? (
           <SignUpEdit
-            onSaveClick={onSaveClick}
+            onSaveClick={Edit}
             onCancelClick={onCancelClick}
             updateFunction={updateStudentInfo}
           />
@@ -461,3 +491,6 @@ export default function ResponsiveGrid(props) {
     </Grid>
   );
 }
+ResponsiveGrid.propTypes = {
+  updateFunction: PropTypes.func.isRequired,
+};
