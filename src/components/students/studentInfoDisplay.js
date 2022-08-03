@@ -91,7 +91,7 @@ export default function StudentInfoDisplay(props) {
               <h3 component="span">
                 Date of Birth: {'  '}
                 <Box component="span" style={{ fontWeight: 'normal' }}>
-                  {getParsedDate(students.studentDateOfBirth)};
+                  {getParsedDate(students.studentDateOfBirth)}
                 </Box>
               </h3>
             </StudentInfo>
