@@ -30,17 +30,9 @@ export default function CreateGoalModal(props) {
   const [wasItAccomplished, setWasItAccomplished] = useState('');
   const [explanation, setExplanation] = useState('');
 
-  const Create = async (
-    tempId,
-    tempGoalSet,
-    tempSel,
-    tempDateGoalSet,
-    tempDateGoalReview,
-    tempWasItAccomplished,
-    tempExplanation
-  ) => {
+  const Create = async () => {
     handleClose();
-    handleSel();
+    // handleSel();
     {
       const Goal = {
         studentId,
