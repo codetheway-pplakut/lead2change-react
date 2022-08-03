@@ -5,10 +5,7 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import PropTypes from 'prop-types';
-import { Box, Checkbox } from '@mui/material';
-import { useParams } from 'react-router';
 import ColorButton from '../coaches/Shared/ColoredButton';
 import { addGoal } from '../../services/goals/goals';
 
@@ -21,7 +18,7 @@ export default function CreateGoalModal(props) {
   const [goalSet, setGoalSet] = useState('');
   const [dateGoalSet, setDateGoalSet] = useState('');
   const [sel, setsel] = useState('');
-  const [dateGoalReview, setDateGoalReview] = useState('');
+  const [goalReviewDate, setGoalReviewDate] = useState('');
   const [wasItAccomplished, setWasItAccomplished] = useState('');
   const [explanation, setExplanation] = useState('');
 
@@ -33,7 +30,7 @@ export default function CreateGoalModal(props) {
         goalSet,
         sel,
         dateGoalSet,
-        dateGoalReview,
+        goalReviewDate,
         wasItAccomplished,
         explanation,
       };
@@ -132,14 +129,14 @@ export default function CreateGoalModal(props) {
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
-                    value={dateGoalReview}
+                    value={goalReviewDate}
                     fullWidth
                     label="Goal Review Date:"
                     type="date"
                     variant="outlined"
                     size="small"
                     onChange={(e) => {
-                      setDateGoalReview(e.target.value);
+                      setGoalReviewDate(e.target.value);
                     }}
                   />
                 </Grid>
@@ -176,7 +173,7 @@ export default function CreateGoalModal(props) {
                       (goalSet,
                       dateGoalSet,
                       sel,
-                      dateGoalReview,
+                      goalReviewDate,
                       wasItAccomplished,
                       explanation)
                     }
