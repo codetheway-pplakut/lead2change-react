@@ -5,69 +5,38 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import PropTypes from 'prop-types';
-import { Box, Checkbox } from '@mui/material';
-import { useParams } from 'react-router';
 import ColorButton from '../coaches/Shared/ColoredButton';
 import { addGoal } from '../../services/goals/goals';
 
 export default function CreateGoalModal(props) {
-  const { studentId } = useParams;
+  const { studentId } = props;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const [goalSet, setGoalSet] = useState('');
   const [dateGoalSet, setDateGoalSet] = useState('');
-  const [sel1, setsel1] = useState(false);
-  const [sel2, setsel2] = useState(false);
-  const [sel3, setsel3] = useState(false);
-  const [sel4, setsel4] = useState(false);
-  const [sel5, setsel5] = useState(false);
   const [sel, setsel] = useState('');
-  const [dateGoalReview, setDateGoalReview] = useState('');
+  const [goalReviewDate, setGoalReviewDate] = useState('');
   const [wasItAccomplished, setWasItAccomplished] = useState('');
   const [explanation, setExplanation] = useState('');
 
   const Create = async () => {
     handleClose();
-    handleSel();
     {
       const Goal = {
         studentId,
         goalSet,
         sel,
         dateGoalSet,
-        dateGoalReview,
+        goalReviewDate,
         wasItAccomplished,
         explanation,
       };
-      console.log(studentId);
-      console.log(Goal);
       await addGoal(Goal);
+      window.location.reload(false);
     }
-  };
-
-  const handleSel = () => {
-    let temp = '';
-    if (sel1) {
-      temp += 'Self-Awareness/';
-    }
-    if (sel2) {
-      temp += 'Self-Management/';
-    }
-    if (sel3) {
-      temp += 'Social Awareness/';
-    }
-    if (sel4) {
-      temp += 'Relationship Skills/';
-    }
-    if (sel5) {
-      temp += 'Responsible Decision-making/';
-    }
-
-    setsel(temp);
   };
 
   const style = {
@@ -133,96 +102,17 @@ export default function CreateGoalModal(props) {
                     }}
                   />
                 </Grid>
-                <Grid item xs={2}>
-                  <Box
-                    value={sel1}
-                    label="Self-Awareness"
+                <Grid item xs={12}>
+                  <TextField
+                    value={sel}
+                    fullWidth
+                    label="SEL"
+                    variant="outlined"
+                    size="small"
                     onChange={(e) => {
-                      setsel1(e.target.checked);
-                      handleSel();
+                      setsel(e.target.value);
                     }}
-                  >
-                    <FormControlLabel
-                      control={
-                        <Checkbox name="checkedA" value="Self-Awareness/" />
-                      }
-                      label="Self-Awareness"
-                    />
-                  </Box>
-                </Grid>
-                <Grid item xs={2}>
-                  <Box
-                    value={sel2}
-                    label="Self-Management"
-                    onChange={(e) => {
-                      setsel2(e.target.checked);
-                      handleSel();
-                    }}
-                  >
-                    <FormControlLabel
-                      control={
-                        <Checkbox name="checkedB" value="Self-Management/" />
-                      }
-                      label="Self-Management"
-                    />
-                  </Box>
-                </Grid>
-                <Grid item xs={2}>
-                  <Box
-                    value={sel3}
-                    label="Social Awareness"
-                    onChange={(e) => {
-                      setsel3(e.target.checked);
-                      handleSel();
-                    }}
-                  >
-                    <FormControlLabel
-                      control={
-                        <Checkbox name="checkedC" value="Social Awareness/" />
-                      }
-                      label="Social Awareness"
-                    />
-                  </Box>
-                </Grid>
-                <Grid item xs={2}>
-                  <Box
-                    value={sel4}
-                    label="Relationship Skills"
-                    onChange={(e) => {
-                      setsel4(e.target.checked);
-                      handleSel();
-                    }}
-                  >
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          name="checkedD"
-                          value="Relationship Skills/"
-                        />
-                      }
-                      label="Relationship Skills"
-                    />
-                  </Box>
-                  <Grid item xs={2}>
-                    <Box
-                      value={sel5}
-                      label="Responsible Decision-making"
-                      onChange={(e) => {
-                        setsel5(e.target.checked);
-                        handleSel();
-                      }}
-                    >
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            name="checkedE"
-                            value="Responsible Decision-making/"
-                          />
-                        }
-                        label="Responsible Decision-making"
-                      />
-                    </Box>
-                  </Grid>
+                  />
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
@@ -239,14 +129,14 @@ export default function CreateGoalModal(props) {
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
-                    value={dateGoalReview}
+                    value={goalReviewDate}
                     fullWidth
                     label="Goal Review Date:"
                     type="date"
                     variant="outlined"
                     size="small"
                     onChange={(e) => {
-                      setDateGoalReview(e.target.value);
+                      setGoalReviewDate(e.target.value);
                     }}
                   />
                 </Grid>
@@ -281,9 +171,9 @@ export default function CreateGoalModal(props) {
                     onClick={Create}
                     value={
                       (goalSet,
-                      sel,
                       dateGoalSet,
-                      dateGoalReview,
+                      sel,
+                      goalReviewDate,
                       wasItAccomplished,
                       explanation)
                     }
@@ -308,3 +198,7 @@ export default function CreateGoalModal(props) {
     </div>
   );
 }
+
+CreateGoalModal.propTypes = {
+  studentId: PropTypes.string.isRequired,
+};

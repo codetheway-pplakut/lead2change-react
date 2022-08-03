@@ -19,8 +19,11 @@ import ColorButton from '../coaches/Shared/ColoredButton';
 import CreateGoalModal from './create-goal-modal';
 
 import { getStudentById } from '../../services/students/students';
-import { getGoalById, getGoalsByStudentId } from '../../services/goals/goals';
-import { getCareersById } from '../../services/careers/careers';
+import { getGoalsByStudentId } from '../../services/goals/goals';
+import {
+  getCareersById,
+  getStudentCareers,
+} from '../../services/careers/careers';
 
 function TabPanel(props) {
   const { children, value, index } = props;
@@ -53,7 +56,7 @@ function SignUpDisplay(props) {
   const { studentId } = useParams();
   const [goals, setGoals] = useState([]);
   const [students, setStudents] = useState({});
-  const [careers, setCareers] = useState({});
+  const [careers, setCareers] = useState([]);
 
   useEffect(() => {
     const currentStudent = async () => {
@@ -65,7 +68,7 @@ function SignUpDisplay(props) {
       setGoals(currGoal);
     };
     const currentCareer = async () => {
-      const currCareer = await getCareersById(studentId);
+      const currCareer = await getStudentCareers(studentId);
       setCareers(currCareer);
     };
     currentStudent();
@@ -229,25 +232,24 @@ function SignUpDisplay(props) {
                   >
                     Edit
                   </ColorButton>
-                  <CreateGoalModal studentId={studentId}>
-                    + goal
-                  </CreateGoalModal>
-                  <h3 style={{ color: '#2656A5' }}>Goal One</h3>
-                  <h5>Goal: {goals.goalSet}</h5>
-                  <h5>Goal Set Date: {goals.dateGoalSet}</h5>
-                  <h5>SEL: {goals.sel}</h5>
-                  <h5>Goal Review Date:{goals.goalReviewDate}</h5>
-                  <h5>Accomplishment State: {goals.wasItAccomplished}</h5>
-                  <h5>Explanation: {goals.explanation}</h5>
-                  <h3 style={{ color: '#2656A5' }}>Goal Two</h3>
-                  <h5>Goal: Make it onto the Varsity Tennis Team</h5>
-                  <h5>Goal Set Date: 11/22/21</h5>
-                  <h5>SEL:Social Awareness</h5>
-                  <h5>Goal Review Date: 4/30/22</h5>
-                  <h5>Accomplishment State: In Progress</h5>
-                  <h5>
-                    Explanation: Tryouts will be in April, currently on JV
-                  </h5>
+                  <CreateGoalModal studentId={studentId} />
+
+                  {goals.map((goal) => {
+                    return (
+                      <div key={goal.id}>
+                        <h3 style={{ color: '#2656A5' }}>Goal </h3>
+                        <h5>Goal: {goal.goalSet}</h5>
+                        <h5>Goal Set Date: {goal.dateGoalSet}</h5>
+                        <h5>SEL: {goal.sel}</h5>
+                        <h5>
+                          Goal Review Date:
+                          {goal.goalReviewDate}
+                        </h5>
+                        <h5>Accomplishment State: {goal.wasItAccomplished}</h5>
+                        <h5>Explanation: {goal.explanation}</h5>
+                      </div>
+                    );
+                  })}
                 </Box>
               </Grid>
             </Grid>
@@ -334,7 +336,7 @@ function AddCareer(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [students, setStudents] = useState({});
+  // const [careers, setCareers] = useState([]);
   const style = {
     position: 'absolute',
     top: '50%',
@@ -357,20 +359,19 @@ function AddCareer(props) {
 
   useEffect(() => {
     const currentCareer = async () => {
-      const currCareer = await getCareersById(studentId);
-
-      const {
-        collegeBound,
-        careerCluster,
-        specificCluster,
-        technicalCollegeBound,
-      } = currCareer;
-      setStudents(currCareer);
-
-      setEnteredIsCollegeBound(collegeBound);
-      setEnteredCareerCluster(careerCluster);
-      setEnteredSpecificCluster(specificCluster);
-      setEnteredTechnicalCollegeBound(technicalCollegeBound);
+      // const currCareers = await getCareersById(studentId);
+      // setCareers(currCareers);
+      // const {
+      //   collegeBound,
+      //   careerCluster,
+      //   specificCluster,
+      //   technicalCollegeBound,
+      // } = currCareer;
+      // setStudents(currCareer);
+      // setEnteredIsCollegeBound(collegeBound);
+      // setEnteredCareerCluster(careerCluster);
+      // setEnteredSpecificCluster(specificCluster);
+      // setEnteredTechnicalCollegeBound(technicalCollegeBound);
     };
     currentCareer();
   }, [studentId]);
@@ -513,12 +514,12 @@ function AddCareer(props) {
 
 function SignUpEdit(props) {
   const { onCancelClick, updateFunction } = props;
-  const { studentId, goalId } = useParams();
+  const { studentId } = useParams();
   const [value, setValue] = React.useState(0);
   const [students, setStudents] = useState({});
-  const [goals, setGoals] = useState({});
+  const [goals, setGoals] = useState([]);
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const [enteredPlanAfterHighSchool, setEnteredPlanAfterHighSchool] =
@@ -644,12 +645,12 @@ function SignUpEdit(props) {
       actTestDate: enteredActTestDate,
       satTestScore: enteredSatTestScore,
       satTestDate: enteredSatTestDate,
-      goalSet: enteredGoalSet,
-      dateGoalSet: enteredGoalSet,
-      sel: enteredSel,
-      goalReviewDate: enteredGoalReviewDate,
-      wasItAccomplished: enteredWasItAccomplished,
-      explanation: enteredExplanation,
+      // goalSet: enteredGoalSet,
+      // dateGoalSet: enteredGoalSet,
+      // sel: enteredSel,
+      // goalReviewDate: enteredGoalReviewDate,
+      // wasItAccomplished: enteredWasItAccomplished,
+      // explanation: enteredExplanation,
       parentFirstName: enteredParentFirstName,
       address: enteredParentAddress,
       parentApartmentNumber: enteredParentApartmentNumber,
@@ -739,54 +740,54 @@ function SignUpEdit(props) {
     };
 
     const currentGoal = async () => {
-      const currGoal = await getGoalById(goalId);
-
-      const {
-        goalSet,
-        dateGoalSet,
-        sel,
-        goalReviewDate,
-        wasItAccomplished,
-        explanation,
-      } = currGoal;
+      const currGoal = await getGoalsByStudentId(studentId);
       setGoals(currGoal);
+      // const {
+      //   goalSet,
+      //   dateGoalSet,
+      //   sel,
+      //   goalReviewDate,
+      //   wasItAccomplished,
+      //   explanation,
+      // } = currGoal;
+      // setGoals(currGoal);
 
-      setEnteredGoalSet(goalSet);
-      setEnteredDateGoalSet(dateGoalSet);
-      setEnteredSel(sel);
-      setEnteredGoalReviewDate(goalReviewDate);
-      setEnteredWasItAccomplished(wasItAccomplished);
-      setEnteredExplanation(explanation);
+      // setEnteredGoalSet(goalSet);
+      // setEnteredDateGoalSet(dateGoalSet);
+      // setEnteredSel(sel);
+      // setEnteredGoalReviewDate(goalReviewDate);
+      // setEnteredWasItAccomplished(wasItAccomplished);
+      // setEnteredExplanation(explanation);
     };
 
     const currentCareer = async () => {
       const currCareer = await getCareersById(studentId);
 
-      const {
-        collegeBound,
-        careerCluster,
-        specificCluster,
-        technicalCollegeBound,
-      } = currCareer;
-      setStudents(currCareer);
+      // const {
+      //   collegeBound,
+      //   careerCluster,
+      //   specificCluster,
+      //   technicalCollegeBound,
+      // } = currCareer;
+      // setStudents(currCareer);
 
-      setEnteredIsCollegeBound(collegeBound);
-      setEnteredCareerCluster(careerCluster);
-      setEnteredSpecificCluster(specificCluster);
-      setEnteredTechnicalCollegeBound(technicalCollegeBound);
+      // setEnteredIsCollegeBound(collegeBound);
+      // setEnteredCareerCluster(careerCluster);
+      // setEnteredSpecificCluster(specificCluster);
+      // setEnteredTechnicalCollegeBound(technicalCollegeBound);
     };
     currentCareer();
     currentStudent();
     currentGoal();
-  }, [studentId, goalId]);
+  }, [studentId]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   const [first, setFirst] = useState('');
-  const [newPlanAfterHighSchool, setNewPlanAfterHighSchool] = useState('');
-  const [newCollegesList, setNewCollegesList] = useState('');
-  const [newFirstChoiceCollege, setNewFirstChoiceCollege] = useState('');
+  // const [newPlanAfterHighSchool, setNewPlanAfterHighSchool] = useState('');
+  // const [newCollegesList, setNewCollegesList] = useState('');
+  // const [newFirstChoiceCollege, setNewFirstChoiceCollege] = useState('');
   return (
     <div style={{ marginRight: '8vh' }}>
       <Box
@@ -1125,7 +1126,7 @@ function SignUpEdit(props) {
                         size="small"
                         className="typing-container"
                         label="Set Date"
-                        type="date"
+                        type="string"
                         value={enteredDateGoalSet}
                         onChange={(event) =>
                           setEnteredDateGoalSet(event.target.value)
@@ -1147,7 +1148,7 @@ function SignUpEdit(props) {
                       <TextField
                         size="small"
                         className="typing-container"
-                        type="date"
+                        type="string"
                         label="Review Date"
                         value={enteredGoalReviewDate}
                         onChange={(event) =>
@@ -1716,11 +1717,11 @@ export default function TabsFunction() {
   const cancelEditing = () => setIsEditing(false);
 
   const saveStudentInfo = (studentInfo) => {
-    console.log(studentInfo);
+    // console.log(studentInfo);
   };
 
   const cancelStudentInfo = (studentInfo) => {
-    console.log('cancel');
+    // console.log('cancel');
   };
 
   const onSaveClick = (event) => {

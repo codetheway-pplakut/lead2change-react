@@ -11,7 +11,11 @@ import { Stack, TextField } from '@mui/material';
 import ColorButton from '../coaches/Shared/ColoredButton';
 import TabsFunction from './detailsTab';
 
-import { getStudentById } from '../../services/students/students';
+import {
+  getStudentById,
+  getStudents,
+  updateStudent,
+} from '../../services/students/students';
 
 const StudentInfo = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -168,7 +172,6 @@ function SignUpDisplay(props) {
 SignUpDisplay.propTypes = {
   onEditClick: PropTypes.func.isRequired,
 };
-
 function SignUpEdit(props) {
   const { studentId } = useParams();
   const [students, setStudents] = useState({});
@@ -177,15 +180,26 @@ function SignUpEdit(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [enteredFirstName, setEnteredFirstName] = React.useState('');
-  const [enteredDateOfBirth, setEnteredDateOfBirth] = React.useState('');
-  const [enteredEmail, setEnteredEmail] = React.useState('');
-  const [enteredCellPhone, setEnteredCellPhone] = React.useState('');
-  const [enteredAddress, setEnteredAddress] = React.useState('');
-  const [enteredApartmentNumber, setEnteredApartmentNumber] =
-    React.useState('');
-  const [enteredState, setEnteredState] = React.useState('');
-  const [enteredZipCode, setEnteredZipCode] = React.useState('');
+  const [enteredFirstName, setEnteredFirstName] = React.useState(
+    students.studentFirstName
+  );
+  const [enteredDateOfBirth, setEnteredDateOfBirth] = React.useState(
+    students.studentDateOfBirth
+  );
+  const [enteredEmail, setEnteredEmail] = React.useState(students.studentEmail);
+  const [enteredCellPhone, setEnteredCellPhone] = React.useState(
+    students.studentCellPhone
+  );
+  const [enteredAddress, setEnteredAddress] = React.useState(
+    students.studentAddress
+  );
+  const [enteredApartmentNumber, setEnteredApartmentNumber] = React.useState(
+    students.studentApartmentNumber
+  );
+  const [enteredState, setEnteredState] = React.useState(students.studentState);
+  const [enteredZipCode, setEnteredZipCode] = React.useState(
+    students.studentZipCode
+  );
 
   const EditField = () => {
     handleClose();
@@ -218,7 +232,6 @@ function SignUpEdit(props) {
         studentZipCode,
       } = currStudent;
       setStudents(currStudent);
-
       setEnteredFirstName(studentFirstName);
       setEnteredDateOfBirth(studentDateOfBirth);
       setEnteredEmail(studentEmail);
@@ -394,8 +407,20 @@ SignUpEdit.propTypes = {
 };
 
 export default function ResponsiveGrid(props) {
+  const [isLoading, setIsLoading] = React.useState(false);
   const { studentId } = useParams();
   const [students, setStudents] = useState({});
+
+  const refreshStudents = async () => {
+    setIsLoading(true);
+    const result = await getStudents();
+    setIsLoading(false);
+    setStudents(result);
+  };
+  const updateStudentInfo = async (student) => {
+    await updateStudent(student);
+    await refreshStudents();
+  };
 
   useEffect(() => {
     const currentStudent = async () => {
@@ -405,6 +430,48 @@ export default function ResponsiveGrid(props) {
     currentStudent();
   }, [studentId]);
 
+  const { updateFunction } = props;
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const [enteredFirstName, setEnteredFirstName] = React.useState(
+    students.studentFirstName
+  );
+  const [enteredDateOfBirth, setEnteredDateOfBirth] = React.useState(
+    students.studentDateOfBirth
+  );
+  const [enteredEmail, setEnteredEmail] = React.useState(students.studentEmail);
+  const [enteredCellPhone, setEnteredCellPhone] = React.useState(
+    students.studentCellPhone
+  );
+  const [enteredAddress, setEnteredAddress] = React.useState(
+    students.studentAddress
+  );
+  const [enteredApartmentNumber, setEnteredApartmentNumber] = React.useState(
+    students.studentApartmentNumber
+  );
+  const [enteredState, setEnteredState] = React.useState(students.studentState);
+  const [enteredZipCode, setEnteredZipCode] = React.useState(
+    students.studentZipCode
+  );
+
+  const Edit = () => {
+    handleClose();
+    const updatedStudent = {
+      id: students.id, // TODO : Update to agreed ID creation method
+      studentFirstName: enteredFirstName,
+      studentDateOfBirth: enteredDateOfBirth,
+      studentEmail: enteredEmail,
+      studentCellPhone: enteredCellPhone,
+      studentAddress: enteredAddress,
+      studentApartmentNumber: enteredApartmentNumber,
+      studentState: enteredState,
+      studentZipCode: enteredZipCode,
+    };
+    updateFunction(updatedStudent);
+  };
+
   const [isEditing, setIsEditing] = useState(false);
   const startEditing = () => setIsEditing(true);
   const endEditing = () => setIsEditing(false);
@@ -412,6 +479,7 @@ export default function ResponsiveGrid(props) {
 
   const saveStudentInfo = (studentInfo) => {
     console.log(studentInfo);
+    updateStudent(studentInfo);
   };
 
   const cancelStudentInfo = (studentInfo) => {
@@ -419,7 +487,7 @@ export default function ResponsiveGrid(props) {
   };
 
   const onSaveClick = (event) => {
-    saveStudentInfo();
+    saveStudentInfo(students);
     endEditing();
     event.preventDefault();
   };
@@ -434,7 +502,11 @@ export default function ResponsiveGrid(props) {
       <DisplayBanner />
       <Stack direction="row" spacing={2}>
         {isEditing ? (
-          <SignUpEdit onSaveClick={onSaveClick} onCancelClick={onCancelClick} />
+          <SignUpEdit
+            onSaveClick={onSaveClick}
+            onCancelClick={onCancelClick}
+            updateFunction={updateStudentInfo}
+          />
         ) : (
           <SignUpDisplay onEditClick={startEditing} />
         )}
@@ -443,3 +515,6 @@ export default function ResponsiveGrid(props) {
     </Grid>
   );
 }
+ResponsiveGrid.propTypes = {
+  updateFunction: PropTypes.func.isRequired,
+};
