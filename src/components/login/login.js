@@ -22,7 +22,7 @@ export default function Login() {
     await login({ username, password });
 
     setIsLoading(false);
-    navigate(ROUTES.HOME);
+    navigate(ROUTES.STUDENTS);
     window.localStorage.setItem(
       'lead2change-token',
       sessionStorage.getItem('lead2change-token')
