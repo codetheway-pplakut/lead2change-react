@@ -32,7 +32,7 @@ export default function CreateGoalModal(props) {
 
   const Create = async () => {
     handleClose();
-    // handleSel();
+    handleSel();
     {
       const Goal = {
         studentId,
@@ -230,6 +230,7 @@ export default function CreateGoalModal(props) {
                     value={dateGoalSet}
                     fullWidth
                     label="Date Goal Set:"
+                    type="datetime"
                     variant="outlined"
                     size="small"
                     onChange={(e) => {
@@ -242,6 +243,7 @@ export default function CreateGoalModal(props) {
                     value={dateGoalReview}
                     fullWidth
                     label="Goal Review Date:"
+                    type="datetime"
                     variant="outlined"
                     size="small"
                     onChange={(e) => {
