@@ -10,7 +10,6 @@ import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router';
 import ColorButton from '../coaches/Shared/ColoredButton';
 import { addCareers } from '../../services/careers/careers';
 
@@ -19,7 +18,6 @@ export default function CreateCareerModal(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  // const [careers, setCareers] = useState([]);
 
   const [collegeBound, setCollegeBound] = React.useState('');
   const [careerCluster, setCareerCluster] = React.useState('');
@@ -36,10 +34,8 @@ export default function CreateCareerModal(props) {
         specificCareer,
         technicalCollegeBound,
       };
-      console.log(studentId);
-      console.log(Career);
       await addCareers(Career);
-      console.log('add function met');
+      window.location.reload(false);
     }
   };
 
