@@ -43,10 +43,8 @@ export default function CreateGoalModal(props) {
         wasItAccomplished,
         explanation,
       };
-      console.log(studentId);
-      console.log(Goal);
       await addGoal(Goal);
-      console.log('Add method has been completed');
+      window.location.reload(false);
     }
   };
 
@@ -230,7 +228,7 @@ export default function CreateGoalModal(props) {
                     value={dateGoalSet}
                     fullWidth
                     label="Date Goal Set:"
-                    type="datetime"
+                    type="date"
                     variant="outlined"
                     size="small"
                     onChange={(e) => {
@@ -243,7 +241,7 @@ export default function CreateGoalModal(props) {
                     value={dateGoalReview}
                     fullWidth
                     label="Goal Review Date:"
-                    type="datetime"
+                    type="date"
                     variant="outlined"
                     size="small"
                     onChange={(e) => {
