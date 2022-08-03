@@ -25,8 +25,8 @@ export default function AppBar(props) {
   const onCoachesClick = () => {
     navigate(ROUTES.COACHES);
   };
-  const onInterviewsClick = () => {
-    navigate(ROUTES.INTERVIEW_PAGE);
+  const onAdminsClick = () => {
+    navigate(ROUTES.ADMIN);
   };
   const onSignUpClick = () => {
     navigate(ROUTES.SIGN_UP);
@@ -79,17 +79,17 @@ export default function AppBar(props) {
           <Grid item>
             <Button variant="text">
               <Typography color="white" variant="body2">
-                Interviews
+                Admins
               </Typography>
             </Button>
           </Grid>
-          <Grid item>
+          {/* <Grid item>
             <Button variant="text">
               <Typography color="white" variant="body2">
                 Sign Up
               </Typography>
             </Button>
-          </Grid>
+              </Grid> */}
         </Grid>
       </Toolbar>
     </MaterialAppBar>
@@ -134,19 +134,20 @@ export default function AppBar(props) {
             </Button>
           </Grid>
           <Grid item>
-            <Button variant="text" onClick={onInterviewsClick}>
+            <Button variant="text" onClick={onAdminsClick}>
               <Typography color="white" variant="body2">
-                Interviews
+                Admins
               </Typography>
             </Button>
           </Grid>
-          <Grid item>
+          {/* <Grid item>
             <Button variant="text" onClick={onSignUpClick}>
               <Typography color="white" variant="body2">
                 Sign Up
               </Typography>
             </Button>
           </Grid>
+              */}
         </Grid>
         <Grid container alignItems="center" justifyContent="flex-end">
           <Grid xs="auto">
