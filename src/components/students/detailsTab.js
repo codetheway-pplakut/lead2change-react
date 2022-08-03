@@ -1125,7 +1125,7 @@ function SignUpEdit(props) {
                         size="small"
                         className="typing-container"
                         label="Set Date"
-                        type="date"
+                        type="string"
                         value={enteredDateGoalSet}
                         onChange={(event) =>
                           setEnteredDateGoalSet(event.target.value)
@@ -1147,7 +1147,7 @@ function SignUpEdit(props) {
                       <TextField
                         size="small"
                         className="typing-container"
-                        type="date"
+                        type="string"
                         label="Review Date"
                         value={enteredGoalReviewDate}
                         onChange={(event) =>

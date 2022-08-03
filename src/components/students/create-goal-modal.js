@@ -30,7 +30,15 @@ export default function CreateGoalModal(props) {
   const [wasItAccomplished, setWasItAccomplished] = useState('');
   const [explanation, setExplanation] = useState('');
 
-  const Create = async () => {
+  const Create = async (
+    tempId,
+    tempGoalSet,
+    tempSel,
+    tempDateGoalSet,
+    tempDateGoalReview,
+    tempWasItAccomplished,
+    tempExplanation
+  ) => {
     handleClose();
     handleSel();
     {
@@ -230,7 +238,6 @@ export default function CreateGoalModal(props) {
                     value={dateGoalSet}
                     fullWidth
                     label="Date Goal Set:"
-                    type="date"
                     variant="outlined"
                     size="small"
                     onChange={(e) => {
@@ -243,7 +250,6 @@ export default function CreateGoalModal(props) {
                     value={dateGoalReview}
                     fullWidth
                     label="Goal Review Date:"
-                    type="date"
                     variant="outlined"
                     size="small"
                     onChange={(e) => {
@@ -282,8 +288,8 @@ export default function CreateGoalModal(props) {
                     onClick={Create}
                     value={
                       (goalSet,
-                      sel,
                       dateGoalSet,
+                      sel,
                       dateGoalReview,
                       wasItAccomplished,
                       explanation)
