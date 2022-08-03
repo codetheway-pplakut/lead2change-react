@@ -16,6 +16,7 @@ import {
   getInterviewsById,
 } from '../../services/interviews/interview';
 import { getStudentById } from '../../services/students/students';
+import { getAnswerById } from '../../services/answers/answers';
 
 export default function InterviewQuestions() {
   const [interviewIdealCareer, setinterviewIdealCareer] = useState('');
@@ -227,7 +228,9 @@ export default function InterviewQuestions() {
     };
 
     createStudentResponse(response);
-    console.log(getInterviewsById(studentId));
+    console.log(
+      getAnswerById(studentId, 'd68119f8-26ef-4936-cde0-08d95db8fbe0')
+    );
   };
   // const num1 = {
   //   answerString: interviewCommitToActivities,
