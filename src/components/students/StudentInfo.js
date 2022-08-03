@@ -151,7 +151,6 @@ export default function ResponsiveGrid(props) {
   const onSaveClick = (event) => {
     saveStudentInfo(currentStudentTest);
     endEditing();
-    event.preventDefault();
   };
 
   const onCancelClick = () => {

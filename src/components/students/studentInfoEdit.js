@@ -58,9 +58,10 @@ export default function StudentInfoEdit(props) {
   );
 
   const EditField = () => {
+    onSaveClick();
     handleClose();
     const updatedStudent = {
-      id: currentStudentTest.id, // TODO : Update to agreed ID creation method
+      id: studentId, // TODO : Update to agreed ID creation method
       studentFirstName: enteredFirstName,
       studentDateOfBirth: enteredDateOfBirth,
       studentEmail: enteredEmail,
