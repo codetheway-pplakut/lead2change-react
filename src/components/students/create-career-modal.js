@@ -5,7 +5,10 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
 import PropTypes from 'prop-types';
 import { Box, Checkbox } from '@mui/material';
 import { useParams } from 'react-router';
@@ -26,7 +29,6 @@ export default function CreateCareerModal(props) {
 
   const Create = async () => {
     handleClose();
-    // handleSel(); //what is this? is this needed?
     {
       const Career = {
         studentId,
@@ -41,8 +43,6 @@ export default function CreateCareerModal(props) {
     }
   };
 
-  // sel stuff
-
   const style = {
     position: 'absolute',
     top: '50%',
@@ -54,10 +54,13 @@ export default function CreateCareerModal(props) {
     boxShadow: 12,
   };
 
-  // return needs to be updated with correct career variables
   return (
     <div>
-      <ColorButton variant="contained" onClick={handleOpen}>
+      <ColorButton
+        variant="contained"
+        onClick={handleOpen}
+        studentId={studentId}
+      >
         + New Career
       </ColorButton>
       <Modal
@@ -101,10 +104,8 @@ export default function CreateCareerModal(props) {
                     id="demo-simple-select-standard"
                     label="College Bound?"
                     fullWidth
-                    value={enteredIsCollegeBound}
-                    onChange={(event) =>
-                      setEnteredIsCollegeBound(event.target.value)
-                    }
+                    value={collegeBound}
+                    onChange={(event) => setCollegeBound(event.target.value)}
                   >
                     <MenuItem value="" />
                     <MenuItem value={10}>Yes</MenuItem>
@@ -127,9 +128,9 @@ export default function CreateCareerModal(props) {
                     labelId="demo-simple-select-standard-label"
                     id="demo-simple-select-standard"
                     label="Technical Bound?"
-                    value={enteredTechnicalCollegeBound}
+                    value={technicalCollegeBound}
                     onChange={(event) =>
-                      setEnteredTechnicalCollegeBound(event.target.value)
+                      setTechnicalCollegeBound(event.target.value)
                     }
                   >
                     <MenuItem value="" />
@@ -142,12 +143,10 @@ export default function CreateCareerModal(props) {
                     size="small"
                     className="typing-container"
                     variant="outlined"
-                    value={enteredCareerCluster}
+                    value={careerCluster}
                     label="Number of Career Clusters"
                     fullWidth
-                    onChange={(event) =>
-                      setEnteredCareerCluster(event.target.value)
-                    }
+                    onChange={(event) => setCareerCluster(event.target.value)}
                     required
                   />
                 </Grid>
@@ -155,12 +154,10 @@ export default function CreateCareerModal(props) {
                   <TextField
                     size="small"
                     className="typing-container"
-                    value={enteredSpecificCluster}
+                    value={specificCluster}
                     fullWidth
                     label="Career of Choice"
-                    onChange={(event) =>
-                      setEnteredSpecificCluster(event.target.value)
-                    }
+                    onChange={(event) => setSpecificCluster(event.target.value)}
                     required
                   />
                 </Grid>
@@ -168,7 +165,13 @@ export default function CreateCareerModal(props) {
                   <ColorButton
                     variant="contained"
                     fullWidth
-                    style={{ marginBottom: '1.5vh' }}
+                    onClick={Create}
+                    value={
+                      (collegeBound,
+                      careerCluster,
+                      specificCluster,
+                      technicalCollegeBound)
+                    }
                   >
                     Create
                   </ColorButton>
