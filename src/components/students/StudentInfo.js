@@ -94,33 +94,25 @@ export default function ResponsiveGrid(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  function currentStudentTest() {
-    return getStudentById(studentId);
-  }
-
   const [enteredFirstName, setEnteredFirstName] = React.useState(
-    currentStudentTest.studentFirstName
+    students.studentFirstName
   );
   const [enteredDateOfBirth, setEnteredDateOfBirth] = React.useState(
-    currentStudentTest.studentDateOfBirth
+    students.studentDateOfBirth
   );
-  const [enteredEmail, setEnteredEmail] = React.useState(
-    currentStudentTest.studentEmail
-  );
+  const [enteredEmail, setEnteredEmail] = React.useState(students.studentEmail);
   const [enteredCellPhone, setEnteredCellPhone] = React.useState(
-    currentStudentTest.studentCellPhone
+    students.studentCellPhone
   );
   const [enteredAddress, setEnteredAddress] = React.useState(
-    currentStudentTest.studentAddress
+    students.studentAddress
   );
   const [enteredApartmentNumber, setEnteredApartmentNumber] = React.useState(
-    currentStudentTest.studentApartmentNumber
+    students.studentApartmentNumber
   );
-  const [enteredState, setEnteredState] = React.useState(
-    currentStudentTest.studentState
-  );
+  const [enteredState, setEnteredState] = React.useState(students.studentState);
   const [enteredZipCode, setEnteredZipCode] = React.useState(
-    currentStudentTest.studentZipCode
+    students.studentZipCode
   );
 
   const Edit = () => {
