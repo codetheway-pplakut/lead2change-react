@@ -48,17 +48,32 @@ export default function Root() {
                 <Route path={ROUTES.LOGIN} element={<Login />} />
                 <Route path={ROUTES.RESET_PASS} element={<Reset />} />
                 <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
+              <Route path={ROUTES.INTERVIEW_PAGE} element={<InterviewPage />} />
                 <Route
                   path={ROUTES.INTERVIEW_PAGE}
                   element={<InterviewPage />}
                 />
+              <Route
+                path="/interview-page/:studentId"
+                element={<InterviewPage />}
+              />
+              <Route
+                path="/StudentInfo/:studentId"
+                element={<ResponsiveGrid />}
+              />
+              <Route
+                path="/interview-page/:studentId"
+                element={<InterviewPage />}
+              />
+              <Route
+                element={<TabsFunction />}
+                path="/detailsTab/:studentId:goalId"
+              />
                 <Route path={ROUTES.TABS} element={<BasicTabs />} />
                 <Route path={ROUTES.COACHES} element={<Coaches />} />
                 <Route path={ROUTES.STUDENTS} element={<Student />} />
-                <Route
-                  path={ROUTES.STUDENT_INFO}
-                  element={<ResponsiveGrid />}
-                />
+              <Route path={ROUTES.ADMIN} element={<AdminPage />} />
+              <Route path={ROUTES.STUDENT_INFO} element={<ResponsiveGrid />} />
                 <Route path={ROUTES.ERROR_PAGE} element={<ErrorPage />} />
                 <Route
                   path="/ForgotPassword/:studentId"

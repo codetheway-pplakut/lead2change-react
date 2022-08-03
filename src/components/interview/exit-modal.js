@@ -16,7 +16,7 @@ export default function ExitModal() {
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
   const backHome = () => {
-    navigate(ROUTES.HOME);
+    navigate(ROUTES.STUDENTS);
   };
 
   return (
@@ -70,8 +70,8 @@ export default function ExitModal() {
                   sx={{ mt: 2 }}
                   align="center"
                 >
-                  Hit the back home button to go back home. Hit the return to
-                  interview button so you can save changes.
+                  Hit the Go Back Home button to return to Students. Hit the
+                  Return to Interview button if you need to save changes.
                 </Typography>
                 <Grid item xs={2}>
                   <ColorButton variant="contained" fullWidth onClick={backHome}>
