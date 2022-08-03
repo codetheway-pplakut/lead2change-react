@@ -8,8 +8,8 @@ import { useNavigate } from 'react-router';
 import SignUpForm from './sign-up-form/sign-up-form';
 
 import { addStudent, getStudents } from '../../services/students/students';
-import ROUTES from '../../constants/routes';
 import ProgressIndicatorOverlay from '../progress-indicator-overlay/progress-indicator-overlay';
+import ROUTES from '../../constants/routes';
 
 export default function SignUp() {
   const [email, setEmail] = useState('');
@@ -63,9 +63,14 @@ export default function SignUp() {
     }
   };
 
+  // const errorHandler = (error, errorInfo) => {
+  //   console.log('logging', error, errorInfo);
+  // };
+
   return (
     <>
       <ProgressIndicatorOverlay active={isLoading} />
+      {/* <ErrorBoundary FallbackComponent={Fallback} onError={errorHandler}> */}
       <Container maxWidth="sm">
         <Box
           sx={{
@@ -95,6 +100,7 @@ export default function SignUp() {
           />
         </Box>
       </Container>
+      {/* </ErrorBoundary> */}
     </>
   );
 }

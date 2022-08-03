@@ -7,9 +7,10 @@ const ROUTES = {
   INTERVIEW_PAGE: '/interview/interviewPage',
   ADMIN: '/admin/adminPage',
   COACHES: '/coaches/Coaches',
-  STUDENTS: '/students/students-page',
-  STUDENT_INFO: '/students/student-info',
-  RESET_PASS: '/login',
+  STUDENTS: '/students/student-test',
+  STUDENT_INFO: '/students/StudentInfo',
+  RESET_PASS: '/account/reset-password/',
+  ERROR_PAGE: '/login/ErrorPage',
 };
 
 export default ROUTES;
