@@ -457,16 +457,18 @@ export default function ResponsiveGrid(props) {
 
   const saveStudentInfo = (studentInfo) => {
     console.log(studentInfo);
+    updateStudent(studentInfo);
   };
 
   const cancelStudentInfo = (studentInfo) => {
     console.log('cancel');
   };
 
-  // const onSaveClick = (event) => {
-  //   saveStudentInfo();
-  //   endEditing();
-  // };
+  const onSaveClick = (event) => {
+    saveStudentInfo(students);
+    endEditing();
+    event.preventDefault();
+  };
 
   const onCancelClick = () => {
     cancelStudentInfo();
@@ -479,7 +481,7 @@ export default function ResponsiveGrid(props) {
       <Stack direction="row" spacing={2}>
         {isEditing ? (
           <SignUpEdit
-            onSaveClick={updateStudentInfo}
+            onSaveClick={onSaveClick}
             onCancelClick={onCancelClick}
             updateFunction={updateStudentInfo}
           />
