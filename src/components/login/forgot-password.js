@@ -12,7 +12,7 @@ import {
   Container,
 } from '@mui/material';
 import { requestReset } from '../../services/users/users';
-// import { getStudentById } from '../../services/students/students';
+import { getStudentById } from '../../services/students/students';
 
 const style = {
   position: 'absolute',
@@ -27,18 +27,18 @@ const style = {
 };
 
 function ForgotPassword() {
-  // const { studentId } = useParams();
-  // const [students, setStudents] = useState({});
+  const { studentId } = useParams();
+  const [students, setStudents] = useState({});
 
-  // useEffect(() => {
-  //   const currentStudent = async () => {
-  //     const currStudent = await getStudentById(studentId);
-  //     setStudents(currStudent);
-  //   };
-  //   currentStudent();
-  // }, [studentId]);
-  // const x = students.studentEmail;
-  // console.log(`${x}`);
+  useEffect(() => {
+    const currentStudent = async () => {
+      const currStudent = await getStudentById(studentId);
+      setStudents(currStudent);
+    };
+    currentStudent();
+  }, [studentId]);
+  const x = students.studentEmail;
+  console.log(`${x}`);
 
   const [isError, setIsError] = useState(true);
   const [open, setOpen] = React.useState(false);
