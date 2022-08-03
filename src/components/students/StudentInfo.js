@@ -418,6 +418,7 @@ export default function ResponsiveGrid(props) {
     setStudents(result);
   };
   const updateStudentInfo = async (student) => {
+    console.log(student);
     await updateStudent(student);
     await refreshStudents();
   };
@@ -505,7 +506,7 @@ export default function ResponsiveGrid(props) {
           <SignUpEdit
             onSaveClick={onSaveClick}
             onCancelClick={onCancelClick}
-            updateFunction={updateStudentInfo}
+            updateFunction={updateStudentInfo(students)}
           />
         ) : (
           <SignUpDisplay onEditClick={startEditing} />
