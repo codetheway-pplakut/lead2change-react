@@ -93,31 +93,35 @@ export default function ResponsiveGrid(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  function currentStudentTest() {
+    return getStudentById(studentId);
+  }
+
   const [enteredFirstName, setEnteredFirstName] = React.useState(
-    students.studentFirstName
+    currentStudentTest.studentFirstName
   );
   const [enteredDateOfBirth, setEnteredDateOfBirth] = React.useState(
-    students.studentDateOfBirth
+    currentStudentTest.studentDateOfBirth
   );
-  const [enteredEmail, setEnteredEmail] = React.useState(students.studentEmail);
+  const [enteredEmail, setEnteredEmail] = React.useState(currentStudentTest.studentEmail);
   const [enteredCellPhone, setEnteredCellPhone] = React.useState(
-    students.studentCellPhone
+    currentStudentTest.studentCellPhone
   );
   const [enteredAddress, setEnteredAddress] = React.useState(
-    students.studentAddress
+    currentStudentTest.studentAddress
   );
   const [enteredApartmentNumber, setEnteredApartmentNumber] = React.useState(
-    students.studentApartmentNumber
+    currentStudentTest.studentApartmentNumber
   );
-  const [enteredState, setEnteredState] = React.useState(students.studentState);
+  const [enteredState, setEnteredState] = React.useState(currentStudentTest.studentState);
   const [enteredZipCode, setEnteredZipCode] = React.useState(
-    students.studentZipCode
+    currentStudentTest.studentZipCode
   );
 
   const Edit = () => {
     handleClose();
     const updatedStudent = {
-      id: students.id, // TODO : Update to agreed ID creation method
+      id: currentStudentTest.id, // TODO : Update to agreed ID creation method
       studentFirstName: enteredFirstName,
       studentDateOfBirth: enteredDateOfBirth,
       studentEmail: enteredEmail,
@@ -145,7 +149,7 @@ export default function ResponsiveGrid(props) {
   };
 
   const onSaveClick = (event) => {
-    saveStudentInfo(students);
+    saveStudentInfo(currentStudentTest);
     endEditing();
     event.preventDefault();
   };
