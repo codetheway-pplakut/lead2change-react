@@ -260,7 +260,7 @@ function SignUpDisplay(props) {
         <TabPanel value={value} index={2} style={{ overflowY: 'auto' }}>
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">
-              <Grid item xs={12} style={{ height: '30vh' }}>
+              <Grid item xs={12} style={{ height: '64vh' }}>
                 <Grid>
                   <Box>
                     <ColorButton
