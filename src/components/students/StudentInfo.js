@@ -74,8 +74,9 @@ export default function ResponsiveGrid(props) {
     setIsLoading(false);
     setStudents(result);
   };
+
   const updateStudentInfo = async (student) => {
-    console.log(student);
+    // console.log(student);
     await updateStudent(student);
     await refreshStudents();
   };
@@ -103,7 +104,9 @@ export default function ResponsiveGrid(props) {
   const [enteredDateOfBirth, setEnteredDateOfBirth] = React.useState(
     currentStudentTest.studentDateOfBirth
   );
-  const [enteredEmail, setEnteredEmail] = React.useState(currentStudentTest.studentEmail);
+  const [enteredEmail, setEnteredEmail] = React.useState(
+    currentStudentTest.studentEmail
+  );
   const [enteredCellPhone, setEnteredCellPhone] = React.useState(
     currentStudentTest.studentCellPhone
   );
@@ -113,7 +116,9 @@ export default function ResponsiveGrid(props) {
   const [enteredApartmentNumber, setEnteredApartmentNumber] = React.useState(
     currentStudentTest.studentApartmentNumber
   );
-  const [enteredState, setEnteredState] = React.useState(currentStudentTest.studentState);
+  const [enteredState, setEnteredState] = React.useState(
+    currentStudentTest.studentState
+  );
   const [enteredZipCode, setEnteredZipCode] = React.useState(
     currentStudentTest.studentZipCode
   );
@@ -127,8 +132,6 @@ export default function ResponsiveGrid(props) {
     students.studentApartmentNumber = enteredApartmentNumber;
     students.studentState = enteredState;
     students.studentZipCode = enteredZipCode;
-    updateFunction(students);
-    handleClose();
   };
 
   const [isEditing, setIsEditing] = useState(false);
@@ -139,14 +142,17 @@ export default function ResponsiveGrid(props) {
   const saveStudentInfo = (studentInfo) => {
     console.log(studentInfo);
     updateStudent(studentInfo);
+    refreshStudents();
   };
 
   const cancelStudentInfo = (studentInfo) => {
     console.log('cancel');
   };
 
-  const onSaveClick = (event) => {
-    saveStudentInfo(currentStudentTest);
+  const onSaveClick = async (event) => {
+    Edit();
+    console.log(students);
+    saveStudentInfo(students);
     endEditing();
   };
 
