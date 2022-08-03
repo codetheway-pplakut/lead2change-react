@@ -241,7 +241,10 @@ function SignUpDisplay(props) {
                         <h5>Goal: {goal.goalSet}</h5>
                         <h5>Goal Set Date: {goal.dateGoalSet}</h5>
                         <h5>SEL: {goal.sel}</h5>
-                        <h5>Goal Review Date:{goal.goalReviewDate}</h5>
+                        <h5>
+                          Goal Review Date:
+                          {goal.goalReviewDate}
+                        </h5>
                         <h5>Accomplishment State: {goal.wasItAccomplished}</h5>
                         <h5>Explanation: {goal.explanation}</h5>
                       </div>

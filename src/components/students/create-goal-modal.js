@@ -20,11 +20,6 @@ export default function CreateGoalModal(props) {
 
   const [goalSet, setGoalSet] = useState('');
   const [dateGoalSet, setDateGoalSet] = useState('');
-  const [sel1, setsel1] = useState(false);
-  const [sel2, setsel2] = useState(false);
-  const [sel3, setsel3] = useState(false);
-  const [sel4, setsel4] = useState(false);
-  const [sel5, setsel5] = useState(false);
   const [sel, setsel] = useState('');
   const [dateGoalReview, setDateGoalReview] = useState('');
   const [wasItAccomplished, setWasItAccomplished] = useState('');
@@ -32,7 +27,6 @@ export default function CreateGoalModal(props) {
 
   const Create = async () => {
     handleClose();
-    handleSel();
     {
       const Goal = {
         studentId,
@@ -46,27 +40,6 @@ export default function CreateGoalModal(props) {
       await addGoal(Goal);
       window.location.reload(false);
     }
-  };
-
-  const handleSel = () => {
-    let temp = `${sel}`;
-    if (sel1) {
-      temp += 'Self-Awareness/';
-    }
-    if (sel2) {
-      temp += 'Self-Management/';
-    }
-    if (sel3) {
-      temp += 'Social Awareness/';
-    }
-    if (sel4) {
-      temp += 'Relationship Skills/';
-    }
-    if (sel5) {
-      temp += 'Responsible Decision-making/';
-    }
-
-    setsel(temp);
   };
 
   const style = {
@@ -132,96 +105,17 @@ export default function CreateGoalModal(props) {
                     }}
                   />
                 </Grid>
-                <Grid item xs={2}>
-                  <Box
-                    value={sel1}
-                    label="Self-Awareness"
+                <Grid item xs={12}>
+                  <TextField
+                    value={sel}
+                    fullWidth
+                    label="SEL"
+                    variant="outlined"
+                    size="small"
                     onChange={(e) => {
-                      setsel1(e.target.checked);
-                      handleSel();
+                      setsel(e.target.value);
                     }}
-                  >
-                    <FormControlLabel
-                      control={
-                        <Checkbox name="checkedA" value="Self-Awareness/" />
-                      }
-                      label="Self-Awareness"
-                    />
-                  </Box>
-                </Grid>
-                <Grid item xs={2}>
-                  <Box
-                    value={sel2}
-                    label="Self-Management"
-                    onChange={(e) => {
-                      setsel2(e.target.checked);
-                      handleSel();
-                    }}
-                  >
-                    <FormControlLabel
-                      control={
-                        <Checkbox name="checkedB" value="Self-Management/" />
-                      }
-                      label="Self-Management"
-                    />
-                  </Box>
-                </Grid>
-                <Grid item xs={2}>
-                  <Box
-                    value={sel3}
-                    label="Social Awareness"
-                    onChange={(e) => {
-                      setsel3(e.target.checked);
-                      handleSel();
-                    }}
-                  >
-                    <FormControlLabel
-                      control={
-                        <Checkbox name="checkedC" value="Social Awareness/" />
-                      }
-                      label="Social Awareness"
-                    />
-                  </Box>
-                </Grid>
-                <Grid item xs={2}>
-                  <Box
-                    value={sel4}
-                    label="Relationship Skills"
-                    onChange={(e) => {
-                      setsel4(e.target.checked);
-                      handleSel();
-                    }}
-                  >
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          name="checkedD"
-                          value="Relationship Skills/"
-                        />
-                      }
-                      label="Relationship Skills"
-                    />
-                  </Box>
-                  <Grid item xs={2}>
-                    <Box
-                      value={sel5}
-                      label="Responsible Decision-making"
-                      onChange={(e) => {
-                        setsel5(e.target.checked);
-                        handleSel();
-                      }}
-                    >
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            name="checkedE"
-                            value="Responsible Decision-making/"
-                          />
-                        }
-                        label="Responsible Decision-making"
-                      />
-                    </Box>
-                  </Grid>
+                  />
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
