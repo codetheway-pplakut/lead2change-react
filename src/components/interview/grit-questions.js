@@ -14,6 +14,32 @@ import { createStudentResponse } from '../../services/interviews/interview';
 import { getStudentById } from '../../services/students/students';
 
 export default function GritSliderQuestions() {
+  const { studentId } = useParams();
+  const [students, setStudents] = useState({});
+
+  useEffect(() => {
+    const currentStudent = async () => {
+      const currStudent = await getStudentById(studentId);
+      setStudents(currStudent);
+    };
+    currentStudent();
+  }, [studentId]);
+
+  // const previousResponse = getInterviewsById(studentId);
+  // const [interviewNewThingsDistract, setinterviewNewThingsDistract] =
+  //   useState(previousResponse.questions[14].answerString);
+  // const [
+  //   interviewSetbacksDoNotDiscourage,
+  //   setinterviewSetbacksDoNotDiscourage,
+  // ] = useState('previousResponse.questions[15].answerString');
+  // const [interviewLostInterest, setinterviewLostInterest] = useState('previousResponse.questions[16].answerString');
+  // const [interviewHardWorking, setinterviewHardWorking] = useState(previousResponse.questions[17].answerString);
+  // const [interviewDifferentGoals, setinterviewDifferentGoals] = useState(previousResponse.questions[18].answerString);
+  // const [interviewMaintainFocusOnGoals, setinterviewMaintainFocusOnGoals] =
+  //   useState(previousResponse.questions[18].answerString);
+  // const [interviewFinishGoals, setinterviewFinishGoals] = useState(previousResponse.questions[20].answerString);
+  // const [interviewIsDiligent, setinterviewIsDiligent] = useState(previousResponse.questions[21].answerString);
+
   const [interviewNewThingsDistract, setinterviewNewThingsDistract] =
     useState('');
   const [
@@ -27,16 +53,6 @@ export default function GritSliderQuestions() {
     useState('');
   const [interviewFinishGoals, setinterviewFinishGoals] = useState('');
   const [interviewIsDiligent, setinterviewIsDiligent] = useState('');
-  const { studentId } = useParams();
-  const [students, setStudents] = useState({});
-
-  useEffect(() => {
-    const currentStudent = async () => {
-      const currStudent = await getStudentById(studentId);
-      setStudents(currStudent);
-    };
-    currentStudent();
-  }, [studentId]);
 
   const Save = () => {
     const response = {
