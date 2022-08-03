@@ -1,8 +1,6 @@
 import React from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { ErrorBoundary } from 'react-error-boundary';
-import Fallback from '../login/login-form/Fallback';
 import ROUTES from '../../constants/routes';
 import SignUp from '../sign-up/sign-up';
 import App from '../app/app';
@@ -19,7 +17,6 @@ import Coaches from '../coaches/Coaches';
 import InterviewPage from '../interview/interview-page';
 import Student from '../students/students-page';
 import ResponsiveGrid from '../students/StudentInfo';
-import ErrorPage from '../login/ErrorPage';
 import AdminPage from '../admin/adminPage';
 import TabsFunction from '../students/detailsTab';
 import ForgotPassword from '../login/forgot-password';
@@ -27,32 +24,24 @@ import ForgotPassword from '../login/forgot-password';
 const theme = createTheme();
 
 export default function Root() {
-  const errorHandler = (error, errorInfo) => {
-    console.log('logging', error, errorInfo);
-  };
-
   return (
-    <ErrorBoundary FallbackComponent={Fallback} onError={errorHandler}>
-      <ThemeProvider theme={theme}>
-        <AuthenticationProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<App />}>
-                <Route path={ROUTES.HOME} element={<Home />} />
-                <Route
-                  path={ROUTES.SIGN_UP_SUCCESS}
-                  element={<SignUpSuccess />}
-                />
-                <Route path={ROUTES.API_DEMO} element={<ApiDemo />} />
-                <Route path={ROUTES.LAYOUT} element={<Layout />} />
-                <Route path={ROUTES.LOGIN} element={<Login />} />
-                <Route path={ROUTES.RESET_PASS} element={<Reset />} />
-                <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
+    <ThemeProvider theme={theme}>
+      <AuthenticationProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<App />}>
+              <Route path={ROUTES.HOME} element={<Home />} />
+              <Route
+                path={ROUTES.SIGN_UP_SUCCESS}
+                element={<SignUpSuccess />}
+              />
+              <Route path={ROUTES.API_DEMO} element={<ApiDemo />} />
+              <Route path={ROUTES.LAYOUT} element={<Layout />} />
+              <Route path={ROUTES.LOGIN} element={<Login />} />
+              <Route path={ROUTES.RESET_PASS} element={<Reset />} />
+              <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
               <Route path={ROUTES.INTERVIEW_PAGE} element={<InterviewPage />} />
-                <Route
-                  path={ROUTES.INTERVIEW_PAGE}
-                  element={<InterviewPage />}
-                />
+              <Route path={ROUTES.INTERVIEW_PAGE} element={<InterviewPage />} />
               <Route
                 path="/interview-page/:studentId"
                 element={<InterviewPage />}
@@ -69,21 +58,19 @@ export default function Root() {
                 element={<TabsFunction />}
                 path="/detailsTab/:studentId:goalId"
               />
-                <Route path={ROUTES.TABS} element={<BasicTabs />} />
-                <Route path={ROUTES.COACHES} element={<Coaches />} />
-                <Route path={ROUTES.STUDENTS} element={<Student />} />
+              <Route path={ROUTES.TABS} element={<BasicTabs />} />
+              <Route path={ROUTES.COACHES} element={<Coaches />} />
+              <Route path={ROUTES.STUDENTS} element={<Student />} />
               <Route path={ROUTES.ADMIN} element={<AdminPage />} />
               <Route path={ROUTES.STUDENT_INFO} element={<ResponsiveGrid />} />
-                <Route path={ROUTES.ERROR_PAGE} element={<ErrorPage />} />
-                <Route
-                  path="/ForgotPassword/:studentId"
-                  element={<ForgotPassword />}
-                />
-              </Route>
-            </Routes>
-          </BrowserRouter>
-        </AuthenticationProvider>
-      </ThemeProvider>
-    </ErrorBoundary>
+              <Route
+                path="/ForgotPassword/:studentId"
+                element={<ForgotPassword />}
+              />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </AuthenticationProvider>
+    </ThemeProvider>
   );
 }

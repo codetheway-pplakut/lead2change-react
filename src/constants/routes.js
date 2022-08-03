@@ -10,7 +10,6 @@ const ROUTES = {
   STUDENTS: '/students/student-test',
   STUDENT_INFO: '/students/StudentInfo',
   RESET_PASS: '/account/reset-password/',
-  ERROR_PAGE: '/login/ErrorPage',
 };
 
 export default ROUTES;
