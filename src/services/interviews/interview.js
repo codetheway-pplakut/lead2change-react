@@ -7,8 +7,8 @@ export const getInterviews = () => {
   return callApi({ endpoint: SERVICE_ROOT });
 };
 
-export const getInterviewsById = (id) => {
-  return callApi({ endpoint: `${SERVICE_ROOT}/${id}` });
+export const getInterviewsById = (studentId) => {
+  return callApi({ endpoint: `interviews/student-responses/${studentId}` });
 };
 
 export const updateInterview = (interview) => {
