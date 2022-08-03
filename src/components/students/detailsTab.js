@@ -273,23 +273,24 @@ function SignUpDisplay(props) {
                     <CreateCareerModal studentId={studentId}>
                       + career
                     </CreateCareerModal>
-                    <h3 style={{ color: '#2656A5' }}>Career Information</h3>
-                    {/* <h5>
-                      I am College Bound:{' '}
-                      {students.careerDeclaration.collegeBound}
-                    </h5>
-                    <h5>
-                      Number of Career Clusters:{' '}
-                      {students.careerDeclaration.careerCluster}
-                    </h5>
-                    <h5>
-                      Career of Choice:{' '}
-                      {students.careerDeclaration.specificCluster}
-                    </h5>
-                    <h5>
-                      I am Techinical Bound:{' '}
-                      {students.careerDeclaration.technicalCollegeBound}
-                    </h5> */}
+                    {careers.map((career) => {
+                      return (
+                        <div key={career.id}>
+                          <h3 style={{ color: '#2656A5' }}>Career</h3>
+                          <h5>
+                            I am College Bound: {career.collegeBound.toString()}
+                          </h5>
+                          <h5>
+                            Number of Career Clusters: {career.careerCluster}
+                          </h5>
+                          <h5>Career of Choice: {career.specificCareer}</h5>
+                          <h5>
+                            I am Techinical Bound:{' '}
+                            {career.technicalCollegeBound.toString()}
+                          </h5>
+                        </div>
+                      );
+                    })}
                   </Box>
                 </Grid>
               </Grid>
@@ -1209,84 +1210,6 @@ function SignUpEdit(props) {
                         required
                       />
                     </Grid>
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Box>
-          </TabPanel>
-          <TabPanel value={value} index={2} style={{ overflowY: 'auto' }}>
-            <Box sx={{ flexGrow: 1 }}>
-              <Grid container justifyContent="flex-end">
-                <Grid item xs={12} style={{ height: '64vh' }}>
-                  <Grid>
-                    <h3 style={{ color: '#2656A5' }}>Career Information</h3>
-                    <FormControl
-                      variant="standard"
-                      sx={{ m: 1, minWidth: '22vh' }}
-                    >
-                      <InputLabel id="demo-simple-select-standard-label">
-                        I am College Bound{' '}
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-standard-label"
-                        id="demo-simple-select-standard"
-                        label="College Bound?"
-                        fullWidth
-                        value={enteredIsCollegeBound}
-                        onChange={(event) =>
-                          setEnteredIsCollegeBound(event.target.value)
-                        }
-                      >
-                        <MenuItem value="" />
-                        <MenuItem value={10}>Yes</MenuItem>
-                        <MenuItem value={20}>No</MenuItem>
-                      </Select>
-                    </FormControl>
-                    <Grid marginBottom={2}>
-                      <TextField
-                        size="small"
-                        className="typing-container"
-                        value={enteredCareerCluster}
-                        label="Number of Career Clusters"
-                        onChange={(event) =>
-                          setEnteredCareerCluster(event.target.value)
-                        }
-                        required
-                      />
-                    </Grid>
-                    <Grid marginBottom={2}>
-                      <TextField
-                        size="small"
-                        className="typing-container"
-                        value={enteredSpecificCluster}
-                        label="Career of Choice"
-                        onChange={(event) =>
-                          setEnteredSpecificCluster(event.target.value)
-                        }
-                        required
-                      />
-                    </Grid>
-                    <FormControl
-                      variant="standard"
-                      sx={{ m: 1, minWidth: 200 }}
-                    >
-                      <InputLabel id="demo-simple-select-standard-label">
-                        I am Technical Bound{' '}
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-standard-label"
-                        id="demo-simple-select-standard"
-                        label="Technical Bound?"
-                        value={enteredTechnicalCollegeBound}
-                        onChange={(event) =>
-                          setEnteredTechnicalCollegeBound(event.target.value)
-                        }
-                      >
-                        <MenuItem value="" />
-                        <MenuItem value={10}>Yes</MenuItem>
-                        <MenuItem value={20}>No</MenuItem>
-                      </Select>
-                    </FormControl>
                   </Grid>
                 </Grid>
               </Grid>
