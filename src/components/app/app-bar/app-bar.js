@@ -10,11 +10,16 @@ import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
 import getName from '../../../util/name/get-name';
 import ROUTES from '../../../constants/routes';
+import getToken from '../../../util/get-token/get-token';
+import isTokenExpired from '../../../util/is-token-expired/is-token-expired';
 
 export default function AppBar(props) {
   const location = useLocation();
   const navigate = useNavigate();
   const { onMenuClick, title } = props;
+
+  const token = getToken('lead2change-token');
+  const isExpired = isTokenExpired(token);
 
   const onStudentClick = () => {
     navigate(ROUTES.STUDENTS);
@@ -36,7 +41,7 @@ export default function AppBar(props) {
     window.location.href = '/';
   };
 
-  return location.pathname === '/' ? (
+  return location.pathname === '/' && isExpired ? (
     <MaterialAppBar>
       <Toolbar>
         <IconButton

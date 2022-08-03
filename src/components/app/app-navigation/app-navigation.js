@@ -37,23 +37,23 @@ export default function AppNavigation(props) {
           </ListItemIcon>
           <ListItemText primary="Home" />
         </ListItemButton>
-        <ListItemButton onClick={() => onListItemButtonClick(ROUTES.LAYOUT)}>
+        <ListItemButton onClick={() => onListItemButtonClick(ROUTES.STUDENTS)}>
           <ListItemIcon>
             <FormatListBulletedIcon />
           </ListItemIcon>
-          <ListItemText primary="Layout" />
+          <ListItemText primary="Students" />
         </ListItemButton>
-        <ListItemButton onClick={() => onListItemButtonClick(ROUTES.API_DEMO)}>
+        <ListItemButton onClick={() => onListItemButtonClick(ROUTES.COACHES)}>
           <ListItemIcon>
             <FormatListBulletedIcon />
           </ListItemIcon>
-          <ListItemText primary="API Demo" />
+          <ListItemText primary="Coaches" />
         </ListItemButton>
-        <ListItemButton onClick={() => onListItemButtonClick(ROUTES.SIGN_UP)}>
+        <ListItemButton onClick={() => onListItemButtonClick(ROUTES.ADMIN)}>
           <ListItemIcon>
             <FormatListBulletedIcon />
           </ListItemIcon>
-          <ListItemText primary="Sign Up" />
+          <ListItemText primary="Admin" />
         </ListItemButton>
       </List>
     </Drawer>
