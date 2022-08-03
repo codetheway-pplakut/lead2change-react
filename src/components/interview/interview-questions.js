@@ -19,6 +19,43 @@ import { getStudentById } from '../../services/students/students';
 import { getAnswerById } from '../../services/answers/answers';
 
 export default function InterviewQuestions() {
+  const { studentId } = useParams();
+  const [students, setStudents] = useState({});
+
+  useEffect(() => {
+    const currentStudent = async () => {
+      const currStudent = await getStudentById(studentId);
+      setStudents(currStudent);
+    };
+    currentStudent();
+  }, [studentId]);
+
+  // const previousResponse = getInterviewsById(studentId);
+  // const [interviewIdealCareer, setinterviewIdealCareer] = useState(previousResponse.questions[0].answerString);
+  // const [interviewPersonalStrengths, setinterviewPersonalStrengths] =
+  //   useState(previousResponse.questions[1].answerString);
+  // const [interviewImportantWord, setinterviewImportantWord] = useState(previousResponse.questions[2].answerString);
+  // const [interviewOvercomeDifficulty, setinterviewOvercomeDifficulty] =
+  //   useState(previousResponse.questions[3].answerString);
+  // const [interviewOtherCommitments, setinterviewOtherCommitments] =
+  //   useState(previousResponse.questions[4].answerString);
+  // const [interviewSacrificeTime, setinterviewSacrificeTime] = useState(previousResponse.questions[5].answerString);
+  // const [interviewPostHighSchoolCoaching, setinterviewPostHighSchoolCoaching] =
+  //   useState(previousResponse.questions[6].answerString);
+  // const [interviewScheduleManagement, setinterviewScheduleManagement] =
+  //   useState(previousResponse.questions[7].answerString);
+  // const [interviewCommunicateWithMentors, setinterviewCommunicateWithMentors] =
+  //   useState(previousResponse.questions[8].answerString);
+  // const [interviewDiverseClass, setinterviewDiverseClass] = useState(previousResponse.questions[9].answerString);
+  // const [interviewOpenMinded, setinterviewOpenMinded] = useState(previousResponse.questions[10].answerString);
+  // const [
+  //   interviewProfessionalRepresentation,
+  //   setinterviewProfessionalRepresentation,
+  // ] = useState(previousResponse.questions[11].answerString);
+  // const [interviewTryingNewThings, setinterviewTryingNewThings] = useState(previousResponse.questions[12].answerString);
+  // const [interviewCommitToActivities, setinterviewCommitToActivities] =
+  //   useState(previousResponse.questions[13].answerString);
+
   const [interviewIdealCareer, setinterviewIdealCareer] = useState('');
   const [interviewPersonalStrengths, setinterviewPersonalStrengths] =
     useState('');
@@ -56,16 +93,6 @@ export default function InterviewQuestions() {
   //   useState('');
   // const [interviewFinishGoals, setinterviewFinishGoals] = useState('');
   // const [interviewIsDiligent, setinterviewIsDiligent] = useState('');
-  const { studentId } = useParams();
-  const [students, setStudents] = useState({});
-
-  useEffect(() => {
-    const currentStudent = async () => {
-      const currStudent = await getStudentById(studentId);
-      setStudents(currStudent);
-    };
-    currentStudent();
-  }, [studentId]);
 
   const Save = () => {
     const response = {
