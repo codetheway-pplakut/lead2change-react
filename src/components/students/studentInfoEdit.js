@@ -42,7 +42,9 @@ export default function StudentInfoEdit(props) {
   const [enteredDateOfBirth, setEnteredDateOfBirth] = React.useState(
     currentStudentTest.studentDateOfBirth
   );
-  const [enteredEmail, setEnteredEmail] = React.useState(currentStudentTest.studentEmail);
+  const [enteredEmail, setEnteredEmail] = React.useState(
+    currentStudentTest.studentEmail
+  );
   const [enteredCellPhone, setEnteredCellPhone] = React.useState(
     currentStudentTest.studentCellPhone
   );
@@ -52,7 +54,9 @@ export default function StudentInfoEdit(props) {
   const [enteredApartmentNumber, setEnteredApartmentNumber] = React.useState(
     currentStudentTest.studentApartmentNumber
   );
-  const [enteredState, setEnteredState] = React.useState(currentStudentTest.studentState);
+  const [enteredState, setEnteredState] = React.useState(
+    currentStudentTest.studentState
+  );
   const [enteredZipCode, setEnteredZipCode] = React.useState(
     currentStudentTest.studentZipCode
   );
@@ -60,18 +64,15 @@ export default function StudentInfoEdit(props) {
   const EditField = () => {
     onSaveClick();
     handleClose();
-    const updatedStudent = {
-      id: studentId, // TODO : Update to agreed ID creation method
-      studentFirstName: enteredFirstName,
-      studentDateOfBirth: enteredDateOfBirth,
-      studentEmail: enteredEmail,
-      studentCellPhone: enteredCellPhone,
-      studentAddress: enteredAddress,
-      studentApartmentNumber: enteredApartmentNumber,
-      studentState: enteredState,
-      studentZipCode: enteredZipCode,
-    };
-    updateFunction(updatedStudent);
+    students.studentFirstName = enteredFirstName;
+    students.studentDateOfBirth = enteredDateOfBirth;
+    students.studentEmail = enteredEmail;
+    students.studentCellPhone = enteredCellPhone;
+    students.studentAddress = enteredAddress;
+    students.studentApartmentNumber = enteredApartmentNumber;
+    students.studentState = enteredState;
+    students.studentZipCode = enteredZipCode;
+    updateFunction(students);
   };
 
   useEffect(() => {

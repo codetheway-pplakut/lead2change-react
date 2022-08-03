@@ -119,19 +119,16 @@ export default function ResponsiveGrid(props) {
   );
 
   const Edit = () => {
+    students.studentFirstName = enteredFirstName;
+    students.studentDateOfBirth = enteredDateOfBirth;
+    students.studentEmail = enteredEmail;
+    students.studentCellPhone = enteredCellPhone;
+    students.studentAddress = enteredAddress;
+    students.studentApartmentNumber = enteredApartmentNumber;
+    students.studentState = enteredState;
+    students.studentZipCode = enteredZipCode;
+    updateFunction(students);
     handleClose();
-    const updatedStudent = {
-      id: currentStudentTest.id, // TODO : Update to agreed ID creation method
-      studentFirstName: enteredFirstName,
-      studentDateOfBirth: enteredDateOfBirth,
-      studentEmail: enteredEmail,
-      studentCellPhone: enteredCellPhone,
-      studentAddress: enteredAddress,
-      studentApartmentNumber: enteredApartmentNumber,
-      studentState: enteredState,
-      studentZipCode: enteredZipCode,
-    };
-    updateFunction(updatedStudent);
   };
 
   const [isEditing, setIsEditing] = useState(false);
