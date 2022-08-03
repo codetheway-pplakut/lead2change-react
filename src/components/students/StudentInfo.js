@@ -180,15 +180,26 @@ function SignUpEdit(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [enteredFirstName, setEnteredFirstName] = React.useState('');
-  const [enteredDateOfBirth, setEnteredDateOfBirth] = React.useState('');
-  const [enteredEmail, setEnteredEmail] = React.useState('');
-  const [enteredCellPhone, setEnteredCellPhone] = React.useState('');
-  const [enteredAddress, setEnteredAddress] = React.useState('');
-  const [enteredApartmentNumber, setEnteredApartmentNumber] =
-    React.useState('');
-  const [enteredState, setEnteredState] = React.useState('');
-  const [enteredZipCode, setEnteredZipCode] = React.useState('');
+  const [enteredFirstName, setEnteredFirstName] = React.useState(
+    students.studentFirstName
+  );
+  const [enteredDateOfBirth, setEnteredDateOfBirth] = React.useState(
+    students.studentDateOfBirth
+  );
+  const [enteredEmail, setEnteredEmail] = React.useState(students.studentEmail);
+  const [enteredCellPhone, setEnteredCellPhone] = React.useState(
+    students.studentCellPhone
+  );
+  const [enteredAddress, setEnteredAddress] = React.useState(
+    students.studentAddress
+  );
+  const [enteredApartmentNumber, setEnteredApartmentNumber] = React.useState(
+    students.studentApartmentNumber
+  );
+  const [enteredState, setEnteredState] = React.useState(students.studentState);
+  const [enteredZipCode, setEnteredZipCode] = React.useState(
+    students.studentZipCode
+  );
 
   const EditField = () => {
     handleClose();
@@ -424,15 +435,26 @@ export default function ResponsiveGrid(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [enteredFirstName, setEnteredFirstName] = React.useState('');
-  const [enteredDateOfBirth, setEnteredDateOfBirth] = React.useState('');
-  const [enteredEmail, setEnteredEmail] = React.useState('');
-  const [enteredCellPhone, setEnteredCellPhone] = React.useState('');
-  const [enteredAddress, setEnteredAddress] = React.useState('');
-  const [enteredApartmentNumber, setEnteredApartmentNumber] =
-    React.useState('');
-  const [enteredState, setEnteredState] = React.useState('');
-  const [enteredZipCode, setEnteredZipCode] = React.useState('');
+  const [enteredFirstName, setEnteredFirstName] = React.useState(
+    students.studentFirstName
+  );
+  const [enteredDateOfBirth, setEnteredDateOfBirth] = React.useState(
+    students.studentDateOfBirth
+  );
+  const [enteredEmail, setEnteredEmail] = React.useState(students.studentEmail);
+  const [enteredCellPhone, setEnteredCellPhone] = React.useState(
+    students.studentCellPhone
+  );
+  const [enteredAddress, setEnteredAddress] = React.useState(
+    students.studentAddress
+  );
+  const [enteredApartmentNumber, setEnteredApartmentNumber] = React.useState(
+    students.studentApartmentNumber
+  );
+  const [enteredState, setEnteredState] = React.useState(students.studentState);
+  const [enteredZipCode, setEnteredZipCode] = React.useState(
+    students.studentZipCode
+  );
 
   const Edit = () => {
     handleClose();
