@@ -250,7 +250,7 @@ export default function DetailsTabEdit(props) {
   return (
     <div style={{ marginRight: '8vh' }}>
       <Box
-        sx={{ bgcolor: 'background.paper', width: '100vh', overflowY: 'auto' }}
+        sx={{ bgcolor: 'background.paper', width: '75vh', overflowY: 'auto' }}
       >
         <form onSubmit={onSaveClick}>
           <AppBar position="static">
@@ -267,6 +267,7 @@ export default function DetailsTabEdit(props) {
                   height: '3px',
                 },
               }}
+              sx={{ bgcolor: '#2656A5' }}
             >
               <Tab label="Education" />
               <Tab label="Goals" />
