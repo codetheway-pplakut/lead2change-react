@@ -14,6 +14,7 @@ function TabPanel(props) {
       hidden={value !== index}
       id={`full-width-tabpanel-${index}`}
       aria-labelledby={`full-width-tab-${index}`}
+      bgcolor="black"
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
@@ -43,13 +44,15 @@ export default function DetailsTabDisplay(props) {
       <Box
         sx={{ bgcolor: 'background.paper', width: '100vh', overflowY: 'auto' }}
       >
-        <AppBar position="static">
+        <AppBar position="sticky">
           <Tabs
             value={value}
+            sx={{ bgcolor: '#2656A5' }}
             onChange={handleChange}
             indicatorColor="secondary"
             textColor="inherit"
             variant="fullWidth"
+            backgroundColor="black"
             aria-label="full width tabs example"
             TabIndicatorProps={{
               style: {
