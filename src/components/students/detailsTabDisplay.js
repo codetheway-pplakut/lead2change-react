@@ -170,7 +170,7 @@ export default function DetailsTabDisplay(props) {
                   >
                     Edit
                   </ColorButton>
-                  <CreateGoalModal />
+                  <CreateGoalModal studentId={students.id} />
                   {goals.map((goal, index) => (
                     <Box key={goal.id}>
                       <h3 style={{ color: '#2656A5' }}>Goal {index + 1}</h3>
@@ -190,7 +190,7 @@ export default function DetailsTabDisplay(props) {
         <TabPanel value={value} index={2} style={{ overflowY: 'auto' }}>
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">
-              <Grid item xs={12} style={{ height: '30vh' }}>
+              <Grid item xs={12} style={{ height: '64vh' }}>
                 <Grid>
                   <Box>
                     <ColorButton
@@ -200,7 +200,7 @@ export default function DetailsTabDisplay(props) {
                     >
                       Edit
                     </ColorButton>
-                    <CreateCareerModal />
+                    <CreateCareerModal studentId={students.id} />
 
                     {careers.map((career, index) => {
                       return (
