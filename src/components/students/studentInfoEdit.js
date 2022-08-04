@@ -90,7 +90,7 @@ export default function StudentInfoEdit(props) {
               justify="center"
               direction="column"
               style={{ backgroundColor: '#2656A5', color: '#FFFFFF' }}
-              marginBottom={2}
+              marginBottom={1}
             >
               <h2>Student Info</h2>
             </Grid>
@@ -103,170 +103,128 @@ export default function StudentInfoEdit(props) {
                 justifyContent="center"
                 align="center"
               >
-                <Grid item>
-                  <Grid container>
-                    <Grid item xs={6}>
-                      <StudentInfo>
-                        <Grid item marginBottom={1} marginTop={1}>
-                          <TextField
-                            size="small"
-                            value={enteredFirstName}
-                            label="First Name"
-                            sx={{ width: '170px' }}
-                            onChange={(e) => {
-                              setEnteredFirstName(e.target.value);
-                            }}
-                            focused
-                          />
-                        </Grid>
-                      </StudentInfo>
-                    </Grid>
-                    <Grid item xs={6}>
-                      <StudentInfo>
-                        <Grid item marginBottom={1} marginTop={1}>
-                          <TextField
-                            size="small"
-                            value={enteredLastName}
-                            label="Last Name"
-                            sx={{ width: '170px' }}
-                            onChange={(e) => {
-                              setEnteredLastName(e.target.value);
-                            }}
-                            focused
-                          />
-                        </Grid>
-                      </StudentInfo>
-                    </Grid>
+                <StudentInfo>
+                  <Grid item marginBottom={1} marginTop={2}>
+                    <TextField
+                      size="small"
+                      value={enteredFirstName}
+                      label="First Name"
+                      onChange={(e) => {
+                        setEnteredFirstName(e.target.value);
+                      }}
+                      focused
+                    />
                   </Grid>
-                </Grid>
-                <Grid item>
-                  <Grid container>
-                    <Grid item xs={6}>
-                      <StudentInfo>
-                        <Grid item marginBottom={1}>
-                          <TextField
-                            size="small"
-                            className="typing-container"
-                            label="Date of Birth"
-                            type="date"
-                            sx={{ width: '170px' }}
-                            value={enteredDateOfBirth}
-                            onChange={(e) =>
-                              setEnteredDateOfBirth(e.target.value)
-                            }
-                            required
-                            focused
-                          />
-                        </Grid>
-                      </StudentInfo>
-                    </Grid>
-                    <Grid item xs={6}>
-                      <StudentInfo>
-                        <Grid item marginBottom={1}>
-                          <TextField
-                            size="small"
-                            className="typing-container"
-                            value={enteredCellPhone}
-                            label="Cell Phone Number"
-                            sx={{ width: '170px' }}
-                            onChange={(e) =>
-                              setEnteredCellPhone(e.target.value)
-                            }
-                            required
-                            focused
-                          />
-                        </Grid>
-                      </StudentInfo>
-                    </Grid>
+                </StudentInfo>
+                <StudentInfo>
+                  <Grid item marginBottom={1}>
+                    <TextField
+                      size="small"
+                      value={enteredLastName}
+                      label="Last Name"
+                      onChange={(e) => {
+                        setEnteredLastName(e.target.value);
+                      }}
+                      focused
+                    />
                   </Grid>
-                </Grid>
+                </StudentInfo>
+                <StudentInfo>
+                  <Grid item marginBottom={1}>
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      label="Date of Birth"
+                      type="date"
+                      value={enteredDateOfBirth}
+                      onChange={(e) => setEnteredDateOfBirth(e.target.value)}
+                      required
+                      focused
+                    />
+                  </Grid>
+                </StudentInfo>
 
-                <Grid item>
-                  <StudentInfo>
-                    <Grid item marginBottom={1}>
-                      <TextField
-                        size="small"
-                        className="typing-container"
-                        value={enteredEmail}
-                        sx={{ width: '361px' }}
-                        label="Email Address"
-                        onChange={(e) => setEnteredEmail(e.target.value)}
-                        required
-                        focused
-                        fullWidth
-                      />
-                    </Grid>
-                  </StudentInfo>
-                </Grid>
-                <Grid item>
-                  <StudentInfo>
-                    <Grid item marginBottom={1}>
-                      <TextField
-                        size="small"
-                        className="typing-container"
-                        value={enteredAddress}
-                        sx={{ width: '361px' }}
-                        label="Home Address"
-                        onChange={(e) => setEnteredAddress(e.target.value)}
-                        required
-                        focused
-                      />
-                    </Grid>
-                  </StudentInfo>
-                </Grid>
-                <Grid item>
-                  <StudentInfo>
-                    <Grid item marginBottom={1}>
-                      <TextField
-                        size="small"
-                        className="typing-container"
-                        value={enteredApartmentNumber}
-                        label="Apt. #"
-                        sx={{ width: '361px' }}
-                        onChange={(e) =>
-                          setEnteredApartmentNumber(e.target.value)
-                        }
-                        focused
-                      />
-                    </Grid>
-                  </StudentInfo>
-                </Grid>
-                <Grid item>
-                  <Grid container>
-                    <Grid item xs={6}>
-                      <StudentInfo>
-                        <Grid item marginBottom={0}>
-                          <TextField
-                            size="small"
-                            className="typing-container"
-                            value={enteredState}
-                            label="State"
-                            sx={{ width: '170px' }}
-                            onChange={(e) => setEnteredState(e.target.value)}
-                            required
-                            focused
-                          />
-                        </Grid>
-                      </StudentInfo>
-                    </Grid>
-                    <Grid item xs={6}>
-                      <StudentInfo>
-                        <Grid item>
-                          <TextField
-                            size="small"
-                            className="typing-container"
-                            value={enteredZipCode}
-                            label="Zip Code"
-                            sx={{ width: '170px' }}
-                            onChange={(e) => setEnteredZipCode(e.target.value)}
-                            required
-                            focused
-                          />
-                        </Grid>
-                      </StudentInfo>
-                    </Grid>
+                <StudentInfo>
+                  <Grid item marginBottom={1}>
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      value={enteredCellPhone}
+                      label="Cell Phone Number"
+                      onChange={(e) => setEnteredCellPhone(e.target.value)}
+                      required
+                      focused
+                    />
                   </Grid>
-                </Grid>
+                </StudentInfo>
+
+                <StudentInfo>
+                  <Grid item marginBottom={1}>
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      value={enteredEmail}
+                      label="Email Address"
+                      onChange={(e) => setEnteredEmail(e.target.value)}
+                      required
+                      focused
+                      fullWidth
+                    />
+                  </Grid>
+                </StudentInfo>
+
+                <StudentInfo>
+                  <Grid item marginBottom={1}>
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      value={enteredAddress}
+                      label="Home Address"
+                      onChange={(e) => setEnteredAddress(e.target.value)}
+                      required
+                      focused
+                    />
+                  </Grid>
+                </StudentInfo>
+
+                <StudentInfo>
+                  <Grid item marginBottom={1}>
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      value={enteredApartmentNumber}
+                      label="Apt. #"
+                      onChange={(e) =>
+                        setEnteredApartmentNumber(e.target.value)
+                      }
+                      focused
+                    />
+                  </Grid>
+                </StudentInfo>
+                <StudentInfo>
+                  <Grid item marginBottom={1}>
+                    <TextField
+                      size="small"
+                      className="typing-container"
+                      value={enteredState}
+                      label="State"
+                      onChange={(e) => setEnteredState(e.target.value)}
+                      required
+                      focused
+                    />
+                  </Grid>
+                </StudentInfo>
+                <StudentInfo>
+                  <TextField
+                    size="small"
+                    className="typing-container"
+                    value={enteredZipCode}
+                    label="Zip Code"
+                    onChange={(e) => setEnteredZipCode(e.target.value)}
+                    required
+                    focused
+                  />
+                </StudentInfo>
               </Grid>
 
               <Grid
