@@ -95,7 +95,7 @@ export default function DetailsTabDisplay(props) {
                     {String(students.collegeApplicationStatus)}
                   </h5>
                   <h5>
-                    Colleges I’ve applied to/plan to apply to: 1.{' '}
+                    Colleges I’ve applied to/plan to apply to:{' '}
                     {students.firstChoiceCollege}
                   </h5>
                   <h5>
@@ -105,9 +105,6 @@ export default function DetailsTabDisplay(props) {
                   <h5>
                     I need help writing my college essay:{' '}
                     {String(students.collegeEssayHelp)}
-                  </h5>
-                  <h5>
-                    First choice of college: {students.firstChoiceCollege}
                   </h5>
                   <h3 style={{ color: '#2656A5' }}>
                     College Entrance Exam Information:
