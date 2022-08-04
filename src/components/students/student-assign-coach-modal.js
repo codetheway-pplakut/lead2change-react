@@ -125,7 +125,7 @@ export default function CoachAssignModal(props) {
               }}
               xs={12}
             >
-              <Grid container alignItems="center" sx={{ margin: 1 }}>
+              <Grid container alignItems="center">
                 <Grid item xs={2} />
                 <Grid item xs={8}>
                   <Typography
