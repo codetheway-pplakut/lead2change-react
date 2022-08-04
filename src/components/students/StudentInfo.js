@@ -83,31 +83,37 @@ export default function ResponsiveGrid(props) {
           {students.studentFirstName} {students.studentLastName}&rsquo;s Details
         </h1>
       </Grid>
-      <Stack direction="row" spacing={2}>
-        {isEditing ? (
-          <StudentInfoEdit
-            students={students}
-            goals={goals}
-            careers={career}
-            onSaveClick={onSaveClick}
-            onCancelClick={onCancelClick}
-            updateFunction={updateStudentInfo}
-          />
-        ) : (
-          <StudentInfoDisplay
-            students={students}
-            goals={goals}
-            careers={career}
-            onEditClick={startEditing}
-          />
-        )}
-        <TabsFunction
-          students={students}
-          goals={goals}
-          careers={career}
-          updateFunction={updateStudentInfo}
-        />
-      </Stack>
+      <Grid item xs={12}>
+        <Stack direction="row" justifyContent="center">
+          <div>
+            {isEditing ? (
+              <StudentInfoEdit
+                students={students}
+                goals={goals}
+                careers={career}
+                onSaveClick={onSaveClick}
+                onCancelClick={onCancelClick}
+                updateFunction={updateStudentInfo}
+              />
+            ) : (
+              <StudentInfoDisplay
+                students={students}
+                goals={goals}
+                careers={career}
+                onEditClick={startEditing}
+              />
+            )}
+          </div>
+          <div>
+            <TabsFunction
+              students={students}
+              goals={goals}
+              careers={career}
+              updateFunction={updateStudentInfo}
+            />
+          </div>
+        </Stack>
+      </Grid>
     </Grid>
   );
 }

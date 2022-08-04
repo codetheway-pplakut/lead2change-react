@@ -24,12 +24,6 @@ export default function StudentModal(props) {
       backgroundColor: '#005ade',
     },
   });
-  const CancelButton = styled(Button)({
-    backgroundColor: '#7e8794',
-    '&:hover': {
-      backgroundColor: '#8698b3',
-    },
-  });
 
   let useColor = '';
   if (modalType === 'decline') {
@@ -140,7 +134,7 @@ export default function StudentModal(props) {
                 </Typography>
               </Button>
             </Grid>
-            <Grid xs={1} />
+            <Grid item xs={1} />
             <Grid item xs={4} align="center" component="span">
               <Button
                 theme={buttonTheme}
