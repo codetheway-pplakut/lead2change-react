@@ -170,7 +170,7 @@ export default function DetailsTabDisplay(props) {
                   >
                     Edit
                   </ColorButton>
-                  <CreateGoalModal studentId={students.id} />
+                  <CreateGoalModal />
                   {goals.map((goal, index) => (
                     <Box key={goal.id}>
                       <h3 style={{ color: '#2656A5' }}>Goal {index + 1}</h3>
@@ -200,7 +200,7 @@ export default function DetailsTabDisplay(props) {
                     >
                       Edit
                     </ColorButton>
-                    <CreateCareerModal studentId={students.id} />
+                    <CreateCareerModal />
 
                     {careers.map((career, index) => {
                       return (
