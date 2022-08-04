@@ -88,6 +88,8 @@ export default function DetailsTabEdit(props) {
     students.actTestDate
   );
 
+  console.log(enteredActTestDate);
+
   const [enteredSatTestScore, setEnteredSatTestScore] = React.useState(
     students.satTestScore
   );
@@ -113,12 +115,17 @@ export default function DetailsTabEdit(props) {
   const [enteredDateGoalSet, setEnteredDateGoalSet] = React.useState(
     students.dateGoalSet
   );
+  console.log(enteredDateGoalSet);
 
   const [enteredSel, setEnteredSel] = React.useState(students.sel);
+
+  console.log(enteredSel);
 
   const [enteredGoalReviewDate, setEnteredGoalReviewDate] = React.useState(
     students.goalReviewDate
   );
+
+  console.log(enteredGoalReviewDate);
 
   const [enteredWasItAccomplished, setEnteredWasItAccomplished] =
     React.useState(students.wasItAccomplished);
@@ -216,10 +223,12 @@ export default function DetailsTabEdit(props) {
     students.satTestDate = enteredSatTestDate;
     students.assistanceForForms = enteredAssistanceForForms;
     students.supportNeeded = enteredSupportNeeded;
-    students.goalSet = enteredGoalSet;
-    students.dateGoalSet = enteredGoalSet;
+    students.goals.goalSet = enteredGoalSet;
+    console.log(enteredGoalSet);
+    students.dateGoalSet = enteredDateGoalSet;
     students.sel = enteredSel;
     students.goalReviewDate = enteredGoalReviewDate;
+    console.log(enteredGoalReviewDate);
     students.wasItAccomplished = enteredWasItAccomplished;
     students.explanation = enteredExplanation;
     students.parentFirstName = enteredParentFirstName;
@@ -583,7 +592,7 @@ export default function DetailsTabEdit(props) {
                           fullWidth
                           maxRows={4}
                           variant="filled"
-                          value={goal.goalSet}
+                          defaultValue={goal.goalSet}
                           label="Set Goal"
                           onChange={(event) =>
                             setEnteredGoalSet(event.target.value)
@@ -597,7 +606,7 @@ export default function DetailsTabEdit(props) {
                           className="typing-container"
                           label="Set Date"
                           type="date"
-                          value={enteredDateGoalSet}
+                          defaultValue={enteredDateGoalSet}
                           onChange={(event) =>
                             setEnteredDateGoalSet(event.target.value)
                           }
@@ -608,7 +617,7 @@ export default function DetailsTabEdit(props) {
                         <TextField
                           size="small"
                           className="typing-container"
-                          value={goal.sel}
+                          defaultValue={goal.sel}
                           label="SEL"
                           onChange={(event) =>
                             setEnteredSel(event.target.value)
@@ -622,7 +631,7 @@ export default function DetailsTabEdit(props) {
                           className="typing-container"
                           type="date"
                           label="Review Date"
-                          value={enteredGoalReviewDate}
+                          defaultValue={goal.dateGoalSet}
                           onChange={(event) =>
                             setEnteredGoalReviewDate(event.target.value)
                           }
@@ -640,7 +649,7 @@ export default function DetailsTabEdit(props) {
                           <Select
                             labelId="demo-simple-select-standard-label"
                             id="demo-simple-select-standard"
-                            value={enteredWasItAccomplished}
+                            defaultValue={goal.wasItAccomplished}
                             onChange={(event) =>
                               setEnteredWasItAccomplished(event.target.value)
                             }
@@ -658,7 +667,7 @@ export default function DetailsTabEdit(props) {
                           fullWidth
                           maxRows={4}
                           variant="filled"
-                          value={enteredExplanation}
+                          defaultValue={goal.explanation}
                           label="Explanation"
                           onChange={(event) =>
                             setEnteredExplanation(event.target.value)
