@@ -68,33 +68,12 @@ export default function AppBar(props) {
             </Button>
           </Grid>
           <Grid item>
-            <Button variant="text">
+            <Button variant="text" onClick={onSignUpClick}>
               <Typography color="white" variant="body2">
-                Students
+                Student Sign Up
               </Typography>
             </Button>
           </Grid>
-          <Grid item>
-            <Button variant="text">
-              <Typography color="white" variant="body2">
-                Coaches
-              </Typography>
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button variant="text">
-              <Typography color="white" variant="body2">
-                Admins
-              </Typography>
-            </Button>
-          </Grid>
-          {/* <Grid item>
-            <Button variant="text">
-              <Typography color="white" variant="body2">
-                Sign Up
-              </Typography>
-            </Button>
-              </Grid> */}
         </Grid>
       </Toolbar>
     </MaterialAppBar>
