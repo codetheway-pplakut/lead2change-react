@@ -11,8 +11,6 @@ import {
   getStudentById,
   updateStudent,
 } from '../../services/students/students';
-import { getGoalById, getGoalsByStudentId } from '../../services/goals/goals';
-import { getCareersById } from '../../services/careers/careers';
 
 function TabPanel(props) {
   const { children, value, index } = props;
@@ -40,63 +38,11 @@ TabPanel.propTypes = {
 };
 
 export default function TabsFunction(props) {
-  const [goals, setGoals] = useState({});
-  const [career, setCareer] = useState({});
   const [isEditing, setIsEditing] = useState(false);
-  const [isLoading, setIsLoading] = React.useState(false);
-  const { studentId } = useParams();
-  const { updateFunction } = props;
-  const [students, setStudents] = useState({});
+  const { updateFunction, students, goals, careers } = props;
   const startEditing = () => setIsEditing(true);
   const endEditing = () => setIsEditing(false);
   const cancelEditing = () => setIsEditing(false);
-
-  const refreshStudents = async () => {
-    setIsLoading(true);
-    const result = await getStudentById(studentId);
-    setIsLoading(false);
-    setStudents(result);
-  };
-
-  const updateStudentInfo = async (student) => {
-    await updateStudent(student);
-    await refreshStudents();
-  };
-
-  useEffect(() => {
-    const currentStudent = async () => {
-      const currStudent = await getStudentById(studentId);
-      setStudents(currStudent);
-    };
-    currentStudent();
-    const currentGoal = async () => {
-      const currGoal = await getGoalsByStudentId(students.id);
-
-      const {
-        goalSet,
-        dateGoalSet,
-        sel,
-        goalReviewDate,
-        wasItAccomplished,
-        explanation,
-      } = currGoal;
-      setGoals(currGoal);
-    };
-
-    const currentCareer = async () => {
-      const currCareer = await getCareersById(students.id);
-
-      const {
-        collegeBound,
-        careerCluster,
-        specificCluster,
-        technicalCollegeBound,
-      } = currCareer;
-      setCareer(currCareer);
-    };
-    currentCareer();
-    currentGoal();
-  }, [studentId]);
 
   const onSaveClick = async (event) => {
     endEditing();
@@ -112,14 +58,14 @@ export default function TabsFunction(props) {
         <DetailsTabEdit
           onSaveClick={onSaveClick}
           onCancelClick={onCancelClick}
-          updateFunction={updateStudentInfo}
+          updateFunction={updateFunction}
           students={students}
         />
       ) : (
         <DetailsTabDisplay
           students={students}
           goals={goals}
-          careers={career}
+          careers={careers}
           onEditClick={startEditing}
         />
       )}
@@ -128,4 +74,7 @@ export default function TabsFunction(props) {
 }
 TabsFunction.propTypes = {
   updateFunction: PropTypes.func.isRequired,
+  students: PropTypes.object.isRequired,
+  goals: PropTypes.array.isRequired,
+  careers: PropTypes.object.isRequired,
 };

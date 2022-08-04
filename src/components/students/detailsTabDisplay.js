@@ -292,6 +292,6 @@ export default function DetailsTabDisplay(props) {
 DetailsTabDisplay.propTypes = {
   onEditClick: PropTypes.func.isRequired,
   students: PropTypes.object.isRequired,
-  goals: PropTypes.object.isRequired,
+  goals: PropTypes.array.isRequired,
   careers: PropTypes.object.isRequired,
 };

@@ -25,48 +25,32 @@ const StudentInfo = styled(Box)(({ theme }) => ({
 }));
 
 export default function StudentInfoEdit(props) {
-  const { studentId } = useParams();
-  const [students, setStudents] = useState({});
-  const { updateFunction, onSaveClick, onCancelClick } = props;
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  function currentStudentTest() {
-    return getStudentById(studentId);
-  }
-
+  const { updateFunction, onSaveClick, onCancelClick, students } = props;
   const [enteredFirstName, setEnteredFirstName] = React.useState(
-    currentStudentTest.studentFirstName
+    students.studentFirstName
   );
   const [enteredLastName, setEnteredLastName] = React.useState(
-    currentStudentTest.studentLastName
+    students.studentLastName
   );
   const [enteredDateOfBirth, setEnteredDateOfBirth] = React.useState(
-    currentStudentTest.studentDateOfBirth
+    students.studentDateOfBirth
   );
-  const [enteredEmail, setEnteredEmail] = React.useState(
-    currentStudentTest.studentEmail
-  );
+  const [enteredEmail, setEnteredEmail] = React.useState(students.studentEmail);
   const [enteredCellPhone, setEnteredCellPhone] = React.useState(
-    currentStudentTest.studentCellPhone
+    students.studentCellPhone
   );
   const [enteredAddress, setEnteredAddress] = React.useState(
-    currentStudentTest.studentAddress
+    students.studentAddress
   );
   const [enteredApartmentNumber, setEnteredApartmentNumber] = React.useState(
-    currentStudentTest.studentApartmentNumber
+    students.studentApartmentNumber
   );
-  const [enteredState, setEnteredState] = React.useState(
-    currentStudentTest.studentState
-  );
+  const [enteredState, setEnteredState] = React.useState(students.studentState);
   const [enteredZipCode, setEnteredZipCode] = React.useState(
-    currentStudentTest.studentZipCode
+    students.studentZipCode
   );
 
   const EditField = () => {
-    onSaveClick();
-    handleClose();
     students.studentFirstName = enteredFirstName;
     students.studentLastName = enteredLastName;
     students.studentDateOfBirth = enteredDateOfBirth;
@@ -78,35 +62,6 @@ export default function StudentInfoEdit(props) {
     students.studentZipCode = enteredZipCode;
     updateFunction(students);
   };
-
-  useEffect(() => {
-    const currentStudent = async () => {
-      const currStudent = await getStudentById(studentId);
-
-      const {
-        studentFirstName,
-        studentLastName,
-        studentEmail,
-        studentDateOfBirth,
-        studentCellPhone,
-        studentAddress,
-        studentApartmentNumber,
-        studentState,
-        studentZipCode,
-      } = currStudent;
-      setStudents(currStudent);
-      setEnteredFirstName(studentFirstName);
-      setEnteredLastName(studentLastName);
-      setEnteredDateOfBirth(studentDateOfBirth);
-      setEnteredEmail(studentEmail);
-      setEnteredCellPhone(studentCellPhone);
-      setEnteredApartmentNumber(studentApartmentNumber);
-      setEnteredAddress(studentAddress);
-      setEnteredState(studentState);
-      setEnteredZipCode(studentZipCode);
-    };
-    currentStudent();
-  }, [studentId]);
 
   return (
     <Grid container>
@@ -281,4 +236,5 @@ StudentInfoEdit.propTypes = {
   onSaveClick: PropTypes.func.isRequired,
   onCancelClick: PropTypes.func.isRequired,
   updateFunction: PropTypes.func.isRequired,
+  students: PropTypes.object.isRequired,
 };
