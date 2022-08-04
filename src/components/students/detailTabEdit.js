@@ -1078,7 +1078,7 @@ export default function DetailsTabEdit(props) {
               </Grid>
             </Box>
           </TabPanel>
-          <Grid align="center">
+          <Grid align="right">
             <ColorButton variant="contained" type="Submit" onClick={EditField}>
               Save
             </ColorButton>
