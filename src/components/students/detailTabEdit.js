@@ -130,6 +130,10 @@ export default function DetailsTabEdit(props) {
     students.parentFirstName
   );
 
+  const [enteredParentLastName, setEnteredParentLastName] = React.useState(
+    students.parentLastName
+  );
+
   const [enteredParentAddress, setEnteredParentAddress] = React.useState(
     students.parentAddress
   );
@@ -218,6 +222,7 @@ export default function DetailsTabEdit(props) {
     students.wasItAccomplished = enteredWasItAccomplished;
     students.explanation = enteredExplanation;
     students.parentFirstName = enteredParentFirstName;
+    students.parentLastName = enteredParentLastName;
     students.address = enteredParentAddress;
     students.parentApartmentNumber = enteredParentApartmentNumber;
     students.parentCity = enteredParentCity;
@@ -842,14 +847,25 @@ export default function DetailsTabEdit(props) {
                         size="small"
                         className="typing-container"
                         value={enteredParentFirstName}
-                        label="Name"
+                        label="First Name"
                         onChange={(event) =>
                           setEnteredParentFirstName(event.target.value)
                         }
                         required
                       />
                     </Grid>
-
+                    <Grid marginBottom={2}>
+                      <TextField
+                        size="small"
+                        className="typing-container"
+                        value={enteredParentLastName}
+                        label="Last Name"
+                        onChange={(event) =>
+                          setEnteredParentLastName(event.target.value)
+                        }
+                        required
+                      />
+                    </Grid>
                     <Grid marginBottom={2}>
                       <TextField
                         size="small"
