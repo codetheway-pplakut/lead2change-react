@@ -51,11 +51,7 @@ export default function CreateGoalModal(props) {
   };
   return (
     <div>
-      <ColorButton
-        variant="contained"
-        onClick={handleOpen}
-        studentId={studentId}
-      >
+      <ColorButton variant="contained" onClick={handleOpen}>
         + New Goal
       </ColorButton>
       <Modal

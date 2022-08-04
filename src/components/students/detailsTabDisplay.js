@@ -52,7 +52,6 @@ export default function DetailsTabDisplay(props) {
             indicatorColor="secondary"
             textColor="inherit"
             variant="fullWidth"
-            backgroundColor="black"
             aria-label="full width tabs example"
             TabIndicatorProps={{
               style: {
