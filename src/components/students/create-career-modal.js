@@ -9,7 +9,6 @@ import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
-import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import ColorButton from '../coaches/Shared/ColoredButton';
 import { addCareers } from '../../services/careers/careers';
