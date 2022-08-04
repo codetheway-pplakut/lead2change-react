@@ -45,7 +45,7 @@ export default function DetailsTabDisplay(props) {
   return (
     <div style={{ marginRight: '8vh' }}>
       <Box
-        sx={{ bgcolor: 'background.paper', width: '100vh', overflowY: 'auto' }}
+        sx={{ bgcolor: 'background.paper', width: '140vh', overflowY: 'auto' }}
       >
         <AppBar position="static">
           <Tabs
@@ -86,7 +86,7 @@ export default function DetailsTabDisplay(props) {
                   >
                     Edit
                   </ColorButton>
-                  <h3 style={{ color: '#2656A5' }}>Post Secondary Plan</h3>
+                  <h3 style={{ color: '#004cbb' }}>Post Secondary Plan</h3>
                   <h5>
                     Plans After High school: {students.planAfterHighSchool}
                   </h5>

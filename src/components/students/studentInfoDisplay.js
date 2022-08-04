@@ -63,18 +63,17 @@ export default function StudentInfoDisplay(props) {
           sx={{
             '#1A2027': '#fff',
             textAlign: 'center',
-            width: '50vh',
+            width: '60vh',
             mr: '10vh',
-            height: '70vh',
+            height: '90vh',
             overflowY: 'auto',
+            marginLeft: '50px',
+            marginRight: '20px',
           }}
-          style={{ marginLeft: '3vh' }}
         >
           <Grid
             container
             spacing={0}
-            align="center"
-            justify="center"
             direction="column"
             style={{ backgroundColor: '#2656A5', color: '#FFFFFF' }}
           >
@@ -91,7 +90,7 @@ export default function StudentInfoDisplay(props) {
           </Grid>
           <Grid style={{ margin: '2vh' }}>
             <StudentInfo>
-              <h3 component="span">
+              <h3 component="span" align="left">
                 Date of Birth: {'  '}
                 <Box component="span" style={{ fontWeight: 'normal' }}>
                   {getParsedDate(students.studentDateOfBirth)}
@@ -99,7 +98,7 @@ export default function StudentInfoDisplay(props) {
               </h3>
             </StudentInfo>
             <StudentInfo>
-              <h3 component="span">
+              <h3 component="span" align="left">
                 Email Address:{' '}
                 <Box component="span" style={{ fontWeight: 'normal' }}>
                   {students.studentEmail}
@@ -107,7 +106,7 @@ export default function StudentInfoDisplay(props) {
               </h3>
             </StudentInfo>
             <StudentInfo>
-              <h3 component="span">
+              <h3 component="span" align="left">
                 Phone Number:{' '}
                 <Box component="span" style={{ fontWeight: 'normal' }}>
                   {students.studentCellPhone}
@@ -115,7 +114,7 @@ export default function StudentInfoDisplay(props) {
               </h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>
+              <h3 align="left">
                 Home Address:{' '}
                 <Box component="span" style={{ fontWeight: 'normal' }}>
                   {students.studentAddress}
@@ -123,7 +122,7 @@ export default function StudentInfoDisplay(props) {
               </h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>
+              <h3 align="left">
                 Apt. #:{' '}
                 <Box component="span" style={{ fontWeight: 'normal' }}>
                   {students.studentApartmentNumber}
@@ -131,7 +130,7 @@ export default function StudentInfoDisplay(props) {
               </h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>
+              <h3 align="left">
                 State:{' '}
                 <Box component="span" style={{ fontWeight: 'normal' }}>
                   {students.studentState}
@@ -139,7 +138,7 @@ export default function StudentInfoDisplay(props) {
               </h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>
+              <h3 align="left">
                 Zip Code:{' '}
                 <Box component="span" style={{ fontWeight: 'normal' }}>
                   {students.studentZipCode}
