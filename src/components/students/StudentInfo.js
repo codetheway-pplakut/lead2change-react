@@ -75,10 +75,15 @@ export default function ResponsiveGrid(props) {
     setStudents(result);
   };
 
+  const refreshPage = async () => {
+    window.location.reload(true);
+  };
+
   const updateStudentInfo = async (student) => {
     // console.log(student);
     await updateStudent(student);
     await refreshStudents();
+    await refreshPage();
   };
 
   useEffect(() => {
@@ -135,6 +140,7 @@ export default function ResponsiveGrid(props) {
     console.log(studentInfo);
     updateStudent(studentInfo);
     refreshStudents();
+    refreshPage();
   };
 
   const cancelStudentInfo = (studentInfo) => {

@@ -74,12 +74,8 @@ export default function DeleteAdminModal(props) {
 
   return (
     <div>
-      <IconButton>
-        <DeleteOutlineIcon
-          color="delete"
-          theme={buttonTheme}
-          onClick={handleOpen}
-        />
+      <IconButton onClick={handleOpen}>
+        <DeleteOutlineIcon color="delete" theme={buttonTheme} />
       </IconButton>
 
       <Modal open={open} onClose={handleClose}>
