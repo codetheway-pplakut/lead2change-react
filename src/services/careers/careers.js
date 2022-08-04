@@ -20,11 +20,6 @@ export const getCareers = () => {
   return callApi({ endpoint: SERVICE_ROOT });
 };
 
-export const getCareersById = (id) => {
-  return callApi({ endpoint: `${SERVICE_ROOT}/${id}` });
-};
-
-export const getStudentCareers = async (id) => {
-  return callApi({endpoint: `${SERVICE_ROOT_STUDENT_CAREERS}/${id}` });
-    
+export const getCareersById = async (id) => {
+  return callApi({ endpoint: `${SERVICE_ROOT_STUDENT_CAREERS}/${id}` });
 };

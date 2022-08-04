@@ -8,12 +8,18 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
+import getName from '../../../util/name/get-name';
 import ROUTES from '../../../constants/routes';
+import getToken from '../../../util/get-token/get-token';
+import isTokenExpired from '../../../util/is-token-expired/is-token-expired';
 
 export default function AppBar(props) {
   const location = useLocation();
   const navigate = useNavigate();
   const { onMenuClick, title } = props;
+
+  const token = getToken('lead2change-token');
+  const isExpired = isTokenExpired(token);
 
   const onStudentClick = () => {
     navigate(ROUTES.STUDENTS);
@@ -24,18 +30,18 @@ export default function AppBar(props) {
   const onCoachesClick = () => {
     navigate(ROUTES.COACHES);
   };
-  const onInterviewsClick = () => {
-    navigate(ROUTES.INTERVIEW_PAGE);
+  const onAdminsClick = () => {
+    navigate(ROUTES.ADMIN);
   };
   const onSignUpClick = () => {
     navigate(ROUTES.SIGN_UP);
   };
   const onLogoutClick = () => {
-    navigate(ROUTES.LOGIN);
-    // localStorage.removeItem('token');
+    sessionStorage.removeItem('lead2change-token');
+    window.location.href = '/';
   };
 
-  return location.pathname === '/' ? (
+  return location.pathname === '/' && isExpired ? (
     <MaterialAppBar>
       <Toolbar>
         <IconButton
@@ -78,27 +84,18 @@ export default function AppBar(props) {
           <Grid item>
             <Button variant="text">
               <Typography color="white" variant="body2">
-                Interviews
+                Admins
               </Typography>
             </Button>
           </Grid>
-          <Grid item>
+          {/* <Grid item>
             <Button variant="text">
               <Typography color="white" variant="body2">
                 Sign Up
               </Typography>
             </Button>
-          </Grid>
+              </Grid> */}
         </Grid>
-        {/* <Grid container alignItems="center" justifyContent="flex-end">
-          <Grid xs="auto">
-            <Button variant="text">
-              <Typography color="white" variant="body2">
-                <span>LOG OUT: ***</span>
-              </Typography>
-            </Button>
-          </Grid>
-        </Grid> */}
       </Toolbar>
     </MaterialAppBar>
   ) : (
@@ -142,29 +139,30 @@ export default function AppBar(props) {
             </Button>
           </Grid>
           <Grid item>
-            <Button variant="text" onClick={onInterviewsClick}>
+            <Button variant="text" onClick={onAdminsClick}>
               <Typography color="white" variant="body2">
-                Interviews
+                Admins
               </Typography>
             </Button>
           </Grid>
-          <Grid item>
+          {/* <Grid item>
             <Button variant="text" onClick={onSignUpClick}>
               <Typography color="white" variant="body2">
                 Sign Up
               </Typography>
             </Button>
           </Grid>
+              */}
         </Grid>
-        {/* <Grid container alignItems="center" justifyContent="flex-end">
-          <Grid xs="auto">
+        <Grid container alignItems="center" justifyContent="flex-end">
+          <Grid item xs="auto">
             <Button variant="text" onClick={onLogoutClick}>
               <Typography color="white" variant="body2">
-                <span>LOG OUT: ***</span>
+                <span>LOG OUT: {getName()}</span>
               </Typography>
             </Button>
           </Grid>
-        </Grid> */}
+        </Grid>
       </Toolbar>
     </MaterialAppBar>
   );

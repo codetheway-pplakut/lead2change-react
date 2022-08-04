@@ -81,30 +81,36 @@ export default function DeleteAdminModal(props) {
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <Grid container>
-            <Grid item xs={12} sx={{ borderRadius: '10px' }}>
-              <Box
-                bgcolor="#004cbb"
-                sx={{
-                  borderTopLeftRadius: '10px',
-                  borderTopRightRadius: '10px',
-                }}
-              >
-                <Typography
-                  textAlign="center"
-                  color="white"
-                  variant="h4"
-                  fontWeight="bold"
-                  padding="10px"
-                >
-                  Delete Admin
-                </Typography>
-                <IconButton
-                  onClick={handleClose}
-                  sx={{ position: 'absolute', right: 8, top: 8 }}
-                >
-                  <CloseIcon fontSize="large" sx={{ color: 'white' }} />
-                </IconButton>
-              </Box>
+            <Grid
+              item
+              sx={{
+                bgcolor: '#004cbb',
+                color: 'white',
+                borderTopLeftRadius: 10,
+                borderTopRightRadius: 10,
+              }}
+              xs={12}
+            >
+              <Grid container alignItems="center" sx={{ margin: 1 }}>
+                <Grid item xs={2} />
+                <Grid item xs={8}>
+                  <Typography
+                    variant="h5"
+                    component="h2"
+                    align="center"
+                    padding="10px"
+                  >
+                    Delete Admin
+                  </Typography>
+                  <IconButton
+                    onClick={handleClose}
+                    sx={{ position: 'absolute', right: 8, top: 8 }}
+                  >
+                    <CloseIcon fontSize="large" sx={{ color: 'white' }} />
+                  </IconButton>
+                </Grid>
+                <Grid item xs={1} />
+              </Grid>
             </Grid>
           </Grid>
 
@@ -132,6 +138,7 @@ export default function DeleteAdminModal(props) {
                 </Button>
               </Box>
             </Grid>
+            <Grid xs={1} />
 
             <Grid item xs={4}>
               <Box>

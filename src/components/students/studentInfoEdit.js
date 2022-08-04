@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { experimentalStyled as styled } from '@mui/material/styles';
 
 import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
-import { useParams } from 'react-router-dom';
 import { TextField } from '@mui/material';
 import ColorButton from '../coaches/Shared/ColoredButton';
-
-import { getStudentById } from '../../services/students/students';
 
 const StudentInfo = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -25,46 +22,34 @@ const StudentInfo = styled(Box)(({ theme }) => ({
 }));
 
 export default function StudentInfoEdit(props) {
-  const { studentId } = useParams();
-  const [students, setStudents] = useState({});
-  const { updateFunction, onSaveClick, onCancelClick } = props;
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  function currentStudentTest() {
-    return getStudentById(studentId);
-  }
-
+  const { updateFunction, onSaveClick, onCancelClick, students } = props;
   const [enteredFirstName, setEnteredFirstName] = React.useState(
-    currentStudentTest.studentFirstName
+    students.studentFirstName
+  );
+  const [enteredLastName, setEnteredLastName] = React.useState(
+    students.studentLastName
   );
   const [enteredDateOfBirth, setEnteredDateOfBirth] = React.useState(
-    currentStudentTest.studentDateOfBirth
+    students.studentDateOfBirth
   );
-  const [enteredEmail, setEnteredEmail] = React.useState(
-    currentStudentTest.studentEmail
-  );
+  const [enteredEmail, setEnteredEmail] = React.useState(students.studentEmail);
   const [enteredCellPhone, setEnteredCellPhone] = React.useState(
-    currentStudentTest.studentCellPhone
+    students.studentCellPhone
   );
   const [enteredAddress, setEnteredAddress] = React.useState(
-    currentStudentTest.studentAddress
+    students.studentAddress
   );
   const [enteredApartmentNumber, setEnteredApartmentNumber] = React.useState(
-    currentStudentTest.studentApartmentNumber
+    students.studentApartmentNumber
   );
-  const [enteredState, setEnteredState] = React.useState(
-    currentStudentTest.studentState
-  );
+  const [enteredState, setEnteredState] = React.useState(students.studentState);
   const [enteredZipCode, setEnteredZipCode] = React.useState(
-    currentStudentTest.studentZipCode
+    students.studentZipCode
   );
 
   const EditField = () => {
-    onSaveClick();
-    handleClose();
     students.studentFirstName = enteredFirstName;
+    students.studentLastName = enteredLastName;
     students.studentDateOfBirth = enteredDateOfBirth;
     students.studentEmail = enteredEmail;
     students.studentCellPhone = enteredCellPhone;
@@ -74,33 +59,6 @@ export default function StudentInfoEdit(props) {
     students.studentZipCode = enteredZipCode;
     updateFunction(students);
   };
-
-  useEffect(() => {
-    const currentStudent = async () => {
-      const currStudent = await getStudentById(studentId);
-
-      const {
-        studentFirstName,
-        studentEmail,
-        studentDateOfBirth,
-        studentCellPhone,
-        studentAddress,
-        studentApartmentNumber,
-        studentState,
-        studentZipCode,
-      } = currStudent;
-      setStudents(currStudent);
-      setEnteredFirstName(studentFirstName);
-      setEnteredDateOfBirth(studentDateOfBirth);
-      setEnteredEmail(studentEmail);
-      setEnteredCellPhone(studentCellPhone);
-      setEnteredApartmentNumber(studentApartmentNumber);
-      setEnteredAddress(studentAddress);
-      setEnteredState(studentState);
-      setEnteredZipCode(studentZipCode);
-    };
-    currentStudent();
-  }, [studentId]);
 
   return (
     <Grid container>
@@ -136,9 +94,22 @@ export default function StudentInfoEdit(props) {
                   <TextField
                     size="small"
                     value={enteredFirstName}
-                    label="Name"
+                    label="First Name"
                     onChange={(e) => {
                       setEnteredFirstName(e.target.value);
+                    }}
+                    focused
+                  />
+                </Grid>
+              </StudentInfo>
+              <StudentInfo>
+                <Grid item marginBottom={2} marginTop={1}>
+                  <TextField
+                    size="small"
+                    value={enteredLastName}
+                    label="Last Name"
+                    onChange={(e) => {
+                      setEnteredLastName(e.target.value);
                     }}
                     focused
                   />
@@ -205,7 +176,6 @@ export default function StudentInfoEdit(props) {
                     value={enteredApartmentNumber}
                     label="Apt. #"
                     onChange={(e) => setEnteredApartmentNumber(e.target.value)}
-                    required
                     focused
                   />
                 </Grid>
@@ -262,4 +232,5 @@ StudentInfoEdit.propTypes = {
   onSaveClick: PropTypes.func.isRequired,
   onCancelClick: PropTypes.func.isRequired,
   updateFunction: PropTypes.func.isRequired,
+  students: PropTypes.object.isRequired,
 };

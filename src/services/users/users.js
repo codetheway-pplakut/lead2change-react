@@ -13,8 +13,9 @@ export const authenticateUser = ({ username, password } = {}) => {
     method: 'POST',
   });
 };
-export const requestReset = ({ email } = {}) => {
+export const requestReset = (email) => {
   // if (!email) return;
+  // const email = 'admin-test@lead2changeinc.org';
 
   return callApi({
     body: { email },

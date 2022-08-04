@@ -9,22 +9,35 @@ import {
   Avatar,
   Container,
 } from '@mui/material';
-
 import AutorenewTwoToneIcon from '@mui/icons-material/AutorenewTwoTone';
+import { resetPassword } from '../../services/users/users';
+
 // import { resetPassword } from '../../services/users/users';
 import ROUTES from '../../constants/routes';
+import getToken from '../../util/get-token/get-token';
+import setToken from '../../util/set-token/set-token';
 
 function ResetPassword() {
   const navigate = useNavigate();
+  // const [authenticated, setAuthenticated] = useState(false);
+  // const token = getToken();
+  // const queryParams = new URLSearchParams(window.location.search);
+  // const token = queryParams.get('token');
 
+  // setAuthenticated(true);
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const [changeButton, setChangeButton] = useState(false);
+  const token = localStorage.getItem('lead2change-token');
+  console.log(token);
+  sessionStorage.setItem('lead2change-token', token);
+  // setToken(token);
+  // setToken(token);
   // const [isError, setIsError] = useState(false);
 
   // Checks if both field is filled
   const onSubmitDisabled = !newPassword || !confirmNewPassword;
-
+  // navigate(ROUTES.RESET_PASS);
   const confirmHandler = (e) => {
     e.preventDefault();
 
@@ -36,6 +49,7 @@ function ResetPassword() {
     if (newPassword === confirmNewPassword) {
       // console.log('Both field match now the password will be changed.');
       setChangeButton(true);
+      // resetPassword(token,)
     } else {
       // console.log(
       //   'Both fields do not match, so your password will not be changed'

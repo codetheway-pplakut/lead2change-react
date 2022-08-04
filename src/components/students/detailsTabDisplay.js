@@ -1,19 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import AppBar from '@mui/material/AppBar';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
-import Typography from '@mui/material/Typography';
-import { useParams } from 'react-router-dom';
+import { Box, Grid, AppBar, Tab, Tabs, Typography, Stack } from '@mui/material';
 import ColorButton from '../coaches/Shared/ColoredButton';
 import CreateGoalModal from './create-goal-modal';
 import AddCareer from './addCareer';
-
-import { getStudentById } from '../../services/students/students';
-import { getGoalsByStudentId } from '../../services/goals/goals';
-import { getCareersById } from '../../services/careers/careers';
 
 function TabPanel(props) {
   const { children, value, index } = props;
@@ -41,30 +31,8 @@ TabPanel.propTypes = {
 };
 
 export default function DetailsTabDisplay(props) {
-  const { onEditClick } = props;
+  const { onEditClick, students, goals, careers } = props;
   const [value, setValue] = React.useState(0);
-  const { studentId } = useParams();
-  const [goals, setGoals] = useState([]);
-  const [students, setStudents] = useState({});
-  const [careers, setCareers] = useState({});
-
-  useEffect(() => {
-    const currentStudent = async () => {
-      const currStudent = await getStudentById(studentId);
-      setStudents(currStudent);
-    };
-    const currentGoal = async () => {
-      const currGoal = await getGoalsByStudentId(studentId);
-      setGoals(currGoal);
-    };
-    const currentCareer = async () => {
-      const currCareer = await getCareersById(studentId);
-      setCareers(currCareer);
-    };
-    currentStudent();
-    currentGoal();
-    currentCareer();
-  }, [studentId]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -124,87 +92,69 @@ export default function DetailsTabDisplay(props) {
                   </h5>
                   <h5>
                     I have applied to a college:{' '}
-                    {students.collegeApplicationStatus}
+                    {String(students.collegeApplicationStatus)}
                   </h5>
                   <h5>
-                    Colleges I’ve applied to/plan to apply to: 1.{' '}
-                    {students.firstChoiceCollege} 2.{' '}
-                    {students.secondChoiceCollege}
-                    3. {students.thirdChoiceCollege}
+                    Colleges I’ve applied to/plan to apply to:{' '}
+                    {students.firstChoiceCollege}
                   </h5>
                   <h5>
                     I have begun my work on my college essay:{' '}
-                    {students.collegeEssayStatus}
+                    {String(students.collegeEssayStatus)}
                   </h5>
                   <h5>
                     I need help writing my college essay:{' '}
-                    {students.collegeEssayHelp}
-                  </h5>
-                  <h5>
-                    First choice of college: {students.firstChoiceCollege}
+                    {String(students.collegeEssayHelp)}
                   </h5>
                   <h3 style={{ color: '#2656A5' }}>
                     College Entrance Exam Information:
                   </h3>
                   <h5>
-                    PSAT Score:{' '}
-                    <Box component="span" style={{ fontWeight: 'normal' }}>
-                      {students.psatTestScore}
-                    </Box>{' '}
-                    <Box component="span" style={{ marginLeft: '20.3vh' }}>
-                      SAT Score:{' '}
-                      <Box component="span" style={{ fontWeight: 'normal' }}>
-                        {students.satTestDate}
-                      </Box>
-                    </Box>{' '}
-                    <div>
-                      Date of PSAT:{' '}
-                      <Box component="span" style={{ fontWeight: 'normal' }}>
-                        {students.psatTestDate}
-                      </Box>
-                      <Box component="span" style={{ marginLeft: '23.29vh' }}>
-                        Date of SAT:{' '}
-                        <Box component="span" style={{ fontWeight: 'normal' }}>
-                          {students.satTestDate}
-                        </Box>{' '}
-                      </Box>
-                    </div>
-                  </h5>
-                  <h5>
-                    PACT Score:{' '}
-                    <Box component="span" style={{ fontWeight: 'normal' }}>
-                      {students.pactTestScore}
-                    </Box>{' '}
-                    <Box component="span" style={{ marginLeft: '22vh' }}>
-                      ACT Score:{' '}
-                      <Box component="span" style={{ fontWeight: 'normal' }}>
-                        {students.actTestScore}
-                      </Box>
-                    </Box>
-                    <div>
-                      {' '}
-                      Date of PACT: {students.pactTestDate}
-                      <Box component="span" style={{ fontWeight: 'normal' }}>
-                        {students.pactTestDate}
-                      </Box>
-                      <Box component="span" style={{ marginLeft: '23.29vh' }}>
-                        Date of PSAT:{' '}
-                        <Box component="span" style={{ fontWeight: 'normal' }}>
-                          {students.psatTestDate}
-                        </Box>{' '}
-                      </Box>
-                    </div>
+                    <Stack direction="column">
+                      <Grid container>
+                        <Grid item xs={2}>
+                          PACT Score: {students.pactTestScore}
+                        </Grid>
+                        <Grid item xs={4}>
+                          PACT Date: {students.pactTestDate}
+                        </Grid>
+                      </Grid>
+                      <Grid container>
+                        <Grid item xs={2}>
+                          ACT Score: {students.actTestScore}
+                        </Grid>
+                        <Grid item xs={4}>
+                          ACT Date: {students.actTestDate}
+                        </Grid>
+                      </Grid>
+                      <Grid container>
+                        <Grid item xs={2}>
+                          PSAT Score: {students.psatTestScore}
+                        </Grid>
+                        <Grid item xs={4}>
+                          PSAT Date: {students.psatTestDate}
+                        </Grid>
+                      </Grid>
+                      <Grid container>
+                        <Grid item xs={2}>
+                          SAT Score: {students.satTestScore}
+                        </Grid>
+                        <Grid item xs={4}>
+                          SAT Date: {students.satTestDate}
+                        </Grid>
+                      </Grid>
+                    </Stack>
                   </h5>
                   <h3 style={{ color: '#2656A5' }}>Financial Aid:</h3>
                   <h5>
                     I have already completed the financial aid process:{' '}
-                    {students.financialAidProcessComplete}
+                    {String(students.financialAidProcessComplete)}
                   </h5>
                   <h5>
-                    I need assistance filling out my FAFSA/Financial aid forms:
-                    {students.supportNeeded}
+                    I need assistance filling out my FAFSA/Financial aid forms:{' '}
+                    {String(students.assistanceForForms)}
                   </h5>
-                  <h5>Support they need: None</h5>
+                  <h5>Support they need: {String(students.supportNeeded)}</h5>
                 </Box>
               </Grid>
             </Grid>
@@ -222,25 +172,20 @@ export default function DetailsTabDisplay(props) {
                   >
                     Edit
                   </ColorButton>
-                  <CreateGoalModal studentId={studentId}>
+                  <CreateGoalModal studentId={students.id}>
                     + goal
                   </CreateGoalModal>
-                  <h3 style={{ color: '#2656A5' }}>Goal One</h3>
-                  <h5>Goal: {goals.goalSet}</h5>
-                  <h5>Goal Set Date: {goals.dateGoalSet}</h5>
-                  <h5>SEL: {goals.sel}</h5>
-                  <h5>Goal Review Date:{goals.goalReviewDate}</h5>
-                  <h5>Accomplishment State: {goals.wasItAccomplished}</h5>
-                  <h5>Explanation: {goals.explanation}</h5>
-                  <h3 style={{ color: '#2656A5' }}>Goal Two</h3>
-                  <h5>Goal: Make it onto the Varsity Tennis Team</h5>
-                  <h5>Goal Set Date: 11/22/21</h5>
-                  <h5>SEL:Social Awareness</h5>
-                  <h5>Goal Review Date: 4/30/22</h5>
-                  <h5>Accomplishment State: In Progress</h5>
-                  <h5>
-                    Explanation: Tryouts will be in April, currently on JV
-                  </h5>
+                  {goals.map((goal, index) => (
+                    <>
+                      <h3 style={{ color: '#2656A5' }}>Goal {index + 1}</h3>
+                      <h5>Goal: {goal.goalSet}</h5>
+                      <h5>Goal Set Date: {goal.dateGoalSet}</h5>
+                      <h5>SEL: {goal.sel}</h5>
+                      <h5>Goal Review Date:{goal.goalReviewDate}</h5>
+                      <h5>Accomplishment State: {goal.wasItAccomplished}</h5>
+                      <h5>Explanation: {goal.explanation}</h5>
+                    </>
+                  ))}
                 </Box>
               </Grid>
             </Grid>
@@ -259,13 +204,14 @@ export default function DetailsTabDisplay(props) {
                     >
                       Edit
                     </ColorButton>
-                    <AddCareer studentId={studentId}>+ New Career</AddCareer>
+                    <AddCareer studentId={students.id}>+ New Career</AddCareer>
                     <h3 style={{ color: '#2656A5' }}>Career Information</h3>
-                    <h5>I am College Bound: {careers.collegeBound}</h5>
+                    <h5>I am College Bound: {String(careers.collegeBound)}</h5>
                     <h5>Number of Career Clusters: {careers.careerCluster}</h5>
                     <h5>Career of Choice: {careers.specificCluster}</h5>
                     <h5>
-                      I am Techinical Bound: {careers.technicalCollegeBound}
+                      I am Techinical Bound:{' '}
+                      {String(careers.technicalCollegeBound)}
                     </h5>
                   </Box>
                 </Grid>
@@ -299,7 +245,7 @@ export default function DetailsTabDisplay(props) {
                   <h3 style={{ color: '#2656A5' }}>Guidance Couselor Info:</h3>
                   <h5>
                     I know my guidance counselor:{' '}
-                    {students.knowGuidanceCounselor}
+                    {String(students.knowGuidanceCounselor)}
                   </h5>
                   <h3 style={{ color: '#2656A5' }}>Admin Details:</h3>
                   <h5>Activity Status: {students.state}</h5>
@@ -320,4 +266,7 @@ export default function DetailsTabDisplay(props) {
 
 DetailsTabDisplay.propTypes = {
   onEditClick: PropTypes.func.isRequired,
+  students: PropTypes.object.isRequired,
+  goals: PropTypes.array.isRequired,
+  careers: PropTypes.array.isRequired,
 };

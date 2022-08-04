@@ -7,6 +7,7 @@ import LoginForm from './login-form/login-form';
 import AuthenticationContext from '../../context/authentication/authentication';
 import ROUTES from '../../constants/routes';
 import ForgotPassword from './forgot-password';
+import getToken from '../../util/get-token/get-token';
 
 export default function Login() {
   const { login } = useContext(AuthenticationContext);
@@ -21,7 +22,12 @@ export default function Login() {
     await login({ username, password });
 
     setIsLoading(false);
-    navigate(ROUTES.HOME);
+    navigate(ROUTES.STUDENTS);
+    window.localStorage.setItem(
+      'lead2change-token',
+      sessionStorage.getItem('lead2change-token')
+    );
+    console.log(sessionStorage.getItem('lead2change-token'));
   };
 
   return (
