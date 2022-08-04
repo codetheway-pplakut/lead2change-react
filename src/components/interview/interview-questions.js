@@ -255,9 +255,6 @@ export default function InterviewQuestions() {
     };
 
     createStudentResponse(response);
-    console.log(
-      getAnswerById(studentId, 'd68119f8-26ef-4936-cde0-08d95db8fbe0')
-    );
   };
   // const num1 = {
   //   answerString: interviewCommitToActivities,
@@ -580,6 +577,32 @@ export default function InterviewQuestions() {
   // setinterviewMaintainFocusOnGoals(event.target.value);
   // setinterviewFinishGoals(event.target.value);
   // setinterviewIsDiligent(event.target.value);
+
+  const onLoad = async () => {
+    const previousResponse = await getInterviewsById(studentId);
+    setinterviewIdealCareer(previousResponse.questions[0].answerString);
+    setinterviewPersonalStrengths(previousResponse.questions[1].answerString);
+    setinterviewImportantWord(previousResponse.questions[2].answerString);
+    setinterviewOvercomeDifficulty(previousResponse.questions[3].answerString);
+    setinterviewOtherCommitments(previousResponse.questions[4].answerString);
+    setinterviewSacrificeTime(previousResponse.questions[5].answerString);
+    setinterviewPostHighSchoolCoaching(
+      previousResponse.questions[6].answerString
+    );
+    setinterviewScheduleManagement(previousResponse.questions[7].answerString);
+    setinterviewCommunicateWithMentors(
+      previousResponse.questions[8].answerString
+    );
+    setinterviewDiverseClass(previousResponse.questions[9].answerString);
+    setinterviewOpenMinded(previousResponse.questions[10].answerString);
+    setinterviewProfessionalRepresentation(
+      previousResponse.questions[11].answerString
+    );
+    setinterviewTryingNewThings(previousResponse.questions[12].answerString);
+    setinterviewCommitToActivities(previousResponse.questions[13].answerString);
+  };
+
+  onLoad();
 
   return (
     <Container fixed textalign="true" justify="center">
