@@ -1,11 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import AppBar from '@mui/material/AppBar';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
-import Typography from '@mui/material/Typography';
+import { Box, Grid, AppBar, Tab, Tabs, Typography, Stack } from '@mui/material';
 import ColorButton from '../coaches/Shared/ColoredButton';
 import CreateGoalModal from './create-goal-modal';
 import AddCareer from './addCareer';
@@ -118,53 +113,40 @@ export default function DetailsTabDisplay(props) {
                     College Entrance Exam Information:
                   </h3>
                   <h5>
-                    PSAT Score:{' '}
-                    <Box component="span" style={{ fontWeight: 'normal' }}>
-                      {students.psatTestScore}
-                    </Box>{' '}
-                    <Box component="span" style={{ marginLeft: '20.3vh' }}>
-                      SAT Score:{' '}
-                      <Box component="span" style={{ fontWeight: 'normal' }}>
-                        {students.satTestDate}
-                      </Box>
-                    </Box>{' '}
-                    <div>
-                      Date of PSAT:{' '}
-                      <Box component="span" style={{ fontWeight: 'normal' }}>
-                        {students.psatTestDate}
-                      </Box>
-                      <Box component="span" style={{ marginLeft: '23.29vh' }}>
-                        Date of SAT:{' '}
-                        <Box component="span" style={{ fontWeight: 'normal' }}>
-                          {students.satTestDate}
-                        </Box>{' '}
-                      </Box>
-                    </div>
-                  </h5>
-                  <h5>
-                    PACT Score:{' '}
-                    <Box component="span" style={{ fontWeight: 'normal' }}>
-                      {students.pactTestScore}
-                    </Box>{' '}
-                    <Box component="span" style={{ marginLeft: '22vh' }}>
-                      ACT Score:{' '}
-                      <Box component="span" style={{ fontWeight: 'normal' }}>
-                        {students.actTestScore}
-                      </Box>
-                    </Box>
-                    <div>
-                      {' '}
-                      Date of PACT: {students.pactTestDate}
-                      <Box component="span" style={{ fontWeight: 'normal' }}>
-                        {students.pactTestDate}
-                      </Box>
-                      <Box component="span" style={{ marginLeft: '23.29vh' }}>
-                        Date of PSAT:{' '}
-                        <Box component="span" style={{ fontWeight: 'normal' }}>
-                          {students.psatTestDate}
-                        </Box>{' '}
-                      </Box>
-                    </div>
+                    <Stack direction="column">
+                      <Grid container>
+                        <Grid item xs={2}>
+                          PACT Score: {students.pactTestScore}
+                        </Grid>
+                        <Grid item xs={4}>
+                          PACT Date: {students.pactTestDate}
+                        </Grid>
+                      </Grid>
+                      <Grid container>
+                        <Grid item xs={2}>
+                          ACT Score: {students.actTestScore}
+                        </Grid>
+                        <Grid item xs={4}>
+                          ACT Date: {students.actTestDate}
+                        </Grid>
+                      </Grid>
+                      <Grid container>
+                        <Grid item xs={2}>
+                          PSAT Score: {students.psatTestScore}
+                        </Grid>
+                        <Grid item xs={4}>
+                          PSAT Date: {students.psatTestDate}
+                        </Grid>
+                      </Grid>
+                      <Grid container>
+                        <Grid item xs={2}>
+                          SAT Score: {students.satTestScore}
+                        </Grid>
+                        <Grid item xs={4}>
+                          SAT Date: {students.satTestDate}
+                        </Grid>
+                      </Grid>
+                    </Stack>
                   </h5>
                   <h3 style={{ color: '#2656A5' }}>Financial Aid:</h3>
                   <h5>
