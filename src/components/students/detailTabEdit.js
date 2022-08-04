@@ -638,7 +638,7 @@ export default function DetailsTabEdit(props) {
                 <Grid container justifyContent="flex-end">
                   <Grid item xs={12} style={{ height: '64vh' }}>
                     <Grid>
-                      <h3 style={{ color: '#2656A5' }}>Goal One</h3>
+                      <h3 style={{ color: '#2656A5' }}>Goal </h3>
                       <Grid marginBottom={2}>
                         <TextField
                           id="text-area-q1"
