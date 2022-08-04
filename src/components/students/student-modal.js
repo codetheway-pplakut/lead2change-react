@@ -16,7 +16,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { createTheme } from '@mui/material/styles';
 
 export default function StudentModal(props) {
-  const { modalType, confirmHandler, studentId } = props;
+  const { modalType, confirmHandler, studentId, modalMessage } = props;
 
   const StyledButton = styled(Button)({
     backgroundColor: '#004cbb',
@@ -122,6 +122,11 @@ export default function StudentModal(props) {
             </Grid>
           </Grid>
           <Grid container spacing={1} sx={{ p: 2 }} justifyContent="center">
+            <Box padding="30px">
+              <Grid item xs={12} align="center">
+                {modalMessage}
+              </Grid>
+            </Box>
             <Grid item xs={4} align="center" component="span">
               <Button
                 theme={buttonTheme}
@@ -156,6 +161,7 @@ export default function StudentModal(props) {
 
 StudentModal.propTypes = {
   modalType: PropTypes.string.isRequired,
+  modalMessage: PropTypes.string.isRequired,
   confirmHandler: PropTypes.func.isRequired,
   studentId: PropTypes.string.isRequired,
 };

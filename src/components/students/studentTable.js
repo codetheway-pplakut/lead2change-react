@@ -550,6 +550,7 @@ export default function StudentTable() {
                           <Grid item>
                             <StudentModal
                               modalType="Deactivate"
+                              modalMessage="Are you sure you want to deactivate this student?"
                               studentId={student.id}
                               confirmHandler={deactivateHandler}
                             />
@@ -643,6 +644,7 @@ export default function StudentTable() {
                               modalType="Reactivate"
                               studentId={student.id}
                               confirmHandler={activateHandler}
+                              modalMessage="Are you sure you want to reactivate this student?"
                             />
                           </Grid>
                         </Grid>
@@ -732,6 +734,7 @@ export default function StudentTable() {
                               modalType="Accept"
                               studentId={student.id}
                               confirmHandler={activateHandler}
+                              modalMessage="Are you sure you want to accept this student?"
                             />
                           </Grid>
                         </Grid>
@@ -741,6 +744,7 @@ export default function StudentTable() {
                           <Grid item>
                             <StudentModal
                               modalType="Decline"
+                              modalMessage="Are you sure you want to decline this student?"
                               studentId={student.id}
                               confirmHandler={declineHandler}
                             />
