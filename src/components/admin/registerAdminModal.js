@@ -125,10 +125,9 @@ export default function RegisterAdminModal() {
             }}
           >
             <Typography
-              textAlign="center"
-              color="white"
-              variant="h4"
-              fontWeight="bold"
+              variant="h5"
+              component="h2"
+              align="center"
               padding="10px"
             >
               Register Admin
@@ -209,7 +208,7 @@ export default function RegisterAdminModal() {
                     </Box>
                   </Grid>
 
-                  <Grid item xs={4} sx={{ borderRadius: '10px' }}>
+                  <Grid item xs={4}>
                     <Box>
                       <Button
                         theme={buttonTheme}
