@@ -64,8 +64,8 @@ export default function StudentInfoDisplay(props) {
             '#1A2027': '#fff',
             textAlign: 'center',
             width: '50vh',
-            mr: '8vh',
-            height: '80vh',
+            mr: '10vh',
+            height: '74vh',
             overflowY: 'auto',
           }}
           style={{ marginLeft: '3vh' }}
