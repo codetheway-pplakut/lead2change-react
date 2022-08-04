@@ -8,6 +8,7 @@ import Grid from '@mui/material/Grid';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import AddIcon from '@mui/icons-material/Add';
 import { createTheme } from '@mui/material/styles';
 import { addAdmin, getAdmins } from '../../services/Admin/admin';
 
@@ -99,10 +100,6 @@ export default function RegisterAdminModal() {
         contrastText: '#fff',
       },
     },
-    typography: {
-      fontFamily: 'Calibri',
-      fontSize: 18,
-    },
   });
 
   return (
@@ -112,34 +109,46 @@ export default function RegisterAdminModal() {
         color="cancel"
         variant="contained"
         onClick={handleOpen}
+        sx={{ padding: '8px', minWidth: '100px' }}
+        startIcon={<AddIcon />}
       >
-        + Admin
+        Admin
       </Button>
       <Modal open={open} onClose={handleClose}>
         <Box sx={modalPosition}>
-          <Box
-            bgcolor="#004cbb"
-            sx={{
-              borderTopLeftRadius: '10px',
-              borderTopRightRadius: '10px',
-            }}
-          >
-            <Typography
-              textAlign="center"
-              color="white"
-              variant="h4"
-              fontWeight="bold"
-              padding="10px"
+          <Grid container>
+            <Grid
+              item
+              sx={{
+                bgcolor: '#004cbb',
+                color: 'white',
+                borderTopLeftRadius: 10,
+                borderTopRightRadius: 10,
+              }}
+              xs={12}
             >
-              Register Admin
-            </Typography>
-            <IconButton
-              onClick={handleClose}
-              sx={{ position: 'absolute', right: 8, top: 8 }}
-            >
-              <CloseIcon fontSize="large" sx={closeIconColor} />
-            </IconButton>
-          </Box>
+              <Grid container alignItems="center" sx={{ margin: 1 }}>
+                <Grid item xs={2} />
+                <Grid item xs={8}>
+                  <Typography
+                    variant="h5"
+                    component="h2"
+                    align="center"
+                    padding="10px"
+                  >
+                    Register Admin
+                  </Typography>
+                  <IconButton
+                    onClick={handleClose}
+                    sx={{ position: 'absolute', right: 8, top: 8 }}
+                  >
+                    <CloseIcon fontSize="large" sx={closeIconColor} />
+                  </IconButton>
+                </Grid>
+                <Grid item xs={1} />
+              </Grid>
+            </Grid>
+          </Grid>
           <Box sx={{ mt: 1 }}>
             <Box container margin="20px">
               <Grid container rowSpacing={2}>
@@ -190,7 +199,7 @@ export default function RegisterAdminModal() {
 
                 <Grid
                   container
-                  spacing={2}
+                  spacing={0}
                   justifyContent="center"
                   padding="20px"
                   align="center"
@@ -202,21 +211,21 @@ export default function RegisterAdminModal() {
                         color="save"
                         variant="contained"
                         onClick={handleRegister}
-                        style={{ minWidth: '100px' }}
+                        style={{ minWidth: '120px' }}
                       >
-                        <Typography padding="5px">Save</Typography>
+                        <Typography padding="5px">Register</Typography>
                       </Button>
                     </Box>
                   </Grid>
-
-                  <Grid item xs={4} sx={{ borderRadius: '10px' }}>
+                  <Grid xs={1} />
+                  <Grid item xs={4}>
                     <Box>
                       <Button
                         theme={buttonTheme}
                         color="cancel"
                         variant="contained"
                         onClick={handleClose}
-                        style={{ minWidth: '100px' }}
+                        style={{ minWidth: '120px' }}
                       >
                         <Typography padding="5px">Cancel</Typography>
                       </Button>

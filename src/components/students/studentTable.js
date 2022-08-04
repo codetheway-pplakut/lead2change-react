@@ -200,6 +200,12 @@ const headCellsApplied = [
     disablePadding: false,
     label: 'Reject',
   },
+  {
+    id: 'empty',
+    numeric: false,
+    disablePadding: false,
+    label: '',
+  },
 ];
 
 function EnhancedTableHead(props) {
@@ -428,11 +434,12 @@ export default function StudentTable() {
                     onSearchChange(event.target.value);
                   }}
                 />
-                <div sx={{ minWidth: '200px' }}>
+                <div sx={{ minWidth: '100px' }}>
                   <StyledButton
                     variant="contained"
                     startIcon={<AddIcon />}
                     onClick={onRegisterClick}
+                    sx={{ padding: '8px', minWidth: '100px' }}
                   >
                     Student
                   </StyledButton>
@@ -548,7 +555,8 @@ export default function StudentTable() {
                         <Grid container spacing={2}>
                           <Grid item>
                             <StudentModal
-                              modalType="deactivate"
+                              modalType="Deactivate"
+                              modalMessage="Are you sure you want to deactivate this student?"
                               studentId={student.id}
                               confirmHandler={deactivateHandler}
                             />
@@ -639,9 +647,10 @@ export default function StudentTable() {
                         <Grid container spacing={2}>
                           <Grid item>
                             <StudentModal
-                              modalType="reactivate"
+                              modalType="Reactivate"
                               studentId={student.id}
                               confirmHandler={activateHandler}
+                              modalMessage="Are you sure you want to reactivate this student?"
                             />
                           </Grid>
                         </Grid>
@@ -728,9 +737,10 @@ export default function StudentTable() {
                         <Grid container spacing={2}>
                           <Grid item>
                             <StudentModal
-                              modalType="accept"
+                              modalType="Accept"
                               studentId={student.id}
                               confirmHandler={activateHandler}
+                              modalMessage="Are you sure you want to accept this student?"
                             />
                           </Grid>
                         </Grid>
@@ -739,7 +749,8 @@ export default function StudentTable() {
                         <Grid container spacing={2}>
                           <Grid item>
                             <StudentModal
-                              modalType="decline"
+                              modalType="Decline"
+                              modalMessage="Are you sure you want to decline this student?"
                               studentId={student.id}
                               confirmHandler={declineHandler}
                             />
