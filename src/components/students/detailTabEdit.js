@@ -40,7 +40,7 @@ TabPanel.propTypes = {
 
 export default function DetailsTabEdit(props) {
   const { students } = props;
-  const { onCancelClick, updateFunction, onSaveClick } = props;
+  const { onCancelClick, updateFunction, onSaveClick, goals } = props;
   const [value, setValue] = React.useState(0);
   const [careers, setCareer] = React.useState({});
 
@@ -568,193 +568,107 @@ export default function DetailsTabEdit(props) {
               </Grid>
             </Box>
           </TabPanel>
+
           <TabPanel value={value} index={1} style={{ overflowY: 'auto' }}>
             <Box sx={{ flexGrow: 1 }}>
               <Grid container justifyContent="flex-end">
                 <Grid item xs={12} style={{ height: '64vh' }}>
-                  <Grid>
-                    <h3 style={{ color: '#2656A5' }}>Goal One</h3>
-                    <Grid marginBottom={2}>
-                      <TextField
-                        id="text-area-q1"
-                        multiline
-                        fullWidth
-                        maxRows={4}
-                        variant="filled"
-                        value={enteredGoalSet}
-                        label="Set Goal"
-                        onChange={(event) =>
-                          setEnteredGoalSet(event.target.value)
-                        }
-                        required
-                      />
-                    </Grid>
-                    <Grid marginBottom={2}>
-                      <TextField
-                        size="small"
-                        className="typing-container"
-                        label="Set Date"
-                        type="date"
-                        value={enteredDateGoalSet}
-                        onChange={(event) =>
-                          setEnteredDateGoalSet(event.target.value)
-                        }
-                        required
-                      />
-                    </Grid>
-                    <Grid marginBottom={2}>
-                      <TextField
-                        size="small"
-                        className="typing-container"
-                        value={enteredSel}
-                        label="SEL"
-                        onChange={(event) => setEnteredSel(event.target.value)}
-                        required
-                      />
-                    </Grid>
-                    <Grid marginBottom={2}>
-                      <TextField
-                        size="small"
-                        className="typing-container"
-                        type="date"
-                        label="Review Date"
-                        value={enteredGoalReviewDate}
-                        onChange={(event) =>
-                          setEnteredGoalReviewDate(event.target.value)
-                        }
-                        required
-                      />
-                    </Grid>
-                    <Grid marginBottom={2}>
-                      <FormControl
-                        variant="standard"
-                        sx={{ m: 1, minWidth: 200 }}
-                      >
-                        <InputLabel id="demo-simple-select-standard-label">
-                          Accomplishment State{' '}
-                        </InputLabel>
-                        <Select
-                          labelId="demo-simple-select-standard-label"
-                          id="demo-simple-select-standard"
-                          value={enteredWasItAccomplished}
+                  {[goals].map((goal, index) => (
+                    <Grid>
+                      <h3 style={{ color: '#2656A5' }}>Goal {index + 1}</h3>
+                      <Grid marginBottom={2}>
+                        <TextField
+                          id="text-area-q1"
+                          multiline
+                          fullWidth
+                          maxRows={4}
+                          variant="filled"
+                          value={enteredGoalSet}
+                          label="Set Goal"
                           onChange={(event) =>
-                            setEnteredWasItAccomplished(event.target.value)
+                            setEnteredGoalSet(event.target.value)
                           }
-                        >
-                          <MenuItem value="" />
-                          <MenuItem value={10}>In Progress</MenuItem>
-                          <MenuItem value={20}>Completed</MenuItem>
-                        </Select>
-                      </FormControl>
-                    </Grid>
-
-                    <Grid marginBottom={2}>
-                      <TextField
-                        id="text-area-q1"
-                        multiline
-                        fullWidth
-                        maxRows={4}
-                        variant="filled"
-                        value={enteredExplanation}
-                        label="Explanation"
-                        onChange={(event) =>
-                          setEnteredExplanation(event.target.value)
-                        }
-                        required
-                      />
-                    </Grid>
-
-                    <h3 style={{ color: '#2656A5' }}>Goal Two</h3>
-                    <Grid marginBottom={2}>
-                      <TextField
-                        id="text-area-q1"
-                        multiline
-                        fullWidth
-                        maxRows={4}
-                        variant="filled"
-                        value={enteredGoalSet}
-                        label="Set Goal"
-                        onChange={(event) =>
-                          setEnteredGoalSet(event.target.value)
-                        }
-                        required
-                      />
-                    </Grid>
-                    <Grid marginBottom={2}>
-                      <TextField
-                        size="small"
-                        className="typing-container"
-                        label="Set Date"
-                        type="date"
-                        value={enteredDateGoalSet}
-                        onChange={(event) =>
-                          setEnteredDateGoalSet(event.target.value)
-                        }
-                        required
-                      />
-                    </Grid>
-                    <Grid marginBottom={2}>
-                      <TextField
-                        size="small"
-                        className="typing-container"
-                        value={enteredSel}
-                        label="SEL"
-                        onChange={(event) => setEnteredSel(event.target.value)}
-                        required
-                      />
-                    </Grid>
-                    <Grid marginBottom={2}>
-                      <TextField
-                        size="small"
-                        className="typing-container"
-                        type="date"
-                        label="Review Date"
-                        value={enteredGoalReviewDate}
-                        onChange={(event) =>
-                          setEnteredGoalReviewDate(event.target.value)
-                        }
-                        required
-                      />
-                    </Grid>
-                    <Grid marginBottom={2}>
-                      <FormControl
-                        variant="standard"
-                        sx={{ m: 1, minWidth: 200 }}
-                      >
-                        <InputLabel id="demo-simple-select-standard-label">
-                          Accomplishment State{' '}
-                        </InputLabel>
-                        <Select
-                          labelId="demo-simple-select-standard-label"
-                          id="demo-simple-select-standard"
-                          value={enteredWasItAccomplished}
+                          required
+                        />
+                      </Grid>
+                      <Grid marginBottom={2}>
+                        <TextField
+                          size="small"
+                          className="typing-container"
+                          label="Set Date"
+                          type="date"
+                          value={enteredDateGoalSet}
                           onChange={(event) =>
-                            setEnteredWasItAccomplished(event.target.value)
+                            setEnteredDateGoalSet(event.target.value)
                           }
+                          required
+                        />
+                      </Grid>
+                      <Grid marginBottom={2}>
+                        <TextField
+                          size="small"
+                          className="typing-container"
+                          value={enteredSel}
+                          label="SEL"
+                          onChange={(event) =>
+                            setEnteredSel(event.target.value)
+                          }
+                          required
+                        />
+                      </Grid>
+                      <Grid marginBottom={2}>
+                        <TextField
+                          size="small"
+                          className="typing-container"
+                          type="date"
+                          label="Review Date"
+                          value={enteredGoalReviewDate}
+                          onChange={(event) =>
+                            setEnteredGoalReviewDate(event.target.value)
+                          }
+                          required
+                        />
+                      </Grid>
+                      <Grid marginBottom={2}>
+                        <FormControl
+                          variant="standard"
+                          sx={{ m: 1, minWidth: 200 }}
                         >
-                          <MenuItem value="" />
-                          <MenuItem value={10}>In Progress</MenuItem>
-                          <MenuItem value={20}>Completed</MenuItem>
-                        </Select>
-                      </FormControl>
-                    </Grid>
+                          <InputLabel id="demo-simple-select-standard-label">
+                            Accomplishment State{' '}
+                          </InputLabel>
+                          <Select
+                            labelId="demo-simple-select-standard-label"
+                            id="demo-simple-select-standard"
+                            value={enteredWasItAccomplished}
+                            onChange={(event) =>
+                              setEnteredWasItAccomplished(event.target.value)
+                            }
+                          >
+                            <MenuItem value="" />
+                            <MenuItem value={10}>In Progress</MenuItem>
+                            <MenuItem value={20}>Completed</MenuItem>
+                          </Select>
+                        </FormControl>
+                      </Grid>
 
-                    <Grid marginBottom={2}>
-                      <TextField
-                        id="text-area-q1"
-                        multiline
-                        fullWidth
-                        maxRows={4}
-                        variant="filled"
-                        value={enteredExplanation}
-                        label="Explanation"
-                        onChange={(event) =>
-                          setEnteredExplanation(event.target.value)
-                        }
-                        required
-                      />
+                      <Grid marginBottom={2}>
+                        <TextField
+                          id="text-area-q1"
+                          multiline
+                          fullWidth
+                          maxRows={4}
+                          variant="filled"
+                          value={enteredExplanation}
+                          label="Explanation"
+                          onChange={(event) =>
+                            setEnteredExplanation(event.target.value)
+                          }
+                          required
+                        />
+                      </Grid>
                     </Grid>
-                  </Grid>
+                  ))}
                 </Grid>
               </Grid>
             </Box>
@@ -1109,4 +1023,5 @@ DetailsTabEdit.propTypes = {
   updateFunction: PropTypes.func.isRequired,
   onSaveClick: PropTypes.func.isRequired,
   students: PropTypes.object.isRequired,
+  goals: PropTypes.array.isRequired,
 };

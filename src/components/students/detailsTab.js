@@ -53,6 +53,7 @@ export default function TabsFunction(props) {
           onSaveClick={onSaveClick}
           onCancelClick={onCancelClick}
           updateFunction={updateFunction}
+          goals={goals}
           students={students}
           careers={careers}
         />
