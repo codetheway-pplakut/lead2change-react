@@ -6,17 +6,12 @@ import Grid from '@mui/material/Grid';
 import AppBar from '@mui/material/AppBar';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
-import { useParams } from 'react-router-dom';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import Select from '@mui/material/Select';
 import ColorButton from '../coaches/Shared/ColoredButton';
-
-import { getStudentById } from '../../services/students/students';
-import { getGoalById, getGoalsByStudentId } from '../../services/goals/goals';
-import { getCareersById } from '../../services/careers/careers';
 
 function TabPanel(props) {
   const { children, value, index } = props;
@@ -44,11 +39,11 @@ TabPanel.propTypes = {
 };
 
 export default function DetailsTabEdit(props) {
+  const { students } = props;
   const { onCancelClick, updateFunction, onSaveClick } = props;
-  const { studentId } = useParams();
   const [value, setValue] = React.useState(0);
-  const [students, setStudents] = useState({});
   const [goals, setGoals] = useState({});
+  const [career, setCareer] = useState({});
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -205,7 +200,6 @@ export default function DetailsTabEdit(props) {
     React.useState(students.technicalCollegeBound);
 
   const EditField = () => {
-    onSaveClick();
     handleClose();
     students.planAfterHighSchool = enteredPlanAfterHighSchool;
     students.collegesList = enteredCollegesList;
@@ -221,6 +215,8 @@ export default function DetailsTabEdit(props) {
     students.actTestDate = enteredActTestDate;
     students.satTestScore = enteredSatTestScore;
     students.satTestDate = enteredSatTestDate;
+    students.assistanceForForms = enteredAssistanceForForms;
+    students.supportNeeded = enteredSupportNeeded;
     students.goalSet = enteredGoalSet;
     students.dateGoalSet = enteredGoalSet;
     students.sel = enteredSel;
@@ -248,118 +244,10 @@ export default function DetailsTabEdit(props) {
     students.technicalCollegeBound = enteredTechnicalCollegeBound;
     updateFunction(students);
   };
-  useEffect(() => {
-    const currentStudent = async () => {
-      const currStudent = await getStudentById(studentId);
-
-      const {
-        planAfterHighSchool,
-        collegesList,
-        firstChoiceCollege,
-        collegeApplicationStatus,
-        collegeEssayStatus,
-        collegeEssayHelp,
-        pactTestScore,
-        psatTestDate,
-        psatTestScore,
-        pactTestDate,
-        actTestScore,
-        actTestDate,
-        satTestScore,
-        satTestDate,
-        parentFirstName,
-        address,
-        parentApartmentNumber,
-        parentCity,
-        parentZipCode,
-        parentState,
-        parentCellPhone,
-        parentEmail,
-        knowGuidanceCounselor,
-        // workStatus,
-        // acceptanceStatus,
-        studentSignature,
-        studentSignatureDate,
-        parentSignature,
-        parentSignatureDate,
-      } = currStudent;
-      setStudents(currStudent);
-
-      setEnteredPlanAfterHighSchool(planAfterHighSchool);
-      setEnteredCollegesList(collegesList);
-      setEnteredFirstChoiceCollege(firstChoiceCollege);
-      setEnteredCollegeApplicationStatus(collegeApplicationStatus);
-      setEnteredCollegeEssayStatus(collegeEssayStatus);
-      setEnteredCollegeEssayHelp(collegeEssayHelp);
-      setEnteredPactTestScore(pactTestScore);
-      setEnteredPsatTestDate(psatTestDate);
-      setEnteredPsatTestScore(psatTestScore);
-      setEnteredPactTestDate(pactTestDate);
-      setEnteredActTestScore(actTestScore);
-      setEnteredActTestDate(actTestDate);
-      setEnteredSatTestScore(satTestScore);
-      setEnteredSatTestDate(satTestDate);
-      setEnteredParentFirstName(parentFirstName);
-      setEnteredParentAddress(address);
-      setEnteredParentApartmentNumber(parentApartmentNumber);
-      setEnteredParentCity(parentCity);
-      setEnteredParentState(parentState);
-      setEnteredParentZipCode(parentZipCode);
-      setEnteredParentCellPhone(parentCellPhone);
-      setEnteredParentEmail(parentEmail);
-      setEnteredGuidanceCounselor(knowGuidanceCounselor);
-      setEnteredStudentSignature(studentSignature);
-      setEnteredStudentSignatureDate(studentSignatureDate);
-      setEnteredParentSignature(parentSignature);
-      setEnteredParentSignatureDate(parentSignatureDate);
-    };
-
-    const currentGoal = async () => {
-      const currGoal = await getGoalsByStudentId(studentId);
-
-      const {
-        goalSet,
-        dateGoalSet,
-        sel,
-        goalReviewDate,
-        wasItAccomplished,
-        explanation,
-      } = currGoal;
-      setGoals(currGoal);
-
-      setEnteredGoalSet(goalSet);
-      setEnteredDateGoalSet(dateGoalSet);
-      setEnteredSel(sel);
-      setEnteredGoalReviewDate(goalReviewDate);
-      setEnteredWasItAccomplished(wasItAccomplished);
-      setEnteredExplanation(explanation);
-    };
-
-    const currentCareer = async () => {
-      const currCareer = await getCareersById(studentId);
-
-      const {
-        collegeBound,
-        careerCluster,
-        specificCluster,
-        technicalCollegeBound,
-      } = currCareer;
-      setStudents(currCareer);
-
-      setEnteredIsCollegeBound(collegeBound);
-      setEnteredCareerCluster(careerCluster);
-      setEnteredSpecificCluster(specificCluster);
-      setEnteredTechnicalCollegeBound(technicalCollegeBound);
-    };
-    currentStudent();
-    currentCareer();
-    currentGoal();
-  }, [studentId]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  console.log(enteredCollegeApplicationStatus);
   return (
     <div style={{ marginRight: '8vh' }}>
       <Box
@@ -401,7 +289,6 @@ export default function DetailsTabEdit(props) {
 
                     <TextField
                       fullWidth
-                      variant="filled"
                       value={enteredPlanAfterHighSchool}
                       label="Plans after High School"
                       onChange={(e) =>
@@ -417,7 +304,6 @@ export default function DetailsTabEdit(props) {
                       multiline
                       fullWidth
                       maxRows={4}
-                      variant="filled"
                       value={enteredCollegesList}
                       label="Colleges Plan/Applied To"
                       onChange={(event) =>
@@ -453,10 +339,13 @@ export default function DetailsTabEdit(props) {
                         id="demo-simple-select-standard"
                         label="Age"
                         value={enteredCollegeApplicationStatus}
+                        onChange={(e) =>
+                          setEnteredCollegeApplicationStatus(e.target.value)
+                        }
                       >
                         <MenuItem value="" />
-                        <MenuItem value={10}>Yes</MenuItem>
-                        <MenuItem value={20}>No</MenuItem>
+                        <MenuItem value>Yes</MenuItem>
+                        <MenuItem value={false}>No</MenuItem>
                       </Select>
                     </FormControl>
                   </Grid>
@@ -474,10 +363,13 @@ export default function DetailsTabEdit(props) {
                         id="demo-simple-select-standard"
                         label="Age"
                         value={enteredCollegeEssayStatus}
+                        onChange={(e) =>
+                          setEnteredCollegeEssayStatus(e.target.value)
+                        }
                       >
                         <MenuItem value="" />
-                        <MenuItem value={10}>Yes</MenuItem>
-                        <MenuItem value={20}>No</MenuItem>
+                        <MenuItem value>Yes</MenuItem>
+                        <MenuItem value={false}>No</MenuItem>
                       </Select>
                     </FormControl>
                   </Grid>
@@ -494,10 +386,13 @@ export default function DetailsTabEdit(props) {
                         id="demo-simple-select-standard"
                         label="Age"
                         value={enteredCollegeEssayHelp}
+                        onChange={(e) =>
+                          setEnteredCollegeEssayHelp(e.target.value)
+                        }
                       >
                         <MenuItem value="" />
-                        <MenuItem value={10}>Yes</MenuItem>
-                        <MenuItem value={20}>No</MenuItem>
+                        <MenuItem value>Yes</MenuItem>
+                        <MenuItem value={false}>No</MenuItem>
                       </Select>
                     </FormControl>
                   </Grid>
@@ -515,7 +410,6 @@ export default function DetailsTabEdit(props) {
                       onChange={(event) =>
                         setEnteredPactTestScore(event.target.value)
                       }
-                      required
                       focused
                     />
                     <TextField
@@ -527,7 +421,6 @@ export default function DetailsTabEdit(props) {
                       onChange={(event) =>
                         setEnteredPactTestDate(event.target.value)
                       }
-                      required
                       focused
                     />
                   </Grid>
@@ -539,7 +432,6 @@ export default function DetailsTabEdit(props) {
                       label="PSAT Score"
                       type="number"
                       onChange={(e) => setEnteredPsatTestScore(e.target.value)}
-                      required
                       focused
                     />
                     <TextField
@@ -551,7 +443,6 @@ export default function DetailsTabEdit(props) {
                       onChange={(event) =>
                         setEnteredPsatTestDate(event.target.value)
                       }
-                      required
                       focused
                     />
                   </Grid>
@@ -565,7 +456,6 @@ export default function DetailsTabEdit(props) {
                       onChange={(event) =>
                         setEnteredActTestScore(event.target.value)
                       }
-                      required
                       focused
                     />
                     <TextField
@@ -577,7 +467,6 @@ export default function DetailsTabEdit(props) {
                       onChange={(event) =>
                         setEnteredActTestDate(event.target.value)
                       }
-                      required
                       focused
                     />
                   </Grid>
@@ -591,7 +480,6 @@ export default function DetailsTabEdit(props) {
                       onChange={(event) =>
                         setEnteredSatTestScore(event.target.value)
                       }
-                      required
                       focused
                     />
                     <TextField
@@ -603,7 +491,6 @@ export default function DetailsTabEdit(props) {
                       onChange={(event) =>
                         setEnteredSatTestDate(event.target.value)
                       }
-                      required
                       focused
                     />
                   </Grid>
@@ -619,17 +506,15 @@ export default function DetailsTabEdit(props) {
                       <Select
                         labelId="demo-simple-select-standard-label"
                         id="demo-simple-select-standard"
-                        label="Age"
+                        label="CompletedFinAid"
                         value={enteredFinancialAidProcessComplete}
-                        onChange={(event) =>
-                          setEnteredFinancialAidProcessComplete(
-                            event.target.value
-                          )
+                        onChange={(e) =>
+                          setEnteredFinancialAidProcessComplete(e.target.value)
                         }
                       >
                         <MenuItem value="" />
-                        <MenuItem value={10}>Yes</MenuItem>
-                        <MenuItem value={20}>No</MenuItem>
+                        <MenuItem value>Yes</MenuItem>
+                        <MenuItem value={false}>No</MenuItem>
                       </Select>
                     </FormControl>
                   </Grid>
@@ -651,8 +536,8 @@ export default function DetailsTabEdit(props) {
                         }
                       >
                         <MenuItem value="" />
-                        <MenuItem value={10}>Yes</MenuItem>
-                        <MenuItem value={20}>No</MenuItem>
+                        <MenuItem value>Yes</MenuItem>
+                        <MenuItem value={false}>No</MenuItem>
                       </Select>
                     </FormControl>
                   </Grid>
@@ -674,8 +559,8 @@ export default function DetailsTabEdit(props) {
                         }
                       >
                         <MenuItem value="" />
-                        <MenuItem value={10}>Yes</MenuItem>
-                        <MenuItem value={20}>No</MenuItem>
+                        <MenuItem value>Yes</MenuItem>
+                        <MenuItem value={false}>No</MenuItem>
                       </Select>
                     </FormControl>
                   </Grid>
@@ -1202,4 +1087,5 @@ DetailsTabEdit.propTypes = {
   onCancelClick: PropTypes.func.isRequired,
   updateFunction: PropTypes.func.isRequired,
   onSaveClick: PropTypes.func.isRequired,
+  students: PropTypes.object.isRequired,
 };

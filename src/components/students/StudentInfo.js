@@ -33,36 +33,6 @@ const StudentInfo = styled(Box)(({ theme }) => ({
   borderRadius: 1,
 }));
 
-function DisplayBanner() {
-  const { studentId } = useParams();
-  const [students, setStudents] = useState({});
-
-  useEffect(() => {
-    const currentStudent = async () => {
-      const currStudent = await getStudentById(studentId);
-      setStudents(currStudent);
-    };
-    currentStudent();
-  }, [studentId]);
-  return (
-    <Grid
-      item
-      align="center"
-      style={{
-        backgroundColor: '#2656A5',
-        marginBottom: '3vh',
-        color: '#FFFFFF',
-        padding: '0.1vh',
-      }}
-      sx={{ width: '100%' }}
-    >
-      <h1>
-        {students.studentFirstName} {students.studentLastName}&rsquo;s Details
-      </h1>
-    </Grid>
-  );
-}
-
 export default function ResponsiveGrid(props) {
   const [isLoading, setIsLoading] = React.useState(false);
   const { studentId } = useParams();
@@ -159,7 +129,21 @@ export default function ResponsiveGrid(props) {
 
   return (
     <Grid container>
-      <DisplayBanner />
+      <Grid
+        item
+        align="center"
+        style={{
+          backgroundColor: '#2656A5',
+          marginBottom: '3vh',
+          color: '#FFFFFF',
+          padding: '0.1vh',
+        }}
+        sx={{ width: '100%' }}
+      >
+        <h1>
+          {students.studentFirstName} {students.studentLastName}&rsquo;s Details
+        </h1>
+      </Grid>
       <Stack direction="row" spacing={2}>
         {isEditing ? (
           <StudentInfoEdit
