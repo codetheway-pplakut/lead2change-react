@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router';
 
 import Typography from '@mui/material/Typography';
 
+import { createTheme } from '@mui/material/styles';
+import CloseIcon from '@mui/icons-material/Close';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { Modal, Grid, IconButton } from '@mui/material';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
@@ -19,6 +22,29 @@ export default function ExitModal() {
     navigate(ROUTES.STUDENTS);
   };
 
+  const modalPosition = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    width: 550,
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'background.paper',
+    borderRadius: '10px',
+    boxShadow: 24,
+  };
+  const buttonTheme = createTheme({
+    palette: {
+      save: {
+        main: '#004cbb',
+        contrastText: '#fff',
+      },
+      cancel: {
+        main: '#004cbb',
+        contrastText: '#fff',
+      },
+    },
+  });
+
   return (
     <div>
       <Button variant="outlined" onClick={handleOpen}>
@@ -29,30 +55,41 @@ export default function ExitModal() {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
       >
-        <Grid container variant="large">
+        <Box sx={modalPosition}>
           <Grid container>
-            <Grid item sx={{ bgcolor: '#004cbb', color: 'white' }} xs={12}>
+            <Grid
+              item
+              sx={{
+                bgcolor: '#004cbb',
+                color: 'white',
+                borderTopLeftRadius: 10,
+                borderTopRightRadius: 10,
+              }}
+              xs={12}
+            >
               <Grid container alignItems="center" sx={{ margin: 1 }}>
                 <Grid item xs={2} />
                 <Grid item xs={8}>
-                  <Typography variant="h5" component="h2" align="center">
-                    Remember To Save
-                  </Typography>
-                </Grid>
-                <Grid item xs={1} />
-                <Grid item>
-                  <IconButton
-                    align="right"
-                    size="medium"
-                    onClick={handleClose}
-                    sx={{ color: 'white' }}
+                  <Typography
+                    variant="h5"
+                    component="h2"
+                    align="center"
+                    padding="10px"
                   >
-                    <CloseOutlinedIcon />
+                    Remember to Save
+                  </Typography>
+                  <IconButton
+                    onClick={handleClose}
+                    sx={{ position: 'absolute', right: 8, top: 8 }}
+                  >
+                    <CloseIcon fontSize="large" sx={{ color: 'white' }} />
                   </IconButton>
                 </Grid>
+                <Grid item xs={1} />
               </Grid>
             </Grid>
           </Grid>
+
           <Grid container>
             <Grid item xs={12}>
               <Grid container spacing={1} sx={{ p: 2 }} justifyContent="center">
@@ -73,24 +110,48 @@ export default function ExitModal() {
                   Hit the Go Back Home button to return to Students. Hit the
                   Return to Interview button if you need to save changes.
                 </Typography>
-                <Grid item xs={2}>
-                  <ColorButton variant="contained" fullWidth onClick={backHome}>
-                    Go Back Home
-                  </ColorButton>
-                </Grid>
-                <Grid item xs={2}>
-                  <ColorButton
-                    variant="contained"
-                    fullWidth
-                    onClick={handleClose}
-                  >
-                    Return To Interview
-                  </ColorButton>
+
+                <Grid
+                  container
+                  spacing={0}
+                  justifyContent="center"
+                  padding="20px"
+                  align="center"
+                >
+                  <Grid item xs={5}>
+                    <Box>
+                      <Button
+                        theme={buttonTheme}
+                        color="save"
+                        variant="contained"
+                        onClick={backHome}
+                        style={{ minWidth: '150px' }}
+                      >
+                        <Typography padding="5px">Go Back Home</Typography>
+                      </Button>
+                    </Box>
+                  </Grid>
+                  <Grid xs={1} />
+                  <Grid item xs={6}>
+                    <Box>
+                      <Button
+                        theme={buttonTheme}
+                        color="cancel"
+                        variant="contained"
+                        onClick={handleClose}
+                        style={{ minWidth: '150px' }}
+                      >
+                        <Typography padding="5px">
+                          Return to Interview
+                        </Typography>
+                      </Button>
+                    </Box>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
+        </Box>
       </Modal>
 
       {/* <Modal
