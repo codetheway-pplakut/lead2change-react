@@ -19,6 +19,7 @@ import { getStudentById } from '../../services/students/students';
 import { getAnswerById } from '../../services/answers/answers';
 
 export default function InterviewQuestions() {
+  const [isLoaded, setIsLoaded] = useState(false);
   const { studentId } = useParams();
   const [students, setStudents] = useState({});
 
@@ -600,10 +601,11 @@ export default function InterviewQuestions() {
     );
     setinterviewTryingNewThings(previousResponse.questions[12].answerString);
     setinterviewCommitToActivities(previousResponse.questions[13].answerString);
+    setIsLoaded(true);
   };
-
-  onLoad();
-
+  if (isLoaded === false) {
+    onLoad();
+  }
   return (
     <Container fixed textalign="true" justify="center">
       <Box
