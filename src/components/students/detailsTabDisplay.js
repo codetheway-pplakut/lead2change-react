@@ -5,6 +5,26 @@ import ColorButton from '../coaches/Shared/ColoredButton';
 import CreateGoalModal from './create-goal-modal';
 import AddCareer from './addCareer';
 
+function getParsedDate(strDate) {
+  if (strDate === null) {
+    return '';
+  }
+  const strSplitDate = String(strDate).split(' ');
+  let date = new Date(strSplitDate[0]);
+  let dd = date.getDate();
+  let mm = date.getMonth() + 1;
+
+  const yyyy = date.getFullYear();
+  if (dd < 10) {
+    dd = `0${dd}`;
+  }
+  if (mm < 10) {
+    mm = `0${mm}`;
+  }
+  date = `${mm}-${dd}-${yyyy}`;
+  return date.toString();
+}
+
 function TabPanel(props) {
   const { children, value, index } = props;
 
@@ -118,7 +138,7 @@ export default function DetailsTabDisplay(props) {
                           PACT Score: {students.pactTestScore}
                         </Grid>
                         <Grid item xs={4}>
-                          PACT Date: {students.pactTestDate}
+                          PACT Date: {getParsedDate(students.pactTestDate)}
                         </Grid>
                       </Grid>
                       <Grid container>
@@ -126,7 +146,7 @@ export default function DetailsTabDisplay(props) {
                           ACT Score: {students.actTestScore}
                         </Grid>
                         <Grid item xs={4}>
-                          ACT Date: {students.actTestDate}
+                          ACT Date: {getParsedDate(students.actTestDate)}
                         </Grid>
                       </Grid>
                       <Grid container>
@@ -134,7 +154,7 @@ export default function DetailsTabDisplay(props) {
                           PSAT Score: {students.psatTestScore}
                         </Grid>
                         <Grid item xs={4}>
-                          PSAT Date: {students.psatTestDate}
+                          PSAT Date: {getParsedDate(students.psatTestDate)}
                         </Grid>
                       </Grid>
                       <Grid container>
@@ -142,7 +162,7 @@ export default function DetailsTabDisplay(props) {
                           SAT Score: {students.satTestScore}
                         </Grid>
                         <Grid item xs={4}>
-                          SAT Date: {students.satTestDate}
+                          SAT Date: {getParsedDate(students.satTestDate)}
                         </Grid>
                       </Grid>
                     </Stack>
