@@ -267,7 +267,7 @@ export default function DetailsTabEdit(props) {
                   height: '3px',
                 },
               }}
-              sx={{ bgcolor: '#2656A5' }}
+              sx={{ bgcolor: '#004cbb' }}
             >
               <Tab label="Education" />
               {/* <Tab label="Goals" />

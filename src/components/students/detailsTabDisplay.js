@@ -67,7 +67,6 @@ export default function DetailsTabDisplay(props) {
         <AppBar position="sticky">
           <Tabs
             value={value}
-            sx={{ bgcolor: '#2656A5' }}
             onChange={handleChange}
             indicatorColor="secondary"
             textColor="inherit"
@@ -214,10 +213,10 @@ export default function DetailsTabDisplay(props) {
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">
               <Grid item xs={12} style={{ height: '73vh' }}>
-              <Grid item xs={12} style={{ height: '64vh' }}>
-                <Grid>
-                  <Box>
-                    {/* <ColorButton
+                <Grid item xs={12} style={{ height: '64vh' }}>
+                  <Grid>
+                    <Box>
+                      {/* <ColorButton
                       style={{ float: 'right' }}
                       variant="contained"
                       onClick={onEditClick}
@@ -225,29 +224,31 @@ export default function DetailsTabDisplay(props) {
                     >
                       Edit
                     </ColorButton> */}
-                    <CreateCareerModal studentId={students.id} />
+                      <CreateCareerModal studentId={students.id} />
 
-                    {careers.map((career, index) => {
-                      return (
-                        <div key={career.id}>
-                          <h3 style={{ color: '#2656A5' }}>
-                            Career {index + 1}
-                          </h3>
-                          <h5>
-                            I am College Bound: {career.collegeBound.toString()}
-                          </h5>
-                          <h5>
-                            Number of Career Clusters: {career.careerCluster}
-                          </h5>
-                          <h5>Career of Choice: {career.specificCareer}</h5>
-                          <h5>
-                            I am Techinical Bound:{' '}
-                            {career.technicalCollegeBound.toString()}
-                          </h5>
-                        </div>
-                      );
-                    })}
-                  </Box>
+                      {careers.map((career, index) => {
+                        return (
+                          <div key={career.id}>
+                            <h3 style={{ color: '#2656A5' }}>
+                              Career {index + 1}
+                            </h3>
+                            <h5>
+                              I am College Bound:{' '}
+                              {career.collegeBound.toString()}
+                            </h5>
+                            <h5>
+                              Number of Career Clusters: {career.careerCluster}
+                            </h5>
+                            <h5>Career of Choice: {career.specificCareer}</h5>
+                            <h5>
+                              I am Techinical Bound:{' '}
+                              {career.technicalCollegeBound.toString()}
+                            </h5>
+                          </div>
+                        );
+                      })}
+                    </Box>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>

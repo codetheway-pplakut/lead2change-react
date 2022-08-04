@@ -4,15 +4,12 @@ import Modal from '@mui/material/Modal';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
-import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import PropTypes from 'prop-types';
 import CloseIcon from '@mui/icons-material/Close';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { createTheme } from '@mui/material/styles';
 import AddIcon from '@mui/icons-material/Add';
 import { useParams } from 'react-router-dom';
-import ColorButton from '../coaches/Shared/ColoredButton';
 import { addGoal } from '../../services/goals/goals';
 
 export default function CreateGoalModal(props) {
