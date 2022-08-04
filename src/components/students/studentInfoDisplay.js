@@ -52,7 +52,7 @@ export default function StudentInfoDisplay(props) {
             textAlign: 'center',
             width: '50vh',
             mr: '10vh',
-            height: '70vh',
+            height: '74vh',
             overflowY: 'auto',
           }}
           style={{ marginLeft: '3vh' }}

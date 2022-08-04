@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Box, Grid, AppBar, Tab, Tabs, Typography, Stack } from '@mui/material';
 import ColorButton from '../coaches/Shared/ColoredButton';
 import CreateGoalModal from './create-goal-modal';
-import AddCareer from './addCareer';
+import CreateCareerModal from './create-career-modal';
 
 function TabPanel(props) {
   const { children, value, index } = props;
@@ -14,6 +14,7 @@ function TabPanel(props) {
       hidden={value !== index}
       id={`full-width-tabpanel-${index}`}
       aria-labelledby={`full-width-tab-${index}`}
+      bgcolor="black"
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
@@ -38,18 +39,15 @@ export default function DetailsTabDisplay(props) {
     setValue(newValue);
   };
 
-  // const filteredArray = students.filter((student) => {
-  //   return goals.id === goalId;
-  // });
-
   return (
     <div style={{ marginRight: '8vh' }}>
       <Box
         sx={{ bgcolor: 'background.paper', width: '100vh', overflowY: 'auto' }}
       >
-        <AppBar position="static">
+        <AppBar position="sticky">
           <Tabs
             value={value}
+            sx={{ bgcolor: '#2656A5' }}
             onChange={handleChange}
             indicatorColor="secondary"
             textColor="inherit"
@@ -172,11 +170,9 @@ export default function DetailsTabDisplay(props) {
                   >
                     Edit
                   </ColorButton>
-                  <CreateGoalModal studentId={students.id}>
-                    + goal
-                  </CreateGoalModal>
+                  <CreateGoalModal studentId={students.id} />
                   {goals.map((goal, index) => (
-                    <>
+                    <Box key={goal.id}>
                       <h3 style={{ color: '#2656A5' }}>Goal {index + 1}</h3>
                       <h5>Goal: {goal.goalSet}</h5>
                       <h5>Goal Set Date: {goal.dateGoalSet}</h5>
@@ -184,7 +180,7 @@ export default function DetailsTabDisplay(props) {
                       <h5>Goal Review Date:{goal.goalReviewDate}</h5>
                       <h5>Accomplishment State: {goal.wasItAccomplished}</h5>
                       <h5>Explanation: {goal.explanation}</h5>
-                    </>
+                    </Box>
                   ))}
                 </Box>
               </Grid>
@@ -194,7 +190,7 @@ export default function DetailsTabDisplay(props) {
         <TabPanel value={value} index={2} style={{ overflowY: 'auto' }}>
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">
-              <Grid item xs={12} style={{ height: '30vh' }}>
+              <Grid item xs={12} style={{ height: '64vh' }}>
                 <Grid>
                   <Box>
                     <ColorButton
@@ -204,15 +200,28 @@ export default function DetailsTabDisplay(props) {
                     >
                       Edit
                     </ColorButton>
-                    <AddCareer studentId={students.id}>+ New Career</AddCareer>
-                    <h3 style={{ color: '#2656A5' }}>Career Information</h3>
-                    <h5>I am College Bound: {String(careers.collegeBound)}</h5>
-                    <h5>Number of Career Clusters: {careers.careerCluster}</h5>
-                    <h5>Career of Choice: {careers.specificCluster}</h5>
-                    <h5>
-                      I am Techinical Bound:{' '}
-                      {String(careers.technicalCollegeBound)}
-                    </h5>
+                    <CreateCareerModal studentId={students.id} />
+
+                    {careers.map((career, index) => {
+                      return (
+                        <div key={career.id}>
+                          <h3 style={{ color: '#2656A5' }}>
+                            Career {index + 1}
+                          </h3>
+                          <h5>
+                            I am College Bound: {career.collegeBound.toString()}
+                          </h5>
+                          <h5>
+                            Number of Career Clusters: {career.careerCluster}
+                          </h5>
+                          <h5>Career of Choice: {career.specificCareer}</h5>
+                          <h5>
+                            I am Techinical Bound:{' '}
+                            {career.technicalCollegeBound.toString()}
+                          </h5>
+                        </div>
+                      );
+                    })}
                   </Box>
                 </Grid>
               </Grid>
