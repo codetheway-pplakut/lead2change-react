@@ -23,6 +23,26 @@ const StudentInfo = styled(Box)(({ theme }) => ({
   borderRadius: 1,
 }));
 
+function getParsedDate(strDate) {
+  if (strDate === null) {
+    return '';
+  }
+  const strSplitDate = String(strDate).split(' ');
+  let date = new Date(strSplitDate[0]);
+  let dd = date.getDate();
+  let mm = date.getMonth() + 1;
+
+  const yyyy = date.getFullYear();
+  if (dd < 10) {
+    dd = `0${dd}`;
+  }
+  if (mm < 10) {
+    mm = `0${mm}`;
+  }
+  date = `${dd}-${mm}-${yyyy}`;
+  return date.toString();
+}
+
 export default function StudentInfoDisplay(props) {
   const { studentId } = useParams();
   const [students, setStudents] = useState({});
@@ -35,6 +55,7 @@ export default function StudentInfoDisplay(props) {
     currentStudent();
   }, [studentId]);
   const { onEditClick } = props;
+
   return (
     <Grid container>
       <Grid item xs={4}>
@@ -73,7 +94,7 @@ export default function StudentInfoDisplay(props) {
               <h3 component="span">
                 Date of Birth: {'  '}
                 <Box component="span" style={{ fontWeight: 'normal' }}>
-                  {students.studentDateOfBirth}
+                  {getParsedDate(students.studentDateOfBirth)}
                 </Box>
               </h3>
             </StudentInfo>
