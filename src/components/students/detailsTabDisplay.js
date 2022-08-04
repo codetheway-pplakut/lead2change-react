@@ -172,9 +172,7 @@ export default function DetailsTabDisplay(props) {
                   >
                     Edit
                   </ColorButton>
-                  <CreateGoalModal studentId={students.id}>
-                    + goal
-                  </CreateGoalModal>
+                  <CreateGoalModal studentId={students.id} />
                   {goals.map((goal, index) => (
                     <>
                       <h3 style={{ color: '#2656A5' }}>Goal {index + 1}</h3>
