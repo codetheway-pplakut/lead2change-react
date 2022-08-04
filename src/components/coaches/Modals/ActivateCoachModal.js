@@ -119,7 +119,7 @@ export default function ReactivationModal(props) {
                 style={{ minWidth: '120px' }}
               >
                 <Typography paddingTop="5px" paddingBottom="5px">
-                  Deactivate
+                  Reactivate
                 </Typography>
               </Button>
             </Grid>
