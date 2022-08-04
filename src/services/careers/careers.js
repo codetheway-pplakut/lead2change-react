@@ -25,6 +25,5 @@ export const getCareersById = (id) => {
 };
 
 export const getStudentCareers = async (id) => {
-  return callApi({endpoint: `${SERVICE_ROOT_STUDENT_CAREERS}/${id}` });
-    
+  return callApi({ endpoint: `${SERVICE_ROOT_STUDENT_CAREERS}/${id}` });
 };
