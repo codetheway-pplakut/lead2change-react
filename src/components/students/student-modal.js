@@ -13,6 +13,8 @@ import {
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 
+import { createTheme } from '@mui/material/styles';
+
 export default function StudentModal(props) {
   const { modalType, confirmHandler, studentId } = props;
 
@@ -39,12 +41,11 @@ export default function StudentModal(props) {
     position: 'absolute',
     top: '50%',
     left: '50%',
+    width: 430,
     transform: 'translate(-50%, -50%)',
-    width: 400,
     bgcolor: 'background.paper',
-    border: '',
+    borderRadius: '10px',
     boxShadow: 24,
-    p: 4,
   };
 
   const [open, setOpen] = React.useState(false);
@@ -54,6 +55,19 @@ export default function StudentModal(props) {
     confirmHandler(studentId);
     handleClose();
   };
+
+  const buttonTheme = createTheme({
+    palette: {
+      delete: {
+        main: '#004cbb',
+        contrastText: '#fff',
+      },
+      cancel: {
+        main: '#004cbb',
+        contrastText: '#fff',
+      },
+    },
+  });
 
   return (
     <Box>
@@ -73,30 +87,65 @@ export default function StudentModal(props) {
         </IconButton>
       )}
       <Modal open={open} onClose={handleClose}>
-        <Box sx={style} component="span">
-          <Typography variant="h6" align="center" component="span">
-            Are you sure you want to {modalType} this student?
-          </Typography>
-          <Grid container spacing={4} sx={{ mt: '1vh' }} component="span">
-            <Grid item xs={6} align="center" component="span">
-              <StyledButton
-                component="span"
+        <Box sx={style}>
+          <Grid container>
+            <Grid
+              item
+              sx={{
+                bgcolor: '#004cbb',
+                color: 'white',
+                borderTopLeftRadius: 10,
+                borderTopRightRadius: 10,
+              }}
+              xs={12}
+            >
+              <Grid container alignItems="center" sx={{ margin: 1 }}>
+                <Grid item xs={2} />
+                <Grid item xs={8}>
+                  <Typography
+                    variant="h5"
+                    component="h2"
+                    align="center"
+                    padding="10px"
+                  >
+                    {modalType} Student
+                  </Typography>
+                  <IconButton
+                    onClick={handleClose}
+                    sx={{ position: 'absolute', right: 8, top: 8 }}
+                  >
+                    <CloseIcon fontSize="large" sx={{ color: 'white' }} />
+                  </IconButton>
+                </Grid>
+                <Grid item xs={1} />
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid container spacing={1} sx={{ p: 2 }} justifyContent="center">
+            <Grid item xs={4} align="center" component="span">
+              <Button
+                theme={buttonTheme}
+                color="delete"
                 variant="contained"
                 onClick={confirm}
-                fullWidth
+                style={{ minWidth: '120px' }}
               >
-                {modalType}
-              </StyledButton>
+                <Typography paddingTop="5px" paddingBottom="5px">
+                  {modalType}
+                </Typography>
+              </Button>
             </Grid>
-            <Grid item xs={6} align="center" component="span">
-              <CancelButton
+            <Grid xs={1} />
+            <Grid item xs={4} align="center" component="span">
+              <Button
+                theme={buttonTheme}
+                color="cancel"
                 variant="contained"
                 onClick={handleClose}
-                component="span"
-                fullWidth
+                style={{ minWidth: '120px' }}
               >
-                Cancel
-              </CancelButton>
+                <Typography padding="5px">Cancel</Typography>
+              </Button>
             </Grid>
           </Grid>
         </Box>

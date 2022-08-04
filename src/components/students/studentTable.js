@@ -549,7 +549,7 @@ export default function StudentTable() {
                         <Grid container spacing={2}>
                           <Grid item>
                             <StudentModal
-                              modalType="deactivate"
+                              modalType="Deactivate"
                               studentId={student.id}
                               confirmHandler={deactivateHandler}
                             />
@@ -640,7 +640,7 @@ export default function StudentTable() {
                         <Grid container spacing={2}>
                           <Grid item>
                             <StudentModal
-                              modalType="reactivate"
+                              modalType="Reactivate"
                               studentId={student.id}
                               confirmHandler={activateHandler}
                             />
@@ -729,7 +729,7 @@ export default function StudentTable() {
                         <Grid container spacing={2}>
                           <Grid item>
                             <StudentModal
-                              modalType="accept"
+                              modalType="Accept"
                               studentId={student.id}
                               confirmHandler={activateHandler}
                             />
@@ -740,7 +740,7 @@ export default function StudentTable() {
                         <Grid container spacing={2}>
                           <Grid item>
                             <StudentModal
-                              modalType="decline"
+                              modalType="Decline"
                               studentId={student.id}
                               confirmHandler={declineHandler}
                             />
