@@ -249,9 +249,7 @@ export default function DetailsTabEdit(props) {
   };
   return (
     <div style={{ marginRight: '8vh' }}>
-      <Box
-        sx={{ bgcolor: 'background.paper', width: '100vh', overflowY: 'auto' }}
-      >
+      <Box sx={{ bgcolor: 'background.paper', overflowY: 'auto' }}>
         <form onSubmit={onSaveClick}>
           <AppBar position="sticky">
             <Tabs
