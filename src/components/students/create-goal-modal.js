@@ -4,9 +4,12 @@ import Modal from '@mui/material/Modal';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
-import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import CloseIcon from '@mui/icons-material/Close';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import { createTheme } from '@mui/material/styles';
+import AddIcon from '@mui/icons-material/Add';
 import { useParams } from 'react-router-dom';
-import ColorButton from '../coaches/Shared/ColoredButton';
 import { addGoal } from '../../services/goals/goals';
 
 export default function CreateGoalModal(props) {
@@ -38,51 +41,79 @@ export default function CreateGoalModal(props) {
       window.location.reload(false);
     }
   };
+  const buttonTheme = createTheme({
+    palette: {
+      delete: {
+        main: '#004cbb',
+        contrastText: '#fff',
+      },
+      cancel: {
+        main: '#004cbb',
+        contrastText: '#fff',
+      },
+    },
+  });
 
   const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
+    width: 430,
     transform: 'translate(-50%, -50%)',
-    minWidth: '750px',
-    width: '50%',
-    backgroundColor: 'white',
-    boxShadow: 12,
+    bgcolor: 'background.paper',
+    borderRadius: '10px',
+    boxShadow: 24,
   };
+
   return (
     <div>
-      <ColorButton variant="contained" onClick={handleOpen}>
-        + New Goal
-      </ColorButton>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
+      <Button
+        variant="contained"
+        onClick={handleOpen}
+        studentId={studentId}
+        startIcon={<AddIcon />}
+        sx={{ padding: '8px', minWidth: '100px' }}
+        theme={buttonTheme}
+        color="cancel"
       >
-        <Grid container sx={style}>
+        New Goal
+      </Button>
+      <Modal open={open} onClose={handleClose}>
+        <Box sx={style}>
           <Grid container>
-            <Grid item sx={{ bgcolor: '#004cbb', color: 'white' }} xs={12}>
+            <Grid
+              item
+              sx={{
+                bgcolor: '#004cbb',
+                color: 'white',
+                borderTopLeftRadius: 10,
+                borderTopRightRadius: 10,
+              }}
+              xs={12}
+            >
               <Grid container alignItems="center" sx={{ margin: 1 }}>
                 <Grid item xs={2} />
                 <Grid item xs={8}>
-                  <Typography variant="h5" component="span" align="center">
+                  <Typography
+                    variant="h5"
+                    component="h2"
+                    align="center"
+                    padding="10px"
+                  >
                     New Goal
                   </Typography>
-                </Grid>
-                <Grid item xs={1} />
-                <Grid item>
                   <IconButton
-                    align="right"
-                    size="medium"
                     onClick={handleClose}
-                    sx={{ color: 'white' }}
+                    sx={{ position: 'absolute', right: 8, top: 8 }}
                   >
-                    <CloseOutlinedIcon />
+                    <CloseIcon fontSize="large" sx={{ color: 'white' }} />
                   </IconButton>
                 </Grid>
+                <Grid item xs={1} />
               </Grid>
             </Grid>
           </Grid>
+
           <Grid container>
             <Grid item xs={12}>
               <Grid container spacing={1} sx={{ p: 2 }} justifyContent="center">
@@ -111,10 +142,10 @@ export default function CreateGoalModal(props) {
                   />
                 </Grid>
                 <Grid item xs={6}>
+                  <Typography>Goal Set Date:</Typography>
                   <TextField
                     value={dateGoalSet}
                     fullWidth
-                    label="Date Goal Set:"
                     type="date"
                     variant="outlined"
                     size="small"
@@ -124,10 +155,10 @@ export default function CreateGoalModal(props) {
                   />
                 </Grid>
                 <Grid item xs={6}>
+                  <Typography>Goal review date:</Typography>
                   <TextField
                     value={goalReviewDate}
                     fullWidth
-                    label="Goal Review Date:"
                     type="date"
                     variant="outlined"
                     size="small"
@@ -160,36 +191,51 @@ export default function CreateGoalModal(props) {
                     }}
                   />
                 </Grid>
-                <Grid item xs={2}>
-                  <ColorButton
-                    variant="contained"
-                    fullWidth
-                    onClick={Create}
-                    value={
-                      (goalSet,
-                      dateGoalSet,
-                      sel,
-                      goalReviewDate,
-                      wasItAccomplished,
-                      explanation)
-                    }
-                  >
-                    Create
-                  </ColorButton>
-                </Grid>
-                <Grid item xs={2}>
-                  <ColorButton
-                    variant="contained"
-                    fullWidth
-                    onClick={handleClose}
-                  >
-                    Cancel
-                  </ColorButton>
+                <Grid
+                  container
+                  spacing={1}
+                  sx={{ p: 2 }}
+                  justifyContent="center"
+                >
+                  <Grid item xs={4}>
+                    <Button
+                      theme={buttonTheme}
+                      color="delete"
+                      variant="contained"
+                      onClick={Create}
+                      style={{ minWidth: '120px' }}
+                      value={
+                        (goalSet,
+                        dateGoalSet,
+                        sel,
+                        goalReviewDate,
+                        wasItAccomplished,
+                        explanation)
+                      }
+                    >
+                      <Typography paddingTop="5px" paddingBottom="5px">
+                        Add Goal
+                      </Typography>
+                    </Button>
+                  </Grid>
+                  <Grid xs={1} />
+
+                  <Grid item xs={4}>
+                    <Button
+                      theme={buttonTheme}
+                      color="cancel"
+                      variant="contained"
+                      onClick={handleClose}
+                      style={{ minWidth: '120px' }}
+                    >
+                      <Typography padding="5px">Cancel</Typography>
+                    </Button>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
+        </Box>
       </Modal>
     </div>
   );

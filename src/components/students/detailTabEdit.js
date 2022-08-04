@@ -249,9 +249,7 @@ export default function DetailsTabEdit(props) {
   };
   return (
     <div style={{ marginRight: '8vh' }}>
-      <Box
-        sx={{ bgcolor: 'background.paper', width: '100vh', overflowY: 'auto' }}
-      >
+      <Box sx={{ bgcolor: 'background.paper', overflowY: 'auto' }}>
         <form onSubmit={onSaveClick}>
           <AppBar position="sticky">
             <Tabs
@@ -263,15 +261,15 @@ export default function DetailsTabEdit(props) {
               aria-label="full width tabs example"
               TabIndicatorProps={{
                 style: {
-                  backgroundColor: '#FFFFFF',
+                  backgroundColory: '#FFFFFF',
                   height: '3px',
                 },
               }}
-              sx={{ bgcolor: '#2656A5' }}
+              sx={{ bgcolor: '#004cbb' }}
             >
               <Tab label="Education" />
-              <Tab label="Goals" />
-              <Tab label="Careers" />
+              {/* <Tab label="Goals" />
+              <Tab label="Careers" /> */}
               <Tab label="Other" />
             </Tabs>
           </AppBar>
@@ -572,7 +570,7 @@ export default function DetailsTabEdit(props) {
               </Grid>
             </Box>
           </TabPanel>
-          <TabPanel value={value} index={1} style={{ overflowY: 'auto' }}>
+          {/* <TabPanel value={value} index={1} style={{ overflowY: 'auto' }}>
             <Box sx={{ flexGrow: 1 }}>
               <Grid
                 container
@@ -767,89 +765,8 @@ export default function DetailsTabEdit(props) {
               </Grid>
             </Box>
           </TabPanel>
-          <TabPanel value={value} index={2} style={{ overflowY: 'auto' }}>
-            <Box sx={{ flexGrow: 1 }}>
-              <Grid
-                container
-                justifyContent="flex-end"
-                style={{ height: '60vh' }}
-              >
-                <Grid item xs={12} style={{ height: '64vh' }}>
-                  <Grid>
-                    <h3 style={{ color: '#2656A5' }}>Career Information</h3>
-                    <FormControl
-                      variant="standard"
-                      sx={{ m: 1, minWidth: '22vh' }}
-                    >
-                      <InputLabel id="demo-simple-select-standard-label">
-                        I am College Bound{' '}
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-standard-label"
-                        id="demo-simple-select-standard"
-                        label="College Bound?"
-                        fullWidth
-                        value={enteredIsCollegeBound}
-                        onChange={(event) =>
-                          setEnteredIsCollegeBound(event.target.value)
-                        }
-                      >
-                        <MenuItem value="" />
-                        <MenuItem value={10}>Yes</MenuItem>
-                        <MenuItem value={20}>No</MenuItem>
-                      </Select>
-                    </FormControl>
-                    <Grid marginBottom={2}>
-                      <TextField
-                        size="small"
-                        className="typing-container"
-                        value={enteredCareerCluster}
-                        label="Number of Career Clusters"
-                        onChange={(event) =>
-                          setEnteredCareerCluster(event.target.value)
-                        }
-                        required
-                      />
-                    </Grid>
-                    <Grid marginBottom={2}>
-                      <TextField
-                        size="small"
-                        className="typing-container"
-                        value={enteredSpecificCluster}
-                        label="Career of Choice"
-                        onChange={(event) =>
-                          setEnteredSpecificCluster(event.target.value)
-                        }
-                        required
-                      />
-                    </Grid>
-                    <FormControl
-                      variant="standard"
-                      sx={{ m: 1, minWidth: 200 }}
-                    >
-                      <InputLabel id="demo-simple-select-standard-label">
-                        I am Technical Bound{' '}
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-standard-label"
-                        id="demo-simple-select-standard"
-                        label="Technical Bound?"
-                        value={enteredTechnicalCollegeBound}
-                        onChange={(event) =>
-                          setEnteredTechnicalCollegeBound(event.target.value)
-                        }
-                      >
-                        <MenuItem value="" />
-                        <MenuItem value={10}>Yes</MenuItem>
-                        <MenuItem value={20}>No</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Box>
-          </TabPanel>
-          <TabPanel value={value} index={3} style={{ overflowY: 'auto' }}>
+           */}
+          <TabPanel value={value} index={1} style={{ overflowY: 'auto' }}>
             <Box sx={{ flexGrow: 1 }}>
               <Grid
                 container
@@ -1052,10 +969,10 @@ export default function DetailsTabEdit(props) {
                       />
                     </Grid>
                     <Grid marginBottom={2}>
+                      <Typography>Date signed</Typography>
                       <TextField
                         size="small"
                         className="typing-container"
-                        label="Date Signed"
                         type="date"
                         value={enteredStudentSignatureDate}
                         onChange={(event) =>
@@ -1078,10 +995,10 @@ export default function DetailsTabEdit(props) {
                       />
                     </Grid>
                     <Grid marginBottom={2}>
+                      <Typography>Date signed</Typography>
                       <TextField
                         size="small"
                         className="typing-container"
-                        label="Date Signed"
                         type="date"
                         value={enteredParentSignatureDate}
                         onChange={(event) =>

@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { experimentalStyled as styled } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import { useParams } from 'react-router-dom';
 import ColorButton from '../coaches/Shared/ColoredButton';
-
-import { getStudentById } from '../../services/students/students';
 
 const StudentInfo = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -39,22 +36,12 @@ function getParsedDate(strDate) {
   if (mm < 10) {
     mm = `0${mm}`;
   }
-  date = `${dd}-${mm}-${yyyy}`;
+  date = `${mm}-${dd}-${yyyy}`;
   return date.toString();
 }
 
 export default function StudentInfoDisplay(props) {
-  const { studentId } = useParams();
-  const [students, setStudents] = useState({});
-
-  useEffect(() => {
-    const currentStudent = async () => {
-      const currStudent = await getStudentById(studentId);
-      setStudents(currStudent);
-    };
-    currentStudent();
-  }, [studentId]);
-  const { onEditClick } = props;
+  const { student, onEditClick } = props;
 
   return (
     <Grid container>
@@ -63,26 +50,26 @@ export default function StudentInfoDisplay(props) {
           sx={{
             '#1A2027': '#fff',
             textAlign: 'center',
-            width: '50vh',
+            width: '70vh',
             mr: '10vh',
-            height: '74vh',
+            height: '90vh',
             overflowY: 'auto',
+            marginLeft: '3vh',
+            marginRight: '3vh',
           }}
-          style={{ marginLeft: '3vh' }}
         >
           <Grid
             container
             spacing={0}
-            align="center"
-            justify="center"
             direction="column"
-            style={{ backgroundColor: '#2656A5', color: '#FFFFFF' }}
+            style={{ backgroundColor: '#004cbb', color: '#FFFFFF' }}
           >
             <h2>Student Info</h2>
           </Grid>
           <Grid marginRight={1} marginTop={1}>
             <ColorButton
               style={{ float: 'right' }}
+              sx={{ bgcolor: '#004cbb' }}
               variant="contained"
               onClick={onEditClick}
             >
@@ -91,58 +78,58 @@ export default function StudentInfoDisplay(props) {
           </Grid>
           <Grid style={{ margin: '2vh' }}>
             <StudentInfo>
-              <h3 component="span">
+              <h3 component="span" align="left">
                 Date of Birth: {'  '}
                 <Box component="span" style={{ fontWeight: 'normal' }}>
-                  {getParsedDate(students.studentDateOfBirth)}
+                  {getParsedDate(student.studentDateOfBirth)}
                 </Box>
               </h3>
             </StudentInfo>
             <StudentInfo>
-              <h3 component="span">
+              <h3 component="span" align="left">
                 Email Address:{' '}
                 <Box component="span" style={{ fontWeight: 'normal' }}>
-                  {students.studentEmail}
+                  {student.studentEmail}
                 </Box>
               </h3>
             </StudentInfo>
             <StudentInfo>
-              <h3 component="span">
+              <h3 component="span" align="left">
                 Phone Number:{' '}
                 <Box component="span" style={{ fontWeight: 'normal' }}>
-                  {students.studentCellPhone}
+                  {student.studentCellPhone}
                 </Box>
               </h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>
+              <h3 align="left">
                 Home Address:{' '}
                 <Box component="span" style={{ fontWeight: 'normal' }}>
-                  {students.studentAddress}
+                  {student.studentAddress}
                 </Box>
               </h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>
+              <h3 align="left">
                 Apt. #:{' '}
                 <Box component="span" style={{ fontWeight: 'normal' }}>
-                  {students.studentApartmentNumber}
+                  {student.studentApartmentNumber}
                 </Box>
               </h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>
+              <h3 align="left">
                 State:{' '}
                 <Box component="span" style={{ fontWeight: 'normal' }}>
-                  {students.studentState}
+                  {student.studentState}
                 </Box>
               </h3>
             </StudentInfo>
             <StudentInfo>
-              <h3>
+              <h3 align="left">
                 Zip Code:{' '}
                 <Box component="span" style={{ fontWeight: 'normal' }}>
-                  {students.studentZipCode}
+                  {student.studentZipCode}
                 </Box>
               </h3>
             </StudentInfo>
@@ -155,4 +142,5 @@ export default function StudentInfoDisplay(props) {
 
 StudentInfoDisplay.propTypes = {
   onEditClick: PropTypes.func.isRequired,
+  student: PropTypes.object.isRequired,
 };

@@ -136,11 +136,6 @@ export default function CoachAssignModal(props) {
           <Box paddingTop="10px" paddingBottom="10px" paddingLeft="20px">
             <FormControl>
               <RadioGroup value={value} onChange={handleCoachChange}>
-                <FormControlLabel
-                  value="Unassigned"
-                  control={<StyledRadio />}
-                  label="Unassigned"
-                />
                 {coaches
                   .filter((item) => item.active === true)
                   .map((coach) => (

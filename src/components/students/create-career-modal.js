@@ -52,7 +52,11 @@ export default function CreateCareerModal(props) {
 
   return (
     <div>
-      <ColorButton variant="contained" onClick={handleOpen}>
+      <ColorButton
+        variant="contained"
+        sx={{ bgcolor: '#004cbb', color: 'white' }}
+        onClick={handleOpen}
+      >
         + New Career
       </ColorButton>
       <Modal
