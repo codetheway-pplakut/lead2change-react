@@ -55,9 +55,14 @@ export default function ReactivationModal(props) {
 
   return (
     <div>
-      <ColorButton variant="contained" onClick={handleOpen}>
+      <Button
+        variant="contained"
+        onClick={handleOpen}
+        theme={buttonTheme}
+        color="cancel"
+      >
         Reactivate
-      </ColorButton>
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}

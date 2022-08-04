@@ -13,11 +13,14 @@ import {
   TableSortLabel,
   Typography,
   Paper,
+  Box,
+  Button,
   Grid,
   IconButton,
 } from '@mui/material';
 import { useNavigate } from 'react-router';
-import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import CloseIcon from '@mui/icons-material/Close';
+import { createTheme } from '@mui/material/styles';
 import ColorButton from './Shared/ColoredButton';
 
 function descendingComparator(a, b, orderBy) {
@@ -128,6 +131,29 @@ function StudentListModal(props) {
     coach.students = [];
   }
 
+  const buttonTheme = createTheme({
+    palette: {
+      save: {
+        main: '#004cbb',
+        contrastText: '#fff',
+      },
+      cancel: {
+        main: '#004cbb',
+        contrastText: '#fff',
+      },
+    },
+  });
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    width: 600,
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'background.paper',
+    borderRadius: '10px',
+    boxShadow: 24,
+  };
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -155,36 +181,52 @@ function StudentListModal(props) {
   };
   return (
     <div>
-      <ColorButton onClick={handleOpen} variant="contained">
+      <Button
+        onClick={handleOpen}
+        variant="contained"
+        theme={buttonTheme}
+        color="cancel"
+      >
         Student List
-      </ColorButton>
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Grid container variant="large">
+        <Box sx={style}>
           <Grid container>
-            <Grid item sx={{ bgcolor: '#2656A5', color: 'white' }} xs={12}>
-              <Grid container>
+            <Grid
+              item
+              sx={{
+                bgcolor: '#004cbb',
+                color: 'white',
+                borderTopLeftRadius: '10px',
+                borderTopRightRadius: '10px',
+              }}
+              xs={12}
+            >
+              <Grid container alignItems="center" sx={{ margin: 1 }}>
                 <Grid item xs={2} />
-                <Grid item xs={8} sx={{ margin: 2 }}>
-                  <Typography variant="h5" component="h2" align="center">
+                <Grid item xs={8}>
+                  <Typography
+                    variant="h5"
+                    component="h2"
+                    align="center"
+                    padding="10px"
+                  >
                     {coach.coachFirstName} {coach.coachLastName}&#39;s Students
                     ({coach.students.length})
                   </Typography>
-                </Grid>
-                <Grid item sx={{ margin: 1.5 }}>
                   <IconButton
-                    align="right"
-                    size="medium"
                     onClick={handleClose}
-                    sx={{ color: 'white' }}
+                    sx={{ position: 'absolute', right: 8, top: 8 }}
                   >
-                    <CloseOutlinedIcon />
+                    <CloseIcon fontSize="large" sx={{ color: 'white' }} />
                   </IconButton>
                 </Grid>
+                <Grid item xs={1} />
               </Grid>
             </Grid>
           </Grid>
@@ -237,7 +279,7 @@ function StudentListModal(props) {
               </Table>
             </TableContainer>
           </Paper>
-        </Grid>
+        </Box>
       </Modal>
     </div>
   );

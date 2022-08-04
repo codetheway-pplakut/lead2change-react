@@ -77,7 +77,7 @@ export default function EditCoachModal(props) {
   });
   return (
     <div>
-      <IconButton sx={{ color: '#2656A5' }} size="small" onClick={handleOpen}>
+      <IconButton sx={{ color: '#004cbb' }} size="small" onClick={handleOpen}>
         <EditIcon />
       </IconButton>
       <Modal

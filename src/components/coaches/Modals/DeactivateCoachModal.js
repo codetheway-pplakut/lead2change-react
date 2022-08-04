@@ -49,9 +49,14 @@ export default function InactivationModal(props) {
 
   return (
     <div>
-      <ColorButton variant="contained" onClick={handleOpen}>
+      <Button
+        variant="contained"
+        onClick={handleOpen}
+        theme={buttonTheme}
+        color="cancel"
+      >
         Deactivate
-      </ColorButton>
+      </Button>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <Grid container>
