@@ -13,19 +13,14 @@ import {
 import { getGoalsByStudentId } from '../../services/goals/goals';
 
 export default function ResponsiveGrid(props) {
+  const { studentId } = useParams();
+
   const [goals, setGoals] = useState([]);
   const [career, setCareer] = useState([]);
-  const { studentId } = useParams();
   const [students, setStudents] = useState({});
-
-  const refreshStudents = async () => {
-    const result = await getStudentById(studentId);
-    setStudents(result);
-  };
 
   const updateStudentInfo = async (student) => {
     await updateStudent(student);
-    await refreshStudents();
   };
 
   useEffect(() => {
@@ -33,38 +28,22 @@ export default function ResponsiveGrid(props) {
       const currStudent = await getStudentById(studentId);
       setStudents(currStudent);
     };
-    currentStudent();
     const currentGoal = async () => {
       const currGoal = await getGoalsByStudentId(studentId);
       setGoals(currGoal);
     };
-
     const currentCareer = async () => {
       const currCareer = await getCareersById(studentId);
       setCareer(currCareer);
     };
+    currentStudent();
     currentCareer();
     currentGoal();
-  }, [studentId]);
+  }, []);
 
   const [isEditing, setIsEditing] = useState(false);
   const startEditing = () => setIsEditing(true);
   const endEditing = () => setIsEditing(false);
-  const cancelEditing = () => setIsEditing(false);
-
-  const saveStudentInfo = (studentInfo) => {
-    updateStudent(studentInfo);
-    refreshStudents();
-  };
-
-  const onSaveClick = async (event) => {
-    saveStudentInfo(students);
-    endEditing();
-  };
-
-  const onCancelClick = () => {
-    cancelEditing();
-  };
 
   return (
     <Grid container>
@@ -89,17 +68,11 @@ export default function ResponsiveGrid(props) {
             students={students}
             goals={goals}
             careers={career}
-            onSaveClick={onSaveClick}
-            onCancelClick={onCancelClick}
+            onDoneClick={endEditing}
             updateFunction={updateStudentInfo}
           />
         ) : (
-          <StudentInfoDisplay
-            students={students}
-            goals={goals}
-            careers={career}
-            onEditClick={startEditing}
-          />
+          <StudentInfoDisplay student={students} onEditClick={startEditing} />
         )}
         <TabsFunction
           students={students}

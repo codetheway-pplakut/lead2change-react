@@ -22,7 +22,8 @@ const StudentInfo = styled(Box)(({ theme }) => ({
 }));
 
 export default function StudentInfoEdit(props) {
-  const { updateFunction, onSaveClick, onCancelClick, students } = props;
+  const { updateFunction, onDoneClick, students } = props;
+
   const [enteredFirstName, setEnteredFirstName] = React.useState(
     students.studentFirstName
   );
@@ -62,7 +63,7 @@ export default function StudentInfoEdit(props) {
 
   return (
     <Grid container>
-      <form onSubmit={onSaveClick}>
+      <form onSubmit={onDoneClick}>
         <Grid>
           <Paper
             sx={{
@@ -217,7 +218,7 @@ export default function StudentInfoEdit(props) {
                 Save
               </ColorButton>
               {'   '}
-              <ColorButton variant="contained" onClick={onCancelClick}>
+              <ColorButton variant="contained" onClick={onDoneClick}>
                 Cancel
               </ColorButton>
             </Grid>
@@ -229,8 +230,7 @@ export default function StudentInfoEdit(props) {
 }
 
 StudentInfoEdit.propTypes = {
-  onSaveClick: PropTypes.func.isRequired,
-  onCancelClick: PropTypes.func.isRequired,
+  onDoneClick: PropTypes.func.isRequired,
   updateFunction: PropTypes.func.isRequired,
   students: PropTypes.object.isRequired,
 };
