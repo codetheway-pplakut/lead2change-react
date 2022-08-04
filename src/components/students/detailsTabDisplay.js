@@ -14,6 +14,7 @@ function TabPanel(props) {
       hidden={value !== index}
       id={`full-width-tabpanel-${index}`}
       aria-labelledby={`full-width-tab-${index}`}
+      bgcolor="black"
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
@@ -58,18 +59,15 @@ export default function DetailsTabDisplay(props) {
     setValue(newValue);
   };
 
-  // const filteredArray = students.filter((student) => {
-  //   return goals.id === goalId;
-  // });
-
   return (
     <div style={{ marginRight: '8vh' }}>
       <Box
         sx={{ bgcolor: 'background.paper', width: '100vh', overflowY: 'auto' }}
       >
-        <AppBar position="static">
+        <AppBar position="sticky">
           <Tabs
             value={value}
+            sx={{ bgcolor: '#2656A5' }}
             onChange={handleChange}
             indicatorColor="secondary"
             textColor="inherit"
@@ -192,11 +190,9 @@ export default function DetailsTabDisplay(props) {
                   >
                     Edit
                   </ColorButton>
-                  <CreateGoalModal studentId={students.id}>
-                    + goal
-                  </CreateGoalModal>
+                  <CreateGoalModal studentId={students.id} />
                   {goals.map((goal, index) => (
-                    <>
+                    <Box key={goal.id}>
                       <h3 style={{ color: '#2656A5' }}>Goal {index + 1}</h3>
                       <h5>Goal: {goal.goalSet}</h5>
                       <h5>Goal Set Date: {getParsedDate(goal.dateGoalSet)}</h5>
@@ -206,7 +202,7 @@ export default function DetailsTabDisplay(props) {
                       </h5>
                       <h5>Accomplishment State: {goal.wasItAccomplished}</h5>
                       <h5>Explanation: {goal.explanation}</h5>
-                    </>
+                    </Box>
                   ))}
                 </Box>
               </Grid>
@@ -216,7 +212,7 @@ export default function DetailsTabDisplay(props) {
         <TabPanel value={value} index={2} style={{ overflowY: 'auto' }}>
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">
-              <Grid item xs={12} style={{ height: '30vh' }}>
+              <Grid item xs={12} style={{ height: '64vh' }}>
                 <Grid>
                   <Box>
                     <ColorButton

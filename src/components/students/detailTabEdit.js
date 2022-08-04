@@ -274,7 +274,7 @@ export default function DetailsTabEdit(props) {
         sx={{ bgcolor: 'background.paper', width: '100vh', overflowY: 'auto' }}
       >
         <form onSubmit={onSaveClick}>
-          <AppBar position="static">
+          <AppBar position="sticky">
             <Tabs
               value={value}
               onChange={handleChange}
@@ -288,6 +288,7 @@ export default function DetailsTabEdit(props) {
                   height: '3px',
                 },
               }}
+              sx={{ bgcolor: '#2656A5' }}
             >
               <Tab label="Education" />
               <Tab label="Goals" />
@@ -297,7 +298,11 @@ export default function DetailsTabEdit(props) {
           </AppBar>
           <TabPanel value={value} index={0} style={{ overflowY: 'auto' }}>
             <Box sx={{ flexGrow: 1 }}>
-              <Grid container justifyContent="flex-end">
+              <Grid
+                container
+                justifyContent="flex-end"
+                style={{ height: '60vh' }}
+              >
                 <Grid
                   item
                   xs={12}
@@ -591,7 +596,11 @@ export default function DetailsTabEdit(props) {
 
           <TabPanel value={value} index={1} style={{ overflowY: 'auto' }}>
             <Box sx={{ flexGrow: 1 }}>
-              <Grid container justifyContent="flex-end">
+              <Grid
+                container
+                justifyContent="flex-end"
+                style={{ height: '60vh' }}
+              >
                 <Grid item xs={12} style={{ height: '64vh' }}>
                   {goals.map((goal, index) => (
                     <Grid>
@@ -695,7 +704,11 @@ export default function DetailsTabEdit(props) {
 
           <TabPanel value={value} index={2} style={{ overflowY: 'auto' }}>
             <Box sx={{ flexGrow: 1 }}>
-              <Grid container justifyContent="flex-end">
+              <Grid
+                container
+                justifyContent="flex-end"
+                style={{ height: '60vh' }}
+              >
                 <Grid item xs={12} style={{ height: '64vh' }}>
                   {careers.map((career, index) => {
                     return (
@@ -812,7 +825,11 @@ export default function DetailsTabEdit(props) {
 
           <TabPanel value={value} index={3} style={{ overflowY: 'auto' }}>
             <Box sx={{ flexGrow: 1 }}>
-              <Grid container justifyContent="flex-end">
+              <Grid
+                container
+                justifyContent="flex-end"
+                style={{ height: '60vh' }}
+              >
                 <Grid item xs={12} style={{ height: '64vh' }}>
                   <Grid>
                     <h3 style={{ color: '#2656A5' }}>Parent Information</h3>
