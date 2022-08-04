@@ -575,6 +575,7 @@ export default function DetailsTabEdit(props) {
                 <Grid item xs={12} style={{ height: '64vh' }}>
                   {goals.map((goal, index) => (
                     <Grid>
+                      <h3 style={{ color: '#2656A5' }}>Goal {index + 1}</h3>
                       <Grid marginBottom={2}>
                         <TextField
                           id="text-area-q1"
