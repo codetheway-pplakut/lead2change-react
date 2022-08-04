@@ -5,6 +5,26 @@ import ColorButton from '../coaches/Shared/ColoredButton';
 import CreateGoalModal from './create-goal-modal';
 import CreateCareerModal from './create-career-modal';
 
+function getParsedDate(strDate) {
+  if (strDate === null) {
+    return '';
+  }
+  const strSplitDate = String(strDate).split(' ');
+  let date = new Date(strSplitDate[0]);
+  let dd = date.getDate();
+  let mm = date.getMonth() + 1;
+
+  const yyyy = date.getFullYear();
+  if (dd < 10) {
+    dd = `0${dd}`;
+  }
+  if (mm < 10) {
+    mm = `0${mm}`;
+  }
+  date = `${mm}-${dd}-${yyyy}`;
+  return date.toString();
+}
+
 function TabPanel(props) {
   const { children, value, index } = props;
 
@@ -42,7 +62,7 @@ export default function DetailsTabDisplay(props) {
   return (
     <div style={{ marginRight: '8vh' }}>
       <Box
-        sx={{ bgcolor: 'background.paper', width: '100vh', overflowY: 'auto' }}
+        sx={{ bgcolor: 'background.paper', width: '130vh', overflowY: 'auto' }}
       >
         <AppBar position="sticky">
           <Tabs
@@ -51,6 +71,7 @@ export default function DetailsTabDisplay(props) {
             onChange={handleChange}
             indicatorColor="secondary"
             textColor="inherit"
+            sx={{ bgcolor: '#004cbb' }}
             variant="fullWidth"
             aria-label="full width tabs example"
             TabIndicatorProps={{
@@ -73,7 +94,7 @@ export default function DetailsTabDisplay(props) {
                 item
                 xs={12}
                 sx={{ minWidth: 10, height: 'max-content' }}
-                style={{ height: '64vh' }}
+                style={{ height: '73vh' }}
               >
                 <Box>
                   {' '}
@@ -81,10 +102,11 @@ export default function DetailsTabDisplay(props) {
                     style={{ float: 'right' }}
                     variant="contained"
                     onClick={onEditClick}
+                    sx={{ bgcolor: '#004cbb' }}
                   >
                     Edit
                   </ColorButton>
-                  <h3 style={{ color: '#2656A5' }}>Post Secondary Plan</h3>
+                  <h3 style={{ color: '#004cbb' }}>Post Secondary Plan</h3>
                   <h5>
                     Plans After High school: {students.planAfterHighSchool}
                   </h5>
@@ -104,7 +126,7 @@ export default function DetailsTabDisplay(props) {
                     I need help writing my college essay:{' '}
                     {String(students.collegeEssayHelp)}
                   </h5>
-                  <h3 style={{ color: '#2656A5' }}>
+                  <h3 style={{ color: '#004cbb' }}>
                     College Entrance Exam Information:
                   </h3>
                   <h5>
@@ -114,7 +136,7 @@ export default function DetailsTabDisplay(props) {
                           PACT Score: {students.pactTestScore}
                         </Grid>
                         <Grid item xs={4}>
-                          PACT Date: {students.pactTestDate}
+                          PACT Date: {getParsedDate(students.pactTestDate)}
                         </Grid>
                       </Grid>
                       <Grid container>
@@ -122,7 +144,7 @@ export default function DetailsTabDisplay(props) {
                           ACT Score: {students.actTestScore}
                         </Grid>
                         <Grid item xs={4}>
-                          ACT Date: {students.actTestDate}
+                          ACT Date: {getParsedDate(students.actTestDate)}
                         </Grid>
                       </Grid>
                       <Grid container>
@@ -130,7 +152,7 @@ export default function DetailsTabDisplay(props) {
                           PSAT Score: {students.psatTestScore}
                         </Grid>
                         <Grid item xs={4}>
-                          PSAT Date: {students.psatTestDate}
+                          PSAT Date: {getParsedDate(students.psatTestDate)}
                         </Grid>
                       </Grid>
                       <Grid container>
@@ -138,12 +160,12 @@ export default function DetailsTabDisplay(props) {
                           SAT Score: {students.satTestScore}
                         </Grid>
                         <Grid item xs={4}>
-                          SAT Date: {students.satTestDate}
+                          SAT Date: {getParsedDate(students.satTestDate)}
                         </Grid>
                       </Grid>
                     </Stack>
                   </h5>
-                  <h3 style={{ color: '#2656A5' }}>Financial Aid:</h3>
+                  <h3 style={{ color: '#004cbb' }}>Financial Aid:</h3>
                   <h5>
                     I have already completed the financial aid process:{' '}
                     {String(students.financialAidProcessComplete)}
@@ -161,12 +183,13 @@ export default function DetailsTabDisplay(props) {
         <TabPanel value={value} index={1} style={{ overflowY: 'auto' }}>
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">
-              <Grid item xs={12} style={{ height: '64vh' }}>
+              <Grid item xs={12} style={{ height: '73vh' }}>
                 <Box>
                   {/* <ColorButton
                     style={{ float: 'right' }}
                     variant="contained"
                     onClick={onEditClick}
+                    sx={{ bgcolor: '#004cbb' }}
                   >
                     Edit
                   </ColorButton> */}
@@ -190,6 +213,7 @@ export default function DetailsTabDisplay(props) {
         <TabPanel value={value} index={2} style={{ overflowY: 'auto' }}>
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">
+              <Grid item xs={12} style={{ height: '73vh' }}>
               <Grid item xs={12} style={{ height: '64vh' }}>
                 <Grid>
                   <Box>
@@ -197,6 +221,7 @@ export default function DetailsTabDisplay(props) {
                       style={{ float: 'right' }}
                       variant="contained"
                       onClick={onEditClick}
+                      sx={{ bgcolor: '#004cbb' }}
                     >
                       Edit
                     </ColorButton> */}
@@ -231,16 +256,17 @@ export default function DetailsTabDisplay(props) {
         <TabPanel value={value} index={3} style={{ overflowY: 'auto' }}>
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">
-              <Grid item xs={12} style={{ height: '64vh' }}>
+              <Grid item xs={12} style={{ height: '73vh' }}>
                 <Box>
                   <ColorButton
                     style={{ float: 'right' }}
                     variant="contained"
                     onClick={onEditClick}
+                    sx={{ bgcolor: '#004cbb' }}
                   >
                     Edit
                   </ColorButton>
-                  <h3 style={{ color: '#2656A5' }}>Parent Information</h3>
+                  <h3 style={{ color: '#004cbb' }}>Parent Information</h3>
                   <h5>First Name: {students.parentFirstName}</h5>
                   <h5>Last Name: {students.parentLastName}</h5>
                   <h5>Address: {students.address}</h5>
@@ -251,14 +277,14 @@ export default function DetailsTabDisplay(props) {
                   <h5>Home Phone: {students.parentHomePhone}</h5>
                   <h5>Cell Phone: {students.parentCellPhone}</h5>
                   <h5>Parent Email: {students.parentEmail}</h5>
-                  <h3 style={{ color: '#2656A5' }}>Guidance Couselor Info:</h3>
+                  <h3 style={{ color: '#004cbb' }}>Guidance Couselor Info:</h3>
                   <h5>
                     I know my guidance counselor:{' '}
                     {String(students.knowGuidanceCounselor)}
                   </h5>
-                  <h3 style={{ color: '#2656A5' }}>Admin Details:</h3>
+                  <h3 style={{ color: '#004cbb' }}>Admin Details:</h3>
                   <h5>Activity Status: {students.state}</h5>
-                  <h3 style={{ color: '#2656A5' }}>Signatures</h3>
+                  <h3 style={{ color: '#004cbb' }}>Signatures</h3>
                   <h5>Student Signature: {students.studentSignature}</h5>
                   <h5>Date Signed: {students.studentSignatureDate}</h5>
                   <h5>Parent Signature: {students.parentSignature}</h5>
