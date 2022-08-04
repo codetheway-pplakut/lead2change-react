@@ -573,9 +573,8 @@ export default function DetailsTabEdit(props) {
             <Box sx={{ flexGrow: 1 }}>
               <Grid container justifyContent="flex-end">
                 <Grid item xs={12} style={{ height: '64vh' }}>
-                  {[goals].map((goal, index) => (
+                  {goals.map((goal, index) => (
                     <Grid>
-                      <h3 style={{ color: '#2656A5' }}>Goal {index + 1}</h3>
                       <Grid marginBottom={2}>
                         <TextField
                           id="text-area-q1"
@@ -583,7 +582,7 @@ export default function DetailsTabEdit(props) {
                           fullWidth
                           maxRows={4}
                           variant="filled"
-                          value={enteredGoalSet}
+                          value={goal.goalSet}
                           label="Set Goal"
                           onChange={(event) =>
                             setEnteredGoalSet(event.target.value)
@@ -608,7 +607,7 @@ export default function DetailsTabEdit(props) {
                         <TextField
                           size="small"
                           className="typing-container"
-                          value={enteredSel}
+                          value={goal.sel}
                           label="SEL"
                           onChange={(event) =>
                             setEnteredSel(event.target.value)
@@ -651,7 +650,6 @@ export default function DetailsTabEdit(props) {
                           </Select>
                         </FormControl>
                       </Grid>
-
                       <Grid marginBottom={2}>
                         <TextField
                           id="text-area-q1"
