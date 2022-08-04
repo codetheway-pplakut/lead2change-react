@@ -692,6 +692,7 @@ export default function DetailsTabEdit(props) {
               </Grid>
             </Box>
           </TabPanel>
+
           <TabPanel value={value} index={2} style={{ overflowY: 'auto' }}>
             <Box sx={{ flexGrow: 1 }}>
               <Grid container justifyContent="flex-end">
@@ -715,14 +716,28 @@ export default function DetailsTabEdit(props) {
                               id="demo-simple-select-standard"
                               label="College Bound?"
                               fullWidth
-                              defaultValue={career.isCollegeBound}
+                              defaultValue={Boolean(
+                                career.collegeBound.toString().toLowerCase()
+                              )}
                               onChange={(event) =>
                                 setEnteredIsCollegeBound(event.target.value)
                               }
                             >
                               <MenuItem value="" />
-                              <MenuItem value={10}>Yes</MenuItem>
-                              <MenuItem value={20}>No</MenuItem>
+                              <MenuItem
+                                value={
+                                  career.collegeBound.toString() === 'true'
+                                }
+                              >
+                                Yes
+                              </MenuItem>
+                              <MenuItem
+                                value={
+                                  career.collegeBound.toString() === 'false'
+                                }
+                              >
+                                No
+                              </MenuItem>
                             </Select>
                           </FormControl>
                           <Grid marginBottom={2}>
@@ -741,7 +756,7 @@ export default function DetailsTabEdit(props) {
                             <TextField
                               size="small"
                               className="typing-container"
-                              defaultValue={career.specificCluster}
+                              defaultValue={career.specificCareer}
                               label="Career of Choice"
                               onChange={(event) =>
                                 setEnteredSpecificCluster(event.target.value)
@@ -760,7 +775,7 @@ export default function DetailsTabEdit(props) {
                               labelId="demo-simple-select-standard-label"
                               id="demo-simple-select-standard"
                               label="Technical Bound?"
-                              defaultValue={career.technicalCollegeBound}
+                              defaultValue={career.technicalCollegeBound.toString()}
                               onChange={(event) =>
                                 setEnteredTechnicalCollegeBound(
                                   event.target.value
@@ -768,8 +783,22 @@ export default function DetailsTabEdit(props) {
                               }
                             >
                               <MenuItem value="" />
-                              <MenuItem value={10}>Yes</MenuItem>
-                              <MenuItem value={20}>No</MenuItem>
+                              <MenuItem
+                                value={
+                                  career.technicalCollegeBound.toString() ===
+                                  'true'
+                                }
+                              >
+                                Yes
+                              </MenuItem>
+                              <MenuItem
+                                value={
+                                  career.technicalCollegeBound.toString() ===
+                                  'false'
+                                }
+                              >
+                                No
+                              </MenuItem>
                             </Select>
                           </FormControl>
                         </Grid>
@@ -780,6 +809,7 @@ export default function DetailsTabEdit(props) {
               </Grid>
             </Box>
           </TabPanel>
+
           <TabPanel value={value} index={3} style={{ overflowY: 'auto' }}>
             <Box sx={{ flexGrow: 1 }}>
               <Grid container justifyContent="flex-end">
