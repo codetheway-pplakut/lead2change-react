@@ -63,7 +63,7 @@ export default function StudentInfoDisplay(props) {
           sx={{
             '#1A2027': '#fff',
             textAlign: 'center',
-            width: '60vh',
+            width: '70vh',
             mr: '10vh',
             height: '90vh',
             overflowY: 'auto',
