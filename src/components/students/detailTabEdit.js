@@ -39,7 +39,7 @@ TabPanel.propTypes = {
 };
 
 export default function DetailsTabEdit(props) {
-  const { students } = props;
+  const { students, careers } = props;
   const { onCancelClick, updateFunction, onSaveClick } = props;
   const [value, setValue] = React.useState(0);
 
@@ -763,74 +763,84 @@ export default function DetailsTabEdit(props) {
               <Grid container justifyContent="flex-end">
                 <Grid item xs={12} style={{ height: '64vh' }}>
                   <Grid>
-                    <h3 style={{ color: '#2656A5' }}>Career Information</h3>
-                    <FormControl
-                      variant="standard"
-                      sx={{ m: 1, minWidth: '22vh' }}
-                    >
-                      <InputLabel id="demo-simple-select-standard-label">
-                        I am College Bound{' '}
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-standard-label"
-                        id="demo-simple-select-standard"
-                        label="College Bound?"
-                        fullWidth
-                        value={enteredIsCollegeBound}
-                        onChange={(event) =>
-                          setEnteredIsCollegeBound(event.target.value)
-                        }
-                      >
-                        <MenuItem value="" />
-                        <MenuItem value={10}>Yes</MenuItem>
-                        <MenuItem value={20}>No</MenuItem>
-                      </Select>
-                    </FormControl>
-                    <Grid marginBottom={2}>
-                      <TextField
-                        size="small"
-                        className="typing-container"
-                        value={enteredCareerCluster}
-                        label="Number of Career Clusters"
-                        onChange={(event) =>
-                          setEnteredCareerCluster(event.target.value)
-                        }
-                        required
-                      />
-                    </Grid>
-                    <Grid marginBottom={2}>
-                      <TextField
-                        size="small"
-                        className="typing-container"
-                        value={enteredSpecificCluster}
-                        label="Career of Choice"
-                        onChange={(event) =>
-                          setEnteredSpecificCluster(event.target.value)
-                        }
-                        required
-                      />
-                    </Grid>
-                    <FormControl
-                      variant="standard"
-                      sx={{ m: 1, minWidth: 200 }}
-                    >
-                      <InputLabel id="demo-simple-select-standard-label">
-                        I am Technical Bound{' '}
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-standard-label"
-                        id="demo-simple-select-standard"
-                        label="Technical Bound?"
-                        value={enteredTechnicalCollegeBound}
-                        onChange={(event) =>
-                          setEnteredTechnicalCollegeBound(event.target.value)
-                        }
-                      >
-                        <MenuItem value="" />
-                        <MenuItem value={10}>Yes</MenuItem>
-                        <MenuItem value={20}>No</MenuItem>
-                      </Select>
-                    </FormControl>
+                    {careers.map((career) => {
+                      return (
+                        <div key={career.id}>
+                          <h3 style={{ color: '#2656A5' }}>
+                            Career Information
+                          </h3>
+                          <FormControl
+                            variant="standard"
+                            sx={{ m: 1, minWidth: '22vh' }}
+                          >
+                            <InputLabel id="demo-simple-select-standard-label">
+                              I am College Bound{' '}
+                            </InputLabel>
+                            <Select
+                              labelId="demo-simple-select-standard-label"
+                              id="demo-simple-select-standard"
+                              label="College Bound?"
+                              fullWidth
+                              value={career.enteredIsCollegeBound}
+                              onChange={(event) =>
+                                setEnteredIsCollegeBound(event.target.value)
+                              }
+                            >
+                              <MenuItem value="" />
+                              <MenuItem value={10}>Yes</MenuItem>
+                              <MenuItem value={20}>No</MenuItem>
+                            </Select>
+                          </FormControl>
+                          <Grid marginBottom={2}>
+                            <TextField
+                              size="small"
+                              className="typing-container"
+                              value={enteredCareerCluster}
+                              label="Number of Career Clusters"
+                              onChange={(event) =>
+                                setEnteredCareerCluster(event.target.value)
+                              }
+                              required
+                            />
+                          </Grid>
+                          <Grid marginBottom={2}>
+                            <TextField
+                              size="small"
+                              className="typing-container"
+                              value={enteredSpecificCluster}
+                              label="Career of Choice"
+                              onChange={(event) =>
+                                setEnteredSpecificCluster(event.target.value)
+                              }
+                              required
+                            />
+                          </Grid>
+                          <FormControl
+                            variant="standard"
+                            sx={{ m: 1, minWidth: 200 }}
+                          >
+                            <InputLabel id="demo-simple-select-standard-label">
+                              I am Technical Bound{' '}
+                            </InputLabel>
+                            <Select
+                              labelId="demo-simple-select-standard-label"
+                              id="demo-simple-select-standard"
+                              label="Technical Bound?"
+                              value={enteredTechnicalCollegeBound}
+                              onChange={(event) =>
+                                setEnteredTechnicalCollegeBound(
+                                  event.target.value
+                                )
+                              }
+                            >
+                              <MenuItem value="" />
+                              <MenuItem value={10}>Yes</MenuItem>
+                              <MenuItem value={20}>No</MenuItem>
+                            </Select>
+                          </FormControl>
+                        </div>
+                      );
+                    })}
                   </Grid>
                 </Grid>
               </Grid>
@@ -1098,4 +1108,5 @@ DetailsTabEdit.propTypes = {
   updateFunction: PropTypes.func.isRequired,
   onSaveClick: PropTypes.func.isRequired,
   students: PropTypes.object.isRequired,
+  careers: PropTypes.array.isRequired,
 };
