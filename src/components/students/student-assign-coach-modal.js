@@ -1,6 +1,5 @@
 /* eslint-disable react/require-default-props */
 import * as React from 'react';
-import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import CloseIcon from '@mui/icons-material/Close';
@@ -20,20 +19,7 @@ import {
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import { createTheme } from '@mui/material/styles';
-import { getCoaches } from '../../services/coaches/coaches';
 
-const StyledButton = styled(Button)({
-  backgroundColor: '#004cbb',
-  '&:hover': {
-    backgroundColor: '#005ade',
-  },
-});
-const CancelButton = styled(Button)({
-  backgroundColor: '#7e8794',
-  '&:hover': {
-    backgroundColor: '#8698b3',
-  },
-});
 const StyledRadio = styled(Radio)({
   '&.Mui-checked': {
     color: '#005ade',
@@ -150,11 +136,6 @@ export default function CoachAssignModal(props) {
           <Box paddingTop="10px" paddingBottom="10px" paddingLeft="20px">
             <FormControl>
               <RadioGroup value={value} onChange={handleCoachChange}>
-                <FormControlLabel
-                  value="Unassigned"
-                  control={<StyledRadio />}
-                  label="Unassigned"
-                />
                 {coaches
                   .filter((item) => item.active === true)
                   .map((coach) => (
