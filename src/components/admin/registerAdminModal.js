@@ -8,6 +8,7 @@ import Grid from '@mui/material/Grid';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import AddIcon from '@mui/icons-material/Add';
 import { createTheme } from '@mui/material/styles';
 import { addAdmin, getAdmins } from '../../services/Admin/admin';
 
@@ -99,10 +100,6 @@ export default function RegisterAdminModal() {
         contrastText: '#fff',
       },
     },
-    typography: {
-      fontFamily: 'Calibri',
-      fontSize: 18,
-    },
   });
 
   return (
@@ -112,8 +109,10 @@ export default function RegisterAdminModal() {
         color="cancel"
         variant="contained"
         onClick={handleOpen}
+        sx={{ padding: '8px', minWidth: '100px' }}
+        startIcon={<AddIcon />}
       >
-        + Admin
+        Admin
       </Button>
       <Modal open={open} onClose={handleClose}>
         <Box sx={modalPosition}>

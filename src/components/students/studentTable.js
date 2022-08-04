@@ -429,11 +429,12 @@ export default function StudentTable() {
                     onSearchChange(event.target.value);
                   }}
                 />
-                <div sx={{ minWidth: '200px' }}>
+                <div sx={{ minWidth: '100px' }}>
                   <StyledButton
                     variant="contained"
                     startIcon={<AddIcon />}
                     onClick={onRegisterClick}
+                    sx={{ padding: '8px', minWidth: '100px' }}
                   >
                     Student
                   </StyledButton>

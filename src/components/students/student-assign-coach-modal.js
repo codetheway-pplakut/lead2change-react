@@ -109,7 +109,7 @@ export default function CoachAssignModal(props) {
           })}
         {coachId === null && <p>Unassigned</p>}
         <IconButton onClick={handleOpen}>
-          <EditIcon />
+          <EditIcon sx={{ color: '#004cbb' }} />
         </IconButton>
       </Grid>
       <Modal open={open} onClose={handleClose}>

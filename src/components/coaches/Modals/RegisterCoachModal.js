@@ -9,6 +9,8 @@ import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
+import AddIcon from '@mui/icons-material/Add';
+
 import { createTheme } from '@mui/material/styles';
 import ColorButton from '../Shared/ColoredButton';
 
@@ -46,10 +48,6 @@ export default function RegisterCoachModal(props) {
         contrastText: '#fff',
       },
     },
-    typography: {
-      fontFamily: 'Calibri',
-      fontSize: 18,
-    },
   });
 
   const Register = () => {
@@ -65,13 +63,16 @@ export default function RegisterCoachModal(props) {
   };
   return (
     <div>
-      <ColorButton
-        sx={{ minWidth: '120px' }}
+      <Button
+        theme={buttonTheme}
+        color="cancel"
         variant="contained"
         onClick={handleOpen}
+        sx={{ padding: '8px', minWidth: '100px' }}
+        startIcon={<AddIcon />}
       >
-        + Register
-      </ColorButton>
+        Coach
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
