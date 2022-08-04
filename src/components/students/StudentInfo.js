@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 import { useParams } from 'react-router-dom';
 import { Stack } from '@mui/material';
 import TabsFunction from './detailsTab';
@@ -76,18 +77,16 @@ export default function ResponsiveGrid(props) {
     <Grid container>
       <Grid
         item
-        align="center"
         style={{
-          backgroundColor: '#2656A5',
           marginBottom: '3vh',
-          color: '#FFFFFF',
+          color: 'black',
           padding: '0.1vh',
         }}
         sx={{ width: '100%' }}
       >
-        <h1>
+        <Typography align="center" variant="h3" component="h4">
           {students.studentFirstName} {students.studentLastName}&rsquo;s Details
-        </h1>
+        </Typography>
       </Grid>
       <Stack direction="row" spacing={2}>
         {isEditing ? (

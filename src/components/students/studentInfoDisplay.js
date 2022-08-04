@@ -67,7 +67,7 @@ export default function StudentInfoDisplay(props) {
             mr: '10vh',
             height: '90vh',
             overflowY: 'auto',
-            marginLeft: '50px',
+            marginLeft: '30px',
             marginRight: '20px',
           }}
         >
