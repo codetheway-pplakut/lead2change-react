@@ -39,6 +39,10 @@ export default function StudentInfoEdit(props) {
   const [enteredFirstName, setEnteredFirstName] = React.useState(
     currentStudentTest.studentFirstName
   );
+
+  const [enteredLastName, setEnteredLastName] = React.useState(
+    currentStudentTest.studentLastName
+  );
   const [enteredDateOfBirth, setEnteredDateOfBirth] = React.useState(
     currentStudentTest.studentDateOfBirth
   );
@@ -65,6 +69,7 @@ export default function StudentInfoEdit(props) {
     onSaveClick();
     handleClose();
     students.studentFirstName = enteredFirstName;
+    students.studentLastName = enteredLastName;
     students.studentDateOfBirth = enteredDateOfBirth;
     students.studentEmail = enteredEmail;
     students.studentCellPhone = enteredCellPhone;
@@ -81,6 +86,7 @@ export default function StudentInfoEdit(props) {
 
       const {
         studentFirstName,
+        studentLastName,
         studentEmail,
         studentDateOfBirth,
         studentCellPhone,
@@ -91,6 +97,7 @@ export default function StudentInfoEdit(props) {
       } = currStudent;
       setStudents(currStudent);
       setEnteredFirstName(studentFirstName);
+      setEnteredLastName(studentLastName);
       setEnteredDateOfBirth(studentDateOfBirth);
       setEnteredEmail(studentEmail);
       setEnteredCellPhone(studentCellPhone);
@@ -136,9 +143,22 @@ export default function StudentInfoEdit(props) {
                   <TextField
                     size="small"
                     value={enteredFirstName}
-                    label="Name"
+                    label="First Name"
                     onChange={(e) => {
                       setEnteredFirstName(e.target.value);
+                    }}
+                    focused
+                  />
+                </Grid>
+              </StudentInfo>
+              <StudentInfo>
+                <Grid item marginBottom={2} marginTop={1}>
+                  <TextField
+                    size="small"
+                    value={enteredLastName}
+                    label="Last Name"
+                    onChange={(e) => {
+                      setEnteredLastName(e.target.value);
                     }}
                     focused
                   />

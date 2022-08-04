@@ -200,6 +200,7 @@ const headCellsApplied = [
     disablePadding: false,
     label: 'Reject',
   },
+  {},
 ];
 
 function EnhancedTableHead(props) {
