@@ -45,7 +45,7 @@ export default function DetailsTabDisplay(props) {
   return (
     <div style={{ marginRight: '8vh' }}>
       <Box
-        sx={{ bgcolor: 'background.paper', width: '140vh', overflowY: 'auto' }}
+        sx={{ bgcolor: 'background.paper', width: '130vh', overflowY: 'auto' }}
       >
         <AppBar position="static">
           <Tabs
