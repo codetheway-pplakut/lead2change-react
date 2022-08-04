@@ -708,7 +708,7 @@ export default function DetailsTabEdit(props) {
                             <TextField
                               size="small"
                               className="typing-container"
-                              value={enteredCareerCluster}
+                              defaultValue={career.careerCluster}
                               label="Number of Career Clusters"
                               onChange={(event) =>
                                 setEnteredCareerCluster(event.target.value)
@@ -720,7 +720,7 @@ export default function DetailsTabEdit(props) {
                             <TextField
                               size="small"
                               className="typing-container"
-                              value={enteredSpecificCluster}
+                              defaultValue={career.specificCluster}
                               label="Career of Choice"
                               onChange={(event) =>
                                 setEnteredSpecificCluster(event.target.value)
@@ -739,7 +739,7 @@ export default function DetailsTabEdit(props) {
                               labelId="demo-simple-select-standard-label"
                               id="demo-simple-select-standard"
                               label="Technical Bound?"
-                              value={enteredTechnicalCollegeBound}
+                              defaultValue={career.technicalCollegeBound}
                               onChange={(event) =>
                                 setEnteredTechnicalCollegeBound(
                                   event.target.value
