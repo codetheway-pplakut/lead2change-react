@@ -1,34 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { experimentalStyled as styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
 import { useParams } from 'react-router-dom';
 import { Stack } from '@mui/material';
 import TabsFunction from './detailsTab';
 import StudentInfoEdit from './studentInfoEdit';
 import StudentInfoDisplay from './studentInfoDisplay';
-import { getGoalById, getGoalsByStudentId } from '../../services/goals/goals';
 import { getCareersById } from '../../services/careers/careers';
 import {
   getStudentById,
-  getStudents,
   updateStudent,
 } from '../../services/students/students';
+import { getGoalsByStudentId } from '../../services/goals/goals';
 
 export default function ResponsiveGrid(props) {
-  const [goals, setGoals] = useState({});
-  const [career, setCareer] = useState({});
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [goals, setGoals] = useState([]);
+  const [career, setCareer] = useState([]);
   const { studentId } = useParams();
   const [students, setStudents] = useState({});
 
   const refreshStudents = async () => {
-    setIsLoading(true);
-    const result = await getStudents();
-    setIsLoading(false);
+    const result = await getStudentById(studentId);
     setStudents(result);
   };
+
   const updateStudentInfo = async (student) => {
     await updateStudent(student);
     await refreshStudents();

@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { experimentalStyled as styled } from '@mui/material/styles';
 
 import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
-import { useParams } from 'react-router-dom';
 import { TextField } from '@mui/material';
 import ColorButton from '../coaches/Shared/ColoredButton';
-
-import { getStudentById } from '../../services/students/students';
 
 const StudentInfo = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -179,7 +176,6 @@ export default function StudentInfoEdit(props) {
                     value={enteredApartmentNumber}
                     label="Apt. #"
                     onChange={(e) => setEnteredApartmentNumber(e.target.value)}
-                    required
                     focused
                   />
                 </Grid>

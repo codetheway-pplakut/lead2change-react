@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { TextField } from '@mui/material';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
@@ -42,11 +42,6 @@ export default function DetailsTabEdit(props) {
   const { students } = props;
   const { onCancelClick, updateFunction, onSaveClick } = props;
   const [value, setValue] = React.useState(0);
-  const [goals, setGoals] = useState({});
-  const [career, setCareer] = useState({});
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   const [enteredPlanAfterHighSchool, setEnteredPlanAfterHighSchool] =
     React.useState(students.planAfterHighSchool);
@@ -200,7 +195,6 @@ export default function DetailsTabEdit(props) {
     React.useState(students.technicalCollegeBound);
 
   const EditField = () => {
-    handleClose();
     students.planAfterHighSchool = enteredPlanAfterHighSchool;
     students.collegesList = enteredCollegesList;
     students.firstChoiceCollege = enteredFirstChoiceCollege;

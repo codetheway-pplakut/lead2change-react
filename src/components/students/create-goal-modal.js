@@ -6,7 +6,6 @@ import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import PropTypes from 'prop-types';
 import { Box, Checkbox } from '@mui/material';
 import { useParams } from 'react-router';
 import ColorButton from '../coaches/Shared/ColoredButton';
@@ -43,8 +42,6 @@ export default function CreateGoalModal(props) {
         wasItAccomplished,
         explanation,
       };
-      console.log(studentId);
-      console.log(Goal);
       await addGoal(Goal);
     }
   };
