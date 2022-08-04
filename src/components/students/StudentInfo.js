@@ -430,7 +430,7 @@ export default function ResponsiveGrid(props) {
     currentStudent();
   }, [studentId]);
 
-  const updateFunction = () => {};
+  const updateFunction = updateStudent();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
