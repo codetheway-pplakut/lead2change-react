@@ -263,7 +263,7 @@ export default function DetailsTabEdit(props) {
               aria-label="full width tabs example"
               TabIndicatorProps={{
                 style: {
-                  backgroundColor: '#FFFFFF',
+                  backgroundColory: '#FFFFFF',
                   height: '3px',
                 },
               }}
@@ -971,10 +971,10 @@ export default function DetailsTabEdit(props) {
                       />
                     </Grid>
                     <Grid marginBottom={2}>
+                      <Typography>Date signed</Typography>
                       <TextField
                         size="small"
                         className="typing-container"
-                        label="Date Signed"
                         type="date"
                         value={enteredStudentSignatureDate}
                         onChange={(event) =>
@@ -997,10 +997,10 @@ export default function DetailsTabEdit(props) {
                       />
                     </Grid>
                     <Grid marginBottom={2}>
+                      <Typography>Date signed</Typography>
                       <TextField
                         size="small"
                         className="typing-container"
-                        label="Date Signed"
                         type="date"
                         value={enteredParentSignatureDate}
                         onChange={(event) =>

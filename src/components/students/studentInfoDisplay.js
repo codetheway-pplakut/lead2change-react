@@ -54,8 +54,8 @@ export default function StudentInfoDisplay(props) {
             mr: '10vh',
             height: '90vh',
             overflowY: 'auto',
-            marginLeft: '30px',
-            marginRight: '20px',
+            marginLeft: '3vh',
+            marginRight: '3vh',
           }}
         >
           <Grid

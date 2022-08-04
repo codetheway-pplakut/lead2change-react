@@ -60,7 +60,7 @@ export default function DetailsTabDisplay(props) {
   };
 
   return (
-    <div style={{ marginRight: '8vh' }}>
+    <div style={{ marginRight: '3vh' }}>
       <Box
         sx={{ bgcolor: 'background.paper', width: '130vh', overflowY: 'auto' }}
       >
