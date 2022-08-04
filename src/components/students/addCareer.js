@@ -10,6 +10,14 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import Box from '@mui/material/Box';
+
+import CloseIcon from '@mui/icons-material/Close';
+import Button from '@mui/material/Button';
+
+import AddIcon from '@mui/icons-material/Add';
+
+import { createTheme } from '@mui/material/styles';
 import ColorButton from '../coaches/Shared/ColoredButton';
 
 import { getCareersById } from '../../services/careers/careers';
@@ -40,6 +48,29 @@ export default function AddCareer(props) {
   const [enteredTechnicalCollegeBound, setEnteredTechnicalCollegeBound] =
     React.useState('');
 
+  const buttonTheme = createTheme({
+    palette: {
+      save: {
+        main: '#004cbb',
+        contrastText: '#fff',
+      },
+      cancel: {
+        main: '#004cbb',
+        contrastText: '#fff',
+      },
+    },
+  });
+  const modalPosition = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    width: 430,
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'background.paper',
+    borderRadius: '10px',
+    boxShadow: 24,
+  };
+
   useEffect(() => {
     const currentCareer = async () => {
       const currCareer = await getCareersById(studentId);
@@ -62,42 +93,68 @@ export default function AddCareer(props) {
 
   return (
     <div>
-      <ColorButton variant="contained" onClick={handleOpen}>
-        + New Career
-      </ColorButton>
+      <Button
+        theme={buttonTheme}
+        color="cancel"
+        variant="contained"
+        onClick={handleOpen}
+        sx={{ padding: '8px', minWidth: '100px' }}
+        startIcon={<AddIcon />}
+      >
+        New Career
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
       >
-        <Grid container sx={style}>
+        <Box container sx={modalPosition}>
           <Grid container>
-            <Grid item sx={{ bgcolor: '#004cbb', color: 'white' }} xs={12}>
+            <Grid
+              item
+              sx={{
+                bgcolor: '#004cbb',
+                color: 'white',
+                borderTopLeftRadius: 10,
+                borderTopRightRadius: 10,
+              }}
+              xs={12}
+            >
               <Grid container alignItems="center" sx={{ margin: 1 }}>
                 <Grid item xs={2} />
                 <Grid item xs={8}>
-                  <Typography variant="h5" component="h2" align="center">
-                    New Career
-                  </Typography>
-                </Grid>
-                <Grid item xs={1} />
-                <Grid item>
-                  <IconButton
-                    align="right"
-                    size="medium"
-                    onClick={handleClose}
-                    sx={{ color: 'white' }}
+                  <Typography
+                    variant="h5"
+                    component="h2"
+                    align="center"
+                    padding="10px"
                   >
-                    <CloseOutlinedIcon />
+                    Add Career
+                  </Typography>
+                  <IconButton
+                    onClick={handleClose}
+                    sx={{ position: 'absolute', right: 8, top: 8 }}
+                  >
+                    <CloseIcon fontSize="large" sx={{ color: 'white' }} />
                   </IconButton>
                 </Grid>
+                <Grid item xs={1} />
               </Grid>
             </Grid>
           </Grid>
+
           <Grid item xs={12}>
             <Grid container spacing={1} sx={{ p: 2 }} justifyContent="center">
               <Grid item xs={12}>
-                <FormControl variant="standard" sx={{ m: 1, minWidth: '40vh' }}>
+                <FormControl
+                  variant="standard"
+                  sx={{
+                    m: 1,
+                    minWidth: '42vh',
+                    marginBottom: '1.5vh',
+                    marginLeft: '2vh',
+                  }}
+                >
                   <InputLabel id="demo-simple-select-standard-label">
                     I am College Bound{' '}
                   </InputLabel>
@@ -169,28 +226,42 @@ export default function AddCareer(props) {
                     required
                   />
                 </Grid>
-                <Grid item xs={2}>
-                  <ColorButton
-                    variant="contained"
-                    fullWidth
-                    style={{ marginBottom: '1.5vh' }}
-                  >
-                    Create
-                  </ColorButton>
-                </Grid>
-                <Grid item xs={2}>
-                  <ColorButton
-                    variant="contained"
-                    fullWidth
-                    onClick={handleClose}
-                  >
-                    Cancel
-                  </ColorButton>
+                <Grid
+                  container
+                  spacing={0}
+                  justifyContent="center"
+                  padding="20px"
+                  align="center"
+                >
+                  <Grid item xs={4}>
+                    <Box>
+                      <Button
+                        theme={buttonTheme}
+                        color="save"
+                        variant="contained"
+                        sx={{ minWidth: '120px' }}
+                      >
+                        <Typography padding="5px">Create</Typography>
+                      </Button>
+                    </Box>
+                  </Grid>
+                  <Grid xs={1} />
+                  <Grid item xs={4}>
+                    <Button
+                      theme={buttonTheme}
+                      color="cancel"
+                      variant="contained"
+                      onClick={handleClose}
+                      style={{ minWidth: '120px' }}
+                    >
+                      <Typography padding="5px">Cancel</Typography>
+                    </Button>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
+        </Box>
       </Modal>
     </div>
   );
