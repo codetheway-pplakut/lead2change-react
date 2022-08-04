@@ -44,6 +44,27 @@ export default function DetailsTabEdit(props) {
   const [value, setValue] = React.useState(0);
   const [careers, setCareer] = React.useState({});
 
+  function getParsedDate(strDate) {
+    if (strDate === null) {
+      return '';
+    }
+    const strSplitDate = String(strDate).split(' ');
+    let date = new Date(strSplitDate[0]);
+    let dd = date.getDate();
+    let mm = date.getMonth() + 1;
+
+    const yyyy = date.getFullYear();
+    if (dd < 10) {
+      dd = `0${dd}`;
+    }
+    if (mm < 10) {
+      mm = `0${mm}`;
+    }
+    date = `${yyyy}-${mm}-${dd}`;
+    console.log(date);
+    return date.toString();
+  }
+
   const [enteredPlanAfterHighSchool, setEnteredPlanAfterHighSchool] =
     React.useState(students.planAfterHighSchool);
 
@@ -115,17 +136,12 @@ export default function DetailsTabEdit(props) {
   const [enteredDateGoalSet, setEnteredDateGoalSet] = React.useState(
     students.dateGoalSet
   );
-  console.log(enteredDateGoalSet);
 
   const [enteredSel, setEnteredSel] = React.useState(students.sel);
-
-  console.log(enteredSel);
 
   const [enteredGoalReviewDate, setEnteredGoalReviewDate] = React.useState(
     students.goalReviewDate
   );
-
-  console.log(enteredGoalReviewDate);
 
   const [enteredWasItAccomplished, setEnteredWasItAccomplished] =
     React.useState(students.wasItAccomplished);
@@ -224,11 +240,9 @@ export default function DetailsTabEdit(props) {
     students.assistanceForForms = enteredAssistanceForForms;
     students.supportNeeded = enteredSupportNeeded;
     students.goals.goalSet = enteredGoalSet;
-    console.log(enteredGoalSet);
     students.dateGoalSet = enteredDateGoalSet;
     students.sel = enteredSel;
     students.goalReviewDate = enteredGoalReviewDate;
-    console.log(enteredGoalReviewDate);
     students.wasItAccomplished = enteredWasItAccomplished;
     students.explanation = enteredExplanation;
     students.parentFirstName = enteredParentFirstName;
@@ -606,7 +620,7 @@ export default function DetailsTabEdit(props) {
                           className="typing-container"
                           label="Set Date"
                           type="date"
-                          defaultValue={enteredDateGoalSet}
+                          defaultValue={getParsedDate(goal.dateGoalSet)}
                           onChange={(event) =>
                             setEnteredDateGoalSet(event.target.value)
                           }
@@ -631,7 +645,7 @@ export default function DetailsTabEdit(props) {
                           className="typing-container"
                           type="date"
                           label="Review Date"
-                          defaultValue={goal.dateGoalSet}
+                          defaultValue={getParsedDate(goal.goalReviewDate)}
                           onChange={(event) =>
                             setEnteredGoalReviewDate(event.target.value)
                           }
