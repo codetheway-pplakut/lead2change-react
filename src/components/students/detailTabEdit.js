@@ -15,7 +15,7 @@ import Select from '@mui/material/Select';
 import ColorButton from '../coaches/Shared/ColoredButton';
 
 import { getStudentById } from '../../services/students/students';
-import { getGoalById } from '../../services/goals/goals';
+import { getGoalById, getGoalsByStudentId } from '../../services/goals/goals';
 import { getCareersById } from '../../services/careers/careers';
 
 function TabPanel(props) {
@@ -45,7 +45,7 @@ TabPanel.propTypes = {
 
 export default function DetailsTabEdit(props) {
   const { onCancelClick, updateFunction, onSaveClick } = props;
-  const { studentId, goalId } = useParams();
+  const { studentId } = useParams();
   const [value, setValue] = React.useState(0);
   const [students, setStudents] = useState({});
   const [goals, setGoals] = useState({});
@@ -53,128 +53,122 @@ export default function DetailsTabEdit(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  function currentStudentTest() {
-    return getStudentById(studentId);
-  }
-
   const [enteredPlanAfterHighSchool, setEnteredPlanAfterHighSchool] =
-    React.useState(currentStudentTest.planAfterHighSchool);
+    React.useState(students.planAfterHighSchool);
 
   const [enteredCollegesList, setEnteredCollegesList] = React.useState(
-    currentStudentTest.collegesList
+    students.collegesList
   );
 
   const [enteredFirstChoiceCollege, setEnteredFirstChoiceCollege] =
-    React.useState(currentStudentTest.firstChoiceCollege);
+    React.useState(students.firstChoiceCollege);
 
   const [enteredCollegeApplicationStatus, setEnteredCollegeApplicationStatus] =
-    React.useState(currentStudentTest.collegeApplicationStatus);
+    React.useState(students.collegeApplicationStatus);
 
   const [enteredCollegeEssayStatus, setEnteredCollegeEssayStatus] =
-    React.useState(currentStudentTest.collegeEssayStatus);
+    React.useState(students.collegeEssayStatus);
 
   const [enteredCollegeEssayHelp, setEnteredCollegeEssayHelp] = React.useState(
-    currentStudentTest.collegeEssayHelp
+    students.collegeEssayHelp
   );
 
   const [enteredPactTestScore, setEnteredPactTestScore] = React.useState(
-    currentStudentTest.pactTestScore
+    students.pactTestScore
   );
 
   const [enteredPsatTestDate, setEnteredPsatTestDate] = React.useState(
-    currentStudentTest.psatTestDate
+    students.psatTestDate
   );
 
   const [enteredPsatTestScore, setEnteredPsatTestScore] = React.useState(
-    currentStudentTest.psatTestScore
+    students.psatTestScore
   );
 
   const [enteredPactTestDate, setEnteredPactTestDate] = React.useState(
-    currentStudentTest.pactTestDate
+    students.pactTestDate
   );
 
   const [enteredActTestScore, setEnteredActTestScore] = React.useState(
-    currentStudentTest.actTestScore
+    students.actTestScore
   );
 
   const [enteredActTestDate, setEnteredActTestDate] = React.useState(
-    currentStudentTest.actTestDate
+    students.actTestDate
   );
 
   const [enteredSatTestScore, setEnteredSatTestScore] = React.useState(
-    currentStudentTest.satTestScore
+    students.satTestScore
   );
 
   const [enteredSatTestDate, setEnteredSatTestDate] = React.useState(
-    currentStudentTest.satTestDate
+    students.satTestDate
   );
 
   const [
     enteredFinancialAidProcessComplete,
     setEnteredFinancialAidProcessComplete,
-  ] = React.useState(currentStudentTest.financialAidProcessComplete);
+  ] = React.useState(students.financialAidProcessComplete);
 
   const [enteredAssistanceForForms, setEnteredAssistanceForForms] =
-    React.useState(currentStudentTest.assistanceForForms);
+    React.useState(students.assistanceForForms);
 
   const [enteredSupportNeeded, setEnteredSupportNeeded] = React.useState(
-    currentStudentTest.supportNeeded
+    students.supportNeeded
   );
 
-  const [enteredGoalSet, setEnteredGoalSet] = React.useState(
-    currentStudentTest.goalSet
-  );
+  const [enteredGoalSet, setEnteredGoalSet] = React.useState(students.goalSet);
 
   const [enteredDateGoalSet, setEnteredDateGoalSet] = React.useState(
-    currentStudentTest.dateGoalSet
+    students.dateGoalSet
   );
 
-  const [enteredSel, setEnteredSel] = React.useState(currentStudentTest.sel);
+  const [enteredSel, setEnteredSel] = React.useState(students.sel);
 
   const [enteredGoalReviewDate, setEnteredGoalReviewDate] = React.useState(
-    currentStudentTest.goalReviewDate
+    students.goalReviewDate
   );
 
   const [enteredWasItAccomplished, setEnteredWasItAccomplished] =
-    React.useState(currentStudentTest.wasItAccomplished);
+    React.useState(students.wasItAccomplished);
 
   const [enteredExplanation, setEnteredExplanation] = React.useState(
-    currentStudentTest.explanation
+    students.explanation
   );
 
   const [enteredParentFirstName, setEnteredParentFirstName] = React.useState(
-    currentStudentTest.parentFirstName
+    students.parentFirstName
   );
 
   const [enteredParentAddress, setEnteredParentAddress] = React.useState(
-    currentStudentTest.parentAddress
+    students.parentAddress
   );
 
   const [enteredParentApartmentNumber, setEnteredParentApartmentNumber] =
-    React.useState(currentStudentTest.parentApartmentNumber);
+    React.useState(students.parentApartmentNumber);
 
   const [enteredParentCity, setEnteredParentCity] = React.useState(
-    currentStudentTest.parentCity
+    students.parentCity
   );
 
   const [enteredParentState, setEnteredParentState] = React.useState(
-    currentStudentTest.parentState
+    students.parentState
   );
 
   const [enteredParentZipCode, setEnteredParentZipCode] = React.useState(
-    currentStudentTest.parentZipCode
+    students.parentZipCode
   );
 
   const [enteredParentCellPhone, setEnteredParentCellPhone] = React.useState(
-    currentStudentTest.parentCellPhone
+    students.parentCellPhone
   );
 
   const [enteredParentEmail, setEnteredParentEmail] = React.useState(
-    currentStudentTest.parentEmail
+    students.parentEmail
   );
 
   const [enteredGuidanceCounselor, setEnteredGuidanceCounselor] =
-    React.useState(currentStudentTest.guidanceConselor);
+    React.useState(students.guidanceConselor);
 
   // const [enteredWorkStatus, setEnteredWorkStatus] = React.useState('');
 
@@ -182,33 +176,33 @@ export default function DetailsTabEdit(props) {
   //   React.useState('');
 
   const [enteredStudentSignature, setEnteredStudentSignature] = React.useState(
-    currentStudentTest.studentSignature
+    students.studentSignature
   );
 
   const [enteredStudentSignatureDate, setEnteredStudentSignatureDate] =
-    React.useState(currentStudentTest.studentSignatureDate);
+    React.useState(students.studentSignatureDate);
 
   const [enteredParentSignature, setEnteredParentSignature] = React.useState(
-    currentStudentTest.parentSignature
+    students.parentSignature
   );
 
   const [enteredParentSignatureDate, setEnteredParentSignatureDate] =
-    React.useState(currentStudentTest.parentSignatureDate);
+    React.useState(students.parentSignatureDate);
 
   const [enteredIsCollegeBound, setEnteredIsCollegeBound] = React.useState(
-    currentStudentTest.isCollegeBound
+    students.isCollegeBound
   );
 
   const [enteredCareerCluster, setEnteredCareerCluster] = React.useState(
-    currentStudentTest.careerCluster
+    students.careerCluster
   );
 
   const [enteredSpecificCluster, setEnteredSpecificCluster] = React.useState(
-    currentStudentTest.specificCluster
+    students.specificCluster
   );
 
   const [enteredTechnicalCollegeBound, setEnteredTechnicalCollegeBound] =
-    React.useState(currentStudentTest.technicalCollegeBound);
+    React.useState(students.technicalCollegeBound);
 
   const EditField = () => {
     onSaveClick();
@@ -321,7 +315,7 @@ export default function DetailsTabEdit(props) {
     };
 
     const currentGoal = async () => {
-      const currGoal = await getGoalById(goalId);
+      const currGoal = await getGoalsByStudentId(studentId);
 
       const {
         goalSet,
@@ -357,14 +351,15 @@ export default function DetailsTabEdit(props) {
       setEnteredSpecificCluster(specificCluster);
       setEnteredTechnicalCollegeBound(technicalCollegeBound);
     };
-    currentCareer();
     currentStudent();
+    currentCareer();
     currentGoal();
-  }, [studentId, goalId]);
+  }, [studentId]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  console.log(enteredCollegeApplicationStatus);
   return (
     <div style={{ marginRight: '8vh' }}>
       <Box
@@ -413,6 +408,7 @@ export default function DetailsTabEdit(props) {
                         setEnteredPlanAfterHighSchool(e.target.value)
                       }
                       required
+                      focused
                     />
                   </Grid>
                   <Grid marginTop={2} marginBottom={3}>
@@ -428,6 +424,7 @@ export default function DetailsTabEdit(props) {
                         setEnteredCollegesList(event.target.value)
                       }
                       required
+                      focused
                     />
                   </Grid>
                   <Grid>
@@ -440,6 +437,7 @@ export default function DetailsTabEdit(props) {
                         setEnteredFirstChoiceCollege(event.target.value)
                       }
                       required
+                      focused
                     />
                   </Grid>
                   <Grid marginTop={1}>
@@ -518,6 +516,7 @@ export default function DetailsTabEdit(props) {
                         setEnteredPactTestScore(event.target.value)
                       }
                       required
+                      focused
                     />
                     <TextField
                       size="small"
@@ -529,6 +528,7 @@ export default function DetailsTabEdit(props) {
                         setEnteredPactTestDate(event.target.value)
                       }
                       required
+                      focused
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -540,6 +540,7 @@ export default function DetailsTabEdit(props) {
                       type="number"
                       onChange={(e) => setEnteredPsatTestScore(e.target.value)}
                       required
+                      focused
                     />
                     <TextField
                       size="small"
@@ -551,6 +552,7 @@ export default function DetailsTabEdit(props) {
                         setEnteredPsatTestDate(event.target.value)
                       }
                       required
+                      focused
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -564,6 +566,7 @@ export default function DetailsTabEdit(props) {
                         setEnteredActTestScore(event.target.value)
                       }
                       required
+                      focused
                     />
                     <TextField
                       size="small"
@@ -575,6 +578,7 @@ export default function DetailsTabEdit(props) {
                         setEnteredActTestDate(event.target.value)
                       }
                       required
+                      focused
                     />
                   </Grid>
                   <Grid marginBottom={2}>
@@ -588,6 +592,7 @@ export default function DetailsTabEdit(props) {
                         setEnteredSatTestScore(event.target.value)
                       }
                       required
+                      focused
                     />
                     <TextField
                       size="small"
@@ -599,6 +604,7 @@ export default function DetailsTabEdit(props) {
                         setEnteredSatTestDate(event.target.value)
                       }
                       required
+                      focused
                     />
                   </Grid>
                   <h3 style={{ color: '#2656A5' }}>Financial Aid:</h3>
@@ -774,96 +780,6 @@ export default function DetailsTabEdit(props) {
                     </Grid>
 
                     <h3 style={{ color: '#2656A5' }}>Goal Two</h3>
-                    <Grid marginBottom={2}>
-                      <TextField
-                        id="text-area-q1"
-                        multiline
-                        fullWidth
-                        maxRows={4}
-                        variant="filled"
-                        value={enteredGoalSet}
-                        label="Set Goal"
-                        onChange={(event) =>
-                          setEnteredGoalSet(event.target.value)
-                        }
-                        required
-                      />
-                    </Grid>
-                    <Grid marginBottom={2}>
-                      <TextField
-                        size="small"
-                        className="typing-container"
-                        label="Set Date"
-                        type="date"
-                        value={enteredDateGoalSet}
-                        onChange={(event) =>
-                          setEnteredDateGoalSet(event.target.value)
-                        }
-                        required
-                      />
-                    </Grid>
-                    <Grid marginBottom={2}>
-                      <TextField
-                        size="small"
-                        className="typing-container"
-                        value={enteredSel}
-                        label="SEL"
-                        onChange={(event) => setEnteredSel(event.target.value)}
-                        required
-                      />
-                    </Grid>
-                    <Grid marginBottom={2}>
-                      <TextField
-                        size="small"
-                        className="typing-container"
-                        type="date"
-                        label="Review Date"
-                        value={enteredGoalReviewDate}
-                        onChange={(event) =>
-                          setEnteredGoalReviewDate(event.target.value)
-                        }
-                        required
-                      />
-                    </Grid>
-                    <Grid marginBottom={2}>
-                      <FormControl
-                        variant="standard"
-                        sx={{ m: 1, minWidth: 200 }}
-                      >
-                        <InputLabel id="demo-simple-select-standard-label">
-                          Accomplishment State{' '}
-                        </InputLabel>
-                        <Select
-                          labelId="demo-simple-select-standard-label"
-                          id="demo-simple-select-standard"
-                          value={enteredWasItAccomplished}
-                          onChange={(event) =>
-                            setEnteredWasItAccomplished(event.target.value)
-                          }
-                        >
-                          <MenuItem value="" />
-                          <MenuItem value={10}>In Progress</MenuItem>
-                          <MenuItem value={20}>Completed</MenuItem>
-                        </Select>
-                      </FormControl>
-                    </Grid>
-
-                    <Grid marginBottom={2}>
-                      <TextField
-                        id="text-area-q1"
-                        multiline
-                        fullWidth
-                        maxRows={4}
-                        variant="filled"
-                        value={enteredExplanation}
-                        label="Explanation"
-                        onChange={(event) =>
-                          setEnteredExplanation(event.target.value)
-                        }
-                        required
-                      />
-                    </Grid>
-                    <h3 style={{ color: '#2656A5' }}>Goal Three</h3>
                     <Grid marginBottom={2}>
                       <TextField
                         id="text-area-q1"

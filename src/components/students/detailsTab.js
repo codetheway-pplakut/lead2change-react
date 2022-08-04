@@ -64,6 +64,28 @@ export default function TabsFunction(props) {
   const endEditing = () => setIsEditing(false);
   const cancelEditing = () => setIsEditing(false);
 
+  const refreshStudents = async () => {
+    setIsLoading(true);
+    const result = await getStudentById(studentId);
+    setIsLoading(false);
+    setStudents(result);
+  };
+
+  const updateStudentInfo = async (student) => {
+    // console.log(student);
+    await updateStudent(student);
+    await refreshStudents();
+  };
+
+  useEffect(() => {
+    const currentStudent = async () => {
+      const currStudent = await getStudentById(studentId);
+      setStudents(currStudent);
+      console.log(currStudent);
+    };
+    currentStudent();
+  }, [studentId]);
+
   const [enteredPlanAfterHighSchool, setEnteredPlanAfterHighSchool] =
     React.useState(students.planAfterHighSchool);
 
@@ -257,15 +279,7 @@ export default function TabsFunction(props) {
     students.technicalCollegeBound = enteredTechnicalCollegeBound;
   };
 
-  const refreshStudents = async () => {
-    setIsLoading(true);
-    const result = await getStudents();
-    setIsLoading(false);
-    setStudents(result);
-  };
-
   const saveStudentInfo = (studentInfo) => {
-    console.log(studentInfo);
     updateStudent(studentInfo);
     refreshStudents();
   };
@@ -274,26 +288,11 @@ export default function TabsFunction(props) {
     console.log('cancel');
   };
 
-  const onSaveClick = (event) => {
+  const onSaveClick = async (event) => {
     EditField();
-    console.log(students);
     saveStudentInfo(students);
     endEditing();
   };
-
-  const updateStudentInfo = async (student) => {
-    // console.log(student);
-    await updateStudent(student);
-    await refreshStudents();
-  };
-
-  useEffect(() => {
-    const currentStudent = async () => {
-      const currStudent = await getStudentById(studentId);
-      setStudents(currStudent);
-    };
-    currentStudent();
-  }, [studentId]);
 
   const onCancelClick = () => {
     cancelStudentInfo();
