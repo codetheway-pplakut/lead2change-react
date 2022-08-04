@@ -1,6 +1,5 @@
 /* eslint-disable react/require-default-props */
 import * as React from 'react';
-import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import CloseIcon from '@mui/icons-material/Close';
@@ -20,20 +19,7 @@ import {
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import { createTheme } from '@mui/material/styles';
-import { getCoaches } from '../../services/coaches/coaches';
 
-const StyledButton = styled(Button)({
-  backgroundColor: '#004cbb',
-  '&:hover': {
-    backgroundColor: '#005ade',
-  },
-});
-const CancelButton = styled(Button)({
-  backgroundColor: '#7e8794',
-  '&:hover': {
-    backgroundColor: '#8698b3',
-  },
-});
 const StyledRadio = styled(Radio)({
   '&.Mui-checked': {
     color: '#005ade',
@@ -125,7 +111,7 @@ export default function CoachAssignModal(props) {
               }}
               xs={12}
             >
-              <Grid container alignItems="center" sx={{ margin: 1 }}>
+              <Grid container alignItems="center">
                 <Grid item xs={2} />
                 <Grid item xs={8}>
                   <Typography
@@ -183,7 +169,7 @@ export default function CoachAssignModal(props) {
                 </Typography>
               </Button>
             </Grid>
-            <Grid xs={1} />
+            <Grid item xs={1} />
 
             <Grid item xs={4}>
               <Button

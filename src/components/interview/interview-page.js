@@ -4,7 +4,6 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Alert from '@mui/material/Alert';
 import { useParams } from 'react-router-dom';
 import BasicTabs from './tabs';
-import Navbar from '../admin/sampleNavbar';
 import ExitModal from './exit-modal';
 
 import { getInterviewsById } from '../../services/interviews/interview';
@@ -72,7 +71,6 @@ export default function InterviewPage() {
   return (
     <div>
       <ThemeProvider theme={theme}>
-        <Navbar />
         <Grid container>
           <Grid
             item

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Grid from '@mui/material/Grid';
@@ -9,12 +9,12 @@ import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
-import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 import ColorButton from '../coaches/Shared/ColoredButton';
 import { addCareers } from '../../services/careers/careers';
 
 export default function CreateCareerModal(props) {
-  const { studentId } = props;
+  const { studentId } = useParams();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -189,7 +189,3 @@ export default function CreateCareerModal(props) {
     </div>
   );
 }
-
-CreateCareerModal.propTypes = {
-  studentId: PropTypes.string.isRequired,
-};
