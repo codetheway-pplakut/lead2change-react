@@ -40,9 +40,8 @@ TabPanel.propTypes = {
 
 export default function DetailsTabEdit(props) {
   const { students } = props;
-  const { onCancelClick, updateFunction, onSaveClick, goals } = props;
+  const { onCancelClick, updateFunction, onSaveClick, goals, careers } = props;
   const [value, setValue] = React.useState(0);
-  const [careers, setCareer] = React.useState({});
 
   function getParsedDate(strDate) {
     if (strDate === null) {
@@ -108,8 +107,6 @@ export default function DetailsTabEdit(props) {
   const [enteredActTestDate, setEnteredActTestDate] = React.useState(
     students.actTestDate
   );
-
-  console.log(enteredActTestDate);
 
   const [enteredSatTestScore, setEnteredSatTestScore] = React.useState(
     students.satTestScore
@@ -240,11 +237,11 @@ export default function DetailsTabEdit(props) {
     students.assistanceForForms = enteredAssistanceForForms;
     students.supportNeeded = enteredSupportNeeded;
     students.goals.goalSet = enteredGoalSet;
-    students.dateGoalSet = enteredDateGoalSet;
-    students.sel = enteredSel;
-    students.goalReviewDate = enteredGoalReviewDate;
-    students.wasItAccomplished = enteredWasItAccomplished;
-    students.explanation = enteredExplanation;
+    students.goals.dateGoalSet = enteredDateGoalSet;
+    students.goals.sel = enteredSel;
+    students.goals.goalReviewDate = enteredGoalReviewDate;
+    students.goals.wasItAccomplished = enteredWasItAccomplished;
+    students.goals.explanation = enteredExplanation;
     students.parentFirstName = enteredParentFirstName;
     students.parentLastName = enteredParentLastName;
     students.address = enteredParentAddress;
@@ -261,10 +258,10 @@ export default function DetailsTabEdit(props) {
     students.studentSignatureDate = enteredStudentSignatureDate;
     students.parentSignature = enteredParentSignature;
     students.parentSignatureDate = enteredParentSignatureDate;
-    students.collegeBound = enteredIsCollegeBound;
-    students.careerCluster = enteredCareerCluster;
-    students.specificCluster = enteredSpecificCluster;
-    students.technicalCollegeBound = enteredTechnicalCollegeBound;
+    students.careers.collegeBound = enteredIsCollegeBound;
+    students.careers.careerCluster = enteredCareerCluster;
+    students.careers.specificCluster = enteredSpecificCluster;
+    students.careers.technicalCollegeBound = enteredTechnicalCollegeBound;
     updateFunction(students);
   };
 
@@ -699,12 +696,12 @@ export default function DetailsTabEdit(props) {
             <Box sx={{ flexGrow: 1 }}>
               <Grid container justifyContent="flex-end">
                 <Grid item xs={12} style={{ height: '64vh' }}>
-                  <Grid>
-                    {[careers].map((career) => {
-                      return (
-                        <div key={career.id}>
+                  {careers.map((career, index) => {
+                    return (
+                      <div key={career.id}>
+                        <Grid>
                           <h3 style={{ color: '#2656A5' }}>
-                            Career Information
+                            Career {index + 1}
                           </h3>
                           <FormControl
                             variant="standard"
@@ -718,7 +715,7 @@ export default function DetailsTabEdit(props) {
                               id="demo-simple-select-standard"
                               label="College Bound?"
                               fullWidth
-                              value={career.enteredIsCollegeBound}
+                              defaultValue={career.isCollegeBound}
                               onChange={(event) =>
                                 setEnteredIsCollegeBound(event.target.value)
                               }
@@ -732,7 +729,7 @@ export default function DetailsTabEdit(props) {
                             <TextField
                               size="small"
                               className="typing-container"
-                              value={enteredCareerCluster}
+                              defaultValue={career.careerCluster}
                               label="Number of Career Clusters"
                               onChange={(event) =>
                                 setEnteredCareerCluster(event.target.value)
@@ -744,7 +741,7 @@ export default function DetailsTabEdit(props) {
                             <TextField
                               size="small"
                               className="typing-container"
-                              value={enteredSpecificCluster}
+                              defaultValue={career.specificCluster}
                               label="Career of Choice"
                               onChange={(event) =>
                                 setEnteredSpecificCluster(event.target.value)
@@ -763,7 +760,7 @@ export default function DetailsTabEdit(props) {
                               labelId="demo-simple-select-standard-label"
                               id="demo-simple-select-standard"
                               label="Technical Bound?"
-                              value={enteredTechnicalCollegeBound}
+                              defaultValue={career.technicalCollegeBound}
                               onChange={(event) =>
                                 setEnteredTechnicalCollegeBound(
                                   event.target.value
@@ -775,10 +772,10 @@ export default function DetailsTabEdit(props) {
                               <MenuItem value={20}>No</MenuItem>
                             </Select>
                           </FormControl>
-                        </div>
-                      );
-                    })}
-                  </Grid>
+                        </Grid>
+                      </div>
+                    );
+                  })}
                 </Grid>
               </Grid>
             </Box>
@@ -1046,4 +1043,5 @@ DetailsTabEdit.propTypes = {
   onSaveClick: PropTypes.func.isRequired,
   students: PropTypes.object.isRequired,
   goals: PropTypes.array.isRequired,
+  careers: PropTypes.array.isRequired,
 };
