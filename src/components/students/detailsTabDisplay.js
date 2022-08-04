@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Box, Grid, AppBar, Tab, Tabs, Typography, Stack } from '@mui/material';
 import ColorButton from '../coaches/Shared/ColoredButton';
 import CreateGoalModal from './create-goal-modal';
-import AddCareer from './addCareer';
+import CreateCareerModal from './create-career-modal';
 
 function TabPanel(props) {
   const { children, value, index } = props;
@@ -226,15 +226,27 @@ export default function DetailsTabDisplay(props) {
                     >
                       Edit
                     </ColorButton>
-                    <AddCareer studentId={students.id}>+ New Career</AddCareer>
-                    <h3 style={{ color: '#2656A5' }}>Career Information</h3>
-                    <h5>I am College Bound: {String(careers.collegeBound)}</h5>
-                    <h5>Number of Career Clusters: {careers.careerCluster}</h5>
-                    <h5>Career of Choice: {careers.specificCluster}</h5>
-                    <h5>
-                      I am Techinical Bound:{' '}
-                      {String(careers.technicalCollegeBound)}
-                    </h5>
+                    <CreateCareerModal studentId={students.id}>
+                      + career
+                    </CreateCareerModal>
+                    {careers.map((career) => {
+                      return (
+                        <div key={career.id}>
+                          <h3 style={{ color: '#2656A5' }}>Career</h3>
+                          <h5>
+                            I am College Bound: {career.collegeBound.toString()}
+                          </h5>
+                          <h5>
+                            Number of Career Clusters: {career.careerCluster}
+                          </h5>
+                          <h5>Career of Choice: {career.specificCareer}</h5>
+                          <h5>
+                            I am Techinical Bound:{' '}
+                            {career.technicalCollegeBound.toString()}
+                          </h5>
+                        </div>
+                      );
+                    })}
                   </Box>
                 </Grid>
               </Grid>
