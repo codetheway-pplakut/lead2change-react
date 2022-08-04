@@ -229,10 +229,12 @@ export default function DetailsTabDisplay(props) {
                     <CreateCareerModal studentId={students.id}>
                       + career
                     </CreateCareerModal>
-                    {careers.map((career) => {
+                    {careers.map((career, index) => {
                       return (
                         <div key={career.id}>
-                          <h3 style={{ color: '#2656A5' }}>Career</h3>
+                          <h3 style={{ color: '#2656A5' }}>
+                            Career {index + 1}
+                          </h3>
                           <h5>
                             I am College Bound: {career.collegeBound.toString()}
                           </h5>
