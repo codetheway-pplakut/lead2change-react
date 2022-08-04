@@ -200,6 +200,12 @@ const headCellsApplied = [
     disablePadding: false,
     label: 'Reject',
   },
+  {
+    id: 'interviews',
+    numeric: false,
+    disablePadding: false,
+    label: '',
+  },
 ];
 
 function EnhancedTableHead(props) {
