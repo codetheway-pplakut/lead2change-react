@@ -82,7 +82,7 @@ export default function RegisterCoachModal(props) {
             <Grid
               item
               sx={{
-                bgcolor: '#2656A5',
+                bgcolor: '#004cbb',
                 color: 'white',
                 borderTopLeftRadius: 10,
                 borderTopRightRadius: 10,
@@ -196,6 +196,7 @@ export default function RegisterCoachModal(props) {
                       </Button>
                     </Box>
                   </Grid>
+                  <Grid item xs={2} />
                   <Grid item xs={4}>
                     <Box>
                       <Button
