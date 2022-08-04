@@ -163,13 +163,13 @@ export default function DetailsTabDisplay(props) {
             <Grid container justifyContent="flex-end">
               <Grid item xs={12} style={{ height: '64vh' }}>
                 <Box>
-                  <ColorButton
+                  {/* <ColorButton
                     style={{ float: 'right' }}
                     variant="contained"
                     onClick={onEditClick}
                   >
                     Edit
-                  </ColorButton>
+                  </ColorButton> */}
                   <CreateGoalModal studentId={students.id} />
                   {goals.map((goal, index) => (
                     <Box key={goal.id}>
@@ -193,13 +193,13 @@ export default function DetailsTabDisplay(props) {
               <Grid item xs={12} style={{ height: '64vh' }}>
                 <Grid>
                   <Box>
-                    <ColorButton
+                    {/* <ColorButton
                       style={{ float: 'right' }}
                       variant="contained"
                       onClick={onEditClick}
                     >
                       Edit
-                    </ColorButton>
+                    </ColorButton> */}
                     <CreateCareerModal studentId={students.id} />
 
                     {careers.map((career, index) => {
