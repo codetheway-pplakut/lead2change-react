@@ -170,7 +170,7 @@ export default function DetailsTabDisplay(props) {
                   </ColorButton>
                   <CreateGoalModal studentId={students.id} />
                   {goals.map((goal, index) => (
-                    <>
+                    <Box key={goal.id}>
                       <h3 style={{ color: '#2656A5' }}>Goal {index + 1}</h3>
                       <h5>Goal: {goal.goalSet}</h5>
                       <h5>Goal Set Date: {goal.dateGoalSet}</h5>
@@ -178,7 +178,7 @@ export default function DetailsTabDisplay(props) {
                       <h5>Goal Review Date:{goal.goalReviewDate}</h5>
                       <h5>Accomplishment State: {goal.wasItAccomplished}</h5>
                       <h5>Explanation: {goal.explanation}</h5>
-                    </>
+                    </Box>
                   ))}
                 </Box>
               </Grid>
