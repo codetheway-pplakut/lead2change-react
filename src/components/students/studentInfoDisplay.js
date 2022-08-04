@@ -75,13 +75,14 @@ export default function StudentInfoDisplay(props) {
             container
             spacing={0}
             direction="column"
-            style={{ backgroundColor: '#2656A5', color: '#FFFFFF' }}
+            style={{ backgroundColor: '#004cbb', color: '#FFFFFF' }}
           >
             <h2>Student Info</h2>
           </Grid>
           <Grid marginRight={1} marginTop={1}>
             <ColorButton
               style={{ float: 'right' }}
+              sx={{ bgcolor: '#004cbb' }}
               variant="contained"
               onClick={onEditClick}
             >

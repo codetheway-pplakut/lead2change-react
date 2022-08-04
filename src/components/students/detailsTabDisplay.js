@@ -53,6 +53,7 @@ export default function DetailsTabDisplay(props) {
             onChange={handleChange}
             indicatorColor="secondary"
             textColor="inherit"
+            sx={{ bgcolor: '#004cbb' }}
             variant="fullWidth"
             aria-label="full width tabs example"
             TabIndicatorProps={{
@@ -75,7 +76,7 @@ export default function DetailsTabDisplay(props) {
                 item
                 xs={12}
                 sx={{ minWidth: 10, height: 'max-content' }}
-                style={{ height: '64vh' }}
+                style={{ height: '73vh' }}
               >
                 <Box>
                   {' '}
@@ -83,6 +84,7 @@ export default function DetailsTabDisplay(props) {
                     style={{ float: 'right' }}
                     variant="contained"
                     onClick={onEditClick}
+                    sx={{ bgcolor: '#004cbb' }}
                   >
                     Edit
                   </ColorButton>
@@ -106,7 +108,7 @@ export default function DetailsTabDisplay(props) {
                     I need help writing my college essay:{' '}
                     {String(students.collegeEssayHelp)}
                   </h5>
-                  <h3 style={{ color: '#2656A5' }}>
+                  <h3 style={{ color: '#004cbb' }}>
                     College Entrance Exam Information:
                   </h3>
                   <h5>
@@ -145,7 +147,7 @@ export default function DetailsTabDisplay(props) {
                       </Grid>
                     </Stack>
                   </h5>
-                  <h3 style={{ color: '#2656A5' }}>Financial Aid:</h3>
+                  <h3 style={{ color: '#004cbb' }}>Financial Aid:</h3>
                   <h5>
                     I have already completed the financial aid process:{' '}
                     {String(students.financialAidProcessComplete)}
@@ -163,12 +165,13 @@ export default function DetailsTabDisplay(props) {
         <TabPanel value={value} index={1} style={{ overflowY: 'auto' }}>
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">
-              <Grid item xs={12} style={{ height: '64vh' }}>
+              <Grid item xs={12} style={{ height: '73vh' }}>
                 <Box>
                   <ColorButton
                     style={{ float: 'right' }}
                     variant="contained"
                     onClick={onEditClick}
+                    sx={{ bgcolor: '#004cbb' }}
                   >
                     Edit
                   </ColorButton>
@@ -177,7 +180,7 @@ export default function DetailsTabDisplay(props) {
                   </CreateGoalModal>
                   {goals.map((goal, index) => (
                     <>
-                      <h3 style={{ color: '#2656A5' }}>Goal {index + 1}</h3>
+                      <h3 style={{ color: '#004cbb' }}>Goal {index + 1}</h3>
                       <h5>Goal: {goal.goalSet}</h5>
                       <h5>Goal Set Date: {goal.dateGoalSet}</h5>
                       <h5>SEL: {goal.sel}</h5>
@@ -194,18 +197,19 @@ export default function DetailsTabDisplay(props) {
         <TabPanel value={value} index={2} style={{ overflowY: 'auto' }}>
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">
-              <Grid item xs={12} style={{ height: '30vh' }}>
+              <Grid item xs={12} style={{ height: '73vh' }}>
                 <Grid>
                   <Box>
                     <ColorButton
                       style={{ float: 'right' }}
                       variant="contained"
                       onClick={onEditClick}
+                      sx={{ bgcolor: '#004cbb' }}
                     >
                       Edit
                     </ColorButton>
                     <AddCareer studentId={students.id}>+ New Career</AddCareer>
-                    <h3 style={{ color: '#2656A5' }}>Career Information</h3>
+                    <h3 style={{ color: '#004cbb' }}>Career Information</h3>
                     <h5>I am College Bound: {String(careers.collegeBound)}</h5>
                     <h5>Number of Career Clusters: {careers.careerCluster}</h5>
                     <h5>Career of Choice: {careers.specificCluster}</h5>
@@ -222,16 +226,17 @@ export default function DetailsTabDisplay(props) {
         <TabPanel value={value} index={3} style={{ overflowY: 'auto' }}>
           <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent="flex-end">
-              <Grid item xs={12} style={{ height: '64vh' }}>
+              <Grid item xs={12} style={{ height: '73vh' }}>
                 <Box>
                   <ColorButton
                     style={{ float: 'right' }}
                     variant="contained"
                     onClick={onEditClick}
+                    sx={{ bgcolor: '#004cbb' }}
                   >
                     Edit
                   </ColorButton>
-                  <h3 style={{ color: '#2656A5' }}>Parent Information</h3>
+                  <h3 style={{ color: '#004cbb' }}>Parent Information</h3>
                   <h5>First Name: {students.parentFirstName}</h5>
                   <h5>Last Name: {students.parentLastName}</h5>
                   <h5>Address: {students.address}</h5>
@@ -242,14 +247,14 @@ export default function DetailsTabDisplay(props) {
                   <h5>Home Phone: {students.parentHomePhone}</h5>
                   <h5>Cell Phone: {students.parentCellPhone}</h5>
                   <h5>Parent Email: {students.parentEmail}</h5>
-                  <h3 style={{ color: '#2656A5' }}>Guidance Couselor Info:</h3>
+                  <h3 style={{ color: '#004cbb' }}>Guidance Couselor Info:</h3>
                   <h5>
                     I know my guidance counselor:{' '}
                     {String(students.knowGuidanceCounselor)}
                   </h5>
-                  <h3 style={{ color: '#2656A5' }}>Admin Details:</h3>
+                  <h3 style={{ color: '#004cbb' }}>Admin Details:</h3>
                   <h5>Activity Status: {students.state}</h5>
-                  <h3 style={{ color: '#2656A5' }}>Signatures</h3>
+                  <h3 style={{ color: '#004cbb' }}>Signatures</h3>
                   <h5>Student Signature: {students.studentSignature}</h5>
                   <h5>Date Signed: {students.studentSignatureDate}</h5>
                   <h5>Parent Signature: {students.parentSignature}</h5>
