@@ -39,9 +39,10 @@ TabPanel.propTypes = {
 };
 
 export default function DetailsTabEdit(props) {
-  const { students, careers } = props;
+  const { students } = props;
   const { onCancelClick, updateFunction, onSaveClick } = props;
   const [value, setValue] = React.useState(0);
+  const [careers, setCareer] = React.useState({});
 
   const [enteredPlanAfterHighSchool, setEnteredPlanAfterHighSchool] =
     React.useState(students.planAfterHighSchool);
@@ -763,7 +764,7 @@ export default function DetailsTabEdit(props) {
               <Grid container justifyContent="flex-end">
                 <Grid item xs={12} style={{ height: '64vh' }}>
                   <Grid>
-                    {careers.map((career) => {
+                    {[careers].map((career) => {
                       return (
                         <div key={career.id}>
                           <h3 style={{ color: '#2656A5' }}>
@@ -1108,5 +1109,4 @@ DetailsTabEdit.propTypes = {
   updateFunction: PropTypes.func.isRequired,
   onSaveClick: PropTypes.func.isRequired,
   students: PropTypes.object.isRequired,
-  careers: PropTypes.array.isRequired,
 };

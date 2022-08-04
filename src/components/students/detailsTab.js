@@ -54,6 +54,7 @@ export default function TabsFunction(props) {
           onCancelClick={onCancelClick}
           updateFunction={updateFunction}
           students={students}
+          careers={careers}
         />
       ) : (
         <DetailsTabDisplay
