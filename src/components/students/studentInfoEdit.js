@@ -269,18 +269,34 @@ export default function StudentInfoEdit(props) {
                 </Grid>
               </Grid>
 
-              <Grid alignItems="center" marginTop={7}>
-                <ColorButton
-                  variant="contained"
-                  type="Submit"
-                  onClick={EditField}
-                >
-                  Save
-                </ColorButton>
-                {'   '}
-                <ColorButton variant="contained" onClick={onDoneClick}>
-                  Cancel
-                </ColorButton>
+              <Grid
+                container
+                spacing={0}
+                justifyContent="center"
+                padding="5vh"
+                align="center"
+              >
+                <Grid xs={4}>
+                  <ColorButton
+                    variant="contained"
+                    type="Submit"
+                    onClick={EditField}
+                    style={{ minWidth: '120px' }}
+                  >
+                    Save
+                  </ColorButton>
+                </Grid>
+                <Grid xs={1} />
+
+                <Grid xs={4}>
+                  <ColorButton
+                    variant="contained"
+                    onClick={onDoneClick}
+                    style={{ minWidth: '120px' }}
+                  >
+                    Cancel
+                  </ColorButton>
+                </Grid>
               </Grid>
             </Grid>
           </Paper>
