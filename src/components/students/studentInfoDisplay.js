@@ -24,6 +24,9 @@ const StudentInfo = styled(Box)(({ theme }) => ({
 }));
 
 function getParsedDate(strDate) {
+  if (strDate === null) {
+    return '';
+  }
   const strSplitDate = String(strDate).split(' ');
   let date = new Date(strSplitDate[0]);
   let dd = date.getDate();
